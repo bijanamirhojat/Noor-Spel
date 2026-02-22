@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Piano</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎹</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
+        body { min-height: 100vh; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; }
+        .game-container { background: rgba(255, 255, 255, 0.95); border-radius: 40px; padding: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); max-width: 600px; width: 100%; text-align: center; position: relative; }
+        .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.8rem; margin-bottom: 15px; text-shadow: 2px 2px 0 #ffd5d5; }
+        .piano { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            margin-bottom: 20px; 
+            height: 180px;
+            overflow-x: auto;
+            padding: 0 5px;
+        }
+        .keys-container {
+            position: relative;
+            display: flex;
+        }
+        .white-key { 
+            width: 35px; 
+            height: 170px; 
+            background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%); 
+            border: 1px solid #bbb; 
+            border-radius: 0 0 4px 4px; 
+            cursor: pointer; 
+            transition: all 0.1s; 
+            display: flex; 
+            align-items: flex-end; 
+            justify-content: center; 
+            padding-bottom: 8px; 
+            font-family: 'Fredoka One', cursive; 
+            font-size: 0.7rem; 
+            color: #888; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+            z-index: 1; 
+        }
+        .white-key:hover { background: #fff; }
+        .white-key:active, .white-key.playing { background: #ff6b6b; color: white; transform: translateY(2px); }
+        .black-key { 
+            position: absolute; 
+            width: 22px; 
+            height: 100px; 
+            background: linear-gradient(180deg, #222 0%, #000 100%); 
+            border-radius: 0 0 3px 3px; 
+            cursor: pointer; 
+            transition: all 0.1s; 
+            z-index: 2; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4); 
+            top: 0;
+        }
+        .black-key:hover { background: #333; }
+        .black-key:active, .black-key.playing { background: #ff6b6b; transform: translateY(2px); }
+        .mode-select { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .mode-btn { padding: 10px 20px; border: none; border-radius: 20px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; cursor: pointer; background: #f0f0f0; color: #666; transition: all 0.2s; }
+        .mode-btn.active { background: #ff6b6b; color: white; }
+        .songs { background: #f5f5f5; padding: 15px; border-radius: 20px; margin-bottom: 15px; }
+        .songs h3 { font-family: 'Fredoka One', cursive; color: #444; margin-bottom: 10px; font-size: 1rem; }
+        .song-btn { display: block; width: 100%; padding: 12px; margin: 5px 0; border: none; border-radius: 15px; font-family: 'Nunito', sans-serif; font-size: 1rem; cursor: pointer; background: white; color: #444; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .song-btn:hover { background: #ff9a8b; color: white; }
+        .song-btn.playing { background: #4CAF50; color: white; }
+        .notes-display { height: 40px; display: flex; align-items: center; justify-content: center; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+        .note-badge { background: #ff9a8b; color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; animation: popIn 0.2s ease; }
+        @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+        .instructions { font-size: 0.9rem; color: #888; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">🏠 Terug</a>
+    <div class="game-container">
+        <h1>🎹 Piano</h1>
+        <div class="notes-display" id="notesDisplay"></div>
+        <div class="piano" id="piano">
+            <div class="keys-container">
+                <div class="white-key" data-note="C" onclick="playNote('C')">C</div>
+                <div class="white-key" data-note="D" onclick="playNote('D')">D</div>
+                <div class="white-key" data-note="E" onclick="playNote('E')">E</div>
+                <div class="white-key" data-note="F" onclick="playNote('F')">F</div>
+                <div class="white-key" data-note="G" onclick="playNote('G')">G</div>
+                <div class="white-key" data-note="A" onclick="playNote('A')">A</div>
+                <div class="white-key" data-note="B" onclick="playNote('B')">B</div>
+                <div class="white-key" data-note="C2" onclick="playNote('C2')">C</div>
+                
+                <div class="black-key" style="left: 24px;" data-note="Cs" onclick="playNote('Cs')"></div>
+                <div class="black-key" style="left: 60px;" data-note="Ds" onclick="playNote('Ds')"></div>
+                <div class="black-key" style="left: 120px;" data-note="Fs" onclick="playNote('Fs')"></div>
+                <div class="black-key" style="left: 156px;" data-note="Gs" onclick="playNote('Gs')"></div>
+                <div class="black-key" style="left: 192px;" data-note="As" onclick="playNote('As')"></div>
+            </div>
+        </div>
+        <div class="songs">
+            <h3>🎵 Leer liedjes</h3>
+            <button class="song-btn" onclick="playSong('twinkle')">⭐ Twinkle Twinkle Little Star</button>
+            <button class="song-btn" onclick="playSong('birthday')">🎂 Verjaardagslied</button>
+            <button class="song-btn" onclick="playSong('mary')">🐑 Mary Had a Little Lamb</button>
+        </div>
+        <p class="instructions">Tik op de toetsen om te spelen!</p>
+    </div>
+
+    <script>
+        const notes = {
+            'C': 261.63, 'Cs': 277.18, 'D': 293.66, 'Ds': 311.13,
+            'E': 329.63, 'F': 349.23, 'Fs': 369.99, 'G': 392.00,
+            'Gs': 415.30, 'A': 440.00, 'As': 466.16, 'B': 493.88,
+            'C2': 523.25
+        };
+
+        const noteNames = {
+            'C': 'Do', 'Cs': 'Do#', 'D': 'Re', 'Ds': 'Re#',
+            'E': 'Mi', 'F': 'Fa', 'Fs': 'Fa#', 'G': 'Sol',
+            'Gs': 'Sol#', 'A': 'La', 'As': 'La#', 'B': 'Ti', 'C2': 'Do'
+        };
+
+        const songs = {
+            'twinkle': ['C', 'C', 'G', 'G', 'A', 'A', 'G', 'F', 'F', 'E', 'E', 'D', 'D', 'C'],
+            'birthday': ['C', 'C', 'D', 'C', 'F', 'E', 'C', 'C', 'D', 'C', 'G', 'F'],
+            'mary': ['E', 'D', 'C', 'D', 'E', 'E', 'E', 'D', 'D', 'D', 'E', 'G', 'G']
+        };
+
+        let audioCtx = null;
+        let isPlaying = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playSound(freq) {
+            const ctx = initAudio();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.frequency.value = freq;
+            osc.type = 'sine';
+            gain.gain.setValueAtTime(0.4, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.5);
+        }
+
+        function playNote(note) {
+            const key = document.querySelector(`[data-note="${note}"]`);
+            if (key) {
+                key.classList.add('playing');
+                setTimeout(() => key.classList.remove('playing'), 200);
+            }
+            
+            playSound(notes[note]);
+            showNote(note);
+        }
+
+        function showNote(note) {
+            const display = document.getElementById('notesDisplay');
+            const badge = document.createElement('span');
+            badge.className = 'note-badge';
+            badge.textContent = noteNames[note];
+            display.appendChild(badge);
+            
+            setTimeout(() => {
+                if (display.contains(badge)) {
+                    display.removeChild(badge);
+                }
+            }, 1500);
+        }
+
+        async function playSong(songName) {
+            if (isPlaying) return;
+            
+            const song = songs[songName];
+            const buttons = document.querySelectorAll('.song-btn');
+            buttons.forEach(btn => btn.classList.remove('playing'));
+            
+            isPlaying = true;
+            event.target.classList.add('playing');
+            
+            for (let i = 0; i < song.length; i++) {
+                playNote(song[i]);
+                await new Promise(resolve => setTimeout(resolve, 400));
+            }
+            
+            isPlaying = false;
+            event.target.classList.remove('playing');
+        }
+
+        document.querySelectorAll('.white-key, .black-key').forEach(key => {
+            key.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const note = key.dataset.note;
+                playNote(note);
+            });
+        });
+    </script>
+</body>
+</html>

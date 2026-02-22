@@ -28,78 +28,211 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             font-family: 'Nunito', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
+            padding: 15px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255,182,193,0.2) 0%, transparent 30%);
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBg 20s ease-in-out infinite;
+        }
+
+        @keyframes floatBg {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-2%, 2%); }
+        }
+
+        .floating-shape {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatMove 8s ease-in-out infinite, fadeInOut 5s ease-in-out infinite;
+        }
+
+        .shape-1 { top: 5%; left: 5%; animation-delay: 0s, 0s; }
+        .shape-2 { top: 8%; right: 5%; animation-delay: 1s, 1.5s; }
+        .shape-3 { top: 50%; left: 2%; animation-delay: 2s, 3s; }
+        .shape-4 { top: 50%; right: 2%; animation-delay: 3s, 0.5s; }
+        .shape-5 { bottom: 5%; left: 5%; animation-delay: 4s, 2s; }
+        .shape-6 { bottom: 5%; right: 5%; animation-delay: 5s, 4s; }
+        .shape-7 { top: 30%; left: 3%; animation-delay: 1.5s, 2.5s; }
+        .shape-8 { bottom: 30%; right: 3%; animation-delay: 2.5s, 1s; }
+
+        @keyframes floatMove {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(-5px) rotate(-5deg); }
+            75% { transform: translateY(-20px) rotate(3deg); }
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            20%, 80% { opacity: 0.2; }
+            50% { opacity: 0.4; }
+        }
+
+        .header {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .header-decoration {
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0.4;
+        }
+
+        .deco-1 { left: 5px; top: -5px; animation: spin 12s linear infinite; }
+        .deco-2 { right: 5px; top: -5px; animation: spin 10s linear infinite reverse; }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .home-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
-            padding: 12px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,245,245,0.95) 100%);
+            border-radius: 35px;
+            padding: 20px;
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.25),
+                0 0 0 1px rgba(255,255,255,0.5) inset;
             max-width: 100%;
             width: 100%;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         @media (min-width: 768px) {
             .home-container {
-                max-width: 550px;
-                padding: 30px;
-                border-radius: 40px;
+                max-width: 600px;
+                padding: 35px;
+                border-radius: 45px;
             }
         }
 
         @media (min-width: 900px) {
             .home-container {
-                max-width: 800px;
-                padding: 35px;
+                max-width: 850px;
+                padding: 40px;
             }
+        }
+
+        .header {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .header-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .deco-1 { left: 0; top: -5px; animation: spin 10s linear infinite; }
+        .deco-2 { right: 0; top: 0; animation: spin 8s linear infinite reverse; }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
-            color: #e63946;
-            font-size: 1.4rem;
-            margin-bottom: 3px;
-            text-shadow: 2px 2px 0 #ffd5d5;
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 50%, #ff9ff3 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-shadow: none;
+            letter-spacing: 1px;
         }
 
         @media (min-width: 768px) {
             h1 {
-                font-size: 2rem;
-                margin-bottom: 8px;
+                font-size: 2.5rem;
+                margin-bottom: 10px;
             }
         }
 
         .subtitle {
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             color: #888;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         @media (min-width: 768px) {
             .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+        }
+
+        .section-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: '';
+            height: 2px;
+            width: 30px;
+            background: linear-gradient(90deg, transparent, #ddd, transparent);
+            border-radius: 2px;
+        }
+
+        .beta-title {
+            color: #9b59b6;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
                 font-size: 1.1rem;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
         }
 
         .games-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 10px;
             margin-bottom: 8px;
         }
 
         @media (min-width: 768px) {
             .games-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
+                gap: 15px;
                 margin-bottom: 15px;
             }
         }
@@ -111,105 +244,139 @@
         }
 
         .game-card {
-            background: linear-gradient(145deg, #fff 0%, #fff5f5 100%);
-            border-radius: 12px;
-            padding: 8px 4px;
+            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 18px;
+            padding: 12px 6px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-            border: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255,255,255,0.8) inset;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
         }
 
         @media (min-width: 768px) {
             .game-card {
-                padding: 12px 8px;
-                border-radius: 18px;
+                padding: 18px 12px;
+                border-radius: 24px;
             }
         }
 
         @media (min-width: 900px) {
             .game-card {
-                padding: 18px 12px;
+                padding: 22px 15px;
             }
         }
 
         .game-icon {
-            font-size: 1.6rem;
-            margin-bottom: 3px;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
             display: block;
+            transition: transform 0.3s;
         }
 
         .game-title {
             font-family: 'Fredoka One', cursive;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #444;
         }
 
         .game-desc {
-            font-size: 0.55rem;
-            color: #888;
-            margin-top: 1px;
+            font-size: 0.6rem;
+            color: #999;
+            margin-top: 2px;
         }
 
         @media (min-width: 768px) {
             .game-icon {
-                font-size: 2rem;
-                margin-bottom: 5px;
+                font-size: 2.2rem;
+                margin-bottom: 8px;
             }
             .game-title {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .game-desc {
-                font-size: 0.7rem;
-                margin-top: 3px;
+                font-size: 0.75rem;
+                margin-top: 4px;
             }
         }
 
         .footer {
-            font-size: 0.6rem;
+            font-size: 0.7rem;
             color: #aaa;
-            margin-top: 6px;
+            margin-top: 15px;
+        }
+
+        .footer br {
+            display: none;
+        }
+
+        .parent-mode .footer br {
+            display: block;
+            margin-bottom: 8px;
         }
 
         @media (min-width: 768px) {
             .footer {
-                font-size: 0.8rem;
-                margin-top: 15px;
+                font-size: 0.85rem;
+                margin-top: 20px;
             }
         }
 
         .cache-btn {
-            background: #f1f3f5;
+            background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);
             border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: 0.65rem;
-            color: #888;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            color: #666;
             cursor: pointer;
-            margin-top: 8px;
+            margin-top: 10px;
             transition: all 0.2s;
+            font-weight: 600;
         }
 
         @media (min-width: 768px) {
             .cache-btn {
-                padding: 8px 16px;
-                font-size: 0.8rem;
-                border-radius: 12px;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+                border-radius: 15px;
             }
         }
 
         .cache-btn:hover {
-            background: #e9ecef;
-            color: #666;
+            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .game-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.15),
+                0 0 0 2px rgba(255,107,107,0.3) inset;
         }
 
         .game-card:active {
-            transform: translateY(-2px) scale(0.98);
+            transform: translateY(-4px) scale(0.98);
         }
 
         .game-card.flip {
@@ -220,6 +387,10 @@
             border-color: #ff6b6b;
         }
 
+        .game-card.flip::before {
+            background: linear-gradient(90deg, #ff9a8b, #ff6b6b);
+        }
+
         .game-card.memory {
             border-color: #74b9ff;
         }
@@ -228,12 +399,20 @@
             border-color: #0984e3;
         }
 
+        .game-card.memory::before {
+            background: linear-gradient(90deg, #74b9ff, #0984e3);
+        }
+
         .game-card.color {
             border-color: #ffe66d;
         }
 
         .game-card.color:hover {
             border-color: #f39c12;
+        }
+
+        .game-card.color::before {
+            background: linear-gradient(90deg, #ffe66d, #f39c12);
         }
 
         .game-card.letters {
@@ -252,13 +431,25 @@
             border-color: #e84393;
         }
 
+        .game-card.piano {
+            border-color: #a29bfe;
+        }
+
+        .game-card.piano:hover {
+            border-color: #6c5ce7;
+        }
+
+        .game-card.piano::before {
+            background: linear-gradient(90deg, #a29bfe, #6c5ce7);
+        }
+
         .locked {
             opacity: 0.5;
-            filter: grayscale(1);
+            filter: grayscale(0.3);
         }
 
         .locked .game-icon {
-            filter: grayscale(1);
+            filter: grayscale(0.5);
         }
 
         .beta-section {
@@ -307,13 +498,18 @@
         }
 
         .game-card.beta {
-            background: linear-gradient(145deg, #fff 0%, #fff8e1 100%);
-            border: 2px dashed #f39c12;
+            background: linear-gradient(145deg, #fff 0%, #f5e6ff 100%);
+            border: 3px dashed #9b59b6;
         }
 
         .game-card.beta:hover {
             border-style: solid;
-            border-color: #e67e22;
+            border-color: #8e44ad;
+            background: linear-gradient(145deg, #fff 0%, #f0e6ff 100%);
+        }
+
+        .game-card.beta::before {
+            background: linear-gradient(90deg, #9b59b6, #8e44ad);
         }
 
         .beta-label {
@@ -336,13 +532,188 @@
         .game-card:hover .game-icon {
             animation: bounce 0.5s ease infinite;
         }
+
+        .parent-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: opacity 0.2s;
+            padding: 5px;
+        }
+
+        .parent-btn:hover {
+            opacity: 0.7;
+        }
+
+        .pin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pin-modal.show {
+            display: flex;
+        }
+
+        .pin-box {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+        }
+
+        .pin-box h2 {
+            font-family: 'Fredoka One', cursive;
+            color: #e63946;
+            margin-bottom: 15px;
+        }
+
+        .pin-input {
+            font-size: 2rem;
+            width: 120px;
+            text-align: center;
+            padding: 10px;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            letter-spacing: 10px;
+        }
+
+        .pin-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 15px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .pin-btn.cancel {
+            background: #999;
+        }
+
+        .parent-mode .beta-section {
+            display: block;
+        }
+
+        .parent-mode .cache-btn {
+            display: inline-block;
+        }
+
+        .parent-mode .parent-tools {
+            display: inline;
+        }
+
+        .parent-tools {
+            display: none;
+        }
+
+        .normal-footer {
+            display: inline;
+        }
+
+        .parent-mode .normal-footer {
+            display: none;
+        }
+
+        .beta-section, .cache-btn {
+            display: none;
+        }
+
+        .parent-badge {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+
+        .parent-mode .parent-badge {
+            display: inline-block;
+        }
+
+        .parent-header {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .parent-mode .parent-header {
+            display: block;
+        }
+
+        .parent-exit {
+            display: none;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .parent-mode .parent-exit {
+            display: inline-block;
+        }
     </style>
 </head>
 <body>
-    <div class="home-container">
-        <h1>🎮 Noor's Games 🎮</h1>
+    <div class="floating-shape shape-1">⭐</div>
+    <div class="floating-shape shape-2">🎈</div>
+    <div class="floating-shape shape-3">🌈</div>
+    <div class="floating-shape shape-4">🎀</div>
+    <div class="floating-shape shape-5">🌸</div>
+    <div class="floating-shape shape-6">🎨</div>
+    <div class="floating-shape shape-7">🦋</div>
+    <div class="floating-shape shape-8">✨</div>
+    
+    <button class="parent-btn" onclick="showPinModal()">⚙️</button>
+    
+    <div class="pin-modal" id="pinModal">
+        <div class="pin-box">
+            <h2 id="pinTitle">Ouder Mode</h2>
+            <p id="pinDesc" style="margin-bottom: 15px; color: #666;">Voer PIN in om toegang te krijgen</p>
+            <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="****">
+            <br>
+            <button class="pin-btn" onclick="checkPin()">OK</button>
+            <button class="pin-btn cancel" onclick="closePinModal()">Annuleren</button>
+        </div>
+    </div>
+
+        <div class="home-container" id="homeContainer">
+        <div class="parent-header">
+            <span class="parent-badge">👨‍👩‍👧 Ouder Mode</span>
+            <button class="parent-exit" onclick="exitParentMode()">✕ Uitloggen</button>
+        </div>
+        
+        <div class="header">
+            <span class="header-decoration deco-1">✨</span>
+            <span class="header-decoration deco-2">🌟</span>
+            <h1>🎮 Noor's Games 🎮</h1>
+        </div>
         <p class="subtitle">Kies een spelletje!</p>
 
+        <div class="section-title">🎯 Favorieten</div>
         <div class="games-grid">
             <div class="game-card flip" onclick="playGame('flip')">
                 <span class="game-icon">🐱</span>
@@ -374,10 +745,10 @@
                 <div class="game-desc">Leer cijfers</div>
             </div>
 
-            <div class="game-card locked">
-                <span class="game-icon">🎵</span>
-                <div class="game-title">Muziek</div>
-                <div class="game-desc">Binnenkort!</div>
+            <div class="game-card piano" onclick="playGame('piano')">
+                <span class="game-icon">🎹</span>
+                <div class="game-title">Piano</div>
+                <div class="game-desc">Speel muziek</div>
             </div>
 
             <div class="game-card locked">
@@ -394,18 +765,200 @@
         </div>
 
         <div class="beta-section">
-            <div class="beta-title">🧪 Beta</div>
+            <div class="section-title beta-title">🧪 Beta Spelletjes</div>
             <div class="beta-grid">
+                <div class="game-card beta" onclick="playGame('zoekenvind')">
+                    <span class="game-icon">🔍</span>
+                    <div class="game-title">Zoek & Vind</div>
+                    <div class="game-desc">Zoek de items</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('kleurensorteren')">
+                    <span class="game-icon">🧺</span>
+                    <div class="game-title">Kleuren Sorteren</div>
+                    <div class="game-desc">Sorteer de kleuren</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('plaatjefout')">
+                    <span class="game-icon">❌</span>
+                    <div class="game-title">Wat hoort er niet?</div>
+                    <div class="game-desc">Vind het plaatje</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('kiekeboe')">
+                    <span class="game-icon">👻</span>
+                    <div class="game-title">Kiekeboe</div>
+                    <div class="game-desc">Verstoppertje</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('poetsen')">
+                    <span class="game-icon">🧽</span>
+                    <div class="game-title">Poetsen</div>
+                    <div class="game-desc">Maak schoon</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('kamer')">
+                    <span class="game-icon">🛏️</span>
+                    <div class="game-title">Kamer</div>
+                    <div class="game-desc">Opruimen maar</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('muziektuin')">
+                    <span class="game-icon">🌷</span>
+                    <div class="game-title">Muziektuin</div>
+                    <div class="game-desc">Bloemenorkest</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('bellen')">
+                    <span class="game-icon">🫧</span>
+                    <div class="game-title">Bellen</div>
+                    <div class="game-desc">Pop de bubbles</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('aankleden')">
+                    <span class="game-icon">👕</span>
+                    <div class="game-title">Aankleden</div>
+                    <div class="game-desc">Kleed je aan</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('pizza')">
+                    <span class="game-icon">🍕</span>
+                    <div class="game-title">Pizza</div>
+                    <div class="game-desc">Maak pizza</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('kleurenmixen')">
+                    <span class="game-icon">🎨</span>
+                    <div class="game-title">Kleuren Mixen</div>
+                    <div class="game-desc">Mix kleuren</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('sokken')">
+                    <span class="game-icon">🧦</span>
+                    <div class="game-title">Sokken</div>
+                    <div class="game-desc">Match sokken</div>
+                </div>
+
+                <div class="game-card beta" onclick="playGame('zaklamp')">
+                    <span class="game-icon">🔦</span>
+                    <div class="game-title">Zaklamp</div>
+                    <div class="game-desc">Bos avontuur</div>
+                </div>
             </div>
         </div>
 
         <div class="footer">
-            Meer spelletjes binnenkort!<br>
-            <button class="cache-btn" onclick="clearCache()">🗑️ Cache wissen</button>
+            <span class="parent-tools">
+                <button class="cache-btn" onclick="clearCache()">🗑️ Cache wissen</button>
+                <button class="cache-btn" onclick="changePin()">🔐 PIN wijzigen</button>
+            </span>
+            <span class="normal-footer">
+                Meer spelletjes binnenkort!
+            </span>
         </div>
     </div>
 
     <script>
+        const DEFAULT_PIN = '1234';
+        
+        function getPin() {
+            return localStorage.getItem('parentPin') || DEFAULT_PIN;
+        }
+        
+        function setPin(pin) {
+            localStorage.setItem('parentPin', pin);
+        }
+        
+        function isParentMode() {
+            return localStorage.getItem('parentMode') === 'true';
+        }
+        
+        function setParentMode(enabled) {
+            localStorage.setItem('parentMode', enabled);
+            const container = document.getElementById('homeContainer');
+            if (enabled) {
+                container.classList.add('parent-mode');
+            } else {
+                container.classList.remove('parent-mode');
+            }
+        }
+        
+        function showPinModal(setup = false) {
+            const modal = document.getElementById('pinModal');
+            const title = document.getElementById('pinTitle');
+            const desc = document.getElementById('pinDesc');
+            const input = document.getElementById('pinInput');
+            
+            if (setup) {
+                title.textContent = 'Stel PIN in';
+                desc.textContent = 'Kies een 4-cijferige PIN';
+            } else {
+                title.textContent = 'Ouder Mode';
+                desc.textContent = 'Voer PIN in om toegang te krijgen';
+            }
+            
+            input.value = '';
+            modal.classList.add('show');
+            input.focus();
+        }
+
+        function changePin() {
+            closePinModal();
+            setTimeout(() => {
+                const modal = document.getElementById('pinModal');
+                const title = document.getElementById('pinTitle');
+                const desc = document.getElementById('pinDesc');
+                const input = document.getElementById('pinInput');
+                
+                title.textContent = 'Wijzig PIN';
+                desc.textContent = 'Voer nieuwe 4-cijferige PIN in';
+                
+                input.value = '';
+                modal.classList.add('show');
+                input.focus();
+                
+                input.onchange = function() {
+                    if (input.value.length === 4) {
+                        setPin(input.value);
+                        alert('PIN gewijzigd!');
+                        closePinModal();
+                    }
+                };
+            }, 100);
+        }
+        
+        function closePinModal() {
+            document.getElementById('pinModal').classList.remove('show');
+            document.getElementById('pinInput').value = '';
+        }
+        
+        function checkPin() {
+            const input = document.getElementById('pinInput').value;
+            const savedPin = getPin();
+            
+            if (input === savedPin) {
+                setParentMode(true);
+                closePinModal();
+            } else {
+                alert('Verkeerde PIN!');
+                document.getElementById('pinInput').value = '';
+            }
+        }
+        
+        function exitParentMode() {
+            setParentMode(false);
+        }
+        
+        document.getElementById('pinInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPin();
+            }
+        });
+        
+        if (isParentMode()) {
+            setParentMode(true);
+        }
+
         function playGame(gameName) {
             if (gameName === 'flip') {
                 window.location.href = 'games/flip.html';
@@ -417,6 +970,34 @@
                 window.location.href = 'games/letters.html';
             } else if (gameName === 'cijfers') {
                 window.location.href = 'games/cijfers.html';
+            } else if (gameName === 'piano') {
+                window.location.href = 'games/piano.html';
+            } else if (gameName === 'zoekenvind') {
+                window.location.href = 'games/zoekenvind.html';
+            } else if (gameName === 'kleurensorteren') {
+                window.location.href = 'games/kleurensorteren.html';
+            } else if (gameName === 'plaatjefout') {
+                window.location.href = 'games/plaatjefout.html';
+            } else if (gameName === 'kiekeboe') {
+                window.location.href = 'games/kiekeboe.html';
+            } else if (gameName === 'poetsen') {
+                window.location.href = 'games/poetsen.html';
+            } else if (gameName === 'kamer') {
+                window.location.href = 'games/kamer.html';
+            } else if (gameName === 'muziektuin') {
+                window.location.href = 'games/muziektuin.html';
+            } else if (gameName === 'bellen') {
+                window.location.href = 'games/bellen.html';
+            } else if (gameName === 'aankleden') {
+                window.location.href = 'games/aankleden.html';
+            } else if (gameName === 'pizza') {
+                window.location.href = 'games/pizza.html';
+            } else if (gameName === 'kleurenmixen') {
+                window.location.href = 'games/kleurenmixen.html';
+            } else if (gameName === 'sokken') {
+                window.location.href = 'games/sokken.html';
+            } else if (gameName === 'zaklamp') {
+                window.location.href = 'games/zaklamp.html';
             }
         }
 

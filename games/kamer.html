@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Kamer Opruimen</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛏️</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
+        body { min-height: 100vh; background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%); font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; }
+        .game-container { background: rgba(255, 255, 255, 0.95); border-radius: 40px; padding: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); max-width: 450px; width: 100%; text-align: center; position: relative; }
+        .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 2px 2px 0 #ffd5d5; }
+        .room { position: relative; width: 100%; height: 280px; background: linear-gradient(180deg, #E8D5B7 0%, #F5E6D3 50%, #DEB887 100%); border-radius: 25px; overflow: hidden; margin-bottom: 15px; }
+        .item { position: absolute; font-size: 2.5rem; cursor: pointer; transition: all 0.3s; }
+        .item:hover { transform: scale(1.15); }
+        .item.done { filter: grayscale(0.5) brightness(0.8); }
+        .item.placed { opacity: 0.5; pointer-events: none; }
+        .item.tap { animation: bounce 0.3s ease; }
+        @keyframes bounce { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+        .item.lamp { top: 10px; right: 20px; }
+        .item.bed { bottom: 20px; left: 50%; transform: translateX(-50%); }
+        .item.bear { bottom: 25px; left: 30%; }
+        .item.toy { top: 40%; right: 15%; }
+        .item.book { top: 35%; left: 10%; }
+        .item.shoes { bottom: 15px; right: 20%; }
+        .item.lamp-off { filter: brightness(0.5); }
+        .zone { position: absolute; border: 3px dashed #aaa; border-radius: 15px; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; opacity: 0.7; }
+        .zone.lamp-zone { top: 5px; right: 10px; width: 50px; height: 60px; }
+        .zone.bed-zone { bottom: 10px; left: 10px; width: 100px; height: 70px; }
+        .zone.toy-zone { bottom: 10px; right: 10px; width: 70px; height: 50px; }
+        .zone.lamp-zone.done, .zone.bed-zone.done, .zone.toy-zone.done { border-color: #4CAF50; background: rgba(76,175,80,0.2); }
+        .message { font-size: 1rem; color: #636e72; font-weight: 600; padding: 10px 15px; background: #fff5f5; border-radius: 15px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">🏠 Terug</a>
+    <div class="game-container">
+        <h1>🛏️ Kamer Opruimen</h1>
+        <div class="message" id="message">Maak alles klaar voor bed!</div>
+        <div class="room" id="room">
+            <div class="zone lamp-zone" id="lampZone">💡</div>
+            <div class="zone bed-zone" id="bedZone">🛏️</div>
+            <div class="zone toy-zone" id="toyZone">🧸</div>
+            
+            <div class="item lamp" id="lamp" onclick="tapItem('lamp')">💡</div>
+            <div class="item bed" id="bed" onclick="tapItem('bed')">🛏️</div>
+            <div class="item bear" id="bear" onclick="tapItem('bear')">🧸</div>
+            <div class="item toy" id="toy" onclick="tapItem('toy')">🚗</div>
+            <div class="item book" id="book" onclick="tapItem('book')">📚</div>
+            <div class="item shoes" id="shoes" onclick="tapItem('shoes')">👟</div>
+        </div>
+    </div>
+    <script>
+        const message = document.getElementById('message');
+        let completed = 0;
+        
+        const tasks = {
+            lamp: { zone: 'lampZone', done: false, msg: 'Doe het licht uit!' },
+            bear: { zone: 'bedZone', done: false, msg: 'De beer gaat naar bed!' },
+            toy: { zone: 'toyZone', done: false, msg: 'Speelgoed opruimen!' },
+            bed: { zone: 'bedZone', done: false, msg: 'Bed klaarmaken!' },
+            shoes: { zone: 'toyZone', done: false, msg: 'Schoenen wegzetten!' },
+            book: { zone: 'toyZone', done: false, msg: 'Boeken opruimen!' }
+        };
+        
+        function tapItem(item) {
+            const el = document.getElementById(item);
+            if (el.classList.contains('done')) return;
+            
+            el.classList.add('tap');
+            setTimeout(() => el.classList.remove('tap'), 300);
+            
+            const task = tasks[item];
+            if (!task.done) {
+                task.done = true;
+                el.classList.add('done');
+                
+                const zone = document.getElementById(task.zone);
+                zone.classList.add('done');
+                
+                completed++;
+                message.textContent = task.msg + ' ⭐';
+                
+                if (completed >= 6) {
+                    setTimeout(() => {
+                        message.textContent = 'Slaap lekker! 🌙';
+                        setTimeout(() => {
+                            completed = 0;
+                            Object.keys(tasks).forEach(k => {
+                                tasks[k].done = false;
+                                document.getElementById(k).classList.remove('done');
+                                document.getElementById(tasks[k].zone).classList.remove('done');
+                            });
+                            message.textContent = 'Nog een keer?';
+                        }, 2000);
+                    }, 500);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Aankleden</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👕</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
+        body { min-height: 100vh; background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%); font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; }
+        .game-container { background: rgba(255, 255, 255, 0.95); border-radius: 40px; padding: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); max-width: 450px; width: 100%; text-align: center; position: relative; }
+        .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.6rem; margin-bottom: 5px; text-shadow: 2px 2px 0 #ffd5d5; }
+        .weather { font-size: 3rem; margin-bottom: 10px; }
+        .task { font-size: 1rem; color: #555; margin-bottom: 15px; background: #fff5f5; padding: 10px; border-radius: 15px; }
+        .character { position: relative; width: 150px; height: 220px; margin: 0 auto 15px; }
+        .char-base { position: absolute; font-size: 6rem; left: 50%; transform: translateX(-50%); bottom: 0; }
+        .char-clothes { position: absolute; font-size: 3rem; left: 50%; transform: translateX(-50%); }
+        .clothes-options { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .clothing-item { font-size: 2rem; padding: 10px; background: white; border-radius: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
+        .clothing-item:hover { transform: scale(1.1); }
+        .clothing-item.selected { background: #90EE90; }
+        .message { font-size: 1rem; color: #636e72; font-weight: 600; padding: 8px 15px; background: #fff5f5; border-radius: 15px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">🏠 Terug</a>
+    <div class="game-container">
+        <h1>👕 Aankleden</h1>
+        <div class="weather" id="weather">☀️</div>
+        <div class="task" id="task">Kleed het poppetje aan voor zonnig weer!</div>
+        <div class="character">
+            <div class="char-clothes" id="hatDisplay"></div>
+            <div class="char-clothes" id="shirtDisplay"></div>
+            <div class="char-clothes" id="pantsDisplay"></div>
+            <div class="char-base">🧑</div>
+        </div>
+        <div>
+            <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Hoofd:</div>
+            <div class="clothes-options" id="hatOptions"></div>
+        </div>
+        <div>
+            <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Shirt:</div>
+            <div class="clothes-options" id="shirtOptions"></div>
+        </div>
+        <div>
+            <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Broek:</div>
+            <div class="clothes-options" id="pantsOptions"></div>
+        </div>
+        <div class="message" id="message">Kies de juiste kleding!</div>
+    </div>
+    <script>
+        const weatherData = [
+            { weather: '☀️', task: 'Kleed voor zonnig weer!', hat: ['🧢', '👒'], shirt: ['👕', '🎽'], pants: ['🩳', '👖'] },
+            { weather: '🌧️', task: 'Kleed voor regen!', hat: ['🧢', '🎩'], shirt: ['🧥', '👕'], pants: ['👖', '👖'] },
+            { weather: '❄️', task: 'Kleed voor koud weer!', hat: ['🧣', '🎿'], shirt: ['🧥', '🧥'], pants: ['👖', '👖'] },
+            { weather: '🌙', task: 'Kleed voor bed!', hat: ['😴', '👳'], shirt: ['👕', '👚'], pants: ['🩳', '🩳'] }
+        ];
+        
+        const allClothes = {
+            hat: ['🧢', '👒', '🎩', '🧣', '👳', '😴', '🎿'],
+            shirt: ['👕', '🎽', '🧥', '👚', '👔'],
+            pants: ['🩳', '👖', '🩳']
+        };
+        
+        let currentLevel = 0;
+        let selected = { hat: null, shirt: null, pants: null };
+        
+        const weatherDisplay = document.getElementById('weather');
+        const taskDisplay = document.getElementById('task');
+        const message = document.getElementById('message');
+        
+        function loadLevel() {
+            const level = weatherData[currentLevel];
+            weatherDisplay.textContent = level.weather;
+            taskDisplay.textContent = level.task;
+            
+            selected = { hat: null, shirt: null, pants: null };
+            document.getElementById('hatDisplay').textContent = '';
+            document.getElementById('shirtDisplay').textContent = '';
+            document.getElementById('pantsDisplay').textContent = '';
+            
+            createOptions('hat', allClothes.hat);
+            createOptions('shirt', allClothes.shirt);
+            createOptions('pants', allClothes.pants);
+        }
+        
+        function createOptions(type, items) {
+            const container = document.getElementById(type + 'Options');
+            container.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'clothing-item';
+                div.textContent = item;
+                div.onclick = () => selectClothing(type, item, div);
+                container.appendChild(div);
+            });
+        }
+        
+        function selectClothing(type, item, el) {
+            selected[type] = item;
+            
+            document.querySelectorAll('#' + type + 'Options .clothing-item').forEach(i => i.classList.remove('selected'));
+            el.classList.add('selected');
+            
+            const display = document.getElementById(type + 'Display');
+            display.textContent = item;
+            display.style.bottom = type === 'hat' ? '140px' : type === 'shirt' ? '80px' : '10px';
+            
+            checkComplete();
+        }
+        
+        function checkComplete() {
+            const level = weatherData[currentLevel];
+            const correct = level.hat.includes(selected.hat) && 
+                           level.shirt.includes(selected.shirt) && 
+                           level.pants.includes(selected.pants);
+            
+            if (selected.hat && selected.shirt && selected.pants) {
+                if (correct) {
+                    message.textContent = 'Perfect! Goed gedaan! ⭐';
+                    setTimeout(() => {
+                        currentLevel = (currentLevel + 1) % weatherData.length;
+                        loadLevel();
+                    }, 1500);
+                } else {
+                    message.textContent = 'Hmm, past dit bij het weer?';
+                }
+            }
+        }
+        
+        loadLevel();
+    </script>
+</body>
+</html>

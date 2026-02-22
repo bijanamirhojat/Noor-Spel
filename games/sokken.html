@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Sokken Matchen</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧦</text></svg>">
+    <link manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
+        body { min-height: 100vh; background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%); font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; }
+        .game-container { background: rgba(255, 255, 255, 0.95); border-radius: 40px; padding: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); max-width: 500px; width: 100%; text-align: center; position: relative; }
+        .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 2px 2px 0 #ffd5d5; }
+        .task { font-size: 1rem; color: #555; margin-bottom: 15px; background: #fff5f5; padding: 10px; border-radius: 15px; }
+        .socks-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
+        .sock { font-size: 2.5rem; background: white; border-radius: 15px; padding: 12px 8px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+        .sock:hover { transform: scale(1.1); }
+        .sock.selected { background: #FFF59D; transform: scale(1.1); }
+        .sock.matched { opacity: 0; pointer-events: none; }
+        .score { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: #4CAF50; }
+        .message { font-size: 1rem; color: #636e72; font-weight: 600; padding: 8px 15px; background: #fff5f5; border-radius: 15px; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">🏠 Terug</a>
+    <div class="game-container">
+        <h1>🧦 Sokken Matchen</h1>
+        <div class="task">Welke sokken horen bij elkaar?</div>
+        <div class="socks-grid" id="socksGrid"></div>
+        <div class="score">Score: <span id="score">0</span></div>
+        <div class="message" id="message">Tik op twee dezelfde sokken!</div>
+    </div>
+    <script>
+        const sockPatterns = ['🧦', '🧦', '🩳', '🩳', '🧤', '🧤', '👞', '👞', '🩰', '🩰', '👟', '👟'];
+        const sockColors = ['🔴', '🔵', '🟢', '🟡', '🟣', '🟠'];
+        
+        let selectedSocks = [];
+        let matched = 0;
+        let score = 0;
+        
+        const grid = document.getElementById('socksGrid');
+        const scoreDisplay = document.getElementById('score');
+        const message = document.getElementById('message');
+        
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+        
+        function initGame() {
+            selectedSocks = [];
+            matched = 0;
+            grid.innerHTML = '';
+            
+            const socks = [];
+            for (let i = 0; i < 8; i++) {
+                const color = sockColors[i % 6];
+                socks.push(color);
+                socks.push(color);
+            }
+            
+            shuffle(socks).forEach((sock, i) => {
+                const div = document.createElement('div');
+                div.className = 'sock';
+                div.textContent = sock;
+                div.dataset.index = i;
+                div.onclick = () => selectSock(div, sock, i);
+                grid.appendChild(div);
+            });
+        }
+        
+        function selectSock(el, sock, index) {
+            if (el.classList.contains('matched') || el.classList.contains('selected')) return;
+            
+            if (selectedSocks.length < 2) {
+                el.classList.add('selected');
+                selectedSocks.push({ el, sock, index });
+                
+                if (selectedSocks.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+        
+        function checkMatch() {
+            const [first, second] = selectedSocks;
+            
+            if (first.sock === second.sock) {
+                first.el.classList.add('matched');
+                second.el.classList.add('matched');
+                score += 10;
+                scoreDisplay.textContent = score;
+                message.textContent = 'Gevonden! ⭐';
+                matched++;
+                
+                if (matched >= 8) {
+                    setTimeout(() => {
+                        message.textContent = 'Alle sokken gematcht! Goed gedaan! 🏆';
+                        setTimeout(initGame, 2000);
+                    }, 500);
+                }
+            } else {
+                message.textContent = 'Niet hetzelfde...';
+                setTimeout(() => {
+                    first.el.classList.remove('selected');
+                    second.el.classList.remove('selected');
+                }, 500);
+            }
+            
+            selectedSocks = [];
+        }
+        
+        initGame();
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Muziektuin</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌷</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
+        body { min-height: 100vh; background: linear-gradient(180deg, #87CEEB 0%, #98D8AA 100%); font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; }
+        .game-container { background: rgba(255, 255, 255, 0.95); border-radius: 40px; padding: 20px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2); max-width: 500px; width: 100%; text-align: center; position: relative; }
+        .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
+        h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.8rem; margin-bottom: 10px; text-shadow: 2px 2px 0 #ffd5d5; }
+        .garden { position: relative; width: 100%; height: 320px; background: linear-gradient(180deg, #87CEEB 30%, #90EE90 70%); border-radius: 25px; overflow: hidden; margin-bottom: 15px; }
+        .flower { position: absolute; font-size: 3.5rem; cursor: pointer; transition: all 0.2s; bottom: 20px; }
+        .flower:hover { transform: scale(1.15); }
+        .flower:active { transform: scale(0.9); }
+        .flower.playing { animation: sway 0.5s ease infinite; }
+        @keyframes sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+        .note { position: absolute; font-size: 2rem; pointer-events: none; animation: floatUp 1s ease-out forwards; }
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-80px) scale(1.5); } }
+        .instructions { font-size: 1rem; color: #555; background: #fff5f5; padding: 10px; border-radius: 15px; }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-btn">🏠 Terug</a>
+    <div class="game-container">
+        <h1>🌷 Muziektuin</h1>
+        <div class="garden" id="garden"></div>
+        <div class="instructions">Tik op de bloemen om muziek te maken!</div>
+    </div>
+    <script>
+        const flowers = [
+            { emoji: '🌷', note: 'do', x: '10%', freq: 261.63 },
+            { emoji: '🌻', note: 're', x: '25%', freq: 293.66 },
+            { emoji: '🌸', note: 'mi', x: '40%', freq: 329.63 },
+            { emoji: '🌺', note: 'fa', x: '55%', freq: 349.23 },
+            { emoji: '🌹', note: 'sol', x: '70%', freq: 392.00 },
+            { emoji: '🌼', note: 'la', x: '85%', freq: 440.00 }
+        ];
+        
+        const garden = document.getElementById('garden');
+        
+        flowers.forEach((flower, i) => {
+            const el = document.createElement('div');
+            el.className = 'flower';
+            el.textContent = flower.emoji;
+            el.style.left = flower.x;
+            el.style.bottom = (20 + (i % 2) * 15) + '%';
+            el.onclick = () => playNote(flower, el);
+            garden.appendChild(el);
+        });
+        
+        function playNote(flower, el) {
+            el.classList.add('playing');
+            setTimeout(() => el.classList.remove('playing'), 500);
+            
+            showNote(el);
+            playSound(flower.freq);
+        }
+        
+        function showNote(el) {
+            const note = document.createElement('div');
+            note.className = 'note';
+            note.textContent = ['🎵', '🎶', '✨'][Math.floor(Math.random() * 3)];
+            note.style.left = el.style.left;
+            note.style.bottom = '60%';
+            garden.appendChild(note);
+            setTimeout(() => note.remove(), 1000);
+        }
+        
+        function playSound(freq) {
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = freq;
+                osc.type = 'sine';
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.5);
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
