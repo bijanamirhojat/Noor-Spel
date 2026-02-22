@@ -20,15 +20,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 10px;
         }
 
         .game-container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 40px;
-            padding: 20px;
+            border-radius: 30px;
+            padding: 15px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 100%;
             width: 100%;
             text-align: center;
             position: relative;
@@ -40,33 +40,40 @@
                 display: flex;
                 flex-direction: row;
                 align-items: flex-start;
-                gap: 20px;
+                gap: 15px;
                 text-align: left;
+                padding: 20px;
+                border-radius: 40px;
             }
             .game-container h1 {
                 position: absolute;
-                top: 20px;
+                top: 15px;
                 left: 20px;
                 margin-bottom: 0;
+                font-size: 1.8rem;
             }
             .pictures-list {
                 position: absolute;
-                top: 70px;
+                top: 55px;
                 left: 20px;
+                margin-bottom: 0;
             }
             .color-palette {
                 flex-direction: column;
-                width: 60px;
+                width: 55px;
                 order: 1;
                 margin-bottom: 0;
+                padding: 8px;
             }
             .canvas-container {
                 order: 2;
                 flex: 1;
                 margin-bottom: 0;
+                padding: 8px;
             }
             .progress {
                 order: 3;
+                margin-bottom: 0;
             }
             .toolbar {
                 order: 4;

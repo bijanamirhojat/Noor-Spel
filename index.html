@@ -20,83 +20,78 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
         }
 
         .home-container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 40px;
-            padding: 30px;
+            border-radius: 25px;
+            padding: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 400px;
+            max-width: 100%;
             width: 100%;
             text-align: center;
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: 768px) {
             .home-container {
-                max-width: 600px;
-                padding: 40px;
+                max-width: 550px;
+                padding: 30px;
+                border-radius: 40px;
             }
         }
 
         @media (min-width: 900px) {
             .home-container {
-                max-width: 1000px;
-                padding: 50px;
-            }
-            .game-card {
-                padding: 30px 20px;
-            }
-            .game-icon {
-                font-size: 5rem;
-            }
-            .game-title {
-                font-size: 1.5rem;
+                max-width: 800px;
+                padding: 35px;
             }
         }
 
         h1 {
             font-family: 'Fredoka One', cursive;
             color: #e63946;
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            text-shadow: 3px 3px 0 #ffd5d5;
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+            text-shadow: 2px 2px 0 #ffd5d5;
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
         }
 
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 0.75rem;
             color: #888;
-            margin-bottom: 35px;
+            margin-bottom: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+            }
         }
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
         }
 
-        @media (min-width: 600px) {
+        @media (min-width: 768px) {
             .games-grid {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
+                gap: 12px;
+                margin-bottom: 15px;
             }
         }
 
         @media (min-width: 900px) {
-            .games-grid {
-                grid-template-columns: repeat(6, 1fr);
-                max-width: 900px;
-                margin: 0 auto 30px;
-            }
-            .home-container {
-                max-width: 1000px;
-                padding: 50px;
-            }
-        }
-
-        @media (min-width: 1200px) {
             .games-grid {
                 grid-template-columns: repeat(6, 1fr);
             }
@@ -104,12 +99,70 @@
 
         .game-card {
             background: linear-gradient(145deg, #fff 0%, #fff5f5 100%);
-            border-radius: 25px;
-            padding: 25px 15px;
+            border-radius: 12px;
+            padding: 8px 4px;
             cursor: pointer;
             transition: all 0.2s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            border: 4px solid transparent;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+
+        @media (min-width: 768px) {
+            .game-card {
+                padding: 12px 8px;
+                border-radius: 18px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .game-card {
+                padding: 18px 12px;
+            }
+        }
+
+        .game-icon {
+            font-size: 1.6rem;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .game-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.75rem;
+            color: #444;
+        }
+
+        .game-desc {
+            font-size: 0.55rem;
+            color: #888;
+            margin-top: 1px;
+        }
+
+        @media (min-width: 768px) {
+            .game-icon {
+                font-size: 2rem;
+                margin-bottom: 5px;
+            }
+            .game-title {
+                font-size: 0.9rem;
+            }
+            .game-desc {
+                font-size: 0.7rem;
+                margin-top: 3px;
+            }
+        }
+
+        .footer {
+            font-size: 0.6rem;
+            color: #aaa;
+            margin-top: 6px;
+        }
+
+        @media (min-width: 768px) {
+            .footer {
+                font-size: 0.8rem;
+                margin-top: 15px;
+            }
         }
 
         .game-card:hover {
@@ -145,24 +198,6 @@
             border-color: #f39c12;
         }
 
-        .game-icon {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .game-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 1.3rem;
-            color: #444;
-        }
-
-        .game-desc {
-            font-size: 0.9rem;
-            color: #888;
-            margin-top: 5px;
-        }
-
         .locked {
             opacity: 0.5;
             filter: grayscale(1);
@@ -170,12 +205,6 @@
 
         .locked .game-icon {
             filter: grayscale(1);
-        }
-
-        .footer {
-            font-size: 0.85rem;
-            color: #aaa;
-            margin-top: 20px;
         }
 
         @keyframes bounce {
