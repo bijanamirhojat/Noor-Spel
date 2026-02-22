@@ -2,15 +2,28 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
     <title>Flip - Verzorgingsspel</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
+    <link rel="manifest" href="../manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            overscroll-behavior: none;
         }
 
         body {
@@ -101,6 +114,13 @@
             font-size: 0.9rem;
             box-shadow: 0 3px 10px rgba(0,0,0,0.15);
             transition: all 0.2s ease;
+        }
+
+        @media (min-width: 768px) {
+            .back-btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
         }
 
         .back-btn:hover {
@@ -424,8 +444,9 @@
     </style>
 </head>
 <body>
+    <a href="../index.html" class="back-btn">🏠 Terug</a>
+
     <div class="game-container">
-        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🐱 Flip 🐱</h1>
         
         <div class="game-content">

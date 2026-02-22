@@ -2,15 +2,28 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
     <title>Noor's Speelgoed - Games</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+    <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            touch-action: manipulation;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            overscroll-behavior: none;
         }
 
         body {
@@ -198,6 +211,22 @@
             border-color: #f39c12;
         }
 
+        .game-card.letters {
+            border-color: #a29bfe;
+        }
+
+        .game-card.letters:hover {
+            border-color: #6c5ce7;
+        }
+
+        .game-card.numbers {
+            border-color: #fd79a8;
+        }
+
+        .game-card.numbers:hover {
+            border-color: #e84393;
+        }
+
         .locked {
             opacity: 0.5;
             filter: grayscale(1);
@@ -241,6 +270,18 @@
                 <div class="game-desc">Kleurspelletje</div>
             </div>
 
+            <div class="game-card letters" onclick="playGame('letters')">
+                <span class="game-icon">🔤</span>
+                <div class="game-title">Letters</div>
+                <div class="game-desc">Kleine letters</div>
+            </div>
+
+            <div class="game-card numbers" onclick="playGame('cijfers')">
+                <span class="game-icon">🔢</span>
+                <div class="game-title">Cijfers</div>
+                <div class="game-desc">Leer cijfers</div>
+            </div>
+
             <div class="game-card locked">
                 <span class="game-icon">🎵</span>
                 <div class="game-title">Muziek</div>
@@ -273,7 +314,17 @@
                 window.location.href = 'games/memory.html';
             } else if (gameName === 'kleuren') {
                 window.location.href = 'games/kleuren.html';
+            } else if (gameName === 'letters') {
+                window.location.href = 'games/letters.html';
+            } else if (gameName === 'cijfers') {
+                window.location.href = 'games/cijfers.html';
             }
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed:', err));
         }
     </script>
 </body>
