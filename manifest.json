@@ -2,7 +2,7 @@
     "name": "Noor's Games",
     "short_name": "Noor's Games",
     "description": "Leuke spelletjes voor Noor",
-    "start_url": "/index.html",
+    "start_url": "https://bijanamirhojat.github.io/Noor-Spel/index.html",
     "display": "standalone",
     "background_color": "#ff6b6b",
     "theme_color": "#ff6b6b",
