@@ -26,7 +26,7 @@
         .game-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
-            padding: 25px;
+            padding: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
             max-width: 380px;
             width: 100%;
@@ -34,26 +34,54 @@
             position: relative;
         }
 
+        .game-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         @media (min-width: 768px) {
             .game-container {
-                max-width: 700px;
+                max-width: 800px;
                 padding: 30px;
             }
-            .cat-wrapper {
+            .game-content {
+                display: flex;
                 flex-direction: row;
-                gap: 40px;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 30px;
             }
-            .stats {
-                flex-direction: column;
-                width: 200px;
+            .cat-wrapper {
+                flex: 0 0 auto;
             }
             .cat-container {
-                width: 250px;
-                height: 250px;
+                width: 220px;
+                height: 220px;
+            }
+            .stats-section {
+                flex: 1;
+                max-width: 280px;
             }
             .buttons {
-                flex-direction: row;
-                flex-wrap: wrap;
+                max-width: 500px;
+                margin: 25px auto 0;
+            }
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .game-container {
+                max-width: 900px;
+            }
+            .cat-container {
+                width: 280px;
+                height: 280px;
+            }
+            .stats-section {
+                max-width: 350px;
             }
         }
 
@@ -92,19 +120,8 @@
             margin-bottom: 25px;
         }
 
-        @media (min-width: 768px) {
-            .cat-wrapper {
-                flex-direction: row;
-                justify-content: center;
-                gap: 30px;
-            }
-            .cat-container {
-                order: 1;
-            }
-            .stats {
-                order: 2;
-                align-items: flex-start;
-            }
+        .stats-section {
+            width: 100%;
         }
 
         .mood-emoji {
@@ -408,39 +425,43 @@
         <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🐱 Flip 🐱</h1>
         
-        <div class="cat-wrapper">
-            <div class="mood-emoji" id="mood">😺</div>
-            <div class="cat-container">
-                <div class="hearts" id="hearts">❤️💗💖</div>
-                <div class="zzz" id="zzz">💤 Zzz...</div>
-                <div class="poop-emoji" id="poopEmoji">💩</div>
-                <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&crop=face" alt="Flip" class="cat" id="cat">
+        <div class="game-content">
+            <div class="cat-wrapper">
+                <div class="mood-emoji" id="mood">😺</div>
+                <div class="cat-container">
+                    <div class="hearts" id="hearts">❤️💗💖</div>
+                    <div class="zzz" id="zzz">💤 Zzz...</div>
+                    <div class="poop-emoji" id="poopEmoji">💩</div>
+                    <img src="https://images.unsplash.com/photo-1574158622682-e40e69881006?w=400&h=400&fit=crop&crop=face" alt="Flip" class="cat" id="cat">
+                </div>
             </div>
-        </div>
 
-        <div class="stats">
-            <div class="stat">
-                <span class="stat-icon">🐟</span>
-                <div class="stat-bar">
-                    <div class="stat-fill hunger" id="hunger" style="width: 70%"></div>
-                </div>
-            </div>
-            <div class="stat">
-                <span class="stat-icon">💖</span>
-                <div class="stat-bar">
-                    <div class="stat-fill happiness" id="happiness" style="width: 70%"></div>
-                </div>
-            </div>
-            <div class="stat">
-                <span class="stat-icon">⚡</span>
-                <div class="stat-bar">
-                    <div class="stat-fill energy" id="energy" style="width: 70%"></div>
-                </div>
-            </div>
-            <div class="stat">
-                <span class="stat-icon">💩</span>
-                <div class="stat-bar">
-                    <div class="stat-fill poop" id="poop" style="width: 30%"></div>
+            <div class="stats-section">
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-icon">🐟</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill hunger" id="hunger" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">💖</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill happiness" id="happiness" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">⚡</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill energy" id="energy" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-icon">💩</span>
+                        <div class="stat-bar">
+                            <div class="stat-fill poop" id="poop" style="width: 30%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
