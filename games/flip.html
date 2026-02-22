@@ -26,12 +26,35 @@
         .game-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
-            padding: 35px;
+            padding: 25px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 420px;
+            max-width: 380px;
             width: 100%;
             text-align: center;
             position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .game-container {
+                max-width: 700px;
+                padding: 30px;
+            }
+            .cat-wrapper {
+                flex-direction: row;
+                gap: 40px;
+            }
+            .stats {
+                flex-direction: column;
+                width: 200px;
+            }
+            .cat-container {
+                width: 250px;
+                height: 250px;
+            }
+            .buttons {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
         }
 
         .back-btn {
@@ -67,6 +90,21 @@
             flex-direction: column;
             align-items: center;
             margin-bottom: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .cat-wrapper {
+                flex-direction: row;
+                justify-content: center;
+                gap: 30px;
+            }
+            .cat-container {
+                order: 1;
+            }
+            .stats {
+                order: 2;
+                align-items: flex-start;
+            }
         }
 
         .mood-emoji {
