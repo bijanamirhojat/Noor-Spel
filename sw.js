@@ -35,6 +35,13 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
+    const url = new URL(event.request.url);
+    
+    if (url.hostname === 'localhost' || url.hostname === '127.0.0.1' || url.hostname === '0.0.0.0') {
+        event.respondWith(fetch(event.request));
+        return;
+    }
+    
     event.respondWith(
         caches.match(event.request)
             .then(response => {

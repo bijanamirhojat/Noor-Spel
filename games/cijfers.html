@@ -272,26 +272,25 @@
         }
 
         .message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.98);
-            padding: 30px 50px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            z-index: 100;
             display: none;
-            animation: popIn 0.3s ease;
         }
 
-        @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
-            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 99;
+            display: none;
         }
 
-        .message h2 {
+        .overlay.show {
+            display: block;
+        }
+
+        .confetti {
             font-family: 'Fredoka One', cursive;
             color: #40c057;
             font-size: 2rem;
@@ -377,12 +376,7 @@
     </div>
 
     <div class="confetti" id="confetti"></div>
-
-    <div class="message" id="successMessage">
-        <h2>Goed gedaan! 🎉</h2>
-        <p>Je hebt het juiste antwoord!</p>
-        <button class="next-btn" onclick="nextLevel()">Volgende</button>
-    </div>
+    <div class="overlay" id="overlay"></div>
 
     <script>
         let currentNumber = 0;
@@ -453,6 +447,27 @@
             });
             
             isAnswering = false;
+            speakNumber(currentNumber);
+        }
+
+        function speakNumber(num) {
+            const utterance = new SpeechSynthesisUtterance(num.toString());
+            utterance.lang = 'nl-NL';
+            utterance.rate = 0.4;
+            utterance.pitch = 1.2;
+            
+            const voices = speechSynthesis.getVoices();
+            const femaleVoice = voices.find(v => v.lang.includes('nl') && (v.name.includes('Female') || v.name.includes('Vrouw'))) ||
+                              voices.find(v => v.lang.includes('nl'));
+            if (femaleVoice) {
+                utterance.voice = femaleVoice;
+            }
+            
+            speechSynthesis.speak(utterance);
+        }
+
+        if (speechSynthesis.getVoices().length === 0) {
+            speechSynthesis.addEventListener('voiceschanged', () => {});
         }
 
         function checkAnswer(index) {
@@ -470,8 +485,9 @@
                 
                 showConfetti();
                 setTimeout(() => {
-                    document.getElementById('successMessage').style.display = 'block';
-                }, 500);
+                    hideConfetti();
+                    initGame();
+                }, 1000);
             } else {
                 buttons[index].classList.add('wrong');
                 buttons[correctIndex].classList.add('correct');
@@ -482,7 +498,6 @@
         }
 
         function nextLevel() {
-            document.getElementById('successMessage').style.display = 'none';
             hideConfetti();
             initGame();
         }

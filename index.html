@@ -178,6 +178,31 @@
             }
         }
 
+        .cache-btn {
+            background: #f1f3f5;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.65rem;
+            color: #888;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+
+        @media (min-width: 768px) {
+            .cache-btn {
+                padding: 8px 16px;
+                font-size: 0.8rem;
+                border-radius: 12px;
+            }
+        }
+
+        .cache-btn:hover {
+            background: #e9ecef;
+            color: #666;
+        }
+
         .game-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
@@ -234,6 +259,73 @@
 
         .locked .game-icon {
             filter: grayscale(1);
+        }
+
+        .beta-section {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 2px dashed #ddd;
+            min-height: 20px;
+        }
+
+        .beta-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.9rem;
+            color: #f39c12;
+            margin-bottom: 6px;
+        }
+
+        .beta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .beta-grid:empty {
+            display: none;
+        }
+
+        .beta-grid:empty + .beta-title {
+            display: none;
+        }
+
+        .beta-section:has(.beta-grid:empty) {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        @media (min-width: 768px) {
+            .beta-grid {
+                gap: 12px;
+            }
+        }
+
+        @media (min-width: 900px) {
+            .beta-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        .game-card.beta {
+            background: linear-gradient(145deg, #fff 0%, #fff8e1 100%);
+            border: 2px dashed #f39c12;
+        }
+
+        .game-card.beta:hover {
+            border-style: solid;
+            border-color: #e67e22;
+        }
+
+        .beta-label {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #f39c12;
+            color: white;
+            font-size: 0.5rem;
+            padding: 2px 5px;
+            border-radius: 6px;
+            font-family: 'Fredoka One', cursive;
         }
 
         @keyframes bounce {
@@ -301,8 +393,15 @@
             </div>
         </div>
 
+        <div class="beta-section">
+            <div class="beta-title">🧪 Beta</div>
+            <div class="beta-grid">
+            </div>
+        </div>
+
         <div class="footer">
-            Meer spelletjes binnenkort!
+            Meer spelletjes binnenkort!<br>
+            <button class="cache-btn" onclick="clearCache()">🗑️ Cache wissen</button>
         </div>
     </div>
 
@@ -318,6 +417,24 @@
                 window.location.href = 'games/letters.html';
             } else if (gameName === 'cijfers') {
                 window.location.href = 'games/cijfers.html';
+            }
+        }
+
+        async function clearCache() {
+            if (confirm('Wil je de cache wissen?')) {
+                if ('caches' in window) {
+                    const keys = await caches.keys();
+                    for (const key of keys) {
+                        await caches.delete(key);
+                    }
+                }
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (const reg of registrations) {
+                        await reg.unregister();
+                    }
+                }
+                alert('Cache gewist! Ververs de pagina.');
             }
         }
 
