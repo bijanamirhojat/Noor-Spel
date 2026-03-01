@@ -751,16 +751,46 @@
                 <div class="game-desc">Speel muziek</div>
             </div>
 
-            <div class="game-card locked">
-                <span class="game-icon">🎯</span>
-                <div class="game-title">Dieren</div>
-                <div class="game-desc">Binnenkort!</div>
+            <div class="game-card" onclick="playGame('zaklamp')">
+                <span class="game-icon">🔦</span>
+                <div class="game-title">Zaklamp</div>
+                <div class="game-desc">Bos avontuur</div>
             </div>
 
-            <div class="game-card locked">
-                <span class="game-icon">🏃</span>
-                <div class="game-title">Rennen</div>
-                <div class="game-desc">Binnenkort!</div>
+            <div class="game-card" onclick="playGame('kleurensorteren')">
+                <span class="game-icon">🏠</span>
+                <div class="game-title">Dieren naar hun Huis</div>
+                <div class="game-desc">Welk dier woont waar?</div>
+            </div>
+
+            <div class="game-card" onclick="playGame('plaatjefout')">
+                <span class="game-icon">❌</span>
+                <div class="game-title">Wat hoort er niet?</div>
+                <div class="game-desc">Vind het plaatje</div>
+            </div>
+
+            <div class="game-card" onclick="playGame('kiekeboe')">
+                <span class="game-icon">👻</span>
+                <div class="game-title">Kiekeboe</div>
+                <div class="game-desc">Verstoppertje</div>
+            </div>
+
+            <div class="game-card" onclick="playGame('poetsen')">
+                <span class="game-icon">🧽</span>
+                <div class="game-title">Poetsen</div>
+                <div class="game-desc">Maak schoon</div>
+            </div>
+
+            <div class="game-card" onclick="playGame('muziektuin')">
+                <span class="game-icon">🌷</span>
+                <div class="game-title">Muziektuin</div>
+                <div class="game-desc">Bloemenorkest</div>
+            </div>
+
+            <div class="game-card" onclick="playGame('sokken')">
+                <span class="game-icon">🧦</span>
+                <div class="game-title">Sokken</div>
+                <div class="game-desc">Match sokken</div>
             </div>
         </div>
 
@@ -773,40 +803,10 @@
                     <div class="game-desc">Zoek de items</div>
                 </div>
 
-                <div class="game-card beta" onclick="playGame('kleurensorteren')">
-                    <span class="game-icon">🏠</span>
-                    <div class="game-title">Dieren naar hun Huis</div>
-                    <div class="game-desc">Welk dier woont waar?</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('plaatjefout')">
-                    <span class="game-icon">❌</span>
-                    <div class="game-title">Wat hoort er niet?</div>
-                    <div class="game-desc">Vind het plaatje</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('kiekeboe')">
-                    <span class="game-icon">👻</span>
-                    <div class="game-title">Kiekeboe</div>
-                    <div class="game-desc">Verstoppertje</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('poetsen')">
-                    <span class="game-icon">🧽</span>
-                    <div class="game-title">Poetsen</div>
-                    <div class="game-desc">Maak schoon</div>
-                </div>
-
                 <div class="game-card beta" onclick="playGame('kamer')">
                     <span class="game-icon">🛏️</span>
                     <div class="game-title">Kamer</div>
                     <div class="game-desc">Opruimen maar</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('muziektuin')">
-                    <span class="game-icon">🌷</span>
-                    <div class="game-title">Muziektuin</div>
-                    <div class="game-desc">Bloemenorkest</div>
                 </div>
 
                 <div class="game-card beta" onclick="playGame('bellen')">
@@ -831,18 +831,6 @@
                     <span class="game-icon">🎨</span>
                     <div class="game-title">Kleuren Mixen</div>
                     <div class="game-desc">Mix kleuren</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('sokken')">
-                    <span class="game-icon">🧦</span>
-                    <div class="game-title">Sokken</div>
-                    <div class="game-desc">Match sokken</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('zaklamp')">
-                    <span class="game-icon">🔦</span>
-                    <div class="game-title">Zaklamp</div>
-                    <div class="game-desc">Bos avontuur</div>
                 </div>
             </div>
         </div>
@@ -1016,7 +1004,7 @@
                         await reg.unregister();
                     }
                 }
-                alert('Cache gewist! Ververs de pagina.');
+                window.location.reload();
             }
         }
 
