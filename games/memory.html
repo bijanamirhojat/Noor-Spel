@@ -17,10 +17,6 @@
             background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
         }
 
-        .back-btn {
-            background: #ff9a8b;
-        }
-
         .score-board {
             display: flex;
             justify-content: center;
@@ -95,82 +91,6 @@
             display: none;
         }
 
-        .new-game-btn {
-            background: linear-gradient(180deg, #55efc4 0%, #00b894 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-family: 'Fredoka One', cursive;
-            border-radius: 15px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
-            transition: all 0.15s ease;
-            margin-bottom: 10px;
-        }
-
-        .new-game-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .new-game-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 2px 0 rgba(0,0,0,0.15);
-        }
-
-        .win-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 40px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            z-index: 100;
-            display: none;
-            animation: popIn 0.5s ease;
-        }
-
-        .win-message.show {
-            display: block;
-        }
-
-        @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            70% { transform: translate(-50%, -50%) scale(1.1); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .win-message h2 {
-            font-family: 'Fredoka One', cursive;
-            color: #e63946;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .win-message p {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 99;
-            display: none;
-        }
-
-        .overlay.show {
-            display: block;
-        }
-
         @keyframes celebrate {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.2); }
@@ -201,11 +121,6 @@
                 border: 3px solid #fff;
             }
 
-            .new-game-btn {
-                padding: 15px 35px;
-                font-size: 1.2rem;
-                border-radius: 20px;
-            }
         }
     </style>
 </head>
@@ -220,16 +135,8 @@
             <div class="score">⭐ <span id="matches">0</span>/8</div>
         </div>
 
-        <button class="new-game-btn" onclick="newGame()">Nieuw Spel!</button>
-
         <div class="memory-grid" id="grid"></div>
-    </div>
-
-    <div class="overlay" id="overlay"></div>
-    <div class="win-message" id="winMessage">
-        <h2>🎉 Proficiat! 🎉</h2>
-        <p>Je hebt gewonnen!</p>
-        <button class="new-game-btn" onclick="newGame()">Nog een keer!</button>
+        <div class="message" id="message"></div>
     </div>
 
     <script>
@@ -305,13 +212,12 @@
         }
 
         function showWin() {
-            document.getElementById('overlay').classList.add('show');
-            document.getElementById('winMessage').classList.add('show');
+            document.getElementById('message').textContent = '🎉 Proficiat! Goed gedaan! 🎉';
+            setTimeout(newGame, 2000);
         }
 
         function newGame() {
-            document.getElementById('overlay').classList.remove('show');
-            document.getElementById('winMessage').classList.remove('show');
+            document.getElementById('message').textContent = '';
             
             cards = [...emojis, ...emojis];
             shuffle(cards);

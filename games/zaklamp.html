@@ -162,12 +162,47 @@
                     
                     if (found >= animals.length) {
                         message.textContent = 'Je vond alle dieren! ⭐';
+                        setTimeout(resetGame, 2000);
                     }
                 }
             };
             
             forest.appendChild(eyes);
         });
+        
+        function resetGame() {
+            found = 0;
+            document.querySelectorAll('.eyes').forEach(e => e.remove());
+            
+            animals.forEach(animal => {
+                const eyes = document.createElement('div');
+                eyes.className = 'eyes';
+                eyes.textContent = '👀';
+                eyes.style.left = Math.random() * 80 + 5 + '%';
+                eyes.style.top = Math.random() * 60 + 20 + '%';
+                eyes.style.color = animal.color;
+                eyes.dataset.found = 'false';
+                
+                eyes.onclick = () => {
+                    if (eyes.dataset.found === 'false') {
+                        eyes.dataset.found = 'true';
+                        eyes.textContent = animal.emoji;
+                        eyes.classList.add('revealed');
+                        found++;
+                        message.textContent = `Je zag een ${animal.name}! ${found}/${animals.length} gevonden`;
+                        
+                        if (found >= animals.length) {
+                            message.textContent = 'Je vond alle dieren! ⭐';
+                            setTimeout(resetGame, 2000);
+                        }
+                    }
+                };
+                
+                forest.appendChild(eyes);
+            });
+            
+            message.textContent = 'Schijn met je zaklamp in het donkere bos!';
+        }
         
         document.addEventListener('mousemove', (e) => {
             flashlight.classList.add('on');

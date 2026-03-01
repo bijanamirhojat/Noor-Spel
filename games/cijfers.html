@@ -17,14 +17,6 @@
             background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
         }
 
-        .back-btn {
-            background: #74b9ff;
-        }
-
-        .back-btn:hover {
-            background: #0984e3;
-        }
-
         .difficulty-selector {
             display: flex;
             justify-content: center;
@@ -151,52 +143,6 @@
             75% { transform: translateX(10px); }
         }
 
-        .message {
-            display: none;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.3);
-            z-index: 99;
-            display: none;
-        }
-
-        .overlay.show {
-            display: block;
-        }
-
-        .confetti {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 99;
-            display: none;
-        }
-
-        .confetti.active {
-            display: block;
-        }
-
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            animation: confettiFall 3s ease-out forwards;
-        }
-
-        @keyframes confettiFall {
-            0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-
         @media (min-width: 768px) {
             .diff-btn {
                 padding: 10px 30px;
@@ -261,9 +207,6 @@
         </div>
     </div>
 
-    <div class="confetti" id="confetti"></div>
-    <div class="overlay" id="overlay"></div>
-
     <script>
         let currentNumber = 0;
         let score = 0;
@@ -273,10 +216,6 @@
         let options = [];
         let correctIndex = 0;
         let isAnswering = false;
-
-        function goBack() {
-            window.location.href = '../index.html';
-        }
 
         function setDifficulty(diff) {
             difficulty = diff;
@@ -369,9 +308,7 @@
                 document.getElementById('score').textContent = score;
                 document.getElementById('level').textContent = level;
                 
-                showConfetti();
                 setTimeout(() => {
-                    hideConfetti();
                     initGame();
                 }, 1000);
             } else {
@@ -381,33 +318,6 @@
                     initGame();
                 }, 800);
             }
-        }
-
-        function nextLevel() {
-            hideConfetti();
-            initGame();
-        }
-
-        function showConfetti() {
-            const confetti = document.getElementById('confetti');
-            confetti.innerHTML = '';
-            const colors = ['#ff6b6b', '#ffa8a8', '#51cf66', '#ffd43b', '#74b9ff', '#a29bfe'];
-            
-            for (let i = 0; i < 50; i++) {
-                const piece = document.createElement('div');
-                piece.className = 'confetti-piece';
-                piece.style.left = Math.random() * 100 + '%';
-                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
-                piece.style.animationDelay = Math.random() * 2 + 's';
-                piece.style.animationDuration = (2 + Math.random() * 2) + 's';
-                confetti.appendChild(piece);
-            }
-            
-            confetti.classList.add('active');
-        }
-
-        function hideConfetti() {
-            document.getElementById('confetti').classList.remove('active');
         }
 
         initGame();
