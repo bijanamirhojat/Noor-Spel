@@ -16,6 +16,8 @@
         html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
         body { min-height: 100vh; background: #000; font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; overflow: hidden; }
         .game-container { background: #000; border-radius: 40px; padding: 20px; max-width: 500px; width: 100%; text-align: center; position: relative; height: 100vh; box-sizing: border-box; }
+        @media (min-width: 768px) { .game-container { max-width: 800px; height: 600px; overflow: auto; } .forest { height: calc(100% - 120px); } }
+        @media (min-width: 1024px) { .game-container { max-width: 900px; } }
         .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; z-index: 100; }
         h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 2px 2px 0 #ffd5d5; }
         .forest { position: relative; width: 100%; height: calc(100vh - 120px); background: #0a0a15; border-radius: 25px; overflow: hidden; margin-bottom: 15px; }
