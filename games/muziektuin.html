@@ -26,12 +26,13 @@
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🌷 Muziektuin</h1>
         <div class="garden" id="garden"></div>
         <div class="instructions">Tik op de bloemen om muziek te maken!</div>
     </div>
+    <script src="shared.js"></script>
     <script>
         const flowers = [
             { emoji: '🌷', note: 'do', x: '10%', freq: 261.63 },
@@ -59,7 +60,7 @@
             setTimeout(() => el.classList.remove('playing'), 500);
             
             showNote(el);
-            playSound(flower.freq);
+            playTone(flower.freq, 0.5, 0.3);
         }
         
         function showNote(el) {
@@ -70,25 +71,6 @@
             note.style.bottom = '60%';
             garden.appendChild(note);
             setTimeout(() => note.remove(), 1000);
-        }
-        
-        let audioCtx = null;
-        
-        function playSound(freq) {
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.frequency.value = freq;
-                osc.type = 'sine';
-                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.5);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.5);
-            } catch(e) {}
         }
     </script>
 </body>

@@ -13,10 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        body {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
-        }
-
         .game-content {
             display: flex;
             flex-direction: column;
@@ -317,9 +313,8 @@
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
-
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🐱 Flip 🐱</h1>
         
         <div class="game-content">
@@ -392,6 +387,7 @@
         </div>
     </div>
 
+    <script src="shared.js"></script>
     <script>
         let hunger = 70;
         let happiness = 70;
@@ -406,20 +402,8 @@
         const mood = document.getElementById('mood');
         const message = document.getElementById('message');
 
-        let audioCtx = null;
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-            return audioCtx;
-        }
-
         function playMeow() {
-            const ctx = initAudio();
+            const ctx = getAudioContext();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.connect(gain);
@@ -434,7 +418,7 @@
         }
 
         function playPurr() {
-            const ctx = initAudio();
+            const ctx = getAudioContext();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.type = 'triangle';
@@ -451,7 +435,7 @@
         }
 
         function playHappy() {
-            const ctx = initAudio();
+            const ctx = getAudioContext();
             [523, 659, 784].forEach((freq, i) => {
                 const osc = ctx.createOscillator();
                 const gain = ctx.createGain();
@@ -467,7 +451,7 @@
         }
 
         function playSleep() {
-            const ctx = initAudio();
+            const ctx = getAudioContext();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.connect(gain);
@@ -482,7 +466,7 @@
         }
 
         function playPoop() {
-            const ctx = initAudio();
+            const ctx = getAudioContext();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
             osc.type = 'sawtooth';

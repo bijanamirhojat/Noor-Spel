@@ -23,14 +23,12 @@
         @keyframes peek { 0% { transform: translate(-50%, -50%) scale(0); } 50% { transform: translate(-50%, -50%) scale(1.2); } 100% { transform: translate(-50%, -50%) scale(1); } }
         .box.shake { animation: shake 0.5s ease; }
         @keyframes shake { 0%, 100% { transform: translate(-50%, -50%) rotate(0); } 25% { transform: translate(-50%, -50%) rotate(-10deg); } 75% { transform: translate(-50%, -50%) rotate(10deg); } }
-        .message { font-size: 1.2rem; }
-        .score { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: #4CAF50; margin-top: 10px; }
         .hint { font-size: 0.9rem; color: #888; margin-top: 8px; }
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>👻 Kiekeboe!</h1>
         <div class="game-area">
             <div class="box" id="box" onclick="openBox()">📦</div>
@@ -40,35 +38,18 @@
         <div class="score">Gevonden: <span id="score">0</span></div>
         <div class="hint">Wie zit er in de doos?</div>
     </div>
+    <script src="shared.js"></script>
     <script>
         const characters = ['👻', '👽', '🤖', '🦊', '🐼', '🦁', '🐨', '🐯'];
         const sounds = [];
         let isOpen = false;
         let score = 0;
         let currentChar = 0;
-        let audioCtx = null;
         
         const box = document.getElementById('box');
         const character = document.getElementById('character');
         const message = document.getElementById('message');
         const scoreDisplay = document.getElementById('score');
-        
-        function playPop() {
-            try {
-                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                if (audioCtx.state === 'suspended') audioCtx.resume();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
-                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.2);
-            } catch(e) {}
-        }
         
         function openBox() {
             if (isOpen) {
@@ -81,7 +62,7 @@
             box.textContent = '👐';
             character.textContent = characters[currentChar];
             character.classList.add('show');
-            playPop();
+            playFreqSweep(400, 800, 0.2, 0.3);
             
             score++;
             scoreDisplay.textContent = score;

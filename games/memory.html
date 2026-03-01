@@ -7,16 +7,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Noor's Games">
-    <title>Memory - Noor's Games</title>
+    <title>Memory</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
     <link rel="manifest" href="../manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        body {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
-        }
-
         .score-board {
             display: flex;
             justify-content: center;
@@ -125,9 +121,9 @@
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
-
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
+
         <h1>🧩 Memory</h1>
 
         <div class="score-board">
@@ -139,6 +135,7 @@
         <div class="message" id="message"></div>
     </div>
 
+    <script src="shared.js"></script>
     <script>
         const emojis = ['🐱', '🐶', '🐰', '🦊', '🐻', '🐼', '🐨', '🐸'];
         let cards = [];
@@ -146,14 +143,6 @@
         let matchedPairs = 0;
         let moves = 0;
         let canFlip = true;
-
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
 
         function createCard(emoji, index) {
             const card = document.createElement('div');

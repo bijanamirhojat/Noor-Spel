@@ -13,7 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        body { background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%); }
         .room { position: relative; width: 100%; height: 280px; background: linear-gradient(180deg, #E8D5B7 0%, #F5E6D3 50%, #DEB887 100%); border-radius: 25px; overflow: hidden; margin-bottom: 15px; }
         .item { position: absolute; font-size: 2.5rem; cursor: pointer; transition: all 0.3s; }
         .item:hover { transform: scale(1.15); }
@@ -33,12 +32,11 @@
         .zone.bed-zone { bottom: 10px; left: 10px; width: 100px; height: 70px; }
         .zone.toy-zone { bottom: 10px; right: 10px; width: 70px; height: 50px; }
         .zone.lamp-zone.done, .zone.bed-zone.done, .zone.toy-zone.done { border-color: #4CAF50; background: rgba(76,175,80,0.2); }
-        .message { margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🛏️ Kamer Opruimen</h1>
         <div class="message" id="message">Maak alles klaar voor bed!</div>
         <div class="room" id="room">
@@ -54,6 +52,7 @@
             <div class="item shoes" id="shoes" onclick="tapItem('shoes')">👟</div>
         </div>
     </div>
+    <script src="shared.js"></script>
     <script>
         const message = document.getElementById('message');
         let completed = 0;

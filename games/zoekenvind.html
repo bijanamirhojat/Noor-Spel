@@ -13,25 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        body { background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%); }
-        .task { font-size: 1rem; color: #555; margin-bottom: 15px; background: #fff5f5; padding: 10px; border-radius: 15px; }
         .items-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
         .item { font-size: 2.5rem; background: white; border-radius: 15px; padding: 15px 10px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
         .item:hover { transform: scale(1.1); }
         .item.found { opacity: 0.3; pointer-events: none; }
-        .score { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: #4CAF50; }
-        .message { min-height: 24px; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🔍 Zoek & Vind</h1>
         <div class="task" id="task">Zoek: <span id="target">⭐</span></div>
         <div class="items-grid" id="gameGrid"></div>
         <div class="score">Score: <span id="score">0</span></div>
         <div class="message" id="message">Tik op de juiste item!</div>
     </div>
+    <script src="shared.js"></script>
     <script>
         const items = ['⭐', '🍎', '🚗', '🐱', '🌸', '🎈', '🍕', '🎁', '🌈', '🦋', '🍦', '⚽'];
         let targetItem = '';
@@ -42,14 +39,6 @@
         const targetDisplay = document.getElementById('target');
         const scoreDisplay = document.getElementById('score');
         const messageDisplay = document.getElementById('message');
-        
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-            return array;
-        }
         
         function newRound() {
             grid.innerHTML = '';

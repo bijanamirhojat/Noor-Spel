@@ -13,8 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        body { background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%); }
-        .task { font-size: 1rem; color: #555; margin-bottom: 15px; background: #fff5f5; padding: 10px; border-radius: 15px; }
         .pizza { position: relative; width: 200px; height: 200px; background: #FFD700; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.2); overflow: hidden; }
         .topping { position: absolute; font-size: 1.8rem; transition: all 0.2s; }
         .ingredients { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
@@ -24,14 +22,15 @@
     </style>
 </head>
 <body>
-    <a href="../index.html" class="back-btn">🏠 Terug</a>
     <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🍕 Pizza Maken</h1>
         <div class="task" id="task">Voeg 3 ingrediënten toe!</div>
         <div class="pizza" id="pizza">🍕</div>
         <div class="ingredients" id="ingredients"></div>
         <div class="message" id="message">Kies ingrediënten voor op de pizza!</div>
     </div>
+    <script src="shared.js"></script>
     <script>
         const ingredients = ['🧀', '🍅', '🍕', '🥓', '🍄', '🌶️', '🫑', '🥦', '🥚', '🐟'];
         const recipes = [
