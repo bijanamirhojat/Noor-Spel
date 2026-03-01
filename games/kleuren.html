@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        /* ── Selection screen ── */
+        /* ── Selection screen (inside .game-container) ── */
         .page-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -65,80 +65,181 @@
             padding: 40px 10px;
         }
 
-        /* ── Coloring screen ── */
-        .color-palette {
+        /* ── Fullscreen coloring screen ── */
+        .color-fullscreen {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: #f0f0f0;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 5px;
-            margin-bottom: 10px;
-            padding: 8px;
-            background: #fff5f5;
+            flex-direction: column;
+        }
+
+        /* ── Top bar ── */
+        .color-topbar {
+            height: 48px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 12px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+        }
+
+        .color-topbar-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #ff9a8b;
+            color: white;
+            border: none;
+            padding: 7px 14px;
             border-radius: 12px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            transition: all 0.2s ease;
+        }
+
+        .color-topbar-btn:hover {
+            background: #ff6b6b;
+            transform: scale(1.05);
+        }
+
+        .color-topbar-btn:active {
+            transform: scale(0.95);
+        }
+
+        .color-toggle-btn {
+            background: #fff;
+            color: #333;
+            border: 2px solid #eee;
+        }
+
+        .color-toggle-btn:hover {
+            background: #fff5f5;
+            border-color: #ff6b6b;
+        }
+
+        .color-toggle-btn.active {
+            border-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .color-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.15);
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        /* ── Canvas area ── */
+        .color-canvas-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 10px;
+            position: relative;
+        }
+
+        .drawing-canvas {
+            border-radius: 10px;
+            cursor: crosshair;
+            display: block;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            background: white;
+        }
+
+        /* ── Flyout panel (right side) ── */
+        .color-flyout {
+            position: absolute;
+            top: 48px;
+            right: 0;
+            bottom: 0;
+            width: 190px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: -3px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            padding: 18px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+        }
+
+        .color-flyout.open {
+            transform: translateX(0);
+        }
+
+        .color-flyout-header {
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.95rem;
+            color: #e63946;
+            text-align: center;
+        }
+
+        .color-flyout-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            justify-items: center;
         }
 
         .color-btn {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             border: 2px solid white;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: all 0.15s ease;
         }
 
         .color-btn:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         .color-btn.selected {
             border-color: #333;
-            transform: scale(1.15);
+            transform: scale(1.2);
             box-shadow: 0 0 0 2px #333;
         }
 
-        .canvas-container {
-            background: white;
-            border-radius: 12px;
-            padding: 6px;
-            margin-bottom: 10px;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        .color-flyout-tools {
             display: flex;
-            justify-content: center;
-        }
-
-        .drawing-canvas {
-            border-radius: 8px;
-            cursor: crosshair;
-            display: block;
-            max-width: 100%;
-        }
-
-        .progress {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .toolbar {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 10px;
         }
 
         .tool-btn {
             background: linear-gradient(180deg, #ff7675 0%, #d63031 100%);
             border: none;
-            padding: 8px 16px;
+            padding: 10px 14px;
             border-radius: 12px;
             font-family: 'Fredoka One', cursive;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: white;
             cursor: pointer;
-            box-shadow: 0 3px 0 rgba(0,0,0,0.15);
+            box-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
             transition: all 0.2s ease;
+            width: 100%;
+            text-align: center;
         }
 
         .tool-btn:hover {
@@ -147,7 +248,53 @@
 
         .tool-btn:active {
             transform: translateY(2px);
-            box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        /* ── Expand animation (thumbnail → fullscreen) ── */
+        .color-fullscreen.animating-in {
+            animation: expandToFullscreen 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        @keyframes expandToFullscreen {
+            0% {
+                top: var(--start-top);
+                left: var(--start-left);
+                width: var(--start-width);
+                height: var(--start-height);
+                border-radius: 16px;
+                opacity: 0.85;
+            }
+            100% {
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                opacity: 1;
+            }
+        }
+
+        /* ── Exit animation (reuse shared.css gameExitOut) ── */
+        .color-fullscreen.color-exit {
+            animation: gameExitOut 0.3s ease-in forwards;
+        }
+
+        /* ── Flyout overlay tap-to-close (mobile-friendly) ── */
+        .color-flyout-backdrop {
+            display: none;
+            position: absolute;
+            top: 48px;
+            left: 0;
+            right: 190px;
+            bottom: 0;
+            z-index: 4;
+        }
+
+        .color-flyout-backdrop.active {
+            display: block;
         }
 
         /* ── Responsive ── */
@@ -157,56 +304,84 @@
                 gap: 15px;
             }
 
-            .color-palette {
-                gap: 5px;
-                margin-bottom: 5px;
-                padding: 6px;
+            .color-topbar {
+                height: 52px;
+                padding: 0 20px;
+            }
+
+            .color-topbar-btn {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
+
+            /* Sidebar always visible on tablet */
+            .color-toggle-btn {
+                display: none;
+            }
+
+            .color-flyout {
+                top: 52px;
+                width: 210px;
+                padding: 20px 16px;
+                transform: translateX(0);
+                box-shadow: -1px 0 10px rgba(0, 0, 0, 0.06);
+            }
+
+            .color-canvas-area {
+                margin-right: 210px;
+            }
+
+            /* No backdrop needed on tablet */
+            .color-flyout-backdrop {
+                display: none !important;
             }
 
             .color-btn {
-                width: 34px;
-                height: 34px;
-            }
-
-            .canvas-container {
-                margin: 0 auto 5px;
-                padding: 4px;
-            }
-
-            .progress {
-                margin-bottom: 5px;
+                width: 38px;
+                height: 38px;
             }
 
             .tool-btn {
-                padding: 8px 18px;
-                font-size: 0.9rem;
+                padding: 10px 16px;
+                font-size: 0.85rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="game-container">
+    <!-- ── Selection screen (inside .game-container) ── -->
+    <div class="game-container" id="gameContainer">
         <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🎨 Kleuren</h1>
 
-        <!-- ── Screen A: Selection ── -->
         <div id="selectScreen">
             <div class="page-grid" id="pageGrid">
                 <div class="empty-state">Kleurplaten laden...</div>
             </div>
         </div>
+    </div>
 
-        <!-- ── Screen B: Coloring ── -->
-        <div id="colorScreen" style="display:none">
-            <div class="color-palette" id="palette"></div>
+    <!-- ── Fullscreen coloring screen (OUTSIDE .game-container) ── -->
+    <div id="colorScreen" class="color-fullscreen" style="display:none">
+        <div class="color-topbar">
+            <button class="color-topbar-btn" onclick="showSelection()">🏠 Terug</button>
+            <button class="color-topbar-btn color-toggle-btn" id="paletteToggle" onclick="togglePalette()">
+                <span class="color-indicator" id="colorIndicator"></span>
+                🎨
+            </button>
+        </div>
 
-            <div class="canvas-container">
-                <canvas id="canvas" class="drawing-canvas"></canvas>
-            </div>
+        <div class="color-canvas-area">
+            <canvas id="canvas" class="drawing-canvas"></canvas>
+        </div>
 
-            <div class="progress" id="progress">0% ingekleurd</div>
+        <!-- Tap-to-close backdrop when flyout is open -->
+        <div class="color-flyout-backdrop" id="flyoutBackdrop" onclick="togglePalette()"></div>
 
-            <div class="toolbar">
+        <div class="color-flyout" id="colorFlyout">
+            <div class="color-flyout-header">Kies een kleur</div>
+            <div class="color-flyout-grid" id="palette"></div>
+            <div class="color-flyout-tools">
                 <button class="tool-btn" onclick="resetCanvas()">Opnieuw</button>
                 <button class="tool-btn" onclick="showSelection()">Andere kleurplaat</button>
             </div>
@@ -225,25 +400,57 @@
 
         let selectedColor = colors[0];
 
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
+        const canvas  = document.getElementById('canvas');
+        const ctx     = canvas.getContext('2d');
 
         /* ── State ── */
         let currentImg = null;   // loaded Image element
-        let svgRatio = 1;        // width / height from SVG viewBox
+        let svgRatio   = 1;      // width / height from SVG viewBox
+
+        /* ── DOM refs ── */
+        const gameContainer  = document.getElementById('gameContainer');
+        const selectScreen   = document.getElementById('selectScreen');
+        const colorScreen    = document.getElementById('colorScreen');
+        const colorFlyout    = document.getElementById('colorFlyout');
+        const flyoutBackdrop = document.getElementById('flyoutBackdrop');
+        const paletteToggle  = document.getElementById('paletteToggle');
+        const colorIndicator = document.getElementById('colorIndicator');
+
+        /* ── Topbar height helper ── */
+        function getTopbarHeight() {
+            return window.innerWidth >= 768 ? 52 : 48;
+        }
 
         /* ── Screen management ── */
-        const selectScreen = document.getElementById('selectScreen');
-        const colorScreen  = document.getElementById('colorScreen');
-
         function showSelection() {
-            colorScreen.style.display = 'none';
-            selectScreen.style.display = '';
+            // Close flyout if open
+            closePalette();
+
+            // Play exit animation on fullscreen color screen
+            colorScreen.classList.add('color-exit');
+            setTimeout(() => {
+                colorScreen.style.display = 'none';
+                colorScreen.classList.remove('color-exit', 'animating-in');
+                gameContainer.style.display = '';
+            }, 300);
         }
 
         function showColoring() {
-            selectScreen.style.display = 'none';
-            colorScreen.style.display = '';
+            gameContainer.style.display = 'none';
+            colorScreen.style.display = 'flex';
+        }
+
+        /* ── Flyout palette toggle ── */
+        function togglePalette() {
+            const isOpen = colorFlyout.classList.toggle('open');
+            flyoutBackdrop.classList.toggle('active', isOpen);
+            paletteToggle.classList.toggle('active', isOpen);
+        }
+
+        function closePalette() {
+            colorFlyout.classList.remove('open');
+            flyoutBackdrop.classList.remove('active');
+            paletteToggle.classList.remove('active');
         }
 
         /* ── Load page index and build thumbnails ── */
@@ -262,7 +469,7 @@
                 data.pages.forEach(page => {
                     const card = document.createElement('div');
                     card.className = 'page-card';
-                    card.onclick = () => openPage(page.file);
+                    card.onclick = () => openPage(page.file, card);
 
                     const img = document.createElement('img');
                     img.className = 'page-thumb';
@@ -283,17 +490,47 @@
             }
         }
 
-        /* ── Open a coloring page ── */
-        function openPage(file) {
+        /* ── Open a coloring page with expand animation ── */
+        function openPage(file, cardElement) {
             const img = new Image();
             img.onload = () => {
                 currentImg = img;
-                // Parse viewBox or fallback to natural dimensions
                 svgRatio = img.naturalWidth / img.naturalHeight || 1;
-                sizeCanvas();
+
+                // Get thumbnail position for expand animation
+                if (cardElement) {
+                    const rect = cardElement.getBoundingClientRect();
+                    colorScreen.style.setProperty('--start-top', rect.top + 'px');
+                    colorScreen.style.setProperty('--start-left', rect.left + 'px');
+                    colorScreen.style.setProperty('--start-width', rect.width + 'px');
+                    colorScreen.style.setProperty('--start-height', rect.height + 'px');
+                }
+
                 initPalette();
-                drawFresh();
-                showColoring();
+                updateColorIndicator();
+
+                // Show the fullscreen overlay with animation
+                colorScreen.style.display = 'flex';
+                colorScreen.classList.add('animating-in');
+                gameContainer.style.display = 'none';
+
+                // After animation completes, size canvas and render
+                const onEnd = () => {
+                    colorScreen.removeEventListener('animationend', onEnd);
+                    colorScreen.classList.remove('animating-in');
+                    sizeCanvas();
+                    drawFresh();
+                };
+                colorScreen.addEventListener('animationend', onEnd);
+
+                // Fallback in case animationend doesn't fire
+                setTimeout(() => {
+                    if (colorScreen.classList.contains('animating-in')) {
+                        colorScreen.classList.remove('animating-in');
+                        sizeCanvas();
+                        drawFresh();
+                    }
+                }, 600);
             };
             img.onerror = () => {
                 alert('Kon de kleurplaat niet laden');
@@ -301,45 +538,46 @@
             img.src = '../kleurplaten/' + file;
         }
 
-        /* ── Size canvas to fit screen without scrollbar ── */
+        /* ── Size canvas to fill the fullscreen viewport ── */
+        function getSidebarWidth() {
+            return window.innerWidth >= 768 ? 210 : 0;
+        }
+
         function sizeCanvas() {
-            const container = document.querySelector('.game-container');
-            const maxW = container.clientWidth - 32; // padding
+            const topbarH = getTopbarHeight();
+            const sidebarW = getSidebarWidth();
+            const padding = 15; // breathing room around canvas
 
-            // Calculate available height:
-            // total container - (title + palette + progress + toolbar + margins)
-            const containerStyle = getComputedStyle(container);
-            const containerPad = parseFloat(containerStyle.paddingTop) + parseFloat(containerStyle.paddingBottom);
-            const titleH = 60;    // h1 + back-btn area
-            const paletteH = 60;  // color palette
-            const progressH = 30; // progress text
-            const toolbarH = 50;  // buttons
-            const spacing = 40;   // gaps and margins
+            const availW = window.innerWidth - sidebarW - (padding * 2);
+            const availH = window.innerHeight - topbarH - (padding * 2);
 
-            // Use viewport height minus game-container padding on tablets
-            let maxH;
-            if (window.innerWidth >= 768) {
-                // On tablet the game-container has fixed 600px height
-                maxH = 600 - containerPad - titleH - paletteH - progressH - toolbarH - spacing;
-            } else {
-                maxH = window.innerHeight - titleH - paletteH - progressH - toolbarH - spacing - 60;
-            }
-
-            maxH = Math.max(maxH, 150); // minimum usable height
-
-            let w = maxW;
+            let w = availW;
             let h = w / svgRatio;
 
-            if (h > maxH) {
-                h = maxH;
+            if (h > availH) {
+                h = availH;
                 w = h * svgRatio;
             }
 
-            canvas.width  = Math.round(w);
-            canvas.height = Math.round(h);
-            canvas.style.width  = canvas.width + 'px';
-            canvas.style.height = canvas.height + 'px';
+            w = Math.max(Math.round(w), 100);
+            h = Math.max(Math.round(h), 100);
+
+            // Only re-render if size actually changed
+            if (canvas.width !== w || canvas.height !== h) {
+                canvas.width  = w;
+                canvas.height = h;
+                canvas.style.width  = w + 'px';
+                canvas.style.height = h + 'px';
+                drawFresh();
+            }
         }
+
+        /* ── Resize listener ── */
+        window.addEventListener('resize', () => {
+            if (colorScreen.style.display !== 'none' && currentImg) {
+                sizeCanvas();
+            }
+        });
 
         /* ── Drawing ── */
         function drawFresh() {
@@ -348,11 +586,9 @@
             if (currentImg) {
                 ctx.drawImage(currentImg, 0, 0, canvas.width, canvas.height);
             }
-            updateProgress();
         }
 
         function redrawOutlines() {
-            // Re-stamp only the dark outline pixels (preserves colored areas)
             if (!currentImg) return;
             const tmpCanvas = document.createElement('canvas');
             tmpCanvas.width = canvas.width;
@@ -391,10 +627,15 @@
                     selectedColor = color;
                     document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
+                    updateColorIndicator();
                 };
                 palette.appendChild(btn);
             });
             selectedColor = colors[0];
+        }
+
+        function updateColorIndicator() {
+            colorIndicator.style.backgroundColor = selectedColor;
         }
 
         /* ── Flood fill ── */
@@ -460,7 +701,6 @@
 
             ctx.putImageData(imageData, 0, 0);
             redrawOutlines();
-            updateProgress();
         }
 
         /* ── Click handler ── */
@@ -473,24 +713,9 @@
             floodFill(x, y, selectedColor);
         });
 
-        /* ── Progress ── */
-        function updateProgress() {
-            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-            let colored = 0;
-            for (let i = 0; i < pixels.length; i += 4) {
-                if (pixels[i+3] > 0) {
-                    const r = pixels[i], g = pixels[i+1], b = pixels[i+2];
-                    if (r !== 255 || g !== 255 || b !== 255) {
-                        colored++;
-                    }
-                }
-            }
-            const pct = Math.round((colored / (canvas.width * canvas.height)) * 100);
-            document.getElementById('progress').textContent = pct + '% ingekleurd';
-        }
-
         /* ── Init ── */
         loadPages();
+        updateColorIndicator();
     </script>
 </body>
 </html>
