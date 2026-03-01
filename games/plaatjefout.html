@@ -70,6 +70,7 @@
             answered = true;
             
             if (isCorrect) {
+                playCorrect();
                 el.classList.add('correct');
                 score += 10;
                 scoreDisplay.textContent = score;
@@ -80,6 +81,7 @@
                     loadLevel();
                 }, 1500);
             } else {
+                playWrong();
                 el.classList.add('wrong');
                 messageDisplay.textContent = 'Hmm, dat hoort er wel bij!';
             }

@@ -96,6 +96,7 @@
         function pickColor(color) {
             if (selectedColors.length < 2) {
                 selectedColors.push(color);
+                playPop();
                 
                 const box = selectedColors.length === 1 ? color1 : color2;
                 box.style.background = color.hex;
@@ -117,12 +118,14 @@
                 
                 const needed = targets[currentTarget].need.sort().join('+');
                 if (key === needed || key === selectedColors[1].name + '+' + selectedColors[0].name) {
+                    playCorrect();
                     message.textContent = 'Goed! Je maakte ' + mix.name + '! ⭐';
                     setTimeout(() => {
                         reset();
                         setNewTarget();
                     }, 1500);
                 } else {
+                    playWrong();
                     message.textContent = 'Hmm, dat is ' + mix.name + '...';
                 }
             }

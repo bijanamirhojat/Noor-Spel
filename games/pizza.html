@@ -70,6 +70,7 @@
             
             addedIngredients.push(ing);
             el.classList.add('used');
+            playPop();
             
             const topping = document.createElement('div');
             topping.className = 'topping';
@@ -93,12 +94,14 @@
             const expected = [...recipe.ingredients].sort().join('');
             
             if (sorted === expected) {
+                playWin();
                 message.textContent = `Lekker! ${recipe.name} pizza! ⭐`;
                 setTimeout(() => {
                     currentRecipe = (currentRecipe + 1) % recipes.length;
                     loadLevel();
                 }, 1500);
             } else {
+                playWrong();
                 message.textContent = 'Hmm, dat is geen ' + recipe.name + '...';
             }
         }

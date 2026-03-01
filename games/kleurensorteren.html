@@ -310,8 +310,7 @@
                 score += 10;
                 scoreDisplay.textContent = score;
                 message.textContent = 'Goed zo! ⭐';
-                playTone(523, 0.15, 0.3);
-                setTimeout(() => playTone(659, 0.15, 0.3), 150);
+                playCorrect();
 
                 // Animate animal away
                 selectedAnimal.el.classList.add('matched');
@@ -327,9 +326,7 @@
                     // Round complete
                     setTimeout(() => {
                         message.textContent = 'Alle dieren zijn thuis! 🏆';
-                        playTone(523, 0.15, 0.3);
-                        setTimeout(() => playTone(659, 0.15, 0.3), 150);
-                        setTimeout(() => playTone(784, 0.2, 0.3), 300);
+                        playWin();
 
                         setTimeout(() => {
                             round++;
@@ -342,7 +339,7 @@
                 // Wrong match
                 message.textContent = 'Hmm, probeer nog eens!';
                 houseEl.classList.add('shake');
-                playTone(200, 0.2, 0.2);
+                playWrong();
                 setTimeout(() => houseEl.classList.remove('shake'), 400);
             }
         }

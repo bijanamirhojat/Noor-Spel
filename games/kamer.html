@@ -77,6 +77,7 @@
             if (!task.done) {
                 task.done = true;
                 el.classList.add('done');
+                playCorrect();
                 
                 const zone = document.getElementById(task.zone);
                 zone.classList.add('done');
@@ -86,6 +87,7 @@
                 
                 if (completed >= 6) {
                     setTimeout(() => {
+                        playWin();
                         message.textContent = 'Slaap lekker! 🌙';
                         setTimeout(() => {
                             completed = 0;

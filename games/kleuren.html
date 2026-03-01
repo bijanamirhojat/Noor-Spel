@@ -13,35 +13,59 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        .pictures-list {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
+        /* ── Selection screen ── */
+        .page-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 10px 0;
         }
 
-        .pic-btn {
+        .page-card {
             background: #fff;
-            border: 2px solid #ddd;
-            padding: 6px 10px;
-            border-radius: 10px;
+            border: 3px solid #eee;
+            border-radius: 16px;
+            padding: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
             transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .pic-btn:hover {
+        .page-card:hover {
             border-color: #ff6b6b;
-            transform: scale(1.05);
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.25);
         }
 
-        .pic-btn.selected {
-            border-color: #e63946;
-            background: #fff5f5;
-            box-shadow: 0 0 0 2px #ff6b6b;
+        .page-card:active {
+            transform: scale(0.97);
         }
 
+        .page-thumb {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #fafafa;
+            pointer-events: none;
+        }
+
+        .page-name {
+            margin-top: 6px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .empty-state {
+            color: #999;
+            font-size: 0.95rem;
+            padding: 40px 10px;
+        }
+
+        /* ── Coloring screen ── */
         .color-palette {
             display: flex;
             flex-wrap: wrap;
@@ -79,11 +103,11 @@
             padding: 6px;
             margin-bottom: 10px;
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
         }
 
         .drawing-canvas {
-            width: 100%;
-            height: auto;
             border-radius: 8px;
             cursor: crosshair;
             display: block;
@@ -126,15 +150,11 @@
             box-shadow: 0 1px 0 rgba(0,0,0,0.15);
         }
 
+        /* ── Responsive ── */
         @media (min-width: 768px) {
-            .pictures-list {
-                gap: 8px;
-                margin-bottom: 5px;
-            }
-
-            .pic-btn {
-                padding: 4px 8px;
-                font-size: 1.2rem;
+            .page-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
 
             .color-palette {
@@ -149,13 +169,8 @@
             }
 
             .canvas-container {
-                max-width: 380px;
                 margin: 0 auto 5px;
                 padding: 4px;
-            }
-
-            .drawing-canvas {
-                border-radius: 10px;
             }
 
             .progress {
@@ -174,31 +189,33 @@
         <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🎨 Kleuren</h1>
 
-        <div class="pictures-list">
-            <button class="pic-btn selected" onclick="selectPicture('fish')">🐟</button>
-            <button class="pic-btn" onclick="selectPicture('cat')">🐱</button>
-            <button class="pic-btn" onclick="selectPicture('heart')">❤️</button>
-            <button class="pic-btn" onclick="selectPicture('star')">⭐</button>
-            <button class="pic-btn" onclick="selectPicture('flower')">🌸</button>
-            <button class="pic-btn" onclick="selectPicture('sun')">☀️</button>
-            <button class="pic-btn" onclick="selectPicture('unicorn')">🦄</button>
+        <!-- ── Screen A: Selection ── -->
+        <div id="selectScreen">
+            <div class="page-grid" id="pageGrid">
+                <div class="empty-state">Kleurplaten laden...</div>
+            </div>
         </div>
 
-        <div class="color-palette" id="palette"></div>
+        <!-- ── Screen B: Coloring ── -->
+        <div id="colorScreen" style="display:none">
+            <div class="color-palette" id="palette"></div>
 
-        <div class="canvas-container">
-            <canvas id="canvas" class="drawing-canvas" width="320" height="260"></canvas>
-        </div>
+            <div class="canvas-container">
+                <canvas id="canvas" class="drawing-canvas"></canvas>
+            </div>
 
-        <div class="progress" id="progress">0% ingekleurd</div>
+            <div class="progress" id="progress">0% ingekleurd</div>
 
-        <div class="toolbar">
-            <button class="tool-btn" onclick="clearCanvas()">Nieuw plaatje</button>
+            <div class="toolbar">
+                <button class="tool-btn" onclick="resetCanvas()">Opnieuw</button>
+                <button class="tool-btn" onclick="showSelection()">Andere kleurplaat</button>
+            </div>
         </div>
     </div>
 
     <script src="shared.js"></script>
     <script>
+        /* ── Config ── */
         const colors = [
             '#FF6B6B', '#FF8E8E', '#FFB5B5', '#FFD5D5',
             '#FFE66D', '#FFA500', '#96CEB4', '#4ECDC4',
@@ -207,356 +224,273 @@
         ];
 
         let selectedColor = colors[0];
-        let currentPicture = 'fish';
 
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        // Pre-load unicorn SVG
-        const unicornImg = new Image();
-        let unicornLoaded = false;
-        unicornImg.onload = () => { unicornLoaded = true; };
-        unicornImg.src = '../public/30708730_7728706.svg';
+        /* ── State ── */
+        let currentImg = null;   // loaded Image element
+        let svgRatio = 1;        // width / height from SVG viewBox
 
-        const outlines = {
-            fish: () => {
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.ellipse(160, 130, 80, 50, 0, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(80, 130);
-                ctx.lineTo(40, 90);
-                ctx.lineTo(40, 170);
-                ctx.closePath();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(200, 118, 12, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(202, 116, 4, 0, Math.PI * 2);
-                ctx.fillStyle = '#000';
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(130, 95);
-                ctx.quadraticCurveTo(160, 60, 190, 95);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(240, 140, 6, 0, Math.PI);
-                ctx.stroke();
-            },
-            cat: () => {
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.arc(160, 140, 65, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(105, 95);
-                ctx.lineTo(95, 55);
-                ctx.lineTo(130, 80);
-                ctx.closePath();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(215, 95);
-                ctx.lineTo(225, 55);
-                ctx.lineTo(190, 80);
-                ctx.closePath();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.ellipse(138, 125, 12, 15, 0, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.ellipse(182, 125, 12, 15, 0, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.fillStyle = '#000';
-                ctx.beginPath();
-                ctx.arc(140, 125, 4, 0, Math.PI * 2);
-                ctx.arc(180, 125, 4, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.beginPath();
-                ctx.moveTo(160, 150);
-                ctx.lineTo(154, 160);
-                ctx.lineTo(166, 160);
-                ctx.closePath();
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(160, 160);
-                ctx.lineTo(160, 172);
-                ctx.moveTo(160, 172);
-                ctx.lineTo(148, 182);
-                ctx.moveTo(160, 172);
-                ctx.lineTo(172, 182);
-                ctx.stroke();
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(105, 155);
-                ctx.lineTo(65, 150);
-                ctx.moveTo(105, 162);
-                ctx.lineTo(65, 162);
-                ctx.moveTo(215, 155);
-                ctx.lineTo(255, 150);
-                ctx.moveTo(215, 162);
-                ctx.lineTo(255, 162);
-                ctx.stroke();
-            },
-            heart: () => {
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(160, 65);
-                ctx.bezierCurveTo(160, 45, 120, 45, 120, 85);
-                ctx.bezierCurveTo(120, 125, 160, 165, 160, 185);
-                ctx.bezierCurveTo(160, 165, 200, 125, 200, 85);
-                ctx.bezierCurveTo(200, 45, 160, 45, 160, 65);
-                ctx.stroke();
-            },
-            star: () => {
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                const drawStar = (cx, cy, spikes, outerRadius, innerRadius) => {
-                    let rot = Math.PI / 2 * 3;
-                    let x = cx, y = cy, step = Math.PI / spikes;
-                    ctx.beginPath();
-                    ctx.moveTo(cx, cy - outerRadius);
-                    for (let i = 0; i < spikes; i++) {
-                        x = cx + Math.cos(rot) * outerRadius;
-                        y = cy + Math.sin(rot) * outerRadius;
-                        ctx.lineTo(x, y);
-                        rot += step;
-                        x = cx + Math.cos(rot) * innerRadius;
-                        y = cy + Math.sin(rot) * innerRadius;
-                        ctx.lineTo(x, y);
-                        rot += step;
-                    }
-                    ctx.lineTo(cx, cy - outerRadius);
-                    ctx.closePath();
-                    ctx.stroke();
-                };
-                drawStar(160, 130, 5, 85, 42);
-            },
-            flower: () => {
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.moveTo(160, 165);
-                ctx.lineTo(160, 240);
-                ctx.stroke();
-                for (let i = 0; i < 6; i++) {
-                    const angle = (i / 6) * Math.PI * 2;
-                    const x = 160 + Math.cos(angle) * 35;
-                    const y = 125 + Math.sin(angle) * 35;
-                    ctx.beginPath();
-                    ctx.arc(x, y, 22, 0, Math.PI * 2);
-                    ctx.stroke();
-                }
-                ctx.beginPath();
-                ctx.arc(160, 125, 18, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.ellipse(140, 195, 15, 8, -0.5, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.ellipse(180, 198, 15, 8, 0.5, 0, Math.PI * 2);
-                ctx.stroke();
-            },
-            sun: () => {
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.arc(160, 140, 50, 0, Math.PI * 2);
-                ctx.stroke();
-                for (let i = 0; i < 8; i++) {
-                    const angle = (i / 8) * Math.PI * 2;
-                    const x1 = 160 + Math.cos(angle) * 60;
-                    const y1 = 140 + Math.sin(angle) * 60;
-                    const x2 = 160 + Math.cos(angle) * 90;
-                    const y2 = 140 + Math.sin(angle) * 90;
-                    ctx.beginPath();
-                    ctx.moveTo(x1, y1);
-                    ctx.lineTo(x2, y2);
-                    ctx.stroke();
-                }
-            },
-            unicorn: () => {
-                if (unicornLoaded) {
-                    // Draw SVG onto a temporary canvas to extract only the outlines
-                    const tmpCanvas = document.createElement('canvas');
-                    tmpCanvas.width = canvas.width;
-                    tmpCanvas.height = canvas.height;
-                    const tmpCtx = tmpCanvas.getContext('2d');
-                    const size = Math.min(canvas.width, canvas.height);
-                    const offsetX = (canvas.width - size) / 2;
-                    const offsetY = (canvas.height - size) / 2;
-                    tmpCtx.drawImage(unicornImg, offsetX, offsetY, size, size);
+        /* ── Screen management ── */
+        const selectScreen = document.getElementById('selectScreen');
+        const colorScreen  = document.getElementById('colorScreen');
 
-                    // Copy only the dark (outline) pixels onto the main canvas
-                    const tmpData = tmpCtx.getImageData(0, 0, canvas.width, canvas.height);
-                    const mainData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                    const src = tmpData.data;
-                    const dst = mainData.data;
-                    for (let i = 0; i < src.length; i += 4) {
-                        // If this pixel is dark enough to be an outline, stamp it
-                        if (src[i] < 60 && src[i + 1] < 60 && src[i + 2] < 60 && src[i + 3] > 128) {
-                            dst[i] = src[i];
-                            dst[i + 1] = src[i + 1];
-                            dst[i + 2] = src[i + 2];
-                            dst[i + 3] = 255;
-                        }
-                    }
-                    ctx.putImageData(mainData, 0, 0);
+        function showSelection() {
+            colorScreen.style.display = 'none';
+            selectScreen.style.display = '';
+        }
+
+        function showColoring() {
+            selectScreen.style.display = 'none';
+            colorScreen.style.display = '';
+        }
+
+        /* ── Load page index and build thumbnails ── */
+        async function loadPages() {
+            const grid = document.getElementById('pageGrid');
+            try {
+                const resp = await fetch('../kleurplaten/index.json');
+                const data = await resp.json();
+
+                if (!data.pages || data.pages.length === 0) {
+                    grid.innerHTML = '<div class="empty-state">Nog geen kleurplaten gevonden</div>';
+                    return;
                 }
+
+                grid.innerHTML = '';
+                data.pages.forEach(page => {
+                    const card = document.createElement('div');
+                    card.className = 'page-card';
+                    card.onclick = () => openPage(page.file);
+
+                    const img = document.createElement('img');
+                    img.className = 'page-thumb';
+                    img.src = '../kleurplaten/' + page.file;
+                    img.alt = page.name;
+                    img.loading = 'lazy';
+
+                    const name = document.createElement('div');
+                    name.className = 'page-name';
+                    name.textContent = page.name;
+
+                    card.appendChild(img);
+                    card.appendChild(name);
+                    grid.appendChild(card);
+                });
+            } catch (e) {
+                grid.innerHTML = '<div class="empty-state">Kon kleurplaten niet laden</div>';
             }
-        };
-
-        function initPalette() {
-            const palette = document.getElementById('palette');
-            palette.innerHTML = '';
-            colors.forEach((color, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'color-btn' + (index === 0 ? ' selected' : '');
-                btn.style.backgroundColor = color;
-                btn.onclick = () => selectColor(color, btn);
-                palette.appendChild(btn);
-            });
         }
 
-        function selectColor(color, btn) {
-            selectedColor = color;
-            document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
+        /* ── Open a coloring page ── */
+        function openPage(file) {
+            const img = new Image();
+            img.onload = () => {
+                currentImg = img;
+                // Parse viewBox or fallback to natural dimensions
+                svgRatio = img.naturalWidth / img.naturalHeight || 1;
+                sizeCanvas();
+                initPalette();
+                drawFresh();
+                showColoring();
+            };
+            img.onerror = () => {
+                alert('Kon de kleurplaat niet laden');
+            };
+            img.src = '../kleurplaten/' + file;
         }
 
-        function selectPicture(name) {
-            currentPicture = name;
-            document.querySelectorAll('.pic-btn').forEach(b => b.classList.remove('selected'));
-            event.target.classList.add('selected');
-            // Adjust canvas size for unicorn (square SVG)
-            if (name === 'unicorn') {
-                canvas.width = 320;
-                canvas.height = 320;
+        /* ── Size canvas to fit screen without scrollbar ── */
+        function sizeCanvas() {
+            const container = document.querySelector('.game-container');
+            const maxW = container.clientWidth - 32; // padding
+
+            // Calculate available height:
+            // total container - (title + palette + progress + toolbar + margins)
+            const containerStyle = getComputedStyle(container);
+            const containerPad = parseFloat(containerStyle.paddingTop) + parseFloat(containerStyle.paddingBottom);
+            const titleH = 60;    // h1 + back-btn area
+            const paletteH = 60;  // color palette
+            const progressH = 30; // progress text
+            const toolbarH = 50;  // buttons
+            const spacing = 40;   // gaps and margins
+
+            // Use viewport height minus game-container padding on tablets
+            let maxH;
+            if (window.innerWidth >= 768) {
+                // On tablet the game-container has fixed 600px height
+                maxH = 600 - containerPad - titleH - paletteH - progressH - toolbarH - spacing;
             } else {
-                canvas.width = 320;
-                canvas.height = 260;
+                maxH = window.innerHeight - titleH - paletteH - progressH - toolbarH - spacing - 60;
             }
-            clearCanvas();
+
+            maxH = Math.max(maxH, 150); // minimum usable height
+
+            let w = maxW;
+            let h = w / svgRatio;
+
+            if (h > maxH) {
+                h = maxH;
+                w = h * svgRatio;
+            }
+
+            canvas.width  = Math.round(w);
+            canvas.height = Math.round(h);
+            canvas.style.width  = canvas.width + 'px';
+            canvas.style.height = canvas.height + 'px';
         }
 
-        function clearCanvas() {
+        /* ── Drawing ── */
+        function drawFresh() {
             ctx.fillStyle = '#fff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            if (currentPicture === 'unicorn' && unicornLoaded) {
-                // For the initial draw, render the full SVG (canvas is already white)
-                const size = Math.min(canvas.width, canvas.height);
-                const offsetX = (canvas.width - size) / 2;
-                const offsetY = (canvas.height - size) / 2;
-                ctx.drawImage(unicornImg, offsetX, offsetY, size, size);
-            } else {
-                outlines[currentPicture]();
+            if (currentImg) {
+                ctx.drawImage(currentImg, 0, 0, canvas.width, canvas.height);
             }
             updateProgress();
         }
 
+        function redrawOutlines() {
+            // Re-stamp only the dark outline pixels (preserves colored areas)
+            if (!currentImg) return;
+            const tmpCanvas = document.createElement('canvas');
+            tmpCanvas.width = canvas.width;
+            tmpCanvas.height = canvas.height;
+            const tmpCtx = tmpCanvas.getContext('2d');
+            tmpCtx.drawImage(currentImg, 0, 0, canvas.width, canvas.height);
+
+            const src  = tmpCtx.getImageData(0, 0, canvas.width, canvas.height).data;
+            const main = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const dst  = main.data;
+
+            for (let i = 0; i < src.length; i += 4) {
+                if (src[i] < 60 && src[i+1] < 60 && src[i+2] < 60 && src[i+3] > 128) {
+                    dst[i]   = src[i];
+                    dst[i+1] = src[i+1];
+                    dst[i+2] = src[i+2];
+                    dst[i+3] = 255;
+                }
+            }
+            ctx.putImageData(main, 0, 0);
+        }
+
+        function resetCanvas() {
+            drawFresh();
+        }
+
+        /* ── Color palette ── */
+        function initPalette() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = '';
+            colors.forEach((color, i) => {
+                const btn = document.createElement('button');
+                btn.className = 'color-btn' + (i === 0 ? ' selected' : '');
+                btn.style.backgroundColor = color;
+                btn.onclick = () => {
+                    selectedColor = color;
+                    document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                };
+                palette.appendChild(btn);
+            });
+            selectedColor = colors[0];
+        }
+
+        /* ── Flood fill ── */
         function floodFill(startX, startY, fillColor) {
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
-            
-            const startPos = (startY * canvas.width + startX) * 4;
+            const w = canvas.width;
+            const h = canvas.height;
+
+            const startPos = (startY * w + startX) * 4;
             const startR = data[startPos];
             const startG = data[startPos + 1];
             const startB = data[startPos + 2];
-            
+
+            // Don't fill outlines
             if (startR < 60 && startG < 60 && startB < 60) return;
-            
+
             const fillR = parseInt(fillColor.slice(1, 3), 16);
             const fillG = parseInt(fillColor.slice(3, 5), 16);
             const fillB = parseInt(fillColor.slice(5, 7), 16);
-            
+
+            // Already this color
             if (startR === fillR && startG === fillG && startB === fillB) return;
-            
+
             const tolerance = 50;
-            
+
             function matches(pos) {
-                const r = data[pos], g = data[pos+1], b = data[pos+2];
-                return Math.abs(r - startR) <= tolerance &&
-                       Math.abs(g - startG) <= tolerance &&
-                       Math.abs(b - startB) <= tolerance;
+                return Math.abs(data[pos]   - startR) <= tolerance &&
+                       Math.abs(data[pos+1] - startG) <= tolerance &&
+                       Math.abs(data[pos+2] - startB) <= tolerance;
             }
-            
+
             function isBorder(pos) {
                 return data[pos] < 60 && data[pos+1] < 60 && data[pos+2] < 60;
             }
-            
+
             const stack = [[startX, startY]];
             const visited = new Set();
-            const width = canvas.width;
-            const height = canvas.height;
-            
+
             while (stack.length > 0) {
                 const [x, y] = stack.pop();
-                const key = `${x},${y}`;
-                
+                const key = (y * w + x);
+
                 if (visited.has(key)) continue;
-                if (x < 0 || x >= width || y < 0 || y >= height) continue;
-                
-                const pos = (y * width + x) * 4;
-                
+                if (x < 0 || x >= w || y < 0 || y >= h) continue;
+
+                const pos = key * 4;
                 if (isBorder(pos)) continue;
                 if (!matches(pos)) continue;
-                
+
                 visited.add(key);
-                
-                data[pos] = fillR;
+
+                data[pos]     = fillR;
                 data[pos + 1] = fillG;
                 data[pos + 2] = fillB;
                 data[pos + 3] = 255;
-                
+
                 stack.push([x + 1, y]);
                 stack.push([x - 1, y]);
                 stack.push([x, y + 1]);
                 stack.push([x, y - 1]);
             }
-            
+
             ctx.putImageData(imageData, 0, 0);
-            outlines[currentPicture]();
+            redrawOutlines();
             updateProgress();
         }
 
-        function handleClick(e) {
+        /* ── Click handler ── */
+        canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
             const scaleX = canvas.width / rect.width;
             const scaleY = canvas.height / rect.height;
-            
             const x = Math.floor((e.clientX - rect.left) * scaleX);
             const y = Math.floor((e.clientY - rect.top) * scaleY);
-            
             floodFill(x, y, selectedColor);
-        }
+        });
 
+        /* ── Progress ── */
         function updateProgress() {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const pixels = imageData.data;
-            let coloredPixels = 0;
-            
+            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            let colored = 0;
             for (let i = 0; i < pixels.length; i += 4) {
-                if (pixels[i + 3] > 0) {
-                    const r = pixels[i], g = pixels[i + 1], b = pixels[i + 2];
+                if (pixels[i+3] > 0) {
+                    const r = pixels[i], g = pixels[i+1], b = pixels[i+2];
                     if (r !== 255 || g !== 255 || b !== 255) {
-                        coloredPixels++;
+                        colored++;
                     }
                 }
             }
-            
-            const totalPixels = canvas.width * canvas.height;
-            const percent = Math.round((coloredPixels / totalPixels) * 100);
-            document.getElementById('progress').textContent = percent + '% ingekleurd';
+            const pct = Math.round((colored / (canvas.width * canvas.height)) * 100);
+            document.getElementById('progress').textContent = pct + '% ingekleurd';
         }
 
-        canvas.addEventListener('click', handleClick);
-
-        initPalette();
-        clearCanvas();
+        /* ── Init ── */
+        loadPages();
     </script>
 </body>
 </html>

@@ -138,6 +138,7 @@
             const buttons = document.querySelectorAll('.option-btn');
             
             if (index === correctIndex) {
+                playCorrect();
                 buttons[index].classList.add('correct');
                 score += 10;
                 level++;
@@ -148,6 +149,7 @@
                     initGame();
                 }, 1000);
             } else {
+                playWrong();
                 buttons[index].classList.add('wrong');
                 buttons[correctIndex].classList.add('correct');
                 setTimeout(() => {

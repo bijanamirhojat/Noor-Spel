@@ -247,14 +247,11 @@
             showAnimalPopup(eyes, animal.emoji);
 
             // Sound
-            playTone(523, 0.15, 0.3);
-            setTimeout(() => playTone(659, 0.15, 0.3), 150);
+            playCorrect();
 
             if (found >= animals.length) {
                 message.textContent = 'Je vond alle dieren! ⭐';
-                playTone(523, 0.15, 0.3);
-                setTimeout(() => playTone(659, 0.15, 0.3), 150);
-                setTimeout(() => playTone(784, 0.2, 0.3), 300);
+                playWin();
                 setTimeout(resetGame, 2000);
             }
         }

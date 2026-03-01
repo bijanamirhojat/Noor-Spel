@@ -63,16 +63,19 @@
                 el.classList.add('found');
                 score += 10;
                 scoreDisplay.textContent = score;
+                playCorrect();
                 messageDisplay.textContent = 'Gevonden! Goed zo! ⭐';
                 found++;
                 
                 if (found >= 8) {
                     setTimeout(() => {
+                        playWin();
                         messageDisplay.textContent = 'Level voltooid! Volgende...';
                         setTimeout(newRound, 1000);
                     }, 500);
                 }
             } else {
+                playWrong();
                 messageDisplay.textContent = 'Hmm, dat is niet goed. Probeer opnieuw!';
             }
         }

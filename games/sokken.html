@@ -83,6 +83,7 @@
             
             if (selectedSocks.length < 2) {
                 el.classList.add('selected');
+                playPop();
                 selectedSocks.push({ el, color, index });
                 
                 if (selectedSocks.length === 2) {
@@ -95,6 +96,7 @@
             const [first, second] = selectedSocks;
             
             if (first.color === second.color) {
+                playCorrect();
                 first.el.classList.add('matched');
                 second.el.classList.add('matched');
                 score += 10;
@@ -104,11 +106,13 @@
                 
                 if (matched >= 8) {
                     setTimeout(() => {
+                        playWin();
                         message.textContent = 'Alle sokken gematcht! Goed gedaan! 🏆';
                         setTimeout(initGame, 2000);
                     }, 500);
                 }
             } else {
+                playWrong();
                 message.textContent = 'Niet hetzelfde...';
                 setTimeout(() => {
                     first.el.classList.remove('selected');

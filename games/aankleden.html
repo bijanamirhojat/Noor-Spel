@@ -120,6 +120,7 @@
         
         function selectClothing(type, item, el) {
             selected[type] = item;
+            playPop();
             
             document.querySelectorAll('#' + type + 'Options .clothing-item').forEach(i => i.classList.remove('selected'));
             el.classList.add('selected');
@@ -139,12 +140,14 @@
             
             if (selected.hat && selected.shirt && selected.pants) {
                 if (correct) {
+                    playWin();
                     message.textContent = 'Perfect! Goed gedaan! ⭐';
                     setTimeout(() => {
                         currentLevel = (currentLevel + 1) % weatherData.length;
                         loadLevel();
                     }, 1500);
                 } else {
+                    playWrong();
                     message.textContent = 'Hmm, past dit bij het weer?';
                 }
             }

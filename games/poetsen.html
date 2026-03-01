@@ -65,6 +65,7 @@
             percentDisplay.textContent = percent;
             
             if (percent >= 100) {
+                playWin();
                 message.textContent = 'Super! Alles is schoon! ⭐';
                 setTimeout(() => {
                     message.textContent = 'Nog een keer?';
@@ -100,6 +101,7 @@
                 if (dist < 40) {
                     dirt.classList.add('cleaned');
                     cleanedDirt++;
+                    playPop();
                     updateProgress();
                 }
             });
