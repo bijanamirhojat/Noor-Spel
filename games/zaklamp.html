@@ -131,6 +131,126 @@
             margin-top: 8px;
         }
 
+        /* ── Victory overlay ── */
+        .victory-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 70;
+            background: rgba(5, 5, 20, 0.92);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            opacity: 0;
+            animation: victoryFadeIn 0.5s ease forwards;
+        }
+
+        .victory-stars {
+            font-size: 2rem;
+            animation: victoryStarsPulse 1.5s ease-in-out infinite;
+        }
+
+        .victory-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.8rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 2px 0 #b8860b;
+            opacity: 0;
+            animation: victoryBounceIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
+        }
+
+        .victory-subtitle {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            color: #ccc;
+            font-weight: 600;
+            opacity: 0;
+            animation: victoryFadeUp 0.4s ease 0.4s forwards;
+        }
+
+        .victory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px 12px;
+            padding: 6px 10px;
+        }
+
+        .victory-animal {
+            font-size: 2.5rem;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0);
+            animation: victoryAnimalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .victory-animal-name {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.65rem;
+            color: #aaa;
+            text-align: center;
+            margin-top: -4px;
+        }
+
+        .victory-btn {
+            background: linear-gradient(180deg, #ffd700 0%, #f0a500 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 16px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px rgba(255, 215, 0, 0.3);
+            transition: all 0.2s ease;
+            opacity: 0;
+            animation: victoryFadeUp 0.4s ease forwards;
+            flex-shrink: 0;
+            margin-bottom: 4px;
+        }
+
+        .victory-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2), 0 8px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .victory-btn:active {
+            transform: translateY(3px) scale(0.98);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes victoryFadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        @keyframes victoryBounceIn {
+            from { opacity: 0; transform: scale(0.4); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes victoryFadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes victoryAnimalPop {
+            from { opacity: 0; transform: scale(0); }
+            60%  { opacity: 1; transform: scale(1.25); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes victoryStarsPulse {
+            0%, 100% { transform: scale(1); }
+            50%      { transform: scale(1.15); }
+        }
+
         @media (min-width: 768px) {
             .game-container {
                 height: 600px;
@@ -150,6 +270,18 @@
             .instructions {
                 margin-top: 4px;
                 font-size: 0.8rem;
+            }
+
+            .victory-title {
+                font-size: 2.2rem;
+            }
+
+            .victory-animal {
+                font-size: 3rem;
+            }
+
+            .victory-grid {
+                gap: 16px;
             }
         }
     </style>
@@ -186,7 +318,10 @@
         const HOLD_DURATION = 1200; // ms to hold flashlight on eyes
 
         // Track hold state per eyes element
-        let holdTimers = new Map(); // eyes element -> { start, raf }
+        let holdTimers = new Map(); // eyes element -> { start, raf, osc, gain }
+
+        // Track which eyes have already played their tinkle sound (debounce)
+        let tinkledEyes = new Set();
         
         // Plant trees
         for (let i = 0; i < 30; i++) {
@@ -199,11 +334,107 @@
             forest.appendChild(tree);
         }
 
-        function createEyes(animal) {
+        /* ── Sound effects ── */
+
+        /** Soft tinkle when eyes first appear in beam */
+        function playTinkle() {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = 1200;
+                osc.type = 'sine';
+                const t = ctx.currentTime;
+                gain.gain.setValueAtTime(0.1, t);
+                gain.gain.exponentialRampToValueAtTime(0.01, t + 0.12);
+                osc.start(t);
+                osc.stop(t + 0.12);
+            } catch(e) {}
+        }
+
+        /** Start a rising tone that follows the progress ring (400Hz → 900Hz over HOLD_DURATION) */
+        function startRisingTone() {
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                const t = ctx.currentTime;
+                const dur = HOLD_DURATION / 1000;
+                osc.frequency.setValueAtTime(400, t);
+                osc.frequency.linearRampToValueAtTime(900, t + dur);
+                gain.gain.setValueAtTime(0.07, t);
+                gain.gain.setValueAtTime(0.07, t + dur * 0.8);
+                gain.gain.exponentialRampToValueAtTime(0.01, t + dur);
+                osc.start(t);
+                osc.stop(t + dur + 0.05);
+                return { osc, gain };
+            } catch(e) {
+                return null;
+            }
+        }
+
+        /** Stop a rising tone immediately */
+        function stopRisingTone(toneRef) {
+            if (!toneRef) return;
+            try {
+                toneRef.gain.gain.cancelScheduledValues(0);
+                toneRef.gain.gain.setValueAtTime(toneRef.gain.gain.value, 0);
+                toneRef.gain.gain.exponentialRampToValueAtTime(0.001, toneRef.gain.gain.context.currentTime + 0.05);
+                toneRef.osc.stop(toneRef.gain.gain.context.currentTime + 0.06);
+            } catch(e) {}
+        }
+
+        /* ── Eyes creation ── */
+
+        /** Shuffle array in-place (Fisher-Yates) */
+        function shuffle(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        /**
+         * Generate well-spread positions for all animals.
+         * Divides the usable area into a 4×2 grid and places each
+         * animal randomly within its cell, guaranteeing spacing.
+         */
+        function generateSpreadPositions(count) {
+            const cols = 4, rows = 2;
+            // Usable area in percent (left 5-85%, top 15-80%)
+            const minX = 5, maxX = 85, minY = 15, maxY = 80;
+            const cellW = (maxX - minX) / cols;
+            const cellH = (maxY - minY) / rows;
+            // Padding inside each cell so animals don't sit right at edges
+            const padX = cellW * 0.15;
+            const padY = cellH * 0.1;
+
+            const positions = [];
+            // Create shuffled cell indices so animals don't always follow array order
+            const cells = shuffle(Array.from({ length: cols * rows }, (_, i) => i));
+
+            for (let i = 0; i < count; i++) {
+                const cell = cells[i % cells.length];
+                const col = cell % cols;
+                const row = Math.floor(cell / cols);
+                const x = minX + col * cellW + padX + Math.random() * (cellW - 2 * padX);
+                const y = minY + row * cellH + padY + Math.random() * (cellH - 2 * padY);
+                positions.push({ x, y });
+            }
+            return positions;
+        }
+
+        function createEyes(animal, x, y) {
             const eyes = document.createElement('div');
             eyes.className = 'eyes';
-            eyes.style.left = Math.random() * 80 + 5 + '%';
-            eyes.style.top = Math.random() * 60 + 20 + '%';
+            eyes.style.left = x + '%';
+            eyes.style.top = y + '%';
             eyes.style.color = animal.color;
             eyes.dataset.found = 'false';
             eyes.dataset.animal = animal.emoji;
@@ -232,6 +463,8 @@
             return eyes;
         }
 
+        /* ── Reveal animal ── */
+
         function revealAnimal(eyes, animal) {
             if (eyes.dataset.found === 'true') return;
             eyes.dataset.found = 'true';
@@ -243,6 +476,9 @@
             // Clear any hold timer
             clearHoldTimer(eyes);
 
+            // Remove from tinkle debounce set
+            tinkledEyes.delete(eyes);
+
             // Show popup
             showAnimalPopup(eyes, animal.emoji);
 
@@ -252,7 +488,7 @@
             if (found >= animals.length) {
                 message.textContent = 'Je vond alle dieren! ⭐';
                 playWin();
-                setTimeout(resetGame, 2000);
+                setTimeout(showVictoryScreen, 800);
             }
         }
 
@@ -268,12 +504,89 @@
             setTimeout(() => popup.remove(), 1200);
         }
 
-        // --- Hold-to-reveal for touch ---
+        /* ── Victory screen ── */
+
+        function showVictoryScreen() {
+            // Hide flashlight
+            flashlight.classList.remove('on');
+
+            const overlay = document.createElement('div');
+            overlay.className = 'victory-overlay';
+            overlay.id = 'victoryOverlay';
+
+            // Stars
+            const stars = document.createElement('div');
+            stars.className = 'victory-stars';
+            stars.textContent = '🌟✨🌟';
+            overlay.appendChild(stars);
+
+            // Title
+            const title = document.createElement('div');
+            title.className = 'victory-title';
+            title.textContent = 'Goed gedaan!';
+            overlay.appendChild(title);
+
+            // Subtitle
+            const subtitle = document.createElement('div');
+            subtitle.className = 'victory-subtitle';
+            subtitle.textContent = 'Je hebt alle dieren gevonden!';
+            overlay.appendChild(subtitle);
+
+            // Animal grid
+            const grid = document.createElement('div');
+            grid.className = 'victory-grid';
+
+            animals.forEach((animal, i) => {
+                const cell = document.createElement('div');
+
+                const emoji = document.createElement('div');
+                emoji.className = 'victory-animal';
+                emoji.textContent = animal.emoji;
+                emoji.style.animationDelay = (0.5 + i * 0.15) + 's';
+                cell.appendChild(emoji);
+
+                const name = document.createElement('div');
+                name.className = 'victory-animal-name';
+                name.textContent = animal.name;
+                name.style.opacity = '0';
+                name.style.animation = 'victoryFadeUp 0.3s ease forwards';
+                name.style.animationDelay = (0.6 + i * 0.15) + 's';
+                cell.appendChild(name);
+
+                grid.appendChild(cell);
+            });
+
+            overlay.appendChild(grid);
+
+            // Play again button
+            const btn = document.createElement('button');
+            btn.className = 'victory-btn';
+            btn.textContent = 'Nog een keer!';
+            btn.style.animationDelay = (0.5 + animals.length * 0.15 + 0.3) + 's';
+            btn.onclick = () => {
+                playPop();
+                resetGame();
+            };
+            overlay.appendChild(btn);
+
+            forest.appendChild(overlay);
+        }
+
+        function hideVictoryScreen() {
+            const overlay = document.getElementById('victoryOverlay');
+            if (overlay) overlay.remove();
+        }
+
+        /* ── Hold-to-reveal for touch ── */
+
         function startHoldTimer(eyes, animal) {
             if (eyes.dataset.found === 'true') return;
             const circle = eyes.querySelector('.progress-ring circle');
             const circumference = 2 * Math.PI * 22; // ~138.2
             const startTime = performance.now();
+
+            // Start rising tone
+            const toneRef = startRisingTone();
 
             function updateRing() {
                 const elapsed = performance.now() - startTime;
@@ -281,19 +594,23 @@
                 circle.style.strokeDashoffset = circumference * (1 - progress);
 
                 if (progress >= 1) {
-                    // Reveal!
+                    // Pop sound right before reveal
+                    playPop();
                     revealAnimal(eyes, animal);
                     return;
                 }
                 holdTimers.get(eyes).raf = requestAnimationFrame(updateRing);
             }
 
-            holdTimers.set(eyes, { raf: requestAnimationFrame(updateRing) });
+            holdTimers.set(eyes, { raf: requestAnimationFrame(updateRing), toneRef });
         }
 
         function clearHoldTimer(eyes) {
             if (holdTimers.has(eyes)) {
-                cancelAnimationFrame(holdTimers.get(eyes).raf);
+                const timer = holdTimers.get(eyes);
+                cancelAnimationFrame(timer.raf);
+                // Stop rising tone
+                stopRisingTone(timer.toneRef);
                 holdTimers.delete(eyes);
             }
             const circle = eyes.querySelector('.progress-ring circle');
@@ -301,15 +618,24 @@
         }
 
         // Init game
-        animals.forEach(animal => createEyes(animal));
+        {
+            const positions = generateSpreadPositions(animals.length);
+            animals.forEach((animal, i) => createEyes(animal, positions[i].x, positions[i].y));
+        }
 
         function resetGame() {
             found = 0;
-            holdTimers.forEach((v, k) => cancelAnimationFrame(v.raf));
+            holdTimers.forEach((v, k) => {
+                cancelAnimationFrame(v.raf);
+                stopRisingTone(v.toneRef);
+            });
             holdTimers.clear();
+            tinkledEyes.clear();
+            hideVictoryScreen();
             document.querySelectorAll('.eyes').forEach(e => e.remove());
             document.querySelectorAll('.animal-popup').forEach(e => e.remove());
-            animals.forEach(animal => createEyes(animal));
+            const positions = generateSpreadPositions(animals.length);
+            animals.forEach((animal, i) => createEyes(animal, positions[i].x, positions[i].y));
             message.textContent = 'Schijn met je zaklamp in het donkere bos!';
         }
 
@@ -344,6 +670,8 @@
             document.querySelectorAll('.eyes:not(.revealed)').forEach(eyes => {
                 clearHoldTimer(eyes);
                 eyes.style.opacity = 0;
+                // Reset tinkle debounce so it can play again next touch
+                tinkledEyes.delete(eyes);
             });
         });
 
@@ -358,6 +686,12 @@
                     // In flashlight beam
                     eyes.style.opacity = 0.7;
 
+                    // Play tinkle sound once per appearance (debounced)
+                    if (!tinkledEyes.has(eyes)) {
+                        tinkledEyes.add(eyes);
+                        playTinkle();
+                    }
+
                     // On touch: start hold timer if not already started
                     if (isTouch && !holdTimers.has(eyes) && eyes.dataset.found === 'false') {
                         const name = eyes.dataset.name;
@@ -367,6 +701,9 @@
                 } else {
                     // Out of flashlight beam
                     eyes.style.opacity = 0;
+
+                    // Reset tinkle debounce so it plays again when re-entering beam
+                    tinkledEyes.delete(eyes);
 
                     // Cancel hold timer if moved away
                     if (holdTimers.has(eyes)) {
