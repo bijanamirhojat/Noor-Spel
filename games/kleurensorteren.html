@@ -7,95 +7,347 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Noor's Games">
-    <title>Kleuren Sorteren</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧺</text></svg>">
+    <title>Dieren naar hun Huis</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
     <link rel="manifest" href="../manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        .bins { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .bin { width: 70px; height: 70px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.15); }
-        .bin:hover { transform: scale(1.1); }
-        .color-item { width: 60px; height: 60px; border-radius: 50%; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.2); }
-        .color-item:hover { transform: scale(1.15); }
-        .color-item.dragging { opacity: 0.5; }
+        .houses-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 12px; }
+        .house {
+            width: 64px; height: 72px; border-radius: 15px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; font-size: 2rem; cursor: pointer;
+            transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+            border: 3px solid transparent; position: relative;
+        }
+        .house:hover { transform: scale(1.05); }
+        .house .house-emoji { font-size: 1.8rem; }
+        .house .house-animal { font-size: 1.2rem; position: absolute; bottom: 6px; opacity: 0; transition: opacity 0.3s; }
+        .house.filled .house-animal { opacity: 1; }
+        .house.filled .house-emoji { opacity: 0.4; }
+        .house.shake {
+            animation: shake 0.4s ease-in-out;
+        }
+        .animals-row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+        .animal {
+            width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 2.2rem; cursor: pointer; transition: all 0.2s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15); background: white;
+            border: 3px solid transparent;
+        }
+        .animal:hover { transform: scale(1.1); }
+        .animal.selected { border-color: #FFD700; transform: scale(1.1); box-shadow: 0 0 12px rgba(255,215,0,0.5); }
+        .animal.matched {
+            animation: flyUp 0.4s ease-in forwards;
+        }
+        .round-badge {
+            font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.85rem;
+            color: #888; text-align: center; margin-bottom: 4px;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+        @keyframes flyUp {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3) translateY(-20px); opacity: 0.7; }
+            100% { transform: scale(0.3) translateY(-40px); opacity: 0; }
+        }
+        @media (min-width: 768px) {
+            .task { margin-bottom: 6px; padding: 6px; }
+            .houses-row { margin-bottom: 10px; gap: 12px; }
+            .animals-row { margin-bottom: 8px; gap: 12px; }
+            .round-badge { margin-bottom: 2px; }
+            .message { margin-top: 4px; margin-bottom: 0; padding: 6px 12px; }
+            .score { margin-bottom: 2px; }
+        }
     </style>
 </head>
 <body>
     <div class="game-container">
         <a href="../index.html" class="back-btn">🏠 Terug</a>
-        <h1>🧺 Kleuren Sorteren</h1>
-        <div class="task">Sleep de kleur naar het juiste vakje!</div>
-        <div class="bins">
-            <div class="bin" style="background: #ff6b6b;" data-color="rood" onclick="selectBin('rood')">🔴</div>
-            <div class="bin" style="background: #4CAF50;" data-color="groen" onclick="selectBin('groen')">🟢</div>
-            <div class="bin" style="background: #2196F3;" data-color="blauw" onclick="selectBin('blauw')">🔵</div>
-            <div class="bin" style="background: #FFEB3B;" data-color="geel" onclick="selectBin('geel')">🟡</div>
-        </div>
-        <div class="items-row" id="itemsRow"></div>
+        <h1>🏠 Dieren naar hun Huis</h1>
+        <div class="task">Welk dier woont in welk huis?</div>
+        <div class="round-badge" id="roundBadge">Ronde 1</div>
+        <div class="houses-row" id="housesRow"></div>
+        <div class="animals-row" id="animalsRow"></div>
         <div class="score">Score: <span id="score">0</span></div>
-        <div class="message" id="message">Kies een kleur!</div>
+        <div class="message" id="message">Tik op een dier!</div>
     </div>
     <script src="shared.js"></script>
     <script>
-        const colors = [
-            { name: 'rood', hex: '#ff6b6b' },
-            { name: 'groen', hex: '#4CAF50' },
-            { name: 'blauw', hex: '#2196F3' },
-            { name: 'geel', hex: '#FFEB3B' }
+        // --- Synth animal sounds ---
+        function synthSound(type) {
+            try {
+                const ctx = getAudioContext();
+                const now = ctx.currentTime;
+                switch (type) {
+                    case 'pig': {
+                        // Two short nasal snorts (square wave = nasaal)
+                        for (let i = 0; i < 2; i++) {
+                            const o = ctx.createOscillator();
+                            const g = ctx.createGain();
+                            o.connect(g); g.connect(ctx.destination);
+                            o.type = 'square';
+                            const t = now + i * 0.18;
+                            o.frequency.setValueAtTime(280, t);
+                            o.frequency.linearRampToValueAtTime(380, t + 0.08);
+                            o.frequency.linearRampToValueAtTime(250, t + 0.12);
+                            g.gain.setValueAtTime(0.2, t);
+                            g.gain.exponentialRampToValueAtTime(0.01, t + 0.14);
+                            o.start(t); o.stop(t + 0.14);
+                        }
+                        break;
+                    }
+                    case 'frog': {
+                        // Two quick "ribbit" croaks — fast up-sweep
+                        for (let i = 0; i < 2; i++) {
+                            const o = ctx.createOscillator();
+                            const g = ctx.createGain();
+                            o.connect(g); g.connect(ctx.destination);
+                            o.type = 'square';
+                            const t = now + i * 0.22;
+                            o.frequency.setValueAtTime(120, t);
+                            o.frequency.exponentialRampToValueAtTime(450, t + 0.04);
+                            o.frequency.exponentialRampToValueAtTime(200, t + 0.12);
+                            g.gain.setValueAtTime(0.25, t);
+                            g.gain.exponentialRampToValueAtTime(0.01, t + 0.15);
+                            o.start(t); o.stop(t + 0.15);
+                        }
+                        break;
+                    }
+                    case 'chick': {
+                        // Three quick high chirps
+                        for (let i = 0; i < 3; i++) {
+                            const o = ctx.createOscillator();
+                            const g = ctx.createGain();
+                            o.connect(g); g.connect(ctx.destination);
+                            o.type = 'sine';
+                            const t = now + i * 0.12;
+                            o.frequency.setValueAtTime(1800, t);
+                            o.frequency.linearRampToValueAtTime(2200, t + 0.03);
+                            o.frequency.linearRampToValueAtTime(1600, t + 0.07);
+                            g.gain.setValueAtTime(0.2, t);
+                            g.gain.exponentialRampToValueAtTime(0.01, t + 0.08);
+                            o.start(t); o.stop(t + 0.08);
+                        }
+                        break;
+                    }
+                    case 'whale': {
+                        // Long slow descending moan
+                        const o = ctx.createOscillator();
+                        const g = ctx.createGain();
+                        o.connect(g); g.connect(ctx.destination);
+                        o.type = 'sine';
+                        o.frequency.setValueAtTime(400, now);
+                        o.frequency.exponentialRampToValueAtTime(150, now + 0.6);
+                        g.gain.setValueAtTime(0.25, now);
+                        g.gain.linearRampToValueAtTime(0.15, now + 0.3);
+                        g.gain.exponentialRampToValueAtTime(0.01, now + 0.7);
+                        o.start(now); o.stop(now + 0.7);
+                        break;
+                    }
+                    case 'fox': {
+                        // Two short sharp barks — high to low sweep
+                        for (let i = 0; i < 2; i++) {
+                            const o = ctx.createOscillator();
+                            const g = ctx.createGain();
+                            o.connect(g); g.connect(ctx.destination);
+                            o.type = 'sawtooth';
+                            const t = now + i * 0.2;
+                            o.frequency.setValueAtTime(600, t);
+                            o.frequency.exponentialRampToValueAtTime(250, t + 0.1);
+                            g.gain.setValueAtTime(0.18, t);
+                            g.gain.exponentialRampToValueAtTime(0.01, t + 0.12);
+                            o.start(t); o.stop(t + 0.12);
+                        }
+                        break;
+                    }
+                    case 'octopus': {
+                        // Bubbly blub-blub — sine pops rising
+                        for (let i = 0; i < 3; i++) {
+                            const o = ctx.createOscillator();
+                            const g = ctx.createGain();
+                            o.connect(g); g.connect(ctx.destination);
+                            o.type = 'sine';
+                            const t = now + i * 0.13;
+                            o.frequency.setValueAtTime(250 + i * 80, t);
+                            o.frequency.exponentialRampToValueAtTime(500 + i * 60, t + 0.05);
+                            o.frequency.exponentialRampToValueAtTime(200, t + 0.1);
+                            g.gain.setValueAtTime(0.2, t);
+                            g.gain.exponentialRampToValueAtTime(0.01, t + 0.1);
+                            o.start(t); o.stop(t + 0.1);
+                        }
+                        break;
+                    }
+                    case 'bear': {
+                        // Deep rumbling growl — low sawtooth
+                        const o = ctx.createOscillator();
+                        const g = ctx.createGain();
+                        o.connect(g); g.connect(ctx.destination);
+                        o.type = 'sawtooth';
+                        o.frequency.setValueAtTime(90, now);
+                        o.frequency.linearRampToValueAtTime(110, now + 0.15);
+                        o.frequency.linearRampToValueAtTime(80, now + 0.4);
+                        g.gain.setValueAtTime(0.25, now);
+                        g.gain.linearRampToValueAtTime(0.2, now + 0.2);
+                        g.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                        o.start(now); o.stop(now + 0.5);
+                        break;
+                    }
+                    case 'ladybug': {
+                        // Buzzy flutter — high sawtooth wobble
+                        const o = ctx.createOscillator();
+                        const g = ctx.createGain();
+                        const lfo = ctx.createOscillator();
+                        const lfoGain = ctx.createGain();
+                        lfo.connect(lfoGain);
+                        lfoGain.connect(o.frequency);
+                        o.connect(g); g.connect(ctx.destination);
+                        o.type = 'sawtooth';
+                        o.frequency.setValueAtTime(350, now);
+                        lfo.frequency.setValueAtTime(45, now);
+                        lfoGain.gain.setValueAtTime(80, now);
+                        g.gain.setValueAtTime(0.12, now);
+                        g.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                        o.start(now); lfo.start(now);
+                        o.stop(now + 0.4); lfo.stop(now + 0.4);
+                        break;
+                    }
+                }
+            } catch(e) {}
+        }
+
+        const allAnimals = [
+            { name: 'varken', emoji: '🐷', color: '#FFB3B3', sound: 'pig' },
+            { name: 'kikker', emoji: '🐸', color: '#B3FFB3', sound: 'frog' },
+            { name: 'kuiken', emoji: '🐤', color: '#FFFAB3', sound: 'chick' },
+            { name: 'walvis', emoji: '🐳', color: '#B3D9FF', sound: 'whale' },
+            { name: 'vos',    emoji: '🦊', color: '#FFD9B3', sound: 'fox' },
+            { name: 'octopus',emoji: '🐙', color: '#E0B3FF', sound: 'octopus' },
+            { name: 'beer',   emoji: '🐻', color: '#D4C4B0', sound: 'bear' },
+            { name: 'lieveheersbeestje', emoji: '🐞', color: '#FF9999', sound: 'ladybug' },
         ];
-        let currentItem = null;
+
+        let selectedAnimal = null;
         let score = 0;
-        
-        const itemsRow = document.getElementById('itemsRow');
+        let round = 1;
+        let matchedCount = 0;
+        let currentCount = 3; // start with 3 animals
+
+        const housesRow = document.getElementById('housesRow');
+        const animalsRow = document.getElementById('animalsRow');
         const scoreDisplay = document.getElementById('score');
-        const messageDisplay = document.getElementById('message');
-        
-        function createItems() {
-            itemsRow.innerHTML = '';
-            const shuffled = shuffle([...colors]);
-            shuffled.forEach(color => {
+        const message = document.getElementById('message');
+        const roundBadge = document.getElementById('roundBadge');
+
+        function animalSound(animal) {
+            synthSound(animal.sound);
+        }
+
+        function startRound() {
+            selectedAnimal = null;
+            matchedCount = 0;
+            housesRow.innerHTML = '';
+            animalsRow.innerHTML = '';
+            roundBadge.textContent = 'Ronde ' + round;
+            message.textContent = 'Tik op een dier!';
+
+            // Pick random animals for this round
+            const picked = shuffle([...allAnimals]).slice(0, currentCount);
+
+            // Create houses (in original order)
+            const houseOrder = shuffle([...picked]);
+            houseOrder.forEach(animal => {
                 const div = document.createElement('div');
-                div.className = 'color-item';
-                div.style.background = color.hex;
-                div.dataset.color = color.name;
-                div.onclick = () => selectItem(div, color.name);
-                itemsRow.appendChild(div);
+                div.className = 'house';
+                div.style.background = animal.color;
+                div.dataset.name = animal.name;
+                div.innerHTML = '<span class="house-emoji">🏠</span><span class="house-animal">' + animal.emoji + '</span>';
+                div.onclick = () => selectHouse(div, animal);
+                housesRow.appendChild(div);
+            });
+
+            // Create animals (shuffled differently)
+            const animalOrder = shuffle([...picked]);
+            animalOrder.forEach(animal => {
+                const div = document.createElement('div');
+                div.className = 'animal';
+                div.textContent = animal.emoji;
+                div.dataset.name = animal.name;
+                div.onclick = () => selectAnimalEl(div, animal);
+                animalsRow.appendChild(div);
             });
         }
-        
-        function selectItem(el, colorName) {
-            currentItem = { el, colorName };
-            messageDisplay.textContent = 'Kies nu het juiste vakje!';
-            document.querySelectorAll('.color-item').forEach(i => i.classList.remove('dragging'));
-            el.classList.add('dragging');
+
+        function selectAnimalEl(el, animal) {
+            if (el.classList.contains('matched')) return;
+
+            // Deselect previous
+            document.querySelectorAll('.animal').forEach(a => a.classList.remove('selected'));
+
+            // Select this one
+            el.classList.add('selected');
+            selectedAnimal = { el, animal };
+            message.textContent = 'Waar woont de ' + animal.name + '?';
+
+            // Play animal sound
+            animalSound(animal);
         }
-        
-        function selectBin(binColor) {
-            if (!currentItem) {
-                messageDisplay.textContent = 'Eerst een kleur kiezen!';
+
+        function selectHouse(houseEl, houseAnimal) {
+            if (!selectedAnimal) {
+                message.textContent = 'Eerst een dier kiezen!';
                 return;
             }
-            
-            if (currentItem.colorName === binColor) {
+            if (houseEl.classList.contains('filled')) return;
+
+            if (selectedAnimal.animal.name === houseAnimal.name) {
+                // Correct match!
                 score += 10;
                 scoreDisplay.textContent = score;
-                messageDisplay.textContent = 'Goed zo! Die hoort erin! ⭐';
-                currentItem.el.remove();
-                currentItem = null;
-                
-                if (itemsRow.children.length === 0) {
+                message.textContent = 'Goed zo! ⭐';
+                playTone(523, 0.15, 0.3);
+                setTimeout(() => playTone(659, 0.15, 0.3), 150);
+
+                // Animate animal away
+                selectedAnimal.el.classList.add('matched');
+                selectedAnimal.el.style.pointerEvents = 'none';
+
+                // Show animal in house
+                houseEl.classList.add('filled');
+
+                selectedAnimal = null;
+                matchedCount++;
+
+                if (matchedCount >= currentCount) {
+                    // Round complete
                     setTimeout(() => {
-                        messageDisplay.textContent = 'Alle kleuren gesorteerd! Nieuw level!';
-                        setTimeout(createItems, 1000);
+                        message.textContent = 'Alle dieren zijn thuis! 🏆';
+                        playTone(523, 0.15, 0.3);
+                        setTimeout(() => playTone(659, 0.15, 0.3), 150);
+                        setTimeout(() => playTone(784, 0.2, 0.3), 300);
+
+                        setTimeout(() => {
+                            round++;
+                            if (currentCount < 5) currentCount++;
+                            startRound();
+                        }, 2000);
                     }, 500);
                 }
             } else {
-                messageDisplay.textContent = 'Hmm, die kleur hoort daar niet!';
+                // Wrong match
+                message.textContent = 'Hmm, probeer nog eens!';
+                houseEl.classList.add('shake');
+                playTone(200, 0.2, 0.2);
+                setTimeout(() => houseEl.classList.remove('shake'), 400);
             }
         }
-        
-        createItems();
+
+        startRound();
     </script>
 </body>
 </html>
