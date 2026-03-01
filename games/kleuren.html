@@ -181,6 +181,7 @@
             <button class="pic-btn" onclick="selectPicture('star')">⭐</button>
             <button class="pic-btn" onclick="selectPicture('flower')">🌸</button>
             <button class="pic-btn" onclick="selectPicture('sun')">☀️</button>
+            <button class="pic-btn" onclick="selectPicture('unicorn')">🦄</button>
         </div>
 
         <div class="color-palette" id="palette"></div>
@@ -210,6 +211,12 @@
 
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
+
+        // Pre-load unicorn SVG
+        const unicornImg = new Image();
+        let unicornLoaded = false;
+        unicornImg.onload = () => { unicornLoaded = true; };
+        unicornImg.src = '../public/30708730_7728706.svg';
 
         const outlines = {
             fish: () => {
@@ -371,6 +378,35 @@
                     ctx.lineTo(x2, y2);
                     ctx.stroke();
                 }
+            },
+            unicorn: () => {
+                if (unicornLoaded) {
+                    // Draw SVG onto a temporary canvas to extract only the outlines
+                    const tmpCanvas = document.createElement('canvas');
+                    tmpCanvas.width = canvas.width;
+                    tmpCanvas.height = canvas.height;
+                    const tmpCtx = tmpCanvas.getContext('2d');
+                    const size = Math.min(canvas.width, canvas.height);
+                    const offsetX = (canvas.width - size) / 2;
+                    const offsetY = (canvas.height - size) / 2;
+                    tmpCtx.drawImage(unicornImg, offsetX, offsetY, size, size);
+
+                    // Copy only the dark (outline) pixels onto the main canvas
+                    const tmpData = tmpCtx.getImageData(0, 0, canvas.width, canvas.height);
+                    const mainData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const src = tmpData.data;
+                    const dst = mainData.data;
+                    for (let i = 0; i < src.length; i += 4) {
+                        // If this pixel is dark enough to be an outline, stamp it
+                        if (src[i] < 60 && src[i + 1] < 60 && src[i + 2] < 60 && src[i + 3] > 128) {
+                            dst[i] = src[i];
+                            dst[i + 1] = src[i + 1];
+                            dst[i + 2] = src[i + 2];
+                            dst[i + 3] = 255;
+                        }
+                    }
+                    ctx.putImageData(mainData, 0, 0);
+                }
             }
         };
 
@@ -396,13 +432,29 @@
             currentPicture = name;
             document.querySelectorAll('.pic-btn').forEach(b => b.classList.remove('selected'));
             event.target.classList.add('selected');
+            // Adjust canvas size for unicorn (square SVG)
+            if (name === 'unicorn') {
+                canvas.width = 320;
+                canvas.height = 320;
+            } else {
+                canvas.width = 320;
+                canvas.height = 260;
+            }
             clearCanvas();
         }
 
         function clearCanvas() {
             ctx.fillStyle = '#fff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            outlines[currentPicture]();
+            if (currentPicture === 'unicorn' && unicornLoaded) {
+                // For the initial draw, render the full SVG (canvas is already white)
+                const size = Math.min(canvas.width, canvas.height);
+                const offsetX = (canvas.width - size) / 2;
+                const offsetY = (canvas.height - size) / 2;
+                ctx.drawImage(unicornImg, offsetX, offsetY, size, size);
+            } else {
+                outlines[currentPicture]();
+            }
             updateProgress();
         }
 

@@ -23,7 +23,8 @@ const urlsToCache = [
     '/games/poetsen.html',
     '/games/sokken.html',
     '/games/zaklamp.html',
-    '/games/zoekenvind.html'
+    '/games/zoekenvind.html',
+    '/public/30708730_7728706.svg'
 ];
 
 self.addEventListener('install', event => {
