@@ -49,13 +49,50 @@
             position: absolute;
             font-size: 2rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: opacity 0.3s;
             opacity: 0;
         }
 
         .eyes.revealed {
             opacity: 1;
             animation: glow 1s ease infinite;
+        }
+
+        /* Progress ring for hold-to-reveal on touch */
+        .eyes .progress-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 52px; height: 52px;
+            pointer-events: none;
+        }
+        .eyes .progress-ring circle {
+            fill: none;
+            stroke: #ffd700;
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-dasharray: 138.2; /* 2 * pi * 22 */
+            stroke-dashoffset: 138.2;
+            transform: rotate(-90deg);
+            transform-origin: center;
+            transition: stroke-dashoffset 0.1s linear;
+        }
+
+        /* Animal popup when discovered */
+        .animal-popup {
+            position: absolute;
+            font-size: 3.5rem;
+            pointer-events: none;
+            z-index: 60;
+            animation: popAnimal 1.2s ease forwards;
+        }
+
+        @keyframes popAnimal {
+            0% { transform: scale(0.3); opacity: 0; }
+            20% { transform: scale(1.4); opacity: 1; }
+            40% { transform: scale(1.1); opacity: 1; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(0.5); opacity: 0; }
         }
 
         @keyframes glow {
@@ -145,7 +182,13 @@
         ];
         
         let found = 0;
+        const isTouch = 'ontouchstart' in window;
+        const HOLD_DURATION = 1200; // ms to hold flashlight on eyes
+
+        // Track hold state per eyes element
+        let holdTimers = new Map(); // eyes element -> { start, raf }
         
+        // Plant trees
         for (let i = 0; i < 30; i++) {
             const tree = document.createElement('div');
             tree.className = 'tree';
@@ -155,97 +198,183 @@
             tree.style.fontSize = (2 + Math.random() * 3) + 'rem';
             forest.appendChild(tree);
         }
-        
-        animals.forEach(animal => {
+
+        function createEyes(animal) {
             const eyes = document.createElement('div');
             eyes.className = 'eyes';
-            eyes.textContent = '👀';
             eyes.style.left = Math.random() * 80 + 5 + '%';
             eyes.style.top = Math.random() * 60 + 20 + '%';
             eyes.style.color = animal.color;
             eyes.dataset.found = 'false';
-            
-            eyes.onclick = () => {
-                if (eyes.dataset.found === 'false') {
-                    eyes.dataset.found = 'true';
-                    eyes.textContent = animal.emoji;
-                    eyes.classList.add('revealed');
-                    found++;
-                    message.textContent = `Je zag een ${animal.name}! ${found}/${animals.length} gevonden`;
-                    
-                    if (found >= animals.length) {
-                        message.textContent = 'Je vond alle dieren! ⭐';
-                        setTimeout(resetGame, 2000);
-                    }
-                }
-            };
-            
+            eyes.dataset.animal = animal.emoji;
+            eyes.dataset.name = animal.name;
+
+            // Eyes text
+            const eyeSpan = document.createElement('span');
+            eyeSpan.textContent = '👀';
+            eyes.appendChild(eyeSpan);
+
+            // SVG progress ring (for touch hold)
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.classList.add('progress-ring');
+            svg.setAttribute('viewBox', '0 0 48 48');
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('cx', '24');
+            circle.setAttribute('cy', '24');
+            circle.setAttribute('r', '22');
+            svg.appendChild(circle);
+            eyes.appendChild(svg);
+
+            // Click handler (works for mouse, backup for touch)
+            eyes.onclick = () => revealAnimal(eyes, animal);
+
             forest.appendChild(eyes);
-        });
-        
+            return eyes;
+        }
+
+        function revealAnimal(eyes, animal) {
+            if (eyes.dataset.found === 'true') return;
+            eyes.dataset.found = 'true';
+            eyes.querySelector('span').textContent = animal.emoji;
+            eyes.classList.add('revealed');
+            found++;
+            message.textContent = `Je zag een ${animal.name}! ${found}/${animals.length} gevonden`;
+
+            // Clear any hold timer
+            clearHoldTimer(eyes);
+
+            // Show popup
+            showAnimalPopup(eyes, animal.emoji);
+
+            // Sound
+            playTone(523, 0.15, 0.3);
+            setTimeout(() => playTone(659, 0.15, 0.3), 150);
+
+            if (found >= animals.length) {
+                message.textContent = 'Je vond alle dieren! ⭐';
+                playTone(523, 0.15, 0.3);
+                setTimeout(() => playTone(659, 0.15, 0.3), 150);
+                setTimeout(() => playTone(784, 0.2, 0.3), 300);
+                setTimeout(resetGame, 2000);
+            }
+        }
+
+        function showAnimalPopup(eyes, emoji) {
+            const popup = document.createElement('div');
+            popup.className = 'animal-popup';
+            popup.textContent = emoji;
+            // Position relative to the forest
+            popup.style.left = eyes.style.left;
+            popup.style.top = eyes.style.top;
+            popup.style.transform = 'translate(-25%, -25%)';
+            forest.appendChild(popup);
+            setTimeout(() => popup.remove(), 1200);
+        }
+
+        // --- Hold-to-reveal for touch ---
+        function startHoldTimer(eyes, animal) {
+            if (eyes.dataset.found === 'true') return;
+            const circle = eyes.querySelector('.progress-ring circle');
+            const circumference = 2 * Math.PI * 22; // ~138.2
+            const startTime = performance.now();
+
+            function updateRing() {
+                const elapsed = performance.now() - startTime;
+                const progress = Math.min(elapsed / HOLD_DURATION, 1);
+                circle.style.strokeDashoffset = circumference * (1 - progress);
+
+                if (progress >= 1) {
+                    // Reveal!
+                    revealAnimal(eyes, animal);
+                    return;
+                }
+                holdTimers.get(eyes).raf = requestAnimationFrame(updateRing);
+            }
+
+            holdTimers.set(eyes, { raf: requestAnimationFrame(updateRing) });
+        }
+
+        function clearHoldTimer(eyes) {
+            if (holdTimers.has(eyes)) {
+                cancelAnimationFrame(holdTimers.get(eyes).raf);
+                holdTimers.delete(eyes);
+            }
+            const circle = eyes.querySelector('.progress-ring circle');
+            if (circle) circle.style.strokeDashoffset = 2 * Math.PI * 22;
+        }
+
+        // Init game
+        animals.forEach(animal => createEyes(animal));
+
         function resetGame() {
             found = 0;
+            holdTimers.forEach((v, k) => cancelAnimationFrame(v.raf));
+            holdTimers.clear();
             document.querySelectorAll('.eyes').forEach(e => e.remove());
-            
-            animals.forEach(animal => {
-                const eyes = document.createElement('div');
-                eyes.className = 'eyes';
-                eyes.textContent = '👀';
-                eyes.style.left = Math.random() * 80 + 5 + '%';
-                eyes.style.top = Math.random() * 60 + 20 + '%';
-                eyes.style.color = animal.color;
-                eyes.dataset.found = 'false';
-                
-                eyes.onclick = () => {
-                    if (eyes.dataset.found === 'false') {
-                        eyes.dataset.found = 'true';
-                        eyes.textContent = animal.emoji;
-                        eyes.classList.add('revealed');
-                        found++;
-                        message.textContent = `Je zag een ${animal.name}! ${found}/${animals.length} gevonden`;
-                        
-                        if (found >= animals.length) {
-                            message.textContent = 'Je vond alle dieren! ⭐';
-                            setTimeout(resetGame, 2000);
-                        }
-                    }
-                };
-                
-                forest.appendChild(eyes);
-            });
-            
+            document.querySelectorAll('.animal-popup').forEach(e => e.remove());
+            animals.forEach(animal => createEyes(animal));
             message.textContent = 'Schijn met je zaklamp in het donkere bos!';
         }
-        
+
+        // --- Flashlight movement ---
         document.addEventListener('mousemove', (e) => {
             flashlight.classList.add('on');
             flashlight.style.left = e.clientX + 'px';
             flashlight.style.top = e.clientY + 'px';
-            
             checkFlashlight(e.clientX, e.clientY);
         });
-        
+
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            flashlight.classList.add('on');
+            flashlight.style.left = touch.clientX + 'px';
+            flashlight.style.top = touch.clientY + 'px';
+            checkFlashlight(touch.clientX, touch.clientY);
+        }, { passive: true });
+
         document.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
             flashlight.classList.add('on');
             flashlight.style.left = touch.clientX + 'px';
             flashlight.style.top = touch.clientY + 'px';
-            
             checkFlashlight(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        document.addEventListener('touchend', () => {
+            flashlight.classList.remove('on');
+            // Reset all hold timers and ring progress
+            document.querySelectorAll('.eyes:not(.revealed)').forEach(eyes => {
+                clearHoldTimer(eyes);
+                eyes.style.opacity = 0;
+            });
         });
-        
+
         function checkFlashlight(x, y) {
             document.querySelectorAll('.eyes:not(.revealed)').forEach(eyes => {
                 const rect = eyes.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
                 const dist = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
-                
+
                 if (dist < 80) {
-                    eyes.style.opacity = 0.3;
+                    // In flashlight beam
+                    eyes.style.opacity = 0.7;
+
+                    // On touch: start hold timer if not already started
+                    if (isTouch && !holdTimers.has(eyes) && eyes.dataset.found === 'false') {
+                        const name = eyes.dataset.name;
+                        const animal = animals.find(a => a.name === name);
+                        if (animal) startHoldTimer(eyes, animal);
+                    }
                 } else {
+                    // Out of flashlight beam
                     eyes.style.opacity = 0;
+
+                    // Cancel hold timer if moved away
+                    if (holdTimers.has(eyes)) {
+                        clearHoldTimer(eyes);
+                    }
                 }
             });
         }
