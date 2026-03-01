@@ -1,4 +1,4 @@
-const CACHE_NAME = 'noors-games-v8';
+const CACHE_NAME = 'noors-games-v9';
 const urlsToCache = [
     '/',
     '/index.html',
@@ -25,7 +25,9 @@ const urlsToCache = [
     '/games/zaklamp.html',
     '/games/zoekenvind.html',
     '/kleurplaten/index.json',
-    '/kleurplaten/eenhoorn.svg'
+    '/kleurplaten/eenhoorn.svg',
+    '/kleurplaten/ijs_katje.svg',
+    '/kleurplaten/ijsjes.svg'
 ];
 
 self.addEventListener('install', event => {

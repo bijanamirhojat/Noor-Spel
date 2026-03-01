@@ -1,5 +1,7 @@
 {
   "pages": [
-    { "file": "eenhoorn.svg", "name": "Eenhoorn" }
+    { "file": "eenhoorn.svg", "name": "Eenhoorn" },
+    { "file": "ijs_katje.svg", "name": "Ijs Katje" },
+    { "file": "ijsjes.svg", "name": "Ijsjes" }
   ]
 }
