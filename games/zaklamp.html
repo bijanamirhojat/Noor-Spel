@@ -11,30 +11,104 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔦</text></svg>">
     <link rel="manifest" href="../manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { touch-action: manipulation; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; overscroll-behavior: none; }
-        body { min-height: 100vh; background: #000; font-family: 'Nunito', sans-serif; display: flex; justify-content: center; padding: 15px; overflow: hidden; }
-        .game-container { background: #000; border-radius: 40px; padding: 20px; max-width: 500px; width: 100%; text-align: center; position: relative; height: 100vh; box-sizing: border-box; }
-        @media (min-width: 768px) { .game-container { max-width: 800px; height: 600px; overflow: auto; } .forest { height: calc(100% - 120px); } }
-        @media (min-width: 1024px) { .game-container { max-width: 900px; } }
-        .back-btn { position: absolute; top: 15px; left: 15px; background: #ff9a8b; color: white; text-decoration: none; padding: 8px 15px; border-radius: 15px; font-family: 'Fredoka One', cursive; font-size: 0.9rem; z-index: 100; }
-        h1 { font-family: 'Fredoka One', cursive; color: #e63946; font-size: 1.6rem; margin-bottom: 10px; text-shadow: 2px 2px 0 #ffd5d5; }
-        .forest { position: relative; width: 100%; height: calc(100vh - 120px); background: #0a0a15; border-radius: 25px; overflow: hidden; margin-bottom: 15px; }
-        .tree { position: absolute; font-size: 4rem; bottom: 20px; opacity: 0.1; }
-        .eyes { position: absolute; font-size: 2rem; cursor: pointer; transition: all 0.3s; opacity: 0; }
-        .eyes.revealed { opacity: 1; animation: glow 1s ease infinite; }
-        @keyframes glow { 0%, 100% { text-shadow: 0 0 10px currentColor; } 50% { text-shadow: 0 0 30px currentColor; } }
-        .flashlight { position: fixed; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,200,0.8) 0%, rgba(255,255,200,0) 70%); pointer-events: none; transform: translate(-50%, -50%); z-index: 50; display: none; }
-        .flashlight.on { display: block; }
-        .message { font-size: 1rem; color: #aaa; font-weight: 600; padding: 10px 15px; background: #222; border-radius: 15px; }
-        .instructions { font-size: 0.9rem; color: #666; margin-top: 8px; }
+        body {
+            background: #000;
+            overflow: hidden;
+        }
+
+        .game-container {
+            background: #000;
+            box-shadow: none;
+            height: calc(100vh - 30px);
+        }
+
+        h1 {
+            color: #ffd700;
+        }
+
+        .forest {
+            position: relative;
+            width: 100%;
+            height: calc(100% - 120px);
+            background: #0a0a15;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .tree {
+            position: absolute;
+            font-size: 4rem;
+            bottom: 20px;
+            opacity: 0.1;
+        }
+
+        .eyes {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .eyes.revealed {
+            opacity: 1;
+            animation: glow 1s ease infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px currentColor; }
+            50% { text-shadow: 0 0 30px currentColor; }
+        }
+
+        .flashlight {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,200,0.8) 0%, rgba(255,255,200,0) 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 50;
+            display: none;
+        }
+
+        .flashlight.on {
+            display: block;
+        }
+
+        .message {
+            font-size: 1rem;
+            color: #aaa;
+            font-weight: 600;
+            padding: 10px 15px;
+            background: #222;
+            border-radius: 15px;
+        }
+
+        .instructions {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .game-container {
+                height: 600px;
+            }
+
+            .forest {
+                height: calc(100% - 120px);
+            }
+        }
     </style>
 </head>
 <body>
     <a href="../index.html" class="back-btn">🏠 Terug</a>
     <div class="game-container">
-        <h1 style="color: #ffd700;">🔦 Zaklamp</h1>
+        <h1>🔦 Zaklamp</h1>
         <div class="forest" id="forest"></div>
         <div class="message" id="message">Schijn met je zaklamp in het donkere bos!</div>
         <div class="instructions">Vind alle dieren die zich verstoppen!</div>

@@ -11,71 +11,14 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧩</text></svg>">
     <link rel="manifest" href="../manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            touch-action: manipulation;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-            overscroll-behavior: none;
-        }
-
         body {
-            min-height: 100vh;
             background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
-            font-family: 'Nunito', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
         }
 
-        .game-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 100%;
-            width: 100%;
-            text-align: center;
-            position: relative;
-        }
-
-        @media (min-width: 768px) {
-            .game-container {
-                max-width: 800px;
-                padding: 20px;
-                border-radius: 40px;
-                height: 600px;
-                overflow: auto;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .game-container {
-                max-width: 900px;
-            }
-        }
-
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: #e63946;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 0 #ffd5d5;
-        }
-
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 15px;
-            }
+        .back-btn {
+            background: #ff9a8b;
         }
 
         .score-board {
@@ -87,12 +30,11 @@
             font-weight: bold;
         }
 
-        @media (min-width: 768px) {
-            .score-board {
-                gap: 30px;
-                font-size: 1.1rem;
-                margin-bottom: 15px;
-            }
+        .score {
+            background: #fff5f5;
+            padding: 8px 20px;
+            border-radius: 15px;
+            color: #e63946;
         }
 
         .memory-grid {
@@ -100,16 +42,6 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .memory-grid {
-                gap: 12px;
-                margin-bottom: 20px;
-                max-width: 450px;
-                margin-left: auto;
-                margin-right: auto;
-            }
         }
 
         .card {
@@ -124,108 +56,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 3px 8px rgba(0,0,0,0.1);
             border: 2px solid #fff;
-        }
-
-        @media (min-width: 768px) {
-            .card {
-                font-size: 2.5rem;
-                border-radius: 15px;
-                border: 3px solid #fff;
-            }
-        }
-
-        .new-game-btn {
-            background: linear-gradient(180deg, #55efc4 0%, #00b894 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-family: 'Fredoka One', cursive;
-            border-radius: 15px;
-            cursor: pointer;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
-            transition: all 0.15s ease;
-            margin-bottom: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .new-game-btn {
-                padding: 15px 35px;
-                font-size: 1.2rem;
-                border-radius: 20px;
-            }
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #ff9a8b;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-            transition: all 0.2s ease;
-        }
-
-        @media (min-width: 768px) {
-            .back-btn {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-        }
-
-        .back-btn:hover {
-            background: #ff6b6b;
-            transform: scale(1.05);
-        }
-
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: #e63946;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            text-shadow: 2px 2px 0 #ffd5d5;
-        }
-
-        .score-board {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            font-weight: bold;
-        }
-
-        .score {
-            background: #fff5f5;
-            padding: 8px 20px;
-            border-radius: 15px;
-            color: #e63946;
-        }
-
-        .memory-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .card {
-            aspect-ratio: 1;
-            background: linear-gradient(145deg, #ff9a8b, #ff6b6b);
-            border-radius: 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 2.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 3px solid #fff;
         }
 
         .card:hover {
@@ -269,13 +99,14 @@
             background: linear-gradient(180deg, #55efc4 0%, #00b894 100%);
             color: white;
             border: none;
-            padding: 15px 35px;
-            font-size: 1.2rem;
+            padding: 12px 25px;
+            font-size: 1rem;
             font-family: 'Fredoka One', cursive;
-            border-radius: 20px;
+            border-radius: 15px;
             cursor: pointer;
-            box-shadow: 0 5px 0 rgba(0,0,0,0.15);
+            box-shadow: 0 4px 0 rgba(0,0,0,0.15);
             transition: all 0.15s ease;
+            margin-bottom: 10px;
         }
 
         .new-game-btn:hover {
@@ -347,6 +178,34 @@
 
         .celebrating {
             animation: celebrate 0.5s ease infinite;
+        }
+
+        @media (min-width: 768px) {
+            .score-board {
+                gap: 30px;
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+
+            .memory-grid {
+                gap: 12px;
+                margin-bottom: 20px;
+                max-width: 450px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .card {
+                font-size: 2.5rem;
+                border-radius: 15px;
+                border: 3px solid #fff;
+            }
+
+            .new-game-btn {
+                padding: 15px 35px;
+                font-size: 1.2rem;
+                border-radius: 20px;
+            }
         }
     </style>
 </head>

@@ -1,8 +1,9 @@
-const CACHE_NAME = 'noors-games-v1';
+const CACHE_NAME = 'noors-games-v2';
 const urlsToCache = [
     '/',
     '/index.html',
     '/manifest.json',
+    '/games/shared.css',
     '/games/flip.html',
     '/games/memory.html',
     '/games/kleuren.html',

@@ -11,129 +11,21 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐱</text></svg>">
     <link rel="manifest" href="../manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            touch-action: manipulation;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-            overscroll-behavior: none;
-        }
-
         body {
-            min-height: 100vh;
             background: linear-gradient(135deg, #ff6b6b 0%, #ffa8a8 50%, #ff8787 100%);
-            font-family: 'Nunito', sans-serif;
-            display: flex;
-            justify-content: center;
-            padding: 15px;
-            overflow-x: hidden;
         }
 
-        .game-container {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 40px;
-            padding: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
-            max-width: 380px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            margin: auto 0;
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 25px;
         }
 
         .game-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        @media (min-width: 768px) {
-            .game-container {
-                max-width: 800px;
-                padding: 30px;
-                margin: auto 0;
-            }
-            .game-content {
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: center;
-                gap: 30px;
-            }
-            .cat-wrapper {
-                flex: 0 0 auto;
-            }
-            .cat-container {
-                width: 220px;
-                height: 220px;
-            }
-            .stats-section {
-                flex: 1;
-                max-width: 280px;
-            }
-            .buttons {
-                max-width: 500px;
-                margin: 25px auto 0;
-            }
-            h1 {
-                font-size: 2.5rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .game-container {
-                max-width: 900px;
-                margin: auto 0;
-            }
-            .cat-container {
-                width: 280px;
-                height: 280px;
-            }
-            .stats-section {
-                max-width: 350px;
-            }
-        }
-
-        .back-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #ff9a8b;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-            transition: all 0.2s ease;
-        }
-
-        @media (min-width: 768px) {
-            .back-btn {
-                padding: 10px 20px;
-                font-size: 1rem;
-            }
-        }
-
-        .back-btn:hover {
-            background: #ff6b6b;
-            transform: scale(1.05);
-        }
-
-        h1 {
-            font-family: 'Fredoka One', cursive;
-            color: #e63946;
-            font-size: 2rem;
-            margin-bottom: 25px;
-            text-shadow: 2px 2px 0 #ffd5d5;
         }
 
         .cat-wrapper {
@@ -166,38 +58,6 @@
             overflow: hidden;
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             border: 5px solid #fff;
-        }
-
-        .cat {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .cat:hover {
-            transform: scale(1.05);
-        }
-
-        .cat.bounce {
-            animation: bounce 0.5s ease;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            30% { transform: translateY(-20px) scale(1.05); }
-            60% { transform: translateY(-5px) scale(0.98); }
-        }
-
-        .cat.purr {
-            animation: purr 0.4s ease infinite;
-        }
-
-        @keyframes purr {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-2deg); }
-            75% { transform: rotate(2deg); }
         }
 
         .cat {
@@ -323,29 +183,15 @@
             box-shadow: 0 2px 0 rgba(0,0,0,0.15);
         }
 
-        .btn-food {
-            background: linear-gradient(180deg, #ff7675 0%, #d63031 100%);
-        }
+        .btn-food { background: linear-gradient(180deg, #ff7675 0%, #d63031 100%); }
         .btn-food:hover { background: linear-gradient(180deg, #ff8787 0%, #e17055 100%); }
-
-        .btn-love {
-            background: linear-gradient(180deg, #fdcb6e 0%, #f39c12 100%);
-        }
+        .btn-love { background: linear-gradient(180deg, #fdcb6e 0%, #f39c12 100%); }
         .btn-love:hover { background: linear-gradient(180deg, #ffeaa7 0%, #f1c40f 100%); }
-
-        .btn-play {
-            background: linear-gradient(180deg, #55efc4 0%, #00b894 100%);
-        }
+        .btn-play { background: linear-gradient(180deg, #55efc4 0%, #00b894 100%); }
         .btn-play:hover { background: linear-gradient(180deg, #81ecec 0%, #00cec9 100%); }
-
-        .btn-sleep {
-            background: linear-gradient(180deg, #a29bfe 0%, #6c5ce7 100%);
-        }
+        .btn-sleep { background: linear-gradient(180deg, #a29bfe 0%, #6c5ce7 100%); }
         .btn-sleep:hover { background: linear-gradient(180deg, #b8b5ff 0%, #8176f1 100%); }
-
-        .btn-poop {
-            background: linear-gradient(180deg, #8B7355 0%, #6B5344 100%);
-        }
+        .btn-poop { background: linear-gradient(180deg, #8B7355 0%, #6B5344 100%); }
         .btn-poop:hover { background: linear-gradient(180deg, #A0896C 0%, #7D6352 100%); }
 
         .poop-emoji {
@@ -374,11 +220,6 @@
             50% { transform: scale(1.02); }
         }
 
-        @keyframes sleepBreathe {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
         .zzz {
             position: absolute;
             top: 0;
@@ -399,13 +240,6 @@
         }
 
         .message {
-            font-size: 1.1rem;
-            color: #636e72;
-            min-height: 28px;
-            font-weight: 600;
-            padding: 8px 15px;
-            background: #fff5f5;
-            border-radius: 15px;
             margin-bottom: 15px;
         }
 
@@ -440,6 +274,50 @@
             0% { opacity: 1; transform: scale(0) rotate(0deg); }
             50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
             100% { opacity: 0; transform: scale(0) rotate(360deg); }
+        }
+
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .game-content {
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
+                gap: 30px;
+            }
+
+            .cat-wrapper {
+                flex: 0 0 auto;
+            }
+
+            .cat-container {
+                width: 220px;
+                height: 220px;
+            }
+
+            .stats-section {
+                flex: 1;
+                max-width: 280px;
+            }
+
+            .buttons {
+                max-width: 500px;
+                margin: 25px auto 0;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .cat-container {
+                width: 280px;
+                height: 280px;
+            }
+
+            .stats-section {
+                max-width: 350px;
+            }
         }
     </style>
 </head>

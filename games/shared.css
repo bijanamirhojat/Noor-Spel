@@ -1,0 +1,112 @@
+/* Noor-Spel: Shared game layout foundation
+   Based on flip.html as the golden reference.
+   Each game imports this file and only adds game-specific styles. */
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Touch handling */
+html, body {
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    overscroll-behavior: none;
+}
+
+/* Body: flex centering, no align-items to allow scroll */
+body {
+    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    overflow-x: hidden;
+}
+
+/* Game container: card-like layout */
+.game-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 40px;
+    padding: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    max-width: 380px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    margin: auto 0;
+}
+
+/* Back button */
+.back-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #ff9a8b;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 15px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.9rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.back-btn:hover {
+    background: #ff6b6b;
+    transform: scale(1.05);
+}
+
+/* Game title */
+h1 {
+    font-family: 'Fredoka One', cursive;
+    color: #e63946;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 0 #ffd5d5;
+}
+
+/* Common message/feedback area */
+.message {
+    font-size: 1rem;
+    color: #636e72;
+    font-weight: 600;
+    padding: 8px 15px;
+    background: #fff5f5;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+    .game-container {
+        max-width: 800px;
+        padding: 30px;
+        margin: auto 0;
+        height: 600px;
+        overflow: auto;
+    }
+
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Large tablet / desktop breakpoint */
+@media (min-width: 1024px) {
+    .game-container {
+        max-width: 900px;
+        margin: auto 0;
+    }
+}
