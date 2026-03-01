@@ -22,8 +22,20 @@
         .clothing-item:hover { transform: scale(1.1); }
         .clothing-item.selected { background: #90EE90; }
         @media (min-width: 768px) {
-            .character { height: 180px; }
-            .weather { font-size: 2.2rem; margin-bottom: 5px; }
+            .weather { font-size: 2rem; margin-bottom: 3px; }
+            .task { margin-bottom: 8px; padding: 6px 10px; font-size: 0.9rem; }
+            .game-layout {
+                display: flex;
+                gap: 20px;
+                align-items: flex-start;
+                justify-content: center;
+            }
+            .character { height: 160px; width: 130px; flex-shrink: 0; margin-bottom: 0; }
+            .char-base { font-size: 5rem; }
+            .options-panel { flex: 1; max-width: 400px; }
+            .options-panel > div { margin-bottom: 4px; }
+            .clothing-item { font-size: 1.8rem; padding: 8px; }
+            .message { margin-top: 8px; }
         }
     </style>
 </head>
@@ -33,12 +45,14 @@
         <h1>👕 Aankleden</h1>
         <div class="weather" id="weather">☀️</div>
         <div class="task" id="task">Kleed het poppetje aan voor zonnig weer!</div>
+        <div class="game-layout">
         <div class="character">
             <div class="char-clothes" id="hatDisplay"></div>
             <div class="char-clothes" id="shirtDisplay"></div>
             <div class="char-clothes" id="pantsDisplay"></div>
             <div class="char-base">🧑</div>
         </div>
+        <div class="options-panel">
         <div>
             <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Hoofd:</div>
             <div class="clothes-options" id="hatOptions"></div>
@@ -50,6 +64,8 @@
         <div>
             <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Broek:</div>
             <div class="clothes-options" id="pantsOptions"></div>
+        </div>
+        </div>
         </div>
         <div class="message" id="message">Kies de juiste kleding!</div>
     </div>
