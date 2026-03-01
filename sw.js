@@ -1,14 +1,28 @@
-const CACHE_NAME = 'noors-games-v2';
+const CACHE_NAME = 'noors-games-v3';
 const urlsToCache = [
     '/',
     '/index.html',
     '/manifest.json',
     '/games/shared.css',
+    '/games/aankleden.html',
+    '/games/bellen.html',
+    '/games/cijfers.html',
     '/games/flip.html',
-    '/games/memory.html',
+    '/games/kamer.html',
+    '/games/kiekeboe.html',
     '/games/kleuren.html',
+    '/games/kleurenmixen.html',
+    '/games/kleurensorteren.html',
     '/games/letters.html',
-    '/games/cijfers.html'
+    '/games/memory.html',
+    '/games/muziektuin.html',
+    '/games/piano.html',
+    '/games/pizza.html',
+    '/games/plaatjefout.html',
+    '/games/poetsen.html',
+    '/games/sokken.html',
+    '/games/zaklamp.html',
+    '/games/zoekenvind.html'
 ];
 
 self.addEventListener('install', event => {
