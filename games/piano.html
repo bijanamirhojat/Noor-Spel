@@ -127,6 +127,8 @@
 
         let isPlaying = false;
         let isPointerDown = false;
+        let activePointerId = null;
+        let lastDraggedKeyEl = null;
         let lastDraggedNote = null;
         let lastDragTime = 0;
 
@@ -197,12 +199,16 @@
         function playDraggedNote(x, y) {
             const key = keyFromPoint(x, y);
             if (!key) return;
+
+            if (key === lastDraggedKeyEl) return;
+
             const note = key.dataset.note;
             if (!note) return;
 
             const now = performance.now();
             if (note === lastDraggedNote && now - lastDragTime < 80) return;
 
+            lastDraggedKeyEl = key;
             lastDraggedNote = note;
             lastDragTime = now;
             playNote(note);
@@ -233,8 +239,11 @@
 
         piano.addEventListener('pointerdown', (e) => {
             if (e.pointerType === 'mouse' && e.button !== 0) return;
+            if (activePointerId !== null) return;
+            activePointerId = e.pointerId;
             isPointerDown = true;
             lastDraggedNote = null;
+            lastDraggedKeyEl = null;
             if (piano.setPointerCapture) piano.setPointerCapture(e.pointerId);
             e.preventDefault();
             playDraggedNote(e.clientX, e.clientY);
@@ -242,12 +251,16 @@
 
         piano.addEventListener('pointermove', (e) => {
             if (!isPointerDown) return;
+            if (e.pointerId !== activePointerId) return;
             e.preventDefault();
             playDraggedNote(e.clientX, e.clientY);
         });
 
         function endPointer(e) {
+            if (e && activePointerId !== null && e.pointerId !== activePointerId) return;
             isPointerDown = false;
+            activePointerId = null;
+            lastDraggedKeyEl = null;
             lastDraggedNote = null;
             if (e && piano.releasePointerCapture && piano.hasPointerCapture && piano.hasPointerCapture(e.pointerId)) {
                 piano.releasePointerCapture(e.pointerId);
