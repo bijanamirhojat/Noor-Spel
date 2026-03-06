@@ -227,6 +227,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-bottom: 8px;
+            grid-auto-rows: 1fr;
         }
 
         @media (min-width: 768px) {
@@ -255,6 +256,13 @@
             border: 3px solid transparent;
             position: relative;
             overflow: hidden;
+            display: grid;
+            grid-template-rows: auto minmax(0, 1fr) auto;
+            align-items: center;
+            justify-items: center;
+            align-content: start;
+            row-gap: 2px;
+            min-height: 112px;
         }
 
         .game-card::before {
@@ -277,12 +285,14 @@
             .game-card {
                 padding: 18px 12px;
                 border-radius: 24px;
+                min-height: 142px;
             }
         }
 
         @media (min-width: 900px) {
             .game-card {
                 padding: 22px 15px;
+                min-height: 152px;
             }
         }
 
@@ -297,12 +307,28 @@
             font-family: 'Fredoka One', cursive;
             font-size: 0.8rem;
             color: #444;
+            line-height: 1.2;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            min-height: 2.35em;
         }
 
         .game-desc {
             font-size: 0.6rem;
             color: #999;
             margin-top: 2px;
+            line-height: 1.2;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            min-height: 1.2em;
         }
 
         @media (min-width: 768px) {
@@ -312,10 +338,94 @@
             }
             .game-title {
                 font-size: 0.95rem;
+                min-height: 2.4em;
             }
             .game-desc {
                 font-size: 0.75rem;
                 margin-top: 4px;
+            }
+        }
+
+        /* iPad portrait/tablet compact mode: fit without overflow */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            body {
+                padding: 8px;
+            }
+
+            .home-container {
+                max-width: 760px;
+                padding: 16px 14px;
+                border-radius: 28px;
+            }
+
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 4px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+
+            .header {
+                margin-bottom: 10px;
+            }
+
+            .section-title {
+                font-size: 0.95rem;
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+
+            .games-grid,
+            .beta-grid {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .games-grid {
+                margin-bottom: 8px;
+            }
+
+            .beta-section {
+                margin-top: 8px;
+                padding-top: 8px;
+            }
+
+            .game-card {
+                padding: 9px 6px;
+                border-radius: 16px;
+                min-height: 96px;
+                row-gap: 1px;
+            }
+
+            .game-icon {
+                font-size: 1.4rem;
+                margin-bottom: 3px;
+            }
+
+            .game-title {
+                font-size: 0.66rem;
+                min-height: 2.4em;
+            }
+
+            .game-desc {
+                font-size: 0.52rem;
+                margin-top: 1px;
+                min-height: 1.15em;
+            }
+
+            .footer {
+                margin-top: 8px;
+                font-size: 0.68rem;
+            }
+
+            .cache-btn {
+                margin-top: 6px;
+                padding: 7px 10px;
+                font-size: 0.66rem;
+                border-radius: 10px;
             }
         }
 
@@ -522,6 +632,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 6px;
+            grid-auto-rows: 1fr;
         }
 
         .beta-grid:empty {
@@ -546,6 +657,12 @@
         @media (min-width: 900px) {
             .beta-grid {
                 grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (min-width: 900px) and (max-width: 1023px) {
+            .beta-grid {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
             }
         }
 
