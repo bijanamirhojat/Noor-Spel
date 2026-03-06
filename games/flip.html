@@ -17,17 +17,29 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 14px;
+            width: 100%;
         }
 
         .cat-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 25px;
+            width: 100%;
+            padding: 14px 12px;
+            background: linear-gradient(180deg, #fff7f7 0%, #ffeaea 100%);
+            border-radius: 22px;
+            border: 2px solid #ffd4d4;
+            box-shadow: 0 10px 24px rgba(255, 107, 107, 0.12);
         }
 
         .stats-section {
             width: 100%;
+            background: linear-gradient(180deg, #ffffff 0%, #fff5f5 100%);
+            border-radius: 22px;
+            border: 2px solid #ffdcdc;
+            box-shadow: 0 10px 24px rgba(255, 107, 107, 0.1);
+            padding: 14px 12px;
         }
 
         .mood-emoji {
@@ -106,25 +118,53 @@
         .stats {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 12px;
             width: 100%;
         }
 
         .stat {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            grid-template-rows: auto auto;
+            column-gap: 10px;
+            row-gap: 5px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 14px;
+            padding: 9px 10px;
+            border: 1px solid #ffdede;
             width: 100%;
         }
 
         .stat-icon {
             font-size: 1.3rem;
-            width: 32px;
+            width: 28px;
             text-align: center;
+            grid-column: 1;
+            grid-row: 1 / 3;
+            align-self: center;
+        }
+
+        .stat-meta {
+            grid-column: 2;
+            grid-row: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #6a5966;
+        }
+
+        .stat-value {
+            min-width: 42px;
+            text-align: right;
+            font-family: 'Fredoka One', cursive;
+            color: #5a4a57;
         }
 
         .stat-bar {
+            grid-column: 2;
+            grid-row: 2;
             flex: 1;
             height: 24px;
             background: #ffe5e5;
@@ -136,9 +176,13 @@
         .stat-fill {
             height: 100%;
             border-radius: 9px;
-            transition: width 0.5s ease;
+            transition: width 0.22s ease;
             min-width: 4px;
         }
+
+        .stat.low .stat-value { color: #d63031; }
+        .stat.mid .stat-value { color: #e17055; }
+        .stat.high .stat-value { color: #00a56a; }
 
         .stat-fill.hunger { background: linear-gradient(90deg, #ff9f43, #ff6b35); }
         .stat-fill.happiness { background: linear-gradient(90deg, #fd79a8, #e84393); }
@@ -150,7 +194,7 @@
             gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
-            margin-bottom: 20px;
+            margin: 6px 0 16px;
         }
 
         .btn {
@@ -269,71 +313,86 @@
 
         @media (min-width: 768px) {
             h1 {
-                font-size: 2.2rem;
-                margin-bottom: 5px;
+                font-size: 2rem;
+                margin-bottom: 2px;
             }
 
             .game-content {
                 display: flex;
                 flex-direction: row;
-                align-items: flex-start;
+                align-items: stretch;
                 justify-content: center;
-                gap: 25px;
+                gap: 12px;
+                max-width: 660px;
+                margin: 0 auto 6px;
             }
 
             .cat-wrapper {
-                flex: 0 0 auto;
-                margin-bottom: 15px;
+                flex: 0 0 250px;
+                margin-bottom: 0;
+                padding: 10px;
             }
 
             .cat-container {
-                width: 200px;
-                height: 200px;
+                width: 190px;
+                height: 190px;
             }
 
             .stats-section {
                 flex: 1;
-                max-width: 280px;
+                min-width: 280px;
+                padding: 10px;
             }
 
             .stats {
-                margin-bottom: 15px;
+                gap: 8px;
+            }
+
+            .stat {
+                padding: 7px 8px;
+            }
+
+            .stat-bar {
+                height: 20px;
             }
 
             .buttons {
-                max-width: 500px;
-                margin: 10px auto 0;
-                margin-bottom: 10px;
+                max-width: 660px;
+                gap: 8px;
+                margin: 6px auto 8px;
             }
 
             .btn {
-                padding: 12px 18px;
-                font-size: 1rem;
+                padding: 10px 14px;
+                font-size: 0.92rem;
+                border-radius: 16px;
             }
 
             .message {
-                margin-bottom: 8px;
+                margin-bottom: 6px;
+                font-size: 0.9rem;
+                padding: 6px 10px;
             }
 
             .legend {
-                font-size: 0.75rem;
-                padding: 6px 10px;
-                gap: 5px 10px;
+                font-size: 0.7rem;
+                padding: 5px 8px;
+                gap: 4px 8px;
             }
 
             .legend span {
-                padding: 3px 8px;
+                padding: 2px 6px;
             }
         }
 
         @media (min-width: 1024px) {
             .cat-container {
-                width: 280px;
-                height: 280px;
+                width: 220px;
+                height: 220px;
             }
 
             .stats-section {
-                max-width: 350px;
+                max-width: 330px;
             }
         }
     </style>
@@ -358,24 +417,40 @@
                 <div class="stats">
                     <div class="stat">
                         <span class="stat-icon">🐟</span>
+                        <div class="stat-meta">
+                            <span>Honger</span>
+                            <span class="stat-value" id="hungerValue">70%</span>
+                        </div>
                         <div class="stat-bar">
                             <div class="stat-fill hunger" id="hunger" style="width: 70%"></div>
                         </div>
                     </div>
                     <div class="stat">
                         <span class="stat-icon">💖</span>
+                        <div class="stat-meta">
+                            <span>Blij</span>
+                            <span class="stat-value" id="happinessValue">70%</span>
+                        </div>
                         <div class="stat-bar">
                             <div class="stat-fill happiness" id="happiness" style="width: 70%"></div>
                         </div>
                     </div>
                     <div class="stat">
                         <span class="stat-icon">⚡</span>
+                        <div class="stat-meta">
+                            <span>Energie</span>
+                            <span class="stat-value" id="energyValue">70%</span>
+                        </div>
                         <div class="stat-bar">
                             <div class="stat-fill energy" id="energy" style="width: 70%"></div>
                         </div>
                     </div>
                     <div class="stat">
                         <span class="stat-icon">💩</span>
+                        <div class="stat-meta">
+                            <span>Poep-druk</span>
+                            <span class="stat-value" id="poopValue">30%</span>
+                        </div>
                         <div class="stat-bar">
                             <div class="stat-fill poop" id="poop" style="width: 30%"></div>
                         </div>
@@ -420,6 +495,7 @@
         let energy = 70;
         let poopLevel = 30;
         let isInteracting = false;
+        let loopTick = 0;
 
         const cat = document.getElementById('cat');
         const hearts = document.getElementById('hearts');
@@ -561,7 +637,24 @@
             document.getElementById('happiness').style.width = happiness + '%';
             document.getElementById('energy').style.width = energy + '%';
             document.getElementById('poop').style.width = poopLevel + '%';
+            document.getElementById('hungerValue').textContent = Math.round(hunger) + '%';
+            document.getElementById('happinessValue').textContent = Math.round(happiness) + '%';
+            document.getElementById('energyValue').textContent = Math.round(energy) + '%';
+            document.getElementById('poopValue').textContent = Math.round(poopLevel) + '%';
+
+            updateStatState('hunger', hunger);
+            updateStatState('happiness', happiness);
+            updateStatState('energy', energy);
+            updateStatState('poop', 100 - poopLevel);
             updateMood();
+        }
+
+        function updateStatState(id, value) {
+            const stat = document.getElementById(id).closest('.stat');
+            stat.classList.remove('low', 'mid', 'high');
+            if (value < 35) stat.classList.add('low');
+            else if (value < 70) stat.classList.add('mid');
+            else stat.classList.add('high');
         }
 
         function updateMood() {
@@ -625,9 +718,10 @@
             if (isInteracting) return;
             isInteracting = true;
             
-            hunger = Math.min(100, hunger + 25);
-            happiness = Math.min(100, happiness + 10);
-            energy = Math.max(0, energy - 5);
+            hunger = Math.min(100, hunger + 30);
+            happiness = Math.min(100, happiness + 8);
+            energy = Math.max(0, energy - 4);
+            poopLevel = Math.min(100, poopLevel + 8);
             
             cat.classList.add('bounce');
             showHearts();
@@ -648,8 +742,9 @@
             if (isInteracting) return;
             isInteracting = true;
             
-            happiness = Math.min(100, happiness + 20);
-            energy = Math.max(0, energy - 3);
+            happiness = Math.min(100, happiness + 24);
+            energy = Math.max(0, energy - 4);
+            hunger = Math.max(0, hunger - 4);
             
             cat.classList.add('purr');
             showHearts();
@@ -670,9 +765,10 @@
             if (isInteracting) return;
             isInteracting = true;
             
-            happiness = Math.min(100, happiness + 25);
-            hunger = Math.max(0, hunger - 15);
-            energy = Math.max(0, energy - 20);
+            happiness = Math.min(100, happiness + 28);
+            hunger = Math.max(0, hunger - 14);
+            energy = Math.max(0, energy - 18);
+            poopLevel = Math.min(100, poopLevel + 10);
             
             mood.textContent = moods.playing;
             cat.classList.add('bounce');
@@ -693,8 +789,10 @@
             if (isInteracting) return;
             isInteracting = true;
             
-            energy = Math.min(100, energy + 40);
-            hunger = Math.max(0, hunger - 10);
+            energy = Math.min(100, energy + 36);
+            hunger = Math.max(0, hunger - 8);
+            happiness = Math.min(100, happiness + 6);
+            poopLevel = Math.min(100, poopLevel + 5);
             
             mood.textContent = moods.sleeping;
             cat.classList.add('sleeping');
@@ -715,8 +813,9 @@
             if (isInteracting) return;
             isInteracting = true;
             
-            happiness = Math.min(100, happiness + 5);
+            happiness = Math.min(100, happiness + 10);
             poopLevel = 0;
+            energy = Math.max(0, energy - 2);
             
             showPoopEmoji();
             showMessage('poop');
@@ -729,25 +828,28 @@
         }
 
         function gameLoop() {
-            hunger = Math.max(0, hunger - 2);
+            loopTick++;
+            hunger = Math.max(0, hunger - 3);
             happiness = Math.max(0, happiness - 2);
-            energy = Math.min(100, energy + 3);
-            poopLevel = Math.min(100, poopLevel + 3);
+            energy = Math.max(0, energy - 2);
+            poopLevel = Math.min(100, poopLevel + 4);
             
-            if (hunger < 30 && !isInteracting) {
-                showMessage('hungry');
-            } else if (happiness < 30 && !isInteracting) {
-                showMessage('sad');
-            } else if (energy < 30 && !isInteracting) {
-                showMessage('tired');
-            } else if (poopLevel >= 100 && !isInteracting) {
-                showMessage('needsPoop');
+            if (!isInteracting && loopTick % 3 === 0) {
+                if (hunger < 35) {
+                    showMessage('hungry');
+                } else if (happiness < 35) {
+                    showMessage('sad');
+                } else if (energy < 35) {
+                    showMessage('tired');
+                } else if (poopLevel >= 90) {
+                    showMessage('needsPoop');
+                }
             }
             
             updateStats();
         }
 
-        setInterval(gameLoop, 5000);
+        setInterval(gameLoop, 1500);
         updateStats();
 
         document.addEventListener('keydown', function(e) {

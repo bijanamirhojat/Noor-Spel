@@ -127,7 +127,16 @@
                 } else {
                     playWrong();
                     message.textContent = 'Hmm, dat is ' + mix.name + '...';
+                    setTimeout(() => {
+                        reset();
+                    }, 900);
                 }
+            } else {
+                playWrong();
+                message.textContent = 'Deze kleuren maken nog geen nieuwe kleur!';
+                setTimeout(() => {
+                    reset();
+                }, 900);
             }
         }
         

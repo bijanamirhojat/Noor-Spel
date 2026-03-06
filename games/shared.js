@@ -17,15 +17,57 @@ function randomPick(array) {
 
 /** Lazy singleton AudioContext */
 let _audioCtx = null;
+let _audioUnlockAttempted = false;
+
 function getAudioContext() {
     if (!_audioCtx) {
         _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     }
     if (_audioCtx.state === 'suspended') {
-        _audioCtx.resume();
+        _audioCtx.resume().catch(() => {});
     }
     return _audioCtx;
 }
+
+/** iOS/Safari: unlock WebAudio on first user gesture */
+function unlockAudioOnGesture() {
+    if (_audioUnlockAttempted) return;
+    _audioUnlockAttempted = true;
+
+    let ctx;
+    try {
+        ctx = getAudioContext();
+    } catch (e) {
+        return;
+    }
+
+    const unlock = () => {
+        try {
+            if (ctx.state === 'suspended') {
+                ctx.resume().catch(() => {});
+            }
+
+            // Play a silent one-sample buffer to reliably unlock on iOS.
+            const buffer = ctx.createBuffer(1, 1, 22050);
+            const source = ctx.createBufferSource();
+            source.buffer = buffer;
+            source.connect(ctx.destination);
+            source.start(0);
+        } catch (e) {}
+
+        document.removeEventListener('touchstart', unlock);
+        document.removeEventListener('pointerdown', unlock);
+        document.removeEventListener('mousedown', unlock);
+        document.removeEventListener('keydown', unlock);
+    };
+
+    document.addEventListener('touchstart', unlock, { passive: true, once: true });
+    document.addEventListener('pointerdown', unlock, { passive: true, once: true });
+    document.addEventListener('mousedown', unlock, { passive: true, once: true });
+    document.addEventListener('keydown', unlock, { once: true });
+}
+
+unlockAudioOnGesture();
 
 /** Play a simple oscillator tone */
 function playTone(freq, duration = 0.3, volume = 0.3, type = 'sine') {

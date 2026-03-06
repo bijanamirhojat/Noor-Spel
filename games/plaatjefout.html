@@ -84,6 +84,10 @@
                 playWrong();
                 el.classList.add('wrong');
                 messageDisplay.textContent = 'Hmm, dat hoort er wel bij!';
+                setTimeout(() => {
+                    messageDisplay.textContent = 'Welk plaatje hoort er niet bij?';
+                    loadLevel();
+                }, 900);
             }
         }
         
