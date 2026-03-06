@@ -33,7 +33,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 15px 20px;
             position: relative;
             overflow-x: hidden;
         }
@@ -112,7 +112,7 @@
         .home-container {
             background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,245,245,0.95) 100%);
             border-radius: 35px;
-            padding: 20px;
+            padding: 20px 24px;
             box-shadow: 
                 0 25px 80px rgba(0, 0, 0, 0.25),
                 0 0 0 1px rgba(255,255,255,0.5) inset;
@@ -272,9 +272,17 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #ff6b6b, #feca57);
+            background: var(--card-accent, linear-gradient(90deg, #ff6b6b, #feca57));
             opacity: 0;
             transition: opacity 0.3s;
+        }
+
+        .game-card:not(.beta) {
+            border-color: var(--card-border, transparent) !important;
+        }
+
+        .game-card:not(.beta)::before {
+            background: var(--card-accent, linear-gradient(90deg, #ff6b6b, #feca57)) !important;
         }
 
         .game-card:hover::before {
@@ -845,6 +853,84 @@
             display: inline-block;
         }
 
+        /* Child mode: icon-only home UI */
+        #homeContainer:not(.parent-mode) .game-title,
+        #homeContainer:not(.parent-mode) .game-desc {
+            display: none;
+        }
+
+        #homeContainer:not(.parent-mode) {
+            padding: 16px 18px;
+            max-width: 740px;
+        }
+
+        #homeContainer:not(.parent-mode) .games-grid {
+            margin-bottom: 0;
+            gap: 10px;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        #homeContainer:not(.parent-mode) .game-card {
+            min-height: 94px;
+            padding: 10px 6px;
+            grid-template-rows: 1fr;
+            place-items: center;
+            border-radius: 18px;
+            border-width: 4px;
+            box-shadow:
+                0 6px 16px rgba(0, 0, 0, 0.12),
+                0 0 0 1px rgba(255,255,255,0.9) inset;
+        }
+
+        #homeContainer:not(.parent-mode) .game-icon {
+            font-size: 2.15rem;
+            margin-bottom: 0;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18));
+        }
+
+        #homeContainer:not(.parent-mode) .game-card:hover {
+            transform: translateY(-5px) scale(1.03);
+        }
+
+        #homeContainer:not(.parent-mode) .game-card:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            #homeContainer:not(.parent-mode) {
+                max-width: 760px;
+                padding: 10px 14px;
+            }
+
+            #homeContainer:not(.parent-mode) .games-grid {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            #homeContainer:not(.parent-mode) .game-card {
+                min-height: 84px;
+                padding: 6px;
+            }
+
+            #homeContainer:not(.parent-mode) .game-icon {
+                font-size: 1.9rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            #homeContainer:not(.parent-mode) .games-grid {
+                grid-template-columns: repeat(7, minmax(0, 1fr));
+            }
+
+            #homeContainer:not(.parent-mode) .game-card {
+                min-height: 112px;
+            }
+
+            #homeContainer:not(.parent-mode) .game-icon {
+                font-size: 2.45rem;
+            }
+        }
+
         /* ── Circular wipe game transition ── */
         #gameTransition {
             position: fixed;
@@ -1002,7 +1088,7 @@
         </div>
         <p class="subtitle">Kies een spelletje!</p>
 
-        <div class="section-title">🎯 Favorieten</div>
+        <div class="section-title">🎯 Bangers</div>
         <div class="games-grid">
             <div class="game-card flip" onclick="playGame('flip')">
                 <span class="game-icon">🐱</span>
@@ -1163,6 +1249,28 @@
             } catch(e) {}
         }
         function playPop() { playFreqSweep(800, 1200, 0.08, 0.25); }
+
+        function applyRandomCardColors() {
+            const palettes = [
+                ['#ff8a8a', '#ff5f6d'],
+                ['#ffd166', '#f6b93b'],
+                ['#7ed6df', '#22a6b3'],
+                ['#9c88ff', '#6c5ce7'],
+                ['#6ee7b7', '#10b981'],
+                ['#74b9ff', '#0984e3'],
+                ['#f8a5c2', '#e84393'],
+                ['#fab1a0', '#e17055'],
+                ['#b8e994', '#78e08f'],
+                ['#f6e58d', '#f9ca24']
+            ];
+
+            const cards = document.querySelectorAll('.game-card:not(.beta)');
+            cards.forEach((card) => {
+                const pair = palettes[Math.floor(Math.random() * palettes.length)];
+                card.style.setProperty('--card-border', pair[1]);
+                card.style.setProperty('--card-accent', `linear-gradient(90deg, ${pair[0]}, ${pair[1]})`);
+            });
+        }
 
         /** Magical chime for splash screen (C6→E6→G6→C7 rapid arpeggiated shimmer) */
         function playMagicChime() {
@@ -1407,6 +1515,8 @@
 
         /* ── Startup: splash (first session) or straight to cards ── */
         document.addEventListener('DOMContentLoaded', () => {
+            applyRandomCardColors();
+
             const splashSeen = sessionStorage.getItem('splashSeen');
             if (!splashSeen) {
                 // Hide home container during splash
