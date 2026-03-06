@@ -368,6 +368,58 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
+        .update-banner {
+            position: fixed;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.96);
+            border: 2px solid #ffd2d2;
+            border-radius: 16px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+            padding: 10px;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .update-banner.show {
+            display: flex;
+        }
+
+        .update-banner button {
+            border: none;
+            border-radius: 12px;
+            padding: 8px 12px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.78rem;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(180deg, #ff7d7d 0%, #e84d4d 100%);
+            flex-shrink: 0;
+        }
+
+        @media (min-width: 768px) {
+            .update-banner {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: min(560px, calc(100vw - 40px));
+                font-size: 0.9rem;
+                padding: 12px 14px;
+            }
+
+            .update-banner button {
+                font-size: 0.85rem;
+                padding: 10px 16px;
+                border-radius: 14px;
+            }
+        }
+
         .game-card:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 
@@ -967,6 +1019,11 @@
         </div>
     </div>
 
+    <div class="update-banner" id="updateBanner" role="status" aria-live="polite">
+        <span id="updateBannerText">Nieuwe versie beschikbaar</span>
+        <button type="button" id="updateNowBtn">Nu updaten</button>
+    </div>
+
     <script>
         /* ── Audio helpers (index.html doesn't load shared.js) ── */
         let _audioCtx = null;
@@ -1276,9 +1333,69 @@
             }
         }
 
+        let _refreshing = false;
+        let _pendingSwReg = null;
+
+        function showUpdateBanner(registration) {
+            _pendingSwReg = registration;
+            const banner = document.getElementById('updateBanner');
+            const text = document.getElementById('updateBannerText');
+            const button = document.getElementById('updateNowBtn');
+            if (!banner || !button || !text) return;
+
+            text.textContent = 'Nieuwe versie klaar!';
+            button.disabled = false;
+            button.textContent = 'Nu updaten';
+            banner.classList.add('show');
+        }
+
+        function wireUpdateButton() {
+            const button = document.getElementById('updateNowBtn');
+            const text = document.getElementById('updateBannerText');
+            if (!button || !text) return;
+
+            button.addEventListener('click', () => {
+                button.disabled = true;
+                button.textContent = 'Bezig...';
+                text.textContent = 'App wordt bijgewerkt...';
+
+                const waiting = _pendingSwReg && _pendingSwReg.waiting;
+                if (waiting) {
+                    waiting.postMessage({ type: 'SKIP_WAITING' });
+                } else {
+                    window.location.reload();
+                }
+            });
+        }
+
         if ('serviceWorker' in navigator) {
+            wireUpdateButton();
+
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (_refreshing) return;
+                _refreshing = true;
+                window.location.reload();
+            });
+
             navigator.serviceWorker.register('sw.js')
-                .then(reg => console.log('Service Worker registered'))
+                .then(reg => {
+                    console.log('Service Worker registered');
+
+                    if (reg.waiting) {
+                        showUpdateBanner(reg);
+                    }
+
+                    reg.addEventListener('updatefound', () => {
+                        const newWorker = reg.installing;
+                        if (!newWorker) return;
+
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                showUpdateBanner(reg);
+                            }
+                        });
+                    });
+                })
                 .catch(err => console.log('Service Worker registration failed:', err));
         }
     </script>
