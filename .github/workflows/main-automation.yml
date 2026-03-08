@@ -9,11 +9,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  automate:
+  build:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout
@@ -26,7 +28,11 @@ jobs:
         run: |
           before="${{ github.event.before }}"
           if [ -z "$before" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then
-            before="$(git rev-parse HEAD~1)"
+            if git rev-parse HEAD~1 >/dev/null 2>&1; then
+              before="$(git rev-parse HEAD~1)"
+            else
+              before="${{ github.sha }}"
+            fi
           fi
 
           if git diff --name-only "$before" "${{ github.sha }}" | grep -E '^kleurplaten/.*\.svg$' >/dev/null 2>&1; then
@@ -42,14 +48,26 @@ jobs:
       - name: Bump release id
         run: bash bump-release-id.sh
 
-      - name: Commit and push automation updates
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add index.html kleurplaten/index.json sw.js
-          if git diff --cached --quiet; then
-            echo "No automation changes to commit"
-          else
-            git commit -m "chore: automate release and kleurplaten updates"
-            git push
-          fi
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    if: github.actor != 'github-actions[bot]'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

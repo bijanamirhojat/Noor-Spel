@@ -1,126 +1,71 @@
 #!/usr/bin/env bash
-# build-kleurplaten.sh
-# Scans kleurplaten/*.svg and generates:
-#   1. kleurplaten/index.json  — list of coloring pages
-#   2. Updates sw.js           — cache entries + version bump
-#
-# Usage:  bash build-kleurplaten.sh
-# Called automatically by GitHub Actions on push.
-
 set -euo pipefail
-cd "$(dirname "$0")"
 
-DIR="kleurplaten"
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# ── 1. Collect SVG files (sorted alphabetically) ─────────────────────
-shopt -s nullglob
-svgs=("$DIR"/*.svg)
-shopt -u nullglob
+python3 - <<'PY' "${ROOT_DIR}"
+import json
+import pathlib
+import re
+import sys
 
-if [ ${#svgs[@]} -eq 0 ]; then
-    echo "No SVG files found in $DIR/"
-    exit 1
-fi
+root = pathlib.Path(sys.argv[1])
+kleurplaten_dir = root / "kleurplaten"
+sw_path = root / "sw.js"
+index_path = kleurplaten_dir / "index.json"
 
-# ── 2. Generate index.json ────────────────────────────────────────────
-{
-    echo '{'
-    echo '  "pages": ['
-    count=0
-    total=${#svgs[@]}
-    for svg in "${svgs[@]}"; do
-        base="$(basename "$svg" .svg)"
-        name="$(echo "$base" | tr '_-' '  ' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1')"
-        count=$((count + 1))
-        if [ "$count" -lt "$total" ]; then
-            printf '    { "file": "%s.svg", "name": "%s" },\n' "$base" "$name"
-        else
-            printf '    { "file": "%s.svg", "name": "%s" }\n' "$base" "$name"
-        fi
-    done
-    echo '  ]'
-    echo '}'
-} > "$DIR/index.json"
+svg_files = sorted(kleurplaten_dir.glob("*.svg"))
+if not svg_files:
+    raise SystemExit("No SVG files found in kleurplaten/")
 
-echo "Generated $DIR/index.json with ${#svgs[@]} page(s)"
+pages = []
+for svg in svg_files:
+    stem = svg.stem
+    readable = " ".join(part.capitalize() for part in re.split(r"[_-]+", stem) if part)
+    pages.append({"file": f"{stem}.svg", "name": readable})
 
-# ── 3. Update sw.js ──────────────────────────────────────────────────
-swfile="sw.js"
-if [ ! -f "$swfile" ]; then
-    echo "Error: $swfile not found"
-    exit 1
-fi
+index_path.write_text(
+    json.dumps({"pages": pages}, ensure_ascii=False, indent=2) + "\n",
+    encoding="utf-8",
+)
+print(f"Generated {index_path} with {len(pages)} page(s)")
 
-# Read the entire file into memory first (avoid read/write conflict)
-sw_content="$(cat "$swfile")"
+sw_content = sw_path.read_text(encoding="utf-8")
 
-# Extract current cache version number and bump it
-current_version=$(echo "$sw_content" | grep -o 'noors-games-v[0-9]*' | head -1 | grep -o '[0-9]*')
-new_version=$((current_version + 1))
-
-# Collect existing non-kleurplaten, non-public cache entries
-existing_entries=()
-in_array=false
-while IFS= read -r line; do
-    if echo "$line" | grep -q 'urlsToCache = \['; then
-        in_array=true
+base_entries = []
+for line in sw_content.splitlines():
+    stripped = line.strip()
+    if not stripped.startswith("'./"):
         continue
-    fi
-    if [ "$in_array" = true ] && echo "$line" | grep -q '^\];'; then
-        in_array=false
+    if not stripped.endswith("',") and not stripped.endswith("'"):
         continue
-    fi
-    if [ "$in_array" = true ]; then
-        if echo "$line" | grep -q '/kleurplaten/'; then continue; fi
-        if echo "$line" | grep -q '/public/'; then continue; fi
-        cleaned=$(echo "$line" | sed 's/,$//')
-        if [ -n "$(echo "$cleaned" | tr -d '[:space:]')" ]; then
-            existing_entries+=("$cleaned")
-        fi
-    fi
-done <<< "$sw_content"
+    entry = stripped.rstrip(",")
+    if entry.startswith("'./kleurplaten/"):
+        continue
+    base_entries.append(entry)
 
-# Collect everything after the closing "];" of the cache array
-rest_of_file=""
-past_array=false
-while IFS= read -r line; do
-    if [ "$past_array" = true ]; then
-        rest_of_file="${rest_of_file}${line}
-"
-    fi
-    if echo "$line" | grep -q '^\];'; then
-        past_array=true
-    fi
-done <<< "$sw_content"
+if not base_entries:
+    raise SystemExit("Could not parse PRECACHE_URLS in sw.js")
 
-# Build new sw.js
-{
-    echo "const CACHE_NAME = 'noors-games-v${new_version}';"
-    echo "const urlsToCache = ["
+kleur_entries = ["'./kleurplaten/index.json'"] + [
+    f"'./kleurplaten/{svg.name}'" for svg in svg_files
+]
 
-    # Existing entries (with trailing commas)
-    for entry in "${existing_entries[@]}"; do
-        echo "${entry},"
-    done
+all_entries = base_entries + kleur_entries
+precache_block = "const PRECACHE_URLS = [\n" + "\n".join(
+    f"    {entry}{',' if i < len(all_entries) - 1 else ''}" for i, entry in enumerate(all_entries)
+) + "\n];"
 
-    # Kleurplaten entries
-    echo "    '/kleurplaten/index.json',"
-    count=0
-    total=${#svgs[@]}
-    for svg in "${svgs[@]}"; do
-        base="$(basename "$svg")"
-        count=$((count + 1))
-        if [ "$count" -lt "$total" ]; then
-            echo "    '/kleurplaten/${base}',"
-        else
-            echo "    '/kleurplaten/${base}'"
-        fi
-    done
+updated = re.sub(
+    r"const PRECACHE_URLS = \[(?:.|\n)*?\n\];",
+    precache_block,
+    sw_content,
+    count=1,
+)
 
-    echo "];"
-
-    # Rest of the file (event listeners etc.)
-    printf '%s' "$rest_of_file"
-} > "$swfile"
-
-echo "Updated $swfile (cache v${new_version}, ${#svgs[@]} kleurplaten)"
+if updated != sw_content:
+    sw_path.write_text(updated, encoding="utf-8")
+    print(f"Updated {sw_path} with {len(kleur_entries)} kleurplaten cache entries")
+else:
+    print(f"No sw.js precache changes needed ({len(kleur_entries)} kleurplaten entries)")
+PY
