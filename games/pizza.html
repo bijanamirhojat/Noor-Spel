@@ -185,6 +185,41 @@
             color: #1b7f46;
         }
 
+        .right-controls {
+            margin-top: auto;
+            padding-top: 8px;
+        }
+
+        .bake-btn-large {
+            width: 100%;
+            min-height: 66px;
+            border: 3px solid #74c69d;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #d8f7dc 0%, #b7efc5 100%);
+            color: #1b7f46;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.15rem;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(27, 127, 70, 0.22);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+        }
+
+        .bake-btn-large:hover:not(:disabled) {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 22px rgba(27, 127, 70, 0.28);
+        }
+
+        .bake-btn-large:active:not(:disabled) {
+            transform: scale(0.99);
+        }
+
+        .bake-btn-large:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            filter: grayscale(0.2);
+            box-shadow: none;
+        }
+
         .control-btn:disabled {
             opacity: 0.45;
             cursor: not-allowed;
@@ -315,6 +350,12 @@
             .control-btn {
                 font-size: 1rem;
             }
+
+            .bake-btn-large {
+                min-height: 88px;
+                font-size: 1.45rem;
+                border-radius: 18px;
+            }
         }
     </style>
 </head>
@@ -342,13 +383,15 @@
 
                 <div class="controls">
                     <button class="control-btn" id="resetBtn" type="button">Opnieuw</button>
-                    <button class="control-btn primary" id="bakeBtn" type="button" disabled>Bak pizza</button>
                 </div>
             </section>
 
             <section class="right-panel" aria-label="Ingrediënten kiezen">
                 <div class="ingredients-title" id="ingredientsTitle">Ingrediënten 0/3</div>
                 <div class="ingredients" id="ingredients"></div>
+                <div class="right-controls">
+                    <button class="bake-btn-large" id="bakeBtn" type="button" disabled>🔥 Bak pizza</button>
+                </div>
             </section>
         </div>
 
@@ -366,9 +409,10 @@
         ];
 
         const TOTAL_ROUNDS = 5;
+        const FIXED_ROUNDS_PER_SESSION = 2;
 
-        let currentRecipeIndex = 0;
-        let roundNumber = 1;
+        let sessionRounds = [];
+        let currentRoundIndex = 0;
         let stars = 0;
         let selectedIngredients = [];
         let evaluation = null;
@@ -386,16 +430,61 @@
         const resetBtn = document.getElementById('resetBtn');
         const bakeBtn = document.getElementById('bakeBtn');
 
-        function currentRecipe() {
-            return recipes[currentRecipeIndex];
+        function recipeKey(recipeIngredients) {
+            return [...recipeIngredients].sort().join('');
         }
 
-        function nextRecipe() {
-            currentRecipeIndex = (currentRecipeIndex + 1) % recipes.length;
+        function randomCombo() {
+            const pool = shuffle([...ingredients]);
+            return pool.slice(0, 3);
+        }
+
+        function buildSessionRounds() {
+            const fixed = shuffle([...recipes]).slice(0, FIXED_ROUNDS_PER_SESSION).map((recipe) => ({
+                name: recipe.name,
+                ingredients: [...recipe.ingredients],
+                isRandom: false
+            }));
+
+            const blockedKeys = new Set(recipes.map((recipe) => recipeKey(recipe.ingredients)));
+            fixed.forEach((recipe) => blockedKeys.add(recipeKey(recipe.ingredients)));
+
+            const randomNeeded = TOTAL_ROUNDS - fixed.length;
+            const randomRounds = [];
+
+            while (randomRounds.length < randomNeeded) {
+                const combo = randomCombo();
+                const key = recipeKey(combo);
+                if (blockedKeys.has(key)) {
+                    continue;
+                }
+
+                blockedKeys.add(key);
+                randomRounds.push({
+                    name: 'Chef Special',
+                    ingredients: combo,
+                    isRandom: true
+                });
+            }
+
+            sessionRounds = shuffle([...fixed, ...randomRounds]);
+        }
+
+        function currentRecipe() {
+            return sessionRounds[currentRoundIndex];
+        }
+
+        function startNewSession() {
+            buildSessionRounds();
+            currentRoundIndex = 0;
+            stars = 0;
+            sessionComplete = false;
+            selectedIngredients = [];
+            evaluation = null;
         }
 
         function renderHud() {
-            roundPill.textContent = `Ronde ${roundNumber}/${TOTAL_ROUNDS}`;
+            roundPill.textContent = `Ronde ${Math.min(currentRoundIndex + 1, TOTAL_ROUNDS)}/${TOTAL_ROUNDS}`;
             scorePill.textContent = `Sterren: ${stars}`;
             ingredientsTitle.textContent = `Ingrediënten ${selectedIngredients.length}/3`;
             bakeBtn.disabled = sessionComplete || selectedIngredients.length !== 3;
@@ -559,12 +648,10 @@
                 renderHud();
 
                 setTimeout(() => {
-                    if (roundNumber >= TOTAL_ROUNDS) {
+                    if (currentRoundIndex >= TOTAL_ROUNDS - 1) {
                         sessionComplete = true;
                         task.textContent = 'Bestelronde klaar!';
                         message.textContent = `Klaar! ${stars}/${TOTAL_ROUNDS} sterren. Tik Opnieuw voor een nieuw rondje.`;
-                        roundNumber = 1;
-                        stars = 0;
                         selectedIngredients = [];
                         evaluation = null;
                         renderHud();
@@ -573,8 +660,7 @@
                         return;
                     }
 
-                    roundNumber += 1;
-                    nextRecipe();
+                    currentRoundIndex += 1;
                     loadRound();
                 }, 1500);
             } else {
@@ -589,6 +675,7 @@
         resetBtn.addEventListener('click', () => {
             playPop();
             if (sessionComplete) {
+                startNewSession();
                 loadRound();
                 return;
             }
@@ -597,6 +684,7 @@
 
         bakeBtn.addEventListener('click', bakePizza);
 
+        startNewSession();
         loadRound();
     </script>
 </body>
