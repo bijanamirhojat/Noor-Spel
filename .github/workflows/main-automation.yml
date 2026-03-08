@@ -1,0 +1,55 @@
+name: Main Automation
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: main-automation
+  cancel-in-progress: true
+
+jobs:
+  automate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect kleurplaten changes
+        id: changes
+        run: |
+          before="${{ github.event.before }}"
+          if [ -z "$before" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then
+            before="$(git rev-parse HEAD~1)"
+          fi
+
+          if git diff --name-only "$before" "${{ github.sha }}" | grep -E '^kleurplaten/.*\.svg$' >/dev/null 2>&1; then
+            echo "kleurplaten_svg_changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "kleurplaten_svg_changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build kleurplaten index
+        if: steps.changes.outputs.kleurplaten_svg_changed == 'true'
+        run: bash build-kleurplaten.sh
+
+      - name: Bump release id
+        run: bash bump-release-id.sh
+
+      - name: Commit and push automation updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html kleurplaten/index.json sw.js
+          if git diff --cached --quiet; then
+            echo "No automation changes to commit"
+          else
+            git commit -m "chore: automate release and kleurplaten updates"
+            git push
+          fi
