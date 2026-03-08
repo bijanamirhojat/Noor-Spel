@@ -13,100 +13,591 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        .pizza { position: relative; width: 200px; height: 200px; background: #FFD700; border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.2); overflow: hidden; }
-        .topping { position: absolute; font-size: 1.8rem; transition: all 0.2s; }
-        .ingredients { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-        .ingredient { font-size: 2rem; padding: 8px; background: white; border-radius: 12px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
-        .ingredient:hover { transform: scale(1.1); }
-        .ingredient.used { opacity: 0.4; }
+        .game-container {
+            max-width: 980px;
+            height: calc(100vh - 30px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 14px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+            font-size: 1.5rem;
+        }
+
+        .back-btn {
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+        }
+
+        .hud {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background: #fff8ef;
+            border: 2px solid #ffd8a8;
+            color: #9c5f00;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .left-panel,
+        .right-panel {
+            background: #fff;
+            border: 2px solid #ffd3d3;
+            border-radius: 18px;
+            padding: 10px;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .order-box {
+            background: #fff7ed;
+            border: 2px dashed #ffb36b;
+            border-radius: 14px;
+            padding: 8px;
+        }
+
+        .order-title {
+            font-size: 0.8rem;
+            color: #8a4d00;
+            margin-bottom: 3px;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .order-name {
+            font-size: 1.02rem;
+            color: #b23a48;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .target-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .target-chip {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            border: 2px solid #ffcf9c;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .target-chip.done {
+            border-color: #2b9348;
+            background: #e9ffe8;
+            box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.2);
+        }
+
+        .pizza {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, #ffe08a 0%, #ffd166 68%, #e39b2a 100%);
+            border: 6px solid #c97e22;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .pizza::after {
+            content: '';
+            position: absolute;
+            inset: 15px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+        }
+
+        .topping {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.84);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .topping.correct {
+            box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.22);
+        }
+
+        .topping.wrong {
+            box-shadow: 0 0 0 3px rgba(224, 49, 49, 0.24);
+            background: #fff1f1;
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .control-btn {
+            flex: 1;
+            border: 2px solid #ffc078;
+            border-radius: 12px;
+            padding: 7px 8px;
+            font-size: 0.8rem;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            background: #fff4e6;
+            color: #8b4a00;
+        }
+
+        .control-btn.primary {
+            border-color: #74c69d;
+            background: #e9ffe8;
+            color: #1b7f46;
+        }
+
+        .control-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .ingredients-title {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #b23a48;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 7px;
+            min-height: 0;
+        }
+
+        .ingredient {
+            border: 3px solid #ffd9d9;
+            border-radius: 12px;
+            min-height: 52px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.18s ease;
+        }
+
+        .ingredient.selected {
+            border-color: #2b9348;
+            background: #e9ffe8;
+            transform: scale(1.03);
+            box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.2);
+        }
+
+        .ingredient.correct {
+            border-color: #2b9348;
+            background: #e9ffe8;
+        }
+
+        .ingredient.wrong {
+            border-color: #e03131;
+            background: #fff1f1;
+            box-shadow: 0 0 0 3px rgba(224, 49, 49, 0.2);
+        }
+
+        .task {
+            margin-bottom: 6px;
+            padding: 7px 10px;
+            font-size: 0.88rem;
+        }
+
+        .message {
+            margin-top: 6px;
+            margin-bottom: 0;
+            min-height: 20px;
+            padding: 7px 10px;
+            font-size: 0.88rem;
+        }
+
+        @media (min-width: 768px) {
+            .game-container {
+                max-height: 740px;
+                padding: 18px;
+            }
+
+            h1 {
+                font-size: 1.95rem;
+                margin-bottom: 8px;
+            }
+
+            .back-btn {
+                font-size: 0.95rem;
+                padding: 9px 16px;
+            }
+
+            .main-grid {
+                grid-template-columns: 330px 1fr;
+                gap: 12px;
+                align-items: stretch;
+            }
+
+            .left-panel,
+            .right-panel {
+                padding: 14px;
+                border-radius: 22px;
+            }
+
+            .pizza {
+                width: 240px;
+                height: 240px;
+            }
+
+            .topping {
+                width: 44px;
+                height: 44px;
+                font-size: 1.6rem;
+            }
+
+            .ingredients {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .ingredient {
+                min-height: 74px;
+                font-size: 2rem;
+                border-radius: 14px;
+            }
+
+            .target-chip {
+                width: 52px;
+                height: 52px;
+                font-size: 1.8rem;
+            }
+
+            .order-name,
+            .ingredients-title,
+            .task,
+            .message,
+            .control-btn {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="game-container">
         <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>🍕 Pizza Maken</h1>
-        <div class="task" id="task">Voeg 3 ingrediënten toe!</div>
-        <div class="pizza" id="pizza">🍕</div>
-        <div class="ingredients" id="ingredients"></div>
-        <div class="message" id="message">Kies ingrediënten voor op de pizza!</div>
+
+        <div class="hud">
+            <div class="pill" id="roundPill">Ronde 1/5</div>
+            <div class="pill" id="scorePill">Sterren: 0</div>
+        </div>
+
+        <div class="task" id="task">Kies 3 ingrediënten. Tik nog eens om te verwijderen.</div>
+
+        <div class="main-grid">
+            <section class="left-panel" aria-label="Pizza en bestelling">
+                <div class="order-box">
+                    <div class="order-title">Bestelling</div>
+                    <div class="order-name" id="orderName">Margherita</div>
+                    <div class="target-row" id="targetRow"></div>
+                </div>
+
+                <div class="pizza" id="pizza"></div>
+
+                <div class="controls">
+                    <button class="control-btn" id="resetBtn" type="button">Opnieuw</button>
+                    <button class="control-btn primary" id="bakeBtn" type="button" disabled>Bak pizza</button>
+                </div>
+            </section>
+
+            <section class="right-panel" aria-label="Ingrediënten kiezen">
+                <div class="ingredients-title" id="ingredientsTitle">Ingrediënten 0/3</div>
+                <div class="ingredients" id="ingredients"></div>
+            </section>
+        </div>
+
+        <div class="message" id="message">Kies de ingrediënten uit de bestelling.</div>
     </div>
     <script src="shared.js"></script>
     <script>
-        const ingredients = ['🧀', '🍅', '🍕', '🥓', '🍄', '🌶️', '🫑', '🥦', '🥚', '🐟'];
+        const ingredients = ['🧀', '🍅', '🍍', '🥓', '🍄', '🫑', '🥦', '🐟', '🫒', '🧅'];
         const recipes = [
-            { name: 'Margherita', ingredients: ['🧀', '🍅', '🍕'] },
+            { name: 'Margherita', ingredients: ['🧀', '🍅', '🫒'] },
             { name: 'Hawaii', ingredients: ['🧀', '🍍', '🥓'] },
-            { name: 'Vegetarisch', ingredients: ['🧀', '🍄', '🥦'] }
+            { name: 'Vegetarisch', ingredients: ['🧀', '🍄', '🥦'] },
+            { name: 'Tonijn', ingredients: ['🧀', '🍅', '🐟'] },
+            { name: 'Groentetuin', ingredients: ['🍄', '🫑', '🧅'] }
         ];
-        
-        let currentRecipe = 0;
-        let addedIngredients = [];
-        
+
+        const TOTAL_ROUNDS = 5;
+
+        let currentRecipeIndex = 0;
+        let roundNumber = 1;
+        let stars = 0;
+        let selectedIngredients = [];
+        let evaluation = null;
+        let sessionComplete = false;
+
         const pizza = document.getElementById('pizza');
         const ingredientsContainer = document.getElementById('ingredients');
         const message = document.getElementById('message');
         const task = document.getElementById('task');
-        
-        function loadLevel() {
-            addedIngredients = [];
-            pizza.innerHTML = '🍕';
-            pizza.style.background = '#FFD700';
-            
-            const recipe = recipes[currentRecipe];
-            task.textContent = `Maak een ${recipe.name}! (3 ingrediënten)`;
-            
-            ingredientsContainer.innerHTML = '';
-            ingredients.forEach(ing => {
-                const div = document.createElement('div');
-                div.className = 'ingredient';
-                div.textContent = ing;
-                div.onclick = () => addIngredient(ing, div);
-                ingredientsContainer.appendChild(div);
+        const orderName = document.getElementById('orderName');
+        const targetRow = document.getElementById('targetRow');
+        const roundPill = document.getElementById('roundPill');
+        const scorePill = document.getElementById('scorePill');
+        const ingredientsTitle = document.getElementById('ingredientsTitle');
+        const resetBtn = document.getElementById('resetBtn');
+        const bakeBtn = document.getElementById('bakeBtn');
+
+        function currentRecipe() {
+            return recipes[currentRecipeIndex];
+        }
+
+        function nextRecipe() {
+            currentRecipeIndex = (currentRecipeIndex + 1) % recipes.length;
+        }
+
+        function renderHud() {
+            roundPill.textContent = `Ronde ${roundNumber}/${TOTAL_ROUNDS}`;
+            scorePill.textContent = `Sterren: ${stars}`;
+            ingredientsTitle.textContent = `Ingrediënten ${selectedIngredients.length}/3`;
+            bakeBtn.disabled = sessionComplete || selectedIngredients.length !== 3;
+        }
+
+        function renderOrder() {
+            const recipe = currentRecipe();
+            orderName.textContent = recipe.name;
+            targetRow.innerHTML = '';
+
+            recipe.ingredients.forEach((ing) => {
+                const chip = document.createElement('div');
+                chip.className = 'target-chip';
+                chip.textContent = ing;
+                if (selectedIngredients.includes(ing)) {
+                    chip.classList.add('done');
+                }
+                targetRow.appendChild(chip);
             });
         }
-        
-        function addIngredient(ing, el) {
-            if (addedIngredients.includes(ing) || addedIngredients.length >= 3) return;
-            
-            addedIngredients.push(ing);
-            el.classList.add('used');
-            playPop();
-            
-            const topping = document.createElement('div');
-            topping.className = 'topping';
-            topping.textContent = ing;
-            const angle = (addedIngredients.length - 1) * (360 / 3);
-            const radius = 50;
-            topping.style.left = (100 + Math.cos(angle * Math.PI / 180) * radius - 15) + 'px';
-            topping.style.top = (100 + Math.sin(angle * Math.PI / 180) * radius - 15) + 'px';
-            pizza.appendChild(topping);
-            
-            if (addedIngredients.length === 3) {
-                checkPizza();
-            } else {
-                message.textContent = `${addedIngredients.length}/3 ingrediënten`;
-            }
+
+        function renderPizza() {
+            pizza.innerHTML = '';
+
+            const size = pizza.clientWidth || 180;
+            const center = size / 2;
+            const radius = size * 0.27;
+            const angles = [-90, 30, 150];
+
+            const positions = angles.map((angle) => {
+                const radians = angle * (Math.PI / 180);
+                return {
+                    x: center + Math.cos(radians) * radius,
+                    y: center + Math.sin(radians) * radius
+                };
+            });
+
+            selectedIngredients.forEach((ing, index) => {
+                const topping = document.createElement('div');
+                topping.className = 'topping';
+                topping.textContent = ing;
+
+                const pos = positions[index] || positions[positions.length - 1];
+                topping.style.left = `${pos.x}px`;
+                topping.style.top = `${pos.y}px`;
+                topping.style.transform = 'translate(-50%, -50%)';
+
+                if (evaluation) {
+                    if (evaluation.extra.includes(ing)) {
+                        topping.classList.add('wrong');
+                    } else if (currentRecipe().ingredients.includes(ing)) {
+                        topping.classList.add('correct');
+                    }
+                }
+
+                pizza.appendChild(topping);
+            });
         }
-        
-        function checkPizza() {
-            const recipe = recipes[currentRecipe];
-            const sorted = [...addedIngredients].sort().join('');
-            const expected = [...recipe.ingredients].sort().join('');
-            
-            if (sorted === expected) {
+
+        function renderIngredients() {
+            ingredientsContainer.innerHTML = '';
+
+            ingredients.forEach((ing) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'ingredient';
+                button.textContent = ing;
+
+                const isSelected = selectedIngredients.includes(ing);
+                if (isSelected) {
+                    button.classList.add('selected');
+                }
+
+                if (evaluation && isSelected) {
+                    if (evaluation.extra.includes(ing)) {
+                        button.classList.add('wrong');
+                    } else if (currentRecipe().ingredients.includes(ing)) {
+                        button.classList.add('correct');
+                    }
+                }
+
+                button.addEventListener('click', () => toggleIngredient(ing));
+                ingredientsContainer.appendChild(button);
+            });
+        }
+
+        function renderAll() {
+            renderHud();
+            renderOrder();
+            renderPizza();
+            renderIngredients();
+        }
+
+        function resetCurrentPizza(withMessage = true) {
+            selectedIngredients = [];
+            evaluation = null;
+            if (withMessage) {
+                message.textContent = 'Opnieuw! Kies de ingrediënten uit de bestelling.';
+            }
+            renderAll();
+        }
+
+        function loadRound() {
+            sessionComplete = false;
+            selectedIngredients = [];
+            evaluation = null;
+            task.textContent = `Maak een ${currentRecipe().name}. Kies precies 3 ingrediënten.`;
+            message.textContent = 'Kies de ingrediënten uit de bestelling.';
+            renderAll();
+        }
+
+        function toggleIngredient(ing) {
+            const selectedIndex = selectedIngredients.indexOf(ing);
+
+            if (selectedIndex >= 0) {
+                selectedIngredients.splice(selectedIndex, 1);
+                evaluation = null;
+                playPop();
+                message.textContent = 'Ingrediënt verwijderd.';
+                renderAll();
+                return;
+            }
+
+            if (selectedIngredients.length >= 3) {
+                playWrong();
+                message.textContent = 'Je pizza is vol. Haal eerst iets weg of bak de pizza.';
+                return;
+            }
+
+            selectedIngredients.push(ing);
+            evaluation = null;
+            playPop();
+
+            if (selectedIngredients.length === 3) {
+                message.textContent = 'Top! Druk op Bak pizza.';
+            } else {
+                message.textContent = `${selectedIngredients.length}/3 gekozen.`;
+            }
+
+            renderAll();
+        }
+
+        function bakePizza() {
+            if (selectedIngredients.length !== 3) {
+                playWrong();
+                message.textContent = 'Kies eerst precies 3 ingrediënten.';
+                return;
+            }
+
+            const recipe = currentRecipe();
+            const missing = recipe.ingredients.filter((ing) => !selectedIngredients.includes(ing));
+            const extra = selectedIngredients.filter((ing) => !recipe.ingredients.includes(ing));
+
+            evaluation = { missing, extra };
+            renderAll();
+
+            if (missing.length === 0 && extra.length === 0) {
                 playWin();
-                message.textContent = `Lekker! ${recipe.name} pizza! ⭐`;
+                stars += 1;
+                message.textContent = `Lekker! ${recipe.name} is gelukt! ⭐`;
+                renderHud();
+
                 setTimeout(() => {
-                    currentRecipe = (currentRecipe + 1) % recipes.length;
-                    loadLevel();
+                    if (roundNumber >= TOTAL_ROUNDS) {
+                        sessionComplete = true;
+                        task.textContent = 'Bestelronde klaar!';
+                        message.textContent = `Klaar! ${stars}/${TOTAL_ROUNDS} sterren. Tik Opnieuw voor een nieuw rondje.`;
+                        roundNumber = 1;
+                        stars = 0;
+                        selectedIngredients = [];
+                        evaluation = null;
+                        renderHud();
+                        renderPizza();
+                        renderIngredients();
+                        return;
+                    }
+
+                    roundNumber += 1;
+                    nextRecipe();
+                    loadRound();
                 }, 1500);
             } else {
                 playWrong();
-                message.textContent = 'Hmm, dat is geen ' + recipe.name + '...';
+
+                const missingText = missing.length ? `Mist: ${missing.join(' ')}` : 'Mist: niets';
+                const extraText = extra.length ? `Te veel: ${extra.join(' ')}` : 'Te veel: niets';
+                message.textContent = `Nog niet goed. ${missingText}. ${extraText}.`;
             }
         }
-        
-        loadLevel();
+
+        resetBtn.addEventListener('click', () => {
+            playPop();
+            if (sessionComplete) {
+                loadRound();
+                return;
+            }
+            resetCurrentPizza();
+        });
+
+        bakeBtn.addEventListener('click', bakePizza);
+
+        loadRound();
     </script>
 </body>
 </html>

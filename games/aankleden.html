@@ -113,6 +113,12 @@
             line-height: 1;
         }
 
+        .slot.wrong {
+            border-color: #e03131;
+            background: #fff0f0;
+            box-shadow: 0 0 0 2px rgba(224, 49, 49, 0.18);
+        }
+
         .category {
             margin-bottom: 5px;
             text-align: left;
@@ -161,6 +167,12 @@
             background: #e9ffe8;
             box-shadow: 0 0 0 4px rgba(43, 147, 72, 0.22);
             transform: scale(1.03);
+        }
+
+        .option-btn.wrong {
+            border-color: #e03131;
+            background: #fff1f1;
+            box-shadow: 0 0 0 3px rgba(224, 49, 49, 0.2);
         }
 
         .controls {
@@ -479,6 +491,12 @@
         ];
 
         const categoryKeys = ['hat', 'top', 'bottom', 'shoes'];
+        const categoryNames = {
+            hat: 'hoofddeksel',
+            top: 'bovenkleding',
+            bottom: 'onderkleding',
+            shoes: 'schoeisel'
+        };
 
         let currentLevel = 0;
         let selected = {
@@ -509,6 +527,8 @@
             document.getElementById('bottomDisplay').textContent = '❔';
             document.getElementById('shoesDisplay').textContent = '❔';
 
+            clearWrongIndicators();
+
             categoryKeys.forEach((category) => {
                 createOptions(category, level.options[category]);
             });
@@ -537,9 +557,35 @@
             });
 
             element.classList.add('selected');
+            element.classList.remove('wrong');
             document.getElementById(type + 'Display').textContent = item;
 
+            const slot = document.getElementById(type + 'Display').closest('.slot');
+            if (slot) slot.classList.remove('wrong');
+
+            document.querySelectorAll('#' + type + 'Options .option-btn').forEach((button) => {
+                button.classList.remove('wrong');
+            });
+
             checkComplete();
+        }
+
+        function clearWrongIndicators() {
+            document.querySelectorAll('.slot.wrong').forEach((slot) => {
+                slot.classList.remove('wrong');
+            });
+
+            document.querySelectorAll('.option-btn.wrong').forEach((button) => {
+                button.classList.remove('wrong');
+            });
+        }
+
+        function markCategoryWrong(category) {
+            const slot = document.getElementById(category + 'Display').closest('.slot');
+            if (slot) slot.classList.add('wrong');
+
+            const selectedButton = document.querySelector('#' + category + 'Options .option-btn.selected');
+            if (selectedButton) selectedButton.classList.add('wrong');
         }
 
         function checkComplete() {
@@ -553,6 +599,7 @@
             const isCorrect = categoryKeys.every((category) => selected[category] === level.correct[category]);
 
             if (isCorrect) {
+                clearWrongIndicators();
                 playWin();
                 message.textContent = 'Goed gedaan! Helemaal passend bij het weer! ⭐';
                 setTimeout(() => {
@@ -560,8 +607,17 @@
                     loadLevel();
                 }, 1400);
             } else {
+                clearWrongIndicators();
+                const wrongCategories = categoryKeys.filter((category) => selected[category] !== level.correct[category]);
+                wrongCategories.forEach(markCategoryWrong);
+
+                const readable = wrongCategories.map((category) => categoryNames[category]);
+                const wrongText = readable.length === 1
+                    ? readable[0]
+                    : `${readable.slice(0, -1).join(', ')} en ${readable[readable.length - 1]}`;
+
                 playWrong();
-                message.textContent = 'Bijna! Kijk nog eens goed naar het weer.';
+                message.textContent = `Nog niet goed: ${wrongText}.`;
             }
         }
 
@@ -570,6 +626,7 @@
             message.textContent = 'Opnieuw! Kies per rij 1 kledingstuk.';
 
             selected = { hat: null, top: null, bottom: null, shoes: null };
+            clearWrongIndicators();
 
             categoryKeys.forEach((category) => {
                 document.getElementById(category + 'Display').textContent = '❔';
