@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Mix in de Kom</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥣</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .game-container {
+            max-width: 980px;
+            height: calc(100vh - 30px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 14px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+            font-size: 1.5rem;
+        }
+
+        .back-btn {
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+        }
+
+        .hud {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background: #fff8ef;
+            border: 2px solid #ffd8a8;
+            color: #9c5f00;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .task {
+            margin-bottom: 6px;
+            padding: 7px 10px;
+            font-size: 0.88rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .left-panel,
+        .right-panel {
+            background: #fff;
+            border: 2px solid #ffd3d3;
+            border-radius: 18px;
+            padding: 10px;
+        }
+
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 0;
+        }
+
+        .order-box {
+            background: #fff7ed;
+            border: 2px dashed #ffb36b;
+            border-radius: 14px;
+            padding: 8px;
+        }
+
+        .order-title {
+            font-size: 0.8rem;
+            color: #8a4d00;
+            margin-bottom: 3px;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .order-name {
+            font-size: 1.02rem;
+            color: #b23a48;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .target-row {
+            display: flex;
+            gap: 6px;
+        }
+
+        .target-chip {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 2px solid #ffcf9c;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .target-chip.done {
+            border-color: #2b9348;
+            background: #e9ffe8;
+            box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.2);
+        }
+
+        .bowl-wrap {
+            position: relative;
+            width: 210px;
+            height: 210px;
+            margin: 0 auto;
+            touch-action: none;
+        }
+
+        .bowl {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 45%, #f8f8f8 0%, #e8e8e8 60%, #d6d6d6 100%);
+            border: 7px solid #b3b3b3;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .mix-liquid {
+            position: absolute;
+            inset: 26px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.6), transparent 45%), var(--liquid, #f6e6b0);
+            transform-origin: center;
+            transition: background 0.25s ease;
+        }
+
+        .swirl {
+            position: absolute;
+            inset: 34px;
+            border-radius: 50%;
+            border: 3px dashed rgba(255, 255, 255, 0.35);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .mix-result {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.86);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+
+        .mix-result.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.08);
+        }
+
+        .bubble {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            animation: bubbleUp 0.6s ease-out forwards;
+        }
+
+        @keyframes bubbleUp {
+            0% { opacity: 0.85; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(0.4) translateY(-14px); }
+        }
+
+        .mix-meter {
+            width: 100%;
+            height: 18px;
+            border-radius: 999px;
+            background: #f1f1f1;
+            overflow: hidden;
+            border: 2px solid #ffd8a8;
+        }
+
+        .mix-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #f6ad55 0%, #ed8936 100%);
+            transition: width 0.12s ease;
+        }
+
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            min-height: 0;
+        }
+
+        .ingredients-title {
+            font-size: 0.9rem;
+            margin-bottom: 6px;
+            color: #b23a48;
+            font-family: 'Fredoka One', cursive;
+        }
+
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 7px;
+            min-height: 0;
+        }
+
+        .ingredient {
+            border: 3px solid #ffd9d9;
+            border-radius: 12px;
+            min-height: 52px;
+            font-size: 1.45rem;
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.18s ease;
+        }
+
+        .ingredient.selected {
+            border-color: #2b9348;
+            background: #e9ffe8;
+            transform: scale(1.03);
+            box-shadow: 0 0 0 3px rgba(43, 147, 72, 0.2);
+        }
+
+        .ingredient.wrong {
+            border-color: #e03131;
+            background: #fff1f1;
+            box-shadow: 0 0 0 3px rgba(224, 49, 49, 0.2);
+        }
+
+        .right-controls {
+            margin-top: auto;
+            display: flex;
+            gap: 8px;
+            padding-top: 8px;
+        }
+
+        .control-btn {
+            flex: 1;
+            border: 2px solid #ffc078;
+            border-radius: 12px;
+            padding: 8px;
+            font-size: 0.82rem;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            background: #fff4e6;
+            color: #8b4a00;
+        }
+
+        .message {
+            margin-top: 6px;
+            margin-bottom: 0;
+            min-height: 20px;
+            padding: 7px 10px;
+            font-size: 0.88rem;
+        }
+
+        @media (min-width: 768px) {
+            .game-container {
+                max-height: 740px;
+                padding: 18px;
+            }
+
+            h1 {
+                font-size: 1.95rem;
+                margin-bottom: 8px;
+            }
+
+            .back-btn {
+                font-size: 0.95rem;
+                padding: 9px 16px;
+            }
+
+            .main-grid {
+                grid-template-columns: 360px 1fr;
+                gap: 12px;
+                align-items: stretch;
+            }
+
+            .left-panel,
+            .right-panel {
+                padding: 14px;
+                border-radius: 22px;
+            }
+
+            .bowl-wrap {
+                width: 270px;
+                height: 270px;
+            }
+
+            .target-chip {
+                width: 52px;
+                height: 52px;
+                font-size: 1.7rem;
+            }
+
+            .ingredients {
+                grid-template-columns: repeat(5, minmax(0, 1fr));
+                gap: 8px;
+            }
+
+            .ingredient {
+                min-height: 72px;
+                font-size: 1.95rem;
+                border-radius: 14px;
+            }
+
+            .order-name,
+            .ingredients-title,
+            .task,
+            .message,
+            .control-btn,
+            .pill {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
+        <h1>🥣 Mix in de Kom</h1>
+
+        <div class="hud">
+            <div class="pill" id="roundPill">Ronde 1/5</div>
+            <div class="pill" id="scorePill">Sterren: 0</div>
+        </div>
+
+        <div class="task" id="task">Kies 3 ingrediënten en roer met rondjes in de kom.</div>
+
+        <div class="main-grid">
+            <section class="left-panel" aria-label="Kom en bestelling">
+                <div class="order-box">
+                    <div class="order-title">Bestelling</div>
+                    <div class="order-name" id="orderName">Aardbei Smoothie</div>
+                    <div class="target-row" id="targetRow"></div>
+                </div>
+
+                <div class="bowl-wrap" id="bowlWrap">
+                    <div class="bowl">
+                        <div class="mix-liquid" id="mixLiquid"></div>
+                        <div class="swirl" id="swirl"></div>
+                        <div class="mix-result" id="mixResult"></div>
+                    </div>
+                </div>
+
+                <div class="mix-meter" aria-label="Roer voortgang">
+                    <div class="mix-fill" id="mixFill"></div>
+                </div>
+            </section>
+
+            <section class="right-panel" aria-label="Ingrediënten kiezen">
+                <div class="ingredients-title" id="ingredientsTitle">Ingrediënten 0/3</div>
+                <div class="ingredients" id="ingredients"></div>
+                <div class="right-controls">
+                    <button class="control-btn" id="resetBtn" type="button">Opnieuw</button>
+                </div>
+            </section>
+        </div>
+
+        <div class="message" id="message">Kies de ingrediënten uit de bestelling.</div>
+    </div>
+    <script src="shared.js"></script>
+    <script>
+        const ingredients = ['🥛', '🌾', '🥚', '🍓', '🍌', '🍫', '🍯', '🥬', '🥭', '🫐'];
+        const recipes = [
+            { name: 'Aardbei Smoothie', ingredients: ['🥛', '🍓', '🍌'], result: '🥤', liquid: '#ffb3c6' },
+            { name: 'Beslag', ingredients: ['🥛', '🌾', '🥚'], result: '🧁', liquid: '#f8e7b8' },
+            { name: 'Choco Mix', ingredients: ['🥛', '🍫', '🍯'], result: '🍫', liquid: '#b98a5f' },
+            { name: 'Groene Shake', ingredients: ['🥛', '🥬', '🥭'], result: '🍹', liquid: '#a7d97f' },
+            { name: 'Bessenmix', ingredients: ['🥛', '🫐', '🍓'], result: '🧋', liquid: '#b6a2ff' }
+        ];
+
+        const TOTAL_ROUNDS = 5;
+        const MIX_TARGET = 220;
+        const MIN_MIX_TIME_MS = 4500;
+
+        let currentRoundIndex = 0;
+        let stars = 0;
+        let selectedIngredients = [];
+        let evaluation = null;
+        let mixProgress = 0;
+        let mixElapsedMs = 0;
+        let isMixing = false;
+        let lastAngle = null;
+        let lastPoint = null;
+        let lastMoveTime = 0;
+
+        const ingredientsContainer = document.getElementById('ingredients');
+        const message = document.getElementById('message');
+        const task = document.getElementById('task');
+        const orderName = document.getElementById('orderName');
+        const targetRow = document.getElementById('targetRow');
+        const roundPill = document.getElementById('roundPill');
+        const scorePill = document.getElementById('scorePill');
+        const ingredientsTitle = document.getElementById('ingredientsTitle');
+        const resetBtn = document.getElementById('resetBtn');
+        const bowlWrap = document.getElementById('bowlWrap');
+        const mixFill = document.getElementById('mixFill');
+        const mixLiquid = document.getElementById('mixLiquid');
+        const swirl = document.getElementById('swirl');
+        const mixResult = document.getElementById('mixResult');
+
+        function currentRecipe() {
+            return recipes[currentRoundIndex % recipes.length];
+        }
+
+        function renderHud() {
+            roundPill.textContent = `Ronde ${currentRoundIndex + 1}/${TOTAL_ROUNDS}`;
+            scorePill.textContent = `Sterren: ${stars}`;
+            ingredientsTitle.textContent = `Ingrediënten ${selectedIngredients.length}/3`;
+        }
+
+        function renderOrder() {
+            const recipe = currentRecipe();
+            orderName.textContent = recipe.name;
+            targetRow.innerHTML = '';
+
+            recipe.ingredients.forEach((ing) => {
+                const chip = document.createElement('div');
+                chip.className = 'target-chip';
+                chip.textContent = ing;
+                if (selectedIngredients.includes(ing)) {
+                    chip.classList.add('done');
+                }
+                targetRow.appendChild(chip);
+            });
+        }
+
+        function renderIngredients() {
+            ingredientsContainer.innerHTML = '';
+
+            ingredients.forEach((ing) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'ingredient';
+                button.textContent = ing;
+
+                if (selectedIngredients.includes(ing)) {
+                    button.classList.add('selected');
+                }
+
+                if (evaluation && selectedIngredients.includes(ing) && evaluation.extra.includes(ing)) {
+                    button.classList.add('wrong');
+                }
+
+                button.addEventListener('click', () => toggleIngredient(ing));
+                ingredientsContainer.appendChild(button);
+            });
+        }
+
+        function updateMixVisuals() {
+            const percent = Math.min(100, Math.round((mixProgress / MIX_TARGET) * 100));
+            mixFill.style.width = `${percent}%`;
+            const wobble = Math.min(8, percent / 10);
+            swirl.style.transform = `rotate(${mixProgress * 1.6}deg) scale(${1 + wobble / 100})`;
+            mixLiquid.style.transform = `rotate(${mixProgress * 1.2}deg)`;
+        }
+
+        function renderAll() {
+            renderHud();
+            renderOrder();
+            renderIngredients();
+            updateMixVisuals();
+        }
+
+        function setReadyToMixState() {
+            if (selectedIngredients.length < 3) {
+                message.textContent = `${selectedIngredients.length}/3 gekozen.`;
+                return;
+            }
+
+            message.textContent = 'Roer met rondjes in de kom!';
+            const recipe = currentRecipe();
+            mixLiquid.style.setProperty('--liquid', recipe.liquid);
+        }
+
+        function resetRoundState(withMessage = true) {
+            selectedIngredients = [];
+            evaluation = null;
+            mixProgress = 0;
+            mixElapsedMs = 0;
+            isMixing = false;
+            lastAngle = null;
+            lastPoint = null;
+            lastMoveTime = 0;
+            mixResult.classList.remove('show');
+            mixResult.textContent = '';
+            mixLiquid.style.setProperty('--liquid', '#f6e6b0');
+            if (withMessage) {
+                message.textContent = 'Kies de ingrediënten uit de bestelling.';
+            }
+            renderAll();
+        }
+
+        function loadRound() {
+            task.textContent = `Maak een ${currentRecipe().name}. Kies 3 ingrediënten en roer.`;
+            resetRoundState();
+        }
+
+        function toggleIngredient(ing) {
+            const idx = selectedIngredients.indexOf(ing);
+
+            if (idx >= 0) {
+                selectedIngredients.splice(idx, 1);
+                playPop();
+                evaluation = null;
+                if (selectedIngredients.length < 3) {
+                    mixProgress = 0;
+                    mixElapsedMs = 0;
+                    mixFill.style.width = '0%';
+                }
+                renderAll();
+                setReadyToMixState();
+                return;
+            }
+
+            if (selectedIngredients.length >= 3) {
+                playWrong();
+                message.textContent = 'Je hebt al 3 ingrediënten. Haal er eerst 1 weg.';
+                return;
+            }
+
+            selectedIngredients.push(ing);
+            evaluation = null;
+            playPop();
+            renderAll();
+            setReadyToMixState();
+        }
+
+        function evaluateMix() {
+            const recipe = currentRecipe();
+            const missing = recipe.ingredients.filter((ing) => !selectedIngredients.includes(ing));
+            const extra = selectedIngredients.filter((ing) => !recipe.ingredients.includes(ing));
+            evaluation = { missing, extra };
+
+            if (!missing.length && !extra.length) {
+                playWin();
+                stars += 1;
+                mixResult.textContent = recipe.result;
+                mixResult.classList.add('show');
+                message.textContent = `Yes! ${recipe.name} gelukt! ⭐`;
+                renderHud();
+
+                setTimeout(() => {
+                    if (currentRoundIndex >= TOTAL_ROUNDS - 1) {
+                        task.textContent = 'Bestelronde klaar!';
+                        message.textContent = `Klaar! ${stars}/${TOTAL_ROUNDS} sterren. Tik Opnieuw voor een nieuw rondje.`;
+                        currentRoundIndex = 0;
+                        stars = 0;
+                        resetRoundState(false);
+                        renderHud();
+                        return;
+                    }
+
+                    currentRoundIndex += 1;
+                    loadRound();
+                }, 1500);
+            } else {
+                playWrong();
+                renderIngredients();
+                const missingText = missing.length ? `Mist: ${missing.join(' ')}` : 'Mist: niets';
+                const extraText = extra.length ? `Te veel: ${extra.join(' ')}` : 'Te veel: niets';
+                message.textContent = `Nog niet goed. ${missingText}. ${extraText}.`;
+                mixProgress = 0;
+                updateMixVisuals();
+            }
+        }
+
+        function pointInsideBowl(clientX, clientY) {
+            const rect = bowlWrap.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            const dx = clientX - cx;
+            const dy = clientY - cy;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            return {
+                inside: distance <= rect.width * 0.47,
+                angle: Math.atan2(dy, dx),
+                radius: distance,
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function spawnBubble(x, y) {
+            const bubble = document.createElement('span');
+            bubble.className = 'bubble';
+            bubble.style.left = `${x}px`;
+            bubble.style.top = `${y}px`;
+            bowlWrap.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 620);
+        }
+
+        function onMixMove(clientX, clientY) {
+            if (selectedIngredients.length !== 3) {
+                return;
+            }
+
+            if (mixProgress >= MIX_TARGET && mixElapsedMs >= MIN_MIX_TIME_MS) {
+                evaluateMix();
+                return;
+            }
+
+            const p = pointInsideBowl(clientX, clientY);
+            if (!p.inside) {
+                return;
+            }
+
+            if (lastAngle === null) {
+                lastAngle = p.angle;
+                lastPoint = p;
+                return;
+            }
+
+            let delta = p.angle - lastAngle;
+            if (delta > Math.PI) delta -= Math.PI * 2;
+            if (delta < -Math.PI) delta += Math.PI * 2;
+
+            const dx = p.x - lastPoint.x;
+            const dy = p.y - lastPoint.y;
+            const movement = Math.sqrt(dx * dx + dy * dy);
+            const ringFactor = Math.max(0, Math.min(1, (p.radius - 24) / 72));
+            const now = performance.now();
+            if (lastMoveTime > 0) {
+                mixElapsedMs += Math.max(0, Math.min(40, now - lastMoveTime));
+            }
+            lastMoveTime = now;
+
+            const gain = Math.abs(delta) * 9 * ringFactor + movement * 0.02;
+
+            mixProgress = Math.min(MIX_TARGET, mixProgress + gain);
+            updateMixVisuals();
+
+            if (movement > 2) {
+                spawnBubble(p.x, p.y);
+            }
+
+            if (Math.random() < 0.08) {
+                playPop();
+            }
+
+            lastAngle = p.angle;
+            lastPoint = p;
+
+            if (mixProgress >= MIX_TARGET) {
+                if (mixElapsedMs < MIN_MIX_TIME_MS) {
+                    message.textContent = 'Goed bezig! Nog even roeren...';
+                    return;
+                }
+                evaluateMix();
+            }
+        }
+
+        bowlWrap.addEventListener('pointerdown', (event) => {
+            if (selectedIngredients.length !== 3) {
+                playWrong();
+                message.textContent = 'Eerst 3 ingrediënten kiezen!';
+                return;
+            }
+
+            isMixing = true;
+            lastAngle = null;
+            lastPoint = null;
+            lastMoveTime = 0;
+            bowlWrap.setPointerCapture(event.pointerId);
+            onMixMove(event.clientX, event.clientY);
+        });
+
+        bowlWrap.addEventListener('pointermove', (event) => {
+            if (!isMixing) {
+                return;
+            }
+            onMixMove(event.clientX, event.clientY);
+        });
+
+        function stopMixing() {
+            isMixing = false;
+            lastAngle = null;
+            lastPoint = null;
+        }
+
+        bowlWrap.addEventListener('pointerup', stopMixing);
+        bowlWrap.addEventListener('pointercancel', stopMixing);
+        bowlWrap.addEventListener('pointerleave', stopMixing);
+
+        resetBtn.addEventListener('click', () => {
+            playPop();
+            loadRound();
+        });
+
+        loadRound();
+    </script>
+</body>
+</html>
