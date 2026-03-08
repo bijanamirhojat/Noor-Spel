@@ -1214,7 +1214,7 @@
             <span class="parent-tools">
                 <button class="cache-btn" onclick="clearCache()">🗑️ Cache wissen</button>
                 <button class="cache-btn" onclick="changePin()">🔐 PIN wijzigen</button>
-                <br><span style="display:inline-block; margin-top: 10px; font-size: 0.6rem; color: #ccc;">v6.0</span>
+                <br><span id="releaseBadge" style="display:inline-block; margin-top: 10px; font-size: 0.6rem; color: #ccc;">v6.0</span>
             </span>
             <span class="normal-footer">
                 Meer spelletjes binnenkort!
@@ -1228,6 +1228,8 @@
     </div>
 
     <script>
+        const RELEASE_ID = '2026-03-08.2';
+
         /* ── Audio helpers (index.html doesn't load shared.js) ── */
         let _audioCtx = null;
         function getAudioContext() {
@@ -1324,6 +1326,11 @@
             kleurenmixen:    { url: 'games/kleurenmixen.html',    emoji: '🎨' }
         };
 
+        function withVersion(url) {
+            const separator = url.includes('?') ? '&' : '?';
+            return `${url}${separator}v=${encodeURIComponent(RELEASE_ID)}`;
+        }
+
         /* ── Play game with circular wipe transition + pop sound ── */
         function playGame(gameName) {
             const game = GAMES[gameName];
@@ -1336,7 +1343,7 @@
             emojiEl.textContent = game.emoji;
             overlay.classList.add('active');
 
-            setTimeout(() => { window.location.href = game.url; }, 700);
+            setTimeout(() => { window.location.href = withVersion(game.url); }, 700);
         }
 
         /* ── PIN management ── */
@@ -1515,6 +1522,9 @@
 
         /* ── Startup: splash (first session) or straight to cards ── */
         document.addEventListener('DOMContentLoaded', () => {
+            const badge = document.getElementById('releaseBadge');
+            if (badge) badge.textContent = `v${RELEASE_ID}`;
+
             applyRandomCardColors();
 
             const splashSeen = sessionStorage.getItem('splashSeen');
@@ -1604,7 +1614,7 @@
                 window.location.reload();
             });
 
-            navigator.serviceWorker.register('sw.js')
+            navigator.serviceWorker.register(`sw.js?release=${encodeURIComponent(RELEASE_ID)}`, { updateViaCache: 'none' })
                 .then(reg => {
                     console.log('Service Worker registered');
 
@@ -1622,6 +1632,10 @@
                             }
                         });
                     });
+
+                    setInterval(() => {
+                        reg.update().catch(() => {});
+                    }, 60 * 1000);
                 })
                 .catch(err => console.log('Service Worker registration failed:', err));
         }

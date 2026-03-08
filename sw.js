@@ -1,4 +1,6 @@
-const CACHE_NAME = 'noors-games-v10';
+const params = new URL(self.location.href).searchParams;
+const RELEASE_ID = params.get('release') || 'dev';
+const CACHE_NAME = `noors-games-${RELEASE_ID}`;
 
 // Relative URLs keep this working on both localhost and GitHub Pages subpaths.
 const PRECACHE_URLS = [
@@ -40,7 +42,6 @@ self.addEventListener('install', (event) => {
                 cache.add(url).catch(() => null)
             )
         );
-        await self.skipWaiting();
     })());
 });
 
