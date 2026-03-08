@@ -13,29 +13,335 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared.css">
     <style>
-        .weather { font-size: 3rem; margin-bottom: 10px; }
-        .character { position: relative; width: 150px; height: 220px; margin: 0 auto 15px; }
-        .char-base { position: absolute; font-size: 6rem; left: 50%; transform: translateX(-50%); bottom: 0; }
-        .char-clothes { position: absolute; font-size: 3rem; left: 50%; transform: translateX(-50%); }
-        .clothes-options { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .clothing-item { font-size: 2rem; padding: 10px; background: white; border-radius: 15px; cursor: pointer; transition: all 0.2s; box-shadow: 0 3px 10px rgba(0,0,0,0.1); }
-        .clothing-item:hover { transform: scale(1.1); }
-        .clothing-item.selected { background: #90EE90; }
+        .game-container {
+            max-width: 980px;
+            padding: 14px;
+            height: calc(100vh - 30px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .weather-panel {
+            background: linear-gradient(140deg, #fff2cc, #ffe8a3);
+            border: 3px solid #ffd166;
+            border-radius: 24px;
+            padding: 10px 12px;
+            margin: 4px 0 8px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            font-size: 1.45rem;
+            margin-bottom: 6px;
+        }
+
+        .back-btn {
+            padding: 6px 10px;
+            font-size: 0.78rem;
+            border-radius: 12px;
+        }
+
+        .weather-emoji {
+            font-size: 2.2rem;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        .weather-text {
+            font-size: 1rem;
+            color: #8a5a00;
+            font-weight: 700;
+        }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 6px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .doll-panel,
+        .choices-panel {
+            background: #fff;
+            border: 2px solid #ffd3d3;
+            border-radius: 18px;
+            padding: 10px;
+            height: 100%;
+        }
+
+        .doll-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .character {
+            display: none;
+            font-size: 3.5rem;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .outfit-slots {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 6px;
+        }
+
+        .slot {
+            background: #fff6f6;
+            border: 2px dashed #ff9f9f;
+            border-radius: 12px;
+            padding: 6px;
+            min-height: 46px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .slot-label {
+            font-size: 0.62rem;
+            color: #9b6666;
+            font-weight: 700;
+        }
+
+        .slot-value {
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .category {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .category:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-title {
+            font-size: 0.8rem;
+            color: #b23a48;
+            margin-bottom: 4px;
+            font-family: 'Fredoka One', cursive;
+            letter-spacing: 0.2px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 5px;
+        }
+
+        .option-btn {
+            min-height: 44px;
+            border: 3px solid #ffd9d9;
+            border-radius: 12px;
+            background: #fff;
+            font-size: 1.35rem;
+            cursor: pointer;
+            transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.09);
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            border-color: #ff9a9a;
+        }
+
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+
+        .option-btn.selected {
+            border-color: #2b9348;
+            background: #e9ffe8;
+            box-shadow: 0 0 0 4px rgba(43, 147, 72, 0.22);
+            transform: scale(1.03);
+        }
+
+        .controls {
+            margin-top: auto;
+            padding-top: 6px;
+        }
+
+        .reset-btn {
+            border: 2px solid #f4a261;
+            background: #fff4e6;
+            color: #8b4a00;
+            border-radius: 12px;
+            padding: 6px 8px;
+            font-size: 0.72rem;
+            font-family: 'Fredoka One', cursive;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .task {
+            margin-bottom: 6px;
+            padding: 6px 9px;
+            font-size: 0.82rem;
+        }
+
+        .message {
+            margin-top: 6px;
+            margin-bottom: 0;
+            padding: 6px 9px;
+            min-height: 18px;
+            font-size: 0.82rem;
+        }
+
+        .reset-btn:hover {
+            background: #ffe5c2;
+        }
+
         @media (min-width: 768px) {
-            .weather { font-size: 2rem; margin-bottom: 3px; }
-            .task { margin-bottom: 8px; padding: 6px 10px; font-size: 0.9rem; }
-            .game-layout {
-                display: flex;
-                gap: 20px;
-                align-items: flex-start;
-                justify-content: center;
+            .game-container {
+                height: calc(100vh - 30px);
+                max-height: 620px;
+                overflow: hidden;
             }
-            .character { height: 160px; width: 130px; flex-shrink: 0; margin-bottom: 0; }
-            .char-base { font-size: 5rem; }
-            .options-panel { flex: 1; max-width: 400px; }
-            .options-panel > div { margin-bottom: 4px; }
-            .clothing-item { font-size: 1.8rem; padding: 8px; }
-            .message { margin-top: 8px; }
+
+            .weather-panel {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+            }
+
+            h1 {
+                font-size: 1.9rem;
+            }
+
+            .back-btn {
+                padding: 9px 16px;
+                font-size: 0.95rem;
+            }
+
+            .weather-emoji {
+                margin-bottom: 0;
+                font-size: 3.2rem;
+            }
+
+            .game-grid {
+                grid-template-columns: 330px 1fr;
+                align-items: stretch;
+                gap: 12px;
+            }
+
+            .character {
+                display: block;
+                font-size: 5rem;
+            }
+
+            .outfit-slots {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+
+            .slot {
+                min-height: 84px;
+            }
+
+            .slot-value {
+                font-size: 2rem;
+            }
+
+            .option-btn {
+                min-height: 78px;
+                font-size: 2rem;
+            }
+
+            .task {
+                margin-bottom: 8px;
+                font-size: 1rem;
+            }
+
+            .category {
+                margin-bottom: 10px;
+            }
+
+            .category-title {
+                font-size: 0.95rem;
+                margin-bottom: 7px;
+            }
+        }
+
+        @media (min-width: 1024px) and (orientation: landscape) {
+            .game-container {
+                max-width: 1180px;
+                max-height: 730px;
+                padding: 18px;
+            }
+
+            .game-grid {
+                grid-template-columns: 360px 1fr;
+                gap: 14px;
+                align-items: stretch;
+            }
+
+            .doll-panel,
+            .choices-panel {
+                border-radius: 22px;
+                padding: 14px;
+            }
+
+            .character {
+                font-size: 5.6rem;
+            }
+
+            .outfit-slots {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .slot {
+                min-height: 92px;
+            }
+
+            .slot-label {
+                font-size: 0.8rem;
+            }
+
+            .slot-value {
+                font-size: 2.1rem;
+            }
+
+            .choices-panel {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 12px;
+                row-gap: 10px;
+                align-content: start;
+                grid-auto-rows: min-content;
+            }
+
+            .category {
+                margin-bottom: 0;
+            }
+
+            .category-title {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+
+            .options {
+                gap: 8px;
+            }
+
+            .option-btn {
+                min-height: 86px;
+                font-size: 2.1rem;
+                border-radius: 14px;
+            }
+
+            .task,
+            .message {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -43,116 +349,236 @@
     <div class="game-container">
         <a href="../index.html" class="back-btn">🏠 Terug</a>
         <h1>👕 Aankleden</h1>
-        <div class="weather" id="weather">☀️</div>
-        <div class="task" id="task">Kleed het poppetje aan voor zonnig weer!</div>
-        <div class="game-layout">
-        <div class="character">
-            <div class="char-clothes" id="hatDisplay"></div>
-            <div class="char-clothes" id="shirtDisplay"></div>
-            <div class="char-clothes" id="pantsDisplay"></div>
-            <div class="char-base">🧑</div>
+
+        <div class="weather-panel">
+            <div class="weather-emoji" id="weather">☀️</div>
+            <div class="weather-text" id="weatherLabel">Zonnig</div>
         </div>
-        <div class="options-panel">
-        <div>
-            <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Hoofd:</div>
-            <div class="clothes-options" id="hatOptions"></div>
+
+        <div class="task" id="task">Het is zonnig. Kies luchtige kleding.</div>
+
+        <div class="game-grid">
+            <section class="doll-panel" aria-label="Gekozen outfit">
+                <div class="character">🧑</div>
+                <div class="outfit-slots">
+                    <div class="slot">
+                        <div class="slot-label">Hoofddeksel</div>
+                        <div class="slot-value" id="hatDisplay">❔</div>
+                    </div>
+                    <div class="slot">
+                        <div class="slot-label">Bovenkleding</div>
+                        <div class="slot-value" id="topDisplay">❔</div>
+                    </div>
+                    <div class="slot">
+                        <div class="slot-label">Onderkleding</div>
+                        <div class="slot-value" id="bottomDisplay">❔</div>
+                    </div>
+                    <div class="slot">
+                        <div class="slot-label">Schoeisel</div>
+                        <div class="slot-value" id="shoesDisplay">❔</div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="reset-btn" id="resetBtn" type="button">Opnieuw kiezen</button>
+                </div>
+            </section>
+
+            <section class="choices-panel" aria-label="Kledingkeuzes">
+                <div class="category">
+                    <div class="category-title">1) Hoofddeksel</div>
+                    <div class="options" id="hatOptions"></div>
+                </div>
+                <div class="category">
+                    <div class="category-title">2) Bovenkleding</div>
+                    <div class="options" id="topOptions"></div>
+                </div>
+                <div class="category">
+                    <div class="category-title">3) Onderkleding</div>
+                    <div class="options" id="bottomOptions"></div>
+                </div>
+                <div class="category">
+                    <div class="category-title">4) Schoeisel</div>
+                    <div class="options" id="shoesOptions"></div>
+                </div>
+            </section>
         </div>
-        <div>
-            <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Shirt:</div>
-            <div class="clothes-options" id="shirtOptions"></div>
-        </div>
-        <div>
-            <div style="margin-bottom: 8px; font-size: 0.9rem; color: #888;">Broek:</div>
-            <div class="clothes-options" id="pantsOptions"></div>
-        </div>
-        </div>
-        </div>
-        <div class="message" id="message">Kies de juiste kleding!</div>
+
+        <div class="message" id="message">Kies per rij 1 kledingstuk.</div>
     </div>
     <script src="shared.js"></script>
     <script>
-        const weatherData = [
-            { weather: '☀️', task: 'Kleed voor zonnig weer!', hat: ['🧢', '👒'], shirt: ['👕', '🎽'], pants: ['🩳', '👖'] },
-            { weather: '🌧️', task: 'Kleed voor regen!', hat: ['🧢', '🎩'], shirt: ['🧥', '👕'], pants: ['👖', '👖'] },
-            { weather: '❄️', task: 'Kleed voor koud weer!', hat: ['🧣', '🎿'], shirt: ['🧥', '🧥'], pants: ['👖', '👖'] },
-            { weather: '🌙', task: 'Kleed voor bed!', hat: ['😴', '👳'], shirt: ['👕', '👚'], pants: ['🩳', '🩳'] }
+        const rounds = [
+            {
+                weather: '☀️',
+                weatherLabel: 'Zonnig',
+                task: 'Het is zonnig. Kies luchtige kleding.',
+                options: {
+                    hat: ['👒', '🧢', '🎩'],
+                    top: ['👕', '🧥', '🦺'],
+                    bottom: ['🩳', '👖', '🩲'],
+                    shoes: ['👟', '🥾', '🩴']
+                },
+                correct: {
+                    hat: '👒',
+                    top: '👕',
+                    bottom: '🩳',
+                    shoes: '🩴'
+                }
+            },
+            {
+                weather: '🌧️',
+                weatherLabel: 'Regenachtig',
+                task: 'Het regent. Kies iets dat droog en stevig is.',
+                options: {
+                    hat: ['🧢', '👒', '🎩'],
+                    top: ['🧥', '👕', '🎽'],
+                    bottom: ['👖', '🩳', '🩲'],
+                    shoes: ['🥾', '👟', '🩴']
+                },
+                correct: {
+                    hat: '🧢',
+                    top: '🧥',
+                    bottom: '👖',
+                    shoes: '🥾'
+                }
+            },
+            {
+                weather: '❄️',
+                weatherLabel: 'Koud',
+                task: 'Brrr, het is koud. Kies warme kleding.',
+                options: {
+                    hat: ['🧣', '👒', '🎩'],
+                    top: ['🧥', '👕', '🎽'],
+                    bottom: ['👖', '🩳', '🩲'],
+                    shoes: ['🥾', '🩴', '👟']
+                },
+                correct: {
+                    hat: '🧣',
+                    top: '🧥',
+                    bottom: '👖',
+                    shoes: '🥾'
+                }
+            },
+            {
+                weather: '🌬️',
+                weatherLabel: 'Winderig',
+                task: 'Het waait hard. Kies kleding die goed blijft zitten.',
+                options: {
+                    hat: ['🧢', '👒', '🎓'],
+                    top: ['🧥', '👚', '🎽'],
+                    bottom: ['👖', '🩳', '🩲'],
+                    shoes: ['👟', '🩴', '🥿']
+                },
+                correct: {
+                    hat: '🧢',
+                    top: '🧥',
+                    bottom: '👖',
+                    shoes: '👟'
+                }
+            }
         ];
-        
-        const allClothes = {
-            hat: ['🧢', '👒', '🎩', '🧣', '👳', '😴', '🎿'],
-            shirt: ['👕', '🎽', '🧥', '👚', '👔'],
-            pants: ['🩳', '👖', '🩳']
-        };
-        
+
+        const categoryKeys = ['hat', 'top', 'bottom', 'shoes'];
+
         let currentLevel = 0;
-        let selected = { hat: null, shirt: null, pants: null };
-        
+        let selected = {
+            hat: null,
+            top: null,
+            bottom: null,
+            shoes: null
+        };
+
         const weatherDisplay = document.getElementById('weather');
+        const weatherLabelDisplay = document.getElementById('weatherLabel');
         const taskDisplay = document.getElementById('task');
         const message = document.getElementById('message');
-        
+        const resetBtn = document.getElementById('resetBtn');
+
         function loadLevel() {
-            const level = weatherData[currentLevel];
+            const level = rounds[currentLevel];
+
             weatherDisplay.textContent = level.weather;
+            weatherLabelDisplay.textContent = level.weatherLabel;
             taskDisplay.textContent = level.task;
-            
-            selected = { hat: null, shirt: null, pants: null };
-            document.getElementById('hatDisplay').textContent = '';
-            document.getElementById('shirtDisplay').textContent = '';
-            document.getElementById('pantsDisplay').textContent = '';
-            
-            createOptions('hat', allClothes.hat);
-            createOptions('shirt', allClothes.shirt);
-            createOptions('pants', allClothes.pants);
+            message.textContent = 'Kies per rij 1 kledingstuk.';
+
+            selected = { hat: null, top: null, bottom: null, shoes: null };
+
+            document.getElementById('hatDisplay').textContent = '❔';
+            document.getElementById('topDisplay').textContent = '❔';
+            document.getElementById('bottomDisplay').textContent = '❔';
+            document.getElementById('shoesDisplay').textContent = '❔';
+
+            categoryKeys.forEach((category) => {
+                createOptions(category, level.options[category]);
+            });
         }
-        
+
         function createOptions(type, items) {
             const container = document.getElementById(type + 'Options');
             container.innerHTML = '';
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'clothing-item';
-                div.textContent = item;
-                div.onclick = () => selectClothing(type, item, div);
-                container.appendChild(div);
+
+            items.forEach((item) => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'option-btn';
+                button.textContent = item;
+                button.addEventListener('click', () => selectClothing(type, item, button));
+                container.appendChild(button);
             });
         }
-        
-        function selectClothing(type, item, el) {
+
+        function selectClothing(type, item, element) {
             selected[type] = item;
             playPop();
-            
-            document.querySelectorAll('#' + type + 'Options .clothing-item').forEach(i => i.classList.remove('selected'));
-            el.classList.add('selected');
-            
-            const display = document.getElementById(type + 'Display');
-            display.textContent = item;
-            display.style.bottom = type === 'hat' ? '140px' : type === 'shirt' ? '80px' : '10px';
-            
+
+            document.querySelectorAll('#' + type + 'Options .option-btn').forEach((button) => {
+                button.classList.remove('selected');
+            });
+
+            element.classList.add('selected');
+            document.getElementById(type + 'Display').textContent = item;
+
             checkComplete();
         }
-        
+
         function checkComplete() {
-            const level = weatherData[currentLevel];
-            const correct = level.hat.includes(selected.hat) && 
-                           level.shirt.includes(selected.shirt) && 
-                           level.pants.includes(selected.pants);
-            
-            if (selected.hat && selected.shirt && selected.pants) {
-                if (correct) {
-                    playWin();
-                    message.textContent = 'Perfect! Goed gedaan! ⭐';
-                    setTimeout(() => {
-                        currentLevel = (currentLevel + 1) % weatherData.length;
-                        loadLevel();
-                    }, 1500);
-                } else {
-                    playWrong();
-                    message.textContent = 'Hmm, past dit bij het weer?';
-                }
+            const level = rounds[currentLevel];
+            const allChosen = categoryKeys.every((category) => Boolean(selected[category]));
+
+            if (!allChosen) {
+                return;
+            }
+
+            const isCorrect = categoryKeys.every((category) => selected[category] === level.correct[category]);
+
+            if (isCorrect) {
+                playWin();
+                message.textContent = 'Goed gedaan! Helemaal passend bij het weer! ⭐';
+                setTimeout(() => {
+                    currentLevel = (currentLevel + 1) % rounds.length;
+                    loadLevel();
+                }, 1400);
+            } else {
+                playWrong();
+                message.textContent = 'Bijna! Kijk nog eens goed naar het weer.';
             }
         }
-        
+
+        resetBtn.addEventListener('click', () => {
+            playPop();
+            message.textContent = 'Opnieuw! Kies per rij 1 kledingstuk.';
+
+            selected = { hat: null, top: null, bottom: null, shoes: null };
+
+            categoryKeys.forEach((category) => {
+                document.getElementById(category + 'Display').textContent = '❔';
+                document.querySelectorAll('#' + category + 'Options .option-btn').forEach((button) => {
+                    button.classList.remove('selected');
+                });
+            });
+        });
+
         loadLevel();
     </script>
 </body>
