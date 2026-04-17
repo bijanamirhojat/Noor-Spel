@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#ff6b6b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Draakjes Naar Huis</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐉</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        .game-container {
+            max-width: 980px;
+            height: calc(100vh - 30px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 14px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+            font-size: 1.5rem;
+        }
+
+        .back-btn {
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+        }
+
+        .hud {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background: #fff8ef;
+            border: 2px solid #ffd8a8;
+            color: #9c5f00;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .task {
+            margin-bottom: 6px;
+            padding: 7px 10px;
+            font-size: 0.88rem;
+        }
+
+        .playfield {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            border-radius: 26px;
+            border: 3px solid #b9a6ff;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 22%),
+                radial-gradient(circle at 85% 18%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 16%),
+                linear-gradient(180deg, #1e1b4b 0%, #2d1b69 45%, #4c1d95 75%, #1f2937 100%);
+            box-shadow: inset 0 -50px 80px rgba(0, 0, 0, 0.2);
+        }
+
+        .stars,
+        .path-dots,
+        .scene-layer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.75rem;
+            animation: twinkle 2.4s ease-in-out infinite;
+        }
+
+        .hill {
+            position: absolute;
+            bottom: -30px;
+            border-radius: 50%;
+            background: linear-gradient(180deg, #1d7a4a, #155e38);
+            opacity: 0.95;
+        }
+
+        .hill.one {
+            left: -8%;
+            width: 48%;
+            height: 25%;
+        }
+
+        .hill.two {
+            left: 24%;
+            width: 40%;
+            height: 20%;
+            background: linear-gradient(180deg, #26734d, #174d37);
+        }
+
+        .hill.three {
+            right: -6%;
+            width: 46%;
+            height: 28%;
+            background: linear-gradient(180deg, #2f855a, #22543d);
+        }
+
+        .moon {
+            position: absolute;
+            right: 24px;
+            top: 22px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fffce8 0%, #fde68a 55%, #f6c453 100%);
+            box-shadow: 0 0 30px rgba(253, 230, 138, 0.45);
+        }
+
+        .house {
+            position: absolute;
+            top: 18%;
+            right: 10%;
+            width: 86px;
+            height: 90px;
+            opacity: 0.15;
+            transform: scale(0.9);
+            transition: all 0.45s ease;
+        }
+
+        .house.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .house-roof {
+            width: 0;
+            height: 0;
+            margin: 0 auto;
+            border-left: 44px solid transparent;
+            border-right: 44px solid transparent;
+            border-bottom: 38px solid #ef4444;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+        }
+
+        .house-body {
+            width: 74px;
+            height: 52px;
+            margin: -1px auto 0;
+            border-radius: 12px 12px 10px 10px;
+            background: linear-gradient(180deg, #f8d8a8 0%, #e0a96d 100%);
+            position: relative;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+        }
+
+        .house-window {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            top: 10px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.28);
+            transition: all 0.3s ease;
+        }
+
+        .house.visible .house-window {
+            background: #fde68a;
+            box-shadow: 0 0 12px rgba(253, 230, 138, 0.8);
+        }
+
+        .house-window.left { left: 12px; }
+        .house-window.right { right: 12px; }
+
+        .house-door {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 24px;
+            border-radius: 8px 8px 0 0;
+            background: #7c3f1a;
+        }
+
+        .dragon,
+        .lantern {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, filter 0.2s ease, opacity 0.2s ease;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .dragon {
+            width: 72px;
+            height: 72px;
+            font-size: 2.6rem;
+            filter: grayscale(0.1) brightness(0.9);
+        }
+
+        .dragon:hover,
+        .lantern:hover {
+            transform: scale(1.06);
+        }
+
+        .dragon.ready {
+            filter: drop-shadow(0 0 14px rgba(255, 102, 46, 0.7));
+        }
+
+        .dragon-home {
+            transition: left 1.2s ease, top 1.2s ease, transform 1.2s ease, opacity 1.2s ease;
+        }
+
+        .dragon.ready .dragon-core {
+            animation: dragonBob 1.6s ease-in-out infinite;
+        }
+
+        .dragon-flame {
+            position: absolute;
+            right: 3px;
+            top: 16px;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: scale(0.6);
+            transition: all 0.2s ease;
+        }
+
+        .dragon.ready .dragon-flame {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .lantern {
+            width: 54px;
+            height: 72px;
+            font-size: 2rem;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .lantern-pole {
+            width: 6px;
+            height: 18px;
+            border-radius: 999px;
+            background: #5b4636;
+        }
+
+        .lantern-light {
+            font-size: 1.9rem;
+            filter: grayscale(0.3) brightness(0.9);
+            transition: all 0.2s ease;
+        }
+
+        .lantern.on .lantern-light {
+            filter: drop-shadow(0 0 18px rgba(255, 222, 89, 0.85));
+            transform: scale(1.05);
+        }
+
+        .lantern-glow {
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 230, 140, 0.55) 0%, rgba(255, 230, 140, 0) 72%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
+
+        .lantern.on .lantern-glow {
+            opacity: 1;
+        }
+
+        .path-dot {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fde68a 0%, #f59e0b 68%, rgba(245, 158, 11, 0) 72%);
+            opacity: 0;
+            transform: scale(0.7);
+            transition: all 0.35s ease;
+        }
+
+        .path-dot.visible {
+            opacity: 1;
+            transform: scale(1);
+            box-shadow: 0 0 14px rgba(253, 230, 138, 0.8);
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .status-chip {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #d8b4fe;
+            border-radius: 999px;
+            padding: 4px 10px;
+            color: #6b21a8;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .message {
+            margin-top: 6px;
+            margin-bottom: 0;
+            min-height: 20px;
+            padding: 7px 10px;
+            font-size: 0.88rem;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.35; transform: scale(0.85); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        @keyframes dragonBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @media (min-width: 768px) {
+            .game-container {
+                max-height: 740px;
+                padding: 18px;
+            }
+
+            h1 {
+                font-size: 1.95rem;
+                margin-bottom: 8px;
+            }
+
+            .back-btn {
+                font-size: 0.95rem;
+                padding: 9px 16px;
+            }
+
+            .task,
+            .message,
+            .pill,
+            .status-chip {
+                font-size: 1rem;
+            }
+
+            .dragon {
+                width: 86px;
+                height: 86px;
+                font-size: 3rem;
+            }
+
+            .lantern {
+                width: 62px;
+                height: 84px;
+                font-size: 2.2rem;
+            }
+
+            .house {
+                width: 108px;
+                height: 112px;
+            }
+
+            .house-roof {
+                border-left-width: 54px;
+                border-right-width: 54px;
+                border-bottom-width: 46px;
+            }
+
+            .house-body {
+                width: 92px;
+                height: 64px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="../index.html" class="back-btn">🏠 Terug</a>
+        <h1>🐉 Draakjes Naar Huis</h1>
+
+        <div class="hud">
+            <div class="pill" id="roundPill">Ronde 1/5</div>
+            <div class="pill" id="starsPill">Sterren: 0</div>
+        </div>
+
+        <div class="task" id="task">Geef alle draakjes vuur en zet alle lantaarns aan.</div>
+
+        <div class="playfield" id="playfield">
+            <div class="stars" id="starsLayer"></div>
+            <div class="scene-layer">
+                <div class="moon"></div>
+                <div class="hill one"></div>
+                <div class="hill two"></div>
+                <div class="hill three"></div>
+                <div class="house" id="house">
+                    <div class="house-roof"></div>
+                    <div class="house-body">
+                        <div class="house-window left"></div>
+                        <div class="house-window right"></div>
+                        <div class="house-door"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="path-dots" id="pathDots"></div>
+        </div>
+
+        <div class="status-row">
+            <div class="status-chip" id="dragonsChip">Draakjes 0/2</div>
+            <div class="status-chip" id="lanternsChip">Lantaarns 0/2</div>
+        </div>
+
+        <div class="message" id="message">Tik op de draakjes en lantaarns.</div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        const rounds = [
+            { dragons: 2, lanterns: 2 },
+            { dragons: 2, lanterns: 3 },
+            { dragons: 3, lanterns: 3 },
+            { dragons: 3, lanterns: 4 },
+            { dragons: 4, lanterns: 4 }
+        ];
+
+        const dragonPositions = [
+            { left: '12%', top: '62%' },
+            { left: '30%', top: '70%' },
+            { left: '22%', top: '42%' },
+            { left: '44%', top: '56%' }
+        ];
+
+        const lanternPositions = [
+            { left: '56%', top: '62%' },
+            { left: '70%', top: '44%' },
+            { left: '80%', top: '66%' },
+            { left: '60%', top: '30%' }
+        ];
+
+        const pathPositions = [
+            { left: '58%', top: '60%' },
+            { left: '64%', top: '54%' },
+            { left: '70%', top: '48%' },
+            { left: '76%', top: '40%' },
+            { left: '81%', top: '30%' }
+        ];
+
+        let currentRound = 0;
+        let stars = 0;
+        let litDragons = 0;
+        let litLanterns = 0;
+        let houseVisible = false;
+        let roundLocked = false;
+
+        const playfield = document.getElementById('playfield');
+        const roundPill = document.getElementById('roundPill');
+        const starsPill = document.getElementById('starsPill');
+        const message = document.getElementById('message');
+        const dragonsChip = document.getElementById('dragonsChip');
+        const lanternsChip = document.getElementById('lanternsChip');
+        const house = document.getElementById('house');
+        const starsLayer = document.getElementById('starsLayer');
+        const pathDots = document.getElementById('pathDots');
+
+        function renderStaticDecor() {
+            starsLayer.innerHTML = '';
+            for (let i = 0; i < 14; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = '✨';
+                star.style.left = `${6 + Math.random() * 86}%`;
+                star.style.top = `${4 + Math.random() * 22}%`;
+                star.style.animationDelay = `${Math.random() * 1.4}s`;
+                star.style.fontSize = `${0.6 + Math.random() * 0.45}rem`;
+                starsLayer.appendChild(star);
+            }
+
+            pathDots.innerHTML = '';
+            pathPositions.forEach((pos, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'path-dot';
+                dot.style.left = pos.left;
+                dot.style.top = pos.top;
+                dot.dataset.index = String(index);
+                pathDots.appendChild(dot);
+            });
+        }
+
+        function updateHud() {
+            const roundInfo = rounds[currentRound];
+            roundPill.textContent = `Ronde ${currentRound + 1}/${rounds.length}`;
+            starsPill.textContent = `Sterren: ${stars}`;
+            dragonsChip.textContent = `Draakjes ${litDragons}/${roundInfo.dragons}`;
+            lanternsChip.textContent = `Lantaarns ${litLanterns}/${roundInfo.lanterns}`;
+        }
+
+        function clearRoundElements() {
+            playfield.querySelectorAll('.dragon, .lantern').forEach((el) => el.remove());
+            pathDots.querySelectorAll('.path-dot').forEach((dot) => dot.classList.remove('visible'));
+            house.classList.remove('visible');
+        }
+
+        function createDragon(index) {
+            const pos = dragonPositions[index];
+            const dragon = document.createElement('button');
+            dragon.type = 'button';
+            dragon.className = 'dragon';
+            dragon.style.left = pos.left;
+            dragon.style.top = pos.top;
+            dragon.innerHTML = '<span class="dragon-core">🐉</span><span class="dragon-flame">🔥</span>';
+            dragon.dataset.ready = 'false';
+
+            dragon.addEventListener('click', () => {
+                if (roundLocked || dragon.dataset.ready === 'true') {
+                    return;
+                }
+
+                dragon.dataset.ready = 'true';
+                dragon.classList.add('ready');
+                litDragons += 1;
+                playPop();
+                updateHud();
+
+                if (litDragons === rounds[currentRound].dragons && litLanterns < rounds[currentRound].lanterns) {
+                    message.textContent = 'Mooi! Nu nog de lantaarns aanzetten.';
+                } else {
+                    message.textContent = 'Nog even helpen...';
+                }
+
+                maybeRevealHome();
+            });
+
+            playfield.appendChild(dragon);
+        }
+
+        function createLantern(index) {
+            const pos = lanternPositions[index];
+            const lantern = document.createElement('button');
+            lantern.type = 'button';
+            lantern.className = 'lantern';
+            lantern.style.left = pos.left;
+            lantern.style.top = pos.top;
+            lantern.innerHTML = '<span class="lantern-glow"></span><span class="lantern-light">🏮</span><span class="lantern-pole"></span>';
+            lantern.dataset.on = 'false';
+
+            lantern.addEventListener('click', () => {
+                if (roundLocked || lantern.dataset.on === 'true') {
+                    return;
+                }
+
+                lantern.dataset.on = 'true';
+                lantern.classList.add('on');
+                litLanterns += 1;
+                playPop();
+                updateHud();
+
+                if (litLanterns === rounds[currentRound].lanterns && litDragons < rounds[currentRound].dragons) {
+                    message.textContent = 'De lantaarns branden! Geef nu alle draakjes vuur.';
+                } else {
+                    message.textContent = 'Nog even helpen...';
+                }
+
+                maybeRevealHome();
+            });
+
+            playfield.appendChild(lantern);
+        }
+
+        function revealPath() {
+            pathDots.querySelectorAll('.path-dot').forEach((dot, index) => {
+                setTimeout(() => dot.classList.add('visible'), index * 120);
+            });
+        }
+
+        function sendDragonsHome() {
+            const dragons = Array.from(playfield.querySelectorAll('.dragon'));
+            dragons.forEach((dragon, index) => {
+                dragon.classList.add('dragon-home');
+                setTimeout(() => {
+                    dragon.style.left = `${73 + index * 2}%`;
+                    dragon.style.top = `${28 + (index % 2) * 6}%`;
+                    dragon.style.transform = 'scale(0.65)';
+                    dragon.style.opacity = '0.2';
+                }, index * 120);
+            });
+        }
+
+        function maybeRevealHome() {
+            const roundInfo = rounds[currentRound];
+            if (houseVisible || litDragons !== roundInfo.dragons || litLanterns !== roundInfo.lanterns) {
+                return;
+            }
+
+            houseVisible = true;
+            roundLocked = true;
+            house.classList.add('visible');
+            revealPath();
+            message.textContent = 'Kijk! Daar is het huis! ⭐';
+            playWin();
+
+            setTimeout(() => {
+                sendDragonsHome();
+            }, 350);
+
+            setTimeout(() => {
+                stars += 1;
+                updateHud();
+
+                if (currentRound >= rounds.length - 1) {
+                    message.textContent = `Alle draakjes zijn thuis! ${stars}/${rounds.length} sterren!`;
+                    currentRound = 0;
+                    stars = 0;
+                    setTimeout(loadRound, 1600);
+                    return;
+                }
+
+                currentRound += 1;
+                loadRound();
+            }, 2200);
+        }
+
+        function loadRound() {
+            litDragons = 0;
+            litLanterns = 0;
+            houseVisible = false;
+            roundLocked = false;
+
+            clearRoundElements();
+            renderStaticDecor();
+
+            const roundInfo = rounds[currentRound];
+            for (let i = 0; i < roundInfo.dragons; i++) {
+                createDragon(i);
+            }
+            for (let i = 0; i < roundInfo.lanterns; i++) {
+                createLantern(i);
+            }
+
+            updateHud();
+            message.textContent = 'Tik op de draakjes en lantaarns.';
+        }
+
+        loadRound();
+    </script>
+</body>
+</html>
