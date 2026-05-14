@@ -92,9 +92,27 @@
         .barn {
             position: absolute;
             right: 7%;
-            top: 18%;
+            top: 16%;
             width: 120px;
             height: 126px;
+        }
+
+        .flower-patch {
+            position: absolute;
+            right: 24%;
+            bottom: 18%;
+            display: flex;
+            gap: 8px;
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .haystack {
+            position: absolute;
+            right: 22%;
+            top: 42%;
+            font-size: 2.2rem;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
         }
 
         .barn-roof {
@@ -130,7 +148,7 @@
         .basket {
             position: absolute;
             right: 8%;
-            bottom: 12%;
+            bottom: 14%;
             width: 110px;
             height: 92px;
             border-radius: 18px;
@@ -168,8 +186,8 @@
         .plot-area {
             position: absolute;
             left: 8%;
-            bottom: 16%;
-            width: 56%;
+            bottom: 14%;
+            width: 66%;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 18px 24px;
@@ -189,9 +207,7 @@
             transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
 
-        .plot:hover,
-        .coop:hover,
-        .egg:hover {
+        .plot:hover {
             transform: scale(1.03);
         }
 
@@ -201,10 +217,24 @@
 
         .plot-content {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 2px;
             font-size: 2rem;
+        }
+
+        .plot-stage {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: rgba(255, 248, 220, 0.92);
+            background: rgba(0, 0, 0, 0.14);
+            border-radius: 999px;
+            padding: 2px 6px;
+        }
+
+        .plot.empty .plot-stage {
+            color: rgba(255,255,255,0.8);
         }
 
         .plot-water {
@@ -222,73 +252,25 @@
             opacity: 1;
         }
 
+        .plot.growing {
+            background: linear-gradient(180deg, #8b5a2b 0%, #7c4f24 65%, #5f7f2f 100%);
+        }
+
+        .plot.ready {
+            box-shadow: inset 0 8px 10px rgba(255,255,255,0.1), 0 0 0 4px rgba(251, 191, 36, 0.22), 0 8px 14px rgba(0,0,0,0.16);
+        }
+
+        .plot.done {
+            opacity: 0.82;
+            background: linear-gradient(180deg, #8b5a2b 0%, #6b4220 100%);
+        }
+
         .plot.sparkle::after {
             content: '✨';
             position: absolute;
             top: -8px;
             right: 10px;
             font-size: 1rem;
-        }
-
-        .coop {
-            position: absolute;
-            right: 23%;
-            bottom: 16%;
-            width: 120px;
-            height: 112px;
-            border-radius: 18px;
-            background: linear-gradient(180deg, #fde68a 0%, #fcd34d 100%);
-            border: 4px solid #d97706;
-            box-shadow: 0 10px 18px rgba(0,0,0,0.16);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            transition: transform 0.18s ease;
-        }
-
-        .coop.chicken-fed {
-            box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.25), 0 10px 18px rgba(0,0,0,0.16);
-        }
-
-        .coop-emoji {
-            font-size: 2.6rem;
-        }
-
-        .coop-heart {
-            position: absolute;
-            top: 8px;
-            right: 10px;
-            font-size: 1rem;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .coop.chicken-fed .coop-heart {
-            opacity: 1;
-        }
-
-        .egg {
-            position: absolute;
-            right: 17%;
-            bottom: 18%;
-            width: 48px;
-            height: 58px;
-            border-radius: 50% 50% 46% 46%;
-            border: 3px solid #d4b08c;
-            background: linear-gradient(180deg, #fffef2 0%, #f5e6c8 100%);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.14);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.3rem;
-        }
-
-        .egg.visible {
-            display: flex;
         }
 
         .flying-item {
@@ -302,7 +284,7 @@
         .tools-panel {
             margin-top: 8px;
             display: grid;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: 8px;
         }
 
@@ -386,15 +368,6 @@
                 font-size: 2.4rem;
             }
 
-            .coop {
-                width: 138px;
-                height: 128px;
-            }
-
-            .coop-emoji {
-                font-size: 3rem;
-            }
-
             .basket {
                 width: 124px;
                 height: 98px;
@@ -439,15 +412,15 @@
                 </div>
             </div>
 
-            <div class="plot-area" id="plotArea"></div>
+            <div class="haystack">🌾</div>
 
-            <div class="coop" id="coop" aria-label="Kippenhok">
-                <div class="coop-heart">💛</div>
-                <div class="coop-emoji">🐔</div>
-                <div style="font-size:0.9rem; font-weight:700; color:#8b4a00;">Kippenhok</div>
+            <div class="flower-patch" aria-hidden="true">
+                <span>🌼</span>
+                <span>🌷</span>
+                <span>🌻</span>
             </div>
 
-            <button class="egg" id="egg" type="button" aria-label="Ei rapen">🥚</button>
+            <div class="plot-area" id="plotArea"></div>
 
             <div class="basket">
                 <div class="basket-items" id="basketItems"></div>
@@ -465,55 +438,44 @@
         const tools = [
             { id: 'seed', emoji: '🌱', label: 'Zaaien' },
             { id: 'water', emoji: '💧', label: 'Water' },
-            { id: 'harvest', emoji: '🧺', label: 'Oogsten' },
-            { id: 'feed', emoji: '🍽️', label: 'Voer' }
+            { id: 'harvest', emoji: '🧺', label: 'Oogsten' }
         ];
 
         const days = [
             {
-                cropTypes: ['🥕', '🍓'],
                 plots: [
                     { crop: '🥕', waterNeeded: 1 },
                     { crop: '🍓', waterNeeded: 1 }
-                ],
-                eggs: 1
+                ]
             },
             {
-                cropTypes: ['🥕', '🍓', '🌽'],
                 plots: [
                     { crop: '🥕', waterNeeded: 1 },
                     { crop: '🍓', waterNeeded: 1 },
                     { crop: '🌽', waterNeeded: 1 }
-                ],
-                eggs: 1
+                ]
             },
             {
-                cropTypes: ['🥕', '🍓', '🎃'],
                 plots: [
                     { crop: '🥕', waterNeeded: 2 },
                     { crop: '🍓', waterNeeded: 1 },
                     { crop: '🎃', waterNeeded: 2 }
-                ],
-                eggs: 1
+                ]
             },
             {
-                cropTypes: ['🥕', '🌽', '🎃'],
                 plots: [
                     { crop: '🥕', waterNeeded: 1 },
                     { crop: '🌽', waterNeeded: 2 },
                     { crop: '🎃', waterNeeded: 1 }
-                ],
-                eggs: 2
+                ]
             },
             {
-                cropTypes: ['🍓', '🌽', '🎃'],
                 plots: [
                     { crop: '🍓', waterNeeded: 2 },
                     { crop: '🌽', waterNeeded: 2 },
                     { crop: '🎃', waterNeeded: 2 },
                     { crop: '🥕', waterNeeded: 1 }
-                ],
-                eggs: 2
+                ]
             }
         ];
 
@@ -522,8 +484,6 @@
         let selectedTool = 'seed';
         let plots = [];
         let basketItems = [];
-        let chickenFed = false;
-        let eggsRemaining = 0;
         let roundLocked = false;
 
         const dayPill = document.getElementById('dayPill');
@@ -533,8 +493,6 @@
         const message = document.getElementById('message');
         const plotArea = document.getElementById('plotArea');
         const toolsPanel = document.getElementById('toolsPanel');
-        const coop = document.getElementById('coop');
-        const egg = document.getElementById('egg');
         const basketItemsEl = document.getElementById('basketItems');
         const farmScene = document.getElementById('farmScene');
 
@@ -557,7 +515,7 @@
         function updateHud() {
             const day = days[currentDay];
             dayPill.textContent = `Dag ${currentDay + 1}/${days.length}`;
-            basketPill.textContent = `Mand ${basketItems.length}/${day.plots.length + day.eggs}`;
+            basketPill.textContent = `Mand ${basketItems.length}/${day.plots.length}`;
             starsPill.textContent = `Sterren: ${stars}`;
         }
 
@@ -580,11 +538,11 @@
         }
 
         function plotStateContent(plot) {
-            if (plot.state === 'empty') return '🟤';
-            if (plot.state === 'seeded') return '🌱';
-            if (plot.state === 'growing') return plot.crop === '🎃' ? '🌿' : '🌱';
-            if (plot.state === 'ready') return plot.crop;
-            return '🟤';
+            if (plot.state === 'empty') return { emoji: '🟤', label: 'Leeg' };
+            if (plot.state === 'seeded') return { emoji: '🌱', label: 'Zaadje' };
+            if (plot.state === 'growing') return { emoji: plot.crop === '🎃' ? '🌿' : '🌱', label: `Water ${plot.waterCount}/${plot.waterNeeded}` };
+            if (plot.state === 'ready') return { emoji: plot.crop, label: 'Klaar' };
+            return { emoji: '✅', label: 'Geoogst' };
         }
 
         function renderPlots() {
@@ -592,11 +550,15 @@
             plots.forEach((plot, index) => {
                 const plotEl = document.createElement('button');
                 plotEl.type = 'button';
-                plotEl.className = 'plot';
+                plotEl.className = `plot ${plot.state}`;
                 if (plot.waterCount > 0) plotEl.classList.add('watered');
                 if (plot.state === 'ready') plotEl.classList.add('ready', 'sparkle');
+                if (plot.state === 'growing') plotEl.classList.add('growing');
+                if (plot.state === 'done') plotEl.classList.add('done');
 
-                plotEl.innerHTML = `<span class="plot-water"></span><span class="plot-content">${plotStateContent(plot)}</span>`;
+                const content = plotStateContent(plot);
+
+                plotEl.innerHTML = `<span class="plot-water"></span><span class="plot-content"><span>${content.emoji}</span><span class="plot-stage">${content.label}</span></span>`;
 
                 plotEl.addEventListener('click', () => handlePlot(index, plotEl));
                 plotArea.appendChild(plotEl);
@@ -611,11 +573,6 @@
                 basketItemsEl.appendChild(span);
             });
             updateHud();
-        }
-
-        function renderChicken() {
-            coop.classList.toggle('chicken-fed', chickenFed);
-            egg.classList.toggle('visible', eggsRemaining > 0);
         }
 
         function animateToBasket(emoji, sourceEl, onDone) {
@@ -701,69 +658,14 @@
                     renderBasket();
                     checkDayComplete();
                 });
-            } else {
-                playWrong();
-                shakeElement(plotEl);
-                message.textContent = 'Met deze tool help je de kip, niet de akker.';
-                return;
             }
 
             renderPlots();
         }
 
-        function handleCoop() {
-            if (roundLocked) return;
-
-            if (selectedTool !== 'feed') {
-                playWrong();
-                message.textContent = 'Gebruik de voerknop bij de kip.';
-                return;
-            }
-
-            if (chickenFed && eggsRemaining > 0) {
-                playWrong();
-                message.textContent = 'De kip heeft al voer gehad. Kijk voor een ei!';
-                return;
-            }
-
-            if (chickenFed && eggsRemaining === 0) {
-                playWrong();
-                message.textContent = 'De kip is al klaar voor vandaag.';
-                return;
-            }
-
-            chickenFed = true;
-            eggsRemaining = days[currentDay].eggs;
-            playCorrect();
-            message.textContent = eggsRemaining > 1 ? 'De kip is blij! Er liggen eieren klaar.' : 'De kip is blij! Kijk, een ei!';
-            renderChicken();
-        }
-
-        function handleEgg() {
-            if (roundLocked || eggsRemaining <= 0) return;
-
-            if (selectedTool !== 'harvest') {
-                playWrong();
-                message.textContent = 'Gebruik de oogstmand om het ei te rapen.';
-                return;
-            }
-
-            playCorrect();
-            message.textContent = 'Ei geraapt!';
-            eggsRemaining -= 1;
-            animateToBasket('🥚', egg, () => {
-                basketItems.push('🥚');
-                renderBasket();
-                renderChicken();
-                checkDayComplete();
-            });
-
-            renderChicken();
-        }
-
         function checkDayComplete() {
             const allHarvested = plots.every((plot) => plot.state === 'done');
-            if (!allHarvested || eggsRemaining > 0) {
+            if (!allHarvested) {
                 return;
             }
 
@@ -796,21 +698,15 @@
             const day = days[currentDay];
             plots = createDayState(day);
             basketItems = [];
-            chickenFed = false;
-            eggsRemaining = 0;
 
-            task.textContent = `Dag ${currentDay + 1}: plant, geef water, oogst en help de kip.`;
+            task.textContent = `Dag ${currentDay + 1}: plant, geef water en oogst alles.`;
             message.textContent = 'Kies een tool en tik op de juiste plek.';
 
             renderTools();
             renderPlots();
-            renderChicken();
             renderBasket();
             updateHud();
         }
-
-        coop.addEventListener('click', handleCoop);
-        egg.addEventListener('click', handleEgg);
 
         loadProgress();
         loadDay();
