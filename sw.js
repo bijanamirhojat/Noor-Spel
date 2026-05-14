@@ -11,6 +11,7 @@ const PRECACHE_URLS = [
     './games/shared.js',
     './games/aankleden.html',
     './games/bellen.html',
+    './games/boerderij.html',
     './games/cijfers.html',
     './games/draakjes.html',
     './games/flip.html',

@@ -207,6 +207,7 @@
             height: 72px;
             font-size: 2.6rem;
             filter: grayscale(0.1) brightness(0.9);
+            opacity: 0.55;
         }
 
         .dragon:hover,
@@ -216,6 +217,20 @@
 
         .dragon.ready {
             filter: drop-shadow(0 0 14px rgba(255, 102, 46, 0.7));
+            opacity: 1;
+        }
+
+        .dragon.awake {
+            opacity: 1;
+            filter: drop-shadow(0 0 10px rgba(255, 194, 87, 0.5));
+        }
+
+        .dragon.locked {
+            cursor: default;
+        }
+
+        .dragon.locked .dragon-core {
+            filter: grayscale(0.2);
         }
 
         .dragon-home {
@@ -224,6 +239,20 @@
 
         .dragon.ready .dragon-core {
             animation: dragonBob 1.6s ease-in-out infinite;
+        }
+
+        .dragon-thought {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dragon.locked .dragon-thought {
+            opacity: 0.9;
         }
 
         .dragon-flame {
@@ -247,6 +276,14 @@
             font-size: 2rem;
             flex-direction: column;
             gap: 2px;
+        }
+
+        .lantern.path-hint .lantern-light {
+            filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.35));
+        }
+
+        .lantern.decoy-hint .lantern-light {
+            filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.2));
         }
 
         .lantern-pole {
@@ -282,6 +319,29 @@
             opacity: 1;
         }
 
+        .lantern.wrong {
+            animation: lanternShake 0.38s ease-in-out;
+        }
+
+        .lantern.wrong .lantern-light {
+            filter: drop-shadow(0 0 12px rgba(96, 165, 250, 0.75));
+        }
+
+        .lantern.wrong .lantern-glow {
+            opacity: 1;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.58) 0%, rgba(96, 165, 250, 0) 72%);
+        }
+
+        .lantern.path-hint:not(.on) .lantern-glow {
+            opacity: 0.22;
+            background: radial-gradient(circle, rgba(251, 191, 36, 0.26) 0%, rgba(251, 191, 36, 0) 72%);
+        }
+
+        .lantern.decoy-hint:not(.on):not(.wrong) .lantern-glow {
+            opacity: 0.12;
+            background: radial-gradient(circle, rgba(96, 165, 250, 0.22) 0%, rgba(96, 165, 250, 0) 72%);
+        }
+
         .path-dot {
             position: absolute;
             width: 18px;
@@ -291,6 +351,12 @@
             opacity: 0;
             transform: scale(0.7);
             transition: all 0.35s ease;
+        }
+
+        .path-dot.preview {
+            opacity: 0.45;
+            transform: scale(0.86);
+            box-shadow: 0 0 10px rgba(191, 219, 254, 0.45);
         }
 
         .path-dot.visible {
@@ -333,6 +399,13 @@
         @keyframes dragonBob {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
+        }
+
+        @keyframes lanternShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-3px); }
         }
 
         @media (min-width: 768px) {
@@ -430,11 +503,11 @@
     <script src="shared.js"></script>
     <script>
         const rounds = [
-            { dragons: 2, lanterns: 2 },
-            { dragons: 2, lanterns: 3 },
-            { dragons: 3, lanterns: 3 },
-            { dragons: 3, lanterns: 4 },
-            { dragons: 4, lanterns: 4 }
+            { dragons: 2, lanterns: 3, correctLanterns: [0, 1] },
+            { dragons: 2, lanterns: 4, correctLanterns: [0, 2, 3] },
+            { dragons: 3, lanterns: 4, correctLanterns: [1, 2, 3] },
+            { dragons: 3, lanterns: 5, correctLanterns: [0, 2, 3, 4] },
+            { dragons: 4, lanterns: 5, correctLanterns: [1, 2, 3, 4] }
         ];
 
         const dragonPositions = [
@@ -442,13 +515,6 @@
             { left: '30%', top: '70%' },
             { left: '22%', top: '42%' },
             { left: '44%', top: '56%' }
-        ];
-
-        const lanternPositions = [
-            { left: '56%', top: '62%' },
-            { left: '70%', top: '44%' },
-            { left: '80%', top: '66%' },
-            { left: '60%', top: '30%' }
         ];
 
         const pathPositions = [
@@ -459,12 +525,27 @@
             { left: '81%', top: '30%' }
         ];
 
+        const pathLanternPositions = [
+            { left: '55%', top: '62%' },
+            { left: '63%', top: '54%' },
+            { left: '71%', top: '46%' },
+            { left: '79%', top: '36%' }
+        ];
+
+        const decoyLanternPositions = [
+            { left: '46%', top: '44%' },
+            { left: '84%', top: '68%' },
+            { left: '58%', top: '28%' }
+        ];
+
         let currentRound = 0;
         let stars = 0;
         let litDragons = 0;
         let litLanterns = 0;
+        let litCorrectLanterns = 0;
         let houseVisible = false;
         let roundLocked = false;
+        let dragonPhaseUnlocked = false;
 
         const playfield = document.getElementById('playfield');
         const roundPill = document.getElementById('roundPill');
@@ -475,6 +556,31 @@
         const house = document.getElementById('house');
         const starsLayer = document.getElementById('starsLayer');
         const pathDots = document.getElementById('pathDots');
+
+        function buildLanternLayout(roundInfo) {
+            const correctSet = new Set(roundInfo.correctLanterns);
+            const layout = [];
+            let correctPointer = 0;
+            let decoyPointer = 0;
+
+            for (let i = 0; i < roundInfo.lanterns; i++) {
+                if (correctSet.has(i)) {
+                    layout.push({
+                        ...pathLanternPositions[correctPointer],
+                        correct: true
+                    });
+                    correctPointer += 1;
+                } else {
+                    layout.push({
+                        ...decoyLanternPositions[decoyPointer],
+                        correct: false
+                    });
+                    decoyPointer += 1;
+                }
+            }
+
+            return layout;
+        }
 
         function renderStaticDecor() {
             starsLayer.innerHTML = '';
@@ -505,27 +611,47 @@
             roundPill.textContent = `Ronde ${currentRound + 1}/${rounds.length}`;
             starsPill.textContent = `Sterren: ${stars}`;
             dragonsChip.textContent = `Draakjes ${litDragons}/${roundInfo.dragons}`;
-            lanternsChip.textContent = `Lantaarns ${litLanterns}/${roundInfo.lanterns}`;
+            lanternsChip.textContent = `Padlicht ${litCorrectLanterns}/${roundInfo.correctLanterns.length}`;
         }
 
         function clearRoundElements() {
             playfield.querySelectorAll('.dragon, .lantern').forEach((el) => el.remove());
-            pathDots.querySelectorAll('.path-dot').forEach((dot) => dot.classList.remove('visible'));
+            pathDots.querySelectorAll('.path-dot').forEach((dot) => dot.classList.remove('visible', 'preview'));
             house.classList.remove('visible');
+        }
+
+        function updatePathPreview() {
+            const needed = rounds[currentRound].correctLanterns.length;
+            const dots = Array.from(pathDots.querySelectorAll('.path-dot'));
+            const previewCount = Math.max(0, Math.round((litCorrectLanterns / needed) * dots.length));
+
+            dots.forEach((dot, index) => {
+                if (index < previewCount && !dot.classList.contains('visible')) {
+                    dot.classList.add('preview');
+                } else if (!dot.classList.contains('visible')) {
+                    dot.classList.remove('preview');
+                }
+            });
         }
 
         function createDragon(index) {
             const pos = dragonPositions[index];
             const dragon = document.createElement('button');
             dragon.type = 'button';
-            dragon.className = 'dragon';
+            dragon.className = 'dragon locked';
             dragon.style.left = pos.left;
             dragon.style.top = pos.top;
-            dragon.innerHTML = '<span class="dragon-core">🐉</span><span class="dragon-flame">🔥</span>';
+            dragon.innerHTML = '<span class="dragon-thought">💤</span><span class="dragon-core">🐉</span><span class="dragon-flame">🔥</span>';
             dragon.dataset.ready = 'false';
 
             dragon.addEventListener('click', () => {
                 if (roundLocked || dragon.dataset.ready === 'true') {
+                    return;
+                }
+
+                if (!dragonPhaseUnlocked) {
+                    playWrong();
+                    message.textContent = 'Eerst het lichtpad aanzetten met de juiste lantaarns.';
                     return;
                 }
 
@@ -535,10 +661,10 @@
                 playPop();
                 updateHud();
 
-                if (litDragons === rounds[currentRound].dragons && litLanterns < rounds[currentRound].lanterns) {
-                    message.textContent = 'Mooi! Nu nog de lantaarns aanzetten.';
+                if (litDragons < rounds[currentRound].dragons) {
+                    message.textContent = 'Nog een paar draakjes vuur geven.';
                 } else {
-                    message.textContent = 'Nog even helpen...';
+                    message.textContent = 'Alle draakjes hebben vuur! Kijk waar het huis oplicht...';
                 }
 
                 maybeRevealHome();
@@ -547,8 +673,7 @@
             playfield.appendChild(dragon);
         }
 
-        function createLantern(index) {
-            const pos = lanternPositions[index];
+        function createLantern(index, pos, isCorrect) {
             const lantern = document.createElement('button');
             lantern.type = 'button';
             lantern.className = 'lantern';
@@ -556,22 +681,40 @@
             lantern.style.top = pos.top;
             lantern.innerHTML = '<span class="lantern-glow"></span><span class="lantern-light">🏮</span><span class="lantern-pole"></span>';
             lantern.dataset.on = 'false';
+            lantern.dataset.correct = isCorrect ? 'true' : 'false';
+
+            if (lantern.dataset.correct === 'true') {
+                lantern.classList.add('path-hint');
+            } else {
+                lantern.classList.add('decoy-hint');
+            }
 
             lantern.addEventListener('click', () => {
                 if (roundLocked || lantern.dataset.on === 'true') {
                     return;
                 }
 
+                if (lantern.dataset.correct !== 'true') {
+                    playWrong();
+                    lantern.classList.add('wrong');
+                    message.textContent = 'Deze lantaarn helpt niet. Zoek het lichtpad!';
+                    setTimeout(() => lantern.classList.remove('wrong'), 420);
+                    return;
+                }
+
                 lantern.dataset.on = 'true';
                 lantern.classList.add('on');
                 litLanterns += 1;
+                litCorrectLanterns += 1;
                 playPop();
+                updatePathPreview();
                 updateHud();
 
-                if (litLanterns === rounds[currentRound].lanterns && litDragons < rounds[currentRound].dragons) {
-                    message.textContent = 'De lantaarns branden! Geef nu alle draakjes vuur.';
-                } else {
-                    message.textContent = 'Nog even helpen...';
+                if (!dragonPhaseUnlocked && litCorrectLanterns === rounds[currentRound].correctLanterns.length) {
+                    unlockDragons();
+                    message.textContent = 'Ja! Het lichtpad is aan. Geef nu alle draakjes vuur.';
+                } else if (!dragonPhaseUnlocked) {
+                    message.textContent = 'Goed! Zoek nog meer lantaarns van het lichtpad.';
                 }
 
                 maybeRevealHome();
@@ -582,7 +725,22 @@
 
         function revealPath() {
             pathDots.querySelectorAll('.path-dot').forEach((dot, index) => {
-                setTimeout(() => dot.classList.add('visible'), index * 120);
+                setTimeout(() => {
+                    dot.classList.remove('preview');
+                    dot.classList.add('visible');
+                }, index * 120);
+            });
+        }
+
+        function unlockDragons() {
+            dragonPhaseUnlocked = true;
+            playfield.querySelectorAll('.dragon').forEach((dragon) => {
+                dragon.classList.remove('locked');
+                dragon.classList.add('awake');
+                const thought = dragon.querySelector('.dragon-thought');
+                if (thought) {
+                    thought.textContent = '🔥';
+                }
             });
         }
 
@@ -601,7 +759,12 @@
 
         function maybeRevealHome() {
             const roundInfo = rounds[currentRound];
-            if (houseVisible || litDragons !== roundInfo.dragons || litLanterns !== roundInfo.lanterns) {
+            if (
+                houseVisible ||
+                !dragonPhaseUnlocked ||
+                litDragons !== roundInfo.dragons ||
+                litCorrectLanterns !== roundInfo.correctLanterns.length
+            ) {
                 return;
             }
 
@@ -636,22 +799,25 @@
         function loadRound() {
             litDragons = 0;
             litLanterns = 0;
+            litCorrectLanterns = 0;
             houseVisible = false;
             roundLocked = false;
+            dragonPhaseUnlocked = false;
 
             clearRoundElements();
             renderStaticDecor();
 
             const roundInfo = rounds[currentRound];
+            const lanternLayout = buildLanternLayout(roundInfo);
             for (let i = 0; i < roundInfo.dragons; i++) {
                 createDragon(i);
             }
             for (let i = 0; i < roundInfo.lanterns; i++) {
-                createLantern(i);
+                createLantern(i, lanternLayout[i], lanternLayout[i].correct);
             }
 
             updateHud();
-            message.textContent = 'Tik op de draakjes en lantaarns.';
+            message.textContent = 'Zoek eerst de lantaarns van het lichtpad.';
         }
 
         loadRound();
