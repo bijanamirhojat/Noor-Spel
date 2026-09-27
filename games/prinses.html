@@ -1745,6 +1745,316 @@
             to { transform: translateX(4px); }
         }
 
+        /* ── Flying unicorn ── */
+        .ride-btns {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 30;
+            display: none;
+            gap: 8px;
+        }
+        .ride-btns.show { display: flex; }
+        .ride-btns .dismount { position: static; display: block; }
+        .ride-btns.flying #dismount { display: none; }
+        .unicorn .uwing {
+            opacity: 0;
+            transform-origin: 66px 46px;
+            transition: opacity 0.3s ease;
+        }
+        .unicorn.flying .uwing {
+            opacity: 1;
+            animation: flap 0.32s ease-in-out infinite alternate;
+        }
+        @keyframes flap {
+            from { transform: rotate(-28deg); }
+            to { transform: rotate(18deg); }
+        }
+        .unicorn.flying .ubody { animation: floaty 1.2s ease-in-out infinite; }
+        .unicorn.flying .ushadow { opacity: 0; }
+        .unicorn.flying .leg-a, .unicorn.flying .leg-b { transform: rotate(35deg); animation: none; }
+        @keyframes floaty {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-6px) rotate(2deg); }
+        }
+        .princess.riding.flying .bob { animation: floaty 1.2s ease-in-out infinite; }
+        .skystar {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            margin: -25px 0 0 -25px;
+            font-size: 42px;
+            line-height: 50px;
+            text-align: center;
+            pointer-events: none;
+            z-index: 6;
+            animation: gemBob 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px #fde68a);
+        }
+        .skystar.got { animation: gemGot 0.5s ease forwards; }
+
+        /* ── Theehuisje building ── */
+        .teahouse { width: 300px; height: 262px; }
+        .teahouse > div { position: absolute; }
+        .teahouse .th-chimney {
+            right: 56px; top: 8px; width: 30px; height: 60px;
+            background: #fb7185; border-radius: 4px;
+        }
+        .teahouse .steam {
+            right: 60px; top: -30px; font-size: 20px; opacity: 0;
+            animation: steam 2.4s ease-out infinite;
+        }
+        @keyframes steam {
+            0% { transform: translateY(20px) scale(0.6); opacity: 0; }
+            30% { opacity: 0.9; }
+            100% { transform: translateY(-40px) scale(1.4); opacity: 0; }
+        }
+        .teahouse .th-roof {
+            left: -22px; top: 0; width: 344px; height: 108px;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            background: repeating-linear-gradient(90deg, #f472b6 0 28px, #fbcfe8 28px 56px);
+        }
+        .teahouse .th-wall {
+            left: 12px; top: 104px; width: 276px; height: 158px;
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.8) 3px, transparent 4px) 0 0 / 30px 30px,
+                #d1fae5;
+            border: 4px solid #fff;
+            border-bottom: none;
+        }
+        .teahouse .th-door {
+            left: 116px; top: 150px; width: 68px; height: 112px;
+            border-radius: 34px 34px 0 0;
+            background: linear-gradient(180deg, #f472b6, #db2777);
+            border: 4px solid #fcd34d;
+            border-bottom: none;
+        }
+        .teahouse .th-door::after {
+            content: '';
+            position: absolute;
+            right: 10px; top: 56px; width: 10px; height: 10px;
+            border-radius: 50%; background: #fde68a;
+        }
+        .teahouse .th-win {
+            top: 138px; width: 62px; height: 56px;
+            background: linear-gradient(90deg, #f9a8d4 0 14px, #bae6fd 14px 48px, #f9a8d4 48px);
+            border: 5px solid #fff;
+            border-radius: 8px;
+        }
+        .teahouse .th-box {
+            top: 196px; width: 72px; font-size: 18px; text-align: center;
+            background: #a16207; border-radius: 4px; line-height: 20px;
+        }
+        .teahouse .th-sign {
+            left: 50%; top: 66px; transform: translateX(-50%);
+            background: #fff; color: #be185d;
+            font-family: 'Fredoka One', cursive; font-size: 18px;
+            padding: 3px 12px; border-radius: 12px; border: 3px solid #fcd34d;
+            white-space: nowrap;
+        }
+
+        /* ── Theehuisje overlay ── */
+        .tea {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 6px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.35) 50%, transparent 50%) 0 0 / 60px 60px,
+                linear-gradient(0deg, rgba(255,255,255,0.35) 50%, transparent 50%) 0 0 / 60px 60px,
+                linear-gradient(180deg, #fce7f3, #fbcfe8);
+        }
+        .tea.open { display: flex; }
+        .guests {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            z-index: 2;
+        }
+        .guest {
+            position: relative;
+            width: 84px;
+            height: 92px;
+            border: none;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            font-size: 50px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            padding-top: 6px;
+        }
+        .guest .gname {
+            display: block;
+            font-family: 'Fredoka One', cursive;
+            font-size: 13px;
+            color: #be185d;
+            margin-top: 4px;
+        }
+        .guest .gcup {
+            position: absolute;
+            right: -4px; bottom: -4px;
+            font-size: 26px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .guest.served .gcup { opacity: 1; }
+        .guest.drink { animation: drink 0.9s ease; }
+        @keyframes drink {
+            0%, 100% { transform: scale(1) rotate(0); }
+            25% { transform: scale(1.2) rotate(-8deg); }
+            50% { transform: scale(1.1) rotate(8deg); }
+            75% { transform: scale(1.2) rotate(-4deg); }
+        }
+        .tea-stage {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+        }
+        .tea-table {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: min(90%, 620px);
+            height: 18%;
+            transform: translateX(-50%);
+            border-radius: 50% 50% 12px 12px / 60% 60% 12px 12px;
+            background:
+                radial-gradient(circle, #fff 4px, transparent 5px) 0 0 / 28px 28px,
+                #f9a8d4;
+            box-shadow: 0 6px 0 #ec4899;
+        }
+        .cup-wrap {
+            position: absolute;
+            left: 50%;
+            bottom: 6%;
+            height: 72%;
+            aspect-ratio: 240 / 200;
+            transform: translateX(-50%);
+            transition: transform 0.6s cubic-bezier(.5,0,.5,1), opacity 0.3s ease;
+            cursor: pointer;
+        }
+        .cup-wrap svg, .pot-wrap svg { width: 100%; height: 100%; overflow: visible; }
+        .cup-wrap.fresh { animation: cupIn 0.5s cubic-bezier(.2,1.6,.4,1); }
+        @keyframes cupIn { from { transform: translateX(-50%) scale(0); } to { transform: translateX(-50%) scale(1); } }
+        .pot-wrap {
+            position: absolute;
+            left: calc(50% + 30px);
+            top: 0;
+            height: 40%;
+            aspect-ratio: 1;
+            transform-origin: 20% 60%;
+            transition: transform 0.5s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .pot-wrap.pour { transform: rotate(-38deg) translate(-10%, 6%); }
+        .stream {
+            position: absolute;
+            width: 12px;
+            margin-left: -6px;
+            border-radius: 6px;
+            transform-origin: 50% 0;
+            transform: scaleY(0);
+            transition: transform 0.35s ease;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .stream.on { transform: scaleY(1); }
+        .tea-surface {
+            transform-box: fill-box;
+            transform-origin: 50% 50%;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .tea-surface.empty { opacity: 0; transform: scale(0.3); }
+        .top-item { transform-box: fill-box; transform-origin: 50% 100%; }
+        .top-item.drop { animation: topDrop 0.5s cubic-bezier(.3,1.5,.5,1); }
+        @keyframes topDrop {
+            from { transform: translateY(-80px) scale(0.6); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+        .bob-item { animation: bobItem 1.6s ease-in-out infinite; transform-box: fill-box; }
+        @keyframes bobItem {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50% { transform: translateY(-3px) rotate(4deg); }
+        }
+        .swirl { transform-box: fill-box; transform-origin: 50% 50%; }
+        .stirring .swirl { animation: swirlSpin 0.5s linear 3; }
+        @keyframes swirlSpin { to { transform: rotate(360deg); } }
+        .spoon {
+            opacity: 0;
+            transform-box: view-box;
+            transform-origin: 120px 66px;
+        }
+        .stirring .spoon { opacity: 1; animation: stir 0.5s linear 3; }
+        @keyframes stir {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .tea-tabs {
+            display: flex;
+            gap: 6px;
+            z-index: 2;
+        }
+        .tea-tab {
+            border: 3px solid #fbcfe8;
+            background: rgba(255,255,255,0.7);
+            border-radius: 16px;
+            padding: 6px 14px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
+            color: #be185d;
+            cursor: pointer;
+            touch-action: none;
+        }
+        .tea-tab.active { background: #fff; border-color: #f472b6; transform: translateY(-3px); }
+        .tea-opts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            min-height: 74px;
+            z-index: 2;
+        }
+        .tea-opt {
+            width: 74px;
+            height: 74px;
+            border-radius: 20px;
+            border: 3px solid #fbcfe8;
+            background: #fff;
+            cursor: pointer;
+            font-size: 36px;
+            line-height: 1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            touch-action: none;
+            padding: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+        .tea-opt small {
+            font-family: 'Fredoka One', cursive;
+            font-size: 11px;
+            color: #be185d;
+        }
+        .tea-opt svg { width: 58px; height: 48px; }
+        .tea-opt .drop-dot {
+            width: 36px; height: 36px; border-radius: 50%;
+            box-shadow: inset -5px -5px 0 rgba(0,0,0,0.15), inset 4px 4px 0 rgba(255,255,255,0.4);
+        }
+        .tea-opt.sel { border-color: #f472b6; transform: translateY(-4px) scale(1.06); }
+        .tea-opt.stir-btn, .tea-opt.new-btn { width: auto; padding: 4px 14px; font-size: 30px; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -1769,7 +2079,7 @@
             <div class="toast" id="toast"></div>
             <div class="door-fade" id="doorFade"></div>
             <div class="night" id="night"></div>
-            <button class="dismount" id="dismount">🦄 Afstappen</button>
+            <div class="ride-btns" id="rideBtns"><button class="dismount" id="flyBtn">✨ Vliegen</button><button class="dismount" id="dismount">🦄 Afstappen</button></div>
             <button class="arrow left" id="btnLeft" aria-label="Naar links">◀</button>
             <button class="arrow right" id="btnRight" aria-label="Naar rechts">▶</button>
 
@@ -1790,11 +2100,44 @@
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
             </div>
+
+            <div class="tea" id="tea">
+                <div class="nails-title">🫖 Theehuisje</div>
+                <div class="guests" id="guests"></div>
+                <div class="tea-stage" id="teaStage">
+                    <div class="tea-table"></div>
+                    <div class="cup-wrap" id="cupWrap"><svg viewBox="0 0 240 200" id="cupSvg"></svg></div>
+                    <div class="pot-wrap" id="potWrap"><svg viewBox="0 0 160 160" id="potSvg"></svg></div>
+                    <div class="stream" id="stream"></div>
+                </div>
+                <div class="tea-tabs" id="teaTabs"></div>
+                <div class="tea-opts" id="teaOpts"></div>
+                <button class="scope-close" id="teaClose" aria-label="Sluiten">✖</button>
+            </div>
+            <svg width="0" height="0" style="position:absolute">
+                <defs>
+                    <linearGradient id="cgold" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#fde68a"/><stop offset=".45" stop-color="#f59e0b"/><stop offset=".7" stop-color="#fef3c7"/><stop offset="1" stop-color="#d97706"/>
+                    </linearGradient>
+                    <linearGradient id="crb" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stop-color="#fca5a5"/><stop offset=".2" stop-color="#fdba74"/><stop offset=".4" stop-color="#fde047"/>
+                        <stop offset=".6" stop-color="#86efac"/><stop offset=".8" stop-color="#93c5fd"/><stop offset="1" stop-color="#d8b4fe"/>
+                    </linearGradient>
+                    <linearGradient id="teaRb" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" stop-color="#ef4444"/><stop offset=".2" stop-color="#fb923c"/><stop offset=".4" stop-color="#facc15"/>
+                        <stop offset=".6" stop-color="#4ade80"/><stop offset=".8" stop-color="#60a5fa"/><stop offset="1" stop-color="#c084fc"/>
+                    </linearGradient>
+                    <pattern id="cdots" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="11" cy="11" r="4.5" fill="#fff"/></pattern>
+                </defs>
+            </svg>
         </div>
     </div>
 
     <script src="shared.js"></script>
     <script>
+        // No voice in this game: sounds and glitter only
+        speak = () => {};
+
         /* ─────────── Constants ─────────── */
         const WORLD_H = 500;
         const ROOM_W = 800;
@@ -1859,6 +2202,10 @@
             fountainBoost: 0,
             clopT: 0,
             anim: { dx: 0, dy: 0, rot: 0, origin: '' },
+            flying: false,
+            alt: 0,
+            targetAlt: 0,
+            flapT: 0,
             pet: { following: false, x: 200, facing: -1, key: 'in' },
             partyUntil: 0,
             lastTime: performance.now()
@@ -2104,7 +2451,7 @@
             const mane = ['#ef4444', '#fb923c', '#facc15', '#4ade80', '#60a5fa', '#a855f7'];
             return `
             <svg viewBox="0 -20 160 150">
-                <ellipse cx="80" cy="126" rx="56" ry="5" fill="rgba(0,0,0,0.18)"/>
+                <ellipse class="ushadow" cx="80" cy="126" rx="56" ry="5" fill="rgba(0,0,0,0.18)"/>
                 <g class="ubody">
                     <g class="utail">
                         ${mane.map((c, i) => `<path d="M36 ${48 + i * 2} Q${14 - i} ${60 + i * 4} ${20 - i * 2} ${92 + i * 3}" stroke="${c}" stroke-width="5" fill="none" stroke-linecap="round"/>`).join('')}
@@ -2114,6 +2461,14 @@
                     <g class="leg-a"><rect x="54" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="54" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
                     <g class="leg-b"><rect x="116" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="116" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
                     <ellipse cx="82" cy="64" rx="50" ry="27" fill="#fff" stroke="#e9d5ff" stroke-width="2"/>
+                    <defs><linearGradient id="uwingGrad" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0" stop-color="#fbcfe8"/><stop offset=".5" stop-color="#e9d5ff"/><stop offset="1" stop-color="#bae6fd"/>
+                    </linearGradient></defs>
+                    <g class="uwing">
+                        <path d="M66 46 C46 16 18 2 0 -16 C20 -12 32 -6 40 2 C24 -4 10 6 4 10 C22 8 36 14 44 22 C32 20 20 28 16 34 C36 30 52 38 66 52 Z"
+                            fill="url(#uwingGrad)" stroke="#f0abfc" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M60 44 C44 24 30 14 14 4 M58 46 C44 34 32 28 20 24" stroke="#fff" stroke-width="2" fill="none" opacity=".8"/>
+                    </g>
                     <circle cx="60" cy="58" r="3" fill="#fbcfe8"/><circle cx="74" cy="72" r="2.5" fill="#bae6fd"/><circle cx="96" cy="60" r="3" fill="#fde68a"/>
                     <path d="M106 52 L118 12 L140 16 L130 62 Z" fill="#fff" stroke="#e9d5ff" stroke-width="2" stroke-linejoin="round"/>
                     ${mane.map((c, i) => `<circle cx="${116 - i * 2}" cy="${10 + i * 9}" r="7" fill="${c}"/>`).join('')}
@@ -2160,13 +2515,27 @@
                 ['🌷', 'Een tulp!', 330], ['🌻', 'Een zonnebloem!', 45], ['🌹', 'Een roos!', 350],
                 ['🌼', 'Een madeliefje!', 50], ['🌸', 'Een roze bloem!', 320], ['💐', 'Een bosje bloemen!', 290]
             ];
-            blooms.forEach(([e, name, hue], i) => {
-                const bx = o1 + 70 + i * 115;
+            blooms.slice(0, 4).forEach(([e, name, hue], i) => {
+                const bx = o1 + 30 + i * 100;
                 addObj(`<div class="bloom">${e}</div>`, bx, 318 + (i % 2) * 18, bx + 38, (node) => bloomGrow(node, name, hue));
             });
             addObj('<div class="flutter">🦋</div>', o1 + 120, 150, o1 + 200, butterflyTap);
             addObj('<div class="flutter" style="animation-delay:-3s">🦋</div>', o1 + 480, 100, o1 + 560, butterflyTap);
             addObj('<div class="bee">🐝</div>', o1 + 360, 220, o1 + 390, beeBuzz);
+            addObj(`<div class="teahouse">
+                <div class="th-chimney"></div>
+                <span class="steam" style="position:absolute">☁️</span>
+                <span class="steam" style="position:absolute;animation-delay:-1.2s">☁️</span>
+                <div class="th-roof"></div>
+                <div class="th-wall"></div>
+                <div class="th-win" style="left:30px"></div>
+                <div class="th-win" style="right:30px"></div>
+                <div class="th-box" style="left:26px">🌷🌷🌷</div>
+                <div class="th-box" style="right:26px">🌸🌸🌸</div>
+                <div class="th-door"></div>
+                <div class="th-sign">☕ Theehuisje</div>
+                <div class="tap-hint" style="top:-40px">👇</div>
+            </div>`, o1 + 450, 140, o1 + 770, openTea);
 
             /* o2: Vijver */
             const o2 = ROOM_W * 2;
@@ -2227,6 +2596,14 @@
             </svg><div class="tap-hint" style="left:30px;top:-44px">👇</div></div>`, o4 + 400, 172, o4 + 430, slideRide);
             addObj('<div class="carousel">🎠</div>', o4 + 690, 300, o4 + 690, () => { playMusicBox(); sayRandom(['Draaimolen! Hoera!', 'Een paardje!']); });
 
+            state.skyStars = [];
+            for (let i = 0; i < 10; i++) {
+                const star = { node: el('<div class="skystar">🌟</div>'), got: false };
+                world.appendChild(star.node);
+                placeSkyStar(star, i);
+                state.skyStars.push(star);
+            }
+
             const uni = el(`<div class="unicorn" id="unicorn"><div class="uflip">${unicornSVG()}</div><div class="tap-hint" style="top:-40px">👇</div></div>`);
             world.appendChild(uni);
             uni.addEventListener('pointerdown', (e) => {
@@ -2245,19 +2622,21 @@
             state.x = state.targetX = state.uniX;
             princessEl().classList.add('riding');
             unicornEl().classList.add('ridden');
-            document.getElementById('dismount').classList.add('show');
-            speak('Hop! Op de eenhoorn! Galop!');
+            document.getElementById('rideBtns').classList.add('show');
+            speak('Hop! Op de eenhoorn! Galop! Wil je vliegen?');
             playWin();
             sparkleShower(state.x, 200, 50);
         }
 
         function dismountUnicorn(silent) {
             if (!state.riding) return;
+            if (state.flying || state.alt > 1) setFlying(false, true);
+            state.alt = state.targetAlt = 0;
             state.riding = false;
             state.uniX = state.x;
             princessEl().classList.remove('riding');
             unicornEl().classList.remove('ridden', 'walking');
-            document.getElementById('dismount').classList.remove('show');
+            document.getElementById('rideBtns').classList.remove('show');
             state.x = state.targetX = Math.max(60, Math.min(WORLD_W - 60, state.x + (state.x > WORLD_W - 200 ? -90 : 90)));
             burst(state.x, 380, 30);
             if (!silent) speak('Dag eenhoorn!');
@@ -2267,6 +2646,65 @@
             e.stopPropagation();
             dismountUnicorn(false);
         });
+
+        function maxAlt() {
+            const topY = -state.offsetY / state.scale;
+            return Math.max(120, FEET_Y - PRINCESS_H - RIDE_LIFT - 20 - topY);
+        }
+
+        function setFlying(on, silent) {
+            state.flying = on;
+            const btns = document.getElementById('rideBtns');
+            btns.classList.toggle('flying', on);
+            document.getElementById('flyBtn').textContent = on ? '⬇️ Landen' : '✨ Vliegen';
+            unicornEl().classList.toggle('flying', on);
+            princessEl().classList.toggle('flying', on);
+            if (on) {
+                state.targetAlt = maxAlt() * 0.6;
+                playFreqSweep(300, 1400, 0.6, 0.15);
+                sparkleShower(state.x, 300, 60);
+                if (!silent) speak('Vliegen! Omhoog! Tik in de lucht waar je heen wilt!');
+            } else {
+                state.targetAlt = 0;
+                if (!silent) {
+                    playFreqSweep(1000, 300, 0.6, 0.12);
+                    speak('Landen! Goed zo!');
+                }
+            }
+        }
+
+        document.getElementById('flyBtn').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            if (!state.riding || state.busy) return;
+            setFlying(!state.flying, false);
+        });
+
+        function placeSkyStar(star, i) {
+            const n = 10;
+            star.x = 150 + (i + Math.random() * 0.7) * ((ROOM_W * ROOMS_OUT.length - 300) / n);
+            star.y = 40 + Math.random() * 190;
+            star.node.style.left = star.x + 'px';
+            star.node.style.top = star.y + 'px';
+        }
+
+        function checkSkyStars() {
+            const py = FEET_Y - 110 - state.alt;
+            state.skyStars.forEach((star, i) => {
+                if (star.got) return;
+                if (Math.abs(star.x - state.x) < 60 && Math.abs(star.y - py) < 70) {
+                    star.got = true;
+                    star.node.classList.add('got');
+                    burst(star.x, star.y, 36);
+                    playSparkleSound();
+                    if (Math.random() < 0.4) speak(randomPick(['Een ster gevangen!', 'Sterretje!', 'Hoera, een ster!']));
+                    setTimeout(() => {
+                        star.got = false;
+                        star.node.classList.remove('got');
+                        placeSkyStar(star, i);
+                    }, 7000);
+                }
+            });
+        }
 
         function goThroughDoor(doorNode, toKey) {
             if (state.busy) return;
@@ -2421,6 +2859,7 @@
         }
 
         function checkGems() {
+            if (state.alt > 60) return;
             for (const g of scene.gems) {
                 if (g.got) continue;
                 if (Math.abs(g.x - state.x) < 40) {
@@ -2616,28 +3055,20 @@
             };
         }
 
-        // iOS only starts speech from a real tap (touchend/click, not pointerdown), so greet there
-        let greeted = false;
-        const greet = () => {
-            if (greeted) return;
-            greeted = true;
-            speak('Welkom in het kasteel, prinses!');
-        };
-        document.addEventListener('touchend', greet, true);
-        document.addEventListener('click', greet, true);
-
         let dragId = null;
         playfield.addEventListener('pointerdown', (e) => {
             if (state.busy || overlayOpen()) return;
             const p = screenToWorld(e.clientX, e.clientY);
             burst(p.x, p.y, 10);
             walkTo(p.x, null);
+            if (state.flying) state.targetAlt = Math.max(0, Math.min(maxAlt(), FEET_Y - 110 - p.y));
             dragId = e.pointerId;
         });
         playfield.addEventListener('pointermove', (e) => {
             if (e.pointerId !== dragId || state.busy || overlayOpen()) return;
             const p = screenToWorld(e.clientX, e.clientY);
             walkTo(p.x, null);
+            if (state.flying) state.targetAlt = Math.max(0, Math.min(maxAlt(), FEET_Y - 110 - p.y));
             if (Math.random() < 0.4) spawnSparkle(p.x, p.y, { speed: 60 });
         });
         const endDrag = (e) => { if (e.pointerId === dragId) dragId = null; };
@@ -2670,6 +3101,7 @@
             if (e.key === 'ArrowRight') { state.hold = 1; state.pending = null; }
             if (e.key === 'Escape' && scopeOpen) closeScope();
             if (e.key === 'Escape' && nailsOpen) closeNails();
+            if (e.key === 'Escape' && teaOpen) closeTea();
         });
         document.addEventListener('keyup', (e) => {
             if ((e.key === 'ArrowLeft' && state.hold === -1) || (e.key === 'ArrowRight' && state.hold === 1)) {
@@ -2812,13 +3244,13 @@
                     if (state.riding) {
                         // Rainbow trail from the tail + clip-clop hooves
                         for (let k = 0; k < 3; k++) {
-                            spawnSparkle(state.x - state.facing * 80, FEET_Y - 110 + Math.random() * 50, {
+                            spawnSparkle(state.x - state.facing * 80, FEET_Y - 110 - state.alt + Math.random() * 50, {
                                 vx: -state.facing * 60, vy: (Math.random() - 0.5) * 30, g: 0,
                                 hue: (now / 4 + k * 40) % 360, size: 6 + Math.random() * 6, max: 0.9
                             });
                         }
                         state.clopT -= dt;
-                        if (state.clopT <= 0) {
+                        if (state.clopT <= 0 && state.alt < 2) {
                             state.clopT = 0.16;
                             playTone(Math.random() < 0.5 ? 900 : 700, 0.05, 0.06, 'triangle');
                         }
@@ -2837,10 +3269,29 @@
                 princessEl().classList.remove('walking');
             }
 
+            // Altitude (flying unicorn)
+            if (!state.busy) {
+                state.alt += (state.targetAlt - state.alt) * Math.min(1, dt * 3);
+                if (!state.flying && state.alt < 1) state.alt = 0;
+            }
+            if (state.flying) {
+                state.flapT -= dt;
+                if (state.flapT <= 0) {
+                    state.flapT = 0.32;
+                    playFreqSweep(260, 180, 0.12, 0.05);
+                }
+                if (Math.random() < 0.7) {
+                    spawnSparkle(state.x - state.facing * 70, FEET_Y - 100 - state.alt + Math.random() * 40, {
+                        vx: -state.facing * 40, vy: 20, g: 10, hue: (now / 4) % 360, size: 5 + Math.random() * 5, max: 1
+                    });
+                }
+                checkSkyStars();
+            }
+
             // Wand sparkles
             if (Math.random() < 0.35) {
                 const wandX = state.x + state.facing * (0.38 * PRINCESS_W);
-                const wandY = FEET_Y - PRINCESS_H + 0.36 * PRINCESS_H - (state.riding ? RIDE_LIFT : 0);
+                const wandY = FEET_Y - PRINCESS_H + 0.36 * PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt;
                 spawnSparkle(wandX, wandY, { speed: 50, g: 30, size: 3 + Math.random() * 4, hue: 40 + Math.random() * 30 });
             }
 
@@ -2849,7 +3300,7 @@
             runTweens(now);
             const an = state.anim;
             p.style.transformOrigin = an.origin || '';
-            p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) + an.dy}px) rotate(${an.rot}deg)`;
+            p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt + an.dy}px) rotate(${an.rot}deg)`;
             updatePet(dt);
             p.classList.toggle('left', state.facing < 0);
 
@@ -2858,7 +3309,7 @@
                 const u = unicornEl();
                 const ux = state.riding ? state.x : state.uniX;
                 const uFacing = state.riding ? state.facing : (state.x < state.uniX ? -1 : 1);
-                u.style.transform = `translate(${ux - UNICORN_W / 2}px, ${FEET_Y - UNICORN_H + 6}px)`;
+                u.style.transform = `translate(${ux - UNICORN_W / 2}px, ${FEET_Y - UNICORN_H + 6 - (state.riding ? state.alt : 0)}px)`;
                 u.classList.toggle('left', uFacing < 0);
                 u.classList.toggle('walking', state.riding && p.classList.contains('walking'));
 
@@ -3356,7 +3807,366 @@
             closeNails();
         });
 
-        function overlayOpen() { return scopeOpen || nailsOpen; }
+
+        /* ─────────── Theehuisje ─────────── */
+        const teaEl = document.getElementById('tea');
+        const cupSvg = document.getElementById('cupSvg');
+        const cupWrap = document.getElementById('cupWrap');
+        const potWrap = document.getElementById('potWrap');
+        const streamEl = document.getElementById('stream');
+        let teaOpen = false;
+        let teaTab = 'cup';
+        let teaBusy = false;
+
+        const CUPS = [
+            { fill: '#f9a8d4', name: 'Het roze stippenkopje', dots: true },
+            { fill: '#93c5fd', name: 'Het blauwe bloemenkopje', deco: '🌼' },
+            { fill: 'url(#cgold)', name: 'Het gouden kopje', rim: '#fff' },
+            { fill: 'url(#crb)', name: 'Het regenboogkopje' },
+            { fill: '#ffffff', name: 'Het witte hartjeskopje', deco: '💖' },
+            { fill: '#c4b5fd', name: 'Het paarse sterrenkopje', deco: '⭐' }
+        ];
+        const TEAS = [
+            { c: '#c2410c', name: 'Gewone thee', short: 'Thee' },
+            { c: '#f472b6', name: 'Aardbeienthee', short: 'Aardbei' },
+            { c: '#4ade80', name: 'Muntthee', short: 'Munt' },
+            { c: '#8b5cf6', name: 'Bosbessenthee', short: 'Bosbes' },
+            { c: '#6b3a1e', name: 'Warme chocolademelk', short: 'Choco' },
+            { c: 'url(#teaRb)', name: 'Regenboogthee', short: 'Regenboog', css: 'linear-gradient(90deg,#ef4444,#facc15,#4ade80,#60a5fa,#c084fc)' }
+        ];
+        const TOPPINGS = [
+            { id: 'suiker', e: '🧊', name: 'Een suikerklontje' },
+            { id: 'melk', e: '🥛', name: 'Een scheutje melk' },
+            { id: 'honing', e: '🍯', name: 'Honing' },
+            { id: 'citroen', e: '🍋', name: 'Een schijfje citroen' },
+            { id: 'aardbei', e: '🍓', name: 'Een aardbei' },
+            { id: 'slagroom', e: '🍦', name: 'Slagroom' },
+            { id: 'hagelslag', e: '🎉', name: 'Hagelslag' },
+            { id: 'marshmallow', e: '🍡', name: 'Marshmallows' },
+            { id: 'bloem', e: '🌸', name: 'Een bloemetje' },
+            { id: 'glitter', e: '✨', name: 'Glitter' },
+            { id: 'koekje', e: '🍪', name: 'Een koekje' }
+        ];
+        const GUESTS = [
+            { e: '🧸', name: 'Beer' },
+            { e: '🐱', name: 'Poes' },
+            { e: '🦄', name: 'Eenhoorn' },
+            { e: '🐰', name: 'Konijn' }
+        ];
+        let cup = { design: 0, tea: null, tops: [] };
+
+        function mixWhite(hex, amt) {
+            if (!hex.startsWith('#')) return hex;
+            const n = parseInt(hex.slice(1), 16);
+            const mix = v => Math.round(v + (255 - v) * amt);
+            const r = mix(n >> 16), g = mix((n >> 8) & 255), b = mix(n & 255);
+            return `rgb(${r},${g},${b})`;
+        }
+
+        function cupBody(d) {
+            const c = CUPS[d];
+            let deco = '';
+            if (c.dots) deco += `<path d="M40 62 L200 62 Q196 168 120 176 Q44 168 40 62 Z" fill="url(#cdots)" opacity=".85"/>`;
+            if (c.deco) deco += [[82, 118], [120, 138], [158, 118]].map(([x, y]) => `<text x="${x}" y="${y}" font-size="24" text-anchor="middle" dominant-baseline="central">${c.deco}</text>`).join('');
+            return `
+                <ellipse cx="120" cy="184" rx="112" ry="16" fill="#fff" stroke="#f9a8d4" stroke-width="3"/>
+                <ellipse cx="120" cy="182" rx="70" ry="8" fill="#fdf2f8"/>
+                <path d="M196 86 q44 -2 38 36 q-6 30 -48 30" fill="none" stroke="${c.fill}" stroke-width="15" stroke-linecap="round"/>
+                <path d="M196 86 q44 -2 38 36 q-6 30 -48 30" fill="none" stroke="rgba(0,0,0,0.12)" stroke-width="2"/>
+                <path d="M40 62 L200 62 Q196 168 120 176 Q44 168 40 62 Z" fill="${c.fill}" stroke="rgba(0,0,0,0.12)" stroke-width="2"/>
+                ${deco}
+                <ellipse cx="120" cy="62" rx="80" ry="16" fill="#fff7ed" stroke="${c.rim || '#fcd34d'}" stroke-width="5"/>`;
+        }
+
+        function teaFill() {
+            if (!cup.tea) return 'transparent';
+            const t = TEAS[cup.tea];
+            return cup.tops.includes('melk') ? mixWhite(t.c, 0.45) : t.c;
+        }
+
+        function renderCup(animateTop) {
+            const has = id => cup.tops.includes(id);
+            const surfaceTopY = 66;
+            let tops = '';
+            const it = (id, inner) => `<g class="top-item${animateTop === id ? ' drop' : ''}">${inner}</g>`;
+            if (has('melk') && cup.tea) tops += it('melk', `<path class="swirl" d="M92 66 q14 -8 28 0 t28 0" stroke="#fff" stroke-width="4" fill="none" opacity=".85" stroke-linecap="round"/>`);
+            if (has('honing')) tops += it('honing', `<path class="swirl" d="M100 64 q20 10 40 0 q-10 -8 -20 -2 q-6 4 0 6" stroke="#fbbf24" stroke-width="5" fill="none" stroke-linecap="round"/>`);
+            if (has('suiker')) tops += it('suiker', `<g class="bob-item"><rect x="78" y="56" width="16" height="14" rx="3" fill="#fff" stroke="#e5e7eb"/><rect x="146" y="58" width="15" height="13" rx="3" fill="#fff" stroke="#e5e7eb"/></g>`);
+            if (has('marshmallow')) tops += it('marshmallow', `<g class="bob-item"><rect x="100" y="52" width="18" height="16" rx="7" fill="#fbcfe8"/><rect x="122" y="54" width="18" height="15" rx="7" fill="#fff"/><rect x="112" y="46" width="17" height="15" rx="7" fill="#fff" stroke="#fbcfe8"/></g>`);
+            if (has('slagroom')) tops += it('slagroom', `<g><circle cx="95" cy="56" r="17" fill="#fff"/><circle cx="145" cy="56" r="17" fill="#fff"/><circle cx="120" cy="48" r="22" fill="#fff"/><circle cx="120" cy="28" r="13" fill="#fff"/><path d="M120 12 q6 4 0 10" fill="#fff"/></g>`);
+            if (has('hagelslag')) {
+                const y0 = has('slagroom') ? 36 : 60;
+                const cols = ['#ef4444', '#facc15', '#4ade80', '#60a5fa', '#c084fc', '#f472b6'];
+                let sp = '';
+                for (let i = 0; i < 16; i++) {
+                    const x = 96 + (i * 37) % 50, y = y0 + (i * 13) % 20;
+                    sp += `<rect x="${x}" y="${y}" width="8" height="3" rx="1.5" fill="${cols[i % cols.length]}" transform="rotate(${(i * 47) % 180} ${x + 4} ${y + 1.5})"/>`;
+                }
+                tops += it('hagelslag', sp);
+            }
+            if (has('bloem')) tops += it('bloem', `<text x="120" y="${has('slagroom') ? 16 : 56}" font-size="28" text-anchor="middle" dominant-baseline="central">🌸</text>`);
+            if (has('glitter')) {
+                let g = '';
+                [[96, 62], [118, 70], [140, 60], [108, 56], [150, 68], [128, 50], [86, 68]].forEach(([x, y], i) => {
+                    g += `<circle cx="${x}" cy="${y - (has('slagroom') ? 20 : 0)}" r="${2 + (i % 3)}" fill="#fff" class="gl-dot" style="animation: glTwinkle 0.8s ${-i * 0.2}s ease-in-out infinite alternate"/>`;
+                });
+                tops += it('glitter', g);
+            }
+            if (has('citroen')) tops += it('citroen', `<text x="196" y="58" font-size="34" text-anchor="middle" dominant-baseline="central">🍋</text>`);
+            if (has('aardbei')) tops += it('aardbei', `<text x="46" y="54" font-size="32" text-anchor="middle" dominant-baseline="central">🍓</text>`);
+            if (has('koekje')) tops += it('koekje', `<text x="30" y="178" font-size="34" text-anchor="middle" dominant-baseline="central">🍪</text>`);
+
+            cupSvg.innerHTML = `${cupBody(cup.design)}
+                <ellipse class="tea-surface${cup.tea ? '' : ' empty'}" cx="120" cy="${surfaceTopY}" rx="73" ry="12" fill="${teaFill()}"/>
+                ${tops}
+                <g class="spoon"><line x1="120" y1="66" x2="150" y2="-10" stroke="#d4d4d8" stroke-width="6" stroke-linecap="round"/>
+                <ellipse cx="152" cy="-16" rx="7" ry="10" fill="#e4e4e7"/></g>`;
+        }
+
+        function renderPot() {
+            document.getElementById('potSvg').innerHTML = `
+                <path d="M40 78 Q4 60 6 40" stroke="#f472b6" stroke-width="14" fill="none" stroke-linecap="round"/>
+                <path d="M122 62 q34 4 30 34 q-4 22 -30 22" stroke="#f472b6" stroke-width="12" fill="none"/>
+                <ellipse cx="80" cy="96" rx="52" ry="46" fill="#f9a8d4" stroke="#ec4899" stroke-width="3"/>
+                <path d="M34 96 Q80 116 126 96" stroke="#fff" stroke-width="5" fill="none"/>
+                <text x="80" y="82" font-size="22" text-anchor="middle" dominant-baseline="central">🌸</text>
+                <ellipse cx="80" cy="54" rx="34" ry="10" fill="#fbcfe8" stroke="#ec4899" stroke-width="3"/>
+                <circle cx="80" cy="42" r="8" fill="#fcd34d"/>`;
+        }
+
+        function renderGuests() {
+            document.getElementById('guests').innerHTML = GUESTS.map((g, i) =>
+                `<button class="guest" data-g="${i}">${g.e}<span class="gname">${g.name}</span><span class="gcup">☕</span></button>`).join('');
+            document.querySelectorAll('.guest').forEach(btn => {
+                btn.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    serveTea(+btn.dataset.g, btn);
+                });
+            });
+        }
+
+        function renderTabs() {
+            const tabs = [['cup', '☕ Kopje'], ['tea', '🫖 Thee'], ['tops', '🍓 Erin']];
+            const el2 = document.getElementById('teaTabs');
+            el2.innerHTML = tabs.map(([k, label]) => `<button class="tea-tab${teaTab === k ? ' active' : ''}" data-k="${k}">${label}</button>`).join('');
+            el2.querySelectorAll('.tea-tab').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                teaTab = b.dataset.k;
+                playPop();
+                renderTabs();
+                renderOpts();
+            }));
+        }
+
+        function renderOpts() {
+            const box = document.getElementById('teaOpts');
+            if (teaTab === 'cup') {
+                box.innerHTML = CUPS.map((c, i) => `<button class="tea-opt${cup.design === i ? ' sel' : ''}" data-i="${i}">
+                    <svg viewBox="0 0 240 200">${cupBody(i)}</svg></button>`).join('');
+                box.querySelectorAll('.tea-opt').forEach(b => b.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    chooseCup(+b.dataset.i);
+                }));
+            } else if (teaTab === 'tea') {
+                box.innerHTML = TEAS.map((t, i) => `<button class="tea-opt${cup.tea === i ? ' sel' : ''}" data-i="${i}">
+                    <span class="drop-dot" style="background:${t.css || t.c}"></span><small>${t.short}</small></button>`).join('');
+                box.querySelectorAll('.tea-opt').forEach(b => b.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    pourTea(+b.dataset.i);
+                }));
+            } else {
+                box.innerHTML = TOPPINGS.map((t, i) => `<button class="tea-opt${cup.tops.includes(t.id) ? ' sel' : ''}" data-i="${i}">${t.e}</button>`).join('') +
+                    `<button class="tea-opt stir-btn" id="stirBtn">🥄<small>Roeren</small></button>`;
+                box.querySelectorAll('.tea-opt[data-i]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    addTopping(+b.dataset.i);
+                }));
+                document.getElementById('stirBtn').addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    stirTea();
+                });
+            }
+        }
+
+        function teaSpark(el2, n = 8) {
+            const r = el2.getBoundingClientRect();
+            const o = teaEl.getBoundingClientRect();
+            const x = r.left + r.width / 2 - o.left;
+            const y = r.top + r.height / 3 - o.top;
+            const icons = ['✨', '⭐', '💖', '🌟', '💫'];
+            for (let i = 0; i < n; i++) {
+                const s = document.createElement('span');
+                s.className = 'scope-spark';
+                s.textContent = randomPick(icons);
+                const a = Math.random() * Math.PI * 2;
+                const d = 50 + Math.random() * 60;
+                s.style.left = x + 'px';
+                s.style.top = y + 'px';
+                s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                teaEl.appendChild(s);
+                setTimeout(() => s.remove(), 900);
+            }
+        }
+
+        function sayNow(text) {
+            if (window.speechSynthesis) speechSynthesis.cancel();
+            setTimeout(() => speak(text), 40);
+        }
+
+        function chooseCup(i) {
+            if (teaBusy) return;
+            cup.design = i;
+            renderCup();
+            playPop();
+            teaSpark(cupWrap);
+            sayNow(CUPS[i].name + '!');
+            teaTab = 'tea';
+            renderTabs();
+            renderOpts();
+        }
+
+        function pourTea(i) {
+            if (teaBusy) return;
+            teaBusy = true;
+            cup.tea = i;
+            const t = TEAS[i];
+            sayNow(t.name + '! Inschenken maar!');
+            potWrap.classList.add('pour');
+            const stage = document.getElementById('teaStage').getBoundingClientRect();
+            setTimeout(() => {
+                const pr = potWrap.getBoundingClientRect();
+                const cr = cupWrap.getBoundingClientRect();
+                const x = pr.left - stage.left + pr.width * 0.12;
+                const y = pr.top - stage.top + pr.height * 0.42;
+                const endY = cr.top - stage.top + cr.height * 0.32;
+                streamEl.style.left = x + 'px';
+                streamEl.style.top = y + 'px';
+                streamEl.style.height = Math.max(20, endY - y) + 'px';
+                streamEl.style.background = t.css || t.c;
+                streamEl.classList.add('on');
+                for (let k = 0; k < 5; k++) setTimeout(() => playFreqSweep(260 + k * 30, 420 + k * 40, 0.14, 0.12), k * 180);
+            }, 450);
+            setTimeout(() => renderCup(), 800);
+            setTimeout(() => {
+                streamEl.classList.remove('on');
+                potWrap.classList.remove('pour');
+                teaSpark(cupWrap, 10);
+                teaBusy = false;
+                teaTab = 'tops';
+                renderTabs();
+                renderOpts();
+            }, 1600);
+        }
+
+        function addTopping(i) {
+            if (teaBusy) return;
+            const t = TOPPINGS[i];
+            if (!cup.tea && !['koekje', 'citroen', 'aardbei'].includes(t.id)) {
+                sayNow('Eerst thee inschenken!');
+                teaTab = 'tea';
+                renderTabs();
+                renderOpts();
+                return;
+            }
+            if (!cup.tops.includes(t.id)) cup.tops.push(t.id);
+            renderCup(t.id);
+            renderOpts();
+            playTone(1000 + i * 60, 0.12, 0.14, 'triangle');
+            if (t.id === 'glitter') playSparkleSound();
+            teaSpark(cupWrap, 6);
+            sayNow(t.name + '!');
+        }
+
+        function stirTea() {
+            if (teaBusy || !cup.tea) {
+                if (!cup.tea) sayNow('Eerst thee inschenken!');
+                return;
+            }
+            teaBusy = true;
+            cupSvg.classList.add('stirring');
+            sayNow('Roeren, roeren, roeren!');
+            for (let k = 0; k < 6; k++) setTimeout(() => playTone(2200 + (k % 2) * 300, 0.05, 0.08, 'sine'), k * 250);
+            setTimeout(() => {
+                cupSvg.classList.remove('stirring');
+                teaBusy = false;
+            }, 1550);
+        }
+
+        function serveTea(g, btn) {
+            if (teaBusy) return;
+            if (!cup.tea) {
+                sayNow(GUESTS[g].name + ' wil graag thee! Kies eerst een kleurtje thee.');
+                return;
+            }
+            teaBusy = true;
+            const cr = cupWrap.getBoundingClientRect();
+            const br = btn.getBoundingClientRect();
+            const dx = (br.left + br.width / 2) - (cr.left + cr.width / 2);
+            const dy = (br.top + br.height / 2) - (cr.top + cr.height / 2);
+            cupWrap.style.transform = `translate(calc(-50% + ${dx}px), ${dy}px) scale(0.25)`;
+            playFreqSweep(500, 900, 0.3, 0.12);
+            setTimeout(() => {
+                cupWrap.style.opacity = '0';
+                btn.classList.remove('drink');
+                void btn.offsetWidth;
+                btn.classList.add('drink', 'served');
+                playFreqSweep(900, 200, 0.5, 0.15);
+                teaSpark(btn, 12);
+                const yum = cup.tops.length >= 3 ? 'Mmm, wat een feestthee!' : 'Mmm, lekker!';
+                sayNow(`${GUESTS[g].name} zegt: slurp slurp! ${yum}`);
+            }, 620);
+            setTimeout(() => {
+                cup = { design: cup.design, tea: null, tops: [] };
+                cupWrap.style.transition = 'none';
+                cupWrap.style.transform = '';
+                cupWrap.style.opacity = '';
+                renderCup();
+                void cupWrap.offsetWidth;
+                cupWrap.style.transition = '';
+                cupWrap.classList.remove('fresh');
+                void cupWrap.offsetWidth;
+                cupWrap.classList.add('fresh');
+                teaBusy = false;
+                teaTab = 'cup';
+                renderTabs();
+                renderOpts();
+                if (document.querySelectorAll('.guest.served').length === GUESTS.length) {
+                    playWin();
+                    sayNow('Iedereen heeft thee! Theefeest!');
+                    document.querySelectorAll('.guest').forEach((b, k) => setTimeout(() => teaSpark(b, 10), k * 150));
+                    setTimeout(() => document.querySelectorAll('.guest').forEach(b => b.classList.remove('served')), 3000);
+                }
+            }, 2200);
+        }
+
+        function openTea() {
+            teaOpen = true;
+            teaEl.classList.add('open');
+            cup = { design: cup.design, tea: null, tops: [] };
+            teaTab = 'cup';
+            renderCup();
+            renderPot();
+            renderGuests();
+            renderTabs();
+            renderOpts();
+            speak('Welkom in het theehuisje! Kies een kopje!');
+            playMusicBox();
+        }
+
+        function closeTea() {
+            teaOpen = false;
+            teaEl.classList.remove('open');
+            _playWhoosh();
+            sayRandom(['Dag theehuisje!', 'Dat was een lekker theefeest!']);
+        }
+        document.getElementById('teaClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeTea();
+        });
+        teaEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
