@@ -2360,6 +2360,282 @@
         }
         .gem.magnet { transition: left 0.7s ease-in, top 0.7s ease-in; }
 
+        /* ── Dierensalon room ── */
+        .i-room.r8 .wall {
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.9) 2px, transparent 2px) 0 0 / 40px 40px,
+                linear-gradient(0deg, rgba(255,255,255,0.9) 2px, transparent 2px) 0 0 / 40px 40px,
+                linear-gradient(180deg, #cffafe, #a5f3fc);
+        }
+        .i-room.r8 .floor {
+            background: conic-gradient(#fff 25%, #bae6fd 0 50%, #fff 0 75%, #bae6fd 0) 0 0 / 50px 50px;
+        }
+        .bathtub { width: 320px; height: 210px; }
+        .bathtub > div, .bathtub > span { position: absolute; }
+        .bathtub .foam {
+            left: 20px; top: 0; width: 280px; height: 80px;
+            background:
+                radial-gradient(circle at 15% 70%, #fff 0 28px, transparent 29px),
+                radial-gradient(circle at 35% 45%, #fff 0 34px, transparent 35px),
+                radial-gradient(circle at 58% 60%, #fff 0 30px, transparent 31px),
+                radial-gradient(circle at 80% 50%, #fff 0 32px, transparent 33px),
+                radial-gradient(circle at 92% 75%, #fff 0 22px, transparent 23px);
+            filter: drop-shadow(0 2px 3px rgba(125,211,252,0.6));
+        }
+        .bathtub .tub {
+            left: 0; top: 60px; width: 320px; height: 120px;
+            border-radius: 20px 20px 90px 90px;
+            background: linear-gradient(180deg, #fff, #fce7f3);
+            border: 6px solid #f9a8d4;
+            box-shadow: inset 0 -12px 20px rgba(244,114,182,0.2);
+        }
+        .bathtub .foot { top: 170px; width: 30px; height: 40px; border-radius: 0 0 14px 14px; background: #fcd34d; }
+        .bathtub .duck { left: 250px; top: 16px; font-size: 42px; animation: carousel 2.4s ease-in-out infinite; }
+        .shower-head {
+            font-size: 64px;
+            line-height: 1;
+            pointer-events: none;
+            transform: scaleX(-1);
+        }
+        .towels {
+            width: 140px; height: 110px;
+            pointer-events: none;
+        }
+        .towels::before {
+            content: '';
+            position: absolute; left: 0; top: 0; width: 140px; height: 8px;
+            border-radius: 4px; background: #fcd34d;
+        }
+        .towels span {
+            position: absolute; top: 6px; width: 40px; height: 90px;
+            border-radius: 0 0 10px 10px;
+        }
+
+        /* ── Dierensalon overlay ── */
+        .care {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 6px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(255,255,255,0.7) 2px, transparent 2px) 0 0 / 44px 44px,
+                linear-gradient(0deg, rgba(255,255,255,0.7) 2px, transparent 2px) 0 0 / 44px 44px,
+                linear-gradient(180deg, #e0f2fe, #cffafe);
+        }
+        .care.open { display: flex; }
+        .care-pets { display: flex; gap: 8px; z-index: 2; flex-wrap: wrap; justify-content: center; }
+        .care-pet {
+            position: relative;
+            width: 64px; height: 64px;
+            border-radius: 18px;
+            border: 3px solid #bae6fd;
+            background: #fff;
+            font-size: 40px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .care-pet.sel { border-color: #f472b6; transform: translateY(-4px) scale(1.08); }
+        .care-pet .done {
+            position: absolute; right: -6px; top: -8px; font-size: 20px;
+            display: none;
+        }
+        .care-pet.is-done .done { display: block; }
+        .care-stage {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+        }
+        .pet-box {
+            position: absolute;
+            left: 50%;
+            bottom: 10%;
+            height: 76%;
+            aspect-ratio: 1;
+            transform: translateX(-50%);
+        }
+        .pet-emoji {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: filter 0.4s ease;
+        }
+        .pet-emoji.wiggle { animation: petWiggle 0.6s ease; }
+        .pet-emoji.jump { animation: petJump 0.9s ease; }
+        @keyframes petWiggle {
+            0%, 100% { transform: rotate(0); }
+            25% { transform: rotate(-8deg); }
+            75% { transform: rotate(8deg); }
+        }
+        @keyframes petJump {
+            0%, 100% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-18%) scale(1.08); }
+        }
+        .pet-emoji.wet { filter: saturate(0.8) brightness(0.92); }
+        .pet-emoji.fluffy { animation: fluff 0.8s cubic-bezier(.2,1.8,.4,1); }
+        @keyframes fluff {
+            0% { transform: scale(0.9); }
+            60% { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+        .pet-emoji.shiny { filter: drop-shadow(0 0 12px #fde68a) drop-shadow(0 0 24px #fff) brightness(1.05); }
+        .pet-layer, .pet-acc {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .mud {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            border-radius: 50% 40% 55% 45% / 45% 55% 40% 50%;
+            background: radial-gradient(circle at 40% 40%, #a16207, #78350f 70%);
+            opacity: 0.92;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .mud.soapy { background: radial-gradient(circle at 40% 40%, #d6b98c, #a47148 70%); opacity: 0.7; }
+        .mud.gone, .foam-b.gone, .wet-drop.gone { opacity: 0; transform: translate(-50%, -50%) scale(0.2); }
+        .leaf { position: absolute; transform: translate(-50%, -50%); transition: opacity 0.3s ease, transform 0.3s ease; }
+        .foam-b {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff 0 40%, #e0f2fe 70%, #bae6fd);
+            box-shadow: 0 0 4px rgba(125,211,252,0.6);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            animation: sprout 0.25s ease-out;
+        }
+        .wet-drop {
+            position: absolute;
+            width: 5%;
+            height: 7%;
+            transform: translate(-50%, -50%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: radial-gradient(circle at 35% 35%, #fff, #7dd3fc 45%, #0ea5e9);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .acc {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            animation: sprout 0.4s cubic-bezier(.2,1.6,.4,1);
+        }
+        .care-tub-front {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: min(92%, 640px);
+            height: 26%;
+            transform: translateX(-50%);
+            border-radius: 20px 20px 80px 80px;
+            background: linear-gradient(180deg, #fff, #fce7f3);
+            border: 6px solid #f9a8d4;
+            pointer-events: none;
+        }
+        .care-tub-front::before {
+            content: '';
+            position: absolute;
+            left: 4%; right: 4%; top: -26px; height: 40px;
+            background:
+                radial-gradient(circle at 8% 60%, #fff 0 18px, transparent 19px),
+                radial-gradient(circle at 22% 40%, #fff 0 22px, transparent 23px),
+                radial-gradient(circle at 40% 55%, #fff 0 18px, transparent 19px),
+                radial-gradient(circle at 60% 45%, #fff 0 22px, transparent 23px),
+                radial-gradient(circle at 78% 60%, #fff 0 18px, transparent 19px),
+                radial-gradient(circle at 93% 45%, #fff 0 20px, transparent 21px);
+            filter: drop-shadow(0 2px 2px rgba(125,211,252,0.6));
+        }
+        .tool-cursor {
+            position: absolute;
+            width: 76px;
+            height: 76px;
+            margin: -38px 0 0 -38px;
+            font-size: 60px;
+            line-height: 76px;
+            text-align: center;
+            pointer-events: none;
+            z-index: 5;
+            display: none;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
+        }
+        .tool-cursor.show { display: block; }
+        .tool-cursor svg { width: 70px; height: 70px; }
+        .fx-bit {
+            position: absolute;
+            pointer-events: none;
+            z-index: 4;
+            line-height: 1;
+        }
+        .spray {
+            width: 6px; height: 14px;
+            margin-left: -3px;
+            border-radius: 3px;
+            background: #38bdf8;
+            animation: spray 0.5s linear forwards;
+        }
+        @keyframes spray {
+            from { transform: translate(0, 0); opacity: 1; }
+            to { transform: translate(var(--dx), 120px); opacity: 0; }
+        }
+        .air {
+            width: 34px; height: 4px;
+            border-radius: 2px;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 0 4px #fbcfe8;
+            animation: air 0.45s ease-out forwards;
+        }
+        @keyframes air {
+            from { transform: translate(0, 0) scaleX(0.4); opacity: 1; }
+            to { transform: translate(-90px, var(--dy)) scaleX(1.2); opacity: 0; }
+        }
+        .twinkle {
+            font-size: 26px;
+            animation: twinkleBit 0.7s ease-out forwards;
+        }
+        @keyframes twinkleBit {
+            from { transform: translate(-50%, -50%) scale(0.3) rotate(0); opacity: 1; }
+            to { transform: translate(-50%, -80%) scale(1.3) rotate(90deg); opacity: 0; }
+        }
+        .care-tools { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 2; }
+        .care-tool {
+            min-width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            border: 3px solid #bae6fd;
+            background: #fff;
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+            padding: 2px 8px;
+        }
+        .care-tool svg { width: 34px; height: 34px; }
+        .care-tool small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #0369a1; }
+        .care-tool.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-5px) scale(1.08); }
+        .care-tool.hint { animation: hintPulse 0.5s ease 3; }
+        @keyframes hintPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
+            50% { transform: scale(1.2); box-shadow: 0 0 0 8px rgba(244,114,182,0.4); }
+        }
+        .care-tool.pulse { animation: hintPulse 0.8s ease infinite; border-color: #4ade80; }
+        .care-sep { width: 2px; height: 50px; background: #bae6fd; border-radius: 1px; align-self: center; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -2414,6 +2690,22 @@
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="care" id="care">
+                <div class="nails-title">🛁 Dierensalon</div>
+                <div class="care-pets" id="carePets"></div>
+                <div class="care-stage" id="careStage">
+                    <div class="pet-box" id="petBox">
+                        <div class="pet-emoji" id="petEmoji">🐶</div>
+                        <div class="pet-layer" id="petLayer"></div>
+                        <div class="pet-acc" id="petAcc"></div>
+                    </div>
+                    <div class="care-tub-front"></div>
+                    <div class="tool-cursor" id="toolCursor"></div>
+                </div>
+                <div class="care-tools" id="careTools"></div>
+                <button class="scope-close" id="careClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="tea" id="tea">
                 <div class="nails-title">🫖 Theehuisje</div>
                 <div class="guests" id="guests"></div>
@@ -2462,7 +2754,8 @@
             { name: 'Balzaal',       icon: '💃', say: 'De balzaal' },
             { name: 'Regenboogzaal', icon: '🌈', say: 'De regenboogzaal' },
             { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' },
-            { name: 'Slaapkamer',    icon: '🛏️', say: 'De slaapkamer' }
+            { name: 'Slaapkamer',    icon: '🛏️', say: 'De slaapkamer' },
+            { name: 'Dierensalon',   icon: '🛁', say: 'De dierensalon' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -2488,7 +2781,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 18, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 20, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
         let scene = SCENES.in;
@@ -2759,6 +3052,25 @@
             place(el('<div class="bed-cover" id="bedCover"></div>'), r6 + 356, 330);
             addObj('<div class="emoji-obj">🧸</div>', r6 + 640, 380, r6 + 630, teddyHug);
             addObj('<div class="emoji-obj" style="font-size:44px">🎶</div>', r6 + 690, 200, r6 + 690, () => { playLullaby(); speak('Een slaapliedje!'); });
+
+            /* Room: Dierensalon */
+            const rd = ROOM_W * 8;
+            place(el('<div class="shower-head">🚿</div>'), rd + 380, 90);
+            place(el(`<div class="towels">
+                <span style="left:6px;background:#f9a8d4"></span>
+                <span style="left:50px;background:#c4b5fd"></span>
+                <span style="left:94px;background:#86efac"></span>
+            </div>`), rd + 620, 150);
+            addObj('<div class="emoji-obj" style="font-size:44px">🧴</div>', rd + 60, 200, rd + 90, () => { playFreqSweep(600, 300, 0.2, 0.15); burst(rd + 85, 220, 20); });
+            addObj(`<div class="bathtub">
+                <div class="foam"></div>
+                <div class="tub"></div>
+                <div class="foot" style="left:40px"></div><div class="foot" style="left:250px"></div>
+                <span class="duck">🦆</span>
+                <div class="tap-hint" style="top:-44px">👇</div>
+            </div>`, rd + 240, 222, rd + 400, () => openCare(0));
+            CARE_PETS.slice(0, 3).forEach((pet, i) =>
+                addObj(`<div class="emoji-obj">${pet.e}</div>`, rd + 70 + i * 60, 380 - (i % 2) * 8, rd + 150, () => openCare(i)));
 
             /* Pet cat (starts in the hall) */
             const pet = el('<div class="pet" id="pet"><span class="pbob"><span class="pflip">🐈</span></span><span class="collar">💖</span></div>');
@@ -3873,6 +4185,7 @@
             if (e.key === 'Escape' && scopeOpen) closeScope();
             if (e.key === 'Escape' && nailsOpen) closeNails();
             if (e.key === 'Escape' && teaOpen) closeTea();
+            if (e.key === 'Escape' && careOpen) closeCare();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -4329,6 +4642,24 @@
             { s: '🌸', name: 'Een bloemetje!' },
             { s: '🦄', name: 'Een eenhoorn!' }
         ];
+        const RINGS = [
+            { band: 'url(#ngold)', gem: '#f472b6' },
+            { band: 'url(#nsilverBase)', gem: '#38bdf8' },
+            { band: '#fda4af', gem: '#ef4444', heart: true },
+            { band: 'url(#ngold)', gem: '#a855f7' },
+            { band: 'url(#nrb)', gem: '#ffffff' }
+        ];
+
+        function ringSVG(r, w) {
+            const gem = r.heart
+                ? `<path d="M0 ${-w * 0.1} C${-w * 0.4} ${-w * 0.46} ${-w * 0.44} ${-w * 0.02} 0 ${w * 0.2} C${w * 0.44} ${-w * 0.02} ${w * 0.4} ${-w * 0.46} 0 ${-w * 0.1} Z" fill="${r.gem}" stroke="#fff" stroke-width="2" transform="translate(0,${-w * 0.2})"/>`
+                : `<circle cx="0" cy="${-w * 0.22}" r="${w * 0.28}" fill="${r.gem}" stroke="#fff" stroke-width="2.5"/>
+                   <circle cx="${-w * 0.09}" cy="${-w * 0.31}" r="${w * 0.08}" fill="#fff" opacity=".9"/>`;
+            return `<rect x="${-w / 2 - 4}" y="-7" width="${w + 8}" height="14" rx="7" fill="${r.band}" stroke="rgba(0,0,0,0.18)" stroke-width="1"/>
+                <rect x="${-w / 2}" y="-4" width="${w}" height="3.5" rx="1.75" fill="#fff" opacity=".55"/>
+                ${gem}`;
+        }
+
         let nailTool = { type: 'color', value: '#f472b6' };
         let nails = [];
         let nailPainting = false;
@@ -4364,7 +4695,7 @@
                 <linearGradient id="nsilver" href="#nsilverBase"/>
             </defs>`;
             let idx = 0;
-            [[230, false], [590, true]].forEach(([cx, mirror]) => {
+            [[230, true], [590, false]].forEach(([cx, mirror]) => {
                 html += `<g transform="translate(${cx},0) scale(${mirror ? -1 : 1},1)">`;
                 html += `<rect x="-72" y="320" width="144" height="140" rx="30" fill="${skin}"/>`;
                 html += `<ellipse cx="0" cy="320" rx="100" ry="100" fill="${skin}"/>`;
@@ -4375,6 +4706,7 @@
                     html += `<g class="finger" data-nail="${i}" transform="translate(${f.x},${f.y}) rotate(${f.a})">
                         <rect x="${-f.w / 2}" y="${-f.len}" width="${f.w}" height="${f.len + 40}" rx="${f.w / 2}" fill="${skin}"/>
                         <path d="M${-f.w * 0.3} ${-f.len + f.w * 1.4} q${f.w * 0.3} 6 ${f.w * 0.6} 0" stroke="#f1b8a0" stroke-width="2" fill="none"/>
+                        <g class="ring-slot" data-w="${f.w}" transform="translate(0,${-f.len * 0.36})"></g>
                         <clipPath id="nc${i}"><rect x="${nx}" y="${ny}" width="${nw}" height="${nh}" rx="${nw * 0.45}"/></clipPath>
                         <rect x="${nx}" y="${ny}" width="${nw}" height="${nh}" rx="${nw * 0.45}" fill="#fde2e4" stroke="#f9a8d4" stroke-width="2"/>
                         <g class="paint-layer" clip-path="url(#nc${i})"></g>
@@ -4393,7 +4725,7 @@
                 html += `</g>`;
             });
             handsSvg.innerHTML = html;
-            nails = Array.from({ length: idx }, () => ({ color: null, sticker: null }));
+            nails = Array.from({ length: idx }, () => ({ color: null, sticker: null, ring: null }));
         }
 
         function buildNailTools() {
@@ -4404,12 +4736,13 @@
                 </button>`).join('');
             const tools = document.getElementById('nailTools');
             tools.innerHTML = STICKERS.map((s, i) => `<button class="tool-btn" data-s="${i}">${s.s}</button>`).join('') +
+                RINGS.map((r, i) => `<button class="tool-btn" data-r="${i}"><svg viewBox="-24 -28 48 40" width="44" height="38">${ringSVG(r, 34)}</svg></button>`).join('') +
                 `<button class="tool-btn wide" id="glitterBtn">✨ Glitter</button>
                  <button class="tool-btn wide" id="wipeBtn">🧽 Weg</button>
                  <button class="tool-btn wide" id="doneBtn">✅ Klaar!</button>`;
 
             const selectBtn = (btn) => {
-                nailsEl.querySelectorAll('.bottle-btn, .tool-btn[data-s]').forEach(b => b.classList.remove('sel'));
+                nailsEl.querySelectorAll('.bottle-btn, .tool-btn[data-s], .tool-btn[data-r]').forEach(b => b.classList.remove('sel'));
                 btn.classList.add('sel');
             };
             palette.querySelectorAll('.bottle-btn').forEach(btn => {
@@ -4421,6 +4754,14 @@
                     playPop();
                     if (window.speechSynthesis) speechSynthesis.cancel();
                     speak(c.name);
+                });
+            });
+            tools.querySelectorAll('.tool-btn[data-r]').forEach(btn => {
+                btn.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    nailTool = { type: 'ring', value: +btn.dataset.r };
+                    selectBtn(btn);
+                    playTone(1500, 0.15, 0.12, 'triangle');
                 });
             });
             tools.querySelectorAll('.tool-btn[data-s]').forEach(btn => {
@@ -4445,9 +4786,10 @@
                 e.stopPropagation();
                 handsSvg.querySelectorAll('.paint-layer').forEach(l => l.innerHTML = '');
                 handsSvg.querySelectorAll('.stk').forEach(t => t.textContent = '');
+                handsSvg.querySelectorAll('.ring-slot').forEach(r => r.innerHTML = '');
                 handsSvg.querySelectorAll('.finger').forEach(f => f.classList.remove('painted'));
                 handsSvg.classList.remove('glitter');
-                nails.forEach(n => { n.color = null; n.sticker = null; });
+                nails.forEach(n => { n.color = null; n.sticker = null; n.ring = null; });
                 playFreqSweep(600, 200, 0.4, 0.15);
                 speak('Alles weg! Opnieuw beginnen!');
             });
@@ -4513,6 +4855,21 @@
                 } else if (Math.random() < 0.25) {
                     speak(randomPick(['Mooi!', 'Prachtig!', 'Wat glimt dat!']));
                 }
+            } else if (nailTool.type === 'ring') {
+                if (!isTap) return;
+                const slot = finger.querySelector('.ring-slot');
+                if (nails[i].ring === nailTool.value) {
+                    nails[i].ring = null;
+                    slot.innerHTML = '';
+                    playFreqSweep(1200, 600, 0.15, 0.1);
+                    return;
+                }
+                nails[i].ring = nailTool.value;
+                slot.innerHTML = `<g class="stk pop">${ringSVG(RINGS[nailTool.value], +slot.dataset.w)}</g>`;
+                [1568, 2093, 2637].forEach((f, k) => setTimeout(() => playTone(f, 0.18, 0.08, 'sine'), k * 60));
+                const r = slot.getBoundingClientRect();
+                const o = nailsEl.getBoundingClientRect();
+                nailSpark(r.left + r.width / 2 - o.left, r.top + r.height / 2 - o.top);
             } else if (isTap) {
                 nails[i].sticker = nailTool.value;
                 const t = finger.querySelector('.stk');
@@ -4547,7 +4904,7 @@
         nailsEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 
         function nailsDone() {
-            if (!nails.some(n => n.color || n.sticker)) {
+            if (!nails.some(n => n.color || n.sticker || n.ring !== null)) {
                 speak('Kies eerst een kleurtje en tik op een nagel!');
                 return;
             }
@@ -4941,7 +5298,440 @@
         });
         teaEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen; }
+
+        /* ─────────── Dierensalon ─────────── */
+        const careEl = document.getElementById('care');
+        const careStage = document.getElementById('careStage');
+        const petBox = document.getElementById('petBox');
+        const petEmoji = document.getElementById('petEmoji');
+        const petLayer = document.getElementById('petLayer');
+        const petAcc = document.getElementById('petAcc');
+        const toolCursor = document.getElementById('toolCursor');
+        let careOpen = false;
+
+        const DRYER_SVG = `<svg viewBox="0 0 40 40"><rect x="10" y="20" width="9" height="17" rx="3" fill="#db2777"/><rect x="4" y="8" width="26" height="15" rx="7.5" fill="#f472b6"/><rect x="0" y="11" width="8" height="9" rx="2" fill="#f9a8d4"/><circle cx="21" cy="15.5" r="3.5" fill="#fff"/></svg>`;
+        const BRUSH_SVG = `<svg viewBox="0 0 40 40"><rect x="17" y="2" width="7" height="20" rx="3.5" fill="#a855f7"/><rect x="7" y="20" width="27" height="10" rx="4" fill="#fcd34d"/><g stroke="#92400e" stroke-width="2" stroke-linecap="round">${[10, 14, 18, 22, 26, 30].map(x => `<line x1="${x}" y1="30" x2="${x}" y2="37"/>`).join('')}</g></svg>`;
+
+        const CARE_PETS = [
+            { e: '🐶', sound: () => { playTone(320, 0.1, 0.22, 'square'); setTimeout(() => playTone(280, 0.12, 0.22, 'square'), 170); } },
+            { e: '🐱', sound: () => { playFreqSweep(700, 1000, 0.15, 0.2); setTimeout(() => playFreqSweep(1000, 600, 0.3, 0.2), 150); } },
+            { e: '🐰', sound: () => { playFreqSweep(1400, 1900, 0.08, 0.15); setTimeout(() => playFreqSweep(1500, 2000, 0.08, 0.15), 120); } },
+            { e: '🐷', sound: () => { playTone(180, 0.1, 0.2, 'sawtooth'); setTimeout(() => playTone(160, 0.12, 0.2, 'sawtooth'), 150); } },
+            { e: '🦄', sound: () => playSparkleSound() },
+            { e: '🐹', sound: () => { playFreqSweep(1800, 2400, 0.06, 0.12); setTimeout(() => playFreqSweep(1800, 2500, 0.06, 0.12), 90); } }
+        ];
+        const CARE_TOOLS = [
+            { id: 'soap', icon: '🧽', label: 'Zeep' },
+            { id: 'shower', icon: '🚿', label: 'Douche' },
+            { id: 'dryer', icon: DRYER_SVG, label: 'Föhn' },
+            { id: 'brush', icon: BRUSH_SVG, label: 'Borstel' }
+        ];
+        const CARE_ACCS = [
+            { id: 'bow', e: '🎀', x: 78, y: 14, s: 0.3 },
+            { id: 'crown', e: '👑', x: 50, y: 2, s: 0.34 },
+            { id: 'flower', e: '🌸', x: 22, y: 14, s: 0.26 },
+            { id: 'glasses', e: '🕶️', x: 50, y: 44, s: 0.42 }
+        ];
+
+        const care = {
+            pet: 0,
+            tool: 'soap',
+            mud: [],
+            foam: [],
+            drops: [],
+            wasWet: false,
+            dry: false,
+            brushed: 0,
+            shiny: false,
+            cleanShown: false,
+            accs: new Set(),
+            active: false,
+            last: { soap: 0, spray: 0, drop: 0, air: 0, brush: 0, snd: 0 },
+            done: new Set()
+        };
+
+        function careSizes() {
+            const h = petBox.getBoundingClientRect().height;
+            petEmoji.style.fontSize = (h * 0.86) + 'px';
+            petAcc.querySelectorAll('.acc').forEach(a => {
+                const acc = CARE_ACCS.find(c => c.id === a.dataset.id);
+                a.style.fontSize = (h * acc.s) + 'px';
+            });
+        }
+
+        function makeDirty() {
+            petLayer.innerHTML = '';
+            care.mud = [];
+            care.foam = [];
+            care.drops = [];
+            care.wasWet = care.dry = care.shiny = care.cleanShown = false;
+            care.brushed = 0;
+            petEmoji.classList.remove('wet', 'shiny', 'fluffy');
+            document.querySelectorAll('.care-tool.pulse').forEach(b => b.classList.remove('pulse'));
+            for (let i = 0; i < 9; i++) {
+                const x = 24 + Math.random() * 52;
+                const y = 22 + Math.random() * 46;
+                const size = 10 + Math.random() * 9;
+                const m = document.createElement('div');
+                m.className = 'mud';
+                m.style.left = x + '%';
+                m.style.top = y + '%';
+                m.style.width = size + '%';
+                m.style.height = (size * (0.7 + Math.random() * 0.5)) + '%';
+                m.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+                petLayer.appendChild(m);
+                care.mud.push({ x, y, node: m, soapy: false });
+            }
+            ['🍂', '🌿'].forEach((e) => {
+                const x = 25 + Math.random() * 50, y = 20 + Math.random() * 50;
+                const l = document.createElement('div');
+                l.className = 'leaf';
+                l.textContent = e;
+                l.style.left = x + '%';
+                l.style.top = y + '%';
+                l.style.fontSize = (petBox.getBoundingClientRect().height * 0.12) + 'px';
+                petLayer.appendChild(l);
+                care.mud.push({ x, y, node: l, soapy: true });
+            });
+        }
+
+        function renderCarePets() {
+            const box = document.getElementById('carePets');
+            box.innerHTML = CARE_PETS.map((p, i) => `<button class="care-pet${care.pet === i ? ' sel' : ''}${care.done.has(i) ? ' is-done' : ''}" data-i="${i}">${p.e}<span class="done">✅</span></button>`).join('');
+            box.querySelectorAll('.care-pet').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                choosePet(+b.dataset.i);
+            }));
+        }
+
+        function renderCareTools() {
+            const box = document.getElementById('careTools');
+            box.innerHTML =
+                CARE_TOOLS.map(t => `<button class="care-tool${care.tool === t.id ? ' sel' : ''}" data-t="${t.id}">${t.icon}<small>${t.label}</small></button>`).join('') +
+                '<span class="care-sep"></span>' +
+                CARE_ACCS.map(a => `<button class="care-tool" data-a="${a.id}">${a.e}</button>`).join('') +
+                '<span class="care-sep"></span>' +
+                '<button class="care-tool" id="careMud">🟤<small>Modder</small></button>' +
+                '<button class="care-tool" id="careDone">✅<small>Klaar</small></button>';
+            box.querySelectorAll('.care-tool[data-t]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                care.tool = b.dataset.t;
+                box.querySelectorAll('.care-tool[data-t]').forEach(x => x.classList.toggle('sel', x === b));
+                playPop();
+            }));
+            box.querySelectorAll('.care-tool[data-a]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                toggleAcc(b.dataset.a);
+            }));
+            document.getElementById('careMud').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                makeDirty();
+                wigglePet();
+                playFreqSweep(300, 120, 0.3, 0.2);
+            });
+            document.getElementById('careDone').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                careDone();
+            });
+        }
+
+        function toolBtn(id) { return document.querySelector(`.care-tool[data-t="${id}"]`); }
+
+        function hintTool(id) {
+            const b = toolBtn(id);
+            if (!b || b.classList.contains('hint')) return;
+            b.classList.add('hint');
+            setTimeout(() => b.classList.remove('hint'), 1600);
+        }
+
+        function wigglePet(cls = 'wiggle') {
+            petEmoji.classList.remove('wiggle', 'jump');
+            void petEmoji.offsetWidth;
+            petEmoji.classList.add(cls);
+        }
+
+        function toggleAcc(id) {
+            const acc = CARE_ACCS.find(a => a.id === id);
+            const existing = petAcc.querySelector(`[data-id="${id}"]`);
+            if (existing) {
+                existing.remove();
+                care.accs.delete(id);
+                playFreqSweep(900, 400, 0.15, 0.12);
+                return;
+            }
+            const a = document.createElement('div');
+            a.className = 'acc';
+            a.dataset.id = id;
+            a.textContent = acc.e;
+            a.style.left = acc.x + '%';
+            a.style.top = acc.y + '%';
+            petAcc.appendChild(a);
+            care.accs.add(id);
+            careSizes();
+            playTone(1200, 0.12, 0.15, 'triangle');
+            twinkleAt(acc.x, acc.y, 5);
+            wigglePet();
+        }
+
+        function choosePet(i) {
+            care.pet = i;
+            petEmoji.textContent = CARE_PETS[i].e;
+            petAcc.innerHTML = '';
+            care.accs.clear();
+            makeDirty();
+            renderCarePets();
+            wigglePet('jump');
+            CARE_PETS[i].sound();
+        }
+
+        // Pointer → percentages inside the pet box, and pixels inside the stage
+        function carePoint(e) {
+            const b = petBox.getBoundingClientRect();
+            const st = careStage.getBoundingClientRect();
+            return {
+                px: ((e.clientX - b.left) / b.width) * 100,
+                py: ((e.clientY - b.top) / b.height) * 100,
+                sx: e.clientX - st.left,
+                sy: e.clientY - st.top
+            };
+        }
+
+        function fxBit(cls, sx, sy, html, ms, vars) {
+            const n = document.createElement('div');
+            n.className = 'fx-bit ' + cls;
+            n.style.left = sx + 'px';
+            n.style.top = sy + 'px';
+            if (html) n.innerHTML = html;
+            if (vars) Object.entries(vars).forEach(([k, v]) => n.style.setProperty(k, v));
+            careStage.appendChild(n);
+            setTimeout(() => n.remove(), ms);
+        }
+
+        function twinkleAt(px, py, n) {
+            const b = petBox.getBoundingClientRect();
+            const st = careStage.getBoundingClientRect();
+            for (let i = 0; i < n; i++) {
+                const sx = b.left - st.left + (px / 100) * b.width + (Math.random() - 0.5) * 60;
+                const sy = b.top - st.top + (py / 100) * b.height + (Math.random() - 0.5) * 60;
+                fxBit('twinkle', sx, sy, randomPick(['✨', '⭐', '💖', '🌟']), 700);
+            }
+        }
+
+        function near(item, pt, r) {
+            return Math.hypot(item.x - pt.px, item.y - pt.py) < r;
+        }
+
+        function removeItem(list, item) {
+            item.node.classList.add('gone');
+            setTimeout(() => item.node.remove(), 350);
+            list.splice(list.indexOf(item), 1);
+        }
+
+        function onPet(pt) {
+            return pt.px > 5 && pt.px < 95 && pt.py > 0 && pt.py < 100;
+        }
+
+        function applyCareTool(e) {
+            const pt = carePoint(e);
+            toolCursor.style.left = pt.sx + 'px';
+            toolCursor.style.top = pt.sy + 'px';
+            const now = performance.now();
+            const L = care.last;
+
+            if (care.tool === 'soap') {
+                if (!onPet(pt)) return;
+                if (now - L.soap > 40 && care.foam.length < 90) {
+                    L.soap = now;
+                    const size = 7 + Math.random() * 7;
+                    const x = pt.px + (Math.random() - 0.5) * 10, y = pt.py + (Math.random() - 0.5) * 10;
+                    const f = document.createElement('div');
+                    f.className = 'foam-b';
+                    f.style.left = x + '%';
+                    f.style.top = y + '%';
+                    f.style.width = f.style.height = size + '%';
+                    petLayer.appendChild(f);
+                    care.foam.push({ x, y, node: f });
+                }
+                care.mud.forEach(m => {
+                    if (!m.soapy && near(m, pt, 14)) {
+                        m.soapy = true;
+                        m.node.classList.add('soapy');
+                    }
+                });
+                if (now - L.snd > 140) { L.snd = now; playFreqSweep(500 + Math.random() * 300, 900, 0.06, 0.06); }
+            } else if (care.tool === 'shower') {
+                if (now - L.spray > 45) {
+                    L.spray = now;
+                    for (let k = 0; k < 3; k++) {
+                        fxBit('spray', pt.sx + (Math.random() - 0.5) * 40, pt.sy + 20, '', 500, { '--dx': ((Math.random() - 0.5) * 40) + 'px' });
+                    }
+                }
+                if (!onPet(pt)) return;
+                const below = { px: pt.px, py: pt.py + 8 };
+                care.foam.slice().forEach(f => { if (near(f, below, 17)) removeItem(care.foam, f); });
+                care.mud.slice().forEach(m => {
+                    if (!near(m, below, 16)) return;
+                    if (m.soapy) removeItem(care.mud, m);
+                    else hintTool('soap');
+                });
+                if (now - L.drop > 90 && care.drops.length < 26) {
+                    L.drop = now;
+                    const x = Math.max(12, Math.min(88, below.px + (Math.random() - 0.5) * 24));
+                    const y = Math.max(12, Math.min(85, below.py + (Math.random() - 0.5) * 24));
+                    const d = document.createElement('div');
+                    d.className = 'wet-drop';
+                    d.style.left = x + '%';
+                    d.style.top = y + '%';
+                    petLayer.appendChild(d);
+                    care.drops.push({ x, y, node: d });
+                    care.wasWet = true;
+                    care.dry = false;
+                    petEmoji.classList.add('wet');
+                }
+            } else if (care.tool === 'dryer') {
+                if (now - L.air > 50) {
+                    L.air = now;
+                    fxBit('air', pt.sx - 40, pt.sy + (Math.random() - 0.5) * 20, '', 450, { '--dy': ((Math.random() - 0.5) * 50) + 'px' });
+                }
+                if (!onPet({ px: pt.px + 12, py: pt.py })) return;
+                const aim = { px: pt.px - 10, py: pt.py };
+                care.drops.slice().forEach(d => { if (near(d, aim, 20)) removeItem(care.drops, d); });
+                if (care.wasWet && !care.dry && care.drops.length === 0) {
+                    care.dry = true;
+                    petEmoji.classList.remove('wet');
+                    petEmoji.classList.remove('fluffy');
+                    void petEmoji.offsetWidth;
+                    petEmoji.classList.add('fluffy');
+                    twinkleAt(50, 45, 10);
+                    CARE_PETS[care.pet].sound();
+                }
+            } else if (care.tool === 'brush') {
+                if (!onPet(pt)) return;
+                if (now - L.brush > 70) {
+                    L.brush = now;
+                    care.brushed++;
+                    fxBit('twinkle', pt.sx + (Math.random() - 0.5) * 30, pt.sy, randomPick(['✨', '✨', '💫']), 700);
+                    playTone(1400 + Math.random() * 800, 0.06, 0.05, 'sine');
+                    if (care.brushed >= 30 && !care.shiny) {
+                        care.shiny = true;
+                        petEmoji.classList.add('shiny');
+                        twinkleAt(50, 40, 12);
+                        playSparkleSound();
+                        wigglePet();
+                    }
+                }
+            }
+            checkClean();
+        }
+
+        function checkClean() {
+            const clean = care.mud.length === 0 && care.foam.length === 0 && care.drops.length === 0;
+            if (clean && !care.cleanShown) {
+                care.cleanShown = true;
+                document.getElementById('careDone').classList.add('pulse');
+                wigglePet('jump');
+                CARE_PETS[care.pet].sound();
+                twinkleAt(50, 50, 12);
+                playCorrect();
+            }
+        }
+
+        function careDone() {
+            if (care.mud.length) { hintTool('soap'); hintTool('shower'); wigglePet(); return; }
+            if (care.foam.length) { hintTool('shower'); wigglePet(); return; }
+            if (care.drops.length) { hintTool('dryer'); wigglePet(); return; }
+            document.getElementById('careDone').classList.remove('pulse');
+            care.done.add(care.pet);
+            renderCarePets();
+            wigglePet('jump');
+            CARE_PETS[care.pet].sound();
+            playWin();
+            for (let k = 0; k < 3; k++) setTimeout(() => twinkleAt(50, 40, 12), k * 250);
+            if (care.done.size === CARE_PETS.length) {
+                setTimeout(() => {
+                    playWin();
+                    for (let k = 0; k < 5; k++) setTimeout(() => twinkleAt(Math.random() * 100, Math.random() * 100, 10), k * 200);
+                }, 900);
+            }
+        }
+
+        careStage.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            care.active = true;
+            toolCursor.innerHTML = CARE_TOOLS.find(t => t.id === care.tool).icon;
+            toolCursor.classList.add('show');
+            if (care.tool === 'shower') startNoise('shower');
+            if (care.tool === 'dryer') startNoise('dryer');
+            applyCareTool(e);
+        });
+        careStage.addEventListener('pointermove', (e) => {
+            if (care.active) applyCareTool(e);
+        });
+        const careUp = () => {
+            if (!care.active) return;
+            care.active = false;
+            toolCursor.classList.remove('show');
+            stopNoise();
+        };
+        window.addEventListener('pointerup', careUp);
+        window.addEventListener('pointercancel', careUp);
+        careEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        // Looping filtered noise for the shower and the hair dryer
+        let noise = null;
+        function startNoise(kind) {
+            stopNoise();
+            try {
+                const ctx = getAudioContext();
+                const buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+                const data = buf.getChannelData(0);
+                for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+                const src = ctx.createBufferSource();
+                src.buffer = buf;
+                src.loop = true;
+                const filter = ctx.createBiquadFilter();
+                filter.type = kind === 'shower' ? 'highpass' : 'bandpass';
+                filter.frequency.value = kind === 'shower' ? 2500 : 700;
+                const gain = ctx.createGain();
+                gain.gain.value = kind === 'shower' ? 0.05 : 0.07;
+                src.connect(filter);
+                filter.connect(gain);
+                gain.connect(ctx.destination);
+                src.start();
+                noise = { src, gain, ctx };
+            } catch (e) {}
+        }
+        function stopNoise() {
+            if (!noise) return;
+            try {
+                noise.gain.gain.setTargetAtTime(0, noise.ctx.currentTime, 0.05);
+                noise.src.stop(noise.ctx.currentTime + 0.2);
+            } catch (e) {}
+            noise = null;
+        }
+
+        function openCare(i) {
+            careOpen = true;
+            careEl.classList.add('open');
+            renderCareTools();
+            careSizes();
+            choosePet(i || 0);
+            playMusicBox();
+        }
+
+        function closeCare() {
+            careOpen = false;
+            careEl.classList.remove('open');
+            careUp();
+            _playWhoosh();
+        }
+        document.getElementById('careClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeCare();
+        });
+        window.addEventListener('resize', () => { if (careOpen) careSizes(); });
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
