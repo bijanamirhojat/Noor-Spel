@@ -41,6 +41,9 @@ function unlockAudioOnGesture() {
         return;
     }
 
+    // iOS only honours touchend/click as a user gesture (not touchstart/pointerdown),
+    // so keep listening on all of them until the context is actually running.
+    const events = ['touchstart', 'touchend', 'pointerdown', 'mousedown', 'click', 'keydown'];
     const unlock = () => {
         try {
             if (ctx.state === 'suspended') {
@@ -55,16 +58,12 @@ function unlockAudioOnGesture() {
             source.start(0);
         } catch (e) {}
 
-        document.removeEventListener('touchstart', unlock);
-        document.removeEventListener('pointerdown', unlock);
-        document.removeEventListener('mousedown', unlock);
-        document.removeEventListener('keydown', unlock);
+        if (ctx.state === 'running') {
+            events.forEach(ev => document.removeEventListener(ev, unlock, true));
+        }
     };
 
-    document.addEventListener('touchstart', unlock, { passive: true, once: true });
-    document.addEventListener('pointerdown', unlock, { passive: true, once: true });
-    document.addEventListener('mousedown', unlock, { passive: true, once: true });
-    document.addEventListener('keydown', unlock, { once: true });
+    events.forEach(ev => document.addEventListener(ev, unlock, { capture: true, passive: true }));
 }
 
 unlockAudioOnGesture();
@@ -104,13 +103,53 @@ function playFreqSweep(startFreq, endFreq, duration = 0.1, volume = 0.2) {
     } catch(e) {}
 }
 
+/* Speech: iOS stays silent until the first utterance starts inside a real tap
+   (touchend/click). After that, speech from timers and animation frames works too. */
+let _nlVoice = null;
+let _speechUnlocked = false;
+
+function _pickDutchVoice() {
+    const voices = speechSynthesis.getVoices();
+    const isNl = v => (v.lang || '').replace('_', '-').toLowerCase().startsWith('nl');
+    _nlVoice = voices.find(v => isNl(v) && v.localService) || voices.find(isNl) || null;
+}
+
+function unlockSpeechOnGesture() {
+    if (!('speechSynthesis' in window)) return;
+    _pickDutchVoice();
+    if (speechSynthesis.addEventListener) {
+        speechSynthesis.addEventListener('voiceschanged', _pickDutchVoice);
+    }
+
+    const unlock = () => {
+        if (_speechUnlocked) return;
+        _speechUnlocked = true;
+        try {
+            const u = new SpeechSynthesisUtterance(' ');
+            u.volume = 0;
+            u.lang = 'nl-NL';
+            speechSynthesis.speak(u);
+        } catch (e) {}
+        document.removeEventListener('touchend', unlock, true);
+        document.removeEventListener('click', unlock, true);
+    };
+
+    document.addEventListener('touchend', unlock, true);
+    document.addEventListener('click', unlock, true);
+}
+
+unlockSpeechOnGesture();
+
 /** Speak text using nl-NL speechSynthesis */
 function speak(text, { rate = 0.6, pitch = 1.2 } = {}) {
     if ('speechSynthesis' in window) {
         const utterance = new SpeechSynthesisUtterance(text);
         utterance.lang = 'nl-NL';
+        if (_nlVoice) utterance.voice = _nlVoice;
         utterance.rate = rate;
         utterance.pitch = pitch;
+        // iOS can leave the queue paused after the app was in the background
+        if (speechSynthesis.paused) speechSynthesis.resume();
         speechSynthesis.speak(utterance);
     }
 }

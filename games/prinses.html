@@ -160,31 +160,31 @@
             background: conic-gradient(#ede9fe 25%, #c4b5fd 0 50%, #ede9fe 0 75%, #c4b5fd 0) 0 0 / 50px 50px;
         }
 
-        .i-room.r2 .wall {
+        .i-room.r3 .wall {
             background:
                 repeating-linear-gradient(90deg, #fecdd3 0 30px, #fda4af 30px 34px),
                 #fecdd3;
         }
-        .i-room.r2 .floor {
+        .i-room.r3 .floor {
             background:
                 linear-gradient(90deg, transparent 290px, #e11d48 290px 510px, transparent 510px),
                 conic-gradient(#fef3c7 25%, #fcd34d 0 50%, #fef3c7 0 75%, #fcd34d 0) 0 0 / 50px 50px;
         }
 
-        .i-room.r3 .wall {
+        .i-room.r4 .wall {
             background: linear-gradient(180deg, #fff7ed 0%, #fdf2f8 55%, #ecfeff 100%);
         }
-        .i-room.r3 .floor {
+        .i-room.r4 .floor {
             background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
         }
 
-        .i-room.r4 .wall {
+        .i-room.r5 .wall {
             background:
                 radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px,
                 radial-gradient(circle at 70% 70%, #fde68a 1.5px, transparent 2.5px) 0 0 / 90px 80px,
                 linear-gradient(180deg, #1e1b4b, #4c1d95);
         }
-        .i-room.r4 .floor {
+        .i-room.r5 .floor {
             background:
                 repeating-linear-gradient(90deg, #7c3aed 0 60px, #6d28d9 60px 62px);
         }
@@ -1395,6 +1395,356 @@
         }
         .dismount.show { display: block; }
 
+        /* ── Nagelsalon room ── */
+        .i-room.r2 .wall {
+            background:
+                radial-gradient(circle, #f9a8d4 4px, transparent 5px) 0 0 / 50px 50px,
+                radial-gradient(circle, #fde68a 3px, transparent 4px) 25px 25px / 50px 50px,
+                linear-gradient(180deg, #ccfbf1, #99f6e4);
+        }
+        .i-room.r2 .floor {
+            background: conic-gradient(#fff 25%, #fbcfe8 0 50%, #fff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
+        }
+        .vanity { width: 280px; height: 230px; }
+        .vanity > div { position: absolute; }
+        .vanity .vmirror {
+            left: 80px; top: 0; width: 120px; height: 110px;
+            border-radius: 50%;
+            border: 8px solid #fcd34d;
+            background: linear-gradient(135deg, #e0f2fe, #fdf2f8 50%, #fff);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 54px;
+        }
+        .vanity .vtop {
+            left: 0; top: 112px; width: 280px; height: 24px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #fbcfe8, #f472b6);
+            border: 4px solid #fcd34d;
+        }
+        .vanity .vbody {
+            left: 20px; top: 136px; width: 240px; height: 70px;
+            background: linear-gradient(180deg, #fdf2f8, #fbcfe8);
+            border-radius: 0 0 16px 16px;
+            border: 4px solid #fcd34d;
+            border-top: none;
+        }
+        .vanity .vbody::before, .vanity .vbody::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            background: #fcd34d;
+        }
+        .vanity .vbody::before { left: 50px; }
+        .vanity .vbody::after { right: 50px; }
+        .vanity .bottles {
+            left: 18px; top: 72px; width: 250px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .mini-bottle {
+            position: relative;
+            width: 22px; height: 30px;
+            border-radius: 6px 6px 9px 9px;
+            box-shadow: inset -4px -4px 0 rgba(0,0,0,0.12), inset 3px 3px 0 rgba(255,255,255,0.5);
+        }
+        .mini-bottle::before {
+            content: '';
+            position: absolute;
+            left: 6px; top: -14px;
+            width: 10px; height: 14px;
+            border-radius: 3px;
+            background: #1f2937;
+        }
+        .stool {
+            width: 90px; height: 90px;
+            pointer-events: none;
+        }
+        .stool::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; width: 90px; height: 34px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, #fdf2f8, #f9a8d4);
+            box-shadow: 0 4px 0 #f472b6;
+        }
+        .stool::after {
+            content: '';
+            position: absolute;
+            left: 38px; top: 30px; width: 14px; height: 60px;
+            background: #fcd34d;
+        }
+
+        /* ── Slaapkamer room ── */
+        .i-room.r6 .wall {
+            background:
+                radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 60px 60px,
+                radial-gradient(circle, #fde68a 2.5px, transparent 3.5px) 30px 30px / 60px 60px,
+                linear-gradient(180deg, #c7d2fe, #a5b4fc);
+        }
+        .i-room.r6 .floor {
+            background: repeating-linear-gradient(90deg, #fcd9b6 0 70px, #f5c79a 70px 73px);
+        }
+        .bed { width: 320px; height: 230px; }
+        .bed > div { position: absolute; }
+        .bed .post {
+            top: 0; width: 10px; height: 230px;
+            background: linear-gradient(90deg, #fcd34d, #fde68a, #f59e0b);
+            border-radius: 5px;
+        }
+        .bed .canopy {
+            left: -10px; top: -6px; width: 340px; height: 44px;
+            background:
+                radial-gradient(circle at 50% 100%, transparent 18px, #f9a8d4 19px) 0 0 / 40px 44px;
+            border-top: 8px solid #f472b6;
+            border-radius: 12px 12px 0 0;
+        }
+        .bed .curtain {
+            top: 30px; width: 36px; height: 150px;
+            background: linear-gradient(90deg, rgba(251,207,232,0.95), rgba(244,114,182,0.8));
+            border-radius: 0 0 30px 30px;
+        }
+        .bed .head {
+            left: 12px; top: 70px; width: 70px; height: 140px;
+            border-radius: 35px 35px 6px 6px;
+            background: linear-gradient(180deg, #f9a8d4, #f472b6);
+            border: 5px solid #fcd34d;
+            display: flex; justify-content: center; padding-top: 16px;
+            font-size: 28px;
+        }
+        .bed .mattress {
+            left: 24px; top: 150px; width: 290px; height: 40px;
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 4px 0 #e5e7eb;
+        }
+        .bed .pillow {
+            left: 36px; top: 124px; width: 76px; height: 34px;
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: inset 0 -4px 0 #f3f4f6;
+        }
+        .bed .blanket, .bed-cover {
+            background:
+                radial-gradient(circle, #fff 3px, transparent 4px) 0 0 / 28px 28px,
+                linear-gradient(180deg, #c084fc, #a855f7);
+            border-radius: 16px 16px 20px 20px;
+        }
+        .bed .blanket { left: 110px; top: 140px; width: 206px; height: 58px; }
+        .bed .bedleg { top: 190px; width: 16px; height: 40px; background: #f59e0b; border-radius: 4px; }
+        .bed-cover {
+            width: 214px;
+            height: 76px;
+            z-index: 12;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .bed-cover.show { opacity: 1; }
+        .night {
+            position: absolute;
+            inset: 0;
+            z-index: 14;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            background: radial-gradient(circle at 50% 40%, rgba(49,46,129,0.45), rgba(15,23,42,0.8));
+        }
+        .night.show { opacity: 1; }
+        .zzz {
+            position: absolute;
+            font-size: 34px;
+            pointer-events: none;
+            z-index: 13;
+            animation: zzz 2.2s ease-out forwards;
+        }
+        @keyframes zzz {
+            from { transform: translate(0, 0) scale(0.5); opacity: 0; }
+            20% { opacity: 1; }
+            to { transform: translate(50px, -140px) scale(1.3); opacity: 0; }
+        }
+
+        /* ── Pet cat ── */
+        .pet {
+            position: absolute;
+            left: 0; top: 0;
+            width: 80px; height: 70px;
+            font-size: 62px;
+            line-height: 70px;
+            text-align: center;
+            z-index: 9;
+            cursor: pointer;
+        }
+        .pet .pflip { display: inline-block; transition: transform 0.15s ease; }
+        .pet.right .pflip { transform: scaleX(-1); }
+        .pet.walking .pbob { animation: walkBob 0.3s ease-in-out infinite; }
+        .pet .pbob { display: inline-block; }
+        .pet .collar {
+            position: absolute;
+            right: -6px; top: -14px;
+            font-size: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .pet.following .collar { opacity: 1; }
+
+        /* ── Speeltuin ── */
+        .swingset { width: 280px; height: 260px; }
+        .swingset .bar {
+            position: absolute;
+            left: 0; top: 0; width: 280px; height: 16px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #f472b6, #db2777);
+        }
+        .swingset .leg {
+            position: absolute;
+            top: 6px; width: 14px; height: 262px;
+            background: linear-gradient(90deg, #f9a8d4, #ec4899);
+            border-radius: 7px;
+            transform-origin: 50% 0;
+        }
+        .swing {
+            width: 90px; height: 160px;
+            transform-origin: 50% 0;
+            pointer-events: none;
+            z-index: 8;
+        }
+        .swing::before, .swing::after {
+            content: '';
+            position: absolute;
+            top: 0; width: 4px; height: 140px;
+            background: #a16207;
+        }
+        .swing::before { left: 10px; }
+        .swing::after { right: 10px; }
+        .swing .seat {
+            position: absolute;
+            left: 0; top: 136px; width: 90px; height: 16px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #fde68a, #f59e0b);
+        }
+        .slide { width: 300px; height: 230px; }
+        .slide svg { width: 100%; height: 100%; overflow: visible; }
+        .carousel {
+            font-size: 96px;
+            line-height: 1;
+            animation: carousel 3s ease-in-out infinite;
+        }
+        @keyframes carousel {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* ── Nagelsalon overlay ── */
+        .nails {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.7) 3px, transparent 4px) 0 0 / 36px 36px,
+                linear-gradient(135deg, #fdf2f8, #f5d0fe 50%, #ccfbf1);
+        }
+        .nails.open { display: flex; }
+        .nails-title {
+            font-family: 'Fredoka One', cursive;
+            color: #db2777;
+            font-size: 1.4rem;
+            pointer-events: none;
+        }
+        .palette, .nail-tools {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            z-index: 2;
+        }
+        .bottle-btn {
+            position: relative;
+            width: 52px;
+            height: 70px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            touch-action: none;
+        }
+        .bottle-btn .cap {
+            position: absolute;
+            left: 17px; top: 0;
+            width: 18px; height: 24px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #111827, #4b5563, #111827);
+        }
+        .bottle-btn .glass {
+            position: absolute;
+            left: 4px; top: 22px;
+            width: 44px; height: 46px;
+            border-radius: 12px 12px 16px 16px;
+            box-shadow: inset -6px -6px 0 rgba(0,0,0,0.12), inset 5px 5px 0 rgba(255,255,255,0.55), 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .bottle-btn.sel { transform: translateY(-10px) scale(1.15); }
+        .bottle-btn.sel .glass { outline: 4px solid #fff; outline-offset: 2px; }
+        .tool-btn {
+            min-width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            border: 3px solid #fbcfe8;
+            background: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            transition: transform 0.2s ease;
+            font-family: 'Fredoka One', cursive;
+            color: #db2777;
+            padding: 0 10px;
+            touch-action: none;
+        }
+        .tool-btn.wide { font-size: 1.05rem; }
+        .tool-btn.sel { transform: translateY(-6px) scale(1.12); border-color: #f472b6; background: #fdf2f8; }
+        .hands-wrap {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .hands-wrap svg { width: 100%; height: 100%; }
+        .finger { cursor: pointer; }
+        .paint {
+            transform-box: fill-box;
+            transform-origin: 50% 100%;
+            animation: paintIn 0.45s ease-out;
+        }
+        @keyframes paintIn {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+        .finger .gl { opacity: 0; transition: opacity 0.3s ease; }
+        .hands.glitter .finger.painted .gl { opacity: 1; }
+        .gl circle { animation: glTwinkle 1s ease-in-out infinite alternate; }
+        .gl circle:nth-child(2) { animation-delay: -0.3s; }
+        .gl circle:nth-child(3) { animation-delay: -0.6s; }
+        .gl circle:nth-child(4) { animation-delay: -0.8s; }
+        @keyframes glTwinkle {
+            from { opacity: 0.2; }
+            to { opacity: 1; }
+        }
+        .stk { pointer-events: none; }
+        .stk.pop { animation: stkPop 0.4s cubic-bezier(.2,1.8,.4,1); transform-box: fill-box; transform-origin: 50% 50%; }
+        @keyframes stkPop { from { transform: scale(0); } to { transform: scale(1); } }
+        .hands.drying { animation: drying 0.25s ease-in-out 6 alternate; }
+        @keyframes drying {
+            from { transform: translateX(-4px); }
+            to { transform: translateX(4px); }
+        }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -1418,6 +1768,7 @@
             <div class="screen-rainbow" id="screenRainbow"></div>
             <div class="toast" id="toast"></div>
             <div class="door-fade" id="doorFade"></div>
+            <div class="night" id="night"></div>
             <button class="dismount" id="dismount">🦄 Afstappen</button>
             <button class="arrow left" id="btnLeft" aria-label="Naar links">◀</button>
             <button class="arrow right" id="btnRight" aria-label="Naar rechts">▶</button>
@@ -1431,6 +1782,14 @@
                 <div class="find-list" id="findList"></div>
                 <button class="scope-close" id="scopeClose" aria-label="Sluiten">✖</button>
             </div>
+
+            <div class="nails" id="nails">
+                <div class="nails-title">💅 Nagelsalon</div>
+                <div class="palette" id="palette"></div>
+                <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
+                <div class="nail-tools" id="nailTools"></div>
+                <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
         </div>
     </div>
 
@@ -1442,15 +1801,18 @@
         const ROOMS_IN = [
             { name: 'Kasteelhal',    icon: '🏰', say: 'De kasteelhal' },
             { name: 'Spiegelkamer',  icon: '🪞', say: 'De spiegelkamer' },
+            { name: 'Nagelsalon',    icon: '💅', say: 'De nagelsalon' },
             { name: 'Troonzaal',     icon: '👑', say: 'De troonzaal' },
             { name: 'Regenboogzaal', icon: '🌈', say: 'De regenboogzaal' },
-            { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' }
+            { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' },
+            { name: 'Slaapkamer',    icon: '🛏️', say: 'De slaapkamer' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
             { name: 'Bloementuin',   icon: '🌷', say: 'De bloementuin' },
             { name: 'Vijver',        icon: '🦢', say: 'De vijver' },
-            { name: 'Eenhoornweide', icon: '🦄', say: 'De eenhoornweide' }
+            { name: 'Eenhoornweide', icon: '🦄', say: 'De eenhoornweide' },
+            { name: 'Speeltuin',     icon: '🎠', say: 'De speeltuin' }
         ];
         // The princess is in one scene at a time; these follow the active scene.
         let ROOMS = ROOMS_IN;
@@ -1467,8 +1829,8 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 12, door: null },
-            out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 10, door: null }
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 16, door: null },
+            out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
         let scene = SCENES.in;
         let world = scene.el;
@@ -1496,6 +1858,8 @@
             uniX: ROOM_W * 3 + 470,
             fountainBoost: 0,
             clopT: 0,
+            anim: { dx: 0, dy: 0, rot: 0, origin: '' },
+            pet: { following: false, x: 200, facing: -1, key: 'in' },
             partyUntil: 0,
             lastTime: performance.now()
         };
@@ -1628,7 +1992,7 @@
             addObj('<div class="banner">👑</div>', r0 + 340, 60, r0 + 385, () => sayRandom(['Het kasteel van de prinses!', 'Hoera!']));
             addObj('<div class="frame">🦄</div>', r0 + 510, 110, r0 + 570, () => { speak('Een eenhoorn!'); sparkleShower(r0 + 570, 170, 30); });
             place(el('<div class="rug"></div>'), r0 + 440, 425).classList.add('obj');
-            addObj('<div class="emoji-obj">🐱</div>', r0 + 190, 385, r0 + 250, catMeow);
+
 
             /* Room 1: Spiegelkamer */
             const r1 = ROOM_W;
@@ -1640,7 +2004,7 @@
             addObj('<div class="emoji-obj" style="font-size:52px">🎀</div>', r1 + 90, 170, r1 + 120, () => sayRandom(['Een mooie strik!', 'Roze strik!']));
 
             /* Room 2: Troonzaal */
-            const r2 = ROOM_W * 2;
+            const r2 = ROOM_W * 3;
             place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), r2 + 150, 20);
             place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), r2 + 500, 20);
             addObj('<div class="throne"><div class="back"></div><div class="seat"></div><div class="legs"></div><div class="tap-hint">👇</div></div>', r2 + 315, 200, r2 + 400, sitOnThrone);
@@ -1648,7 +2012,7 @@
             addObj('<div class="emoji-obj gleam" style="font-size:56px">🎂</div>', r2 + 90, 385, r2 + 130, () => { sayRandom(['Taart! Lekker!', 'Mmm, taart!']); playCorrect(); sparkleShower(r2 + 130, 380, 24); });
 
             /* Room 3: Regenboogzaal */
-            const r3 = ROOM_W * 3;
+            const r3 = ROOM_W * 4;
             place(el('<div class="rainbow-window"></div>'), r3 + 250, 70);
             place(el(`<svg class="rainbow-arc" id="rainbowArc" viewBox="0 0 800 500">
                 ${['#ef4444','#fb923c','#facc15','#4ade80','#60a5fa','#a855f7'].map((c, i) =>
@@ -1664,11 +2028,50 @@
             addObj('<div class="emoji-obj">🎈</div>', r3 + 660, 230, r3 + 690, balloonPop);
 
             /* Room 4: Torenkamer */
-            const r4 = ROOM_W * 4;
+            const r4 = ROOM_W * 5;
             place(el('<div class="tower-window"></div>'), r4 + 440, 70);
             addObj('<div class="telescope"><div class="tube"></div><div class="legs"></div><div class="tap-hint">👇</div></div>', r4 + 300, 225, r4 + 250, openScope);
             addObj('<div class="emoji-obj">🦉</div>', r4 + 90, 160, r4 + 120, owlHoot);
             addObj('<div class="emoji-obj" style="font-size:50px">📚</div>', r4 + 680, 380, r4 + 690, () => sayRandom(['Sprookjesboeken!', 'Er was eens een prinses...']));
+
+            /* Room: Nagelsalon */
+            const rs = ROOM_W * 2;
+            const bottleColors = ['#f472b6', '#ef4444', '#a855f7', '#38bdf8', '#34d399', '#fbbf24', '#fb923c', '#e5e7eb'];
+            addObj(`<div class="vanity">
+                <div class="vmirror">💅</div>
+                <div class="bottles">${bottleColors.map(c => `<span class="mini-bottle" style="background:${c}"></span>`).join('')}</div>
+                <div class="vtop"></div><div class="vbody"></div>
+                <div class="tap-hint" style="top:-40px">👇</div>
+            </div>`, rs + 260, 200, rs + 580, openNails);
+            place(el('<div class="stool"></div>'), rs + 355, 340);
+            addObj('<div class="frame" style="font-size:56px">💅</div>', rs + 70, 110, rs + 130, () => sayRandom(['Nagels lakken!', 'Welke kleur kies jij?']));
+            addObj('<div class="frame" style="font-size:56px">💖</div>', rs + 610, 110, rs + 670, () => { sayRandom(['Een hartje!', 'Ik hou van glitter!']); sparkleShower(rs + 670, 150, 30); });
+
+            /* Room: Slaapkamer */
+            const r6 = ROOM_W * 6;
+            place(el('<div class="tower-window"></div>'), r6 + 20, 70);
+            addObj(`<div class="bed">
+                <div class="post" style="left:0"></div><div class="post" style="left:310px"></div>
+                <div class="curtain" style="left:-8px"></div><div class="curtain" style="left:292px"></div>
+                <div class="canopy"></div>
+                <div class="head">💖</div>
+                <div class="mattress"></div><div class="pillow"></div><div class="blanket"></div>
+                <div class="bedleg" style="left:30px"></div><div class="bedleg" style="left:280px"></div>
+                <div class="tap-hint" style="top:-44px">👇</div>
+            </div>`, r6 + 250, 202, r6 + 386, sleepInBed);
+            place(el('<div class="bed-cover" id="bedCover"></div>'), r6 + 356, 330);
+            addObj('<div class="emoji-obj">🧸</div>', r6 + 640, 380, r6 + 630, teddyHug);
+            addObj('<div class="emoji-obj" style="font-size:44px">🎶</div>', r6 + 690, 200, r6 + 690, () => { playLullaby(); speak('Een slaapliedje!'); });
+
+            /* Pet cat (starts in the hall) */
+            const pet = el('<div class="pet" id="pet"><span class="pbob"><span class="pflip">🐈</span></span><span class="collar">💖</span></div>');
+            world.appendChild(pet);
+            state.pet.x = r0 + 230;
+            pet.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (state.busy) return;
+                togglePet();
+            });
 
             /* Princess */
             const p = el(`<div class="princess" id="princess"><div class="flip">${princessSVG('pr')}</div></div>`);
@@ -1797,6 +2200,33 @@
                 <span class="apple" style="left:130px;top:100px">🍎</span></div>`, o3 + 60, 170, o3 + 170, appleDrop);
             tree.style.zIndex = 2;
 
+            /* o4: Speeltuin */
+            const o4 = ROOM_W * 4;
+            const swingX = o4 + 190;
+            place(el(`<div class="swingset">
+                <div class="leg" style="left:10px;transform:rotate(12deg)"></div>
+                <div class="leg" style="left:40px;transform:rotate(-8deg)"></div>
+                <div class="leg" style="left:228px;transform:rotate(8deg)"></div>
+                <div class="leg" style="left:256px;transform:rotate(-12deg)"></div>
+                <div class="bar"></div>
+            </div>`), o4 + 50, 150).style.zIndex = 1;
+            const swing = place(el('<div class="swing" id="swing"><div class="seat"></div></div>'), swingX - 45, 160);
+            state.swing = { x: swingX, pivotY: 160, node: swing };
+            addObj('<div style="width:120px;height:180px"><div class="tap-hint" style="top:-20px">👇</div></div>', swingX - 60, 150, swingX, swingRide);
+            addObj(`<div class="slide"><svg viewBox="0 0 300 230">
+                <defs><linearGradient id="slideGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#f472b6"/><stop offset=".5" stop-color="#c084fc"/><stop offset="1" stop-color="#60a5fa"/>
+                </linearGradient></defs>
+                <line x1="12" y1="10" x2="12" y2="230" stroke="#fcd34d" stroke-width="8" stroke-linecap="round"/>
+                <line x1="48" y1="10" x2="48" y2="230" stroke="#fcd34d" stroke-width="8" stroke-linecap="round"/>
+                ${[40, 75, 110, 145, 180, 215].map(y => `<line x1="12" y1="${y}" x2="48" y2="${y}" stroke="#fde68a" stroke-width="6"/>`).join('')}
+                <rect x="4" y="4" width="76" height="14" rx="6" fill="#f472b6"/>
+                <path d="M70 14 Q140 40 180 120 Q220 200 296 222" stroke="url(#slideGrad)" stroke-width="26" fill="none" stroke-linecap="round"/>
+                <path d="M70 2 Q140 28 180 108 Q220 188 296 210" stroke="#fff" stroke-width="4" fill="none" opacity=".7" stroke-linecap="round"/>
+                <line x1="200" y1="160" x2="200" y2="230" stroke="#fcd34d" stroke-width="7"/>
+            </svg><div class="tap-hint" style="left:30px;top:-44px">👇</div></div>`, o4 + 400, 172, o4 + 430, slideRide);
+            addObj('<div class="carousel">🎠</div>', o4 + 690, 300, o4 + 690, () => { playMusicBox(); sayRandom(['Draaimolen! Hoera!', 'Een paardje!']); });
+
             const uni = el(`<div class="unicorn" id="unicorn"><div class="uflip">${unicornSVG()}</div><div class="tap-hint" style="top:-40px">👇</div></div>`);
             world.appendChild(uni);
             uni.addEventListener('pointerdown', (e) => {
@@ -1857,6 +2287,7 @@
                 const door = scene.door;
                 state.x = state.targetX = door.walkX;
                 state.facing = 1;
+                if (state.pet.following) state.pet.x = state.x - 90;
                 state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));
                 door.node.classList.add('open');
                 if (window.speechSynthesis) speechSynthesis.cancel();
@@ -1882,6 +2313,12 @@
             WORLD_W = ROOM_W * ROOMS.length;
             const pr = princessEl();
             if (pr) world.appendChild(pr);
+            const pet = petEl();
+            if (pet && state.pet.following) {
+                world.appendChild(pet);
+                state.pet.key = key;
+                state.pet.x = state.x - 90;
+            }
             particles.length = 0;
             state.room = 0;
             roomPill.textContent = `${ROOMS[0].icon} ${ROOMS[0].name}`;
@@ -2074,7 +2511,7 @@
             speak('Hoera voor de prinses!');
             showToast('👑 Hoera voor de prinses! 👑');
             for (let i = 0; i < 5; i++) {
-                setTimeout(() => sparkleShower(ROOM_W * 2 + 150 + i * 125, 20, 30), i * 180);
+                setTimeout(() => sparkleShower(ROOM_W * 3 + 150 + i * 125, 20, 30), i * 180);
             }
             setTimeout(() => {
                 p.classList.remove('sitting');
@@ -2179,24 +2616,26 @@
             };
         }
 
-        // iOS only allows speech that starts inside a user gesture, so greet on the first touch
+        // iOS only starts speech from a real tap (touchend/click, not pointerdown), so greet there
         let greeted = false;
-        document.addEventListener('pointerdown', () => {
+        const greet = () => {
             if (greeted) return;
             greeted = true;
             speak('Welkom in het kasteel, prinses!');
-        }, true);
+        };
+        document.addEventListener('touchend', greet, true);
+        document.addEventListener('click', greet, true);
 
         let dragId = null;
         playfield.addEventListener('pointerdown', (e) => {
-            if (state.busy || scopeOpen) return;
+            if (state.busy || overlayOpen()) return;
             const p = screenToWorld(e.clientX, e.clientY);
             burst(p.x, p.y, 10);
             walkTo(p.x, null);
             dragId = e.pointerId;
         });
         playfield.addEventListener('pointermove', (e) => {
-            if (e.pointerId !== dragId || state.busy || scopeOpen) return;
+            if (e.pointerId !== dragId || state.busy || overlayOpen()) return;
             const p = screenToWorld(e.clientX, e.clientY);
             walkTo(p.x, null);
             if (Math.random() < 0.4) spawnSparkle(p.x, p.y, { speed: 60 });
@@ -2230,6 +2669,7 @@
             if (e.key === 'ArrowLeft') { state.hold = -1; state.pending = null; }
             if (e.key === 'ArrowRight') { state.hold = 1; state.pending = null; }
             if (e.key === 'Escape' && scopeOpen) closeScope();
+            if (e.key === 'Escape' && nailsOpen) closeNails();
         });
         document.addEventListener('keyup', (e) => {
             if ((e.key === 'ArrowLeft' && state.hold === -1) || (e.key === 'ArrowRight' && state.hold === 1)) {
@@ -2351,7 +2791,7 @@
             const dt = Math.min(0.05, (now - state.lastTime) / 1000);
             state.lastTime = now;
 
-            if (!scopeOpen && !state.busy) {
+            if (!overlayOpen() && !state.busy) {
                 if (state.hold) {
                     state.targetX = Math.max(60, Math.min(WORLD_W - 60, state.x + state.hold * 200));
                 }
@@ -2406,7 +2846,11 @@
 
             // Princess transform
             const p = princessEl();
-            p.style.transform = `translate(${state.x - PRINCESS_W / 2}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0)}px)`;
+            runTweens(now);
+            const an = state.anim;
+            p.style.transformOrigin = an.origin || '';
+            p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) + an.dy}px) rotate(${an.rot}deg)`;
+            updatePet(dt);
             p.classList.toggle('left', state.facing < 0);
 
             if (scene.key === 'out') {
@@ -2462,6 +2906,457 @@
             drawParticles(now);
             requestAnimationFrame(frame);
         }
+
+
+        /* ─────────── Animations on the princess (swing, slide, bed) ─────────── */
+        const tweens = [];
+        function tween(dur, fn, done) {
+            tweens.push({ t0: performance.now(), dur, fn, done });
+        }
+        function runTweens(now) {
+            for (let i = tweens.length - 1; i >= 0; i--) {
+                const tw = tweens[i];
+                const t = Math.min(1, (now - tw.t0) / tw.dur);
+                tw.fn(t, now);
+                if (t >= 1) {
+                    tweens.splice(i, 1);
+                    if (tw.done) tw.done();
+                }
+            }
+        }
+        function resetAnim() {
+            state.anim = { dx: 0, dy: 0, rot: 0, origin: '' };
+        }
+        const ease = t => t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+
+        function swingRide() {
+            state.busy = true;
+            state.facing = 1;
+            const sw = state.swing;
+            state.x = sw.x;
+            const lift = -64;
+            const princessTop = FEET_Y - PRINCESS_H + lift;
+            state.anim = { dx: 0, dy: lift, rot: 0, origin: `${PRINCESS_W / 2}px ${sw.pivotY - princessTop}px` };
+            speak('Wiiii! Schommelen!');
+            let lastSign = 0;
+            tween(6000, (t, now) => {
+                const amp = 32 * Math.sin(Math.PI * Math.min(1, t * 1.3)) * (1 - t * 0.6);
+                const rot = amp * Math.sin(t * Math.PI * 2 * 4);
+                state.anim.rot = rot;
+                sw.node.style.transform = `rotate(${rot}deg)`;
+                const sign = Math.sign(Math.cos(t * Math.PI * 2 * 4));
+                if (sign !== lastSign) {
+                    lastSign = sign;
+                    playFreqSweep(sign > 0 ? 400 : 600, sign > 0 ? 700 : 350, 0.25, 0.08);
+                }
+                if (Math.random() < 0.5) {
+                    const a = rot * Math.PI / 180;
+                    spawnSparkle(sw.x + Math.sin(a) * 150, sw.pivotY + Math.cos(a) * 150, { speed: 40, g: 20 });
+                }
+            }, () => {
+                sw.node.style.transform = '';
+                resetAnim();
+                state.busy = false;
+                sayRandom(['Nog een keer?', 'Dat was leuk!']);
+            });
+        }
+
+        function slideRide() {
+            state.busy = true;
+            state.facing = 1;
+            const topDy = -(FEET_Y - 176);
+            const startX = state.x;
+            speak('Klimmen maar!');
+            tween(1400, (t) => {
+                state.anim.dy = topDy * t + Math.sin(t * Math.PI * 8) * 4;
+            }, () => {
+                speak('Wieeee!');
+                playFreqSweep(1200, 300, 0.9, 0.15);
+                const endX = startX + 270;
+                tween(1000, (t) => {
+                    const e = ease(t);
+                    state.x = startX + 40 + (endX - startX - 40) * e;
+                    state.anim.dy = topDy * (1 - e);
+                    state.anim.rot = 12 * Math.sin(Math.PI * t);
+                    for (let k = 0; k < 2; k++) {
+                        spawnSparkle(state.x - 30, FEET_Y - 40 + state.anim.dy, { vx: -80, vy: -30, g: 30, size: 6 });
+                    }
+                }, () => {
+                    resetAnim();
+                    state.targetX = state.x;
+                    burst(state.x, 400, 40);
+                    playCorrect();
+                    state.busy = false;
+                });
+            });
+        }
+
+        function sleepInBed() {
+            state.busy = true;
+            state.facing = 1;
+            const night = document.getElementById('night');
+            const cover = document.getElementById('bedCover');
+            speak('Welterusten prinses!');
+            tween(600, (t) => {
+                state.anim.rot = -90 * ease(t);
+                state.anim.dy = -30 * ease(t);
+            }, () => {
+                cover.classList.add('show');
+                night.classList.add('show');
+                playLullaby();
+                const zzzTimer = setInterval(() => {
+                    const z = el('<div class="zzz">💤</div>');
+                    place(z, state.x - 90, 280);
+                    setTimeout(() => z.remove(), 2200);
+                }, 900);
+                setTimeout(() => {
+                    clearInterval(zzzTimer);
+                    night.classList.remove('show');
+                    cover.classList.remove('show');
+                    speak('Goedemorgen prinses! Kukeleku!');
+                    playWin();
+                    sparkleShower(state.x, 100, 60);
+                    tween(600, (t) => {
+                        state.anim.rot = -90 * (1 - ease(t));
+                        state.anim.dy = -30 * (1 - ease(t));
+                    }, () => {
+                        resetAnim();
+                        state.busy = false;
+                    });
+                }, 7000);
+            });
+        }
+
+        function playLullaby() {
+            // Altijd is Kortjakje ziek / Twinkle twinkle
+            const notes = [523, 523, 784, 784, 880, 880, 784, 0, 698, 698, 659, 659, 587, 587, 523];
+            notes.forEach((f, i) => { if (f) setTimeout(() => playTone(f, 0.4, 0.12, 'sine'), i * 420); });
+        }
+
+        function playMusicBox() {
+            const notes = [784, 988, 1175, 988, 784, 988, 1175, 1568, 1175, 988, 784];
+            notes.forEach((f, i) => setTimeout(() => playTone(f, 0.25, 0.1, 'triangle'), i * 160));
+        }
+
+        function teddyHug(node) {
+            speak(randomPick(['Knuffel! Lieve beer!', 'Een dikke knuffel!']));
+            const r = node.getBoundingClientRect();
+            const p = screenToWorld(r.left + r.width / 2, r.top);
+            for (let i = 0; i < 30; i++) spawnSparkle(p.x, p.y, { hue: 330 + Math.random() * 30, speed: 160 });
+            playCorrect();
+        }
+
+        /* ─────────── Pet cat ─────────── */
+        function petEl() { return document.getElementById('pet'); }
+
+        function togglePet() {
+            const pet = state.pet;
+            pet.following = !pet.following;
+            petEl().classList.toggle('following', pet.following);
+            catMeow();
+            if (pet.following) {
+                speak('Poes gaat met je mee!');
+                for (let i = 0; i < 20; i++) spawnSparkle(pet.x, FEET_Y - 50, { hue: 340, speed: 120 });
+            } else {
+                speak('Poes blijft hier. Dag poes!');
+            }
+        }
+
+        function updatePet(dt) {
+            const node = petEl();
+            const pet = state.pet;
+            if (pet.key !== scene.key) return;
+            let moving = false;
+            if (pet.following) {
+                const target = state.x - state.facing * (state.riding ? 130 : 95);
+                const d = target - pet.x;
+                if (Math.abs(d) > 4) {
+                    const step = d * Math.min(1, dt * 4);
+                    pet.x += step;
+                    pet.facing = Math.sign(d);
+                    moving = Math.abs(step) > 0.6;
+                }
+                if (Math.random() < 0.01) spawnSparkle(pet.x, FEET_Y - 70, { hue: 340, speed: 40, g: -20 });
+            }
+            node.style.transform = `translate(${pet.x - 40}px, ${FEET_Y - 66}px)`;
+            node.classList.toggle('right', pet.facing > 0);
+            node.classList.toggle('walking', moving);
+        }
+
+        /* ─────────── Nagelsalon ─────────── */
+        const nailsEl = document.getElementById('nails');
+        const handsSvg = document.getElementById('hands');
+        let nailsOpen = false;
+        const NAIL_COLORS = [
+            { c: '#f472b6', name: 'Roze!' },
+            { c: '#ef4444', name: 'Rood!' },
+            { c: '#a855f7', name: 'Paars!' },
+            { c: '#38bdf8', name: 'Blauw!' },
+            { c: '#34d399', name: 'Groen!' },
+            { c: 'gold', name: 'Goud!', css: 'linear-gradient(135deg, #fde68a, #f59e0b, #fef3c7, #d97706)' },
+            { c: 'rainbow', name: 'Regenboog!', css: 'linear-gradient(180deg, #ef4444, #fb923c, #facc15, #4ade80, #60a5fa, #c084fc)' },
+            { c: 'silver', name: 'Zilver glitter!', css: 'radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 10px 10px, linear-gradient(135deg, #e5e7eb, #9ca3af, #f9fafb)' }
+        ];
+        const STICKERS = [
+            { s: '💎', name: 'Een diamantje!' },
+            { s: '⭐', name: 'Een sterretje!' },
+            { s: '💖', name: 'Een hartje!' },
+            { s: '🌸', name: 'Een bloemetje!' },
+            { s: '🦄', name: 'Een eenhoorn!' }
+        ];
+        let nailTool = { type: 'color', value: '#f472b6' };
+        let nails = [];
+        let nailPainting = false;
+
+        function nailFill(c) {
+            if (c === 'gold') return 'url(#ngold)';
+            if (c === 'rainbow') return 'url(#nrb)';
+            if (c === 'silver') return 'url(#nsilver)';
+            return c;
+        }
+
+        function buildHands() {
+            const skin = '#ffd7c2';
+            const fingers = [
+                { x: -94, y: 330, a: -52, len: 96, w: 52 },
+                { x: -64, y: 252, a: -10, len: 126, w: 46 },
+                { x: -18, y: 240, a: -3, len: 146, w: 48 },
+                { x: 28, y: 242, a: 4, len: 134, w: 46 },
+                { x: 70, y: 262, a: 12, len: 104, w: 40 }
+            ];
+            let html = `<defs>
+                <linearGradient id="nrb" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#ef4444"/><stop offset=".2" stop-color="#fb923c"/><stop offset=".4" stop-color="#facc15"/>
+                    <stop offset=".6" stop-color="#4ade80"/><stop offset=".8" stop-color="#60a5fa"/><stop offset="1" stop-color="#c084fc"/>
+                </linearGradient>
+                <linearGradient id="ngold" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#fde68a"/><stop offset=".4" stop-color="#f59e0b"/><stop offset=".7" stop-color="#fef3c7"/><stop offset="1" stop-color="#d97706"/>
+                </linearGradient>
+                <pattern id="nsilverDots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.4" fill="#fff"/></pattern>
+                <linearGradient id="nsilverBase" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0" stop-color="#e5e7eb"/><stop offset=".5" stop-color="#9ca3af"/><stop offset="1" stop-color="#f9fafb"/>
+                </linearGradient>
+                <linearGradient id="nsilver" href="#nsilverBase"/>
+            </defs>`;
+            let idx = 0;
+            [[230, false], [590, true]].forEach(([cx, mirror]) => {
+                html += `<g transform="translate(${cx},0) scale(${mirror ? -1 : 1},1)">`;
+                html += `<rect x="-72" y="320" width="144" height="140" rx="30" fill="${skin}"/>`;
+                html += `<ellipse cx="0" cy="320" rx="100" ry="100" fill="${skin}"/>`;
+                fingers.forEach(f => {
+                    const i = idx++;
+                    const nw = f.w * 0.8, nh = f.w * 1.1;
+                    const nx = -nw / 2, ny = -f.len + 6;
+                    html += `<g class="finger" data-nail="${i}" transform="translate(${f.x},${f.y}) rotate(${f.a})">
+                        <rect x="${-f.w / 2}" y="${-f.len}" width="${f.w}" height="${f.len + 40}" rx="${f.w / 2}" fill="${skin}"/>
+                        <path d="M${-f.w * 0.3} ${-f.len + f.w * 1.4} q${f.w * 0.3} 6 ${f.w * 0.6} 0" stroke="#f1b8a0" stroke-width="2" fill="none"/>
+                        <clipPath id="nc${i}"><rect x="${nx}" y="${ny}" width="${nw}" height="${nh}" rx="${nw * 0.45}"/></clipPath>
+                        <rect x="${nx}" y="${ny}" width="${nw}" height="${nh}" rx="${nw * 0.45}" fill="#fde2e4" stroke="#f9a8d4" stroke-width="2"/>
+                        <g class="paint-layer" clip-path="url(#nc${i})"></g>
+                        <g class="gl" clip-path="url(#nc${i})">
+                            <circle cx="${nx + nw * 0.3}" cy="${ny + nh * 0.3}" r="2.2" fill="#fff"/>
+                            <circle cx="${nx + nw * 0.7}" cy="${ny + nh * 0.45}" r="1.8" fill="#fff"/>
+                            <circle cx="${nx + nw * 0.4}" cy="${ny + nh * 0.75}" r="2" fill="#fff"/>
+                            <circle cx="${nx + nw * 0.75}" cy="${ny + nh * 0.8}" r="1.6" fill="#fff"/>
+                        </g>
+                        <ellipse cx="${nx + nw * 0.3}" cy="${ny + nh * 0.3}" rx="${nw * 0.12}" ry="${nh * 0.2}" fill="#fff" opacity=".6"/>
+                        <text class="stk" x="0" y="0" font-size="${nw * 0.8}" text-anchor="middle" dominant-baseline="central"
+                            transform="translate(0,${ny + nh * 0.55})${mirror ? ' scale(-1,1)' : ''}"></text>
+                    </g>`;
+                });
+                html += `</g>`;
+            });
+            handsSvg.innerHTML = html;
+            nails = Array.from({ length: idx }, () => ({ color: null, sticker: null }));
+        }
+
+        function buildNailTools() {
+            const palette = document.getElementById('palette');
+            palette.innerHTML = NAIL_COLORS.map((c, i) =>
+                `<button class="bottle-btn${i === 0 ? ' sel' : ''}" data-i="${i}" aria-label="${c.name}">
+                    <span class="cap"></span><span class="glass" style="background:${c.css || c.c}"></span>
+                </button>`).join('');
+            const tools = document.getElementById('nailTools');
+            tools.innerHTML = STICKERS.map((s, i) => `<button class="tool-btn" data-s="${i}">${s.s}</button>`).join('') +
+                `<button class="tool-btn wide" id="glitterBtn">✨ Glitter</button>
+                 <button class="tool-btn wide" id="wipeBtn">🧽 Weg</button>
+                 <button class="tool-btn wide" id="doneBtn">✅ Klaar!</button>`;
+
+            const selectBtn = (btn) => {
+                nailsEl.querySelectorAll('.bottle-btn, .tool-btn[data-s]').forEach(b => b.classList.remove('sel'));
+                btn.classList.add('sel');
+            };
+            palette.querySelectorAll('.bottle-btn').forEach(btn => {
+                btn.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    const c = NAIL_COLORS[+btn.dataset.i];
+                    nailTool = { type: 'color', value: c.c };
+                    selectBtn(btn);
+                    playPop();
+                    if (window.speechSynthesis) speechSynthesis.cancel();
+                    speak(c.name);
+                });
+            });
+            tools.querySelectorAll('.tool-btn[data-s]').forEach(btn => {
+                btn.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    const st = STICKERS[+btn.dataset.s];
+                    nailTool = { type: 'sticker', value: st.s };
+                    selectBtn(btn);
+                    playPop();
+                    if (window.speechSynthesis) speechSynthesis.cancel();
+                    speak(st.name);
+                });
+            });
+            document.getElementById('glitterBtn').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                handsSvg.classList.toggle('glitter');
+                playSparkleSound();
+                speak(handsSvg.classList.contains('glitter') ? 'Glitter erop!' : 'Glitter eraf!');
+                nailSparkAll(6);
+            });
+            document.getElementById('wipeBtn').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                handsSvg.querySelectorAll('.paint-layer').forEach(l => l.innerHTML = '');
+                handsSvg.querySelectorAll('.stk').forEach(t => t.textContent = '');
+                handsSvg.querySelectorAll('.finger').forEach(f => f.classList.remove('painted'));
+                handsSvg.classList.remove('glitter');
+                nails.forEach(n => { n.color = null; n.sticker = null; });
+                playFreqSweep(600, 200, 0.4, 0.15);
+                speak('Alles weg! Opnieuw beginnen!');
+            });
+            document.getElementById('doneBtn').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                nailsDone();
+            });
+        }
+
+        function nailSpark(x, y) {
+            const icons = ['✨', '⭐', '💖', '🌟', '💫'];
+            for (let i = 0; i < 8; i++) {
+                const s = document.createElement('span');
+                s.className = 'scope-spark';
+                s.textContent = randomPick(icons);
+                const a = Math.random() * Math.PI * 2;
+                const d = 40 + Math.random() * 50;
+                s.style.left = x + 'px';
+                s.style.top = y + 'px';
+                s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                nailsEl.appendChild(s);
+                setTimeout(() => s.remove(), 900);
+            }
+        }
+
+        function nailCenter(i) {
+            const f = handsSvg.querySelector(`.finger[data-nail="${i}"] rect:nth-of-type(2)`);
+            const r = f.getBoundingClientRect();
+            const o = nailsEl.getBoundingClientRect();
+            return { x: r.left + r.width / 2 - o.left, y: r.top + r.height / 2 - o.top };
+        }
+
+        function nailSparkAll(n) {
+            nails.forEach((nl, i) => { if (nl.color || n > 6) { const c = nailCenter(i); nailSpark(c.x, c.y); } });
+        }
+
+        function paintNail(i, isTap) {
+            const finger = handsSvg.querySelector(`.finger[data-nail="${i}"]`);
+            if (!finger) return;
+            if (nailTool.type === 'color') {
+                if (nails[i].color === nailTool.value) return;
+                nails[i].color = nailTool.value;
+                const layer = finger.querySelector('.paint-layer');
+                const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                r.setAttribute('x', -40); r.setAttribute('y', -200);
+                r.setAttribute('width', 80); r.setAttribute('height', 260);
+                r.setAttribute('fill', nailFill(nailTool.value));
+                r.setAttribute('class', 'paint');
+                layer.appendChild(r);
+                if (nailTool.value === 'silver') {
+                    const d = r.cloneNode();
+                    d.setAttribute('fill', 'url(#nsilverDots)');
+                    layer.appendChild(d);
+                }
+                while (layer.children.length > 3) layer.removeChild(layer.firstChild);
+                finger.classList.add('painted');
+                playFreqSweep(500 + i * 40, 900 + i * 40, 0.18, 0.1);
+                const c = nailCenter(i);
+                nailSpark(c.x, c.y);
+                if (nails.every(n => n.color) && isTap !== 'drag-quiet') {
+                    speak('Alle nagels gelakt!');
+                } else if (Math.random() < 0.25) {
+                    speak(randomPick(['Mooi!', 'Prachtig!', 'Wat glimt dat!']));
+                }
+            } else if (isTap) {
+                nails[i].sticker = nailTool.value;
+                const t = finger.querySelector('.stk');
+                t.textContent = nailTool.value;
+                t.classList.remove('pop');
+                void t.getBBox();
+                t.classList.add('pop');
+                playTone(1200, 0.12, 0.15, 'triangle');
+                const c = nailCenter(i);
+                nailSpark(c.x, c.y);
+            }
+        }
+
+        function fingerAt(e) {
+            const hit = document.elementFromPoint(e.clientX, e.clientY);
+            const f = hit && hit.closest && hit.closest('.finger');
+            return f ? +f.dataset.nail : -1;
+        }
+
+        handsSvg.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            nailPainting = true;
+            const i = fingerAt(e);
+            if (i >= 0) paintNail(i, true);
+        });
+        handsSvg.addEventListener('pointermove', (e) => {
+            if (!nailPainting || nailTool.type !== 'color') return;
+            const i = fingerAt(e);
+            if (i >= 0) paintNail(i, false);
+        });
+        window.addEventListener('pointerup', () => { nailPainting = false; });
+        nailsEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function nailsDone() {
+            if (!nails.some(n => n.color || n.sticker)) {
+                speak('Kies eerst een kleurtje en tik op een nagel!');
+                return;
+            }
+            playWin();
+            speak('Wat een prachtige nagels! Even blazen... Klaar!');
+            handsSvg.classList.remove('drying');
+            void handsSvg.getBoundingClientRect();
+            handsSvg.classList.add('drying');
+            nailSparkAll(10);
+            setTimeout(() => nailSparkAll(10), 500);
+            setTimeout(() => handsSvg.classList.remove('drying'), 1600);
+        }
+
+        function openNails() {
+            nailsOpen = true;
+            nailsEl.classList.add('open');
+            speak('De nagelsalon! Kies een kleurtje en tik op een nagel!');
+            playSparkleSound();
+        }
+
+        function closeNails() {
+            nailsOpen = false;
+            nailsEl.classList.remove('open');
+            _playWhoosh();
+            if (nails.some(n => n.color)) {
+                burst(state.x, 330, 40);
+                sayRandom(['Wat een mooie nagels, prinses!', 'Glimmende nagels!']);
+            }
+        }
+        document.getElementById('nailsClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeNails();
+        });
+
+        function overlayOpen() { return scopeOpen || nailsOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
@@ -2644,6 +3539,8 @@
         setScene('in');
         buildWorld();
         buildScope();
+        buildHands();
+        buildNailTools();
         applyDress();
         spawnGems();
         resize();
