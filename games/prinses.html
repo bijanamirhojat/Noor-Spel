@@ -140,50 +140,51 @@
             border: 3px solid #fbcfe8;
             white-space: nowrap;
             box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            z-index: 6;
         }
 
-        .r0 .wall {
+        .i-room.r0 .wall {
             background:
                 repeating-linear-gradient(90deg, #fbcfe8 0 40px, #f9a8d4 40px 80px);
         }
-        .r0 .floor {
+        .i-room.r0 .floor {
             background: conic-gradient(#fdf2f8 25%, #f9a8d4 0 50%, #fdf2f8 0 75%, #f9a8d4 0) 0 0 / 50px 50px;
         }
 
-        .r1 .wall {
+        .i-room.r1 .wall {
             background:
                 radial-gradient(circle, rgba(255,255,255,0.55) 3px, transparent 4px) 0 0 / 46px 46px,
                 linear-gradient(180deg, #ddd6fe, #c4b5fd);
         }
-        .r1 .floor {
+        .i-room.r1 .floor {
             background: conic-gradient(#ede9fe 25%, #c4b5fd 0 50%, #ede9fe 0 75%, #c4b5fd 0) 0 0 / 50px 50px;
         }
 
-        .r2 .wall {
+        .i-room.r2 .wall {
             background:
                 repeating-linear-gradient(90deg, #fecdd3 0 30px, #fda4af 30px 34px),
                 #fecdd3;
         }
-        .r2 .floor {
+        .i-room.r2 .floor {
             background:
                 linear-gradient(90deg, transparent 290px, #e11d48 290px 510px, transparent 510px),
                 conic-gradient(#fef3c7 25%, #fcd34d 0 50%, #fef3c7 0 75%, #fcd34d 0) 0 0 / 50px 50px;
         }
 
-        .r3 .wall {
+        .i-room.r3 .wall {
             background: linear-gradient(180deg, #fff7ed 0%, #fdf2f8 55%, #ecfeff 100%);
         }
-        .r3 .floor {
+        .i-room.r3 .floor {
             background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
         }
 
-        .r4 .wall {
+        .i-room.r4 .wall {
             background:
                 radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px,
                 radial-gradient(circle at 70% 70%, #fde68a 1.5px, transparent 2.5px) 0 0 / 90px 80px,
                 linear-gradient(180deg, #1e1b4b, #4c1d95);
         }
-        .r4 .floor {
+        .i-room.r4 .floor {
             background:
                 repeating-linear-gradient(90deg, #7c3aed 0 60px, #6d28d9 60px 62px);
         }
@@ -984,6 +985,416 @@
             to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2); opacity: 0; }
         }
 
+        /* ── Door ── */
+        .castle-door.open {
+            background: radial-gradient(ellipse at 50% 70%, #fff 0 20%, #fef9c3 40%, #f0abfc 75%, #c084fc 100%);
+            box-shadow: 0 0 50px #fde68a, inset 0 0 30px rgba(255,255,255,0.8);
+        }
+        .castle-door.open::after { opacity: 0; }
+        .door-sign {
+            background: #fff;
+            color: #be185d;
+            font-family: 'Fredoka One', cursive;
+            font-size: 20px;
+            padding: 4px 14px;
+            border-radius: 12px;
+            border: 3px solid #fcd34d;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        .princess.entering {
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+        .door-fade {
+            position: absolute;
+            inset: 0;
+            z-index: 45;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background: radial-gradient(circle, #fff 0%, #fdf2f8 55%, #f5d0fe 100%);
+        }
+        .door-fade.show { opacity: 1; }
+
+        /* ── Outside ── */
+        .o-room .wall {
+            background: linear-gradient(180deg, #0ea5e9 0%, #38bdf8 35%, #7dd3fc 70%, #e0f2fe 100%);
+        }
+        .hills {
+            height: 150px;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 300px 110px at 25% 100%, #86efac 98%, transparent 100%) 0 0 / 800px 150px repeat-x,
+                radial-gradient(ellipse 360px 130px at 75% 100%, #bbf7d0 98%, transparent 100%) 0 0 / 800px 150px repeat-x;
+        }
+        .o-room .floor {
+            background:
+                radial-gradient(circle, #fef08a 2.5px, transparent 3.5px) 0 0 / 70px 36px,
+                radial-gradient(circle, #f9a8d4 2.5px, transparent 3.5px) 35px 18px / 70px 36px,
+                linear-gradient(180deg, #4ade80, #16a34a);
+        }
+        .cloud {
+            width: 130px;
+            height: 42px;
+            background: #fff;
+            border-radius: 40px;
+            pointer-events: none;
+            opacity: 0.95;
+            animation: cloudDrift 9s ease-in-out infinite alternate;
+        }
+        .cloud::before, .cloud::after {
+            content: '';
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .cloud::before { width: 60px; height: 60px; left: 18px; top: -30px; }
+        .cloud::after { width: 46px; height: 46px; left: 62px; top: -20px; }
+        @keyframes cloudDrift {
+            from { transform: translateX(-30px); }
+            to { transform: translateX(40px); }
+        }
+
+        .stone {
+            background: repeating-linear-gradient(0deg, #fbcfe8 0 36px, #f9a8d4 36px 39px);
+        }
+        .castle-wall {
+            width: 480px;
+            height: 340px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .castle-wall::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -28px;
+            height: 28px;
+            background: repeating-linear-gradient(90deg, #fbcfe8 0 34px, transparent 34px 56px);
+        }
+        .tower {
+            width: 130px;
+            height: 480px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        .tower::before {
+            content: '';
+            position: absolute;
+            left: -16px;
+            top: -130px;
+            width: 162px;
+            height: 132px;
+            background: linear-gradient(90deg, #a855f7, #c084fc 50%, #9333ea);
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        }
+        .tower::after {
+            content: '';
+            position: absolute;
+            left: 64px;
+            top: -190px;
+            width: 50px;
+            height: 34px;
+            background: linear-gradient(90deg, #f472b6, #fb7185);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+            border-left: 4px solid #fcd34d;
+            animation: flag 1s ease-in-out infinite alternate;
+            transform-origin: 0 50%;
+        }
+        @keyframes flag {
+            from { transform: scaleX(1) skewY(0); }
+            to { transform: scaleX(0.85) skewY(6deg); }
+        }
+        .tower .win {
+            position: absolute;
+            left: 40px;
+            width: 50px;
+            height: 70px;
+            border-radius: 25px 25px 0 0;
+            background: linear-gradient(180deg, #fde68a, #fbbf24);
+            border: 5px solid #fff;
+            box-shadow: 0 0 16px #fde68a;
+        }
+
+        .sun {
+            font-size: 90px;
+            line-height: 1;
+            animation: sunSpin 12s linear infinite;
+        }
+        @keyframes sunSpin {
+            0%, 100% { transform: rotate(-8deg) scale(1); }
+            50% { transform: rotate(8deg) scale(1.08); }
+        }
+
+        .fountain {
+            width: 180px;
+            height: 200px;
+        }
+        .fountain > div { position: absolute; }
+        .fountain .basin {
+            left: 0;
+            bottom: 0;
+            width: 180px;
+            height: 56px;
+            border-radius: 50% / 40%;
+            background: linear-gradient(180deg, #f5f5f4, #d6d3d1);
+            border: 4px solid #fcd34d;
+        }
+        .fountain .water {
+            left: 16px;
+            bottom: 26px;
+            width: 148px;
+            height: 24px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, #e0f2fe, #38bdf8);
+        }
+        .fountain .col {
+            left: 78px;
+            bottom: 44px;
+            width: 24px;
+            height: 86px;
+            background: linear-gradient(90deg, #e7e5e4, #fff, #d6d3d1);
+        }
+        .fountain .bowl {
+            left: 40px;
+            bottom: 124px;
+            width: 100px;
+            height: 26px;
+            border-radius: 0 0 50px 50px;
+            background: linear-gradient(180deg, #7dd3fc, #f5f5f4 40%, #d6d3d1);
+            border-top: 4px solid #fcd34d;
+        }
+        .fountain .jet {
+            left: 84px;
+            bottom: 148px;
+            width: 12px;
+            height: 50px;
+            border-radius: 6px;
+            background: linear-gradient(0deg, rgba(186,230,253,0.95), rgba(255,255,255,0.1));
+            animation: jet 0.35s ease-in-out infinite alternate;
+            transform-origin: 50% 100%;
+        }
+        @keyframes jet {
+            from { transform: scaleY(0.85); }
+            to { transform: scaleY(1.15); }
+        }
+
+        .fence {
+            height: 70px;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                linear-gradient(180deg, transparent 18px, #fff 18px 26px, transparent 26px 46px, #fff 46px 54px, transparent 54px),
+                repeating-linear-gradient(90deg, #fff 0 14px, transparent 14px 40px);
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.15));
+        }
+
+        .bloom {
+            font-size: 76px;
+            line-height: 1;
+            transform-origin: 50% 100%;
+            filter: drop-shadow(0 6px 5px rgba(0,0,0,0.2));
+        }
+        .bloom.grow { animation: bloomGrow 0.9s cubic-bezier(.2,1.6,.4,1); }
+        @keyframes bloomGrow {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.6) rotate(-8deg); }
+            70% { transform: scale(1.3) rotate(6deg); }
+            100% { transform: scale(1); }
+        }
+
+        .flutter {
+            font-size: 40px;
+            line-height: 1;
+            animation: flutter 7s ease-in-out infinite;
+        }
+        @keyframes flutter {
+            0%   { transform: translate(0, 0) rotate(-10deg); }
+            25%  { transform: translate(70px, -40px) rotate(10deg); }
+            50%  { transform: translate(140px, 10px) rotate(-5deg); }
+            75%  { transform: translate(60px, 40px) rotate(12deg); }
+            100% { transform: translate(0, 0) rotate(-10deg); }
+        }
+        .flutter.flyaway { animation: flyaway 1.4s ease-in forwards; }
+        @keyframes flyaway {
+            to { transform: translate(120px, -400px) rotate(30deg) scale(0.5); opacity: 0; }
+        }
+        .bee {
+            font-size: 40px;
+            animation: bee 3s ease-in-out infinite;
+        }
+        @keyframes bee {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(40px, -20px); }
+            50% { transform: translate(10px, 15px); }
+            75% { transform: translate(-30px, -10px); }
+        }
+
+        .pond {
+            width: 560px;
+            height: 66px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse at 50% 40%, #bae6fd, #38bdf8 60%, #0284c7);
+            box-shadow: inset 0 6px 14px rgba(0,0,0,0.2), 0 0 0 6px #a3e635;
+            z-index: 1;
+            overflow: visible;
+        }
+        .pond .pad {
+            position: absolute;
+            width: 46px;
+            height: 18px;
+            border-radius: 50%;
+            background: #22c55e;
+            border-top: 3px solid #86efac;
+        }
+        .pond .swan {
+            position: absolute;
+            left: 60px;
+            top: -30px;
+            font-size: 48px;
+            animation: swim 12s linear infinite;
+        }
+        @keyframes swim {
+            0% { transform: translateX(0) scaleX(-1); }
+            49% { transform: translateX(380px) scaleX(-1); }
+            50% { transform: translateX(380px) scaleX(1); }
+            99% { transform: translateX(0) scaleX(1); }
+            100% { transform: translateX(0) scaleX(-1); }
+        }
+        .pond .fish {
+            position: absolute;
+            left: 330px;
+            top: 10px;
+            font-size: 30px;
+            opacity: 0;
+            animation: fishJump 5s ease-in-out infinite;
+        }
+        @keyframes fishJump {
+            0%, 70% { transform: translate(0, 0) rotate(0); opacity: 0; }
+            72% { opacity: 1; }
+            80% { transform: translate(30px, -70px) rotate(-40deg); opacity: 1; }
+            88% { transform: translate(60px, 0) rotate(-120deg); opacity: 1; }
+            90%, 100% { transform: translate(60px, 0) rotate(-120deg); opacity: 0; }
+        }
+        .ripple {
+            position: absolute;
+            width: 30px;
+            height: 12px;
+            margin: -6px 0 0 -15px;
+            border: 3px solid rgba(255,255,255,0.9);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 2;
+            animation: ripple 1s ease-out forwards;
+        }
+        @keyframes ripple {
+            to { transform: scale(5); opacity: 0; }
+        }
+        .jumpy.jump { animation: frogJump 0.7s ease; }
+        @keyframes frogJump {
+            0%, 100% { transform: translateY(0); }
+            45% { transform: translateY(-110px) rotate(-15deg); }
+        }
+
+        .sky-rainbow {
+            width: 700px;
+            height: 350px;
+            border-radius: 350px 350px 0 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 100%,
+                transparent 0 55%,
+                rgba(168,85,247,0.6) 55% 61%,
+                rgba(59,130,246,0.6) 61% 67%,
+                rgba(34,197,94,0.6) 67% 73%,
+                rgba(250,204,21,0.6) 73% 79%,
+                rgba(251,146,60,0.6) 79% 85%,
+                rgba(239,68,68,0.6) 85% 91%,
+                transparent 91%);
+        }
+        .haystack {
+            width: 130px;
+            height: 90px;
+            border-radius: 65px 65px 10px 10px;
+            background: repeating-linear-gradient(100deg, #fde047 0 8px, #facc15 8px 12px);
+            box-shadow: inset 0 -10px 12px rgba(0,0,0,0.12);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .tree {
+            width: 200px;
+            height: 240px;
+        }
+        .tree .crown {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 200px;
+            line-height: 1;
+        }
+        .tree .apple {
+            position: absolute;
+            font-size: 30px;
+            transition: none;
+        }
+        .tree .apple.fall { animation: appleFall 0.8s cubic-bezier(.5,0,1,.6) forwards; }
+        @keyframes appleFall {
+            to { transform: translateY(150px) rotate(200deg); }
+        }
+
+        /* Unicorn */
+        .unicorn {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 200px;
+            height: 188px;
+            z-index: 5;
+            cursor: pointer;
+        }
+        .unicorn.ridden { z-index: 11; pointer-events: none; }
+        .unicorn.ridden .tap-hint { display: none; }
+        .unicorn .uflip { width: 100%; height: 100%; }
+        .unicorn.left .uflip { transform: scaleX(-1); }
+        .unicorn svg { width: 100%; height: 100%; overflow: visible; }
+        .unicorn .utail { animation: tailSwish 1.2s ease-in-out infinite alternate; transform-origin: 34px 50px; }
+        @keyframes tailSwish {
+            from { transform: rotate(-8deg); }
+            to { transform: rotate(10deg); }
+        }
+        .unicorn.walking .ubody { animation: gallop 0.3s ease-in-out infinite; }
+        .unicorn.walking .leg-a { animation: legA 0.3s ease-in-out infinite alternate; }
+        .unicorn.walking .leg-b { animation: legB 0.3s ease-in-out infinite alternate; }
+        @keyframes gallop {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes legA { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+        @keyframes legB { from { transform: rotate(18deg); } to { transform: rotate(-18deg); } }
+        .unicorn .leg-a, .unicorn .leg-b { transform-box: fill-box; transform-origin: 50% 0; }
+        .princess.riding.walking .bob { animation: gallop 0.3s ease-in-out infinite; }
+
+        .dismount {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 30;
+            border: 4px solid #fff;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #f472b6, #a855f7);
+            color: #fff;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.1rem;
+            padding: 10px 18px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: none;
+        }
+        .dismount.show { display: block; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -1001,10 +1412,13 @@
         </div>
 
         <div class="playfield" id="playfield">
-            <div class="world" id="world"></div>
+            <div class="world" id="worldIn"></div>
+            <div class="world" id="worldOut" style="display:none"></div>
             <canvas id="fx"></canvas>
             <div class="screen-rainbow" id="screenRainbow"></div>
             <div class="toast" id="toast"></div>
+            <div class="door-fade" id="doorFade"></div>
+            <button class="dismount" id="dismount">🦄 Afstappen</button>
             <button class="arrow left" id="btnLeft" aria-label="Naar links">◀</button>
             <button class="arrow right" id="btnRight" aria-label="Naar rechts">▶</button>
 
@@ -1025,25 +1439,39 @@
         /* ─────────── Constants ─────────── */
         const WORLD_H = 500;
         const ROOM_W = 800;
-        const ROOMS = [
+        const ROOMS_IN = [
             { name: 'Kasteelhal',    icon: '🏰', say: 'De kasteelhal' },
             { name: 'Spiegelkamer',  icon: '🪞', say: 'De spiegelkamer' },
             { name: 'Troonzaal',     icon: '👑', say: 'De troonzaal' },
             { name: 'Regenboogzaal', icon: '🌈', say: 'De regenboogzaal' },
             { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' }
         ];
-        const WORLD_W = ROOM_W * ROOMS.length;
+        const ROOMS_OUT = [
+            { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
+            { name: 'Bloementuin',   icon: '🌷', say: 'De bloementuin' },
+            { name: 'Vijver',        icon: '🦢', say: 'De vijver' },
+            { name: 'Eenhoornweide', icon: '🦄', say: 'De eenhoornweide' }
+        ];
+        // The princess is in one scene at a time; these follow the active scene.
+        let ROOMS = ROOMS_IN;
+        let WORLD_W = ROOM_W * ROOMS.length;
         const PRINCESS_W = 120;
         const PRINCESS_H = 192;
         const FEET_Y = 452;
         const SPEED = 280;
-        const GEM_COUNT = 12;
+        const RIDE_SPEED = 540;
+        const RIDE_LIFT = 30;
         const MIN_VIEW_W = 580;
 
         const DRESSES = ['#f472b6', '#a855f7', '#38bdf8', '#34d399', '#fbbf24', 'rainbow', '#fb7185'];
 
         const playfield = document.getElementById('playfield');
-        const world = document.getElementById('world');
+        const SCENES = {
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 12, door: null },
+            out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 10, door: null }
+        };
+        let scene = SCENES.in;
+        let world = scene.el;
         const canvas = document.getElementById('fx');
         const ctx2d = canvas.getContext('2d');
         const toastEl = document.getElementById('toast');
@@ -1064,8 +1492,10 @@
             busy: false,
             dressIdx: 0,
             room: 0,
-            gems: [],
-            gemsGot: 0,
+            riding: false,
+            uniX: ROOM_W * 3 + 470,
+            fountainBoost: 0,
+            clopT: 0,
             partyUntil: 0,
             lastTime: performance.now()
         };
@@ -1171,20 +1601,28 @@
             return node;
         }
 
-        function buildWorld() {
+        function buildRooms(cls, extra = '') {
             ROOMS.forEach((room, i) => {
-                const r = el(`<div class="room r${i}"><div class="wall"></div><div class="floor"></div>
+                const r = el(`<div class="room ${cls} r${i}"><div class="wall"></div>${extra}<div class="floor"></div>
                     <div class="room-sign">${room.icon} ${room.name}</div></div>`);
                 r.style.left = i * ROOM_W + 'px';
                 world.appendChild(r);
             });
+        }
+
+        function buildWorld() {
+            buildRooms('i-room');
             for (let i = 1; i < ROOMS.length; i++) {
                 place(el('<div class="pillar"></div>'), i * ROOM_W - 22, -500);
             }
 
             /* Room 0: Kasteelhal */
             const r0 = 0;
-            place(el('<div class="castle-door"></div>'), r0 + 60, 120).style.zIndex = 1;
+            place(el('<div class="door-sign">🌳 Naar buiten</div>'), r0 + 78, 78);
+            SCENES.in.door = {
+                walkX: r0 + 150,
+                node: addObj('<div class="castle-door"><div class="tap-hint" style="top:90px">👇</div></div>', r0 + 60, 120, r0 + 150, (node) => goThroughDoor(node, 'out'))
+            };
             addObj('<div class="torch"><div class="stick"></div><div class="flame"></div></div>', r0 + 280, 170, r0 + 295, torchPuff);
             addObj('<div class="torch"><div class="stick"></div><div class="flame"></div></div>', r0 + 700, 170, r0 + 715, torchPuff);
             addObj('<div class="banner">👑</div>', r0 + 340, 60, r0 + 385, () => sayRandom(['Het kasteel van de prinses!', 'Hoera!']));
@@ -1254,40 +1692,308 @@
             addObj(html, x, y, x + 120, mirrorMagic);
         }
 
+
+        /* ─────────── Outside world ─────────── */
+        const UNICORN_W = 200;
+        const UNICORN_H = 188;
+
+        function unicornSVG() {
+            const mane = ['#ef4444', '#fb923c', '#facc15', '#4ade80', '#60a5fa', '#a855f7'];
+            return `
+            <svg viewBox="0 -20 160 150">
+                <ellipse cx="80" cy="126" rx="56" ry="5" fill="rgba(0,0,0,0.18)"/>
+                <g class="ubody">
+                    <g class="utail">
+                        ${mane.map((c, i) => `<path d="M36 ${48 + i * 2} Q${14 - i} ${60 + i * 4} ${20 - i * 2} ${92 + i * 3}" stroke="${c}" stroke-width="5" fill="none" stroke-linecap="round"/>`).join('')}
+                    </g>
+                    <g class="leg-b"><rect x="40" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="40" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
+                    <g class="leg-a"><rect x="102" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="102" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
+                    <g class="leg-a"><rect x="54" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="54" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
+                    <g class="leg-b"><rect x="116" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="116" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
+                    <ellipse cx="82" cy="64" rx="50" ry="27" fill="#fff" stroke="#e9d5ff" stroke-width="2"/>
+                    <circle cx="60" cy="58" r="3" fill="#fbcfe8"/><circle cx="74" cy="72" r="2.5" fill="#bae6fd"/><circle cx="96" cy="60" r="3" fill="#fde68a"/>
+                    <path d="M106 52 L118 12 L140 16 L130 62 Z" fill="#fff" stroke="#e9d5ff" stroke-width="2" stroke-linejoin="round"/>
+                    ${mane.map((c, i) => `<circle cx="${116 - i * 2}" cy="${10 + i * 9}" r="7" fill="${c}"/>`).join('')}
+                    <ellipse cx="138" cy="20" rx="19" ry="13" fill="#fff" stroke="#e9d5ff" stroke-width="2"/>
+                    <ellipse cx="152" cy="27" rx="9" ry="8" fill="#fce7f3"/>
+                    <circle cx="154" cy="26" r="1.4" fill="#be185d"/>
+                    <path d="M128 9 L131 -3 L137 8 Z" fill="#fff" stroke="#e9d5ff" stroke-width="1.5"/>
+                    <path d="M136 8 L141 -18 L145 8 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M137.5 2 L144 0 M138.5 -5 L143 -7" stroke="#f59e0b" stroke-width="1.2"/>
+                    <path d="M136 17 Q140 13 144 17" stroke="#3b0764" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+                    <circle cx="146" cy="24" r="3.5" fill="#fda4af" opacity=".7"/>
+                </g>
+            </svg>`;
+        }
+
+        function buildOutside() {
+            buildRooms('o-room');
+            place(el('<div class="hills"></div>'), 0, 250).style.width = WORLD_W + 'px';
+
+            // Clouds across the sky (also fill the tall portrait sky)
+            for (let i = 0; i < 14; i++) {
+                const c = place(el('<div class="cloud"></div>'), 60 + i * 230 + Math.random() * 80, -380 + Math.random() * 480);
+                c.style.animationDelay = (-Math.random() * 9) + 's';
+                c.style.transform = `scale(${0.7 + Math.random() * 0.6})`;
+            }
+
+            /* o0: Kasteelplein */
+            const o0 = 0;
+            place(el('<div class="castle-wall stone"></div>'), o0 + 70, 60);
+            const t1 = place(el('<div class="tower stone"><div class="win" style="top:60px"></div><div class="win" style="top:200px"></div></div>'), o0 + 10, -80);
+            const t2 = place(el('<div class="tower stone"><div class="win" style="top:60px"></div><div class="win" style="top:200px"></div></div>'), o0 + 470, -80);
+            place(el('<div class="door-sign">🏰 Naar binnen</div>'), o0 + 238, 78);
+            SCENES.out.door = {
+                walkX: o0 + 310,
+                node: addObj('<div class="castle-door"><div class="tap-hint" style="top:90px">👇</div></div>', o0 + 220, 120, o0 + 310, (node) => goThroughDoor(node, 'in'))
+            };
+            addObj('<div class="fountain"><div class="basin"></div><div class="water"></div><div class="col"></div><div class="bowl"></div><div class="jet"></div></div>', o0 + 610, 205, o0 + 700, fountainSplash);
+            addObj('<div class="sun">🌞</div>', o0 + 640, 10, o0 + 700, () => { sayRandom(['Hallo zon!', 'Wat een mooi weer!']); sparkleShower(o0 + 690, 0, 40); });
+
+            /* o1: Bloementuin */
+            const o1 = ROOM_W;
+            place(el('<div class="fence"></div>'), o1, 330).style.width = ROOM_W + 'px';
+            const blooms = [
+                ['🌷', 'Een tulp!', 330], ['🌻', 'Een zonnebloem!', 45], ['🌹', 'Een roos!', 350],
+                ['🌼', 'Een madeliefje!', 50], ['🌸', 'Een roze bloem!', 320], ['💐', 'Een bosje bloemen!', 290]
+            ];
+            blooms.forEach(([e, name, hue], i) => {
+                const bx = o1 + 70 + i * 115;
+                addObj(`<div class="bloom">${e}</div>`, bx, 318 + (i % 2) * 18, bx + 38, (node) => bloomGrow(node, name, hue));
+            });
+            addObj('<div class="flutter">🦋</div>', o1 + 120, 150, o1 + 200, butterflyTap);
+            addObj('<div class="flutter" style="animation-delay:-3s">🦋</div>', o1 + 480, 100, o1 + 560, butterflyTap);
+            addObj('<div class="bee">🐝</div>', o1 + 360, 220, o1 + 390, beeBuzz);
+
+            /* o2: Vijver */
+            const o2 = ROOM_W * 2;
+            const pond = place(el(`<div class="pond">
+                <div class="pad" style="left:90px;top:26px"></div>
+                <div class="pad" style="left:250px;top:34px"></div>
+                <div class="pad" style="left:430px;top:22px"></div>
+                <span class="swan">🦢</span>
+                <span class="fish">🐟</span>
+            </div>`), o2 + 120, 372);
+            pond.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (state.busy) return;
+                const p = screenToWorld(e.clientX, e.clientY);
+                splash(p.x, p.y);
+                walkTo(p.x, null);
+            });
+            addObj('<div class="emoji-obj jumpy" style="font-size:44px">🐸</div>', o2 + 360, 345, o2 + 460, frogJump);
+            addObj('<div class="emoji-obj" style="font-size:50px">🦆</div>', o2 + 650, 360, o2 + 640, () => { quack(); sayRandom(['Kwak kwak!', 'Een eendje!']); });
+            addObj('<div class="flutter" style="animation-delay:-5s">🦋</div>', o2 + 300, 130, o2 + 360, butterflyTap);
+            addObj('<div class="emoji-obj" style="font-size:120px">🌳</div>', o2 + 10, 250, o2 + 70, () => sayRandom(['Een grote boom!', 'Wat een mooie boom!']));
+
+            /* o3: Eenhoornweide */
+            const o3 = ROOM_W * 3;
+            place(el('<div class="sky-rainbow"></div>'), o3 + 50, -60);
+            place(el('<div class="fence"></div>'), o3, 330).style.width = ROOM_W + 'px';
+            place(el('<div class="haystack"></div>'), o3 + 620, 312);
+            const tree = addObj(`<div class="tree"><span class="crown">🌳</span>
+                <span class="apple" style="left:50px;top:60px">🍎</span>
+                <span class="apple" style="left:110px;top:40px">🍎</span>
+                <span class="apple" style="left:130px;top:100px">🍎</span></div>`, o3 + 60, 170, o3 + 170, appleDrop);
+            tree.style.zIndex = 2;
+
+            const uni = el(`<div class="unicorn" id="unicorn"><div class="uflip">${unicornSVG()}</div><div class="tap-hint" style="top:-40px">👇</div></div>`);
+            world.appendChild(uni);
+            uni.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (state.busy || state.riding) return;
+                playPop();
+                burst(state.uniX, 330, 20);
+                walkTo(state.uniX - 70, mountUnicorn);
+            });
+        }
+
+        function unicornEl() { return document.getElementById('unicorn'); }
+
+        function mountUnicorn() {
+            state.riding = true;
+            state.x = state.targetX = state.uniX;
+            princessEl().classList.add('riding');
+            unicornEl().classList.add('ridden');
+            document.getElementById('dismount').classList.add('show');
+            speak('Hop! Op de eenhoorn! Galop!');
+            playWin();
+            sparkleShower(state.x, 200, 50);
+        }
+
+        function dismountUnicorn(silent) {
+            if (!state.riding) return;
+            state.riding = false;
+            state.uniX = state.x;
+            princessEl().classList.remove('riding');
+            unicornEl().classList.remove('ridden', 'walking');
+            document.getElementById('dismount').classList.remove('show');
+            state.x = state.targetX = Math.max(60, Math.min(WORLD_W - 60, state.x + (state.x > WORLD_W - 200 ? -90 : 90)));
+            burst(state.x, 380, 30);
+            if (!silent) speak('Dag eenhoorn!');
+        }
+
+        document.getElementById('dismount').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            dismountUnicorn(false);
+        });
+
+        function goThroughDoor(doorNode, toKey) {
+            if (state.busy) return;
+            state.busy = true;
+            state.hold = 0;
+            state.pending = null;
+            dismountUnicorn(true);
+            doorNode.classList.add('open');
+            playFreqSweep(200, 500, 0.4, 0.15);
+            playSparkleSound();
+            burst(state.x, 300, 40);
+            const fade = document.getElementById('doorFade');
+            setTimeout(() => princessEl().classList.add('entering'), 150);
+            setTimeout(() => fade.classList.add('show'), 450);
+            setTimeout(() => {
+                doorNode.classList.remove('open');
+                setScene(toKey);
+                const door = scene.door;
+                state.x = state.targetX = door.walkX;
+                state.facing = 1;
+                state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));
+                door.node.classList.add('open');
+                if (window.speechSynthesis) speechSynthesis.cancel();
+                setTimeout(() => speak(toKey === 'out' ? 'Naar buiten! Het kasteelplein!' : 'Naar binnen! De kasteelhal!'), 60);
+            }, 900);
+            setTimeout(() => {
+                fade.classList.remove('show');
+                princessEl().classList.remove('entering');
+                burst(state.x, 320, 50);
+            }, 1000);
+            setTimeout(() => {
+                scene.door.node.classList.remove('open');
+                state.busy = false;
+            }, 1700);
+        }
+
+        function setScene(key) {
+            scene.el.style.display = 'none';
+            scene = SCENES[key];
+            world = scene.el;
+            world.style.display = '';
+            ROOMS = scene.rooms;
+            WORLD_W = ROOM_W * ROOMS.length;
+            const pr = princessEl();
+            if (pr) world.appendChild(pr);
+            particles.length = 0;
+            state.room = 0;
+            roomPill.textContent = `${ROOMS[0].icon} ${ROOMS[0].name}`;
+            updateGemPill();
+        }
+
+        function fountainSplash() {
+            state.fountainBoost = performance.now() + 2500;
+            playFreqSweep(900, 300, 0.3, 0.2);
+            setTimeout(() => playFreqSweep(1200, 400, 0.25, 0.15), 150);
+            sayRandom(['Plons! Glitterwater!', 'Wat een mooie fontein!', 'Spetter spetter!']);
+            for (let i = 0; i < 60; i++) {
+                spawnSparkle(700, 205, { vx: (Math.random() - 0.5) * 260, vy: -200 - Math.random() * 200, g: 380, hue: 180 + Math.random() * 40, max: 1.4 });
+            }
+        }
+
+        function bloomGrow(node, name, hue) {
+            node.classList.remove('grow');
+            void node.offsetWidth;
+            node.classList.add('grow');
+            const r = node.getBoundingClientRect();
+            const p = screenToWorld(r.left + r.width / 2, r.top + r.height / 3);
+            for (let i = 0; i < 36; i++) spawnSparkle(p.x, p.y, { hue: hue + (Math.random() - 0.5) * 30, speed: 220 });
+            playCorrect();
+            speak(name);
+        }
+
+        function butterflyTap(node) {
+            node.classList.add('flyaway');
+            speak('Een vlinder! Vlieg maar!');
+            playSparkleSound();
+            setTimeout(() => node.classList.remove('flyaway'), 3500);
+        }
+
+        function beeBuzz() {
+            playTone(220, 0.5, 0.12, 'sawtooth');
+            setTimeout(() => playTone(240, 0.4, 0.1, 'sawtooth'), 250);
+            speak('Zoem zoem! Een bij!');
+        }
+
+        function quack() {
+            playTone(420, 0.1, 0.18, 'square');
+            setTimeout(() => playTone(380, 0.12, 0.18, 'square'), 160);
+        }
+
+        function frogJump(node) {
+            node.classList.remove('jump');
+            void node.offsetWidth;
+            node.classList.add('jump');
+            playFreqSweep(300, 900, 0.2, 0.2);
+            setTimeout(() => { playTone(180, 0.12, 0.2, 'square'); setTimeout(() => playTone(160, 0.14, 0.2, 'square'), 170); }, 450);
+            speak('Kwak kwak! Een kikker!');
+            const r = node.getBoundingClientRect();
+            const p = screenToWorld(r.left + r.width / 2, r.bottom);
+            setTimeout(() => splash(p.x, p.y + 10), 600);
+        }
+
+        function splash(x, y) {
+            const rip = el('<div class="ripple"></div>');
+            place(rip, x, y);
+            setTimeout(() => rip.remove(), 1000);
+            for (let i = 0; i < 24; i++) {
+                spawnSparkle(x, y, { vx: (Math.random() - 0.5) * 160, vy: -120 - Math.random() * 140, g: 400, hue: 190 + Math.random() * 30, max: 0.9 });
+            }
+            playFreqSweep(1400, 300, 0.12, 0.2);
+        }
+
+        function appleDrop(node) {
+            const apple = [...node.querySelectorAll('.apple')].find(a => !a.classList.contains('fall'));
+            if (!apple) return;
+            apple.classList.add('fall');
+            playFreqSweep(900, 250, 0.6, 0.15);
+            setTimeout(() => playTone(160, 0.1, 0.25, 'triangle'), 750);
+            speak(state.riding ? 'Een appel! Lekker voor de eenhoorn!' : 'Een appel valt uit de boom!');
+            setTimeout(() => apple.classList.remove('fall'), 4000);
+        }
+
         /* ─────────── Gems ─────────── */
         function spawnGems() {
-            state.gems.forEach(g => g.node.remove());
-            state.gems = [];
-            state.gemsGot = 0;
+            scene.gems.forEach(g => g.node.remove());
+            scene.gems = [];
+            scene.gemsGot = 0;
             const kinds = ['💎', '💎', '💎', '⭐', '💖', '🌟'];
-            for (let i = 0; i < GEM_COUNT; i++) {
-                const x = 120 + (i + Math.random() * 0.6) * ((WORLD_W - 240) / GEM_COUNT);
+            const n = scene.gemCount;
+            for (let i = 0; i < n; i++) {
+                const x = 120 + (i + Math.random() * 0.6) * ((WORLD_W - 240) / n);
                 const y = 330 + Math.random() * 70;
                 const node = el(`<div class="gem">${randomPick(kinds)}</div>`);
                 node.style.animationDelay = (-Math.random() * 1.6) + 's';
                 place(node, x, y);
-                state.gems.push({ x, y, node, got: false });
+                scene.gems.push({ x, y, node, got: false });
             }
             updateGemPill();
         }
 
         function updateGemPill() {
-            gemPill.textContent = `💎 ${state.gemsGot} / ${GEM_COUNT}`;
+            gemPill.textContent = `💎 ${scene.gemsGot} / ${scene.gemCount}`;
             gemPill.classList.add('bump');
             setTimeout(() => gemPill.classList.remove('bump'), 200);
         }
 
         function checkGems() {
-            for (const g of state.gems) {
+            for (const g of scene.gems) {
                 if (g.got) continue;
                 if (Math.abs(g.x - state.x) < 40) {
                     g.got = true;
                     g.node.classList.add('got');
-                    state.gemsGot++;
+                    scene.gemsGot++;
                     burst(g.x, g.y + 20, 24);
-                    playGemChime(state.gemsGot);
+                    playGemChime(scene.gemsGot);
                     updateGemPill();
-                    if (state.gemsGot === GEM_COUNT) {
+                    if (scene.gemsGot === scene.gemCount) {
                         setTimeout(allGemsFound, 500);
                     }
                 }
@@ -1651,8 +2357,9 @@
                 }
                 const dx = state.targetX - state.x;
                 const p = princessEl();
+                const speed = state.riding ? RIDE_SPEED : SPEED;
                 if (Math.abs(dx) > 1.5) {
-                    const step = Math.sign(dx) * Math.min(Math.abs(dx), SPEED * dt);
+                    const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
                     state.x += step;
                     state.facing = Math.sign(dx);
                     p.classList.add('walking');
@@ -1661,6 +2368,20 @@
                         spawnSparkle(state.x - state.facing * 30 + (Math.random() - 0.5) * 40, FEET_Y - 10 - Math.random() * 30, {
                             vx: -state.facing * 30, vy: -20 - Math.random() * 30, g: 20, size: 3 + Math.random() * 5
                         });
+                    }
+                    if (state.riding) {
+                        // Rainbow trail from the tail + clip-clop hooves
+                        for (let k = 0; k < 3; k++) {
+                            spawnSparkle(state.x - state.facing * 80, FEET_Y - 110 + Math.random() * 50, {
+                                vx: -state.facing * 60, vy: (Math.random() - 0.5) * 30, g: 0,
+                                hue: (now / 4 + k * 40) % 360, size: 6 + Math.random() * 6, max: 0.9
+                            });
+                        }
+                        state.clopT -= dt;
+                        if (state.clopT <= 0) {
+                            state.clopT = 0.16;
+                            playTone(Math.random() < 0.5 ? 900 : 700, 0.05, 0.06, 'triangle');
+                        }
                     }
                     checkGems();
                 } else {
@@ -1679,18 +2400,40 @@
             // Wand sparkles
             if (Math.random() < 0.35) {
                 const wandX = state.x + state.facing * (0.38 * PRINCESS_W);
-                const wandY = FEET_Y - PRINCESS_H + 0.36 * PRINCESS_H;
+                const wandY = FEET_Y - PRINCESS_H + 0.36 * PRINCESS_H - (state.riding ? RIDE_LIFT : 0);
                 spawnSparkle(wandX, wandY, { speed: 50, g: 30, size: 3 + Math.random() * 4, hue: 40 + Math.random() * 30 });
             }
 
             // Princess transform
             const p = princessEl();
-            p.style.transform = `translate(${state.x - PRINCESS_W / 2}px, ${FEET_Y - PRINCESS_H}px)`;
+            p.style.transform = `translate(${state.x - PRINCESS_W / 2}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0)}px)`;
             p.classList.toggle('left', state.facing < 0);
+
+            if (scene.key === 'out') {
+                // Unicorn: carries the princess, or waits and looks at her
+                const u = unicornEl();
+                const ux = state.riding ? state.x : state.uniX;
+                const uFacing = state.riding ? state.facing : (state.x < state.uniX ? -1 : 1);
+                u.style.transform = `translate(${ux - UNICORN_W / 2}px, ${FEET_Y - UNICORN_H + 6}px)`;
+                u.classList.toggle('left', uFacing < 0);
+                u.classList.toggle('walking', state.riding && p.classList.contains('walking'));
+
+                // Fountain keeps spraying glitter water
+                const boost = now < state.fountainBoost;
+                if (Math.random() < (boost ? 1 : 0.5)) {
+                    for (let k = 0; k < (boost ? 4 : 1); k++) {
+                        spawnSparkle(700, 205, {
+                            vx: (Math.random() - 0.5) * (boost ? 200 : 110),
+                            vy: -(boost ? 260 : 130) - Math.random() * 60,
+                            g: 380, hue: 185 + Math.random() * 30, size: 3 + Math.random() * 4, max: 1.1
+                        });
+                    }
+                }
+            }
 
             // Mirror reflection follows princess a little
             const refl = document.getElementById('reflection');
-            if (refl) {
+            if (refl && scene.key === 'in') {
                 const off = Math.max(-45, Math.min(45, (state.x - (ROOM_W + 400)) * 0.25));
                 refl.style.marginLeft = (-75 - off) + 'px';
             }
@@ -1895,6 +2638,10 @@
         document.getElementById('scopeClose').addEventListener('pointerdown', (e) => e.stopPropagation());
 
         /* ─────────── Start ─────────── */
+        setScene('out');
+        buildOutside();
+        spawnGems();
+        setScene('in');
         buildWorld();
         buildScope();
         applyDress();
