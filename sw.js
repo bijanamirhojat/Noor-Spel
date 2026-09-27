@@ -29,6 +29,7 @@ const PRECACHE_URLS = [
     './games/pizza.html',
     './games/plaatjefout.html',
     './games/poetsen.html',
+    './games/prinses.html',
     './games/sokken.html',
     './games/zaklamp.html',
     './games/zoekenvind.html',

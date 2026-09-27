@@ -1,0 +1,1907 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="theme-color" content="#f472b6">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Noor's Games">
+    <title>Prinsessenkasteel</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👑</text></svg>">
+    <link rel="manifest" href="../manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f9a8d4 0%, #c4b5fd 50%, #a5f3fc 100%);
+            background-size: 300% 300%;
+            animation: bodyShimmer 12s ease-in-out infinite;
+        }
+
+        @keyframes bodyShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .game-container {
+            max-width: 980px;
+            height: calc(100vh - 30px);
+            height: calc(100dvh - 30px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding: 14px;
+        }
+
+        h1 {
+            margin-bottom: 6px;
+            font-size: 1.5rem;
+            color: #db2777;
+            text-shadow: 2px 2px 0 #fbcfe8;
+        }
+
+        .back-btn {
+            padding: 6px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
+            background: #f472b6;
+        }
+
+        .back-btn:hover { background: #db2777; }
+
+        .hud {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+
+        .pill {
+            background: #fdf2f8;
+            border: 2px solid #f9a8d4;
+            color: #be185d;
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            transition: transform 0.2s ease;
+        }
+
+        .pill.bump { transform: scale(1.25); }
+
+        .playfield {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            border-radius: 26px;
+            border: 3px solid #f9a8d4;
+            overflow: hidden;
+            background: #2e1065;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .world {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4000px;
+            height: 500px;
+            transform-origin: 0 0;
+        }
+
+        #fx {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        /* ── Rooms ── */
+        /* Rooms reach 500 units above the world so tall (iPad portrait) screens
+           show extra wall instead of zooming in on half a room. */
+        .room {
+            position: absolute;
+            top: -500px;
+            width: 800px;
+            height: 1000px;
+            overflow: hidden;
+        }
+
+        .room .wall {
+            position: absolute;
+            inset: 0 0 100px 0;
+        }
+
+        .room .floor {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100px;
+            box-shadow: inset 0 12px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .room-sign {
+            position: absolute;
+            top: 514px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            color: #be185d;
+            font-family: 'Fredoka One', cursive;
+            font-size: 22px;
+            padding: 4px 18px;
+            border-radius: 999px;
+            border: 3px solid #fbcfe8;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .r0 .wall {
+            background:
+                repeating-linear-gradient(90deg, #fbcfe8 0 40px, #f9a8d4 40px 80px);
+        }
+        .r0 .floor {
+            background: conic-gradient(#fdf2f8 25%, #f9a8d4 0 50%, #fdf2f8 0 75%, #f9a8d4 0) 0 0 / 50px 50px;
+        }
+
+        .r1 .wall {
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.55) 3px, transparent 4px) 0 0 / 46px 46px,
+                linear-gradient(180deg, #ddd6fe, #c4b5fd);
+        }
+        .r1 .floor {
+            background: conic-gradient(#ede9fe 25%, #c4b5fd 0 50%, #ede9fe 0 75%, #c4b5fd 0) 0 0 / 50px 50px;
+        }
+
+        .r2 .wall {
+            background:
+                repeating-linear-gradient(90deg, #fecdd3 0 30px, #fda4af 30px 34px),
+                #fecdd3;
+        }
+        .r2 .floor {
+            background:
+                linear-gradient(90deg, transparent 290px, #e11d48 290px 510px, transparent 510px),
+                conic-gradient(#fef3c7 25%, #fcd34d 0 50%, #fef3c7 0 75%, #fcd34d 0) 0 0 / 50px 50px;
+        }
+
+        .r3 .wall {
+            background: linear-gradient(180deg, #fff7ed 0%, #fdf2f8 55%, #ecfeff 100%);
+        }
+        .r3 .floor {
+            background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
+        }
+
+        .r4 .wall {
+            background:
+                radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px,
+                radial-gradient(circle at 70% 70%, #fde68a 1.5px, transparent 2.5px) 0 0 / 90px 80px,
+                linear-gradient(180deg, #1e1b4b, #4c1d95);
+        }
+        .r4 .floor {
+            background:
+                repeating-linear-gradient(90deg, #7c3aed 0 60px, #6d28d9 60px 62px);
+        }
+
+        /* Pillars / doorways between rooms */
+        .pillar {
+            position: absolute;
+            top: 0;
+            width: 44px;
+            height: 1000px;
+            background: linear-gradient(90deg, #f5f5f4, #ffffff 40%, #e7e5e4);
+            border-left: 3px solid #fde68a;
+            border-right: 3px solid #fde68a;
+            z-index: 2;
+            box-shadow: 0 0 14px rgba(0,0,0,0.2);
+        }
+
+        .pillar::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            right: -10px;
+            top: 500px;
+            height: 28px;
+            background: #fcd34d;
+            border-radius: 0 0 10px 10px;
+        }
+
+        .pillar::after {
+            content: '💖';
+            position: absolute;
+            top: 560px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 22px;
+        }
+
+        /* ── Objects (tappable) ── */
+        .obj {
+            position: absolute;
+            cursor: pointer;
+            z-index: 3;
+            transition: transform 0.2s ease;
+        }
+
+        .obj.tap { animation: objTap 0.5s ease; }
+
+        @keyframes objTap {
+            0%, 100% { transform: scale(1); }
+            40% { transform: scale(1.18) rotate(-4deg); }
+            70% { transform: scale(0.95) rotate(3deg); }
+        }
+
+        .emoji-obj {
+            font-size: 64px;
+            line-height: 1;
+            text-align: center;
+            filter: drop-shadow(0 6px 6px rgba(0,0,0,0.2));
+        }
+
+        .gleam {
+            animation: gleam 2.4s ease-in-out infinite;
+        }
+
+        @keyframes gleam {
+            0%, 100% { filter: drop-shadow(0 0 4px rgba(255,255,255,0.6)); }
+            50% { filter: drop-shadow(0 0 16px rgba(255,236,153,1)); }
+        }
+
+        /* Torch */
+        .torch {
+            width: 30px;
+            height: 110px;
+        }
+        .torch .stick {
+            position: absolute;
+            bottom: 0;
+            left: 9px;
+            width: 12px;
+            height: 70px;
+            background: linear-gradient(90deg, #fbbf24, #fde68a, #f59e0b);
+            border-radius: 4px;
+        }
+        .torch .flame {
+            position: absolute;
+            bottom: 62px;
+            left: 0;
+            width: 30px;
+            height: 44px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: radial-gradient(circle at 50% 70%, #fff 0 18%, #f0abfc 35%, #e879f9 60%, rgba(232,121,249,0) 72%);
+            animation: flicker 0.6s ease-in-out infinite alternate;
+            transform-origin: 50% 100%;
+        }
+
+        @keyframes flicker {
+            from { transform: scale(1, 1) rotate(-3deg); }
+            to { transform: scale(1.1, 1.18) rotate(3deg); }
+        }
+
+        /* Big door */
+        .castle-door {
+            width: 180px;
+            height: 280px;
+            border-radius: 90px 90px 0 0;
+            background:
+                repeating-linear-gradient(90deg, #a16207 0 30px, #854d0e 30px 34px);
+            border: 8px solid #fcd34d;
+            border-bottom: none;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.3);
+        }
+        .castle-door::after {
+            content: '';
+            position: absolute;
+            right: 30px;
+            top: 150px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #fde68a;
+            box-shadow: 0 0 10px #fde68a;
+        }
+
+        .banner {
+            width: 90px;
+            height: 150px;
+            background: linear-gradient(180deg, #a855f7, #7c3aed);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+            display: flex;
+            justify-content: center;
+            padding-top: 28px;
+            font-size: 40px;
+        }
+
+        .frame {
+            width: 120px;
+            height: 140px;
+            border: 10px solid #fbbf24;
+            border-radius: 14px;
+            background: linear-gradient(180deg, #bae6fd, #fbcfe8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.2), inset 0 0 0 4px #fde68a;
+        }
+
+        .rug {
+            width: 240px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, #f0abfc 0 30%, #c084fc 31% 55%, #f472b6 56% 100%);
+            opacity: 0.9;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Mirror */
+        .mirror {
+            width: 240px;
+            height: 300px;
+        }
+        .mirror .glass {
+            position: absolute;
+            inset: 20px;
+            border-radius: 50%;
+            border: 12px solid #fcd34d;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f5d0fe 45%, #ffffff 55%, #cffafe 100%);
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255,255,255,0.8), inset 0 0 30px rgba(255,255,255,0.8);
+        }
+        .mirror .glass::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -60%;
+            width: 40%;
+            height: 180%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transform: rotate(25deg);
+            animation: shine 3.5s ease-in-out infinite;
+        }
+        @keyframes shine {
+            0%, 60% { left: -60%; }
+            100% { left: 140%; }
+        }
+        .mirror.flash .glass {
+            animation: mirrorFlash 0.6s ease;
+        }
+        @keyframes mirrorFlash {
+            0%, 100% { filter: brightness(1); }
+            30% { filter: brightness(1.9) saturate(1.5); }
+        }
+        .mirror .reflection {
+            position: absolute;
+            left: 50%;
+            bottom: -70px;
+            width: 150px;
+            height: 240px;
+            margin-left: -75px;
+            transform: scaleX(-1);
+            opacity: 0.92;
+            transition: margin-left 0.15s linear;
+        }
+        .mirror .flower {
+            position: absolute;
+            font-size: 34px;
+            line-height: 1;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease;
+        }
+        .mirror.flash .flower {
+            animation: flowerSpin 0.8s ease;
+        }
+        @keyframes flowerSpin {
+            0% { transform: translate(-50%, -50%) scale(1) rotate(0); }
+            50% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(360deg); }
+        }
+
+        .garland {
+            position: absolute;
+            top: 70px;
+            height: 40px;
+            font-size: 26px;
+            letter-spacing: 6px;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* Throne */
+        .throne {
+            width: 170px;
+            height: 250px;
+        }
+        .throne .back {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            width: 140px;
+            height: 170px;
+            background: linear-gradient(180deg, #e11d48, #be123c);
+            border: 10px solid #fbbf24;
+            border-radius: 70px 70px 10px 10px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.25);
+        }
+        .throne .back::after {
+            content: '👑';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 48px;
+        }
+        .throne .seat {
+            position: absolute;
+            left: 0;
+            top: 160px;
+            width: 170px;
+            height: 44px;
+            background: linear-gradient(180deg, #fb7185, #e11d48);
+            border: 8px solid #fbbf24;
+            border-radius: 18px;
+        }
+        .throne .legs {
+            position: absolute;
+            left: 14px;
+            right: 14px;
+            top: 200px;
+            height: 50px;
+            border-left: 14px solid #f59e0b;
+            border-right: 14px solid #f59e0b;
+        }
+
+        .chandelier {
+            width: 150px;
+            height: 110px;
+        }
+        .chandelier .chain {
+            position: absolute;
+            left: 73px;
+            top: 0;
+            width: 4px;
+            height: 40px;
+            background: #fbbf24;
+        }
+        .chandelier .body {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            width: 150px;
+            height: 30px;
+            border-radius: 0 0 75px 75px;
+            background: linear-gradient(180deg, #fde68a, #f59e0b);
+        }
+        .chandelier .candles {
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 150px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 22px;
+        }
+        .chandelier .drops {
+            position: absolute;
+            left: 10px;
+            right: 10px;
+            top: 68px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 18px;
+        }
+
+        /* Rainbow room */
+        .rainbow-window {
+            width: 300px;
+            height: 170px;
+            border-radius: 150px 150px 0 0;
+            border: 10px solid #fff;
+            border-bottom: none;
+            background:
+                radial-gradient(circle at 50% 100%,
+                    #bae6fd 0 30%,
+                    #a855f7 30% 37%,
+                    #3b82f6 37% 44%,
+                    #22c55e 44% 51%,
+                    #facc15 51% 58%,
+                    #fb923c 58% 65%,
+                    #ef4444 65% 72%,
+                    #bae6fd 72%);
+            box-shadow: 0 0 30px rgba(255,255,255,0.9);
+            pointer-events: none;
+        }
+
+        .pedestal {
+            width: 110px;
+            height: 170px;
+        }
+        .pedestal .col {
+            position: absolute;
+            left: 25px;
+            bottom: 0;
+            width: 60px;
+            height: 90px;
+            background: linear-gradient(90deg, #f5f5f4, #fff, #e7e5e4);
+            border-top: 8px solid #fcd34d;
+            border-bottom: 8px solid #fcd34d;
+        }
+        .pedestal .ball {
+            position: absolute;
+            left: 10px;
+            top: 0;
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background:
+                conic-gradient(from 0deg, #f472b6, #facc15, #4ade80, #60a5fa, #c084fc, #f472b6);
+            box-shadow: 0 0 30px #f0abfc, inset -12px -12px 24px rgba(0,0,0,0.25), inset 12px 12px 24px rgba(255,255,255,0.7);
+            animation: spinBall 6s linear infinite;
+        }
+        @keyframes spinBall { to { filter: hue-rotate(360deg); } }
+
+        .discoball {
+            width: 70px;
+            height: 110px;
+        }
+        .discoball .chain {
+            position: absolute;
+            left: 33px;
+            top: 0;
+            width: 4px;
+            height: 40px;
+            background: #d4d4d8;
+        }
+        .discoball .ball {
+            position: absolute;
+            left: 0;
+            top: 40px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background:
+                repeating-linear-gradient(0deg, transparent 0 8px, rgba(0,0,0,0.15) 8px 9px),
+                repeating-linear-gradient(90deg, transparent 0 8px, rgba(0,0,0,0.15) 8px 9px),
+                radial-gradient(circle at 35% 35%, #fff, #d4d4d8 60%, #a1a1aa);
+            box-shadow: 0 0 20px rgba(255,255,255,0.8);
+        }
+
+        .rainbow-arc {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 800px;
+            height: 500px;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .rainbow-arc path {
+            fill: none;
+            stroke-width: 22;
+            stroke-linecap: round;
+            stroke-dasharray: 1400;
+            stroke-dashoffset: 1400;
+        }
+        .rainbow-arc.show path {
+            animation: drawArc 1.6s ease forwards;
+        }
+        @keyframes drawArc { to { stroke-dashoffset: 0; } }
+
+        .disco-light {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            opacity: 0;
+            z-index: 1;
+        }
+        .party .disco-light {
+            opacity: 0.55;
+            animation: discoMove 2.2s ease-in-out infinite alternate;
+        }
+        @keyframes discoMove {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(180px, 60px); }
+            100% { transform: translate(-120px, 120px); }
+        }
+
+        /* Tower room */
+        .tower-window {
+            width: 220px;
+            height: 240px;
+            border-radius: 110px 110px 0 0;
+            border: 12px solid #a78bfa;
+            border-bottom-width: 18px;
+            background:
+                radial-gradient(circle at 70% 30%, #fef9c3 0 22px, rgba(254,249,195,0.3) 23px 34px, transparent 35px),
+                radial-gradient(circle at 20% 60%, #fff 1.5px, transparent 2.5px) 0 0 / 40px 36px,
+                linear-gradient(180deg, #0c0a3e, #312e81);
+            pointer-events: none;
+        }
+        .telescope {
+            width: 150px;
+            height: 190px;
+        }
+        .telescope .tube {
+            position: absolute;
+            left: 10px;
+            top: 30px;
+            width: 140px;
+            height: 38px;
+            border-radius: 12px 20px 20px 12px;
+            background: linear-gradient(180deg, #fde68a, #f59e0b 60%, #b45309);
+            transform: rotate(-28deg);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .telescope .tube::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: -6px;
+            width: 22px;
+            height: 50px;
+            border-radius: 8px;
+            background: #fcd34d;
+        }
+        .telescope .tube::after {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 4px;
+            width: 26px;
+            height: 30px;
+            border-radius: 6px;
+            background: #ec4899;
+        }
+        .telescope .legs {
+            position: absolute;
+            left: 50px;
+            top: 80px;
+            width: 60px;
+            height: 110px;
+            background:
+                linear-gradient(100deg, transparent 44%, #7c2d12 44% 52%, transparent 52%),
+                linear-gradient(80deg, transparent 48%, #7c2d12 48% 56%, transparent 56%),
+                linear-gradient(90deg, transparent 46%, #92400e 46% 54%, transparent 54%);
+        }
+        .tap-hint {
+            position: absolute;
+            top: -34px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            animation: hintBob 1.2s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes hintBob {
+            0%, 100% { transform: translate(-50%, 0); }
+            50% { transform: translate(-50%, -10px); }
+        }
+
+        /* ── Gems ── */
+        .gem {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            margin-left: -20px;
+            font-size: 34px;
+            line-height: 40px;
+            text-align: center;
+            z-index: 4;
+            pointer-events: none;
+            animation: gemBob 1.6s ease-in-out infinite;
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.95));
+        }
+        .gem.got {
+            animation: gemGot 0.5s ease forwards;
+        }
+        @keyframes gemBob {
+            0%, 100% { transform: translateY(0) rotate(-6deg); }
+            50% { transform: translateY(-12px) rotate(6deg); }
+        }
+        @keyframes gemGot {
+            to { transform: translateY(-120px) scale(1.8); opacity: 0; }
+        }
+
+        /* ── Princess ── */
+        .princess {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 120px;
+            height: 192px;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .princess .flip {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.15s ease;
+        }
+        .princess.left .flip { transform: scaleX(-1); }
+        .princess svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+        .princess.walking .bob {
+            animation: walkBob 0.36s ease-in-out infinite;
+        }
+        .princess.walking .skirt {
+            animation: skirtSway 0.36s ease-in-out infinite alternate;
+            transform-origin: 50px 80px;
+        }
+        @keyframes walkBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes skirtSway {
+            from { transform: rotate(-3deg); }
+            to { transform: rotate(3deg); }
+        }
+        .princess.sitting .bob {
+            transform: translateY(-38px);
+        }
+        .princess.twirl .flip {
+            animation: twirl 0.8s ease;
+        }
+        @keyframes twirl {
+            0% { transform: scaleX(1); }
+            25% { transform: scaleX(-1); }
+            50% { transform: scaleX(1); }
+            75% { transform: scaleX(-1); }
+            100% { transform: scaleX(1); }
+        }
+        .wand-star {
+            animation: wandTwinkle 1s ease-in-out infinite;
+            transform-origin: 88px 58px;
+        }
+        @keyframes wandTwinkle {
+            0%, 100% { transform: scale(1) rotate(0); }
+            50% { transform: scale(1.3) rotate(20deg); }
+        }
+
+        /* ── Controls ── */
+        .arrow {
+            position: absolute;
+            bottom: 14px;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            background: linear-gradient(135deg, #f472b6, #a855f7);
+            color: #fff;
+            font-size: 30px;
+            font-family: 'Fredoka One', cursive;
+            z-index: 30;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            cursor: pointer;
+            touch-action: none;
+        }
+        .arrow:active { transform: scale(0.92); }
+        .arrow.left { left: 14px; }
+        .arrow.right { right: 14px; }
+
+        .toast {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: linear-gradient(135deg, #fdf2f8, #f5f3ff);
+            border: 4px solid #f9a8d4;
+            border-radius: 28px;
+            padding: 16px 26px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.6rem;
+            color: #db2777;
+            z-index: 40;
+            text-align: center;
+            pointer-events: none;
+            transition: transform 0.35s cubic-bezier(.2,1.6,.4,1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+        .toast.show { transform: translate(-50%, -50%) scale(1); }
+
+        .screen-rainbow {
+            position: absolute;
+            left: 50%;
+            bottom: -40%;
+            width: 140%;
+            aspect-ratio: 1;
+            transform: translateX(-50%) scale(0);
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                transparent 0 46%,
+                rgba(168,85,247,0.8) 46% 49%,
+                rgba(59,130,246,0.8) 49% 52%,
+                rgba(34,197,94,0.8) 52% 55%,
+                rgba(250,204,21,0.8) 55% 58%,
+                rgba(251,146,60,0.8) 58% 61%,
+                rgba(239,68,68,0.8) 61% 64%,
+                transparent 64%);
+            pointer-events: none;
+            z-index: 15;
+            transition: transform 1s cubic-bezier(.2,1.2,.4,1), opacity 1s ease;
+        }
+        .screen-rainbow.show { transform: translateX(-50%) scale(1); }
+
+        /* ── Verrekijker overlay ── */
+        .scope {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            background: #000;
+            display: none;
+            touch-action: none;
+            overflow: hidden;
+        }
+        .scope.open { display: block; }
+        .pano {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #d9f99d 62%, #86efac 100%);
+        }
+        .pano.base {
+            filter: brightness(0.3) blur(2px);
+        }
+        .lens-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+        .pano .p {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            pointer-events: none;
+        }
+        .pano .sun {
+            position: absolute;
+            left: 8%;
+            top: 12%;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #fde047;
+            box-shadow: 0 0 40px #fde047;
+        }
+        .pano .hill {
+            position: absolute;
+            border-radius: 50%;
+        }
+        .pano .rb {
+            position: absolute;
+            left: 30%;
+            top: 20%;
+            width: 40%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                transparent 0 50%,
+                rgba(168,85,247,0.7) 50% 54%,
+                rgba(59,130,246,0.7) 54% 58%,
+                rgba(34,197,94,0.7) 58% 62%,
+                rgba(250,204,21,0.7) 62% 66%,
+                rgba(251,146,60,0.7) 66% 70%,
+                rgba(239,68,68,0.7) 70% 74%,
+                transparent 74%);
+        }
+        .pano .lake {
+            position: absolute;
+            left: 50%;
+            top: 76%;
+            width: 26%;
+            height: 12%;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, #7dd3fc, #38bdf8);
+        }
+        .pano .find.found {
+            animation: foundJump 0.7s ease;
+            filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #f0abfc);
+        }
+        @keyframes foundJump {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            40% { transform: translate(-50%, -80%) scale(1.5); }
+        }
+        .lens-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 8px solid #1f2937;
+            box-shadow: 0 0 0 3px #f472b6, inset 0 0 18px rgba(0,0,0,0.6);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        .find-list {
+            position: absolute;
+            left: 50%;
+            bottom: 12px;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 999px;
+            padding: 6px 14px;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .find-list span {
+            font-size: 28px;
+            filter: grayscale(1) opacity(0.35);
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+        .find-list span.found {
+            filter: none;
+            transform: scale(1.2);
+        }
+        .scope-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            background: #f472b6;
+            color: #fff;
+            font-size: 24px;
+            z-index: 4;
+            cursor: pointer;
+        }
+        .scope-hint {
+            position: absolute;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.92);
+            color: #be185d;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1rem;
+            padding: 6px 16px;
+            border-radius: 999px;
+            z-index: 3;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .scope-spark {
+            position: absolute;
+            font-size: 26px;
+            pointer-events: none;
+            z-index: 2;
+            animation: scopeSpark 0.9s ease-out forwards;
+        }
+        @keyframes scopeSpark {
+            from { transform: translate(-50%, -50%) scale(0.4); opacity: 1; }
+            to { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.2); opacity: 0; }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 1.2rem; margin-top: 28px; }
+            .arrow { width: 54px; height: 54px; font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="../index.html" class="back-btn">← Terug</a>
+        <h1>👑 Prinsessenkasteel ✨</h1>
+
+        <div class="hud">
+            <div class="pill" id="gemPill">💎 0 / 12</div>
+            <div class="pill" id="roomPill">🏰 Kasteelhal</div>
+        </div>
+
+        <div class="playfield" id="playfield">
+            <div class="world" id="world"></div>
+            <canvas id="fx"></canvas>
+            <div class="screen-rainbow" id="screenRainbow"></div>
+            <div class="toast" id="toast"></div>
+            <button class="arrow left" id="btnLeft" aria-label="Naar links">◀</button>
+            <button class="arrow right" id="btnRight" aria-label="Naar rechts">▶</button>
+
+            <div class="scope" id="scope">
+                <div class="pano base" id="panoBase"></div>
+                <div class="lens-wrap" id="lensWrap"><div class="pano" id="panoZoom"></div></div>
+                <div class="lens-ring" id="ringL"></div>
+                <div class="lens-ring" id="ringR"></div>
+                <div class="scope-hint">🔭 Kijk rond met je vinger!</div>
+                <div class="find-list" id="findList"></div>
+                <button class="scope-close" id="scopeClose" aria-label="Sluiten">✖</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared.js"></script>
+    <script>
+        /* ─────────── Constants ─────────── */
+        const WORLD_H = 500;
+        const ROOM_W = 800;
+        const ROOMS = [
+            { name: 'Kasteelhal',    icon: '🏰', say: 'De kasteelhal' },
+            { name: 'Spiegelkamer',  icon: '🪞', say: 'De spiegelkamer' },
+            { name: 'Troonzaal',     icon: '👑', say: 'De troonzaal' },
+            { name: 'Regenboogzaal', icon: '🌈', say: 'De regenboogzaal' },
+            { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' }
+        ];
+        const WORLD_W = ROOM_W * ROOMS.length;
+        const PRINCESS_W = 120;
+        const PRINCESS_H = 192;
+        const FEET_Y = 452;
+        const SPEED = 280;
+        const GEM_COUNT = 12;
+        const MIN_VIEW_W = 580;
+
+        const DRESSES = ['#f472b6', '#a855f7', '#38bdf8', '#34d399', '#fbbf24', 'rainbow', '#fb7185'];
+
+        const playfield = document.getElementById('playfield');
+        const world = document.getElementById('world');
+        const canvas = document.getElementById('fx');
+        const ctx2d = canvas.getContext('2d');
+        const toastEl = document.getElementById('toast');
+        const gemPill = document.getElementById('gemPill');
+        const roomPill = document.getElementById('roomPill');
+
+        /* ─────────── State ─────────── */
+        const state = {
+            x: 400,
+            targetX: 400,
+            facing: 1,
+            camX: 0,
+            scale: 1,
+            viewW: 800,
+            offsetY: 0,
+            hold: 0,
+            pending: null,
+            busy: false,
+            dressIdx: 0,
+            room: 0,
+            gems: [],
+            gemsGot: 0,
+            partyUntil: 0,
+            lastTime: performance.now()
+        };
+
+        /* ─────────── Princess SVG ─────────── */
+        function princessSVG(prefix) {
+            return `
+            <svg viewBox="0 0 100 160" data-prefix="${prefix}">
+                <defs>
+                    <linearGradient id="${prefix}rb" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#ef4444"/>
+                        <stop offset=".2" stop-color="#fb923c"/>
+                        <stop offset=".4" stop-color="#facc15"/>
+                        <stop offset=".6" stop-color="#4ade80"/>
+                        <stop offset=".8" stop-color="#60a5fa"/>
+                        <stop offset="1" stop-color="#c084fc"/>
+                    </linearGradient>
+                    <linearGradient id="${prefix}hair" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#fde047"/>
+                        <stop offset="1" stop-color="#f59e0b"/>
+                    </linearGradient>
+                </defs>
+                <ellipse cx="50" cy="156" rx="30" ry="4" fill="rgba(0,0,0,0.18)"/>
+                <g class="bob">
+                    <path d="M31 36 Q24 70 30 100 Q50 106 70 100 Q76 70 69 36 Z" fill="url(#${prefix}hair)"/>
+                    <ellipse cx="42" cy="152" rx="7" ry="4" fill="#ec4899"/>
+                    <ellipse cx="58" cy="152" rx="7" ry="4" fill="#ec4899"/>
+                    <g class="skirt">
+                        <path class="dress" d="M38 78 Q30 110 12 146 Q50 160 88 146 Q70 110 62 78 Z" fill="#f472b6"/>
+                        <path d="M12 146 Q18 140 24 147 Q30 140 37 148 Q43 141 50 149 Q57 141 63 148 Q70 140 76 147 Q82 140 88 146" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                        <circle cx="34" cy="120" r="2" fill="#fff"/>
+                        <circle cx="52" cy="108" r="2.2" fill="#fff"/>
+                        <circle cx="64" cy="128" r="2" fill="#fff"/>
+                        <circle cx="44" cy="134" r="1.8" fill="#fff"/>
+                        <circle cx="72" cy="140" r="1.6" fill="#fff"/>
+                        <circle cx="26" cy="138" r="1.6" fill="#fff"/>
+                    </g>
+                    <path class="dress" d="M38 64 Q50 60 62 64 L63 82 Q50 86 37 82 Z" fill="#f472b6"/>
+                    <path d="M37 80 Q50 86 63 80" fill="none" stroke="#fde68a" stroke-width="3"/>
+                    <path d="M39 68 Q30 80 28 92" stroke="#ffd7c2" stroke-width="6" stroke-linecap="round" fill="none"/>
+                    <circle cx="28" cy="93" r="4" fill="#ffd7c2"/>
+                    <path d="M61 68 Q70 78 76 88" stroke="#ffd7c2" stroke-width="6" stroke-linecap="round" fill="none"/>
+                    <line x1="76" y1="90" x2="88" y2="60" stroke="#fde68a" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="77" cy="89" r="4" fill="#ffd7c2"/>
+                    <path class="wand-star" d="M88 50 L90.5 55.5 L96.5 56 L92 60 L93.5 66 L88 63 L82.5 66 L84 60 L79.5 56 L85.5 55.5 Z" fill="#fde047" stroke="#f59e0b" stroke-width="1"/>
+                    <rect x="46" y="54" width="8" height="10" fill="#ffd7c2"/>
+                    <circle cx="50" cy="40" r="18" fill="#ffe4d6"/>
+                    <path d="M32 40 Q32 20 50 20 Q68 20 68 40 Q62 28 54 30 Q48 26 42 31 Q36 30 32 40 Z" fill="url(#${prefix}hair)"/>
+                    <ellipse cx="43" cy="42" rx="2.6" ry="3.4" fill="#3b0764"/>
+                    <ellipse cx="57" cy="42" rx="2.6" ry="3.4" fill="#3b0764"/>
+                    <circle cx="44" cy="40.6" r="1" fill="#fff"/>
+                    <circle cx="58" cy="40.6" r="1" fill="#fff"/>
+                    <circle cx="39" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
+                    <circle cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
+                    <path d="M45 50 Q50 55 55 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M36 24 L39 11 L45 19 L50 6 L55 19 L61 11 L64 24 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
+                    <circle cx="50" cy="17" r="2.6" fill="#ec4899"/>
+                    <circle cx="42" cy="20" r="1.8" fill="#38bdf8"/>
+                    <circle cx="58" cy="20" r="1.8" fill="#a855f7"/>
+                </g>
+            </svg>`;
+        }
+
+        function applyDress() {
+            const color = DRESSES[state.dressIdx];
+            document.querySelectorAll('svg[data-prefix]').forEach(svg => {
+                const fill = color === 'rainbow' ? `url(#${svg.dataset.prefix}rb)` : color;
+                svg.querySelectorAll('.dress').forEach(d => d.setAttribute('fill', fill));
+            });
+        }
+
+        /* ─────────── Build world ─────────── */
+        function el(html) {
+            const t = document.createElement('template');
+            t.innerHTML = html.trim();
+            return t.content.firstElementChild;
+        }
+
+        function place(node, x, y) {
+            node.style.position = 'absolute';
+            node.style.left = x + 'px';
+            node.style.top = y + 'px';
+            world.appendChild(node);
+            return node;
+        }
+
+        // Tappable object: princess walks to walkX, then action runs.
+        function addObj(html, x, y, walkX, action) {
+            const node = place(el(html), x, y);
+            node.classList.add('obj');
+            node.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (state.busy) return;
+                node.classList.remove('tap');
+                void node.offsetWidth;
+                node.classList.add('tap');
+                playPop();
+                const r = node.getBoundingClientRect();
+                const p = screenToWorld(r.left + r.width / 2, r.top + r.height / 3);
+                burst(p.x, p.y, 14);
+                walkTo(walkX, action ? () => action(node) : null);
+            });
+            return node;
+        }
+
+        function buildWorld() {
+            ROOMS.forEach((room, i) => {
+                const r = el(`<div class="room r${i}"><div class="wall"></div><div class="floor"></div>
+                    <div class="room-sign">${room.icon} ${room.name}</div></div>`);
+                r.style.left = i * ROOM_W + 'px';
+                world.appendChild(r);
+            });
+            for (let i = 1; i < ROOMS.length; i++) {
+                place(el('<div class="pillar"></div>'), i * ROOM_W - 22, -500);
+            }
+
+            /* Room 0: Kasteelhal */
+            const r0 = 0;
+            place(el('<div class="castle-door"></div>'), r0 + 60, 120).style.zIndex = 1;
+            addObj('<div class="torch"><div class="stick"></div><div class="flame"></div></div>', r0 + 280, 170, r0 + 295, torchPuff);
+            addObj('<div class="torch"><div class="stick"></div><div class="flame"></div></div>', r0 + 700, 170, r0 + 715, torchPuff);
+            addObj('<div class="banner">👑</div>', r0 + 340, 60, r0 + 385, () => sayRandom(['Het kasteel van de prinses!', 'Hoera!']));
+            addObj('<div class="frame">🦄</div>', r0 + 510, 110, r0 + 570, () => { speak('Een eenhoorn!'); sparkleShower(r0 + 570, 170, 30); });
+            place(el('<div class="rug"></div>'), r0 + 440, 425).classList.add('obj');
+            addObj('<div class="emoji-obj">🐱</div>', r0 + 190, 385, r0 + 250, catMeow);
+
+            /* Room 1: Spiegelkamer */
+            const r1 = ROOM_W;
+            const garland = '🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸';
+            place(el(`<div class="garland">${garland}</div>`), r1 + 20, 64);
+            buildMirror(r1 + 280, 70);
+            addObj('<div class="emoji-obj gleam">🌷</div>', r1 + 110, 370, r1 + 150, flowerPop);
+            addObj('<div class="emoji-obj gleam">💐</div>', r1 + 620, 370, r1 + 650, flowerPop);
+            addObj('<div class="emoji-obj" style="font-size:52px">🎀</div>', r1 + 90, 170, r1 + 120, () => sayRandom(['Een mooie strik!', 'Roze strik!']));
+
+            /* Room 2: Troonzaal */
+            const r2 = ROOM_W * 2;
+            place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), r2 + 150, 20);
+            place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), r2 + 500, 20);
+            addObj('<div class="throne"><div class="back"></div><div class="seat"></div><div class="legs"></div><div class="tap-hint">👇</div></div>', r2 + 315, 200, r2 + 400, sitOnThrone);
+            addObj('<div class="emoji-obj">🐶</div>', r2 + 620, 385, r2 + 610, dogBark);
+            addObj('<div class="emoji-obj gleam" style="font-size:56px">🎂</div>', r2 + 90, 385, r2 + 130, () => { sayRandom(['Taart! Lekker!', 'Mmm, taart!']); playCorrect(); sparkleShower(r2 + 130, 380, 24); });
+
+            /* Room 3: Regenboogzaal */
+            const r3 = ROOM_W * 3;
+            place(el('<div class="rainbow-window"></div>'), r3 + 250, 70);
+            place(el(`<svg class="rainbow-arc" id="rainbowArc" viewBox="0 0 800 500">
+                ${['#ef4444','#fb923c','#facc15','#4ade80','#60a5fa','#a855f7'].map((c, i) =>
+                    `<path d="M ${60 + i * 22} 420 A ${340 - i * 22} ${320 - i * 22} 0 0 1 ${740 - i * 22} 420" stroke="${c}"/>`).join('')}
+                </svg>`), r3, 0);
+            ['#f472b6', '#60a5fa', '#facc15', '#4ade80'].forEach((c, i) => {
+                const d = place(el(`<div class="disco-light" style="background:radial-gradient(circle, ${c}, transparent 70%)"></div>`), r3 + 80 + i * 170, 120 + (i % 2) * 90);
+                d.style.animationDelay = (i * -0.5) + 's';
+            });
+            addObj('<div class="discoball"><div class="chain"></div><div class="ball"></div></div>', r3 + 590, 0, r3 + 560, rainbowParty);
+            addObj('<div class="pedestal"><div class="ball"></div><div class="col"></div><div class="tap-hint">👇</div></div>', r3 + 345, 285, r3 + 290, rainbowParty);
+            addObj('<div class="emoji-obj">🎈</div>', r3 + 90, 250, r3 + 120, balloonPop);
+            addObj('<div class="emoji-obj">🎈</div>', r3 + 660, 230, r3 + 690, balloonPop);
+
+            /* Room 4: Torenkamer */
+            const r4 = ROOM_W * 4;
+            place(el('<div class="tower-window"></div>'), r4 + 440, 70);
+            addObj('<div class="telescope"><div class="tube"></div><div class="legs"></div><div class="tap-hint">👇</div></div>', r4 + 300, 225, r4 + 250, openScope);
+            addObj('<div class="emoji-obj">🦉</div>', r4 + 90, 160, r4 + 120, owlHoot);
+            addObj('<div class="emoji-obj" style="font-size:50px">📚</div>', r4 + 680, 380, r4 + 690, () => sayRandom(['Sprookjesboeken!', 'Er was eens een prinses...']));
+
+            /* Princess */
+            const p = el(`<div class="princess" id="princess"><div class="flip">${princessSVG('pr')}</div></div>`);
+            world.appendChild(p);
+        }
+
+        function buildMirror(x, y) {
+            const flowers = ['🌸', '🌷', '🌼', '🌺', '🌸', '🌷', '🌼', '🌺', '🌸', '🌷', '🌼', '🌺', '🌸', '🌷'];
+            let flowerHtml = '';
+            flowers.forEach((f, i) => {
+                const a = (i / flowers.length) * Math.PI * 2;
+                const fx = 120 + Math.cos(a) * 110;
+                const fy = 150 + Math.sin(a) * 140;
+                flowerHtml += `<span class="flower" style="left:${fx}px;top:${fy}px">${f}</span>`;
+            });
+            const html = `<div class="mirror">
+                <div class="glass"><div class="reflection" id="reflection">${princessSVG('mr')}</div></div>
+                ${flowerHtml}
+                <div class="tap-hint" style="top:-6px">👇</div>
+            </div>`;
+            addObj(html, x, y, x + 120, mirrorMagic);
+        }
+
+        /* ─────────── Gems ─────────── */
+        function spawnGems() {
+            state.gems.forEach(g => g.node.remove());
+            state.gems = [];
+            state.gemsGot = 0;
+            const kinds = ['💎', '💎', '💎', '⭐', '💖', '🌟'];
+            for (let i = 0; i < GEM_COUNT; i++) {
+                const x = 120 + (i + Math.random() * 0.6) * ((WORLD_W - 240) / GEM_COUNT);
+                const y = 330 + Math.random() * 70;
+                const node = el(`<div class="gem">${randomPick(kinds)}</div>`);
+                node.style.animationDelay = (-Math.random() * 1.6) + 's';
+                place(node, x, y);
+                state.gems.push({ x, y, node, got: false });
+            }
+            updateGemPill();
+        }
+
+        function updateGemPill() {
+            gemPill.textContent = `💎 ${state.gemsGot} / ${GEM_COUNT}`;
+            gemPill.classList.add('bump');
+            setTimeout(() => gemPill.classList.remove('bump'), 200);
+        }
+
+        function checkGems() {
+            for (const g of state.gems) {
+                if (g.got) continue;
+                if (Math.abs(g.x - state.x) < 40) {
+                    g.got = true;
+                    g.node.classList.add('got');
+                    state.gemsGot++;
+                    burst(g.x, g.y + 20, 24);
+                    playGemChime(state.gemsGot);
+                    updateGemPill();
+                    if (state.gemsGot === GEM_COUNT) {
+                        setTimeout(allGemsFound, 500);
+                    }
+                }
+            }
+        }
+
+        function playGemChime(n) {
+            const base = [784, 880, 988, 1047, 1175, 1319];
+            playTone(base[n % base.length], 0.18, 0.18, 'triangle');
+            setTimeout(() => playTone(base[n % base.length] * 1.5, 0.22, 0.12, 'sine'), 70);
+        }
+
+        function allGemsFound() {
+            playWin();
+            speak('Jij bent de glitterprinses!');
+            showToast('✨ Glitterprinses! ✨<br>💎💎💎');
+            const sr = document.getElementById('screenRainbow');
+            sr.classList.add('show');
+            state.partyUntil = performance.now() + 5000;
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => sparkleShower(state.camX + Math.random() * state.viewW, 40, 40), i * 300);
+            }
+            setTimeout(() => {
+                sr.classList.remove('show');
+                spawnGems();
+            }, 5000);
+        }
+
+        /* ─────────── Interactions ─────────── */
+        function sayRandom(list) {
+            speak(randomPick(list));
+        }
+
+        let toastTimer = null;
+        function showToast(html, ms = 2200) {
+            toastEl.innerHTML = html;
+            toastEl.classList.add('show');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms);
+        }
+
+        function princessEl() { return document.getElementById('princess'); }
+
+        function twirl() {
+            const p = princessEl();
+            p.classList.remove('twirl');
+            void p.offsetWidth;
+            p.classList.add('twirl');
+            setTimeout(() => p.classList.remove('twirl'), 800);
+        }
+
+        function mirrorMagic(node) {
+            state.dressIdx = (state.dressIdx + 1) % DRESSES.length;
+            applyDress();
+            node.classList.remove('flash');
+            void node.offsetWidth;
+            node.classList.add('flash');
+            twirl();
+            playSparkleSound();
+            const mx = ROOM_W + 400;
+            sparkleShower(mx, 70, 50);
+            burst(state.x, 330, 40);
+            const color = DRESSES[state.dressIdx];
+            const names = { '#f472b6': 'roze', '#a855f7': 'paarse', '#38bdf8': 'blauwe', '#34d399': 'groene', '#fbbf24': 'gouden', 'rainbow': 'regenboog', '#fb7185': 'rode' };
+            sayRandom([
+                `Een ${names[color]} jurk! Wat mooi!`,
+                'Spiegeltje, spiegeltje! Wat ben je mooi!',
+                `Glitter glitter! Een ${names[color]} jurk!`
+            ]);
+        }
+
+        function sitOnThrone() {
+            state.busy = true;
+            const p = princessEl();
+            p.classList.add('sitting');
+            state.facing = 1;
+            playWin();
+            speak('Hoera voor de prinses!');
+            showToast('👑 Hoera voor de prinses! 👑');
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => sparkleShower(ROOM_W * 2 + 150 + i * 125, 20, 30), i * 180);
+            }
+            setTimeout(() => {
+                p.classList.remove('sitting');
+                state.busy = false;
+            }, 2600);
+        }
+
+        function rainbowParty() {
+            const arc = document.getElementById('rainbowArc');
+            arc.classList.remove('show');
+            void arc.getBoundingClientRect();
+            arc.classList.add('show');
+            world.classList.add('party');
+            state.partyUntil = performance.now() + 6000;
+            speak('Regenboog feest!');
+            twirl();
+            playMelody();
+            clearTimeout(rainbowParty.t);
+            rainbowParty.t = setTimeout(() => world.classList.remove('party'), 6000);
+        }
+
+        function torchPuff(node) {
+            const r = node.getBoundingClientRect();
+            const p = screenToWorld(r.left + r.width / 2, r.top);
+            for (let i = 0; i < 40; i++) {
+                spawnSparkle(p.x, p.y, {
+                    vx: (Math.random() - 0.5) * 80,
+                    vy: -60 - Math.random() * 140,
+                    hue: 280 + Math.random() * 60
+                });
+            }
+            playFreqSweep(300, 900, 0.3, 0.15);
+        }
+
+        function catMeow() {
+            playFreqSweep(700, 1000, 0.15, 0.2);
+            setTimeout(() => playFreqSweep(1000, 600, 0.3, 0.2), 150);
+            speak('Miauw!', { rate: 0.8, pitch: 1.8 });
+        }
+
+        function dogBark() {
+            playTone(300, 0.1, 0.25, 'square');
+            setTimeout(() => playTone(260, 0.12, 0.25, 'square'), 180);
+            speak('Woef woef!', { rate: 0.9, pitch: 1.3 });
+        }
+
+        function owlHoot() {
+            playTone(420, 0.3, 0.2);
+            setTimeout(() => playTone(360, 0.45, 0.2), 380);
+            speak('Oehoe!', { rate: 0.6, pitch: 0.9 });
+        }
+
+        function flowerPop(node) {
+            const r = node.getBoundingClientRect();
+            const p = screenToWorld(r.left + r.width / 2, r.top + r.height / 2);
+            for (let i = 0; i < 30; i++) {
+                spawnSparkle(p.x, p.y, { hue: 300 + Math.random() * 80, speed: 220 });
+            }
+            playCorrect();
+            sayRandom(['Mooie bloemetjes!', 'Wat ruikt dat lekker!', 'Bloemetjes!']);
+        }
+
+        function balloonPop(node) {
+            const r = node.getBoundingClientRect();
+            const p = screenToWorld(r.left + r.width / 2, r.top + r.height / 2);
+            burst(p.x, p.y, 50);
+            playFreqSweep(1200, 200, 0.12, 0.3);
+            node.style.visibility = 'hidden';
+            node.style.pointerEvents = 'none';
+            setTimeout(() => {
+                node.style.visibility = '';
+                node.style.pointerEvents = '';
+            }, 3000);
+        }
+
+        function playSparkleSound() {
+            [1319, 1568, 1760, 2093, 2637].forEach((f, i) => {
+                setTimeout(() => playTone(f, 0.2, 0.1, 'sine'), i * 60);
+            });
+        }
+
+        function playMelody() {
+            const notes = [523, 659, 784, 1047, 784, 880, 1047, 1319, 1175, 1047, 880, 1047];
+            notes.forEach((f, i) => setTimeout(() => playTone(f, 0.28, 0.16, 'triangle'), i * 180));
+        }
+
+        /* ─────────── Movement ─────────── */
+        function walkTo(x, action) {
+            state.targetX = Math.max(60, Math.min(WORLD_W - 60, x));
+            state.pending = action;
+            if (Math.abs(state.targetX - state.x) < 2 && action) {
+                state.pending = null;
+                action();
+            }
+        }
+
+        function screenToWorld(clientX, clientY) {
+            const r = playfield.getBoundingClientRect();
+            return {
+                x: state.camX + (clientX - r.left) / state.scale,
+                y: (clientY - r.top - state.offsetY) / state.scale
+            };
+        }
+
+        // iOS only allows speech that starts inside a user gesture, so greet on the first touch
+        let greeted = false;
+        document.addEventListener('pointerdown', () => {
+            if (greeted) return;
+            greeted = true;
+            speak('Welkom in het kasteel, prinses!');
+        }, true);
+
+        let dragId = null;
+        playfield.addEventListener('pointerdown', (e) => {
+            if (state.busy || scopeOpen) return;
+            const p = screenToWorld(e.clientX, e.clientY);
+            burst(p.x, p.y, 10);
+            walkTo(p.x, null);
+            dragId = e.pointerId;
+        });
+        playfield.addEventListener('pointermove', (e) => {
+            if (e.pointerId !== dragId || state.busy || scopeOpen) return;
+            const p = screenToWorld(e.clientX, e.clientY);
+            walkTo(p.x, null);
+            if (Math.random() < 0.4) spawnSparkle(p.x, p.y, { speed: 60 });
+        });
+        const endDrag = (e) => { if (e.pointerId === dragId) dragId = null; };
+        playfield.addEventListener('pointerup', endDrag);
+        playfield.addEventListener('pointercancel', endDrag);
+
+        function bindHold(btn, dir) {
+            const start = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                state.hold = dir;
+                state.pending = null;
+            };
+            const stop = () => {
+                if (state.hold === dir) {
+                    state.hold = 0;
+                    state.targetX = state.x;
+                }
+            };
+            btn.addEventListener('pointerdown', start);
+            btn.addEventListener('pointerup', stop);
+            btn.addEventListener('pointerleave', stop);
+            btn.addEventListener('pointercancel', stop);
+        }
+        bindHold(document.getElementById('btnLeft'), -1);
+        bindHold(document.getElementById('btnRight'), 1);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') { state.hold = -1; state.pending = null; }
+            if (e.key === 'ArrowRight') { state.hold = 1; state.pending = null; }
+            if (e.key === 'Escape' && scopeOpen) closeScope();
+        });
+        document.addEventListener('keyup', (e) => {
+            if ((e.key === 'ArrowLeft' && state.hold === -1) || (e.key === 'ArrowRight' && state.hold === 1)) {
+                state.hold = 0;
+                state.targetX = state.x;
+            }
+        });
+
+        /* ─────────── Glitter particles ─────────── */
+        const particles = [];
+        const MAX_PARTICLES = 500;
+
+        function spawnSparkle(x, y, opts = {}) {
+            if (particles.length >= MAX_PARTICLES) particles.shift();
+            const a = Math.random() * Math.PI * 2;
+            const sp = (opts.speed || 120) * (0.3 + Math.random() * 0.7);
+            particles.push({
+                x, y,
+                vx: opts.vx !== undefined ? opts.vx : Math.cos(a) * sp,
+                vy: opts.vy !== undefined ? opts.vy : Math.sin(a) * sp,
+                g: opts.g !== undefined ? opts.g : 60,
+                life: 0,
+                max: opts.max || (0.7 + Math.random() * 0.9),
+                size: opts.size || (4 + Math.random() * 7),
+                hue: opts.hue !== undefined ? opts.hue : Math.random() * 360,
+                spin: Math.random() * Math.PI,
+                tw: Math.random() * 10
+            });
+        }
+
+        function burst(x, y, n) {
+            for (let i = 0; i < n; i++) spawnSparkle(x, y, { speed: 180 });
+        }
+
+        function sparkleShower(x, y, n) {
+            for (let i = 0; i < n; i++) {
+                spawnSparkle(x + (Math.random() - 0.5) * 300, y + Math.random() * 40, {
+                    vx: (Math.random() - 0.5) * 40,
+                    vy: 30 + Math.random() * 80,
+                    g: 40,
+                    max: 1.6 + Math.random() * 1.2
+                });
+            }
+        }
+
+        function drawStar(x, y, r, rot) {
+            ctx2d.beginPath();
+            for (let i = 0; i < 8; i++) {
+                const rad = i % 2 === 0 ? r : r * 0.28;
+                const a = rot + (i * Math.PI) / 4;
+                ctx2d.lineTo(x + Math.cos(a) * rad, y + Math.sin(a) * rad);
+            }
+            ctx2d.closePath();
+            ctx2d.fill();
+        }
+
+        function updateParticles(dt, now) {
+            const party = now < state.partyUntil;
+
+            // Ambient twinkles everywhere in view
+            const ambient = party ? 6 : 1.2;
+            for (let i = 0; i < ambient; i++) {
+                if (Math.random() < ambient - i) {
+                    spawnSparkle(state.camX + Math.random() * state.viewW, -state.offsetY / state.scale + Math.random() * (WORLD_H + state.offsetY / state.scale), {
+                        vx: 0, vy: party ? 40 : -8, g: 0, speed: 0,
+                        max: 0.8 + Math.random() * 0.8,
+                        size: party ? 5 + Math.random() * 8 : 3 + Math.random() * 4
+                    });
+                }
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.life += dt;
+                if (p.life >= p.max) { particles.splice(i, 1); continue; }
+                p.vy += p.g * dt;
+                p.vx *= 0.98;
+                p.x += p.vx * dt;
+                p.y += p.vy * dt;
+                p.spin += dt * 2;
+            }
+        }
+
+        function drawParticles(now) {
+            const dpr = window.devicePixelRatio || 1;
+            ctx2d.setTransform(1, 0, 0, 1, 0, 0);
+            ctx2d.clearRect(0, 0, canvas.width, canvas.height);
+            ctx2d.setTransform(dpr * state.scale, 0, 0, dpr * state.scale, -state.camX * state.scale * dpr, state.offsetY * dpr);
+            ctx2d.globalCompositeOperation = 'lighter';
+            for (const p of particles) {
+                const t = p.life / p.max;
+                const alpha = Math.sin(Math.PI * t) * (0.6 + 0.4 * Math.sin(now / 90 + p.tw));
+                const s = p.size * (0.6 + 0.4 * Math.sin(now / 120 + p.tw));
+                ctx2d.fillStyle = `hsla(${p.hue}, 100%, 72%, ${alpha})`;
+                drawStar(p.x, p.y, s, p.spin);
+                ctx2d.fillStyle = `rgba(255,255,255,${alpha * 0.9})`;
+                drawStar(p.x, p.y, s * 0.45, p.spin);
+            }
+            ctx2d.globalCompositeOperation = 'source-over';
+        }
+
+        /* ─────────── Layout ─────────── */
+        function resize() {
+            const w = playfield.clientWidth;
+            const h = playfield.clientHeight;
+            state.scale = Math.min(h / WORLD_H, w / MIN_VIEW_W);
+            state.viewW = w / state.scale;
+            state.offsetY = h - WORLD_H * state.scale;
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.round(w * dpr);
+            canvas.height = Math.round(h * dpr);
+            if (scopeOpen) layoutScope();
+        }
+        window.addEventListener('resize', resize);
+        if (window.ResizeObserver) new ResizeObserver(resize).observe(playfield);
+
+        /* ─────────── Main loop ─────────── */
+        function frame(now) {
+            const dt = Math.min(0.05, (now - state.lastTime) / 1000);
+            state.lastTime = now;
+
+            if (!scopeOpen && !state.busy) {
+                if (state.hold) {
+                    state.targetX = Math.max(60, Math.min(WORLD_W - 60, state.x + state.hold * 200));
+                }
+                const dx = state.targetX - state.x;
+                const p = princessEl();
+                if (Math.abs(dx) > 1.5) {
+                    const step = Math.sign(dx) * Math.min(Math.abs(dx), SPEED * dt);
+                    state.x += step;
+                    state.facing = Math.sign(dx);
+                    p.classList.add('walking');
+                    // Glitter trail from the skirt hem
+                    if (Math.random() < 0.8) {
+                        spawnSparkle(state.x - state.facing * 30 + (Math.random() - 0.5) * 40, FEET_Y - 10 - Math.random() * 30, {
+                            vx: -state.facing * 30, vy: -20 - Math.random() * 30, g: 20, size: 3 + Math.random() * 5
+                        });
+                    }
+                    checkGems();
+                } else {
+                    state.x = state.targetX;
+                    p.classList.remove('walking');
+                    if (state.pending) {
+                        const act = state.pending;
+                        state.pending = null;
+                        act();
+                    }
+                }
+            } else {
+                princessEl().classList.remove('walking');
+            }
+
+            // Wand sparkles
+            if (Math.random() < 0.35) {
+                const wandX = state.x + state.facing * (0.38 * PRINCESS_W);
+                const wandY = FEET_Y - PRINCESS_H + 0.36 * PRINCESS_H;
+                spawnSparkle(wandX, wandY, { speed: 50, g: 30, size: 3 + Math.random() * 4, hue: 40 + Math.random() * 30 });
+            }
+
+            // Princess transform
+            const p = princessEl();
+            p.style.transform = `translate(${state.x - PRINCESS_W / 2}px, ${FEET_Y - PRINCESS_H}px)`;
+            p.classList.toggle('left', state.facing < 0);
+
+            // Mirror reflection follows princess a little
+            const refl = document.getElementById('reflection');
+            if (refl) {
+                const off = Math.max(-45, Math.min(45, (state.x - (ROOM_W + 400)) * 0.25));
+                refl.style.marginLeft = (-75 - off) + 'px';
+            }
+
+            // Camera
+            let target = state.x - state.viewW / 2;
+            if (state.viewW >= WORLD_W) target = (WORLD_W - state.viewW) / 2;
+            else target = Math.max(0, Math.min(WORLD_W - state.viewW, target));
+            state.camX += (target - state.camX) * Math.min(1, dt * 6);
+            world.style.transform = `translate(${-state.camX * state.scale}px, ${state.offsetY}px) scale(${state.scale})`;
+
+            // Room tracking
+            const room = Math.max(0, Math.min(ROOMS.length - 1, Math.floor(state.x / ROOM_W)));
+            if (room !== state.room) {
+                state.room = room;
+                roomPill.textContent = `${ROOMS[room].icon} ${ROOMS[room].name}`;
+                roomPill.classList.add('bump');
+                setTimeout(() => roomPill.classList.remove('bump'), 200);
+                if (window.speechSynthesis) speechSynthesis.cancel();
+                const say = ROOMS[room].say;
+                setTimeout(() => speak(say), 60);
+                playSparkleSound();
+            }
+
+            updateParticles(dt, now);
+            drawParticles(now);
+            requestAnimationFrame(frame);
+        }
+
+        /* ─────────── Verrekijker ─────────── */
+        const scope = document.getElementById('scope');
+        const panoBase = document.getElementById('panoBase');
+        const panoZoom = document.getElementById('panoZoom');
+        const lensWrap = document.getElementById('lensWrap');
+        const ringL = document.getElementById('ringL');
+        const ringR = document.getElementById('ringR');
+        const findList = document.getElementById('findList');
+        const ZOOM = 2.4;
+        let scopeOpen = false;
+        let lens = { x: 0, y: 0, r: 60 };
+
+        const FINDS = [
+            { e: '🦄', name: 'Een eenhoorn!', x: 16, y: 66, s: 22 },
+            { e: '🐉', name: 'Een lieve draak!', x: 84, y: 24, s: 22 },
+            { e: '🦋', name: 'Een vlinder!', x: 42, y: 58, s: 14 },
+            { e: '🎈', name: 'Een ballon!', x: 62, y: 12, s: 16 },
+            { e: '🐸', name: 'Een kikker!', x: 30, y: 88, s: 14 },
+            { e: '🦢', name: 'Een zwaan!', x: 60, y: 80, s: 16 },
+            { e: '🐰', name: 'Een konijntje!', x: 90, y: 72, s: 16 }
+        ];
+
+        function panoHTML() {
+            let h = `<div class="sun"></div><div class="rb"></div>
+                <div class="hill" style="left:-10%;top:55%;width:70%;height:70%;background:#86efac"></div>
+                <div class="hill" style="left:40%;top:60%;width:80%;height:70%;background:#4ade80"></div>
+                <div class="lake"></div>
+                <span class="p" style="left:22%;top:18%;font-size:34px">☁️</span>
+                <span class="p" style="left:74%;top:10%;font-size:28px">☁️</span>
+                <span class="p" style="left:48%;top:30%;font-size:22px">☁️</span>
+                <span class="p" style="left:50%;top:48%;font-size:36px">🏰</span>
+                <span class="p" style="left:8%;top:78%;font-size:30px">🌳</span>
+                <span class="p" style="left:74%;top:60%;font-size:26px">🌳</span>
+                <span class="p" style="left:38%;top:72%;font-size:16px">🌼</span>
+                <span class="p" style="left:24%;top:76%;font-size:14px">🌷</span>
+                <span class="p" style="left:80%;top:88%;font-size:16px">🌸</span>
+                <span class="p" style="left:95%;top:55%;font-size:26px">🌲</span>`;
+            FINDS.forEach((f, i) => {
+                h += `<span class="p find" data-i="${i}" style="left:${f.x}%;top:${f.y}%;font-size:${f.s}px">${f.e}</span>`;
+            });
+            return h;
+        }
+
+        function buildScope() {
+            panoBase.innerHTML = panoHTML();
+            panoZoom.innerHTML = panoHTML();
+            findList.innerHTML = FINDS.map((f, i) => `<span data-i="${i}">${f.e}</span>`).join('');
+        }
+
+        function layoutScope() {
+            const w = scope.clientWidth;
+            const h = scope.clientHeight;
+            lens.r = Math.max(50, Math.min(w, h) * 0.2);
+            if (!lens.x) { lens.x = w / 2; lens.y = h / 2; }
+            renderLens();
+        }
+
+        function renderLens() {
+            const { x, y, r } = lens;
+            const off = r * 0.92;
+            const m = `radial-gradient(circle ${r}px at ${x - off}px ${y}px, #000 98%, transparent 100%), radial-gradient(circle ${r}px at ${x + off}px ${y}px, #000 98%, transparent 100%)`;
+            lensWrap.style.webkitMaskImage = m;
+            lensWrap.style.maskImage = m;
+            panoZoom.style.transformOrigin = `${x}px ${y}px`;
+            panoZoom.style.transform = `scale(${ZOOM})`;
+            [[ringL, x - off], [ringR, x + off]].forEach(([ring, cx]) => {
+                ring.style.left = cx + 'px';
+                ring.style.top = y + 'px';
+                ring.style.width = ring.style.height = (r * 2 + 16) + 'px';
+            });
+        }
+
+        function openScope() {
+            scopeOpen = true;
+            scope.classList.add('open');
+            lens.x = 0;
+            layoutScope();
+            speak('Kijk door de verrekijker! Wat zie je?');
+            playFreqSweep(400, 1200, 0.3, 0.15);
+        }
+
+        function closeScope() {
+            scopeOpen = false;
+            scope.classList.remove('open');
+            _playWhoosh();
+        }
+
+        function scopeSpark(x, y) {
+            const icons = ['✨', '⭐', '💖', '🌟', '💫'];
+            for (let i = 0; i < 10; i++) {
+                const s = document.createElement('span');
+                s.className = 'scope-spark';
+                s.textContent = randomPick(icons);
+                const a = Math.random() * Math.PI * 2;
+                const d = 60 + Math.random() * 60;
+                s.style.left = x + 'px';
+                s.style.top = y + 'px';
+                s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                scope.appendChild(s);
+                setTimeout(() => s.remove(), 900);
+            }
+        }
+
+        function checkFinds() {
+            const w = scope.clientWidth;
+            const h = scope.clientHeight;
+            if (!scopeOpen || !w || !h) return;
+            // Points in the un-zoomed scene that sit under the finger and under each lens centre
+            const off = (lens.r * 0.92) / ZOOM;
+            const spots = [[lens.x, lens.y], [lens.x - off, lens.y], [lens.x + off, lens.y]];
+            const reach = Math.max(22, (lens.r * 0.75) / ZOOM);
+            FINDS.forEach((f, i) => {
+                if (f.found) return;
+                const bx = (f.x / 100) * w;
+                const by = (f.y / 100) * h;
+                // Where the item appears on screen inside the magnified lens
+                const fx = lens.x + (bx - lens.x) * ZOOM;
+                const fy = lens.y + (by - lens.y) * ZOOM;
+                if (spots.some(([sx, sy]) => Math.hypot(bx - sx, by - sy) < reach)) {
+                    f.found = true;
+                    panoZoom.querySelector(`.find[data-i="${i}"]`).classList.add('found');
+                    panoBase.querySelector(`.find[data-i="${i}"]`).classList.add('found');
+                    findList.querySelector(`[data-i="${i}"]`).classList.add('found');
+                    scopeSpark(fx, fy);
+                    playCorrect();
+                    speak(f.name);
+                    if (FINDS.every(ff => ff.found)) {
+                        setTimeout(() => {
+                            playWin();
+                            speak('Alles gevonden! Knap hoor!');
+                            for (let k = 0; k < 4; k++) {
+                                setTimeout(() => scopeSpark(Math.random() * w, Math.random() * h), k * 200);
+                            }
+                        }, 900);
+                        setTimeout(() => {
+                            FINDS.forEach((ff, j) => {
+                                ff.found = false;
+                                scope.querySelectorAll(`[data-i="${j}"]`).forEach(n => n.classList.remove('found'));
+                            });
+                            closeScope();
+                            showToast('🔭 Alles gevonden! 🌟');
+                            sparkleShower(state.x, 60, 60);
+                        }, 3600);
+                    }
+                }
+            });
+        }
+
+        function moveLens(e) {
+            const r = scope.getBoundingClientRect();
+            lens.x = e.clientX - r.left;
+            lens.y = e.clientY - r.top;
+            renderLens();
+            checkFinds();
+        }
+
+        let scopeDown = false;
+        scope.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            if (e.target.closest('.scope-close')) return;
+            scopeDown = true;
+            moveLens(e);
+        });
+        scope.addEventListener('pointermove', (e) => {
+            if (scopeDown || e.pointerType === 'mouse') moveLens(e);
+        });
+        window.addEventListener('pointerup', () => { scopeDown = false; });
+        document.getElementById('scopeClose').addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeScope();
+        });
+        document.getElementById('scopeClose').addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        /* ─────────── Start ─────────── */
+        buildWorld();
+        buildScope();
+        applyDress();
+        spawnGems();
+        resize();
+        state.camX = Math.max(0, state.x - state.viewW / 2);
+        requestAnimationFrame(frame);
+    </script>
+</body>
+</html>
