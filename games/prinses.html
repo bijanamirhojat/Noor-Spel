@@ -171,20 +171,20 @@
                 conic-gradient(#fef3c7 25%, #fcd34d 0 50%, #fef3c7 0 75%, #fcd34d 0) 0 0 / 50px 50px;
         }
 
-        .i-room.r4 .wall {
+        .i-room.r5 .wall {
             background: linear-gradient(180deg, #fff7ed 0%, #fdf2f8 55%, #ecfeff 100%);
         }
-        .i-room.r4 .floor {
+        .i-room.r5 .floor {
             background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
         }
 
-        .i-room.r5 .wall {
+        .i-room.r6 .wall {
             background:
                 radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px,
                 radial-gradient(circle at 70% 70%, #fde68a 1.5px, transparent 2.5px) 0 0 / 90px 80px,
                 linear-gradient(180deg, #1e1b4b, #4c1d95);
         }
-        .i-room.r5 .floor {
+        .i-room.r6 .floor {
             background:
                 repeating-linear-gradient(90deg, #7c3aed 0 60px, #6d28d9 60px 62px);
         }
@@ -1476,13 +1476,13 @@
         }
 
         /* ── Slaapkamer room ── */
-        .i-room.r6 .wall {
+        .i-room.r7 .wall {
             background:
                 radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 60px 60px,
                 radial-gradient(circle, #fde68a 2.5px, transparent 3.5px) 30px 30px / 60px 60px,
                 linear-gradient(180deg, #c7d2fe, #a5b4fc);
         }
-        .i-room.r6 .floor {
+        .i-room.r7 .floor {
             background: repeating-linear-gradient(90deg, #fcd9b6 0 70px, #f5c79a 70px 73px);
         }
         .bed { width: 320px; height: 230px; }
@@ -2055,6 +2055,205 @@
         .tea-opt.sel { border-color: #f472b6; transform: translateY(-4px) scale(1.06); }
         .tea-opt.stir-btn, .tea-opt.new-btn { width: auto; padding: 4px 14px; font-size: 30px; }
 
+        /* ── Balzaal ── */
+        .i-room.r4 .wall {
+            background:
+                radial-gradient(circle, #fde68a 3px, transparent 4px) 0 0 / 40px 40px,
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 2px, transparent 2px 80px),
+                linear-gradient(180deg, #f5d0fe, #f0abfc 60%, #e879f9);
+        }
+        .i-room.r4 .floor {
+            background: conic-gradient(#fef3c7 25%, #fde68a 0 50%, #fef3c7 0 75%, #fde68a 0) 0 0 / 50px 50px;
+        }
+        .ball-window {
+            width: 110px;
+            height: 200px;
+            border-radius: 55px 55px 0 0;
+            border: 8px solid #fcd34d;
+            background:
+                radial-gradient(circle at 60% 30%, #fff 2px, transparent 3px) 0 0 / 26px 26px,
+                linear-gradient(180deg, #312e81, #6d28d9);
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(255,255,255,0.6);
+        }
+        .ball-window::before, .ball-window::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            width: 30px;
+            height: 210px;
+            background: linear-gradient(90deg, #db2777, #f472b6);
+            border-radius: 0 0 20px 20px;
+        }
+        .ball-window::before { left: -30px; }
+        .ball-window::after { right: -30px; }
+        .tile {
+            width: 50px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.35);
+            pointer-events: none;
+            z-index: 1;
+            transition: background 0.25s ease, box-shadow 0.25s ease;
+        }
+        .tile.lit {
+            background: var(--c);
+            box-shadow: 0 0 22px var(--c), inset 0 0 12px rgba(255,255,255,0.8);
+            transition: none;
+        }
+        .orchestra {
+            width: 170px;
+            height: 150px;
+        }
+        .orchestra .stage {
+            position: absolute;
+            left: 0; bottom: 0; width: 170px; height: 36px;
+            border-radius: 12px 12px 0 0;
+            background: linear-gradient(180deg, #f472b6, #be185d);
+            border-top: 5px solid #fcd34d;
+        }
+        .orchestra .inst {
+            position: absolute;
+            bottom: 30px;
+            font-size: 50px;
+            line-height: 1;
+        }
+        .music .orchestra .inst { animation: instBop 0.6s ease-in-out infinite alternate; }
+        .music .orchestra .inst:nth-child(2) { animation-delay: -0.2s; }
+        .music .orchestra .inst:nth-child(3) { animation-delay: -0.4s; }
+        @keyframes instBop {
+            from { transform: translateY(0) rotate(-8deg); }
+            to { transform: translateY(-10px) rotate(8deg); }
+        }
+        .orchestra .notes {
+            position: absolute;
+            left: 50px; top: -10px;
+            font-size: 28px;
+            opacity: 0;
+        }
+        .music .orchestra .notes { animation: notesUp 1.8s ease-out infinite; }
+        @keyframes notesUp {
+            0% { transform: translate(0, 20px); opacity: 0; }
+            30% { opacity: 1; }
+            100% { transform: translate(30px, -50px); opacity: 0; }
+        }
+        .ball-guest {
+            font-size: 56px;
+            line-height: 1;
+            transform-origin: 50% 100%;
+        }
+        .music .ball-guest { animation: guestDance 1.2s ease-in-out infinite; }
+        @keyframes guestDance {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            33% { transform: translateY(-16px) rotate(-10deg); }
+            66% { transform: translateY(-4px) rotate(10deg); }
+        }
+        .ball-guest.cheer { animation: cheer 0.6s ease !important; }
+        @keyframes cheer {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-40px) scale(1.2); }
+        }
+        .cannon { font-size: 60px; line-height: 1; }
+        .garland-balloons {
+            font-size: 34px;
+            letter-spacing: 10px;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* Dance moves (princess + prince) */
+        .dancer {
+            width: 100%;
+            height: 100%;
+            transform-origin: 50% 100%;
+        }
+        .dancer.move-spin { animation: mvSpin 1s ease-in-out; }
+        .dancer.move-jump { animation: mvJump 1s ease-in-out; }
+        .dancer.move-sway { animation: mvSway 1.2s ease-in-out; }
+        .dancer.move-cartwheel { animation: mvCartwheel 1s ease-in-out; transform-origin: 50% 55%; }
+        .dancer.move-bow { animation: mvBow 1.2s ease-in-out; }
+        @keyframes mvSpin {
+            from { transform: perspective(400px) rotateY(0); }
+            to { transform: perspective(400px) rotateY(720deg); }
+        }
+        @keyframes mvJump {
+            0%, 50%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-70px); }
+            75% { transform: translateY(-45px); }
+        }
+        @keyframes mvSway {
+            0%, 100% { transform: rotate(0); }
+            20% { transform: rotate(-14deg); }
+            40% { transform: rotate(14deg); }
+            60% { transform: rotate(-14deg); }
+            80% { transform: rotate(14deg); }
+        }
+        @keyframes mvCartwheel {
+            0% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+        @keyframes mvBow {
+            0%, 100% { transform: rotate(0) scaleY(1); }
+            40%, 60% { transform: rotate(14deg) translateY(12px) scaleY(0.92); }
+        }
+        .prince {
+            position: absolute;
+            left: 0; top: 0;
+            width: 120px;
+            height: 192px;
+            z-index: 9;
+            cursor: pointer;
+        }
+        .prince .pface { width: 100%; height: 100%; transition: transform 0.2s ease; }
+        .prince.left .pface { transform: scaleX(-1); }
+        .prince svg { width: 100%; height: 100%; overflow: visible; }
+        .music .prince .pbody { animation: princeSway 1.2s ease-in-out infinite; transform-origin: 50px 150px; }
+        @keyframes princeSway {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .dance-bar {
+            position: absolute;
+            left: 50%;
+            top: 12px;
+            transform: translateX(-50%);
+            z-index: 30;
+            display: none;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.85);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+        .dance-bar.show { display: flex; }
+        .dance-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 3px solid #f9a8d4;
+            background: linear-gradient(135deg, #fdf2f8, #f5d0fe);
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1px;
+        }
+        .dance-btn small {
+            font-family: 'Fredoka One', cursive;
+            font-size: 10px;
+            color: #be185d;
+        }
+        .dance-btn:active { transform: scale(0.9); }
+        @media (max-width: 620px) {
+            .dance-btn { width: 54px; height: 54px; font-size: 24px; }
+        }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -2079,6 +2278,13 @@
             <div class="toast" id="toast"></div>
             <div class="door-fade" id="doorFade"></div>
             <div class="night" id="night"></div>
+            <div class="dance-bar" id="danceBar">
+                <button class="dance-btn" data-m="spin">🌀<small>Draaien</small></button>
+                <button class="dance-btn" data-m="jump">⬆️<small>Springen</small></button>
+                <button class="dance-btn" data-m="sway">🎵<small>Wiegen</small></button>
+                <button class="dance-btn" data-m="cartwheel">🤸<small>Radslag</small></button>
+                <button class="dance-btn" data-m="bow">💖<small>Buigen</small></button>
+            </div>
             <div class="ride-btns" id="rideBtns"><button class="dismount" id="flyBtn">✨ Vliegen</button><button class="dismount" id="dismount">🦄 Afstappen</button></div>
             <button class="arrow left" id="btnLeft" aria-label="Naar links">◀</button>
             <button class="arrow right" id="btnRight" aria-label="Naar rechts">▶</button>
@@ -2146,6 +2352,7 @@
             { name: 'Spiegelkamer',  icon: '🪞', say: 'De spiegelkamer' },
             { name: 'Nagelsalon',    icon: '💅', say: 'De nagelsalon' },
             { name: 'Troonzaal',     icon: '👑', say: 'De troonzaal' },
+            { name: 'Balzaal',       icon: '💃', say: 'De balzaal' },
             { name: 'Regenboogzaal', icon: '🌈', say: 'De regenboogzaal' },
             { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' },
             { name: 'Slaapkamer',    icon: '🛏️', say: 'De slaapkamer' }
@@ -2165,6 +2372,8 @@
         const FEET_Y = 452;
         const SPEED = 280;
         const RIDE_SPEED = 540;
+        const BALL_IDX = 4;
+        const BALL_TILE_X0 = 150;
         const RIDE_LIFT = 30;
         const MIN_VIEW_W = 580;
 
@@ -2172,7 +2381,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 16, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 18, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
         let scene = SCENES.in;
@@ -2359,7 +2568,7 @@
             addObj('<div class="emoji-obj gleam" style="font-size:56px">🎂</div>', r2 + 90, 385, r2 + 130, () => { sayRandom(['Taart! Lekker!', 'Mmm, taart!']); playCorrect(); sparkleShower(r2 + 130, 380, 24); });
 
             /* Room 3: Regenboogzaal */
-            const r3 = ROOM_W * 4;
+            const r3 = ROOM_W * 5;
             place(el('<div class="rainbow-window"></div>'), r3 + 250, 70);
             place(el(`<svg class="rainbow-arc" id="rainbowArc" viewBox="0 0 800 500">
                 ${['#ef4444','#fb923c','#facc15','#4ade80','#60a5fa','#a855f7'].map((c, i) =>
@@ -2375,7 +2584,7 @@
             addObj('<div class="emoji-obj">🎈</div>', r3 + 660, 230, r3 + 690, balloonPop);
 
             /* Room 4: Torenkamer */
-            const r4 = ROOM_W * 5;
+            const r4 = ROOM_W * 6;
             place(el('<div class="tower-window"></div>'), r4 + 440, 70);
             addObj('<div class="telescope"><div class="tube"></div><div class="legs"></div><div class="tap-hint">👇</div></div>', r4 + 300, 225, r4 + 250, openScope);
             addObj('<div class="emoji-obj">🦉</div>', r4 + 90, 160, r4 + 120, owlHoot);
@@ -2394,8 +2603,42 @@
             addObj('<div class="frame" style="font-size:56px">💅</div>', rs + 70, 110, rs + 130, () => sayRandom(['Nagels lakken!', 'Welke kleur kies jij?']));
             addObj('<div class="frame" style="font-size:56px">💖</div>', rs + 610, 110, rs + 670, () => { sayRandom(['Een hartje!', 'Ik hou van glitter!']); sparkleShower(rs + 670, 150, 30); });
 
+            /* Room: Balzaal */
+            const rb = ROOM_W * BALL_IDX;
+            place(el('<div class="garland-balloons">🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈</div>'), rb + 30, 60);
+            [100, 330, 590].forEach(x => place(el('<div class="ball-window"></div>'), rb + x, 110));
+            place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), rb + 200, 10);
+            place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), rb + 460, 10);
+            state.tiles = [];
+            const tileColors = ['#f472b6', '#facc15', '#4ade80', '#60a5fa', '#c084fc', '#fb923c'];
+            for (let row = 0; row < 2; row++) {
+                for (let col = 0; col < 10; col++) {
+                    const t = place(el('<div class="tile"></div>'), rb + BALL_TILE_X0 + col * 50, 400 + row * 50);
+                    t.style.setProperty('--c', tileColors[(col + row * 3) % tileColors.length]);
+                    state.tiles.push({ node: t, col, row, until: 0, on: false });
+                }
+            }
+            addObj(`<div class="orchestra">
+                <div class="stage"></div>
+                <span class="inst" style="left:4px">🎻</span>
+                <span class="inst" style="left:60px">🎹</span>
+                <span class="inst" style="left:116px">🎺</span>
+                <span class="notes">🎶</span>
+            </div>`, rb + 10, 262, rb + 110, toggleBallMusic);
+            [['🐰', 690, 360], ['🦊', 740, 372], ['🐻', 30, 372]].forEach(([e, x, y]) =>
+                addObj(`<div class="ball-guest">${e}</div>`, rb + x, y, rb + x, (node) => guestCheer(node)));
+            addObj('<div class="cannon">🎉</div>', rb + 720, 250, rb + 700, confettiCannon);
+            const prince = el(`<div class="prince" id="prince"><div class="dancer"><div class="pface">${princeSVG()}</div></div></div>`);
+            world.appendChild(prince);
+            prince.style.transform = `translate(${rb + 520 - PRINCESS_W / 2}px, ${FEET_Y - PRINCESS_H}px)`;
+            prince.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (state.busy) return;
+                walkTo(rb + 430, () => danceMove('bow'));
+            });
+
             /* Room: Slaapkamer */
-            const r6 = ROOM_W * 6;
+            const r6 = ROOM_W * 7;
             place(el('<div class="tower-window"></div>'), r6 + 20, 70);
             addObj(`<div class="bed">
                 <div class="post" style="left:0"></div><div class="post" style="left:310px"></div>
@@ -2421,7 +2664,7 @@
             });
 
             /* Princess */
-            const p = el(`<div class="princess" id="princess"><div class="flip">${princessSVG('pr')}</div></div>`);
+            const p = el(`<div class="princess" id="princess"><div class="dancer"><div class="flip">${princessSVG('pr')}</div></div></div>`);
             world.appendChild(p);
         }
 
@@ -2761,6 +3004,7 @@
             state.room = 0;
             roomPill.textContent = `${ROOMS[0].icon} ${ROOMS[0].name}`;
             updateGemPill();
+            if (document.getElementById('prince')) updateBallroom();
         }
 
         function fountainSplash() {
@@ -2832,6 +3076,187 @@
             setTimeout(() => playTone(160, 0.1, 0.25, 'triangle'), 750);
             speak(state.riding ? 'Een appel! Lekker voor de eenhoorn!' : 'Een appel valt uit de boom!');
             setTimeout(() => apple.classList.remove('fall'), 4000);
+        }
+
+
+        /* ─────────── Balzaal ─────────── */
+        function princeSVG() {
+            return `
+            <svg viewBox="0 0 100 160">
+                <ellipse cx="50" cy="156" rx="28" ry="4" fill="rgba(0,0,0,0.18)"/>
+                <g class="pbody">
+                    <path d="M30 64 Q20 110 26 140 L74 140 Q80 110 70 64 Z" fill="#dc2626"/>
+                    <rect x="38" y="108" width="10" height="42" rx="4" fill="#1e3a8a"/>
+                    <rect x="52" y="108" width="10" height="42" rx="4" fill="#1e3a8a"/>
+                    <ellipse cx="42" cy="152" rx="8" ry="4" fill="#111827"/>
+                    <ellipse cx="58" cy="152" rx="8" ry="4" fill="#111827"/>
+                    <path d="M34 64 L66 64 L70 114 L30 114 Z" fill="#3b82f6"/>
+                    <path d="M36 64 L64 108" stroke="#fcd34d" stroke-width="6"/>
+                    <circle cx="50" cy="80" r="2.2" fill="#fcd34d"/><circle cx="50" cy="92" r="2.2" fill="#fcd34d"/><circle cx="50" cy="104" r="2.2" fill="#fcd34d"/>
+                    <rect x="28" y="62" width="12" height="6" rx="3" fill="#fcd34d"/>
+                    <rect x="60" y="62" width="12" height="6" rx="3" fill="#fcd34d"/>
+                    <path d="M34 68 Q26 84 26 98" stroke="#3b82f6" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <path d="M66 68 Q74 84 74 98" stroke="#3b82f6" stroke-width="8" stroke-linecap="round" fill="none"/>
+                    <circle cx="26" cy="100" r="4.5" fill="#fff"/>
+                    <circle cx="74" cy="100" r="4.5" fill="#fff"/>
+                    <rect x="46" y="54" width="8" height="10" fill="#ffd7c2"/>
+                    <circle cx="50" cy="40" r="17" fill="#ffe4d6"/>
+                    <path d="M33 38 Q33 20 50 21 Q67 20 67 38 Q62 30 50 31 Q40 30 33 38 Z" fill="#92400e"/>
+                    <ellipse cx="44" cy="42" rx="2.4" ry="3.2" fill="#1e1b4b"/>
+                    <ellipse cx="56" cy="42" rx="2.4" ry="3.2" fill="#1e1b4b"/>
+                    <circle cx="45" cy="40.8" r="0.9" fill="#fff"/><circle cx="57" cy="40.8" r="0.9" fill="#fff"/>
+                    <circle cx="40" cy="48" r="3" fill="#fda4af" opacity=".6"/>
+                    <circle cx="60" cy="48" r="3" fill="#fda4af" opacity=".6"/>
+                    <path d="M45 50 Q50 54 55 50" fill="none" stroke="#9f1239" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M39 24 L41 14 L46 20 L50 12 L54 20 L59 14 L61 24 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
+                    <circle cx="50" cy="19" r="2" fill="#3b82f6"/>
+                </g>
+            </svg>`;
+        }
+
+        let ballMusicOn = false;
+        let ballBeatTimer = null;
+        let ballBeat = 0;
+        const WALTZ = [
+            [523, 131], [659, 0], [784, 0], [784, 98], [0, 0], [659, 0],
+            [659, 131], [784, 0], [1047, 0], [1047, 98], [0, 0], [988, 0],
+            [587, 147], [698, 0], [880, 0], [880, 110], [0, 0], [698, 0],
+            [698, 98], [880, 0], [1175, 0], [1047, 131], [988, 0], [784, 0]
+        ];
+
+        function ballBeatStep() {
+            const [mel, bass] = WALTZ[ballBeat % WALTZ.length];
+            if (mel) playTone(mel, 0.32, 0.09, 'triangle');
+            if (bass) playTone(bass, 0.5, 0.14, 'sine');
+            if (ballBeat % 3 !== 0) playTone(bass ? bass * 2 : 262, 0.1, 0.04, 'sine');
+            ballBeat++;
+            // Light a few random tiles on every beat
+            const now = performance.now();
+            for (let k = 0; k < 3; k++) {
+                const t = randomPick(state.tiles);
+                t.until = now + 380;
+            }
+        }
+
+        function startBallMusic() {
+            if (ballMusicOn) return;
+            ballMusicOn = true;
+            ballBeat = 0;
+            SCENES.in.el.classList.add('music');
+            ballBeatStep();
+            ballBeatTimer = setInterval(ballBeatStep, 400);
+        }
+
+        function stopBallMusic() {
+            if (!ballMusicOn) return;
+            ballMusicOn = false;
+            SCENES.in.el.classList.remove('music');
+            clearInterval(ballBeatTimer);
+        }
+
+        function toggleBallMusic() {
+            if (ballMusicOn) {
+                stopBallMusic();
+            } else {
+                startBallMusic();
+                sparkleShower(ROOM_W * BALL_IDX + 100, 200, 30);
+            }
+        }
+
+        function inBallroom() {
+            return scene.key === 'in' && state.room === BALL_IDX;
+        }
+
+        function updateBallroom() {
+            const inBall = inBallroom();
+            document.getElementById('danceBar').classList.toggle('show', inBall);
+            if (inBall) startBallMusic();
+            else stopBallMusic();
+        }
+
+        function updateTiles(now) {
+            if (!inBallroom()) return;
+            const col = Math.floor((state.x - ROOM_W * BALL_IDX - BALL_TILE_X0) / 50);
+            state.tiles.forEach(t => {
+                if (t.col === col && t.row === 1 && state.alt === 0) t.until = Math.max(t.until, now + 300);
+                const on = now < t.until;
+                if (on !== t.on) {
+                    t.on = on;
+                    t.node.classList.toggle('lit', on);
+                }
+            });
+        }
+
+        const DANCE_MOVES = ['spin', 'jump', 'sway', 'cartwheel', 'bow'];
+
+        function danceMove(kind) {
+            if (state.busy) return;
+            const dancers = [princessEl().querySelector('.dancer'), document.querySelector('#prince .dancer')];
+            dancers.forEach(d => {
+                if (!d) return;
+                DANCE_MOVES.forEach(m => d.classList.remove('move-' + m));
+                void d.offsetWidth;
+                d.classList.add('move-' + kind);
+                clearTimeout(d._t);
+                d._t = setTimeout(() => d.classList.remove('move-' + kind), 1250);
+            });
+            // Prince turns to face the princess
+            const prince = document.getElementById('prince');
+            if (prince) prince.classList.toggle('left', state.x < ROOM_W * BALL_IDX + 520);
+
+            const sounds = {
+                spin: () => playFreqSweep(400, 1600, 0.8, 0.12),
+                jump: () => { playFreqSweep(300, 900, 0.25, 0.15); setTimeout(() => playFreqSweep(300, 800, 0.25, 0.12), 500); },
+                sway: () => [659, 784, 659, 784].forEach((f, i) => setTimeout(() => playTone(f, 0.2, 0.1), i * 240)),
+                cartwheel: () => playFreqSweep(1400, 300, 0.9, 0.12),
+                bow: () => playCorrect()
+            };
+            sounds[kind]();
+            burst(state.x, 320, 30);
+            if (kind === 'spin') {
+                for (let i = 0; i < 24; i++) {
+                    const a = (i / 24) * Math.PI * 2;
+                    spawnSparkle(state.x + Math.cos(a) * 70, 360 + Math.sin(a) * 30, { vx: Math.cos(a) * 120, vy: -60, g: 60 });
+                }
+            }
+            const now = performance.now();
+            state.tiles.forEach((t, i) => { t.until = now + 150 + ((i * 37) % 400); });
+            document.querySelectorAll('.ball-guest').forEach((g, i) => setTimeout(() => guestCheer(g), i * 120));
+            state.danceCount = (state.danceCount || 0) + 1;
+            if (state.danceCount % 8 === 0) {
+                showToast('💃 Wat kun jij mooi dansen! 🤴');
+                playWin();
+                confettiCannon();
+            }
+        }
+
+        document.querySelectorAll('.dance-btn').forEach(btn => {
+            btn.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                danceMove(btn.dataset.m);
+            });
+        });
+
+        function guestCheer(node) {
+            node.classList.remove('cheer');
+            void node.offsetWidth;
+            node.classList.add('cheer');
+            setTimeout(() => node.classList.remove('cheer'), 600);
+        }
+
+        function confettiCannon() {
+            const x = ROOM_W * BALL_IDX + 730;
+            playFreqSweep(200, 60, 0.25, 0.3);
+            setTimeout(playSparkleSound, 150);
+            for (let i = 0; i < 90; i++) {
+                spawnSparkle(x, 270, {
+                    vx: -120 - Math.random() * 420,
+                    vy: -250 - Math.random() * 300,
+                    g: 420,
+                    size: 5 + Math.random() * 6,
+                    max: 1.6 + Math.random() * 0.8
+                });
+            }
         }
 
         /* ─────────── Gems ─────────── */
@@ -3351,7 +3776,9 @@
                 const say = ROOMS[room].say;
                 setTimeout(() => speak(say), 60);
                 playSparkleSound();
+                updateBallroom();
             }
+            updateTiles(now);
 
             updateParticles(dt, now);
             drawParticles(now);
