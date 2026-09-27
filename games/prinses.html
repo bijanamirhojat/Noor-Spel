@@ -4038,8 +4038,9 @@
                             <circle cx="${nx + nw * 0.75}" cy="${ny + nh * 0.8}" r="1.6" fill="#fff"/>
                         </g>
                         <ellipse cx="${nx + nw * 0.3}" cy="${ny + nh * 0.3}" rx="${nw * 0.12}" ry="${nh * 0.2}" fill="#fff" opacity=".6"/>
-                        <text class="stk" x="0" y="0" font-size="${nw * 0.8}" text-anchor="middle" dominant-baseline="central"
-                            transform="translate(0,${ny + nh * 0.55})${mirror ? ' scale(-1,1)' : ''}"></text>
+                        <g transform="translate(0,${ny + nh * 0.55})${mirror ? ' scale(-1,1)' : ''}">
+                            <text class="stk" x="0" y="0" font-size="${nw * 0.8}" text-anchor="middle" dominant-baseline="central"></text>
+                        </g>
                     </g>`;
                 });
                 html += `</g>`;
