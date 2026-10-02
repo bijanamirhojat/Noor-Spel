@@ -2910,18 +2910,35 @@
             flex-direction: column;
             align-items: center;
             padding: 14px;
-            gap: 10px;
+            gap: 8px;
             overflow-y: auto;
+            container-type: size;
+            /* Tile size: 9 tiles must fit across (buiten + zee row), 3 tile rows must fit down */
+            --t: clamp(56px, min(9cqw, calc((100cqh - 190px) / 3)), 104px);
             background:
                 radial-gradient(circle, rgba(255,255,255,0.6) 3px, transparent 4px) 0 0 / 36px 36px,
                 linear-gradient(135deg, #fdf2f8, #e0f2fe);
         }
         .mapov.open { display: flex; }
+        /* Center vertically, but never clip the top when it overflows */
+        .mapov::before, .mapov::after { content: ''; flex: 1 1 0; }
         .map-sec { font-family: 'Fredoka One', cursive; color: #be185d; font-size: 1.1rem; }
-        .map-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 760px; }
+        .map-grid { display: grid; grid-template-columns: repeat(8, auto); justify-content: center; gap: 8px; }
+        .map-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 8px 28px; }
+        .map-col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        #mapOut { grid-template-columns: repeat(6, auto); }
+        #mapSea { grid-template-columns: repeat(3, auto); }
+        /* Portrait (iPad rechtop): fewer, bigger tiles — castle 5 wide, buiten 3 wide beside the sea */
+        @container (aspect-ratio < 1.1) {
+            .map-grid { grid-template-columns: repeat(5, auto); }
+            #mapOut, #mapSea { grid-template-columns: repeat(3, auto); }
+            .map-room { --t: clamp(56px, min(13.5cqw, calc((100cqh - 230px) / 5)), 120px); }
+        }
         .map-room {
-            width: 100px;
-            height: 92px;
+            width: 92px;
+            height: 86px;
+            width: var(--t);
+            height: calc(var(--t) * 0.92);
             border-radius: 20px;
             border: 3px solid #fbcfe8;
             background: #fff;
@@ -2931,12 +2948,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
-            font-size: 36px;
+            gap: 3px;
+            padding: 0 3px;
+            font-size: calc(var(--t) * 0.36);
             line-height: 1;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .map-room small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #be185d; }
+        .map-room small {
+            font-family: 'Fredoka One', cursive;
+            font-size: clamp(9px, calc(var(--t) * 0.115), 11px);
+            line-height: 1.05;
+            color: #be185d;
+            max-width: 100%;
+            text-align: center;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            overflow-wrap: anywhere;
+        }
         .map-room.here { border-color: #f472b6; background: #fdf2f8; }
         .map-room:active { transform: scale(0.92); }
 
@@ -4017,10 +4045,16 @@
                 <div class="nails-title">🗺️ Waar wil je heen?</div>
                 <div class="map-sec">🏰 In het kasteel</div>
                 <div class="map-grid" id="mapIn"></div>
-                <div class="map-sec">🌳 Buiten</div>
-                <div class="map-grid" id="mapOut"></div>
-                <div class="map-sec">🧜‍♀️ Onder water</div>
-                <div class="map-grid" id="mapSea"></div>
+                <div class="map-row">
+                    <div class="map-col">
+                        <div class="map-sec">🌳 Buiten</div>
+                        <div class="map-grid" id="mapOut"></div>
+                    </div>
+                    <div class="map-col">
+                        <div class="map-sec">🧜‍♀️ Onder water</div>
+                        <div class="map-grid" id="mapSea"></div>
+                    </div>
+                </div>
                 <button class="scope-close" id="mapClose" aria-label="Sluiten">✖</button>
             </div>
 
