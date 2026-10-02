@@ -3362,6 +3362,254 @@
         .hp-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.08); }
         .hp-btn.hint { animation: hintPulse 0.5s ease 3; }
 
+        /* ── Poppenhuiskamer ── */
+        .i-room.r13 .wall {
+            background:
+                repeating-linear-gradient(90deg, #ede9fe 0 30px, #ddd6fe 30px 60px);
+        }
+        .i-room.r13 .floor {
+            background: repeating-linear-gradient(90deg, #e7b98a 0 60px, #d9a676 60px 63px);
+        }
+        .dollhouse-prop { width: 260px; height: 270px; }
+        .dollhouse-prop > div { position: absolute; }
+        .dollhouse-prop .roof {
+            left: -15px; top: 0; width: 290px; height: 90px;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            background: repeating-linear-gradient(90deg, #f472b6 0 24px, #f9a8d4 24px 48px);
+        }
+        .dollhouse-prop .body {
+            left: 10px; top: 88px; width: 240px; height: 182px;
+            background: #fff7ed;
+            border: 6px solid #f472b6;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 4px;
+            padding: 4px;
+        }
+        .dollhouse-prop .body span {
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px;
+        }
+        .doll-shelf { width: 150px; height: 120px; pointer-events: none; }
+        .doll-shelf::before, .doll-shelf::after {
+            content: '';
+            position: absolute; left: 0; width: 150px; height: 10px;
+            background: #b45309; border-radius: 4px;
+        }
+        .doll-shelf::before { top: 48px; }
+        .doll-shelf::after { top: 110px; }
+        .doll-shelf span { position: absolute; font-size: 38px; line-height: 1; }
+
+        /* ── Poppenhuis overlay ── */
+        .dollov {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 6px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                repeating-linear-gradient(90deg, rgba(221,214,254,0.6) 0 30px, transparent 30px 60px),
+                linear-gradient(180deg, #f5f3ff, #ede9fe);
+        }
+        .dollov.open { display: flex; }
+        .dh-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+        .dh-house { position: absolute; left: 50%; top: 0; transform: translateX(-50%); }
+        .dh-roof {
+            position: absolute;
+            left: -5%; top: 0; width: 110%; height: 18%;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            background: repeating-linear-gradient(90deg, #f472b6 0 30px, #f9a8d4 30px 60px);
+        }
+        .dh-roof::after {
+            content: '💖';
+            position: absolute; left: 50%; top: 45%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+        }
+        .dh-body {
+            position: absolute;
+            left: 0; top: 18%; width: 100%; height: 82%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 6px;
+            padding: 6px;
+            background: #f472b6;
+            border-radius: 0 0 14px 14px;
+        }
+        .dh-room {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 -14px 0 rgba(180,83,9,0.35);
+        }
+        .dh-room.glow { box-shadow: inset 0 -14px 0 rgba(180,83,9,0.35), inset 0 0 0 4px #fde047; }
+        .dh-furn {
+            position: absolute;
+            right: 8%;
+            bottom: 10%;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .dh-occ {
+            position: absolute;
+            left: 10%;
+            bottom: 12%;
+            line-height: 1;
+            pointer-events: none;
+            animation: sprout 0.4s cubic-bezier(.2,1.6,.4,1);
+        }
+        .dh-occ.act-sleep { transform: rotate(-80deg); left: 46%; bottom: 26%; animation: none; }
+        .dh-occ.act-bath { left: 50%; bottom: 22%; animation: bathBob 1.2s ease-in-out infinite; }
+        .dh-occ.act-food { animation: eat 0.9s ease-in-out infinite; }
+        .dh-occ.act-music { animation: guestDance 0.9s ease-in-out infinite; transform-origin: 50% 100%; }
+        .dh-occ.act-toys { animation: toyJump 0.8s ease-in-out infinite; }
+        .dh-occ.act-garden { animation: princeSway 1.6s ease-in-out infinite; transform-origin: 50% 100%; }
+        @keyframes bathBob {
+            0%, 100% { transform: translateY(0) rotate(-4deg); }
+            50% { transform: translateY(-6px) rotate(4deg); }
+        }
+        @keyframes toyJump {
+            0%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-30%); }
+        }
+        .dh-fx {
+            position: absolute;
+            pointer-events: none;
+            line-height: 1;
+            animation: dhFloat 2s ease-out infinite;
+        }
+        @keyframes dhFloat {
+            from { transform: translate(0, 0) scale(0.6); opacity: 0; }
+            20% { opacity: 1; }
+            to { transform: translate(14px, -50px) scale(1.1); opacity: 0; }
+        }
+        .dh-house.party .dh-room { animation: roomParty 0.6s ease-in-out infinite alternate; }
+        @keyframes roomParty { from { filter: brightness(1); } to { filter: brightness(1.18) saturate(1.3); } }
+        .dh-shelf {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            min-height: 96px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.7);
+            z-index: 2;
+        }
+        .dh-char {
+            position: relative;
+            width: 72px;
+            height: 84px;
+            border: none;
+            background: none;
+            cursor: grab;
+            touch-action: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 46px;
+            line-height: 1;
+        }
+        .dh-char .wish {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+            font-size: 20px;
+            line-height: 34px;
+        }
+        .dh-char.sel { transform: translateY(-6px) scale(1.1); filter: drop-shadow(0 0 8px #f472b6); }
+        .dh-char.nope { animation: nope 0.5s ease; }
+        .dh-char.placed { visibility: hidden; }
+        .dh-ghost {
+            position: absolute;
+            font-size: 56px;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 10;
+            transform: translate(-50%, -60%);
+            filter: drop-shadow(0 6px 6px rgba(0,0,0,0.25));
+        }
+
+        /* ── Meer & bootje ── */
+        .lake {
+            height: 175px;
+            z-index: 1;
+            pointer-events: none;
+            border-radius: 60px 0 0 0;
+            background:
+                radial-gradient(ellipse 40px 6px, rgba(255,255,255,0.7), transparent 70%) 0 0 / 120px 40px,
+                radial-gradient(ellipse 30px 5px, rgba(255,255,255,0.5), transparent 70%) 60px 20px / 120px 40px,
+                linear-gradient(180deg, #7dd3fc, #38bdf8 50%, #0284c7);
+            animation: waves 4s linear infinite;
+            box-shadow: inset 0 8px 14px rgba(255,255,255,0.4);
+        }
+        @keyframes waves {
+            from { background-position: 0 0, 60px 20px, 0 0; }
+            to { background-position: 120px 0, 180px 20px, 0 0; }
+        }
+        .dock {
+            height: 26px;
+            z-index: 2;
+            pointer-events: none;
+            background: repeating-linear-gradient(90deg, #b45309 0 28px, #92400e 28px 31px);
+            border-radius: 4px;
+            box-shadow: 0 6px 0 rgba(0,0,0,0.15);
+        }
+        .dock-post { width: 12px; height: 70px; background: #78350f; border-radius: 4px; z-index: 1; pointer-events: none; }
+        .lily { width: 50px; height: 18px; border-radius: 50%; background: #22c55e; border-top: 3px solid #86efac; z-index: 2; pointer-events: none; }
+        .lily span { position: absolute; left: 14px; top: -16px; font-size: 22px; }
+        .lake-duck { font-size: 42px; z-index: 3; pointer-events: auto; animation: duckSwim 14s linear infinite; }
+        @keyframes duckSwim {
+            0% { transform: translateX(0) scaleX(1); }
+            49% { transform: translateX(-260px) scaleX(1); }
+            50% { transform: translateX(-260px) scaleX(-1); }
+            99% { transform: translateX(0) scaleX(-1); }
+            100% { transform: translateX(0) scaleX(1); }
+        }
+        .lake-fish { font-size: 30px; z-index: 3; pointer-events: none; opacity: 0; animation: fishJump 4.5s ease-in-out infinite; }
+        .island { width: 200px; height: 130px; }
+        .island .sand {
+            position: absolute; left: 0; bottom: 0; width: 200px; height: 46px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, #fde68a, #fbbf24);
+        }
+        .island .palm { position: absolute; left: 20px; bottom: 20px; font-size: 80px; line-height: 1; }
+        .treasure { position: absolute; left: 110px; bottom: 26px; width: 60px; height: 46px; }
+        .treasure .tbox {
+            position: absolute; left: 0; bottom: 0; width: 60px; height: 30px;
+            border-radius: 4px; background: #92400e; border: 3px solid #fcd34d;
+        }
+        .treasure .tlid {
+            position: absolute; left: 0; top: 0; width: 60px; height: 18px;
+            border-radius: 18px 18px 2px 2px; background: #b45309; border: 3px solid #fcd34d;
+            transform-origin: 0 100%;
+            transition: transform 0.4s cubic-bezier(.2,1.6,.4,1);
+        }
+        .treasure.open .tlid { transform: rotate(-70deg); }
+        .boat-part { position: absolute; left: 0; top: 0; width: 220px; height: 170px; pointer-events: none; }
+        .boat-part svg { width: 100%; height: 100%; overflow: visible; }
+        .boat-part.left .bflip { transform: scaleX(-1); }
+        .boat-part .bflip { width: 100%; height: 100%; }
+        .boat-sail { z-index: 9; }
+        .boat-hull { z-index: 11; }
+        .boat-hit { position: absolute; width: 200px; height: 150px; z-index: 6; cursor: pointer; }
+        .boat-btns { position: absolute; top: 12px; right: 12px; z-index: 30; display: none; }
+        .boat-btns.show { display: flex; }
+        .boat-btns .dismount { position: static; display: block; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -3395,6 +3643,7 @@
                 <button class="dance-btn" data-m="cartwheel">🤸<small>Radslag</small></button>
                 <button class="dance-btn" data-m="bow">💖<small>Buigen</small></button>
             </div>
+            <div class="boat-btns" id="boatBtns"><button class="dismount" id="unboatBtn">⚓ Uitstappen</button></div>
             <div class="ride-btns" id="rideBtns"><button class="dismount" id="flyBtn">✨ Vliegen</button><button class="dismount" id="dismount">🦄 Afstappen</button></div>
             <button class="arrow left" id="btnLeft" aria-label="Naar links">◀</button>
             <button class="arrow right" id="btnRight" aria-label="Naar rechts">▶</button>
@@ -3415,6 +3664,14 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="dollov" id="dollOv">
+                <div class="nails-title">🏠 Poppenhuis</div>
+                <div class="dh-stage" id="dhStage"><div class="dh-house" id="dhHouse"></div></div>
+                <div class="dh-shelf" id="dhShelf"></div>
+                <div class="din-again" id="dhAgain"><button class="tool-btn wide" id="dhAgainBtn">🔄 Nieuwe poppetjes!</button></div>
+                <button class="scope-close" id="dhClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="hpost" id="hpost">
@@ -3543,14 +3800,16 @@
             { name: 'Borduurkamer',  icon: '🧵', say: 'De borduurkamer' },
             { name: 'Eetkamer',      icon: '🍽️', say: 'De eetkamer' },
             { name: 'Speelkamer',    icon: '🧸', say: 'De speelkamer' },
-            { name: 'Hartjeskamer',  icon: '💖', say: 'De hartjeskamer' }
+            { name: 'Hartjeskamer',  icon: '💖', say: 'De hartjeskamer' },
+            { name: 'Poppenhuis',    icon: '🏠', say: 'Het poppenhuis' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
             { name: 'Bloementuin',   icon: '🌷', say: 'De bloementuin' },
             { name: 'Vijver',        icon: '🦢', say: 'De vijver' },
             { name: 'Eenhoornweide', icon: '🦄', say: 'De eenhoornweide' },
-            { name: 'Speeltuin',     icon: '🎠', say: 'De speeltuin' }
+            { name: 'Speeltuin',     icon: '🎠', say: 'De speeltuin' },
+            { name: 'Meer',          icon: '⛵', say: 'Het meer' }
         ];
         // The princess is in one scene at a time; these follow the active scene.
         let ROOMS = ROOMS_IN;
@@ -3561,6 +3820,10 @@
         const SPEED = 280;
         const RIDE_SPEED = 540;
         const HEART_IDX = 12;
+        // Lake (outside, last area): the princess can only go past the shore by boat
+        const LAKE_X0 = ROOM_W * 5 + 190;
+        const BOAT_HOME = LAKE_X0 + 80;
+        const BOAT_LIFT = -18;
         const BALL_IDX = 4;
         const BALL_TILE_X0 = 150;
         const RIDE_LIFT = 30;
@@ -3570,8 +3833,8 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 28, door: null },
-            out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 12, door: null }
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 30, door: null },
+            out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 14, door: null }
         };
         let scene = SCENES.in;
         let world = scene.el;
@@ -3599,6 +3862,8 @@
             uniX: ROOM_W * 3 + 470,
             fountainBoost: 0,
             clopT: 0,
+            boating: false,
+            swishT: 0,
             anim: { dx: 0, dy: 0, rot: 0, origin: '' },
             flying: false,
             alt: 0,
@@ -4029,6 +4294,18 @@
             });
             addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
 
+            /* Room: Poppenhuis */
+            const rdh = ROOM_W * 13;
+            addObj(`<div class="dollhouse-prop">
+                <div class="roof"></div>
+                <div class="body">${DH_ROOMS.map(r => `<span style="background:${r.bg}">${r.icon}</span>`).join('')}</div>
+                <div class="tap-hint" style="left:120px;top:-44px">👇</div>
+            </div>`, rdh + 270, 130, rdh + 560, openDollhouse);
+            [[40, 110], [620, 110]].forEach(([x, y], i) => place(el(`<div class="doll-shelf">
+                <span style="left:6px;top:8px">${i ? '🪆' : '🧸'}</span><span style="left:56px;top:8px">${i ? '🎎' : '🐰'}</span><span style="left:104px;top:8px">${i ? '🦄' : '🪆'}</span>
+                <span style="left:20px;top:70px">${i ? '🐻' : '🎀'}</span><span style="left:80px;top:70px">${i ? '👑' : '🧚'}</span>
+            </div>`), rdh + x, y));
+
             /* Room: Hartjeskamer */
             const rh = ROOM_W * HEART_IDX;
             [[60, 70], [590, 70]].forEach(([x, y]) => place(el(`<div class="heart-window">${heartSVG('url(#hwSky)', `<defs><linearGradient id="hwSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#fbcfe8"/></linearGradient></defs>`, '#fff', 6)}</div>`), rh + x, y));
@@ -4254,6 +4531,43 @@
                 placeSkyStar(star, i);
                 state.skyStars.push(star);
             }
+
+            /* o5: Meer */
+            const o5 = ROOM_W * 5;
+            place(el('<div class="lake"></div>'), LAKE_X0 - 20, 330).style.width = (ROOM_W * ROOMS_OUT.length - LAKE_X0 + 20) + 'px';
+            place(el('<div class="dock"></div>'), o5 + 60, 430).style.width = (LAKE_X0 - o5 - 30) + 'px';
+            [o5 + 90, LAKE_X0 - 10].forEach(x => place(el('<div class="dock-post"></div>'), x, 420));
+            [[o5 + 330, 360], [o5 + 470, 392], [o5 + 560, 350]].forEach(([x, y], i) => place(el(`<div class="lily">${i % 2 ? '' : '<span>🌸</span>'}</div>`), x, y));
+            addObj('<div class="lake-duck">🦆</div>', o5 + 640, 340, o5 + 640, () => { quack(); });
+            const fish = place(el('<div class="lake-fish">🐟</div>'), o5 + 420, 380);
+            fish.style.animationDelay = '-2s';
+            place(el('<div class="lake-fish">🐠</div>'), o5 + 560, 400);
+            addObj(`<div class="island"><div class="sand"></div><span class="palm">🌴</span>
+                <div class="treasure" id="treasure"><div class="tbox"></div><div class="tlid"></div></div></div>`, o5 + 570, 250, o5 + 640, openTreasure);
+            const boatSail = el(`<div class="boat-part boat-sail" id="boatSail"><div class="bflip"><svg viewBox="0 0 220 170">
+                <line x1="150" y1="112" x2="150" y2="8" stroke="#92400e" stroke-width="6" stroke-linecap="round"/>
+                <path d="M154 14 L154 100 L214 100 Z" fill="#fff" stroke="#f9a8d4" stroke-width="3"/>
+                <path d="M146 22 L146 100 L92 100 Z" fill="#fbcfe8" stroke="#f9a8d4" stroke-width="3"/>
+                <path d="M150 8 L172 14 L150 20 Z" fill="#ef4444"/>
+                <text x="180" y="78" font-size="22" text-anchor="middle">💖</text>
+            </svg></div></div>`);
+            const boatHull = el(`<div class="boat-part boat-hull" id="boatHull"><div class="bflip"><svg viewBox="0 0 220 170">
+                <path d="M6 108 L214 108 Q196 162 110 164 Q24 162 6 108 Z" fill="#f472b6" stroke="#be185d" stroke-width="3"/>
+                <path d="M14 124 Q110 132 206 124" stroke="#fff" stroke-width="6" fill="none"/>
+                <circle cx="60" cy="140" r="6" fill="#fde68a"/><circle cx="110" cy="144" r="6" fill="#fde68a"/><circle cx="160" cy="140" r="6" fill="#fde68a"/>
+            </svg></div></div>`);
+            world.appendChild(boatSail);
+            world.appendChild(boatHull);
+            const boatHit = el('<div class="boat-hit"><div class="tap-hint" style="top:-30px">👇</div></div>');
+            world.appendChild(boatHit);
+            boatHit.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (state.busy || state.boating) return;
+                playPop();
+                dismountUnicorn(true);
+                if (state.flying) setFlying(false, true);
+                walkTo(LAKE_X0, boardBoat);
+            });
 
             const uni = el(`<div class="unicorn" id="unicorn"><div class="uflip">${unicornSVG()}</div><div class="tap-hint" style="top:-40px">👇</div></div>`);
             world.appendChild(uni);
@@ -5110,8 +5424,17 @@
         }
 
         /* ─────────── Movement ─────────── */
+        function clampX(x) {
+            x = Math.max(60, Math.min(WORLD_W - 60, x));
+            if (scene.key === 'out') {
+                if (state.boating) x = Math.max(BOAT_HOME, Math.min(WORLD_W - 110, x));
+                else if (!state.flying && x > LAKE_X0) x = LAKE_X0;
+            }
+            return x;
+        }
+
         function walkTo(x, action) {
-            state.targetX = Math.max(60, Math.min(WORLD_W - 60, x));
+            state.targetX = clampX(x);
             state.pending = action;
             if (Math.abs(state.targetX - state.x) < 2 && action) {
                 state.pending = null;
@@ -5180,6 +5503,7 @@
             if (e.key === 'Escape' && dinOpen) closeDinner();
             if (e.key === 'Escape' && mapOpen) closeMap();
             if (e.key === 'Escape' && hpOpen) closeHeartPost();
+            if (e.key === 'Escape' && dollOpen) closeDollhouse();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -5322,11 +5646,11 @@
 
             if (!overlayOpen() && !state.busy) {
                 if (state.hold) {
-                    state.targetX = Math.max(60, Math.min(WORLD_W - 60, state.x + state.hold * 200));
+                    state.targetX = clampX(state.x + state.hold * 200);
                 }
                 const dx = state.targetX - state.x;
                 const p = princessEl();
-                const speed = state.riding ? RIDE_SPEED : SPEED;
+                const speed = state.riding ? RIDE_SPEED : state.boating ? 220 : SPEED;
                 if (Math.abs(dx) > 1.5) {
                     const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
                     state.x += step;
@@ -5397,7 +5721,8 @@
             runTweens(now);
             const an = state.anim;
             p.style.transformOrigin = an.origin || '';
-            p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt + an.dy}px) rotate(${an.rot}deg)`;
+            const boatBob = state.boating ? Math.sin(now / 450) * 3 - BOAT_LIFT : 0;
+            p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt + an.dy + boatBob}px) rotate(${an.rot}deg)`;
             updatePet(dt);
             p.classList.toggle('left', state.facing < 0);
 
@@ -5409,6 +5734,7 @@
                 u.style.transform = `translate(${ux - UNICORN_W / 2}px, ${FEET_Y - UNICORN_H + 6 - (state.riding ? state.alt : 0)}px)`;
                 u.classList.toggle('left', uFacing < 0);
                 u.classList.toggle('walking', state.riding && p.classList.contains('walking'));
+                updateBoat(now, p.classList.contains('walking'));
 
                 // Fountain keeps spraying glitter water
                 const boost = now < state.fountainBoost;
@@ -5618,7 +5944,8 @@
             if (pet.key !== scene.key) return;
             let moving = false;
             if (pet.following) {
-                const target = state.x - state.facing * (state.riding ? 130 : 95);
+                let target = state.x - state.facing * (state.riding ? 130 : 95);
+                if (scene.key === 'out') target = Math.min(target, LAKE_X0 - 20);
                 const d = target - pet.x;
                 if (Math.abs(d) > 4) {
                     const step = d * Math.min(1, dt * 4);
@@ -7126,11 +7453,12 @@
             burst(state.x, 320, 40);
             fade.classList.add('show');
             setTimeout(() => {
+                leaveBoat(true);
                 if (key !== scene.key) {
                     dismountUnicorn(true);
                     setScene(key);
                 }
-                state.x = state.targetX = Math.min(WORLD_W - 100, room * ROOM_W + 400);
+                state.x = state.targetX = clampX(room * ROOM_W + 400);
                 if (state.riding) state.uniX = state.x;
                 state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));
                 if (state.pet.following) state.pet.x = state.x - 90;
@@ -7686,7 +8014,313 @@
             closeHeartPost();
         });
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen; }
+
+        /* ─────────── Bootje ─────────── */
+        function boardBoat() {
+            if (state.boating) return;
+            state.busy = true;
+            const from = state.x;
+            playFreqSweep(300, 900, 0.3, 0.15);
+            tween(500, (t) => {
+                state.x = from + (BOAT_HOME - from) * t;
+                state.anim.dy = -Math.sin(Math.PI * t) * 60;
+            }, () => {
+                resetAnim();
+                state.x = state.targetX = BOAT_HOME;
+                state.boating = true;
+                state.facing = 1;
+                document.getElementById('boatBtns').classList.add('show');
+                splash(state.x, 440);
+                state.busy = false;
+                walkTo(BOAT_HOME + 260, null);
+            });
+        }
+
+        function leaveBoat(instant) {
+            if (!state.boating) return;
+            if (instant) {
+                state.boating = false;
+                document.getElementById('boatBtns').classList.remove('show');
+                return;
+            }
+            walkTo(BOAT_HOME, () => {
+                state.busy = true;
+                state.boating = false;
+                document.getElementById('boatBtns').classList.remove('show');
+                tween(500, (t) => {
+                    state.x = BOAT_HOME + (LAKE_X0 - 40 - BOAT_HOME) * t;
+                    state.anim.dy = -Math.sin(Math.PI * t) * 60;
+                }, () => {
+                    resetAnim();
+                    state.targetX = state.x;
+                    state.busy = false;
+                    playCorrect();
+                });
+            });
+        }
+
+        document.getElementById('unboatBtn').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            if (!state.busy) leaveBoat(false);
+        });
+
+        function updateBoat(now, moving) {
+            const sail = document.getElementById('boatSail');
+            const hull = document.getElementById('boatHull');
+            if (!sail) return;
+            const bx = state.boating ? state.x : BOAT_HOME;
+            const by = FEET_Y - 150 + Math.sin(now / 450) * 3;
+            const left = state.boating && state.facing < 0;
+            [sail, hull].forEach(n => {
+                n.style.transform = `translate(${bx - 110}px, ${by}px) rotate(${Math.sin(now / 700) * 2}deg)`;
+                n.classList.toggle('left', left);
+            });
+            const hit = sail.parentNode.querySelector('.boat-hit');
+            if (hit) {
+                hit.style.left = (bx - 100) + 'px';
+                hit.style.top = (by + 10) + 'px';
+                hit.style.display = state.boating ? 'none' : '';
+            }
+            if (state.boating && moving) {
+                if (Math.random() < 0.8) {
+                    spawnSparkle(bx - state.facing * 100, FEET_Y - 6, { vx: -state.facing * 50, vy: -30 - Math.random() * 40, g: 120, hue: 190 + Math.random() * 25, size: 3 + Math.random() * 4, max: 0.8 });
+                }
+                state.swishT -= 1 / 60;
+                if (state.swishT <= 0) {
+                    state.swishT = 0.6;
+                    playFreqSweep(500, 200, 0.3, 0.05);
+                }
+            }
+        }
+
+        function openTreasure() {
+            const tr = document.getElementById('treasure');
+            if (!state.boating) {
+                // You need the boat to reach the island: nudge the boat
+                const hit = document.querySelector('.boat-hit');
+                if (hit) { hit.classList.remove('tap'); void hit.offsetWidth; hit.classList.add('tap'); }
+                splash(BOAT_HOME, 440);
+                return;
+            }
+            if (tr.classList.contains('open')) return;
+            tr.classList.add('open');
+            playWin();
+            const x = ROOM_W * 5 + 710, y = 330;
+            for (let i = 0; i < 70; i++) spawnSparkle(x, y, { vx: (Math.random() - 0.5) * 300, vy: -200 - Math.random() * 250, g: 380, hue: randomPick([45, 50, 190, 320]), size: 5 + Math.random() * 6, max: 1.5 });
+            ['💎', '👑', '💍', '🪙', '⭐'].forEach((e, i) => {
+                const f = tempEl(`<div class="magic-fly">${e}</div>`, x - 18, y - 20, 3300);
+                f.style.setProperty('--dx', ((i - 2) * 70) + 'px');
+                f.style.setProperty('--dy', (-160 - Math.random() * 80) + 'px');
+            });
+            setTimeout(() => tr.classList.remove('open'), 4500);
+        }
+
+        /* ─────────── Poppenhuis ─────────── */
+        const DH_ROOMS = [
+            { k: 'toys', icon: '🧸', bg: 'linear-gradient(180deg, #fef3c7, #fde68a)', fx: '⭐' },
+            { k: 'sleep', icon: '🛏️', bg: 'linear-gradient(180deg, #e0e7ff, #c7d2fe)', fx: '💤' },
+            { k: 'bath', icon: '🛁', bg: 'linear-gradient(180deg, #cffafe, #a5f3fc)', fx: '🫧' },
+            { k: 'music', icon: '🎹', bg: 'linear-gradient(180deg, #fce7f3, #fbcfe8)', fx: '🎵' },
+            { k: 'food', icon: '🍰', bg: 'linear-gradient(180deg, #fee2e2, #fecaca)', fx: '😋' },
+            { k: 'garden', icon: '🌻', bg: 'linear-gradient(180deg, #dcfce7, #bbf7d0)', fx: '🦋' }
+        ];
+        const DH_CHARS = ['🐻', '🐰', '🐼', '🦊', '🐸', '🐧', '🐨', '🦄', '🧚', '🐱', '🐶', '🐷', '🐵', '🐹'];
+        const DH_SOUNDS = {
+            toys: () => playFreqSweep(300, 900, 0.25, 0.15),
+            sleep: () => [784, 659, 523].forEach((f, i) => setTimeout(() => playTone(f, 0.4, 0.1), i * 300)),
+            bath: () => { playFreqSweep(1200, 300, 0.2, 0.15); setTimeout(() => playFreqSweep(1400, 400, 0.15, 0.1), 200); },
+            music: () => [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => playTone(f, 0.2, 0.12, 'triangle'), i * 120)),
+            food: () => [0, 200, 400].forEach(t => setTimeout(() => playTone(280, 0.08, 0.18, 'triangle'), t)),
+            garden: () => [1319, 1568, 2093].forEach((f, i) => setTimeout(() => playTone(f, 0.25, 0.08), i * 100))
+        };
+        const dollEl = document.getElementById('dollOv');
+        let dollOpen = false;
+        let dh = { chars: [], drag: null, selected: null, placed: 0 };
+
+        function sizeDollhouse() {
+            const st = document.getElementById('dhStage').getBoundingClientRect();
+            const h = Math.min(st.height, st.width * 0.95);
+            const house = document.getElementById('dhHouse');
+            house.style.height = h + 'px';
+            house.style.width = (h * 1.05) + 'px';
+            const roomH = (h * 0.82 - 24) / 3;
+            house.querySelectorAll('.dh-furn').forEach(f => { f.style.fontSize = (roomH * 0.55) + 'px'; });
+            house.querySelectorAll('.dh-occ').forEach(f => { f.style.fontSize = (roomH * 0.48) + 'px'; });
+            document.querySelectorAll('.dh-fx').forEach(f => { f.style.fontSize = (roomH * 0.22) + 'px'; });
+        }
+
+        function newDollRound() {
+            const chars = shuffle(DH_CHARS.slice()).slice(0, DH_ROOMS.length);
+            const rooms = shuffle(DH_ROOMS.map(r => r.k));
+            dh.chars = chars.map((e, i) => ({ e, wish: rooms[i], placed: false }));
+            dh.placed = 0;
+            dh.selected = null;
+            document.getElementById('dhAgain').classList.remove('show');
+            const house = document.getElementById('dhHouse');
+            house.classList.remove('party');
+            house.innerHTML = `<div class="dh-roof"></div><div class="dh-body">${DH_ROOMS.map(r =>
+                `<div class="dh-room" data-k="${r.k}" style="background:${r.bg}"><span class="dh-furn">${r.icon}</span></div>`).join('')}</div>`;
+            house.querySelectorAll('.dh-room').forEach(room => room.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (dh.selected !== null) placeChar(dh.selected, room.dataset.k);
+            }));
+            renderDollShelf();
+            sizeDollhouse();
+        }
+
+        function renderDollShelf() {
+            const shelf = document.getElementById('dhShelf');
+            shelf.innerHTML = dh.chars.map((c, i) => {
+                const room = DH_ROOMS.find(r => r.k === c.wish);
+                return `<button class="dh-char${c.placed ? ' placed' : ''}${dh.selected === i ? ' sel' : ''}" data-i="${i}">${c.e}<span class="wish">${room.icon}</span></button>`;
+            }).join('');
+            shelf.querySelectorAll('.dh-char').forEach(b => b.addEventListener('pointerdown', (e) => startCharDrag(e, b)));
+        }
+
+        function dollPoint(e) {
+            const o = dollEl.getBoundingClientRect();
+            return { x: e.clientX - o.left, y: e.clientY - o.top };
+        }
+
+        function startCharDrag(e, btn) {
+            e.stopPropagation();
+            const i = +btn.dataset.i;
+            if (dh.chars[i].placed) return;
+            const ghost = document.createElement('div');
+            ghost.className = 'dh-ghost';
+            ghost.textContent = dh.chars[i].e;
+            const pt = dollPoint(e);
+            ghost.style.left = pt.x + 'px';
+            ghost.style.top = pt.y + 'px';
+            dollEl.appendChild(ghost);
+            dh.drag = { i, ghost, sx: e.clientX, sy: e.clientY, moved: false };
+            playPop();
+        }
+
+        function roomAt(x, y) {
+            return [...document.querySelectorAll('.dh-room')].find(r => {
+                const b = r.getBoundingClientRect();
+                return x >= b.left && x <= b.right && y >= b.top && y <= b.bottom;
+            });
+        }
+
+        window.addEventListener('pointermove', (e) => {
+            const d = dh.drag;
+            if (!d) return;
+            if (Math.hypot(e.clientX - d.sx, e.clientY - d.sy) > 12) d.moved = true;
+            const pt = dollPoint(e);
+            d.ghost.style.left = pt.x + 'px';
+            d.ghost.style.top = pt.y + 'px';
+            document.querySelectorAll('.dh-room').forEach(r => r.classList.remove('glow'));
+            const r = roomAt(e.clientX, e.clientY);
+            if (r) r.classList.add('glow');
+        });
+
+        window.addEventListener('pointerup', (e) => {
+            const d = dh.drag;
+            if (!d) return;
+            dh.drag = null;
+            d.ghost.remove();
+            document.querySelectorAll('.dh-room').forEach(r => r.classList.remove('glow'));
+            const room = roomAt(e.clientX, e.clientY);
+            if (room && d.moved) {
+                placeChar(d.i, room.dataset.k);
+            } else if (!d.moved) {
+                dh.selected = dh.selected === d.i ? null : d.i;
+                renderDollShelf();
+            }
+        });
+
+        function placeChar(i, roomKey) {
+            const c = dh.chars[i];
+            dh.selected = null;
+            if (c.placed) return;
+            if (c.wish !== roomKey) {
+                renderDollShelf();
+                const b = document.querySelector(`.dh-char[data-i="${i}"]`);
+                if (b) { b.classList.remove('nope'); void b.offsetWidth; b.classList.add('nope'); }
+                playTone(220, 0.12, 0.1, 'triangle');
+                setTimeout(() => playTone(180, 0.15, 0.1, 'triangle'), 140);
+                return;
+            }
+            c.placed = true;
+            dh.placed++;
+            const room = document.querySelector(`.dh-room[data-k="${roomKey}"]`);
+            const occ = document.createElement('span');
+            occ.className = 'dh-occ act-' + roomKey;
+            occ.textContent = c.e;
+            room.appendChild(occ);
+            const info = DH_ROOMS.find(r => r.k === roomKey);
+            [0, 0.7, 1.4].forEach((delay, k) => {
+                const fx = document.createElement('span');
+                fx.className = 'dh-fx';
+                fx.textContent = info.fx;
+                fx.style.left = (20 + k * 18) + '%';
+                fx.style.top = (25 + (k % 2) * 10) + '%';
+                fx.style.animationDelay = delay + 's';
+                room.appendChild(fx);
+            });
+            sizeDollhouse();
+            DH_SOUNDS[roomKey]();
+            renderDollShelf();
+            const r = room.getBoundingClientRect();
+            dinSparkIn(dollEl, r.left + r.width / 2, r.top + r.height / 2);
+            if (dh.placed === dh.chars.length) {
+                setTimeout(() => {
+                    playWin();
+                    document.getElementById('dhHouse').classList.add('party');
+                    document.querySelectorAll('.dh-room').forEach((rm, k) => setTimeout(() => {
+                        const b = rm.getBoundingClientRect();
+                        dinSparkIn(dollEl, b.left + b.width / 2, b.top + b.height / 2);
+                    }, k * 120));
+                    document.getElementById('dhAgain').classList.add('show');
+                }, 600);
+            }
+        }
+
+        function dinSparkIn(container, cx, cy) {
+            const o = container.getBoundingClientRect();
+            for (let i = 0; i < 8; i++) {
+                const s = document.createElement('span');
+                s.className = 'scope-spark';
+                s.textContent = randomPick(['✨', '⭐', '💖', '🌟']);
+                const a = Math.random() * Math.PI * 2;
+                const d = 40 + Math.random() * 50;
+                s.style.left = (cx - o.left) + 'px';
+                s.style.top = (cy - o.top) + 'px';
+                s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                container.appendChild(s);
+                setTimeout(() => s.remove(), 900);
+            }
+        }
+
+        function openDollhouse() {
+            dollOpen = true;
+            dollEl.classList.add('open');
+            newDollRound();
+            playMusicBox();
+        }
+
+        function closeDollhouse() {
+            dollOpen = false;
+            dollEl.classList.remove('open');
+            if (dh.drag) { dh.drag.ghost.remove(); dh.drag = null; }
+            _playWhoosh();
+        }
+        document.getElementById('dhAgainBtn').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            newDollRound();
+            playPop();
+        });
+        document.getElementById('dhClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeDollhouse();
+        });
+        dollEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+        window.addEventListener('resize', () => { if (dollOpen) sizeDollhouse(); });
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
