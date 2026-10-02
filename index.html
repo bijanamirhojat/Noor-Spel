@@ -90,34 +90,15 @@
             50% { opacity: 0.4; }
         }
 
-        .header {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .header-decoration {
-            position: absolute;
-            font-size: 1.2rem;
-            opacity: 0.4;
-        }
-
-        .deco-1 { left: 5px; top: -5px; animation: spin 12s linear infinite; }
-        .deco-2 { right: 5px; top: -5px; animation: spin 10s linear infinite reverse; }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
         .home-container {
             background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,245,245,0.95) 100%);
-            border-radius: 35px;
-            padding: 20px 24px;
-            box-shadow: 
+            border-radius: 32px;
+            padding: 16px 12px;
+            box-shadow:
                 0 25px 80px rgba(0, 0, 0, 0.25),
                 0 0 0 1px rgba(255,255,255,0.5) inset;
-            max-width: 100%;
             width: 100%;
+            max-width: 900px;
             text-align: center;
             position: relative;
             z-index: 1;
@@ -125,36 +106,12 @@
 
         @media (min-width: 768px) {
             .home-container {
-                max-width: 600px;
-                padding: 35px;
-                border-radius: 45px;
-            }
-        }
-
-        @media (min-width: 900px) {
-            .home-container {
-                max-width: 850px;
-                padding: 40px;
+                padding: 20px 22px 16px;
             }
         }
 
         .header {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .header-decoration {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0.3;
-        }
-
-        .deco-1 { left: 0; top: -5px; animation: spin 10s linear infinite; }
-        .deco-2 { right: 0; top: 0; animation: spin 8s linear infinite reverse; }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            margin-bottom: 12px;
         }
 
         h1 {
@@ -164,326 +121,202 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-size: 1.8rem;
-            margin-bottom: 5px;
-            text-shadow: none;
             letter-spacing: 1px;
         }
 
         @media (min-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-                margin-bottom: 10px;
-            }
+            h1 { font-size: 2.2rem; }
         }
 
-        .subtitle {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        @media (min-width: 768px) {
-            .subtitle {
-                font-size: 1.2rem;
-                margin-bottom: 25px;
-            }
-        }
-
-        .section-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-            margin-top: 15px;
+        /* ── Hero: Prinsessenkasteel ── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 28px;
+            padding: 14px 16px;
+            margin-bottom: 14px;
+            min-height: 120px;
+            background:
+                radial-gradient(circle at 15% 25%, rgba(255,255,255,.55) 0 3px, transparent 4px),
+                radial-gradient(circle at 70% 18%, rgba(255,255,255,.6) 0 2px, transparent 3px),
+                radial-gradient(circle at 88% 70%, rgba(255,255,255,.5) 0 3px, transparent 4px),
+                radial-gradient(circle at 40% 80%, rgba(255,255,255,.45) 0 2px, transparent 3px),
+                linear-gradient(135deg, #ffb6e1 0%, #e0a8ff 55%, #a8c8ff 100%);
+            border: 5px solid #fff;
+            box-shadow: 0 8px 24px rgba(197,108,240,.35), 0 0 0 3px #f5b8ff;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 14px;
+            text-align: left;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .section-title::before,
-        .section-title::after {
-            content: '';
-            height: 2px;
-            width: 30px;
-            background: linear-gradient(90deg, transparent, #ddd, transparent);
-            border-radius: 2px;
+        .hero:hover { transform: translateY(-4px) scale(1.01); }
+        .hero:active { transform: scale(0.98); }
+
+        .hero-castle {
+            font-size: 4.2rem;
+            line-height: 1;
+            flex-shrink: 0;
+            filter: drop-shadow(0 6px 6px rgba(120,40,160,.3));
+            animation: heroBob 3s ease-in-out infinite;
         }
 
-        .beta-title {
-            color: #9b59b6;
+        @keyframes heroBob {
+            50% { transform: translateY(-6px); }
         }
 
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 1.1rem;
-                margin-bottom: 15px;
-            }
+        .hero-body {
+            flex: 1;
+            min-width: 0;
         }
 
-        .games-grid {
+        .hero-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.3rem;
+            color: #7a2a8f;
+            text-shadow: 0 2px 0 rgba(255,255,255,.7);
+        }
+
+        .hero-worlds {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .hero-world {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: rgba(255,255,255,.7);
+            border: 3px solid #fff;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 8px;
-            grid-auto-rows: 1fr;
+            place-items: center;
+            font-size: 1.5rem;
         }
 
-        @media (min-width: 768px) {
-            .games-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 15px;
-                margin-bottom: 15px;
-            }
+        .hero-crown,
+        .hero-spark {
+            position: absolute;
+            display: none;
+            animation: heroTwinkle 2.4s ease-in-out infinite;
         }
 
-        @media (min-width: 900px) {
-            .games-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
+        .hero-crown { right: 20px; top: 12px; font-size: 2.2rem; }
+        .hero-spark { right: 70px; bottom: 16px; font-size: 1.4rem; animation-delay: 0.6s; }
+
+        @keyframes heroTwinkle {
+            50% { transform: scale(1.25) rotate(10deg); opacity: .7; }
+        }
+
+        @media (min-width: 701px) {
+            .hero { padding: 16px 24px; gap: 22px; min-height: 140px; }
+            .hero-castle { font-size: 5.5rem; }
+            .hero-title { font-size: 1.7rem; }
+            .hero-world { width: 58px; height: 58px; font-size: 1.9rem; }
+            .hero-crown, .hero-spark { display: block; }
+        }
+
+        /* ── Theme rows ── */
+        .theme {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            align-items: center;
+            border-radius: 24px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: var(--tint);
+        }
+
+        .theme-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            font-size: 1.4rem;
+            background: var(--solid);
+            box-shadow: 0 3px 0 var(--dark);
+        }
+
+        .theme-dieren { --tint: #e3f8ec; --solid: #6ee7b7; --dark: #10b981; }
+        .theme-maken  { --tint: #fff3d6; --solid: #ffd166; --dark: #f0a500; }
+        .theme-thuis  { --tint: #e2f0ff; --solid: #74b9ff; --dark: #0984e3; }
+        .theme-puzzel { --tint: #f0eaff; --solid: #b9a7ff; --dark: #6c5ce7; }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 8px;
         }
 
         .game-card {
-            background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
-            border-radius: 18px;
-            padding: 12px 6px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 
-                0 4px 15px rgba(0, 0, 0, 0.08),
-                0 0 0 1px rgba(255,255,255,0.8) inset;
-            border: 3px solid transparent;
             position: relative;
             overflow: hidden;
+            background: #fff;
+            border-radius: 16px;
+            border: 3px solid var(--solid);
+            min-height: 70px;
             display: grid;
-            grid-template-rows: auto minmax(0, 1fr) auto;
-            align-items: center;
-            justify-items: center;
-            align-content: start;
-            row-gap: 2px;
-            min-height: 112px;
+            place-items: center;
+            cursor: pointer;
+            box-shadow: 0 5px 12px rgba(0,0,0,.08);
+            transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .game-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--card-accent, linear-gradient(90deg, #ff6b6b, #feca57));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .game-card:not(.beta) {
-            border-color: var(--card-border, transparent) !important;
-        }
-
-        .game-card:not(.beta)::before {
-            background: var(--card-accent, linear-gradient(90deg, #ff6b6b, #feca57)) !important;
-        }
-
-        .game-card:hover::before {
-            opacity: 1;
-        }
-
-        @media (min-width: 768px) {
-            .game-card {
-                padding: 18px 12px;
-                border-radius: 24px;
-                min-height: 142px;
-            }
-        }
-
-        @media (min-width: 900px) {
-            .game-card {
-                padding: 22px 15px;
-                min-height: 152px;
-            }
-        }
+        .game-card:hover { transform: translateY(-4px) scale(1.04); }
+        .game-card:active { transform: scale(0.96); }
 
         .game-icon {
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            display: block;
-            transition: transform 0.3s;
+            font-size: 1.9rem;
+            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.15));
         }
 
-        .game-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.8rem;
-            color: #444;
-            line-height: 1.2;
-            width: 100%;
-            text-align: center;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            line-clamp: 2;
-            min-height: 2.35em;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
-        .game-desc {
-            font-size: 0.6rem;
-            color: #999;
-            margin-top: 2px;
-            line-height: 1.2;
-            width: 100%;
-            text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            min-height: 1.2em;
+        .game-card:hover .game-icon {
+            animation: bounce 0.5s ease infinite;
         }
 
-        @media (min-width: 768px) {
-            .game-icon {
-                font-size: 2.2rem;
-                margin-bottom: 8px;
+        @media (min-width: 701px) {
+            .theme {
+                grid-template-columns: 64px minmax(0, 1fr);
+                gap: 12px;
+                padding: 10px 12px;
             }
-            .game-title {
-                font-size: 0.95rem;
-                min-height: 2.4em;
+            .theme-badge {
+                width: 64px;
+                height: 64px;
+                border-radius: 20px;
+                font-size: 2.1rem;
+                box-shadow: 0 4px 0 var(--dark);
             }
-            .game-desc {
-                font-size: 0.75rem;
-                margin-top: 4px;
+            .theme-grid {
+                grid-template-columns: repeat(6, minmax(0, 1fr));
+                gap: 10px;
             }
-        }
-
-        /* iPad portrait/tablet compact mode: fit without overflow */
-        @media (min-width: 768px) and (max-width: 1023px) {
-            body {
-                padding: 8px;
-            }
-
-            .home-container {
-                max-width: 760px;
-                padding: 16px 14px;
-                border-radius: 28px;
-            }
-
-            h1 {
-                font-size: 2rem;
-                margin-bottom: 4px;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-                margin-bottom: 12px;
-            }
-
-            .header {
-                margin-bottom: 10px;
-            }
-
-            .section-title {
-                font-size: 0.95rem;
-                margin-top: 8px;
-                margin-bottom: 8px;
-            }
-
-            .games-grid,
-            .beta-grid {
-                grid-template-columns: repeat(5, minmax(0, 1fr));
-                gap: 8px;
-            }
-
-            .games-grid {
-                margin-bottom: 8px;
-            }
-
-            .beta-section {
-                margin-top: 8px;
-                padding-top: 8px;
-            }
-
             .game-card {
-                padding: 9px 6px;
-                border-radius: 16px;
-                min-height: 96px;
-                row-gap: 1px;
+                min-height: 86px;
+                border-radius: 18px;
+                border-width: 4px;
             }
+            .game-icon { font-size: 2.2rem; }
+        }
 
-            .game-icon {
-                font-size: 1.4rem;
-                margin-bottom: 3px;
-            }
-
-            .game-title {
-                font-size: 0.66rem;
-                min-height: 2.4em;
-            }
-
-            .game-desc {
-                font-size: 0.52rem;
-                margin-top: 1px;
-                min-height: 1.15em;
-            }
-
-            .footer {
-                margin-top: 8px;
-                font-size: 0.68rem;
-            }
-
-            .cache-btn {
-                margin-top: 6px;
-                padding: 7px 10px;
-                font-size: 0.66rem;
-                border-radius: 10px;
-            }
+        @media (min-width: 1024px) {
+            .game-card { min-height: 96px; }
+            .game-icon { font-size: 2.5rem; }
         }
 
         .footer {
-            font-size: 0.7rem;
-            color: #aaa;
-            margin-top: 15px;
-        }
-
-        .footer br {
-            display: none;
-        }
-
-        .parent-mode .footer br {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        @media (min-width: 768px) {
-            .footer {
-                font-size: 0.85rem;
-                margin-top: 20px;
-            }
-        }
-
-        .cache-btn {
-            background: linear-gradient(135deg, #f1f3f5 0%, #e9ecef 100%);
-            border: none;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            color: #666;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.2s;
-            font-weight: 600;
-        }
-
-        @media (min-width: 768px) {
-            .cache-btn {
-                padding: 10px 20px;
-                font-size: 0.85rem;
-                border-radius: 15px;
-            }
-        }
-
-        .cache-btn:hover {
-            background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            font-size: 0.6rem;
+            color: #ccc;
+            margin-top: 6px;
         }
 
         .update-banner {
@@ -538,399 +371,6 @@
             }
         }
 
-        .game-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.15),
-                0 0 0 2px rgba(255,107,107,0.3) inset;
-        }
-
-        .game-card:active {
-            transform: translateY(-4px) scale(0.98);
-        }
-
-        .game-card.flip {
-            border-color: #ff9a8b;
-        }
-
-        .game-card.flip:hover {
-            border-color: #ff6b6b;
-        }
-
-        .game-card.flip::before {
-            background: linear-gradient(90deg, #ff9a8b, #ff6b6b);
-        }
-
-        .game-card.memory {
-            border-color: #74b9ff;
-        }
-
-        .game-card.memory:hover {
-            border-color: #0984e3;
-        }
-
-        .game-card.memory::before {
-            background: linear-gradient(90deg, #74b9ff, #0984e3);
-        }
-
-        .game-card.color {
-            border-color: #ffe66d;
-        }
-
-        .game-card.color:hover {
-            border-color: #f39c12;
-        }
-
-        .game-card.color::before {
-            background: linear-gradient(90deg, #ffe66d, #f39c12);
-        }
-
-        .game-card.letters {
-            border-color: #a29bfe;
-        }
-
-        .game-card.letters:hover {
-            border-color: #6c5ce7;
-        }
-
-        .game-card.numbers {
-            border-color: #fd79a8;
-        }
-
-        .game-card.numbers:hover {
-            border-color: #e84393;
-        }
-
-        .game-card.piano {
-            border-color: #a29bfe;
-        }
-
-        .game-card.piano:hover {
-            border-color: #6c5ce7;
-        }
-
-        .game-card.piano::before {
-            background: linear-gradient(90deg, #a29bfe, #6c5ce7);
-        }
-
-        .locked {
-            opacity: 0.5;
-            filter: grayscale(0.3);
-        }
-
-        .locked .game-icon {
-            filter: grayscale(0.5);
-        }
-
-        .beta-section {
-            margin-top: 12px;
-            padding-top: 10px;
-            border-top: 2px dashed #ddd;
-            min-height: 20px;
-        }
-
-        .beta-title {
-            font-family: 'Fredoka One', cursive;
-            font-size: 0.9rem;
-            color: #f39c12;
-            margin-bottom: 6px;
-        }
-
-        .beta-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            grid-auto-rows: 1fr;
-        }
-
-        .beta-grid:empty {
-            display: none;
-        }
-
-        .beta-grid:empty + .beta-title {
-            display: none;
-        }
-
-        .beta-section:has(.beta-grid:empty) {
-            border-top: none;
-            padding-top: 0;
-        }
-
-        @media (min-width: 768px) {
-            .beta-grid {
-                gap: 12px;
-            }
-        }
-
-        @media (min-width: 900px) {
-            .beta-grid {
-                grid-template-columns: repeat(6, 1fr);
-            }
-        }
-
-        @media (min-width: 900px) and (max-width: 1023px) {
-            .beta-grid {
-                grid-template-columns: repeat(5, minmax(0, 1fr));
-            }
-        }
-
-        .game-card.beta {
-            background: linear-gradient(145deg, #fff 0%, #f5e6ff 100%);
-            border: 3px dashed #9b59b6;
-        }
-
-        .game-card.beta:hover {
-            border-style: solid;
-            border-color: #8e44ad;
-            background: linear-gradient(145deg, #fff 0%, #f0e6ff 100%);
-        }
-
-        .game-card.beta::before {
-            background: linear-gradient(90deg, #9b59b6, #8e44ad);
-        }
-
-        .beta-label {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #f39c12;
-            color: white;
-            font-size: 0.5rem;
-            padding: 2px 5px;
-            border-radius: 6px;
-            font-family: 'Fredoka One', cursive;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .game-card:hover .game-icon {
-            animation: bounce 0.5s ease infinite;
-        }
-
-        .parent-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            opacity: 0.3;
-            transition: opacity 0.2s;
-            padding: 5px;
-        }
-
-        .parent-btn:hover {
-            opacity: 0.7;
-        }
-
-        .pin-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .pin-modal.show {
-            display: flex;
-        }
-
-        .pin-box {
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            text-align: center;
-            max-width: 300px;
-            width: 90%;
-        }
-
-        .pin-box h2 {
-            font-family: 'Fredoka One', cursive;
-            color: #e63946;
-            margin-bottom: 15px;
-        }
-
-        .pin-input {
-            font-size: 2rem;
-            width: 120px;
-            text-align: center;
-            padding: 10px;
-            border: 3px solid #ddd;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            letter-spacing: 10px;
-        }
-
-        .pin-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 15px;
-            font-family: 'Fredoka One', cursive;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 5px;
-        }
-
-        .pin-btn.cancel {
-            background: #999;
-        }
-
-        .parent-mode .beta-section {
-            display: block;
-        }
-
-        .parent-mode .cache-btn {
-            display: inline-block;
-        }
-
-        .parent-mode .parent-tools {
-            display: inline;
-        }
-
-        .parent-tools {
-            display: none;
-        }
-
-        .normal-footer {
-            display: inline;
-        }
-
-        .parent-mode .normal-footer {
-            display: none;
-        }
-
-        .beta-section, .cache-btn {
-            display: none;
-        }
-
-        .parent-badge {
-            display: none;
-            background: #4CAF50;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-bottom: 10px;
-        }
-
-        .parent-mode .parent-badge {
-            display: inline-block;
-        }
-
-        .parent-header {
-            display: none;
-            margin-bottom: 10px;
-        }
-
-        .parent-mode .parent-header {
-            display: block;
-        }
-
-        .parent-exit {
-            display: none;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-
-        .parent-mode .parent-exit {
-            display: inline-block;
-        }
-
-        /* Child mode: icon-only home UI */
-        #homeContainer:not(.parent-mode) .game-title,
-        #homeContainer:not(.parent-mode) .game-desc {
-            display: none;
-        }
-
-        #homeContainer:not(.parent-mode) {
-            padding: 16px 18px;
-            max-width: 740px;
-        }
-
-        #homeContainer:not(.parent-mode) .games-grid {
-            margin-bottom: 0;
-            gap: 10px;
-            grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-
-        #homeContainer:not(.parent-mode) .game-card {
-            min-height: 94px;
-            padding: 10px 6px;
-            grid-template-rows: 1fr;
-            place-items: center;
-            border-radius: 18px;
-            border-width: 4px;
-            box-shadow:
-                0 6px 16px rgba(0, 0, 0, 0.12),
-                0 0 0 1px rgba(255,255,255,0.9) inset;
-        }
-
-        #homeContainer:not(.parent-mode) .game-icon {
-            font-size: 2.15rem;
-            margin-bottom: 0;
-            filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.18));
-        }
-
-        #homeContainer:not(.parent-mode) .game-card:hover {
-            transform: translateY(-5px) scale(1.03);
-        }
-
-        #homeContainer:not(.parent-mode) .game-card:active {
-            transform: translateY(-1px) scale(0.98);
-        }
-
-        @media (min-width: 768px) and (max-width: 1023px) {
-            #homeContainer:not(.parent-mode) {
-                max-width: 760px;
-                padding: 10px 14px;
-            }
-
-            #homeContainer:not(.parent-mode) .games-grid {
-                grid-template-columns: repeat(5, minmax(0, 1fr));
-                gap: 8px;
-            }
-
-            #homeContainer:not(.parent-mode) .game-card {
-                min-height: 84px;
-                padding: 6px;
-            }
-
-            #homeContainer:not(.parent-mode) .game-icon {
-                font-size: 1.9rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            #homeContainer:not(.parent-mode) .games-grid {
-                grid-template-columns: repeat(7, minmax(0, 1fr));
-            }
-
-            #homeContainer:not(.parent-mode) .game-card {
-                min-height: 112px;
-            }
-
-            #homeContainer:not(.parent-mode) .game-icon {
-                font-size: 2.45rem;
-            }
-        }
-
         /* ── Circular wipe game transition ── */
         #gameTransition {
             position: fixed;
@@ -966,7 +406,7 @@
             from { opacity: 0; transform: translateY(18px) scale(0.95); }
             to   { opacity: 1; transform: translateY(0) scale(1); }
         }
-        .game-card.card-enter {
+        .card-enter {
             opacity: 0;
             animation: cardFadeIn 0.35s ease-out forwards;
         }
@@ -976,7 +416,8 @@
             0%   { left: -100%; }
             100% { left: 200%; }
         }
-        .game-card::after {
+        .game-card::after,
+        .hero::after {
             content: '';
             position: absolute;
             top: 0;
@@ -1062,194 +503,28 @@
     <div class="floating-shape shape-7">🦋</div>
     <div class="floating-shape shape-8">✨</div>
     
-    <button class="parent-btn" onclick="showPinModal()">⚙️</button>
-    
-    <div class="pin-modal" id="pinModal">
-        <div class="pin-box">
-            <h2 id="pinTitle">Ouder Mode</h2>
-            <p id="pinDesc" style="margin-bottom: 15px; color: #666;">Voer PIN in om toegang te krijgen</p>
-            <input type="password" class="pin-input" id="pinInput" maxlength="4" placeholder="****">
-            <br>
-            <button class="pin-btn" onclick="checkPin()">OK</button>
-            <button class="pin-btn cancel" onclick="closePinModal()">Annuleren</button>
-        </div>
-    </div>
-
-        <div class="home-container" id="homeContainer">
-        <div class="parent-header">
-            <span class="parent-badge">👨‍👩‍👧 Ouder Mode</span>
-            <button class="parent-exit" onclick="exitParentMode()">✕ Uitloggen</button>
-        </div>
-        
+    <div class="home-container" id="homeContainer">
         <div class="header">
-            <span class="header-decoration deco-1">✨</span>
-            <span class="header-decoration deco-2">🌟</span>
-            <h1>🎮 Noor's Games 🎮</h1>
-        </div>
-        <p class="subtitle">Kies een spelletje!</p>
-
-        <div class="section-title">🎯 Bangers</div>
-        <div class="games-grid">
-            <div class="game-card flip" onclick="playGame('flip')">
-                <span class="game-icon">🐱</span>
-                <div class="game-title">Flip</div>
-                <div class="game-desc">Verzorgingsspel</div>
-            </div>
-
-            <div class="game-card memory" onclick="playGame('memory')">
-                <span class="game-icon">🧩</span>
-                <div class="game-title">Memory</div>
-                <div class="game-desc">Kaartspel</div>
-            </div>
-
-            <div class="game-card color" onclick="playGame('kleuren')">
-                <span class="game-icon">🎨</span>
-                <div class="game-title">Kleuren</div>
-                <div class="game-desc">Kleurspelletje</div>
-            </div>
-
-            <div class="game-card letters" onclick="playGame('letters')">
-                <span class="game-icon">🔤</span>
-                <div class="game-title">Letters</div>
-                <div class="game-desc">Kleine letters</div>
-            </div>
-
-            <div class="game-card numbers" onclick="playGame('cijfers')">
-                <span class="game-icon">🔢</span>
-                <div class="game-title">Cijfers</div>
-                <div class="game-desc">Leer cijfers</div>
-            </div>
-
-            <div class="game-card piano" onclick="playGame('piano')">
-                <span class="game-icon">🎹</span>
-                <div class="game-title">Piano</div>
-                <div class="game-desc">Speel muziek</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('zaklamp')">
-                <span class="game-icon">🔦</span>
-                <div class="game-title">Zaklamp</div>
-                <div class="game-desc">Bos avontuur</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('kleurensorteren')">
-                <span class="game-icon">🏠</span>
-                <div class="game-title">Dieren naar hun Huis</div>
-                <div class="game-desc">Welk dier woont waar?</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('plaatjefout')">
-                <span class="game-icon">❌</span>
-                <div class="game-title">Wat hoort er niet?</div>
-                <div class="game-desc">Vind het plaatje</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('kiekeboe')">
-                <span class="game-icon">👻</span>
-                <div class="game-title">Kiekeboe</div>
-                <div class="game-desc">Verstoppertje</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('poetsen')">
-                <span class="game-icon">🧽</span>
-                <div class="game-title">Poetsen</div>
-                <div class="game-desc">Maak schoon</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('muziektuin')">
-                <span class="game-icon">🌷</span>
-                <div class="game-title">Muziektuin</div>
-                <div class="game-desc">Bloemenorkest</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('aankleden')">
-                <span class="game-icon">👕</span>
-                <div class="game-title">Aankleden</div>
-                <div class="game-desc">Kleed je aan</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('pizza')">
-                <span class="game-icon">🍕</span>
-                <div class="game-title">Pizza</div>
-                <div class="game-desc">Maak pizza</div>
-            </div>
-
-            <div class="game-card" onclick="playGame('sokken')">
-                <span class="game-icon">🧦</span>
-                <div class="game-title">Sokken</div>
-                <div class="game-desc">Match sokken</div>
-            </div>
+            <h1>Noor's Games</h1>
         </div>
 
-        <div class="beta-section">
-            <div class="section-title beta-title">🧪 Beta Spelletjes</div>
-            <div class="beta-grid">
-                <div class="game-card beta" onclick="playGame('zoekenvind')">
-                    <span class="game-icon">🔍</span>
-                    <div class="game-title">Zoek & Vind</div>
-                    <div class="game-desc">Zoek de items</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('kamer')">
-                    <span class="game-icon">🛏️</span>
-                    <div class="game-title">Kamer</div>
-                    <div class="game-desc">Opruimen maar</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('bellen')">
-                    <span class="game-icon">🫧</span>
-                    <div class="game-title">Bellen</div>
-                    <div class="game-desc">Pop de bubbles</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('kleurenmixen')">
-                    <span class="game-icon">🎨</span>
-                    <div class="game-title">Kleuren Mixen</div>
-                    <div class="game-desc">Mix kleuren</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('mixen')">
-                    <span class="game-icon">🥣</span>
-                    <div class="game-title">Mix in de Kom</div>
-                    <div class="game-desc">Roer met je vinger</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('draakjes')">
-                    <span class="game-icon">🐉</span>
-                    <div class="game-title">Draakjes Naar Huis</div>
-                    <div class="game-desc">Breng ze naar huis</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('boerderij')">
-                    <span class="game-icon">🚜</span>
-                    <div class="game-title">Boerderijtje</div>
-                    <div class="game-desc">Plant en oogst</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('bommetjes')">
-                    <span class="game-icon">💣</span>
-                    <div class="game-title">Bommetjes</div>
-                    <div class="game-desc">Blaas stenen op</div>
-                </div>
-
-                <div class="game-card beta" onclick="playGame('prinses')">
-                    <span class="game-icon">👑</span>
-                    <div class="game-title">Prinsessenkasteel</div>
-                    <div class="game-desc">Glitter en regenbogen</div>
+        <div class="hero" onclick="playGame('prinses')">
+            <div class="hero-castle">🏰</div>
+            <div class="hero-body">
+                <div class="hero-title">Prinsessenkasteel</div>
+                <div class="hero-worlds">
+                    <div class="hero-world">👸</div>
+                    <div class="hero-world">🌈</div>
+                    <div class="hero-world">🧜‍♀️</div>
                 </div>
             </div>
+            <div class="hero-crown">👑</div>
+            <div class="hero-spark">✨</div>
         </div>
 
-        <div class="footer">
-            <span class="parent-tools">
-                <button class="cache-btn" onclick="clearCache()">🗑️ Cache wissen</button>
-                <button class="cache-btn" onclick="changePin()">🔐 PIN wijzigen</button>
-                <br><span id="releaseBadge" style="display:inline-block; margin-top: 10px; font-size: 0.6rem; color: #ccc;">v6.0</span>
-            </span>
-            <span class="normal-footer">
-                Meer spelletjes binnenkort!
-            </span>
-        </div>
+        <div id="themes"></div>
+
+        <div class="footer" id="releaseBadge"></div>
     </div>
 
     <div class="update-banner" id="updateBanner" role="status" aria-live="polite">
@@ -1281,28 +556,6 @@
             } catch(e) {}
         }
         function playPop() { playFreqSweep(800, 1200, 0.08, 0.25); }
-
-        function applyRandomCardColors() {
-            const palettes = [
-                ['#ff8a8a', '#ff5f6d'],
-                ['#ffd166', '#f6b93b'],
-                ['#7ed6df', '#22a6b3'],
-                ['#9c88ff', '#6c5ce7'],
-                ['#6ee7b7', '#10b981'],
-                ['#74b9ff', '#0984e3'],
-                ['#f8a5c2', '#e84393'],
-                ['#fab1a0', '#e17055'],
-                ['#b8e994', '#78e08f'],
-                ['#f6e58d', '#f9ca24']
-            ];
-
-            const cards = document.querySelectorAll('.game-card:not(.beta)');
-            cards.forEach((card) => {
-                const pair = palettes[Math.floor(Math.random() * palettes.length)];
-                card.style.setProperty('--card-border', pair[1]);
-                card.style.setProperty('--card-accent', `linear-gradient(90deg, ${pair[0]}, ${pair[1]})`);
-            });
-        }
 
         /** Magical chime for splash screen (C6→E6→G6→C7 rapid arpeggiated shimmer) */
         function playMagicChime() {
@@ -1336,8 +589,8 @@
         /* ── Game map: name → {url, emoji} ── */
         const GAMES = {
             flip:            { url: 'games/flip.html',            emoji: '🐱' },
-            memory:          { url: 'games/memory.html',          emoji: '🧩' },
-            kleuren:         { url: 'games/kleuren.html',         emoji: '🎨' },
+            memory:          { url: 'games/memory.html',          emoji: '🃏' },
+            kleuren:         { url: 'games/kleuren.html',         emoji: '🖍️' },
             letters:         { url: 'games/letters.html',         emoji: '🔤' },
             cijfers:         { url: 'games/cijfers.html',         emoji: '🔢' },
             piano:           { url: 'games/piano.html',           emoji: '🎹' },
@@ -1361,6 +614,28 @@
             prinses:         { url: 'games/prinses.html',         emoji: '👑' }
         };
 
+        /* ── Home layout: one row per theme (prinses is the hero tile) ── */
+        const THEMES = [
+            { key: 'dieren', icon: '🐾', label: 'Dieren',         games: ['flip', 'kleurensorteren', 'draakjes', 'boerderij', 'zaklamp'] },
+            { key: 'maken',  icon: '🎵', label: 'Muziek en maken', games: ['piano', 'muziektuin', 'kleuren', 'kleurenmixen', 'mixen', 'pizza'] },
+            { key: 'thuis',  icon: '🏡', label: 'Thuis',          games: ['poetsen', 'kamer', 'aankleden', 'bellen', 'kiekeboe', 'bommetjes'] },
+            { key: 'puzzel', icon: '🧩', label: 'Puzzelen',       games: ['memory', 'letters', 'cijfers', 'plaatjefout', 'sokken', 'zoekenvind'] }
+        ];
+
+        function renderThemes() {
+            document.getElementById('themes').innerHTML = THEMES.map(theme => `
+                <div class="theme theme-${theme.key}" aria-label="${theme.label}">
+                    <div class="theme-badge" aria-hidden="true">${theme.icon}</div>
+                    <div class="theme-grid">
+                        ${theme.games.map(id => `
+                            <div class="game-card" role="button" aria-label="${id}" onclick="playGame('${id}')">
+                                <span class="game-icon">${GAMES[id].emoji}</span>
+                            </div>`).join('')}
+                    </div>
+                </div>`).join('');
+        }
+        renderThemes();
+
         function withVersion(url) {
             const separator = url.includes('?') ? '&' : '?';
             return `${url}${separator}v=${encodeURIComponent(RELEASE_ID)}`;
@@ -1379,107 +654,6 @@
             overlay.classList.add('active');
 
             setTimeout(() => { window.location.href = withVersion(game.url); }, 700);
-        }
-
-        /* ── PIN management ── */
-        const DEFAULT_PIN = '1234';
-        
-        function getPin() {
-            return localStorage.getItem('parentPin') || DEFAULT_PIN;
-        }
-        
-        function setPin(pin) {
-            localStorage.setItem('parentPin', pin);
-        }
-        
-        function isParentMode() {
-            return localStorage.getItem('parentMode') === 'true';
-        }
-        
-        function setParentMode(enabled) {
-            localStorage.setItem('parentMode', enabled);
-            const container = document.getElementById('homeContainer');
-            if (enabled) {
-                container.classList.add('parent-mode');
-            } else {
-                container.classList.remove('parent-mode');
-            }
-        }
-        
-        function showPinModal(setup = false) {
-            const modal = document.getElementById('pinModal');
-            const title = document.getElementById('pinTitle');
-            const desc = document.getElementById('pinDesc');
-            const input = document.getElementById('pinInput');
-            
-            if (setup) {
-                title.textContent = 'Stel PIN in';
-                desc.textContent = 'Kies een 4-cijferige PIN';
-            } else {
-                title.textContent = 'Ouder Mode';
-                desc.textContent = 'Voer PIN in om toegang te krijgen';
-            }
-            
-            input.value = '';
-            modal.classList.add('show');
-            input.focus();
-        }
-
-        function changePin() {
-            closePinModal();
-            setTimeout(() => {
-                const modal = document.getElementById('pinModal');
-                const title = document.getElementById('pinTitle');
-                const desc = document.getElementById('pinDesc');
-                const input = document.getElementById('pinInput');
-                
-                title.textContent = 'Wijzig PIN';
-                desc.textContent = 'Voer nieuwe 4-cijferige PIN in';
-                
-                input.value = '';
-                modal.classList.add('show');
-                input.focus();
-                
-                input.onchange = function() {
-                    if (input.value.length === 4) {
-                        setPin(input.value);
-                        alert('PIN gewijzigd!');
-                        closePinModal();
-                    }
-                };
-            }, 100);
-        }
-        
-        function closePinModal() {
-            document.getElementById('pinModal').classList.remove('show');
-            document.getElementById('pinInput').value = '';
-        }
-        
-        function checkPin() {
-            const input = document.getElementById('pinInput').value;
-            const savedPin = getPin();
-            
-            if (input === savedPin) {
-                setParentMode(true);
-                closePinModal();
-            } else {
-                alert('Verkeerde PIN!');
-                document.getElementById('pinInput').value = '';
-            }
-        }
-        
-        function exitParentMode() {
-            setParentMode(false);
-        }
-        
-        document.getElementById('pinInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                checkPin();
-            }
-        });
-        
-        if (isParentMode()) {
-            setParentMode(true);
         }
 
         /* ── Splash screen logic ── */
@@ -1546,12 +720,15 @@
 
         /* ── Staggered card entrance ── */
         function animateCardEntrance() {
-            const cards = document.querySelectorAll('.games-grid .game-card, .beta-grid .game-card');
+            const cards = document.querySelectorAll('.hero, .theme-grid .game-card');
             cards.forEach((card, i) => {
-                card.style.animationDelay = (i * 0.05) + 's';
-                // Stagger shimmer too
-                card.style.setProperty('animation-delay', (i * 0.05) + 's', '');
+                card.style.animationDelay = (i * 0.04) + 's';
                 card.classList.add('card-enter');
+                // Drop the fill-mode animation afterwards so hover/tap transforms work again
+                card.addEventListener('animationend', () => {
+                    card.classList.remove('card-enter');
+                    card.style.animationDelay = '';
+                }, { once: true });
             });
         }
 
@@ -1559,8 +736,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const badge = document.getElementById('releaseBadge');
             if (badge) badge.textContent = `v${RELEASE_ID}`;
-
-            applyRandomCardColors();
 
             const splashSeen = sessionStorage.getItem('splashSeen');
             if (!splashSeen) {
@@ -1576,34 +751,9 @@
                 document.getElementById('splashScreen').style.display = 'none';
                 animateCardEntrance();
             }
-
-            // Stagger the shimmer animation per card
-            document.querySelectorAll('.games-grid .game-card, .beta-grid .game-card').forEach((card, i) => {
-                card.style.setProperty('--shimmer-delay', (i * 0.6) + 's');
-                if (card.querySelector('::after')) {
-                    card.style.animationDelay = (i * 0.6) + 's';
-                }
-            });
         });
 
-        /* ── Cache + Service Worker ── */
-        async function clearCache() {
-            if (confirm('Wil je de cache wissen?')) {
-                if ('caches' in window) {
-                    const keys = await caches.keys();
-                    for (const key of keys) {
-                        await caches.delete(key);
-                    }
-                }
-                if ('serviceWorker' in navigator) {
-                    const registrations = await navigator.serviceWorker.getRegistrations();
-                    for (const reg of registrations) {
-                        await reg.unregister();
-                    }
-                }
-                window.location.reload();
-            }
-        }
+        /* ── Service Worker ── */
 
         let _refreshing = false;
         let _pendingSwReg = null;
