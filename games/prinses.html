@@ -3961,6 +3961,139 @@
         .octopus { font-size: 76px; line-height: 1; }
         .octopus.wave { animation: petWiggle 0.6s ease 2; }
 
+        /* ── IJskamer ── */
+        .i-room.r15 .wall {
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg stroke='%23ffffff' stroke-width='2' stroke-linecap='round' opacity='.7'%3E%3Cpath d='M30 18 V42 M19.6 24 L40.4 36 M19.6 36 L40.4 24'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 60px 60px,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg stroke='%23ffffff' stroke-width='2' stroke-linecap='round' opacity='.7'%3E%3Cpath d='M30 18 V42 M19.6 24 L40.4 36 M19.6 36 L40.4 24'/%3E%3C/g%3E%3C/svg%3E") 30px 30px / 60px 60px,
+                linear-gradient(180deg, #e0f2fe, #bae6fd 60%, #7dd3fc);
+        }
+        .i-room.r15 .floor {
+            background:
+                radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 24px 18px,
+                linear-gradient(180deg, #f8fafc, #e0f2fe);
+        }
+        .icicles { width: 800px; height: 50px; pointer-events: none; }
+        .icicles svg { width: 100%; height: 100%; }
+        .ice-rink {
+            height: 70px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            background:
+                linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.8) 45%, transparent 55%) 0 0 / 200px 100%,
+                radial-gradient(ellipse, #e0f2fe, #93c5fd 80%);
+            box-shadow: inset 0 0 12px rgba(59,130,246,0.4), 0 0 0 4px rgba(255,255,255,0.8);
+            animation: iceShine 4s linear infinite;
+        }
+        @keyframes iceShine { to { background-position: 400px 0, 0 0; } }
+        .princess.skating .bob { transform: rotate(-8deg); }
+        .princess.skating.walking .bob { animation: none; }
+        .snow-globe { width: 110px; height: 160px; }
+        .snow-globe .globe {
+            position: absolute; left: 5px; top: 0; width: 100px; height: 100px; border-radius: 50%;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0 10%, transparent 20%),
+                radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 16px 18px,
+                radial-gradient(circle at 50% 70%, #a5f3fc, #38bdf8);
+            border: 4px solid rgba(255,255,255,0.9);
+            box-shadow: 0 0 20px rgba(186,230,253,0.9);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 44px;
+        }
+        .snow-globe .stand {
+            position: absolute; left: 15px; top: 92px; width: 80px; height: 30px;
+            border-radius: 8px 8px 14px 14px;
+            background: linear-gradient(180deg, #f472b6, #be185d);
+        }
+        .snow-globe .ped { position: absolute; left: 35px; top: 120px; width: 40px; height: 40px; background: #fff; border-radius: 4px; }
+        .snow-globe.shake .globe { animation: globeShake 0.6s ease; }
+        @keyframes globeShake {
+            0%, 100% { transform: rotate(0); }
+            20% { transform: rotate(-18deg); }
+            40% { transform: rotate(16deg); }
+            60% { transform: rotate(-12deg); }
+            80% { transform: rotate(8deg); }
+        }
+        .penguin { font-size: 54px; line-height: 1; }
+        .penguin.slide { animation: penguinSlide 7s ease-in-out infinite; }
+        @keyframes penguinSlide {
+            0%, 100% { transform: translateX(0) rotate(0) scaleX(1); }
+            40% { transform: translateX(-200px) rotate(-70deg) scaleX(1); }
+            50% { transform: translateX(-200px) rotate(0) scaleX(-1); }
+            90% { transform: translateX(0) rotate(70deg) scaleX(-1); }
+        }
+        .penguin.hop { animation: toyJump 0.5s ease 2; }
+        .skate-sign { font-size: 34px; line-height: 1; background: #fff; border: 4px solid #93c5fd; border-radius: 14px; padding: 6px 10px; }
+        .room-snowman { width: 150px; height: 195px; }
+        .room-snowman svg { width: 100%; height: 100%; overflow: visible; }
+
+        /* ── Sneeuwpop overlay ── */
+        .snowov {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background: linear-gradient(180deg, #bae6fd, #e0f2fe 60%, #f8fafc);
+        }
+        .snowov.open { display: flex; }
+        .snowov::before {
+            content: '';
+            position: absolute; inset: -100px 0 0 0;
+            background:
+                radial-gradient(circle, #fff 2.5px, transparent 3.5px) 0 0 / 50px 60px,
+                radial-gradient(circle, #fff 1.8px, transparent 2.8px) 25px 30px / 70px 50px;
+            animation: snowFall 6s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes snowFall { to { transform: translateY(100px); } }
+        .snowov .nails-title { color: #0369a1; z-index: 1; }
+        .sm-stage { position: relative; flex: 1; min-height: 0; width: 100%; z-index: 1; }
+        .sm-stage::after {
+            content: '';
+            position: absolute; left: 0; right: 0; bottom: 0; height: 18%;
+            border-radius: 50% 50% 0 0 / 40% 40% 0 0;
+            background: #fff;
+            box-shadow: 0 -4px 12px rgba(125,211,252,0.5);
+        }
+        .sm-stage svg { position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); height: 88%; overflow: visible; z-index: 1; }
+        .sm-ball.drop { animation: smDrop 0.6s cubic-bezier(.3,1.5,.5,1); transform-box: fill-box; transform-origin: 50% 100%; }
+        @keyframes smDrop {
+            from { transform: translateY(-260px) scale(0.6); }
+            to { transform: translateY(0) scale(1); }
+        }
+        .sm-alive .sm-body { animation: smDance 0.6s ease-in-out infinite alternate; transform-origin: 100px 250px; }
+        .sm-alive .sm-arm-l { animation: smWaveL 0.4s ease-in-out infinite alternate; transform-origin: 62px 125px; }
+        .sm-alive .sm-arm-r { animation: smWaveR 0.4s ease-in-out infinite alternate; transform-origin: 138px 125px; }
+        @keyframes smDance { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(5deg) translateY(-10px); } }
+        @keyframes smWaveL { from { transform: rotate(10deg); } to { transform: rotate(-30deg); } }
+        @keyframes smWaveR { from { transform: rotate(-10deg); } to { transform: rotate(30deg); } }
+        .sm-tray { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 2; }
+        .sm-btn {
+            min-width: 60px; height: 60px;
+            border-radius: 18px;
+            border: 3px solid #bae6fd;
+            background: #fff;
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 2px 10px;
+        }
+        .sm-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #0369a1; }
+        .sm-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+        .sm-btn.big { font-size: 34px; padding: 4px 18px; border-color: #7dd3fc; }
+        .sm-btn.big small { font-size: 13px; }
+        .sm-btn .sw { width: 30px; height: 12px; border-radius: 6px; margin-top: 2px; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -4016,6 +4149,13 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="snowov" id="snowOv">
+                <div class="nails-title">⛄ Sneeuwpop bouwen</div>
+                <div class="sm-stage"><svg id="smSvg" viewBox="0 0 200 270"></svg></div>
+                <div class="sm-tray" id="smTray"></div>
+                <button class="scope-close" id="smClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="stargame" id="starGame">
@@ -4170,7 +4310,8 @@
             { name: 'Speelkamer',    icon: '🧸', say: 'De speelkamer' },
             { name: 'Hartjeskamer',  icon: '💖', say: 'De hartjeskamer' },
             { name: 'Poppenhuis',    icon: '🏠', say: 'Het poppenhuis' },
-            { name: 'Sterrenkamer',  icon: '⭐', say: 'De sterrenkamer' }
+            { name: 'Sterrenkamer',  icon: '⭐', say: 'De sterrenkamer' },
+            { name: 'IJskamer',      icon: '❄️', say: 'De ijskamer' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -4195,6 +4336,9 @@
         const RIDE_SPEED = 540;
         const HEART_IDX = 12;
         const STAR_IDX = 14;
+        const SNOW_IDX = 15;
+        const ICE_X0 = ROOM_W * SNOW_IDX + 360;
+        const ICE_X1 = ROOM_W * SNOW_IDX + 770;
         // Lake (outside, last area): the princess can only go past the shore by boat
         const LAKE_X0 = ROOM_W * 5 + 190;
         const BOAT_HOME = LAKE_X0 + 80;
@@ -4208,7 +4352,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 32, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 34, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 14, door: null },
             sea: { key: 'sea', rooms: ROOMS_SEA, el: document.getElementById('worldSea'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
@@ -4680,6 +4824,28 @@
                 playFreqSweep(tumbled ? 600 : 300, tumbled ? 150 : 700, 0.4, 0.15);
             });
             addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
+
+            /* Room: IJskamer */
+            const rsn = ROOM_W * SNOW_IDX;
+            place(el(`<div class="icicles"><svg viewBox="0 0 800 50" preserveAspectRatio="none"><g fill="#e0f2fe" stroke="#fff" stroke-width="1.5"><path d="M0 0 L10 28 L20 0 Z"/><path d="M20 0 L30 22 L40 0 Z"/><path d="M40 0 L50 30 L60 0 Z"/><path d="M60 0 L70 38 L80 0 Z"/><path d="M80 0 L90 19 L100 0 Z"/><path d="M100 0 L110 20 L120 0 Z"/><path d="M120 0 L130 44 L140 0 Z"/><path d="M140 0 L150 35 L160 0 Z"/><path d="M160 0 L170 21 L180 0 Z"/><path d="M180 0 L190 29 L200 0 Z"/><path d="M200 0 L210 36 L220 0 Z"/><path d="M220 0 L230 19 L240 0 Z"/><path d="M240 0 L250 34 L260 0 Z"/><path d="M260 0 L270 24 L280 0 Z"/><path d="M280 0 L290 19 L300 0 Z"/><path d="M300 0 L310 20 L320 0 Z"/><path d="M320 0 L330 31 L340 0 Z"/><path d="M340 0 L350 31 L360 0 Z"/><path d="M360 0 L370 20 L380 0 Z"/><path d="M380 0 L390 25 L400 0 Z"/><path d="M400 0 L410 20 L420 0 Z"/><path d="M420 0 L430 35 L440 0 Z"/><path d="M440 0 L450 31 L460 0 Z"/><path d="M460 0 L470 19 L480 0 Z"/><path d="M480 0 L490 44 L500 0 Z"/><path d="M500 0 L510 36 L520 0 Z"/><path d="M520 0 L530 21 L540 0 Z"/><path d="M540 0 L550 25 L560 0 Z"/><path d="M560 0 L570 38 L580 0 Z"/><path d="M580 0 L590 38 L600 0 Z"/><path d="M600 0 L610 36 L620 0 Z"/><path d="M620 0 L630 19 L640 0 Z"/><path d="M640 0 L650 36 L660 0 Z"/><path d="M660 0 L670 36 L680 0 Z"/><path d="M680 0 L690 30 L700 0 Z"/><path d="M700 0 L710 19 L720 0 Z"/><path d="M720 0 L730 25 L740 0 Z"/><path d="M740 0 L750 19 L760 0 Z"/><path d="M760 0 L770 35 L780 0 Z"/><path d="M780 0 L790 45 L800 0 Z"/></g></svg></div>`), rsn, 0);
+            place(el('<div class="ice-rink"></div>'), ICE_X0 - 20, 400).style.width = (ICE_X1 - ICE_X0 + 40) + 'px';
+            state.roomSnowman = addObj(`<div class="room-snowman"><div class="tap-hint" style="top:-40px">👇</div></div>`, rsn + 60, 215, rsn + 230, openSnowman);
+            addObj('<div class="snow-globe"><div class="globe">🏰</div><div class="stand"></div><div class="ped"></div></div>', rsn + 250, 240, rsn + 300, shakeSnowGlobe);
+            addObj('<div class="skate-sign">⛸️</div>', rsn + 380, 300, rsn + 420, () => danceMove('spin'));
+            [[640, 370, 0], [740, 380, -3.5]].forEach(([x, y, d]) => {
+                const pg = addObj('<div class="penguin slide">🐧</div>', rsn + x, y, rsn + x - 60, (node) => {
+                    node.classList.remove('hop'); void node.offsetWidth; node.classList.add('hop');
+                    playFreqSweep(1200, 1800, 0.1, 0.15);
+                    setTimeout(() => node.classList.remove('hop'), 1000);
+                });
+                pg.style.animationDelay = d + 's';
+            });
+            addObj('<div class="emoji-obj" style="font-size:72px">🐻‍❄️</div>', rsn + 680, 200, rsn + 660, (node) => {
+                playTone(140, 0.4, 0.2, 'sawtooth');
+                const r = node.getBoundingClientRect();
+                const c = screenToWorld(r.left + r.width / 2, r.top);
+                for (let i = 0; i < 24; i++) spawnSparkle(c.x, c.y, { speed: 140 });
+            });
 
             /* Room: Sterrenkamer */
             const rst = ROOM_W * STAR_IDX;
@@ -6089,6 +6255,7 @@
             if (e.key === 'Escape' && hpOpen) closeHeartPost();
             if (e.key === 'Escape' && dollOpen) closeDollhouse();
             if (e.key === 'Escape' && sgOpen) closeStarGame();
+            if (e.key === 'Escape' && smOpen) closeSnowman();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -6157,8 +6324,18 @@
         function updateParticles(dt, now) {
             const party = now < state.partyUntil;
 
-            // Ambient twinkles everywhere in view
-            const ambient = party ? 6 : 1.2;
+            // Ambient twinkles everywhere in view (snowflakes falling in the ice room)
+            const snowy = scene.key === 'in' && state.room === SNOW_IDX;
+            if (snowy) {
+                for (let i = 0; i < 2; i++) {
+                    if (Math.random() > 0.6) continue;
+                    spawnSparkle(state.camX + Math.random() * state.viewW, -state.offsetY / state.scale - 10, {
+                        vx: (Math.random() - 0.5) * 30, vy: 40 + Math.random() * 40, g: 0, speed: 0,
+                        max: 5 + Math.random() * 3, size: 3 + Math.random() * 4
+                    });
+                }
+            }
+            const ambient = snowy ? 0 : party ? 6 : 1.2;
             for (let i = 0; i < ambient; i++) {
                 if (Math.random() < ambient - i) {
                     spawnSparkle(state.camX + Math.random() * state.viewW, -state.offsetY / state.scale + Math.random() * (WORLD_H + state.offsetY / state.scale), {
@@ -6189,11 +6366,34 @@
             const hearts = scene.key === 'in' && state.room === HEART_IDX;
             const goldStars = scene.key === 'in' && state.room === STAR_IDX;
             const bubbles = scene.key === 'sea';
+            const snowflakes = scene.key === 'in' && state.room === SNOW_IDX;
+            if (snowflakes) ctx2d.globalCompositeOperation = 'source-over';
             ctx2d.globalCompositeOperation = hearts ? 'source-over' : 'lighter';
             for (const p of particles) {
                 const t = p.life / p.max;
                 const alpha = Math.sin(Math.PI * t) * (0.6 + 0.4 * Math.sin(now / 90 + p.tw));
                 const s = p.size * (0.6 + 0.4 * Math.sin(now / 120 + p.tw));
+                if (snowflakes) {
+                    const a = Math.min(1, alpha * 1.6 + 0.2);
+                    ctx2d.beginPath();
+                    for (let k = 0; k < 3; k++) {
+                        const ang = p.spin + (k * Math.PI) / 3;
+                        ctx2d.moveTo(p.x - Math.cos(ang) * s, p.y - Math.sin(ang) * s);
+                        ctx2d.lineTo(p.x + Math.cos(ang) * s, p.y + Math.sin(ang) * s);
+                    }
+                    // Soft blue outline so white flakes show up against the pale ice walls
+                    ctx2d.strokeStyle = `rgba(14,165,233,${a * 0.55})`;
+                    ctx2d.lineWidth = 3.2;
+                    ctx2d.stroke();
+                    ctx2d.strokeStyle = `rgba(255,255,255,${a})`;
+                    ctx2d.lineWidth = 1.4;
+                    ctx2d.stroke();
+                    ctx2d.fillStyle = `rgba(186,230,253,${a * 0.8})`;
+                    ctx2d.beginPath();
+                    ctx2d.arc(p.x, p.y, s * 0.3, 0, Math.PI * 2);
+                    ctx2d.fill();
+                    continue;
+                }
                 if (bubbles) {
                     ctx2d.strokeStyle = `rgba(255,255,255,${alpha * 0.9})`;
                     ctx2d.lineWidth = 1.4;
@@ -6251,12 +6451,19 @@
                 }
                 const dx = state.targetX - state.x;
                 const p = princessEl();
-                const speed = state.riding ? RIDE_SPEED : state.boating ? 220 : SPEED;
+                const onIce = scene.key === 'in' && state.x > ICE_X0 && state.x < ICE_X1;
+                p.classList.toggle('skating', onIce);
+                const speed = state.riding ? RIDE_SPEED : state.boating ? 220 : onIce ? SPEED * 1.6 : SPEED;
                 if (Math.abs(dx) > 1.5) {
                     const step = Math.sign(dx) * Math.min(Math.abs(dx), speed * dt);
                     state.x += step;
                     state.facing = Math.sign(dx);
                     p.classList.add('walking');
+                    if (onIce && Math.random() < 0.9) {
+                        spawnSparkle(state.x - state.facing * 20, FEET_Y - 2, { vx: -state.facing * 60, vy: -10, g: 0, hue: 200, size: 4 + Math.random() * 3, max: 0.7 });
+                        state.swishT -= 1 / 60;
+                        if (state.swishT <= 0) { state.swishT = 0.35; playFreqSweep(1800, 1200, 0.15, 0.03); }
+                    }
                     // Glitter trail from the skirt hem
                     if (Math.random() < 0.8) {
                         spawnSparkle(state.x - state.facing * 30 + (Math.random() - 0.5) * 40, FEET_Y - 10 - Math.random() * 30, {
@@ -9186,7 +9393,178 @@
         });
         window.addEventListener('resize', () => { if (sgOpen) sizeStarGame(); });
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen; }
+
+        /* ─────────── IJskamer: sneeuwpop ─────────── */
+        const SM_KEY = 'noor-prinses-sneeuwpop';
+        const SM_SCARVES = ['#ef4444', '#f472b6', '#3b82f6', '#22c55e', '#a855f7', '#facc15'];
+        const sm = { cfg: { balls: 0, hat: 'none', nose: false, eyes: 'coal', scarf: -1, buttons: false, arms: false }, alive: false };
+        let smOpen = false;
+        let smSaved = null;
+        try { smSaved = JSON.parse(localStorage.getItem(SM_KEY)); } catch (e) {}
+
+        function snowmanSVG(c, dropBall) {
+            const ball = (i, cx, cy, r) => c.balls > i ? `<circle class="sm-ball${dropBall === i ? ' drop' : ''}" cx="${cx}" cy="${cy}" r="${r}" fill="url(#smShade)" stroke="#bfdbfe" stroke-width="2"/>` : '';
+            let h = `<defs><radialGradient id="smShade" cx="35%" cy="30%" r="75%"><stop offset="0" stop-color="#fff"/><stop offset=".7" stop-color="#f1f5f9"/><stop offset="1" stop-color="#bfdbfe"/></radialGradient></defs>
+                <ellipse cx="100" cy="258" rx="70" ry="8" fill="rgba(59,130,246,0.15)"/>
+                <g class="sm-body">`;
+            if (c.arms && c.balls > 1) {
+                h += `<g class="sm-arm-l"><path d="M62 125 L22 98 M40 110 L30 92 M34 106 L18 108" stroke="#78350f" stroke-width="5" stroke-linecap="round" fill="none"/></g>
+                      <g class="sm-arm-r"><path d="M138 125 L178 98 M160 110 L170 92 M166 106 L182 108" stroke="#78350f" stroke-width="5" stroke-linecap="round" fill="none"/></g>`;
+            }
+            h += ball(0, 100, 205, 55) + ball(1, 100, 128, 40) + ball(2, 100, 64, 30);
+            if (c.balls > 1 && c.buttons) h += [108, 126, 144].map(y => `<circle cx="100" cy="${y}" r="5" fill="#1f2937"/>`).join('');
+            if (c.balls > 2) {
+                if (c.eyes === 'star') h += `<text x="89" y="58" font-size="13" text-anchor="middle" dominant-baseline="central">⭐</text><text x="111" y="58" font-size="13" text-anchor="middle" dominant-baseline="central">⭐</text>`;
+                else if (c.eyes === 'heart') h += `<text x="89" y="58" font-size="12" text-anchor="middle" dominant-baseline="central">💖</text><text x="111" y="58" font-size="12" text-anchor="middle" dominant-baseline="central">💖</text>`;
+                else h += `<circle cx="89" cy="57" r="4.5" fill="#1f2937"/><circle cx="111" cy="57" r="4.5" fill="#1f2937"/><circle cx="90.5" cy="55.5" r="1.4" fill="#fff"/><circle cx="112.5" cy="55.5" r="1.4" fill="#fff"/>`;
+                h += [[86, 76], [93, 80], [100, 81], [107, 80], [114, 76]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="2.4" fill="#1f2937"/>`).join('');
+                h += `<circle cx="80" cy="70" r="5" fill="#fda4af" opacity=".6"/><circle cx="120" cy="70" r="5" fill="#fda4af" opacity=".6"/>`;
+                if (c.nose) h += `<path d="M99 63 L130 70 L99 70 Z" fill="#f97316" stroke="#c2410c" stroke-width="1.2" stroke-linejoin="round"/>`;
+                if (c.scarf >= 0) {
+                    const col = SM_SCARVES[c.scarf];
+                    h += `<path d="M70 90 Q100 104 130 90 L130 100 Q100 114 70 100 Z" fill="${col}"/>
+                          <path d="M116 98 L122 132 L108 130 L106 100 Z" fill="${col}"/>
+                          <path d="M74 94 L126 94 M110 116 L120 117" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>`;
+                }
+                if (c.hat === 'top') h += `<rect x="78" y="10" width="44" height="32" rx="3" fill="#1f2937"/><rect x="66" y="38" width="68" height="8" rx="4" fill="#1f2937"/><rect x="78" y="30" width="44" height="7" fill="#ef4444"/>`;
+                if (c.hat === 'crown') h += `<path d="M76 40 L79 16 L90 30 L100 10 L110 30 L121 16 L124 40 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="2" stroke-linejoin="round"/><circle cx="100" cy="27" r="4" fill="#ec4899"/>`;
+                if (c.hat === 'bow') h += `<path d="M100 36 L76 22 L78 48 Z M100 36 L124 22 L122 48 Z" fill="#f472b6" stroke="#db2777" stroke-width="2"/><circle cx="100" cy="36" r="6" fill="#db2777"/>`;
+                if (c.hat === 'beanie') h += `<path d="M72 46 Q72 12 100 12 Q128 12 128 46 Z" fill="#a855f7"/><rect x="70" y="40" width="60" height="10" rx="5" fill="#e9d5ff"/><circle cx="100" cy="10" r="9" fill="#f9a8d4"/>`;
+            }
+            return h + '</g>';
+        }
+
+        function renderSnowman(dropBall) {
+            const svg = document.getElementById('smSvg');
+            svg.innerHTML = snowmanSVG(sm.cfg, dropBall);
+            svg.classList.toggle('sm-alive', sm.alive);
+        }
+
+        function renderRoomSnowman() {
+            const node = state.roomSnowman;
+            if (!node) return;
+            const hint = node.querySelector('.tap-hint');
+            node.innerHTML = smSaved ? `<svg viewBox="0 0 200 270" class="sm-alive">${snowmanSVG(smSaved).replace('id="smShade"', 'id="smShadeRoom"').replace(/url\(#smShade\)/g, 'url(#smShadeRoom)')}</svg>`
+                : '<div style="font-size:130px;line-height:1;text-align:center;padding-top:50px;filter:drop-shadow(0 6px 6px rgba(59,130,246,0.3))">⛄</div>';
+            if (hint) node.appendChild(hint);
+            else node.insertAdjacentHTML('beforeend', '<div class="tap-hint" style="top:-40px">👇</div>');
+        }
+
+        function renderSmTray() {
+            const c = sm.cfg;
+            const tray = document.getElementById('smTray');
+            if (c.balls < 3) {
+                tray.innerHTML = `<button class="sm-btn big" id="smRoll">❄️<small>Sneeuwbal ${c.balls + 1}</small></button>`;
+                document.getElementById('smRoll').addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    sm.cfg.balls++;
+                    renderSnowman(sm.cfg.balls - 1);
+                    playFreqSweep(300, 120, 0.4, 0.2);
+                    setTimeout(() => playTone(120, 0.15, 0.2, 'triangle'), 450);
+                    renderSmTray();
+                });
+                return;
+            }
+            const hats = [['top', '🎩'], ['crown', '👑'], ['bow', '🎀'], ['beanie', '🧶']];
+            const eyes = { coal: '⚫', star: '⭐', heart: '💖' };
+            tray.innerHTML =
+                hats.map(([v, ic]) => `<button class="sm-btn${c.hat === v ? ' sel' : ''}" data-hat="${v}">${ic}</button>`).join('') +
+                `<button class="sm-btn" data-act="eyes">${eyes[c.eyes]}<small>Ogen</small></button>` +
+                `<button class="sm-btn${c.nose ? ' sel' : ''}" data-act="nose">🥕<small>Neus</small></button>` +
+                `<button class="sm-btn${c.scarf >= 0 ? ' sel' : ''}" data-act="scarf">🧣<span class="sw" style="background:${c.scarf >= 0 ? SM_SCARVES[c.scarf] : '#e5e7eb'}"></span></button>` +
+                `<button class="sm-btn${c.buttons ? ' sel' : ''}" data-act="buttons">🔘<small>Knopen</small></button>` +
+                `<button class="sm-btn${c.arms ? ' sel' : ''}" data-act="arms">🌿<small>Armen</small></button>` +
+                '<span class="care-sep"></span>' +
+                `<button class="sm-btn big" id="smAlive">✨<small>Tot leven!</small></button>` +
+                `<button class="sm-btn" id="smNew">🔄<small>Opnieuw</small></button>`;
+            tray.querySelectorAll('[data-hat]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                c.hat = c.hat === b.dataset.hat ? 'none' : b.dataset.hat;
+                smChanged();
+            }));
+            tray.querySelectorAll('[data-act]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                const a = b.dataset.act;
+                if (a === 'eyes') c.eyes = { coal: 'star', star: 'heart', heart: 'coal' }[c.eyes];
+                if (a === 'nose') c.nose = !c.nose;
+                if (a === 'scarf') c.scarf = c.scarf + 1 >= SM_SCARVES.length ? -1 : c.scarf + 1;
+                if (a === 'buttons') c.buttons = !c.buttons;
+                if (a === 'arms') c.arms = !c.arms;
+                smChanged();
+            }));
+            document.getElementById('smAlive').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                sm.alive = true;
+                renderSnowman();
+                playJingle();
+                saveSnowman();
+            });
+            document.getElementById('smNew').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                sm.cfg = { balls: 0, hat: 'none', nose: false, eyes: 'coal', scarf: -1, buttons: false, arms: false };
+                sm.alive = false;
+                renderSnowman();
+                renderSmTray();
+                playFreqSweep(900, 200, 0.4, 0.12);
+            });
+        }
+
+        function smChanged() {
+            renderSnowman();
+            renderSmTray();
+            [1319, 1760].forEach((f, i) => setTimeout(() => playTone(f, 0.12, 0.08, 'sine'), i * 60));
+            saveSnowman();
+        }
+
+        function saveSnowman() {
+            if (sm.cfg.balls < 3) return;
+            smSaved = { ...sm.cfg };
+            try { localStorage.setItem(SM_KEY, JSON.stringify(smSaved)); } catch (e) {}
+            renderRoomSnowman();
+        }
+
+        function playJingle() {
+            const notes = [659, 659, 659, 0, 659, 659, 659, 0, 659, 784, 523, 587, 659];
+            notes.forEach((f, i) => { if (f) setTimeout(() => playTone(f, 0.22, 0.12, 'triangle'), i * 180); });
+            [0, 360, 720, 1080, 1440, 1800, 2160].forEach(t => setTimeout(() => playTone(2400, 0.05, 0.04, 'square'), t));
+        }
+
+        function openSnowman() {
+            smOpen = true;
+            document.getElementById('snowOv').classList.add('open');
+            if (smSaved && smSaved.balls === 3) {
+                sm.cfg = { ...smSaved };
+                sm.alive = true;
+            }
+            renderSnowman();
+            renderSmTray();
+            playMusicBox();
+        }
+
+        function closeSnowman() {
+            smOpen = false;
+            document.getElementById('snowOv').classList.remove('open');
+            saveSnowman();
+            _playWhoosh();
+        }
+        document.getElementById('smClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeSnowman();
+        });
+        document.getElementById('snowOv').addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function shakeSnowGlobe(node) {
+            node.classList.remove('shake'); void node.offsetWidth; node.classList.add('shake');
+            [2093, 1760, 2349, 1976].forEach((f, i) => setTimeout(() => playTone(f, 0.2, 0.06, 'sine'), i * 100));
+            const v = viewRange();
+            for (let i = 0; i < 120; i++) {
+                spawnSparkle(v.left + Math.random() * (v.right - v.left), v.top + Math.random() * 300, {
+                    vx: (Math.random() - 0.5) * 120, vy: 30 + Math.random() * 80, g: 0, size: 4 + Math.random() * 5, max: 3 + Math.random() * 2
+                });
+            }
+        }
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen || smOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
@@ -9375,6 +9753,7 @@
         buildHands();
         buildNailTools();
         renderWallFrames();
+        renderRoomSnowman();
         loadLook();
         applyLook();
         spawnGems();
