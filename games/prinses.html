@@ -4205,6 +4205,159 @@
             background: rgba(255,255,255,0.8); border-radius: 999px; padding: 4px 14px; z-index: 2;
         }
 
+        /* ── Juwelierskamer ── */
+        .i-room.r17 .wall {
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath d='M25 14 L32 25 L25 36 L18 25 Z' fill='%23fcd34d' opacity='.55'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+                linear-gradient(180deg, #581c87, #7e22ce 60%, #a855f7);
+        }
+        .i-room.r17 .floor {
+            background: conic-gradient(#fef3c7 25%, #e9d5ff 0 50%, #fef3c7 0 75%, #e9d5ff 0) 0 0 / 50px 50px;
+        }
+        .jewel-case {
+            width: 150px; height: 170px;
+            pointer-events: none;
+        }
+        .jewel-case .glass {
+            position: absolute; left: 0; top: 0; width: 150px; height: 110px;
+            border-radius: 70px 70px 8px 8px;
+            border: 5px solid #fcd34d;
+            background: linear-gradient(160deg, rgba(255,255,255,0.55), rgba(255,255,255,0.12));
+            display: flex; align-items: center; justify-content: center; gap: 4px;
+            font-size: 34px;
+            box-shadow: inset 0 0 18px rgba(255,255,255,0.6), 0 0 20px rgba(253,230,138,0.4);
+        }
+        .jewel-case .stand { position: absolute; left: 50px; top: 110px; width: 50px; height: 60px; background: linear-gradient(90deg, #fde68a, #f59e0b); border-radius: 0 0 8px 8px; }
+        .jewel-case .glass span { animation: gleam 2s ease-in-out infinite; }
+        .musicbox { width: 160px; height: 190px; }
+        .musicbox > div, .musicbox > span { position: absolute; }
+        .musicbox .box { left: 0; top: 110px; width: 160px; height: 80px; border-radius: 10px; background: linear-gradient(180deg, #f9a8d4, #db2777); border: 4px solid #fcd34d; }
+        .musicbox .lid {
+            left: 0; top: 100px; width: 160px; height: 20px; border-radius: 10px 10px 4px 4px;
+            background: linear-gradient(180deg, #fbcfe8, #f472b6); border: 4px solid #fcd34d;
+            transform-origin: 0 100%;
+            transition: transform 0.5s cubic-bezier(.2,1.6,.4,1);
+        }
+        .musicbox .ballerina { left: 50px; top: 30px; font-size: 64px; line-height: 1; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(40px); }
+        .musicbox.open .lid { transform: rotate(-60deg); }
+        .musicbox.open .ballerina { opacity: 1; transform: translateY(0); animation: ballerinaSpin 1.2s linear infinite; }
+        @keyframes ballerinaSpin {
+            from { transform: perspective(300px) rotateY(0); }
+            to { transform: perspective(300px) rotateY(360deg); }
+        }
+        .bead-table { width: 240px; height: 140px; }
+        .bead-table .top { position: absolute; left: 0; top: 50px; width: 240px; height: 22px; border-radius: 8px; background: #fde68a; border: 4px solid #f59e0b; }
+        .bead-table .legs { position: absolute; left: 14px; right: 14px; top: 72px; height: 68px; border-left: 12px solid #b45309; border-right: 12px solid #b45309; }
+        .bead-table .bowl {
+            position: absolute; top: 16px; width: 54px; height: 36px; border-radius: 0 0 27px 27px;
+            background: #fff; box-shadow: inset 0 -6px 0 #e5e7eb;
+            display: flex; justify-content: center; font-size: 15px; letter-spacing: -3px; line-height: 14px; padding-top: 2px;
+        }
+
+        /* ── Kralen overlay ── */
+        .beadov {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath d='M25 14 L32 25 L25 36 L18 25 Z' fill='%23fcd34d' opacity='.55'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+                linear-gradient(180deg, #faf5ff, #f3e8ff);
+        }
+        .beadov.open { display: flex; }
+        .bd-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+        .bd-stage svg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(96%, 640px); height: 96%; overflow: visible; }
+        .bd-new { transform-box: fill-box; transform-origin: 50% 50%; animation: beadIn 0.35s cubic-bezier(.2,1.8,.4,1); }
+        @keyframes beadIn { from { transform: translateY(-60px) scale(0.3); } to { transform: translateY(0) scale(1); } }
+        .bd-tray { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; z-index: 2; }
+        .bd-btn {
+            min-width: 56px; height: 56px;
+            border-radius: 18px;
+            border: 3px solid #e9d5ff;
+            background: #fff;
+            font-size: 28px; line-height: 1;
+            cursor: pointer; touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 2px 8px;
+        }
+        .bd-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #7e22ce; }
+        .bd-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+        .bd-btn svg { width: 34px; height: 34px; }
+        .bd-btn .sw { width: 34px; height: 34px; border-radius: 50%; box-shadow: inset -4px -4px 0 rgba(0,0,0,0.15), inset 3px 3px 0 rgba(255,255,255,0.5); }
+
+        /* ── Cadeaukamer ── */
+        .i-room.r18 .wall {
+            background:
+                radial-gradient(circle, #fde047 5px, transparent 6px) 0 0 / 60px 60px,
+                radial-gradient(circle, #60a5fa 4px, transparent 5px) 30px 30px / 60px 60px,
+                linear-gradient(180deg, #ecfccb, #d9f99d);
+        }
+        .i-room.r18 .floor {
+            background: conic-gradient(#fff 25%, #fde68a 0 50%, #fff 0 75%, #fde68a 0) 0 0 / 50px 50px;
+        }
+        .bunting { width: 800px; height: 60px; pointer-events: none; }
+        .bunting svg { width: 100%; height: 100%; }
+        .present-pile { width: 260px; height: 200px; }
+        .present-pile .gift { position: absolute; line-height: 1; animation: giftWiggle 2.4s ease-in-out infinite; }
+        @keyframes giftWiggle {
+            0%, 80%, 100% { transform: rotate(0); }
+            85% { transform: rotate(-8deg); }
+            90% { transform: rotate(8deg); }
+            95% { transform: rotate(-4deg); }
+        }
+        .toy-shelf { width: 340px; height: 160px; pointer-events: none; }
+        .toy-shelf .plank { position: absolute; left: 0; width: 340px; height: 10px; background: #b45309; border-radius: 4px; }
+        .toy-shelf .toys { position: absolute; left: 6px; width: 330px; height: 50px; display: flex; gap: 2px; font-size: 34px; line-height: 50px; overflow: hidden; }
+        .popper { font-size: 56px; line-height: 1; }
+
+        /* ── Cadeau overlay ── */
+        .giftov {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle, rgba(253,224,71,0.6) 5px, transparent 6px) 0 0 / 60px 60px,
+                linear-gradient(180deg, #f7fee7, #ecfccb);
+        }
+        .giftov.open { display: flex; }
+        .gf-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+        .gf-stage svg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); height: 92%; overflow: visible; cursor: pointer; touch-action: none; }
+        .gf-stage svg.shake { animation: giftShake 0.4s ease; }
+        @keyframes giftShake {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0); }
+            25% { transform: translate(-50%, -50%) rotate(-6deg); }
+            75% { transform: translate(-50%, -50%) rotate(6deg); }
+        }
+        .gf-lid { transform-box: fill-box; transform-origin: 50% 100%; transition: transform 0.6s cubic-bezier(.3,1.4,.5,1), opacity 0.6s ease; }
+        .gf-lid.off { transform: translate(60px, -140px) rotate(35deg); opacity: 0; }
+        .gf-bow.off { transform-box: fill-box; transform-origin: 50% 50%; animation: bowFly 0.6s ease forwards; }
+        @keyframes bowFly { to { transform: translate(-120px, -160px) rotate(-120deg) scale(0.5); opacity: 0; } }
+        .gf-toy { transform-box: fill-box; transform-origin: 50% 100%; animation: toyPop 0.8s cubic-bezier(.2,1.6,.4,1) forwards; }
+        @keyframes toyPop {
+            from { transform: translateY(60px) scale(0.2); opacity: 0; }
+            to { transform: translateY(-34px) scale(1.15); opacity: 1; }
+        }
+        .gf-scrap { position: absolute; pointer-events: none; width: 34px; height: 26px; z-index: 3; animation: scrapFly 0.9s ease-out forwards; }
+        @keyframes scrapFly {
+            from { transform: translate(0, 0) rotate(0); opacity: 1; }
+            to { transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); opacity: 0; }
+        }
+        .gf-count { font-family: 'Fredoka One', cursive; color: #4d7c0f; background: rgba(255,255,255,0.85); padding: 4px 14px; border-radius: 999px; z-index: 2; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -4260,6 +4413,21 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="beadov" id="beadOv">
+                <div class="nails-title">💍 Kralen rijgen</div>
+                <div class="bd-stage"><svg id="bdSvg" viewBox="0 0 300 220"></svg></div>
+                <div class="bd-tray" id="bdTray"></div>
+                <button class="scope-close" id="bdClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="giftov" id="giftOv">
+                <div class="nails-title">🎁 Cadeautjes uitpakken</div>
+                <div class="gf-count" id="gfCount"></div>
+                <div class="gf-stage" id="gfStage"><svg id="gfSvg" viewBox="0 0 200 200"></svg></div>
+                <div class="bd-tray"><button class="bd-btn" id="gfNext" style="display:none">🎁<small>Nog een!</small></button></div>
+                <button class="scope-close" id="gfClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="bakeov" id="bakeOv">
@@ -4431,7 +4599,9 @@
             { name: 'Poppenhuis',    icon: '🏠', say: 'Het poppenhuis' },
             { name: 'Sterrenkamer',  icon: '⭐', say: 'De sterrenkamer' },
             { name: 'IJskamer',      icon: '❄️', say: 'De ijskamer' },
-            { name: 'Bakkerij',      icon: '🧁', say: 'De bakkerij' }
+            { name: 'Bakkerij',      icon: '🧁', say: 'De bakkerij' },
+            { name: 'Juwelierskamer', icon: '💍', say: 'De juwelierskamer' },
+            { name: 'Cadeaukamer',   icon: '🎁', say: 'De cadeaukamer' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -4458,6 +4628,8 @@
         const STAR_IDX = 14;
         const SNOW_IDX = 15;
         const BAKE_IDX = 16;
+        const JEWEL_IDX = 17;
+        const GIFT_IDX = 18;
         const ICE_X0 = ROOM_W * SNOW_IDX + 360;
         const ICE_X1 = ROOM_W * SNOW_IDX + 770;
         // Lake (outside, last area): the princess can only go past the shore by boat
@@ -4473,7 +4645,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 36, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 40, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 14, door: null },
             sea: { key: 'sea', rooms: ROOMS_SEA, el: document.getElementById('worldSea'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
@@ -4511,7 +4683,7 @@
             targetAlt: 0,
             flapT: 0,
             pet: { following: false, x: 200, facing: -1, key: 'in' },
-            look: { hat: 'crown', back: 'none', face: 'none', hair: 0 },
+            look: { hat: 'crown', back: 'none', face: 'none', hair: 0, neck: null },
             partyUntil: 0,
             lastTime: performance.now()
         };
@@ -4664,6 +4836,7 @@
                     <circle cx="39" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
                     <circle cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
                     <path d="M45 50 Q50 55 55 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round"/>
+                    <g class="necklace"></g>
                     ${PRINCESS_LAYERS}
                 </g>
             </svg>`;
@@ -4682,6 +4855,8 @@
                 svg.querySelectorAll('.lk').forEach(g => {
                     g.style.display = look[g.dataset.k] === g.dataset.v ? '' : 'none';
                 });
+                const neck = svg.querySelector('.necklace');
+                if (neck) neck.innerHTML = necklaceMarkup(look.neck, [35, 60], [50, 86], [65, 60], 2.8);
                 const h = HAIRS[look.hair] || HAIRS[0];
                 if (h === 'rainbow') {
                     svg.querySelectorAll('.hair').forEach(x => x.setAttribute('fill', `url(#${pre}rb)`));
@@ -4707,6 +4882,7 @@
                 if (d && typeof d === 'object') {
                     ['hat', 'back', 'face'].forEach(k => { if (typeof d[k] === 'string') state.look[k] = d[k]; });
                     if (Number.isInteger(d.hair) && d.hair >= 0 && d.hair < HAIRS.length) state.look.hair = d.hair;
+                    if (d.neck && Array.isArray(d.neck.beads)) state.look.neck = { beads: d.neck.beads.slice(0, 14), pendant: d.neck.pendant || null };
                     if (Number.isInteger(d.dress) && d.dress >= 0 && d.dress < DRESSES.length) state.dressIdx = d.dress;
                 }
             } catch (e) {}
@@ -4945,6 +5121,31 @@
                 playFreqSweep(tumbled ? 600 : 300, tumbled ? 150 : 700, 0.4, 0.15);
             });
             addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
+
+            /* Room: Juwelierskamer */
+            const rj = ROOM_W * JEWEL_IDX;
+            [[40, '👑💍'], [610, '💎📿']].forEach(([x, j]) => place(el(`<div class="jewel-case"><div class="glass">${[...j].filter(c => c.trim()).map(c => `<span>${c}</span>`).join('')}</div><div class="stand"></div></div>`), rj + x, 190));
+            addObj(`<div class="musicbox"><div class="box"></div><span class="ballerina">💃</span><div class="lid"></div></div>`, rj + 220, 210, rj + 300, openMusicBox);
+            addObj(`<div class="bead-table"><div class="top"></div><div class="legs"></div>
+                <div class="bowl" style="left:20px">🔴🟡🔵</div><div class="bowl" style="left:92px">💗💜💚</div><div class="bowl" style="left:164px">⭐🌸💎</div>
+                <div class="tap-hint" style="left:100px;top:-30px">👇</div></div>`, rj + 380, 260, rj + 500, openBeads);
+
+            /* Room: Cadeaukamer */
+            const rg = ROOM_W * GIFT_IDX;
+            const flags = ['#ef4444', '#f97316', '#facc15', '#22c55e', '#3b82f6', '#a855f7'];
+            place(el(`<div class="bunting"><svg viewBox="0 0 800 60"><path d="M0 8 Q400 40 800 8" stroke="#b45309" stroke-width="2" fill="none"/>
+                ${Array.from({ length: 16 }, (_, i) => { const x = 25 + i * 50, y = 8 + 32 * Math.sin(Math.PI * (x / 800)) * 0.9; return `<path d="M${x - 16} ${y} L${x + 16} ${y} L${x} ${y + 30} Z" fill="${flags[i % 6]}"/>`; }).join('')}
+            </svg></div>`), rg, 40);
+            addObj(`<div class="present-pile">
+                <span class="gift" style="left:10px;top:90px;font-size:90px">🎁</span>
+                <span class="gift" style="left:110px;top:60px;font-size:110px;animation-delay:-0.8s">🎁</span>
+                <span class="gift" style="left:60px;top:10px;font-size:70px;animation-delay:-1.6s">🎁</span>
+                <div class="tap-hint" style="left:110px;top:-36px">👇</div>
+            </div>`, rg + 260, 200, rg + 390, openGifts);
+            state.toyShelf = place(el(`<div class="toy-shelf"><div class="toys" style="top:0"></div><div class="plank" style="top:50px"></div><div class="toys" style="top:66px"></div><div class="plank" style="top:116px"></div></div>`), rg + 440, 120);
+            addObj('<div class="popper">🎉</div>', rg + 60, 330, rg + 100, () => { confettiAt(rg + 90, 330); });
+            addObj('<div class="emoji-obj">🎈</div>', rg + 700, 280, rg + 700, balloonPop);
+            addObj('<div class="emoji-obj">🎈</div>', rg + 160, 250, rg + 170, balloonPop);
 
             /* Room: Bakkerij */
             const rbk = ROOM_W * BAKE_IDX;
@@ -6393,6 +6594,8 @@
             if (e.key === 'Escape' && sgOpen) closeStarGame();
             if (e.key === 'Escape' && smOpen) closeSnowman();
             if (e.key === 'Escape' && bakeOpen) closeBakery();
+            if (e.key === 'Escape' && beadOpen) closeBeads(false);
+            if (e.key === 'Escape' && giftOpen) closeGifts();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -9970,7 +10173,329 @@
         });
         document.getElementById('bakeOv').addEventListener('pointerdown', (e) => e.stopPropagation());
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen; }
+
+        /* ─────────── Juwelierskamer: kralen ─────────── */
+        const BEAD_COLORS = ['#ef4444', '#f97316', '#facc15', '#22c55e', '#38bdf8', '#3b82f6', '#a855f7', '#f472b6', '#ffffff', '#fcd34d'];
+        const BEAD_SHAPES = ['round', 'heart', 'star', 'flower', 'diamond'];
+        const PENDANTS = [['💖', '💖'], ['⭐', '⭐'], ['🐚', '🐚'], ['💎', '💎'], ['🌸', '🌸'], ['none', '🚫']];
+        const bd = { color: 7, beads: [], pendant: null };
+        let beadOpen = false;
+
+        function beadShape(shape, c, x, y, r) {
+            const st = `stroke="rgba(0,0,0,0.25)" stroke-width="${r * 0.12}"`;
+            const shine = `<circle cx="${x - r * 0.3}" cy="${y - r * 0.3}" r="${r * 0.22}" fill="#fff" opacity=".7"/>`;
+            if (shape === 'heart') {
+                return `<path d="M${x} ${y + r * 0.9} C${x - r * 1.6} ${y - r * 0.1} ${x - r * 0.7} ${y - r * 1.3} ${x} ${y - r * 0.4} C${x + r * 0.7} ${y - r * 1.3} ${x + r * 1.6} ${y - r * 0.1} ${x} ${y + r * 0.9} Z" fill="${c}" ${st}/>${shine}`;
+            }
+            if (shape === 'star') {
+                let d = '';
+                for (let i = 0; i < 10; i++) {
+                    const rad = i % 2 === 0 ? r * 1.15 : r * 0.5;
+                    const a = -Math.PI / 2 + (i * Math.PI) / 5;
+                    d += (i ? 'L' : 'M') + (x + Math.cos(a) * rad).toFixed(1) + ' ' + (y + Math.sin(a) * rad).toFixed(1) + ' ';
+                }
+                return `<path d="${d}Z" fill="${c}" ${st}/>`;
+            }
+            if (shape === 'flower') {
+                let h = '';
+                for (let i = 0; i < 5; i++) {
+                    const a = (i * Math.PI * 2) / 5;
+                    h += `<circle cx="${(x + Math.cos(a) * r * 0.6).toFixed(1)}" cy="${(y + Math.sin(a) * r * 0.6).toFixed(1)}" r="${r * 0.5}" fill="${c}" ${st}/>`;
+                }
+                return h + `<circle cx="${x}" cy="${y}" r="${r * 0.38}" fill="#fde047"/>`;
+            }
+            if (shape === 'diamond') {
+                return `<path d="M${x} ${y - r * 1.1} L${x + r * 0.85} ${y} L${x} ${y + r * 1.1} L${x - r * 0.85} ${y} Z" fill="${c}" ${st}/>${shine}`;
+            }
+            return `<circle cx="${x}" cy="${y}" r="${r}" fill="${c}" ${st}/>${shine}`;
+        }
+
+        // Beads are spaced evenly along a quadratic curve (the drooping string)
+        function necklaceMarkup(neck, p0, p1, p2, r, newIdx) {
+            if (!neck || !neck.beads.length) return '';
+            const at = (t) => [
+                (1 - t) * (1 - t) * p0[0] + 2 * (1 - t) * t * p1[0] + t * t * p2[0],
+                (1 - t) * (1 - t) * p0[1] + 2 * (1 - t) * t * p1[1] + t * t * p2[1]
+            ];
+            let h = `<path d="M${p0[0]} ${p0[1]} Q${p1[0]} ${p1[1]} ${p2[0]} ${p2[1]}" stroke="#fde68a" stroke-width="${r * 0.3}" fill="none"/>`;
+            const n = neck.beads.length;
+            const mid = at(0.5);
+            if (neck.pendant) {
+                h += `<text x="${mid[0]}" y="${mid[1] + r * 2.4}" font-size="${r * 3.2}" text-anchor="middle" dominant-baseline="central">${neck.pendant}</text>`;
+            }
+            neck.beads.forEach((b, i) => {
+                const [x, y] = at((i + 1) / (n + 1));
+                const rx = Math.round(x * 10) / 10, ry = Math.round(y * 10) / 10;
+                h += `<g${i === newIdx ? ' class="bd-new"' : ''}>${beadShape(b.s, BEAD_COLORS[b.c] || '#f472b6', rx, ry, r)}</g>`;
+            });
+            return h;
+        }
+
+        function renderBeads(newIdx) {
+            const svg = document.getElementById('bdSvg');
+            const neck = { beads: bd.beads, pendant: bd.pendant };
+            svg.innerHTML = `<path d="M30 30 Q150 270 270 30" stroke="#d8b4fe" stroke-width="3" stroke-dasharray="4 6" fill="none"/>
+                <circle cx="30" cy="30" r="7" fill="#fcd34d"/><circle cx="270" cy="30" r="7" fill="#fcd34d"/>
+                ${necklaceMarkup(neck, [30, 30], [150, 270], [270, 30], 15, newIdx)}`;
+        }
+
+        function renderBeadTray() {
+            const tray = document.getElementById('bdTray');
+            tray.innerHTML =
+                BEAD_COLORS.map((c, i) => `<button class="bd-btn${bd.color === i ? ' sel' : ''}" data-c="${i}"><span class="sw" style="background:${c}"></span></button>`).join('') +
+                '<span class="care-sep"></span>' +
+                BEAD_SHAPES.map(sh => `<button class="bd-btn" data-s="${sh}"><svg viewBox="-20 -20 40 40">${beadShape(sh, BEAD_COLORS[bd.color], 0, 0, 13)}</svg></button>`).join('') +
+                '<span class="care-sep"></span>' +
+                PENDANTS.map(([v, ic]) => `<button class="bd-btn${(bd.pendant || 'none') === v ? ' sel' : ''}" data-p="${v}">${ic}</button>`).join('') +
+                '<span class="care-sep"></span>' +
+                '<button class="bd-btn" id="bdUndo">⌫<small>Terug</small></button>' +
+                '<button class="bd-btn" id="bdClear">🧽<small>Leeg</small></button>' +
+                '<button class="bd-btn" id="bdWear" style="border-color:#86efac">✅<small>Omdoen</small></button>';
+            tray.querySelectorAll('[data-c]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                bd.color = +b.dataset.c;
+                renderBeadTray();
+                playPop();
+            }));
+            tray.querySelectorAll('[data-s]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (bd.beads.length >= 14) return;
+                bd.beads.push({ s: b.dataset.s, c: bd.color });
+                renderBeads(bd.beads.length - 1);
+                playTone(900 + bd.beads.length * 70, 0.12, 0.12, 'triangle');
+            }));
+            tray.querySelectorAll('[data-p]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                bd.pendant = b.dataset.p === 'none' ? null : b.dataset.p;
+                renderBeads();
+                renderBeadTray();
+                playSparkleSound();
+            }));
+            document.getElementById('bdUndo').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                bd.beads.pop();
+                renderBeads();
+                playFreqSweep(700, 300, 0.12, 0.1);
+            });
+            document.getElementById('bdClear').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                bd.beads = [];
+                bd.pendant = null;
+                renderBeads();
+                renderBeadTray();
+                playFreqSweep(900, 200, 0.4, 0.12);
+            });
+            document.getElementById('bdWear').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                state.look.neck = bd.beads.length ? { beads: bd.beads.slice(), pendant: bd.pendant } : null;
+                applyLook();
+                saveLook();
+                playWin();
+                closeBeads(true);
+                twirl();
+                sparkleShower(state.x, 200, 40);
+                showToast('💍 Wat een mooie ketting!');
+            });
+        }
+
+        function openBeads() {
+            beadOpen = true;
+            const cur = state.look.neck;
+            bd.beads = cur ? cur.beads.slice() : [];
+            bd.pendant = cur ? cur.pendant : null;
+            document.getElementById('beadOv').classList.add('open');
+            renderBeads();
+            renderBeadTray();
+            playMusicBox();
+        }
+
+        function closeBeads(silent) {
+            beadOpen = false;
+            document.getElementById('beadOv').classList.remove('open');
+            if (!silent) _playWhoosh();
+        }
+        document.getElementById('bdClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeBeads(false);
+        });
+        document.getElementById('beadOv').addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function openMusicBox(node) {
+            const open = node.classList.toggle('open');
+            if (!open) { playFreqSweep(600, 300, 0.2, 0.1); return; }
+            const notes = [1319, 1175, 1047, 988, 1047, 1175, 1319, 1568, 1319, 1175, 1047, 880];
+            notes.forEach((f, i) => setTimeout(() => playTone(f, 0.3, 0.08, 'sine'), i * 260));
+            const r = node.getBoundingClientRect();
+            const c = screenToWorld(r.left + r.width / 2, r.top);
+            for (let i = 0; i < 30; i++) spawnSparkle(c.x, c.y + 40, { speed: 120, hue: 320 });
+            clearTimeout(node._t);
+            node._t = setTimeout(() => node.classList.remove('open'), 7000);
+        }
+
+        /* ─────────── Cadeaukamer ─────────── */
+        const GIFT_KEY = 'noor-prinses-cadeaus';
+        const SURPRISES = ['🧸', '🦄', '🪀', '🎈', '🚂', '🪁', '🎨', '🐶', '🐱', '🐰', '🦋', '👑', '💍', '🌈', '⭐', '🎠', '🧩', '🪆', '🎀', '🍭', '🐣', '🦖', '🚀', '🎺'];
+        const GIFT_PAPERS = [['#f472b6', '#fbcfe8'], ['#60a5fa', '#bfdbfe'], ['#a855f7', '#e9d5ff'], ['#22c55e', '#bbf7d0'], ['#facc15', '#fef08a'], ['#ef4444', '#fecaca']];
+        const GIFT_RIBBONS = ['#fde047', '#ffffff', '#f472b6', '#a855f7', '#22d3ee'];
+        let gifts = [];
+        try { const g = JSON.parse(localStorage.getItem(GIFT_KEY)); if (Array.isArray(g)) gifts = g.filter(x => typeof x === 'string').slice(-40); } catch (e) {}
+        const gf = { paper: 0, ribbon: 0, pattern: 0, stage: 0, toy: null, busy: false };
+        let giftOpen = false;
+
+        function renderToyShelf() {
+            if (!state.toyShelf) return;
+            const rows = state.toyShelf.querySelectorAll('.toys');
+            const recent = gifts.slice(-18);
+            rows[0].textContent = recent.slice(0, 9).join('');
+            rows[1].textContent = recent.slice(9, 18).join('');
+        }
+
+        function giftSVG() {
+            const [c1, c2] = GIFT_PAPERS[gf.paper];
+            const rib = GIFT_RIBBONS[gf.ribbon];
+            const pat = gf.pattern === 0
+                ? `<pattern id="gfPat" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="${c1}"/><circle cx="10" cy="10" r="4" fill="${c2}"/></pattern>`
+                : gf.pattern === 1
+                ? `<pattern id="gfPat" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="20" height="20" fill="${c1}"/><rect width="8" height="20" fill="${c2}"/></pattern>`
+                : `<pattern id="gfPat" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="${c1}"/><text x="12" y="16" font-size="12" text-anchor="middle">⭐</text></pattern>`;
+            const tears = [
+                'M36 96 L70 92 L62 118 L80 130 L44 150 Z',
+                'M164 100 L130 96 L140 124 L118 140 L160 160 Z',
+                'M60 176 L100 150 L140 176 Z'
+            ];
+            let h = `<defs>${pat}</defs>
+                <ellipse cx="100" cy="186" rx="80" ry="8" fill="rgba(0,0,0,0.12)"/>
+                <rect x="34" y="88" width="132" height="94" rx="6" fill="url(#gfPat)" stroke="rgba(0,0,0,0.12)" stroke-width="2"/>`;
+            for (let i = 0; i < gf.stage - 1 && i < 3; i++) h += `<path d="${tears[i]}" fill="#d6a77a" stroke="#a16207" stroke-width="2" stroke-linejoin="round"/>`;
+            if (gf.stage < 4) h += `<rect x="92" y="88" width="16" height="94" fill="${rib}" opacity="${gf.stage >= 1 ? 0 : 1}"/>`;
+            h += `<g class="gf-lid${gf.stage >= 4 ? ' off' : ''}">
+                    <rect x="26" y="64" width="148" height="30" rx="6" fill="url(#gfPat)" stroke="rgba(0,0,0,0.12)" stroke-width="2"/>
+                    ${gf.stage < 1 ? `<rect x="92" y="64" width="16" height="30" fill="${rib}"/>` : ''}
+                </g>`;
+            if (gf.stage === 0) {
+                h += `<g class="gf-bow"><ellipse cx="84" cy="56" rx="18" ry="11" fill="${rib}" stroke="rgba(0,0,0,0.15)" stroke-width="2" transform="rotate(-20 84 56)"/>
+                      <ellipse cx="116" cy="56" rx="18" ry="11" fill="${rib}" stroke="rgba(0,0,0,0.15)" stroke-width="2" transform="rotate(20 116 56)"/>
+                      <circle cx="100" cy="60" r="8" fill="${rib}" stroke="rgba(0,0,0,0.15)" stroke-width="2"/></g>`;
+            }
+            if (gf.stage >= 4 && gf.toy) {
+                h += `<rect x="38" y="92" width="124" height="20" fill="#78350f" opacity=".35"/>
+                      <text class="gf-toy" x="100" y="104" font-size="52" text-anchor="middle" dominant-baseline="central">${gf.toy}</text>`;
+            }
+            return h;
+        }
+
+        function renderGift() {
+            document.getElementById('gfSvg').innerHTML = giftSVG();
+            const unique = new Set(gifts).size;
+            document.getElementById('gfCount').textContent = `🎁 ${unique} / ${SURPRISES.length} verrassingen`;
+        }
+
+        function newGift() {
+            gf.paper = Math.floor(Math.random() * GIFT_PAPERS.length);
+            gf.ribbon = Math.floor(Math.random() * GIFT_RIBBONS.length);
+            gf.pattern = Math.floor(Math.random() * 3);
+            gf.stage = 0;
+            // Prefer surprises she hasn't found yet
+            const fresh = SURPRISES.filter(t => !gifts.includes(t));
+            gf.toy = randomPick(fresh.length ? fresh : SURPRISES);
+            document.getElementById('gfNext').style.display = 'none';
+            renderGift();
+        }
+
+        function giftScraps(n, colors) {
+            const st = document.getElementById('gfStage');
+            const r = document.getElementById('gfSvg').getBoundingClientRect();
+            const o = st.getBoundingClientRect();
+            for (let i = 0; i < n; i++) {
+                const sc = document.createElement('div');
+                sc.className = 'gf-scrap';
+                sc.style.background = randomPick(colors);
+                sc.style.clipPath = 'polygon(0 20%, 60% 0, 100% 40%, 80% 100%, 20% 80%)';
+                sc.style.left = (r.left - o.left + r.width * (0.3 + Math.random() * 0.4)) + 'px';
+                sc.style.top = (r.top - o.top + r.height * (0.45 + Math.random() * 0.3)) + 'px';
+                sc.style.setProperty('--dx', ((Math.random() - 0.5) * 400) + 'px');
+                sc.style.setProperty('--dy', (-80 - Math.random() * 200) + 'px');
+                sc.style.setProperty('--rot', ((Math.random() - 0.5) * 720) + 'deg');
+                st.appendChild(sc);
+                setTimeout(() => sc.remove(), 900);
+            }
+        }
+
+        function tapGift() {
+            if (gf.busy || gf.stage >= 4) return;
+            const svg = document.getElementById('gfSvg');
+            svg.classList.remove('shake'); void svg.getBoundingClientRect(); svg.classList.add('shake');
+            if (gf.stage === 0) {
+                const bow = svg.querySelector('.gf-bow');
+                if (bow) bow.classList.add('off');
+                playFreqSweep(400, 1400, 0.3, 0.12);
+                gf.busy = true;
+                setTimeout(() => { gf.stage = 1; gf.busy = false; renderGift(); }, 500);
+                return;
+            }
+            if (gf.stage < 4) {
+                gf.stage++;
+                giftScraps(8, GIFT_PAPERS[gf.paper]);
+                playFreqSweep(2000, 500, 0.18, 0.12);
+                if (gf.stage < 4) { renderGift(); return; }
+                // Lid pops and the surprise jumps out
+                renderGift();
+                playFreqSweep(200, 900, 0.25, 0.2);
+                setTimeout(() => { playWin(); }, 300);
+                const r = svg.getBoundingClientRect();
+                const o = document.getElementById('giftOv').getBoundingClientRect();
+                for (let k = 0; k < 3; k++) setTimeout(() => {
+                    for (let i = 0; i < 8; i++) {
+                        const sp = document.createElement('span');
+                        sp.className = 'scope-spark';
+                        sp.textContent = randomPick(['✨', '🎉', '⭐', '💖', '🎊']);
+                        const a = Math.random() * Math.PI * 2;
+                        const d = 60 + Math.random() * 90;
+                        sp.style.left = (r.left - o.left + r.width / 2) + 'px';
+                        sp.style.top = (r.top - o.top + r.height * 0.35) + 'px';
+                        sp.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                        sp.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                        document.getElementById('giftOv').appendChild(sp);
+                        setTimeout(() => sp.remove(), 900);
+                    }
+                }, 300 + k * 200);
+                gifts.push(gf.toy);
+                try { localStorage.setItem(GIFT_KEY, JSON.stringify(gifts.slice(-40))); } catch (e) {}
+                renderToyShelf();
+                setTimeout(() => { document.getElementById('gfNext').style.display = ''; renderGift(); }, 900);
+            }
+        }
+
+        document.getElementById('gfSvg').addEventListener('pointerdown', (e) => { e.stopPropagation(); tapGift(); });
+        document.getElementById('gfNext').addEventListener('pointerdown', (e) => { e.stopPropagation(); newGift(); playPop(); });
+
+        function openGifts() {
+            giftOpen = true;
+            document.getElementById('giftOv').classList.add('open');
+            newGift();
+            playMusicBox();
+        }
+
+        function closeGifts() {
+            giftOpen = false;
+            document.getElementById('giftOv').classList.remove('open');
+            _playWhoosh();
+        }
+        document.getElementById('gfClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeGifts();
+        });
+        document.getElementById('giftOv').addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function confettiAt(x, y) {
+            playFreqSweep(200, 60, 0.25, 0.3);
+            setTimeout(playSparkleSound, 150);
+            for (let i = 0; i < 80; i++) {
+                spawnSparkle(x, y, { vx: (Math.random() - 0.3) * 400, vy: -250 - Math.random() * 300, g: 420, size: 5 + Math.random() * 6, max: 1.6 + Math.random() * 0.8 });
+            }
+        }
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
@@ -10161,6 +10686,7 @@
         renderWallFrames();
         renderRoomSnowman();
         renderVitrine();
+        renderToyShelf();
         loadLook();
         applyLook();
         spawnGems();
