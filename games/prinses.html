@@ -3610,6 +3610,141 @@
         .boat-btns.show { display: flex; }
         .boat-btns .dismount { position: static; display: block; }
 
+        /* ── Sterrenkamer ── */
+        .i-room.r14 .wall {
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath d='M35 22 L38.5 31 L48 31.5 L40.5 37.5 L43 47 L35 41.5 L27 47 L29.5 37.5 L22 31.5 L31.5 31 Z' fill='%23fde68a' opacity='.85'/%3E%3C/svg%3E") 0 0 / 70px 70px,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath d='M35 22 L38.5 31 L48 31.5 L40.5 37.5 L43 47 L35 41.5 L27 47 L29.5 37.5 L22 31.5 L31.5 31 Z' fill='%23fde68a' opacity='.85'/%3E%3C/svg%3E") 35px 35px / 70px 70px,
+                radial-gradient(circle, #fff 1.2px, transparent 2px) 10px 20px / 40px 46px,
+                linear-gradient(180deg, #0f0c3d, #312e81 70%, #4c1d95);
+        }
+        .i-room.r14 .floor {
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath d='M35 22 L38.5 31 L48 31.5 L40.5 37.5 L43 47 L35 41.5 L27 47 L29.5 37.5 L22 31.5 L31.5 31 Z' fill='%23fde68a' opacity='.85'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+                linear-gradient(180deg, #1e1b4b, #312e81);
+        }
+        .shooting {
+            width: 120px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(90deg, transparent, #fff);
+            pointer-events: none;
+            opacity: 0;
+            animation: shoot 6s ease-in infinite;
+        }
+        .shooting::after {
+            content: '';
+            position: absolute; right: -4px; top: -3px; width: 9px; height: 9px;
+            border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff, 0 0 20px #fde68a;
+        }
+        @keyframes shoot {
+            0%, 70% { transform: translate(0, 0) rotate(20deg); opacity: 0; }
+            72% { opacity: 1; }
+            90% { transform: translate(380px, 140px) rotate(20deg); opacity: 0; }
+            100% { opacity: 0; }
+        }
+        .big-moon {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #fefce8, #fde68a 60%, #facc15);
+            box-shadow: 0 0 40px rgba(253,230,138,0.8), inset -14px -10px 0 rgba(0,0,0,0.08);
+            pointer-events: none;
+        }
+        .star-mobile-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #fcd34d, #f59e0b); pointer-events: none; }
+        .hang-star { width: 54px; transform-origin: 50% 0; }
+        .hang-star::before {
+            content: '';
+            position: absolute; left: 26px; top: 0; width: 2px; height: var(--len);
+            background: #fde68a;
+        }
+        .hang-star svg { position: absolute; left: 0; top: var(--len); width: 54px; height: 54px; filter: drop-shadow(0 0 8px #fde68a); }
+        .hang-star.ring { animation: bellRing 0.6s ease; }
+        .star-board { width: 240px; height: 250px; }
+        .star-board > div { position: absolute; }
+        .star-board .leg { top: 150px; width: 12px; height: 100px; background: #b45309; border-radius: 5px; }
+        .star-board .board {
+            left: 10px; top: 0; width: 220px; height: 170px;
+            border-radius: 14px;
+            border: 10px solid #fcd34d;
+            background: radial-gradient(circle at 30% 30%, #312e81, #0f0c3d);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+        }
+        .star-board svg { position: absolute; left: 20px; top: 10px; width: 200px; height: 150px; }
+        .star-rug {
+            width: 300px; height: 60px; border-radius: 50%;
+            background: radial-gradient(ellipse, #fde68a 0 25%, #f59e0b 26% 45%, #7c3aed 46% 100%);
+            pointer-events: none; z-index: 1;
+        }
+
+        /* ── Sterrenbeeld overlay ── */
+        .stargame {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle, #fff 1px, transparent 1.8px) 0 0 / 34px 38px,
+                radial-gradient(circle, #fde68a 1px, transparent 1.8px) 17px 19px / 52px 46px,
+                linear-gradient(180deg, #0f0c3d, #312e81 70%, #4c1d95);
+        }
+        .stargame.open { display: flex; }
+        .stargame .nails-title { color: #fde68a; text-shadow: 0 0 10px rgba(253,230,138,0.6); }
+        .sg-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+        .sg-stage svg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: visible; touch-action: none; }
+        .sg-star { cursor: pointer; }
+        .sg-star .shape { transform-box: fill-box; transform-origin: 50% 50%; transition: fill 0.3s ease; }
+        .sg-star.next .shape { animation: sgPulse 0.9s ease-in-out infinite; }
+        .sg-star.lit .shape { fill: #fde047; filter: drop-shadow(0 0 2px #fde68a); }
+        .sg-star.nope .shape { animation: sgNope 0.4s ease; }
+        @keyframes sgPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+        }
+        @keyframes sgNope {
+            0%, 100% { transform: translateX(0); }
+            30% { transform: translateX(-2px); }
+            70% { transform: translateX(2px); }
+        }
+        .sg-num {
+            font-family: 'Fredoka One', cursive;
+            fill: #fff;
+            stroke: #1e1b4b;
+            stroke-width: 1.2px;
+            paint-order: stroke;
+            pointer-events: none;
+        }
+        .sg-line { stroke: #fde047; stroke-width: 1.6; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 1.5px #fde68a); stroke-dasharray: 1; stroke-dashoffset: 1; animation: sgDraw 0.35s ease-out forwards; }
+        @keyframes sgDraw { to { stroke-dashoffset: 0; } }
+        .sg-fill { opacity: 0; transition: opacity 0.8s ease; }
+        .sg-fill.show { opacity: 0.6; }
+        .sg-emoji { opacity: 0; transform-box: fill-box; transform-origin: 50% 50%; }
+        .sg-emoji.show { animation: sgReveal 0.8s cubic-bezier(.2,1.6,.4,1) forwards; }
+        @keyframes sgReveal {
+            from { opacity: 0; transform: scale(0.2) rotate(-30deg); }
+            to { opacity: 1; transform: scale(1) rotate(0); }
+        }
+        .sg-picks { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 2; }
+        .sg-pick {
+            position: relative;
+            width: 58px; height: 58px;
+            border-radius: 18px;
+            border: 3px solid rgba(253,230,138,0.5);
+            background: rgba(255,255,255,0.12);
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+        }
+        .sg-pick.sel { border-color: #fde047; background: rgba(253,224,71,0.25); transform: translateY(-4px) scale(1.08); }
+        .sg-pick .done { position: absolute; right: -6px; top: -8px; font-size: 18px; display: none; }
+        .sg-pick.is-done .done { display: block; }
+        .sg-pick.hint { animation: hintPulse 0.6s ease infinite; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -3664,6 +3799,13 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="stargame" id="starGame">
+                <div class="nails-title">⭐ Sterrenbeeld</div>
+                <div class="sg-stage" id="sgStage"><svg id="sgSvg" viewBox="-8 -8 116 116"></svg></div>
+                <div class="sg-picks" id="sgPicks"></div>
+                <button class="scope-close" id="sgClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="dollov" id="dollOv">
@@ -3801,7 +3943,8 @@
             { name: 'Eetkamer',      icon: '🍽️', say: 'De eetkamer' },
             { name: 'Speelkamer',    icon: '🧸', say: 'De speelkamer' },
             { name: 'Hartjeskamer',  icon: '💖', say: 'De hartjeskamer' },
-            { name: 'Poppenhuis',    icon: '🏠', say: 'Het poppenhuis' }
+            { name: 'Poppenhuis',    icon: '🏠', say: 'Het poppenhuis' },
+            { name: 'Sterrenkamer',  icon: '⭐', say: 'De sterrenkamer' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -3820,6 +3963,7 @@
         const SPEED = 280;
         const RIDE_SPEED = 540;
         const HEART_IDX = 12;
+        const STAR_IDX = 14;
         // Lake (outside, last area): the princess can only go past the shore by boat
         const LAKE_X0 = ROOM_W * 5 + 190;
         const BOAT_HOME = LAKE_X0 + 80;
@@ -3833,7 +3977,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 30, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 32, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 14, door: null }
         };
         let scene = SCENES.in;
@@ -4293,6 +4437,29 @@
                 playFreqSweep(tumbled ? 600 : 300, tumbled ? 150 : 700, 0.4, 0.15);
             });
             addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
+
+            /* Room: Sterrenkamer */
+            const rst = ROOM_W * STAR_IDX;
+            place(el('<div class="big-moon"></div>'), rst + 620, 60);
+            [[60, 40, 0], [300, 20, -2.5], [480, 60, -4]].forEach(([x, y, d]) => {
+                const sh = place(el('<div class="shooting"></div>'), rst + x, y);
+                sh.style.animationDelay = d + 's';
+            });
+            place(el('<div class="star-mobile-bar" style="width:250px"></div>'), rst + 40, 60);
+            [[60, 40], [110, 80], [160, 30], [210, 70]].forEach(([x, len], i) => {
+                const st = addObj(`<div class="hang-star" style="--len:${len}px;height:${len + 54}px">${starSVG(['#fde047', '#fbbf24', '#fde68a', '#facc15'][i])}</div>`, rst + x - 27, 66, rst + x, (node) => ringHangStar(node, i));
+            });
+            addObj(`<div class="star-board">
+                <div class="leg" style="left:40px;transform:rotate(8deg)"></div>
+                <div class="leg" style="left:188px;transform:rotate(-8deg)"></div>
+                <div class="board"></div>
+                <svg viewBox="0 0 100 75">
+                    <polyline points="20,60 30,25 50,40 70,15 82,55" stroke="#fde047" stroke-width="1.5" fill="none"/>
+                    ${[[20, 60], [30, 25], [50, 40], [70, 15], [82, 55]].map(([x, y], i) => `<g transform="translate(${x},${y})"><path d="${starPath(4)}" fill="#fef3c7"/><text y="-6" font-size="6" text-anchor="middle" class="sg-num">${i + 1}</text></g>`).join('')}
+                </svg>
+                <div class="tap-hint" style="left:108px;top:-44px">👇</div>
+            </div>`, rst + 320, 150, rst + 600, openStarGame);
+            place(el('<div class="star-rug"></div>'), rst + 290, 425);
 
             /* Room: Poppenhuis */
             const rdh = ROOM_W * 13;
@@ -5504,6 +5671,7 @@
             if (e.key === 'Escape' && mapOpen) closeMap();
             if (e.key === 'Escape' && hpOpen) closeHeartPost();
             if (e.key === 'Escape' && dollOpen) closeDollhouse();
+            if (e.key === 'Escape' && sgOpen) closeStarGame();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -5602,6 +5770,7 @@
             ctx2d.clearRect(0, 0, canvas.width, canvas.height);
             ctx2d.setTransform(dpr * state.scale, 0, 0, dpr * state.scale, -state.camX * state.scale * dpr, state.offsetY * dpr);
             const hearts = scene.key === 'in' && state.room === HEART_IDX;
+            const goldStars = scene.key === 'in' && state.room === STAR_IDX;
             ctx2d.globalCompositeOperation = hearts ? 'source-over' : 'lighter';
             for (const p of particles) {
                 const t = p.life / p.max;
@@ -5616,8 +5785,8 @@
                     ctx2d.fill();
                     continue;
                 }
-                ctx2d.fillStyle = `hsla(${p.hue}, 100%, 72%, ${alpha})`;
-                drawStar(p.x, p.y, s, p.spin);
+                ctx2d.fillStyle = `hsla(${goldStars ? 42 + (p.hue % 16) : p.hue}, 100%, 72%, ${alpha})`;
+                drawStar(p.x, p.y, goldStars ? s * 1.3 : s, p.spin);
                 ctx2d.fillStyle = `rgba(255,255,255,${alpha * 0.9})`;
                 drawStar(p.x, p.y, s * 0.45, p.spin);
             }
@@ -8320,7 +8489,199 @@
         dollEl.addEventListener('pointerdown', (e) => e.stopPropagation());
         window.addEventListener('resize', () => { if (dollOpen) sizeDollhouse(); });
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen; }
+
+        /* ─────────── Sterrenkamer ─────────── */
+        function starPath(r) {
+            let d = '';
+            for (let i = 0; i < 10; i++) {
+                const rad = i % 2 === 0 ? r : r * 0.45;
+                const a = -Math.PI / 2 + (i * Math.PI) / 5;
+                d += (i ? 'L' : 'M') + (Math.cos(a) * rad).toFixed(2) + ' ' + (Math.sin(a) * rad).toFixed(2) + ' ';
+            }
+            return d + 'Z';
+        }
+
+        function starSVG(fill) {
+            return `<svg viewBox="-12 -12 24 24"><path d="${starPath(11)}" fill="${fill}" stroke="#fff" stroke-width="0.8" stroke-linejoin="round"/></svg>`;
+        }
+
+        const STAR_NOTES = [659, 784, 880, 1047];
+        function ringHangStar(node, i) {
+            node.classList.remove('ring');
+            void node.offsetWidth;
+            node.classList.add('ring');
+            playTone(STAR_NOTES[i], 0.7, 0.15, 'sine');
+            playTone(STAR_NOTES[i] * 2, 0.5, 0.05, 'sine');
+            const r = node.getBoundingClientRect();
+            const c = screenToWorld(r.left + r.width / 2, r.bottom - 20);
+            for (let k = 0; k < 14; k++) spawnSparkle(c.x, c.y, { speed: 140, g: 60 });
+        }
+
+        // Connect-the-stars pictures (0-100 coordinates, drawn in order and closed at the end)
+        const STAR_PICS = [
+            { e: '⭐', c: '#facc15', pts: Array.from({ length: 10 }, (_, i) => {
+                const rad = i % 2 === 0 ? 46 : 19;
+                const a = -Math.PI / 2 + (i * Math.PI) / 5;
+                return [50 + Math.cos(a) * rad, 54 + Math.sin(a) * rad];
+            }) },
+            { e: '❤️', c: '#f43f5e', pts: [[50, 30], [62, 14], [80, 12], [93, 28], [88, 52], [50, 90], [12, 52], [7, 28], [20, 12], [38, 14]] },
+            { e: '🏠', c: '#fb923c', pts: [[18, 92], [18, 50], [50, 18], [64, 32], [64, 20], [76, 20], [76, 44], [82, 50], [82, 92]] },
+            { e: '🐟', c: '#38bdf8', pts: [[8, 50], [30, 30], [58, 26], [76, 42], [94, 26], [94, 74], [76, 58], [58, 74], [30, 70]] },
+            { e: '👑', c: '#fbbf24', pts: [[12, 84], [12, 34], [31, 58], [50, 20], [69, 58], [88, 34], [88, 84]] },
+            { e: '🌙', c: '#fde68a', pts: [[62, 8], [34, 16], [16, 42], [22, 72], [46, 90], [76, 86], [56, 72], [44, 50], [48, 26]] },
+            { e: '🍦', c: '#f9a8d4', pts: [[50, 94], [68, 44], [74, 28], [63, 12], [50, 8], [37, 12], [26, 28], [32, 44]] },
+            { e: '🐱', c: '#c084fc', pts: [[24, 88], [16, 46], [24, 10], [40, 30], [60, 30], [76, 10], [84, 46], [76, 88]] },
+            { e: '🍄', c: '#ef4444', pts: [[40, 92], [40, 64], [10, 60], [18, 34], [50, 14], [82, 34], [90, 60], [60, 64], [60, 92]] }
+        ];
+        const sgEl = document.getElementById('starGame');
+        const sgSvg = document.getElementById('sgSvg');
+        let sgOpen = false;
+        const sg = { pic: 0, next: 0, done: new Set(), finished: false, dragging: false };
+
+        function sizeStarGame() {
+            const st = document.getElementById('sgStage').getBoundingClientRect();
+            const size = Math.max(200, Math.min(st.width, st.height) * 0.98);
+            sgSvg.style.width = sgSvg.style.height = size + 'px';
+        }
+
+        function renderStarPicks() {
+            const box = document.getElementById('sgPicks');
+            box.innerHTML = STAR_PICS.map((p, i) => `<button class="sg-pick${sg.pic === i ? ' sel' : ''}${sg.done.has(i) ? ' is-done' : ''}" data-i="${i}">${p.e}<span class="done">✅</span></button>`).join('');
+            box.querySelectorAll('.sg-pick').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                startStarPic(+b.dataset.i);
+                playPop();
+            }));
+        }
+
+        function startStarPic(i) {
+            sg.pic = i;
+            sg.next = 0;
+            sg.finished = false;
+            const pic = STAR_PICS[i];
+            const pts = pic.pts;
+            const cx = pts.reduce((a, p) => a + p[0], 0) / pts.length;
+            const cy = pts.reduce((a, p) => a + p[1], 0) / pts.length;
+            sgSvg.innerHTML = `
+                <polygon class="sg-fill" points="${pts.map(p => p.join(',')).join(' ')}" fill="${pic.c}"/>
+                <g id="sgLines"></g>
+                <text class="sg-emoji" x="${cx}" y="${cy}" font-size="26" text-anchor="middle" dominant-baseline="central">${pic.e}</text>
+                <g id="sgStars">${pts.map(([x, y], k) => `
+                    <g class="sg-star${k === 0 ? ' next' : ''}" data-i="${k}" transform="translate(${x},${y})">
+                        <circle r="8" fill="transparent"/>
+                        <path class="shape" d="${starPath(3.6)}" fill="#fef3c7" stroke="#fbbf24" stroke-width="0.5"/>
+                        <text class="sg-num" y="-5.5" font-size="5.5" text-anchor="middle">${k + 1}</text>
+                    </g>`).join('')}</g>`;
+            renderStarPicks();
+            sizeStarGame();
+        }
+
+        function sgLine(a, b) {
+            const pts = STAR_PICS[sg.pic].pts;
+            const [x1, y1] = pts[a], [x2, y2] = pts[b];
+            document.getElementById('sgLines').insertAdjacentHTML('beforeend',
+                `<line class="sg-line" pathLength="1" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`);
+        }
+
+        function tapStar(k) {
+            if (sg.finished) return;
+            const stars = sgSvg.querySelectorAll('.sg-star');
+            if (k !== sg.next) {
+                if (k < sg.next) return;
+                const st = stars[k];
+                st.classList.remove('nope'); void st.getBBox(); st.classList.add('nope');
+                playTone(200, 0.12, 0.08, 'triangle');
+                return;
+            }
+            stars[k].classList.remove('next');
+            stars[k].classList.add('lit');
+            if (k > 0) sgLine(k - 1, k);
+            playTone(523 * Math.pow(2, k / 7), 0.3, 0.14, 'triangle');
+            const r = stars[k].getBoundingClientRect();
+            sgSpark(r.left + r.width / 2, r.top + r.height / 2, 4);
+            sg.next++;
+            const total = STAR_PICS[sg.pic].pts.length;
+            if (sg.next < total) {
+                stars[sg.next].classList.add('next');
+                return;
+            }
+            // Last star: close the shape and reveal the picture
+            sg.finished = true;
+            sgLine(total - 1, 0);
+            setTimeout(() => {
+                sgSvg.querySelector('.sg-fill').classList.add('show');
+                sgSvg.querySelector('.sg-emoji').classList.add('show');
+                playWin();
+                sg.done.add(sg.pic);
+                const box = sgSvg.getBoundingClientRect();
+                for (let n = 0; n < 4; n++) setTimeout(() => sgSpark(box.left + Math.random() * box.width, box.top + Math.random() * box.height, 8), n * 180);
+                renderStarPicks();
+                const nextPick = STAR_PICS.findIndex((_, i) => !sg.done.has(i));
+                if (nextPick >= 0) {
+                    const b = document.querySelector(`.sg-pick[data-i="${nextPick}"]`);
+                    if (b) b.classList.add('hint');
+                }
+            }, 400);
+        }
+
+        function sgSpark(cx, cy, n) {
+            const o = sgEl.getBoundingClientRect();
+            for (let i = 0; i < n; i++) {
+                const sp = document.createElement('span');
+                sp.className = 'scope-spark';
+                sp.textContent = randomPick(['✨', '⭐', '🌟', '💫']);
+                const a = Math.random() * Math.PI * 2;
+                const d = 30 + Math.random() * 50;
+                sp.style.left = (cx - o.left) + 'px';
+                sp.style.top = (cy - o.top) + 'px';
+                sp.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                sp.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                sgEl.appendChild(sp);
+                setTimeout(() => sp.remove(), 900);
+            }
+        }
+
+        function starAt(e) {
+            const hit = document.elementFromPoint(e.clientX, e.clientY);
+            const g = hit && hit.closest && hit.closest('.sg-star');
+            return g ? +g.dataset.i : -1;
+        }
+
+        sgSvg.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            sg.dragging = true;
+            const k = starAt(e);
+            if (k >= 0) tapStar(k);
+        });
+        sgSvg.addEventListener('pointermove', (e) => {
+            if (!sg.dragging) return;
+            const k = starAt(e);
+            // Swiping only ever connects the next star, so a finger trail can't trigger "wrong"
+            if (k >= 0 && k === sg.next) tapStar(k);
+        });
+        window.addEventListener('pointerup', () => { sg.dragging = false; });
+        sgEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function openStarGame() {
+            sgOpen = true;
+            sgEl.classList.add('open');
+            const first = STAR_PICS.findIndex((_, i) => !sg.done.has(i));
+            startStarPic(first >= 0 ? first : 0);
+            playMusicBox();
+        }
+
+        function closeStarGame() {
+            sgOpen = false;
+            sgEl.classList.remove('open');
+            _playWhoosh();
+        }
+        document.getElementById('sgClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeStarGame();
+        });
+        window.addEventListener('resize', () => { if (sgOpen) sizeStarGame(); });
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
