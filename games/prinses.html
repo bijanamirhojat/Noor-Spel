@@ -3204,6 +3204,164 @@
         .din-again { margin-top: 14px; display: none; }
         .din-again.show { display: flex; }
 
+        /* ── Hartjeskamer ── */
+        .i-room.r12 .wall {
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 50 C12 36 10 20 21 18 C27 17 31 21 32 24 C33 21 37 17 43 18 C54 20 52 36 32 50Z' fill='%23fb7185'/%3E%3C/svg%3E") 0 0 / 64px 64px,
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 44 C20 36 19 26 25 25 C29 24 31 27 32 29 C33 27 35 24 39 25 C45 26 44 36 32 44Z' fill='%23ffffff' opacity='.8'/%3E%3C/svg%3E") 32px 32px / 64px 64px,
+                linear-gradient(180deg, #fce7f3, #fbcfe8);
+        }
+        .i-room.r12 .floor {
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 44 C20 36 19 26 25 25 C29 24 31 27 32 29 C33 27 35 24 39 25 C45 26 44 36 32 44Z' fill='%23ffffff' opacity='.8'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+                linear-gradient(180deg, #f9a8d4, #f472b6);
+        }
+        .heart-svg { display: block; overflow: visible; }
+        .heart-pump { width: 170px; height: 160px; transform-origin: 50% 100%; transition: transform 0.25s cubic-bezier(.2,1.8,.4,1); }
+        .heart-pump .heart-svg { width: 100%; height: 100%; filter: drop-shadow(0 8px 10px rgba(190,24,93,0.35)); animation: heartBeat 1.1s ease-in-out infinite; }
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            15% { transform: scale(1.08); }
+            30% { transform: scale(0.98); }
+            45% { transform: scale(1.05); }
+        }
+        .heart-pump.boom .heart-svg { animation: heartBoom 0.5s ease forwards; }
+        @keyframes heartBoom { to { transform: scale(2.2); opacity: 0; } }
+        .heart-bell { width: 56px; height: 52px; transform-origin: 50% 0; }
+        .heart-bell .heart-svg { width: 100%; height: 100%; }
+        .heart-bell.ring { animation: bellRing 0.5s ease; }
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0) scale(1); }
+            30% { transform: rotate(-14deg) scale(1.15); }
+            60% { transform: rotate(10deg) scale(1.05); }
+        }
+        .bell-bar {
+            height: 10px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #fcd34d, #f59e0b);
+            pointer-events: none;
+        }
+        .heart-cushion { width: 180px; height: 110px; }
+        .heart-cushion .heart-svg { width: 100%; height: 100%; }
+        .heart-cushion.squish { animation: squish 0.5s ease; transform-origin: 50% 100%; }
+        @keyframes squish {
+            0%, 100% { transform: scale(1, 1); }
+            40% { transform: scale(1.15, 0.75); }
+        }
+        .heart-balloon { width: 60px; height: 120px; animation: carousel 2.6s ease-in-out infinite; }
+        .heart-balloon .heart-svg { width: 60px; height: 56px; }
+        .heart-balloon::after {
+            content: '';
+            position: absolute;
+            left: 29px; top: 52px; width: 2px; height: 66px;
+            background: #be185d;
+        }
+        .heart-window { width: 150px; height: 140px; pointer-events: none; }
+        .heart-window .heart-svg { width: 100%; height: 100%; }
+        .heart-lamp { width: 70px; height: 120px; pointer-events: none; }
+        .heart-lamp::before {
+            content: '';
+            position: absolute;
+            left: 34px; top: 0; width: 2px; height: 60px;
+            background: #be185d;
+        }
+        .heart-lamp .heart-svg { position: absolute; left: 5px; top: 56px; width: 60px; height: 56px; filter: drop-shadow(0 0 14px #fda4af); animation: heartBeat 1.6s ease-in-out infinite; }
+        .mailbox { width: 110px; height: 190px; }
+        .mailbox > div, .mailbox > span { position: absolute; }
+        .mailbox .post { left: 46px; top: 90px; width: 18px; height: 100px; background: #be185d; border-radius: 4px; }
+        .mailbox .box {
+            left: 0; top: 0; width: 110px; height: 96px;
+            border-radius: 50px 50px 10px 10px;
+            background: linear-gradient(180deg, #fb7185, #e11d48);
+            box-shadow: inset 0 -8px 0 rgba(0,0,0,0.12);
+        }
+        .mailbox .slot { left: 25px; top: 40px; width: 60px; height: 10px; border-radius: 5px; background: #881337; }
+        .mailbox .letter { left: 34px; top: 4px; font-size: 40px; animation: carousel 1.8s ease-in-out infinite; }
+
+        /* ── Hartjespost overlay ── */
+        .hpost {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M32 50 C12 36 10 20 21 18 C27 17 31 21 32 24 C33 21 37 17 43 18 C54 20 52 36 32 50Z' fill='%23fb7185'/%3E%3C/svg%3E") 0 0 / 64px 64px,
+                linear-gradient(180deg, #fce7f3, #fbcfe8);
+        }
+        .hpost.open { display: flex; }
+        .hp-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+        .hp-paper {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: min(94%, 720px);
+            height: 94%;
+            transform: translate(-50%, -50%);
+            border-radius: 18px;
+            background:
+                repeating-linear-gradient(0deg, transparent 0 34px, rgba(244,114,182,0.18) 34px 36px),
+                #fff7fb;
+            box-shadow: 0 10px 24px rgba(190,24,93,0.25);
+            border: 6px solid #fff;
+            overflow: hidden;
+            touch-action: none;
+            transition: transform 0.6s cubic-bezier(.5,0,.5,1), opacity 0.6s ease;
+        }
+        .hp-paper.send { transform: translate(-50%, -50%) scale(0.12) rotate(-12deg); opacity: 0; }
+        .hp-paper.fresh { animation: hpIn 0.5s cubic-bezier(.2,1.6,.4,1); }
+        @keyframes hpIn { from { transform: translate(-50%, -50%) scale(0.6); opacity: 0; } to { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+        .hp-heart {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            line-height: 1;
+            pointer-events: none;
+            animation: sprout 0.25s cubic-bezier(.2,1.8,.4,1);
+        }
+        .hp-envelope {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 90px;
+            line-height: 1;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 4;
+            animation: envFly 1.4s ease-in forwards;
+        }
+        @keyframes envFly {
+            0% { transform: translate(-50%, -50%) scale(0.3); opacity: 0; }
+            25% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+            45% { transform: translate(-50%, -50%) scale(1) rotate(-6deg); }
+            100% { transform: translate(120%, -260%) scale(0.5) rotate(20deg); opacity: 0; }
+        }
+        .hp-tools { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; z-index: 2; }
+        .hp-btn {
+            min-width: 56px;
+            height: 56px;
+            border-radius: 18px;
+            border: 3px solid #fbcfe8;
+            background: #fff;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2px 8px;
+        }
+        .hp-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #be185d; }
+        .hp-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.08); }
+        .hp-btn.hint { animation: hintPulse 0.5s ease 3; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -3257,6 +3415,13 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="hpost" id="hpost">
+                <div class="nails-title">💌 Hartjespost</div>
+                <div class="hp-stage"><div class="hp-paper" id="hpPaper"></div></div>
+                <div class="hp-tools" id="hpTools"></div>
+                <button class="scope-close" id="hpClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="mapov" id="mapOv">
@@ -3377,7 +3542,8 @@
             { name: 'Dierensalon',   icon: '🛁', say: 'De dierensalon' },
             { name: 'Borduurkamer',  icon: '🧵', say: 'De borduurkamer' },
             { name: 'Eetkamer',      icon: '🍽️', say: 'De eetkamer' },
-            { name: 'Speelkamer',    icon: '🧸', say: 'De speelkamer' }
+            { name: 'Speelkamer',    icon: '🧸', say: 'De speelkamer' },
+            { name: 'Hartjeskamer',  icon: '💖', say: 'De hartjeskamer' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -3394,6 +3560,7 @@
         const FEET_Y = 452;
         const SPEED = 280;
         const RIDE_SPEED = 540;
+        const HEART_IDX = 12;
         const BALL_IDX = 4;
         const BALL_TILE_X0 = 150;
         const RIDE_LIFT = 30;
@@ -3403,7 +3570,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 26, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 28, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
         let scene = SCENES.in;
@@ -3861,6 +4028,23 @@
                 playFreqSweep(tumbled ? 600 : 300, tumbled ? 150 : 700, 0.4, 0.15);
             });
             addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
+
+            /* Room: Hartjeskamer */
+            const rh = ROOM_W * HEART_IDX;
+            [[60, 70], [590, 70]].forEach(([x, y]) => place(el(`<div class="heart-window">${heartSVG('url(#hwSky)', `<defs><linearGradient id="hwSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#fbcfe8"/></linearGradient></defs>`, '#fff', 6)}</div>`), rh + x, y));
+            [210, 520].forEach(x => place(el(`<div class="heart-lamp">${heartSVG('#fb7185')}</div>`), rh + x, 0));
+            const pump = addObj(`<div class="heart-pump">${heartSVG('#e11d48')}<div class="tap-hint" style="top:-40px">👇</div></div>`, rh + 315, 220, rh + 270, pumpHeart);
+            state.heartPump = { node: pump, size: 0 };
+            place(el('<div class="bell-bar" style="width:290px"></div>'), rh + 40, 252);
+            ['#fb7185', '#f472b6', '#e879f9', '#c084fc', '#a78bfa'].forEach((c, i) => {
+                addObj(`<div class="heart-bell">${heartSVG(c)}</div>`, rh + 50 + i * 58, 258, rh + 78 + i * 58, (node) => ringHeartBell(node, i));
+            });
+            addObj(`<div class="heart-cushion">${heartSVG('#f9a8d4', '', '#fff', 4)}</div>`, rh + 520, 340, rh + 610, bounceCushion);
+            [[40, 120], [700, 130]].forEach(([x, y], i) => {
+                const b = addObj(`<div class="heart-balloon">${heartSVG(i ? '#c084fc' : '#fb7185')}</div>`, rh + x, y, rh + x + 30, balloonPop);
+                b.style.animationDelay = (-i * 1.2) + 's';
+            });
+            addObj(`<div class="mailbox"><div class="post"></div><div class="box"></div><div class="slot"></div><span class="letter">💌</span><div class="tap-hint" style="top:-44px">👇</div></div>`, rh + 680, 220, rh + 660, openHeartPost);
 
             /* Room: Borduurkamer */
             const re = ROOM_W * 9;
@@ -4995,6 +5179,7 @@
             if (e.key === 'Escape' && dressOpen) closeDressup();
             if (e.key === 'Escape' && dinOpen) closeDinner();
             if (e.key === 'Escape' && mapOpen) closeMap();
+            if (e.key === 'Escape' && hpOpen) closeHeartPost();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -5041,6 +5226,14 @@
             }
         }
 
+        function drawHeartShape(x, y, r) {
+            ctx2d.beginPath();
+            ctx2d.moveTo(x, y + r * 0.9);
+            ctx2d.bezierCurveTo(x - r * 1.7, y - r * 0.2, x - r * 0.7, y - r * 1.4, x, y - r * 0.45);
+            ctx2d.bezierCurveTo(x + r * 0.7, y - r * 1.4, x + r * 1.7, y - r * 0.2, x, y + r * 0.9);
+            ctx2d.fill();
+        }
+
         function drawStar(x, y, r, rot) {
             ctx2d.beginPath();
             for (let i = 0; i < 8; i++) {
@@ -5084,11 +5277,21 @@
             ctx2d.setTransform(1, 0, 0, 1, 0, 0);
             ctx2d.clearRect(0, 0, canvas.width, canvas.height);
             ctx2d.setTransform(dpr * state.scale, 0, 0, dpr * state.scale, -state.camX * state.scale * dpr, state.offsetY * dpr);
-            ctx2d.globalCompositeOperation = 'lighter';
+            const hearts = scene.key === 'in' && state.room === HEART_IDX;
+            ctx2d.globalCompositeOperation = hearts ? 'source-over' : 'lighter';
             for (const p of particles) {
                 const t = p.life / p.max;
                 const alpha = Math.sin(Math.PI * t) * (0.6 + 0.4 * Math.sin(now / 90 + p.tw));
                 const s = p.size * (0.6 + 0.4 * Math.sin(now / 120 + p.tw));
+                if (hearts) {
+                    ctx2d.fillStyle = `hsla(${330 + (p.hue % 50)}, 95%, 62%, ${alpha})`;
+                    drawHeartShape(p.x, p.y, s * 1.1);
+                    ctx2d.fillStyle = `rgba(255,255,255,${alpha * 0.7})`;
+                    ctx2d.beginPath();
+                    ctx2d.arc(p.x - s * 0.35, p.y - s * 0.25, s * 0.22, 0, Math.PI * 2);
+                    ctx2d.fill();
+                    continue;
+                }
                 ctx2d.fillStyle = `hsla(${p.hue}, 100%, 72%, ${alpha})`;
                 drawStar(p.x, p.y, s, p.spin);
                 ctx2d.fillStyle = `rgba(255,255,255,${alpha * 0.9})`;
@@ -7280,7 +7483,210 @@
         });
         dinEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen; }
+
+        /* ─────────── Hartjeskamer ─────────── */
+        function heartSVG(fill, defs = '', stroke = '', sw = 0) {
+            return `<svg class="heart-svg" viewBox="0 0 100 92">${defs}
+                <path d="M50 88 C20 66 2 50 2 28 C2 12 14 2 28 2 C38 2 46 8 50 16 C54 8 62 2 72 2 C86 2 98 12 98 28 C98 50 80 66 50 88 Z"
+                    fill="${fill}"${stroke ? ` stroke="${stroke}" stroke-width="${sw}"` : ''}/>
+                <ellipse cx="28" cy="26" rx="10" ry="7" fill="#fff" opacity=".45" transform="rotate(-30 28 26)"/>
+            </svg>`;
+        }
+
+        function pumpHeart(node) {
+            const hp = state.heartPump;
+            if (hp.boom) return;
+            hp.size++;
+            node.style.transform = `scale(${1 + hp.size * 0.16})`;
+            playTone(400 + hp.size * 90, 0.15, 0.15, 'triangle');
+            const r = node.getBoundingClientRect();
+            const c = screenToWorld(r.left + r.width / 2, r.top + r.height / 2);
+            burst(c.x, c.y, 10 + hp.size * 4);
+            if (hp.size < 6) return;
+            hp.boom = true;
+            node.classList.add('boom');
+            playFreqSweep(200, 60, 0.3, 0.3);
+            setTimeout(playWin, 150);
+            for (let i = 0; i < 120; i++) {
+                spawnSparkle(c.x, c.y, { speed: 420, g: 160, size: 6 + Math.random() * 8, max: 1.6 + Math.random() });
+            }
+            spellRain(['💖', '💕', '💗', '💓', '❤️', '💝']);
+            setTimeout(() => {
+                node.classList.remove('boom');
+                node.style.transition = 'none';
+                node.style.transform = 'scale(0.2)';
+                void node.offsetWidth;
+                node.style.transition = '';
+                node.style.transform = '';
+                hp.size = 0;
+                hp.boom = false;
+            }, 2200);
+        }
+
+        const BELL_NOTES = [523, 587, 659, 784, 880];
+        function ringHeartBell(node, i) {
+            node.classList.remove('ring');
+            void node.offsetWidth;
+            node.classList.add('ring');
+            playTone(BELL_NOTES[i], 0.6, 0.18, 'sine');
+            playTone(BELL_NOTES[i] * 2, 0.4, 0.05, 'sine');
+            const r = node.getBoundingClientRect();
+            const c = screenToWorld(r.left + r.width / 2, r.top + r.height / 2);
+            for (let k = 0; k < 10; k++) spawnSparkle(c.x, c.y, { vy: -120 - Math.random() * 80, vx: (Math.random() - 0.5) * 80, g: 40 });
+        }
+
+        function bounceCushion(node) {
+            if (state.busy) return;
+            state.busy = true;
+            const bounces = 3;
+            tween(1800, (t) => {
+                const k = (t * bounces) % 1;
+                const height = 140 * (1 - t * 0.4);
+                state.anim.dy = -Math.sin(Math.PI * k) * height - 26;
+            }, () => {
+                resetAnim();
+                state.busy = false;
+            });
+            for (let b = 0; b < bounces; b++) {
+                setTimeout(() => {
+                    node.classList.remove('squish');
+                    void node.offsetWidth;
+                    node.classList.add('squish');
+                    playFreqSweep(200, 700, 0.25, 0.18);
+                    burst(state.x, 380, 20);
+                }, b * 600);
+            }
+        }
+
+        /* Hartjespost: draw with a trail of hearts, then send it */
+        const hpEl = document.getElementById('hpost');
+        const hpPaper = document.getElementById('hpPaper');
+        let hpOpen = false;
+        const HP_HEARTS = ['❤️', '🧡', '💛', '💚', '💙', '💜', '💖', '🌈'];
+        const HP_SIZES = [[22, 'S'], [36, 'M'], [56, 'L']];
+        const hp = { heart: 0, size: 1, drawing: false, last: null, rainbow: 0, count: 0 };
+
+        function renderHpTools() {
+            const box = document.getElementById('hpTools');
+            box.innerHTML =
+                HP_HEARTS.map((h, i) => `<button class="hp-btn${hp.heart === i ? ' sel' : ''}" data-h="${i}">${h}</button>`).join('') +
+                '<span class="care-sep"></span>' +
+                HP_SIZES.map(([px, l], i) => `<button class="hp-btn${hp.size === i ? ' sel' : ''}" data-s="${i}"><span style="font-size:${12 + i * 9}px">💗</span></button>`).join('') +
+                '<span class="care-sep"></span>' +
+                '<button class="hp-btn" id="hpClear">🧽<small>Leeg</small></button>' +
+                '<button class="hp-btn" id="hpSend">💌<small>Versturen</small></button>';
+            box.querySelectorAll('[data-h]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                hp.heart = +b.dataset.h;
+                renderHpTools();
+                playPop();
+            }));
+            box.querySelectorAll('[data-s]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                hp.size = +b.dataset.s;
+                renderHpTools();
+                playPop();
+            }));
+            document.getElementById('hpClear').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                hpPaper.innerHTML = '';
+                hp.count = 0;
+                playFreqSweep(900, 200, 0.4, 0.12);
+            });
+            document.getElementById('hpSend').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                sendHeartPost();
+            });
+        }
+
+        function stampHeart(x, y) {
+            if (hp.count > 400) hpPaper.firstElementChild && hpPaper.firstElementChild.remove();
+            const h = document.createElement('span');
+            h.className = 'hp-heart';
+            const pick = HP_HEARTS[hp.heart] === '🌈' ? HP_HEARTS[(hp.rainbow++) % 7] : HP_HEARTS[hp.heart];
+            h.textContent = pick;
+            h.style.left = x + 'px';
+            h.style.top = y + 'px';
+            h.style.fontSize = HP_SIZES[hp.size][0] + 'px';
+            h.style.rotate = ((Math.random() - 0.5) * 30) + 'deg';
+            hpPaper.appendChild(h);
+            hp.count++;
+            playTone(900 + Math.random() * 700, 0.05, 0.05, 'sine');
+        }
+
+        function hpPoint(e) {
+            const r = hpPaper.getBoundingClientRect();
+            return { x: e.clientX - r.left, y: e.clientY - r.top };
+        }
+
+        hpPaper.addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            hp.drawing = true;
+            const pt = hpPoint(e);
+            hp.last = pt;
+            stampHeart(pt.x, pt.y);
+        });
+        hpPaper.addEventListener('pointermove', (e) => {
+            if (!hp.drawing) return;
+            const pt = hpPoint(e);
+            const gap = HP_SIZES[hp.size][0] * 0.7;
+            let d = Math.hypot(pt.x - hp.last.x, pt.y - hp.last.y);
+            // Fill the gap with evenly spaced hearts so fast swipes stay a line
+            while (d >= gap) {
+                const k = gap / d;
+                hp.last = { x: hp.last.x + (pt.x - hp.last.x) * k, y: hp.last.y + (pt.y - hp.last.y) * k };
+                stampHeart(hp.last.x, hp.last.y);
+                d = Math.hypot(pt.x - hp.last.x, pt.y - hp.last.y);
+            }
+        });
+        window.addEventListener('pointerup', () => { hp.drawing = false; });
+        hpEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function sendHeartPost() {
+            if (!hpPaper.children.length) {
+                const b = document.querySelector('.hp-btn[data-h]');
+                if (b) { b.classList.remove('hint'); void b.offsetWidth; b.classList.add('hint'); }
+                return;
+            }
+            hpPaper.classList.remove('fresh');
+            hpPaper.classList.add('send');
+            playFreqSweep(400, 1600, 0.6, 0.12);
+            setTimeout(() => {
+                const env = document.createElement('div');
+                env.className = 'hp-envelope';
+                env.textContent = '💌';
+                hpEl.querySelector('.hp-stage').appendChild(env);
+                playWin();
+                setTimeout(() => env.remove(), 1400);
+            }, 450);
+            setTimeout(() => {
+                hpPaper.innerHTML = '';
+                hp.count = 0;
+                hpPaper.classList.remove('send');
+                void hpPaper.offsetWidth;
+                hpPaper.classList.add('fresh');
+            }, 1700);
+        }
+
+        function openHeartPost() {
+            hpOpen = true;
+            hpEl.classList.add('open');
+            renderHpTools();
+            playMusicBox();
+        }
+
+        function closeHeartPost() {
+            hpOpen = false;
+            hpEl.classList.remove('open');
+            hp.drawing = false;
+            _playWhoosh();
+        }
+        document.getElementById('hpClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeHeartPost();
+        });
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
