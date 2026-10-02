@@ -4094,6 +4094,117 @@
         .sm-btn.big small { font-size: 13px; }
         .sm-btn .sw { width: 30px; height: 12px; border-radius: 6px; margin-top: 2px; }
 
+        /* ── Bakkerij ── */
+        .i-room.r16 .wall {
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.7) 4px, transparent 5px) 0 0 / 44px 44px,
+                repeating-linear-gradient(90deg, #fde4ec 0 40px, #fff1f5 40px 80px);
+        }
+        .i-room.r16 .floor {
+            background: conic-gradient(#fff 25%, #fca5a5 0 50%, #fff 0 75%, #fca5a5 0) 0 0 / 50px 50px;
+        }
+        .awning {
+            height: 54px;
+            pointer-events: none;
+            background: repeating-linear-gradient(90deg, #f472b6 0 40px, #fff 40px 80px);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 97.5% 100%, 95% 70%, 92.5% 100%, 90% 70%, 87.5% 100%, 85% 70%, 82.5% 100%, 80% 70%, 77.5% 100%, 75% 70%, 72.5% 100%, 70% 70%, 67.5% 100%, 65% 70%, 62.5% 100%, 60% 70%, 57.5% 100%, 55% 70%, 52.5% 100%, 50% 70%, 47.5% 100%, 45% 70%, 42.5% 100%, 40% 70%, 37.5% 100%, 35% 70%, 32.5% 100%, 30% 70%, 27.5% 100%, 25% 70%, 22.5% 100%, 20% 70%, 17.5% 100%, 15% 70%, 12.5% 100%, 10% 70%, 7.5% 100%, 5% 70%, 2.5% 100%, 0 70%);
+        }
+        .oven { width: 170px; height: 200px; }
+        .oven > div { position: absolute; }
+        .oven .body { left: 0; top: 30px; width: 170px; height: 170px; border-radius: 16px; background: linear-gradient(180deg, #f9a8d4, #ec4899); border: 5px solid #fff; }
+        .oven .knobs { left: 20px; top: 40px; width: 130px; display: flex; justify-content: space-around; }
+        .oven .knobs span { width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: inset -3px -3px 0 #fbcfe8; }
+        .oven .window {
+            left: 22px; top: 76px; width: 126px; height: 90px; border-radius: 12px;
+            background: radial-gradient(ellipse at 50% 80%, #fdba74, #ea580c 60%, #7c2d12);
+            border: 5px solid #fff;
+            animation: ovenGlow 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes ovenGlow { from { filter: brightness(0.9); } to { filter: brightness(1.2); } }
+        .oven .pipe { left: 120px; top: 0; width: 24px; height: 36px; background: #d1d5db; border-radius: 4px; }
+        .vitrine {
+            width: 300px; height: 150px;
+            border-radius: 14px;
+            border: 6px solid #fcd34d;
+            background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(224,242,254,0.6));
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.9), 0 8px 14px rgba(0,0,0,0.15);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: 1fr 1fr;
+            padding: 4px;
+            gap: 4px;
+        }
+        .vitrine::after {
+            content: '';
+            position: absolute; left: 8px; right: 8px; top: 66px; height: 4px; background: #fcd34d; border-radius: 2px;
+        }
+        .vit-slot { display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        .vit-slot svg { width: 64px; height: 64px; overflow: visible; }
+        .vit-slot.empty::before { content: ''; width: 46px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.9); box-shadow: 0 2px 0 #e5e7eb; margin-top: 40px; }
+        .vit-slot.yum { animation: petWiggle 0.5s ease; }
+        .counter { width: 280px; height: 110px; pointer-events: none; }
+        .counter .top { position: absolute; left: 0; top: 0; width: 280px; height: 24px; border-radius: 8px; background: #fde68a; border: 4px solid #f59e0b; }
+        .counter .front { position: absolute; left: 10px; top: 24px; width: 260px; height: 86px; background: repeating-linear-gradient(90deg, #fbcfe8 0 26px, #f9a8d4 26px 52px); }
+        .counter span { position: absolute; top: -40px; font-size: 40px; }
+
+        /* ── Bakken overlay ── */
+        .bakeov {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.8) 4px, transparent 5px) 0 0 / 40px 40px,
+                linear-gradient(180deg, #fff1f5, #fde4ec);
+        }
+        .bakeov.open { display: flex; }
+        .bk-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+        .bk-plate {
+            position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%);
+            width: min(70%, 420px); height: 12%; border-radius: 50%;
+            background: radial-gradient(ellipse, #fff 55%, #e5e7eb 57%, #fff 70%);
+            box-shadow: 0 6px 0 #d1d5db;
+        }
+        .bk-stage svg { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); height: 84%; overflow: visible; touch-action: none; }
+        .bk-stage svg.baking { animation: baking 0.5s ease-in-out infinite alternate; }
+        @keyframes baking { from { filter: brightness(1) sepia(0); } to { filter: brightness(1.15) sepia(0.4) drop-shadow(0 0 20px #fb923c); } }
+        .bk-top { transform-box: fill-box; transform-origin: 50% 50%; animation: sprout 0.3s cubic-bezier(.2,1.8,.4,1); }
+        .bk-timer {
+            position: absolute; left: 50%; top: 6%; transform: translateX(-50%);
+            font-size: 64px; line-height: 1; display: none; z-index: 3;
+            animation: petWiggle 0.5s ease infinite;
+        }
+        .bk-timer.show { display: block; }
+        .bk-tray { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 2; }
+        .bk-btn {
+            min-width: 62px; height: 62px;
+            border-radius: 18px;
+            border: 3px solid #fbcfe8;
+            background: #fff;
+            font-size: 32px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 2px 10px;
+        }
+        .bk-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #be185d; }
+        .bk-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+        .bk-btn.big { font-size: 36px; padding: 4px 18px; border-color: #fda4af; }
+        .bk-btn.big small { font-size: 13px; }
+        .bk-btn .sw { width: 36px; height: 36px; border-radius: 50%; box-shadow: inset -4px -4px 0 rgba(0,0,0,0.15), inset 3px 3px 0 rgba(255,255,255,0.4); }
+        .bk-hint {
+            font-family: 'Fredoka One', cursive; color: #be185d; font-size: 1rem;
+            background: rgba(255,255,255,0.8); border-radius: 999px; padding: 4px 14px; z-index: 2;
+        }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -4149,6 +4260,14 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="bakeov" id="bakeOv">
+                <div class="nails-title">🧁 Bakkerij</div>
+                <div class="bk-hint" id="bkHint"></div>
+                <div class="bk-stage" id="bkStage"><div class="bk-plate"></div><svg id="bkSvg" viewBox="0 0 200 200"></svg><div class="bk-timer" id="bkTimer">⏰</div></div>
+                <div class="bk-tray" id="bkTray"></div>
+                <button class="scope-close" id="bkClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="snowov" id="snowOv">
@@ -4311,7 +4430,8 @@
             { name: 'Hartjeskamer',  icon: '💖', say: 'De hartjeskamer' },
             { name: 'Poppenhuis',    icon: '🏠', say: 'Het poppenhuis' },
             { name: 'Sterrenkamer',  icon: '⭐', say: 'De sterrenkamer' },
-            { name: 'IJskamer',      icon: '❄️', say: 'De ijskamer' }
+            { name: 'IJskamer',      icon: '❄️', say: 'De ijskamer' },
+            { name: 'Bakkerij',      icon: '🧁', say: 'De bakkerij' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -4337,6 +4457,7 @@
         const HEART_IDX = 12;
         const STAR_IDX = 14;
         const SNOW_IDX = 15;
+        const BAKE_IDX = 16;
         const ICE_X0 = ROOM_W * SNOW_IDX + 360;
         const ICE_X1 = ROOM_W * SNOW_IDX + 770;
         // Lake (outside, last area): the princess can only go past the shore by boat
@@ -4352,7 +4473,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 34, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 36, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 14, door: null },
             sea: { key: 'sea', rooms: ROOMS_SEA, el: document.getElementById('worldSea'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
@@ -4825,6 +4946,21 @@
             });
             addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
 
+            /* Room: Bakkerij */
+            const rbk = ROOM_W * BAKE_IDX;
+            place(el('<div class="awning"></div>'), rbk, 0).style.width = ROOM_W + 'px';
+            addObj(`<div class="oven"><div class="pipe"></div><div class="body"></div><div class="knobs"><span></span><span></span><span></span></div><div class="window"></div><div class="tap-hint" style="left:70px;top:-44px">👇</div></div>`, rbk + 40, 200, rbk + 240, openBakery);
+            place(el(`<div class="counter"><div class="top"></div><div class="front"></div>
+                <span style="left:10px">🥣</span><span style="left:70px">🥚</span><span style="left:120px">🧈</span><span style="left:180px">🍓</span><span style="left:226px">🍫</span></div>`), rbk + 250, 300);
+            const vit = addObj(`<div class="vitrine">${Array.from({ length: 6 }, (_, i) => `<div class="vit-slot empty" data-i="${i}"></div>`).join('')}</div>`, rbk + 470, 120, rbk + 620, null);
+            state.vitrine = vit;
+            vit.querySelectorAll('.vit-slot').forEach(slot => slot.addEventListener('pointerdown', (e) => {
+                if (!bakes[+slot.dataset.i]) return;
+                slot.classList.remove('yum'); void slot.offsetWidth; slot.classList.add('yum');
+                [0, 200, 400].forEach(t => setTimeout(() => playTone(300, 0.08, 0.15, 'triangle'), t));
+            }));
+            addObj('<div class="emoji-obj" style="font-size:60px">👩‍🍳</div>', rbk + 690, 360, rbk + 680, () => { playCorrect(); sparkleShower(rbk + 700, 300, 30); });
+
             /* Room: IJskamer */
             const rsn = ROOM_W * SNOW_IDX;
             place(el(`<div class="icicles"><svg viewBox="0 0 800 50" preserveAspectRatio="none"><g fill="#e0f2fe" stroke="#fff" stroke-width="1.5"><path d="M0 0 L10 28 L20 0 Z"/><path d="M20 0 L30 22 L40 0 Z"/><path d="M40 0 L50 30 L60 0 Z"/><path d="M60 0 L70 38 L80 0 Z"/><path d="M80 0 L90 19 L100 0 Z"/><path d="M100 0 L110 20 L120 0 Z"/><path d="M120 0 L130 44 L140 0 Z"/><path d="M140 0 L150 35 L160 0 Z"/><path d="M160 0 L170 21 L180 0 Z"/><path d="M180 0 L190 29 L200 0 Z"/><path d="M200 0 L210 36 L220 0 Z"/><path d="M220 0 L230 19 L240 0 Z"/><path d="M240 0 L250 34 L260 0 Z"/><path d="M260 0 L270 24 L280 0 Z"/><path d="M280 0 L290 19 L300 0 Z"/><path d="M300 0 L310 20 L320 0 Z"/><path d="M320 0 L330 31 L340 0 Z"/><path d="M340 0 L350 31 L360 0 Z"/><path d="M360 0 L370 20 L380 0 Z"/><path d="M380 0 L390 25 L400 0 Z"/><path d="M400 0 L410 20 L420 0 Z"/><path d="M420 0 L430 35 L440 0 Z"/><path d="M440 0 L450 31 L460 0 Z"/><path d="M460 0 L470 19 L480 0 Z"/><path d="M480 0 L490 44 L500 0 Z"/><path d="M500 0 L510 36 L520 0 Z"/><path d="M520 0 L530 21 L540 0 Z"/><path d="M540 0 L550 25 L560 0 Z"/><path d="M560 0 L570 38 L580 0 Z"/><path d="M580 0 L590 38 L600 0 Z"/><path d="M600 0 L610 36 L620 0 Z"/><path d="M620 0 L630 19 L640 0 Z"/><path d="M640 0 L650 36 L660 0 Z"/><path d="M660 0 L670 36 L680 0 Z"/><path d="M680 0 L690 30 L700 0 Z"/><path d="M700 0 L710 19 L720 0 Z"/><path d="M720 0 L730 25 L740 0 Z"/><path d="M740 0 L750 19 L760 0 Z"/><path d="M760 0 L770 35 L780 0 Z"/><path d="M780 0 L790 45 L800 0 Z"/></g></svg></div>`), rsn, 0);
@@ -4832,7 +4968,7 @@
             state.roomSnowman = addObj(`<div class="room-snowman"><div class="tap-hint" style="top:-40px">👇</div></div>`, rsn + 60, 215, rsn + 230, openSnowman);
             addObj('<div class="snow-globe"><div class="globe">🏰</div><div class="stand"></div><div class="ped"></div></div>', rsn + 250, 240, rsn + 300, shakeSnowGlobe);
             addObj('<div class="skate-sign">⛸️</div>', rsn + 380, 300, rsn + 420, () => danceMove('spin'));
-            [[640, 370, 0], [740, 380, -3.5]].forEach(([x, y, d]) => {
+            [[600, 370, 0], [690, 380, -3.5]].forEach(([x, y, d]) => {
                 const pg = addObj('<div class="penguin slide">🐧</div>', rsn + x, y, rsn + x - 60, (node) => {
                     node.classList.remove('hop'); void node.offsetWidth; node.classList.add('hop');
                     playFreqSweep(1200, 1800, 0.1, 0.15);
@@ -6256,6 +6392,7 @@
             if (e.key === 'Escape' && dollOpen) closeDollhouse();
             if (e.key === 'Escape' && sgOpen) closeStarGame();
             if (e.key === 'Escape' && smOpen) closeSnowman();
+            if (e.key === 'Escape' && bakeOpen) closeBakery();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -9564,7 +9701,276 @@
             }
         }
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen || smOpen; }
+
+        /* ─────────── Bakkerij ─────────── */
+        const BAKE_KEY = 'noor-prinses-bakkerij';
+        const BK_GLAZES = [
+            { c: '#f9a8d4', d: '#ec4899' }, { c: '#92400e', d: '#78350f' }, { c: '#fef3c7', d: '#fcd34d' },
+            { c: '#86efac', d: '#22c55e' }, { c: '#93c5fd', d: '#3b82f6' }, { c: 'url(#bkRb)', d: '#a855f7', rb: true }
+        ];
+        const BK_TOPS = [
+            { t: 'sprinkles', icon: '🎉' }, { t: '🍓' }, { t: '🍒' }, { t: '💖' }, { t: '⭐' }, { t: '🌸' }, { t: 'cream', icon: '🍦' }, { t: '🕯️' }, { t: '🍫' }
+        ];
+        let bakes = [null, null, null, null, null, null];
+        try {
+            const d = JSON.parse(localStorage.getItem(BAKE_KEY));
+            if (Array.isArray(d)) bakes = Array.from({ length: 6 }, (_, i) => d[i] && d[i].shape ? d[i] : null);
+        } catch (e) {}
+        const bk = { step: 'shape', item: null, top: 0, bites: 0, busy: false };
+        let bakeOpen = false;
+
+        function bakeSVG(it, idp = 'bk') {
+            const baked = it.baked;
+            const dough = baked ? '#f59e0b' : '#fef3c7';
+            const doughD = baked ? '#b45309' : '#fde68a';
+            const g = it.glaze != null ? BK_GLAZES[it.glaze] : null;
+            const gc = g ? (g.rb ? `url(#${idp}Rb)` : g.c) : null;
+            let h = `<defs><linearGradient id="${idp}Rb" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#f87171"/><stop offset=".2" stop-color="#fb923c"/><stop offset=".4" stop-color="#fde047"/>
+                <stop offset=".6" stop-color="#4ade80"/><stop offset=".8" stop-color="#60a5fa"/><stop offset="1" stop-color="#c084fc"/></linearGradient></defs>`;
+            if (it.shape === 'cupcake') {
+                h += `<path d="M48 118 L152 118 L138 188 L62 188 Z" fill="#f472b6"/>
+                      ${[62, 78, 94, 110, 126, 142].map(x => `<path d="M${x} 118 L${x + 3 - (x - 100) * 0.12} 188" stroke="#fbcfe8" stroke-width="5"/>`).join('')}
+                      <ellipse cx="100" cy="116" rx="56" ry="26" fill="${dough}" stroke="${doughD}" stroke-width="3"/>`;
+                if (gc) h += `<path d="M42 118 Q40 96 62 92 Q60 68 86 66 Q90 44 112 50 Q136 46 138 70 Q162 74 158 96 Q166 116 150 122 Q100 132 50 122 Z" fill="${gc}" stroke="${g.d}" stroke-width="3"/>
+                              <path d="M70 92 Q100 84 130 92 M84 70 Q102 64 120 72" stroke="rgba(255,255,255,0.6)" stroke-width="4" fill="none" stroke-linecap="round"/>`;
+            } else if (it.shape === 'cake') {
+                h += `<rect x="28" y="92" width="144" height="92" rx="12" fill="${dough}" stroke="${doughD}" stroke-width="3"/>
+                      <rect x="28" y="134" width="144" height="10" fill="${baked ? '#f472b6' : '#fbcfe8'}"/>`;
+                if (gc) h += `<path d="M24 100 Q24 82 44 82 L156 82 Q176 82 176 100 L176 108 Q168 122 160 108 Q150 126 140 108 Q128 124 118 108 Q106 126 96 108 Q84 122 74 108 Q62 126 52 108 Q40 122 24 108 Z" fill="${gc}" stroke="${g.d}" stroke-width="3"/>`;
+            } else if (it.shape === 'donut') {
+                h += `<circle cx="100" cy="112" r="72" fill="${dough}" stroke="${doughD}" stroke-width="3"/>`;
+                if (gc) h += `<path d="M100 48 Q124 44 140 60 Q164 66 162 94 Q176 116 160 136 Q156 164 128 168 Q108 184 86 170 Q58 172 48 148 Q26 128 40 104 Q36 72 62 62 Q78 44 100 48 Z" fill="${gc}" stroke="${g.d}" stroke-width="3"/>`;
+                h += `<circle cx="100" cy="112" r="22" fill="#fff7ed" stroke="${doughD}" stroke-width="3"/>`;
+            } else {
+                h += `<circle cx="100" cy="112" r="74" fill="${dough}" stroke="${doughD}" stroke-width="3"/>
+                      ${baked ? [[70, 90], [126, 84], [98, 140], [140, 128], [62, 132]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6" fill="#78350f"/>`).join('') : ''}`;
+                if (gc) h += `<path d="M100 56 Q130 52 146 74 Q166 96 156 124 Q150 156 120 164 Q94 172 70 158 Q42 142 46 110 Q46 78 72 64 Q84 56 100 56 Z" fill="${gc}" stroke="${g.d}" stroke-width="3" opacity=".95"/>`;
+            }
+            (it.tops || []).forEach(tp => { h += topMarkup(tp); });
+            (it.bitesAt || []).forEach(([x, y]) => { h += `<circle cx="${x}" cy="${y}" r="26" fill="#fde4ec"/>`; });
+            return h;
+        }
+
+        function topMarkup(tp) {
+            if (tp.t === 'sprinkles') {
+                const cols = ['#ef4444', '#facc15', '#22c55e', '#3b82f6', '#a855f7', '#fff'];
+                let r = '<g class="bk-top">';
+                for (let i = 0; i < 9; i++) {
+                    const a = (i * 137) % 360, d = 6 + (i * 7) % 14;
+                    const x = tp.x + Math.cos(a) * d, y = tp.y + Math.sin(a) * d;
+                    r += `<rect x="${x - 4}" y="${y - 1.5}" width="8" height="3" rx="1.5" fill="${cols[i % cols.length]}" transform="rotate(${(i * 53) % 180} ${x} ${y})"/>`;
+                }
+                return r + '</g>';
+            }
+            if (tp.t === 'cream') {
+                return `<g class="bk-top"><circle cx="${tp.x - 8}" cy="${tp.y + 4}" r="10" fill="#fff"/><circle cx="${tp.x + 8}" cy="${tp.y + 4}" r="10" fill="#fff"/><circle cx="${tp.x}" cy="${tp.y - 6}" r="11" fill="#fff"/><path d="M${tp.x} ${tp.y - 22} q5 5 0 10" fill="#fff"/></g>`;
+            }
+            const size = tp.t === '🕯️' ? 30 : 22;
+            return `<text class="bk-top" x="${tp.x}" y="${tp.y}" font-size="${size}" text-anchor="middle" dominant-baseline="central">${tp.t}</text>`;
+        }
+
+        function renderBake() {
+            const svg = document.getElementById('bkSvg');
+            svg.innerHTML = bk.item ? bakeSVG(bk.item) : '';
+        }
+
+        function setBkHint(t) { document.getElementById('bkHint').textContent = t; }
+
+        function renderBkTray() {
+            const tray = document.getElementById('bkTray');
+            const it = bk.item;
+            if (bk.step === 'shape') {
+                setBkHint('Wat ga je bakken?');
+                tray.innerHTML = [['cupcake', '🧁'], ['cake', '🎂'], ['donut', '🍩'], ['cookie', '🍪']].map(([v, ic]) =>
+                    `<button class="bk-btn big" data-shape="${v}">${ic}</button>`).join('');
+                tray.querySelectorAll('[data-shape]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    bk.item = { shape: b.dataset.shape, baked: false, glaze: null, tops: [] };
+                    bk.step = 'bake';
+                    renderBake();
+                    renderBkTray();
+                    playPop();
+                }));
+                return;
+            }
+            if (bk.step === 'bake') {
+                setBkHint('In de oven!');
+                tray.innerHTML = '<button class="bk-btn big" id="bkBake">🔥<small>Bakken</small></button>';
+                document.getElementById('bkBake').addEventListener('pointerdown', (e) => {
+                    e.stopPropagation();
+                    bakeIt();
+                });
+                return;
+            }
+            setBkHint(it.glaze == null ? 'Kies een glazuur!' : 'Kies iets lekkers en tik op je gebak!');
+            tray.innerHTML =
+                BK_GLAZES.map((g, i) => `<button class="bk-btn${it.glaze === i ? ' sel' : ''}" data-glaze="${i}"><span class="sw" style="background:${g.rb ? 'linear-gradient(90deg,#f87171,#fde047,#4ade80,#60a5fa,#c084fc)' : g.c}"></span></button>`).join('') +
+                (it.glaze != null ? '<span class="care-sep"></span>' + BK_TOPS.map((t, i) => `<button class="bk-btn${bk.top === i ? ' sel' : ''}" data-top="${i}">${t.icon || t.t}</button>`).join('') : '') +
+                '<span class="care-sep"></span>' +
+                '<button class="bk-btn" id="bkEat">😋<small>Opeten</small></button>' +
+                '<button class="bk-btn" id="bkShelf">🍽️<small>Vitrine</small></button>' +
+                '<button class="bk-btn" id="bkNew">🔄<small>Nieuw</small></button>';
+            tray.querySelectorAll('[data-glaze]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                it.glaze = +b.dataset.glaze;
+                renderBake();
+                renderBkTray();
+                playFreqSweep(500, 900, 0.25, 0.1);
+            }));
+            tray.querySelectorAll('[data-top]').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                bk.top = +b.dataset.top;
+                renderBkTray();
+                playPop();
+            }));
+            document.getElementById('bkEat').addEventListener('pointerdown', (e) => { e.stopPropagation(); biteIt(); });
+            document.getElementById('bkShelf').addEventListener('pointerdown', (e) => { e.stopPropagation(); shelfIt(); });
+            document.getElementById('bkNew').addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                bk.item = null;
+                bk.step = 'shape';
+                renderBake();
+                renderBkTray();
+            });
+        }
+
+        function bakeIt() {
+            if (bk.busy) return;
+            bk.busy = true;
+            const svg = document.getElementById('bkSvg');
+            const timer = document.getElementById('bkTimer');
+            svg.classList.add('baking');
+            timer.classList.add('show');
+            document.getElementById('bkTray').innerHTML = '';
+            setBkHint('Even wachten... tik tak');
+            for (let i = 0; i < 8; i++) setTimeout(() => playTone(i % 2 ? 1500 : 1200, 0.04, 0.08, 'square'), i * 300);
+            setTimeout(() => {
+                svg.classList.remove('baking');
+                timer.classList.remove('show');
+                bk.item.baked = true;
+                renderBake();
+                [1568, 2093, 2637].forEach((f, i) => setTimeout(() => playTone(f, 0.5, 0.12, 'sine'), i * 120));
+                const r = svg.getBoundingClientRect();
+                bkSpark(r.left + r.width / 2, r.top + r.height * 0.4, 14, ['☁️', '✨', '💨']);
+                bk.step = 'decorate';
+                bk.busy = false;
+                renderBkTray();
+            }, 2500);
+        }
+
+        function bkSpark(cx, cy, n, icons = ['✨', '⭐', '💖', '🌟']) {
+            const o = document.getElementById('bakeOv').getBoundingClientRect();
+            for (let i = 0; i < n; i++) {
+                const sp = document.createElement('span');
+                sp.className = 'scope-spark';
+                sp.textContent = randomPick(icons);
+                const a = Math.random() * Math.PI * 2;
+                const d = 40 + Math.random() * 60;
+                sp.style.left = (cx - o.left) + 'px';
+                sp.style.top = (cy - o.top) + 'px';
+                sp.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                sp.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                document.getElementById('bakeOv').appendChild(sp);
+                setTimeout(() => sp.remove(), 900);
+            }
+        }
+
+        // Tap on the bake to place the chosen topping right there
+        document.getElementById('bkSvg').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            const it = bk.item;
+            if (!it || bk.step !== 'decorate' || it.glaze == null || bk.busy) return;
+            const svg = document.getElementById('bkSvg');
+            const pt = svg.createSVGPoint();
+            pt.x = e.clientX;
+            pt.y = e.clientY;
+            const loc = pt.matrixTransform(svg.getScreenCTM().inverse());
+            if (loc.x < 10 || loc.x > 190 || loc.y < 20 || loc.y > 190) return;
+            if (it.tops.length > 40) it.tops.shift();
+            it.tops.push({ t: BK_TOPS[bk.top].t, x: Math.round(loc.x), y: Math.round(loc.y) });
+            svg.insertAdjacentHTML('beforeend', topMarkup(it.tops[it.tops.length - 1]));
+            playTone(1000 + Math.random() * 600, 0.08, 0.1, 'triangle');
+        });
+
+        function biteIt() {
+            if (bk.busy || !bk.item) return;
+            const it = bk.item;
+            it.bitesAt = it.bitesAt || [];
+            const spots = [[160, 80], [40, 100], [150, 160], [60, 170], [100, 60]];
+            it.bitesAt.push(spots[it.bitesAt.length % spots.length]);
+            renderBake();
+            [0, 150].forEach(t => setTimeout(() => playTone(260 + Math.random() * 60, 0.08, 0.18, 'triangle'), t));
+            const r = document.getElementById('bkSvg').getBoundingClientRect();
+            bkSpark(r.left + r.width / 2, r.top + r.height / 2, 6, ['😋', '🍪', '✨']);
+            if (it.bitesAt.length >= 4) {
+                bk.busy = true;
+                setTimeout(() => {
+                    playWin();
+                    showToast('😋 Mmm, op! Lekker!');
+                    bk.item = null;
+                    bk.step = 'shape';
+                    bk.busy = false;
+                    renderBake();
+                    renderBkTray();
+                }, 500);
+            }
+        }
+
+        function saveBakes() {
+            try { localStorage.setItem(BAKE_KEY, JSON.stringify(bakes)); } catch (e) {}
+        }
+
+        function renderVitrine() {
+            if (!state.vitrine) return;
+            state.vitrine.querySelectorAll('.vit-slot').forEach((slot, i) => {
+                const b = bakes[i];
+                slot.classList.toggle('empty', !b);
+                slot.innerHTML = b ? `<svg viewBox="0 0 200 200">${bakeSVG(b, 'v' + i)}</svg>` : '';
+            });
+        }
+
+        function shelfIt() {
+            if (bk.busy || !bk.item) return;
+            let slot = bakes.findIndex(b => !b);
+            if (slot === -1) {
+                bakes.shift();
+                bakes.push(null);
+                slot = 5;
+            }
+            const { shape, baked, glaze, tops } = bk.item;
+            bakes[slot] = { shape, baked, glaze, tops: tops.slice() };
+            saveBakes();
+            renderVitrine();
+            playWin();
+            showToast('🍽️ In de vitrine! Wat mooi!');
+            bk.item = null;
+            bk.step = 'shape';
+            renderBake();
+            renderBkTray();
+        }
+
+        function openBakery() {
+            bakeOpen = true;
+            document.getElementById('bakeOv').classList.add('open');
+            renderBake();
+            renderBkTray();
+            playMusicBox();
+        }
+
+        function closeBakery() {
+            if (bk.busy) return;
+            bakeOpen = false;
+            document.getElementById('bakeOv').classList.remove('open');
+            _playWhoosh();
+        }
+        document.getElementById('bkClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeBakery();
+        });
+        document.getElementById('bakeOv').addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
@@ -9754,6 +10160,7 @@
         buildNailTools();
         renderWallFrames();
         renderRoomSnowman();
+        renderVitrine();
         loadLook();
         applyLook();
         spawnGems();
