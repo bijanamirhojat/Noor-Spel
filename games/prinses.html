@@ -2780,6 +2780,430 @@
         .emb-tool.hidden { display: none; }
         .emb-tool.hint { animation: hintPulse 0.5s ease 3; }
 
+        /* ── Eetkamer room ── */
+        .i-room.r10 .wall {
+            background:
+                repeating-linear-gradient(90deg, #fecaca 0 36px, #fee2e2 36px 72px),
+                #fee2e2;
+        }
+        .i-room.r10 .floor {
+            background: conic-gradient(#fff7ed 25%, #fdba74 0 50%, #fff7ed 0 75%, #fdba74 0) 0 0 / 50px 50px;
+        }
+        .dining { width: 520px; height: 210px; }
+        .dining > div, .dining > span { position: absolute; }
+        .dining .chairback {
+            top: 0; width: 70px; height: 120px;
+            border-radius: 35px 35px 6px 6px;
+            background: linear-gradient(180deg, #f472b6, #be185d);
+            border: 5px solid #fcd34d;
+        }
+        .dining .guest-e { top: 30px; font-size: 54px; line-height: 1; animation: carousel 2.2s ease-in-out infinite; }
+        .dining .tabletop {
+            left: 0; top: 104px; width: 520px; height: 40px;
+            border-radius: 16px;
+            background: #fff;
+            box-shadow: 0 4px 0 #e5e7eb;
+        }
+        .dining .cloth {
+            left: 10px; top: 130px; width: 500px; height: 46px;
+            background: repeating-linear-gradient(90deg, #f472b6 0 20px, #fbcfe8 20px 40px);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 90% 70%, 85% 100%, 80% 70%, 75% 100%, 70% 70%, 65% 100%, 60% 70%, 55% 100%, 50% 70%, 45% 100%, 40% 70%, 35% 100%, 30% 70%, 25% 100%, 20% 70%, 15% 100%, 10% 70%, 5% 100%, 0 70%);
+        }
+        .dining .tleg { top: 170px; width: 16px; height: 40px; background: #b45309; border-radius: 4px; }
+        .dining .plate {
+            top: 98px; width: 54px; height: 20px; border-radius: 50%;
+            background: radial-gradient(ellipse, #fff 45%, #e5e7eb 46%, #fff 60%);
+            box-shadow: 0 2px 0 #d1d5db;
+        }
+        .dining .candle { top: 46px; font-size: 40px; }
+
+        /* ── Speelkamer room ── */
+        .i-room.r11 .wall {
+            background:
+                radial-gradient(circle, #f472b6 6px, transparent 7px) 0 0 / 70px 70px,
+                radial-gradient(circle, #60a5fa 5px, transparent 6px) 35px 35px / 70px 70px,
+                linear-gradient(180deg, #fef9c3, #fde68a);
+        }
+        .i-room.r11 .floor {
+            background: repeating-linear-gradient(90deg, #f87171 0 60px, #fb923c 60px 120px, #facc15 120px 180px, #4ade80 180px 240px, #60a5fa 240px 300px, #c084fc 300px 360px);
+        }
+        .chest { width: 230px; height: 190px; }
+        .chest > div, .chest > span { position: absolute; }
+        .chest .lid {
+            left: 0; top: 0; width: 230px; height: 60px;
+            border-radius: 40px 40px 6px 6px;
+            background: linear-gradient(180deg, #c084fc, #9333ea);
+            border: 5px solid #fcd34d;
+            transform: rotate(-14deg);
+            transform-origin: 6% 100%;
+        }
+        .chest .box {
+            left: 0; top: 70px; width: 230px; height: 120px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, #a855f7, #7e22ce);
+            border: 5px solid #fcd34d;
+        }
+        .chest .box::after {
+            content: '⭐';
+            position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%);
+            font-size: 34px;
+        }
+        .chest .clothes { left: 20px; top: 34px; font-size: 40px; letter-spacing: -6px; white-space: nowrap; }
+        .toy-ball { font-size: 54px; line-height: 1; }
+        .toy-ball.bounce { animation: ballBounce 1.2s ease-out; }
+        @keyframes ballBounce {
+            0% { transform: translate(0, 0) rotate(0); }
+            20% { transform: translate(60px, -120px) rotate(120deg); }
+            40% { transform: translate(120px, 0) rotate(240deg); }
+            60% { transform: translate(160px, -60px) rotate(330deg); }
+            80% { transform: translate(190px, 0) rotate(400deg); }
+            100% { transform: translate(0, 0) rotate(720deg); }
+        }
+        .toy-train { font-size: 60px; line-height: 1; }
+        .toy-train.drive { animation: trainDrive 3s ease-in-out; }
+        @keyframes trainDrive {
+            0% { transform: translateX(0); }
+            45% { transform: translateX(-420px); }
+            50% { transform: translateX(-420px) scaleX(-1); }
+            95% { transform: translateX(0) scaleX(-1); }
+            100% { transform: translateX(0); }
+        }
+        .blocks { width: 70px; height: 150px; }
+        .blocks span {
+            position: absolute;
+            left: 5px;
+            width: 60px; height: 46px;
+            border-radius: 6px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 28px;
+            color: #fff;
+            text-align: center;
+            line-height: 46px;
+            transition: transform 0.6s cubic-bezier(.5,0,.6,1.6);
+        }
+        .blocks.tumble span:nth-child(1) { transform: translate(-40px, 0) rotate(-30deg); }
+        .blocks.tumble span:nth-child(2) { transform: translate(50px, 50px) rotate(60deg); }
+        .blocks.tumble span:nth-child(3) { transform: translate(-10px, 100px) rotate(170deg); }
+
+        /* ── Kaart ── */
+        .map-btn {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 30;
+            width: 58px;
+            height: 58px;
+            border-radius: 18px;
+            border: 4px solid #fff;
+            background: linear-gradient(135deg, #a7f3d0, #60a5fa);
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+        }
+        .mapov {
+            position: absolute;
+            inset: 0;
+            z-index: 55;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 14px;
+            gap: 10px;
+            overflow-y: auto;
+            background:
+                radial-gradient(circle, rgba(255,255,255,0.6) 3px, transparent 4px) 0 0 / 36px 36px,
+                linear-gradient(135deg, #fdf2f8, #e0f2fe);
+        }
+        .mapov.open { display: flex; }
+        .map-sec { font-family: 'Fredoka One', cursive; color: #be185d; font-size: 1.1rem; }
+        .map-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 760px; }
+        .map-room {
+            width: 100px;
+            height: 92px;
+            border-radius: 20px;
+            border: 3px solid #fbcfe8;
+            background: #fff;
+            cursor: pointer;
+            touch-action: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            font-size: 36px;
+            line-height: 1;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .map-room small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #be185d; }
+        .map-room.here { border-color: #f472b6; background: #fdf2f8; }
+        .map-room:active { transform: scale(0.92); }
+
+        /* ── Verkleedkist overlay ── */
+        .dressup {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                radial-gradient(circle, rgba(244,114,182,0.35) 5px, transparent 6px) 0 0 / 50px 50px,
+                linear-gradient(135deg, #fef9c3, #fce7f3);
+        }
+        .dressup.open { display: flex; }
+        .du-main {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        .du-preview {
+            flex: 1;
+            min-width: 0;
+            position: relative;
+            border-radius: 24px;
+            background: radial-gradient(ellipse at 50% 85%, rgba(255,255,255,0.9), rgba(255,255,255,0.3) 70%);
+        }
+        .du-preview svg { position: absolute; inset: 4% 10%; width: 80%; height: 92%; overflow: visible; }
+        .du-preview.pop svg { animation: duPop 0.45s cubic-bezier(.2,1.6,.4,1); }
+        @keyframes duPop { from { transform: scale(0.92) rotate(-3deg); } to { transform: scale(1) rotate(0); } }
+        .du-side {
+            flex: 1.2;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .du-tabs { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+        .du-tab {
+            width: 58px; height: 58px;
+            border-radius: 18px;
+            border: 3px solid #fde68a;
+            background: rgba(255,255,255,0.75);
+            font-size: 30px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+        }
+        .du-tab.active { background: #fff; border-color: #f472b6; transform: translateY(-3px) scale(1.08); }
+        .du-opts {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+            justify-content: center;
+            gap: 8px;
+            padding: 4px;
+        }
+        .du-opt {
+            width: 74px; height: 74px;
+            border-radius: 22px;
+            border: 3px solid #fbcfe8;
+            background: #fff;
+            font-size: 38px;
+            line-height: 1;
+            cursor: pointer;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .du-opt.sel { border-color: #f472b6; background: #fdf2f8; transform: scale(1.08); }
+        .du-opt .sw { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.15), inset 4px 4px 0 rgba(255,255,255,0.4); }
+        .du-actions { display: flex; gap: 10px; }
+        @media (max-width: 640px) {
+            .du-main { flex-direction: column; }
+            .du-preview { flex: 1.1; }
+        }
+
+        /* ── Dinertje overlay ── */
+        .dinner {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px;
+            gap: 8px;
+            touch-action: none;
+            overflow: hidden;
+            background:
+                repeating-linear-gradient(90deg, rgba(254,202,202,0.6) 0 36px, transparent 36px 72px),
+                linear-gradient(180deg, #fff1f2, #fee2e2);
+        }
+        .dinner.open { display: flex; }
+        .din-stage {
+            position: relative;
+            flex: 1;
+            min-height: 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .din-seats {
+            display: flex;
+            justify-content: center;
+            gap: 2%;
+            width: min(100%, 760px);
+            z-index: 2;
+        }
+        .din-seat {
+            position: relative;
+            flex: 1;
+            max-width: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            touch-action: none;
+        }
+        .din-bubble {
+            position: relative;
+            min-width: 70px;
+            height: 66px;
+            border-radius: 33px;
+            background: #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            font-size: 40px;
+            line-height: 66px;
+            text-align: center;
+            margin-bottom: 14px;
+            transition: transform 0.2s ease;
+        }
+        .din-bubble::after {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: -12px;
+            width: 16px; height: 16px;
+            margin-left: -8px;
+            border-radius: 50%;
+            background: #fff;
+        }
+        .din-bubble.new { animation: sprout 0.4s cubic-bezier(.2,1.6,.4,1); }
+        .din-bubble.wobble { animation: petWiggle 0.5s ease; }
+        .din-animal { font-size: 72px; line-height: 1; transition: transform 0.2s ease; }
+        .din-animal.eat { animation: eat 0.9s ease; }
+        .din-animal.nope { animation: nope 0.5s ease; }
+        @keyframes eat {
+            0%, 100% { transform: scale(1); }
+            20%, 60% { transform: scale(1.15, 0.9); }
+            40%, 80% { transform: scale(0.95, 1.1); }
+        }
+        @keyframes nope {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px) rotate(-6deg); }
+            75% { transform: translateX(10px) rotate(6deg); }
+        }
+        .din-plate {
+            position: relative;
+            width: 92px; height: 34px;
+            margin-top: -8px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, #fff 45%, #e5e7eb 47%, #fff 62%);
+            box-shadow: 0 3px 0 #d1d5db;
+            font-size: 32px;
+            line-height: 20px;
+            text-align: center;
+        }
+        .din-stars { font-size: 16px; min-height: 20px; margin-top: 6px; letter-spacing: 2px; }
+        .din-table {
+            width: min(100%, 780px);
+            height: 26px;
+            margin-top: -20px;
+            border-radius: 12px;
+            background: repeating-linear-gradient(90deg, #f472b6 0 24px, #fbcfe8 24px 48px);
+            box-shadow: 0 6px 0 #db2777;
+            z-index: 1;
+        }
+        .din-foods {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            z-index: 2;
+        }
+        .din-food {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            border: 3px solid #fecaca;
+            background: #fff;
+            font-size: 38px;
+            line-height: 1;
+            cursor: grab;
+            touch-action: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+        }
+        .din-food.sel { border-color: #f472b6; transform: translateY(-6px) scale(1.1); }
+        .din-ghost {
+            position: absolute;
+            font-size: 56px;
+            line-height: 1;
+            pointer-events: none;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 6px 6px rgba(0,0,0,0.25));
+        }
+        .din-ghost.fly { transition: left 0.35s ease-in, top 0.35s ease-in, transform 0.35s ease-in, opacity 0.35s ease; }
+        .din-cake {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            z-index: 6;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px 24px;
+            border-radius: 28px;
+            background: rgba(255,255,255,0.92);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .din-cake.show { display: flex; animation: sprout 0.5s cubic-bezier(.2,1.6,.4,1); }
+        .candles { display: flex; gap: 10px; margin-bottom: -6px; }
+        .candle-btn {
+            position: relative;
+            width: 30px; height: 90px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            touch-action: none;
+        }
+        .candle-btn .wax {
+            position: absolute; left: 7px; bottom: 0; width: 16px; height: 54px;
+            border-radius: 4px;
+            background: repeating-linear-gradient(160deg, #fff 0 6px, #f472b6 6px 12px);
+        }
+        .candle-btn .flame {
+            position: absolute; left: 5px; top: 4px; width: 20px; height: 30px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: radial-gradient(circle at 50% 70%, #fff 0 20%, #fde047 45%, #fb923c 75%, transparent 76%);
+            animation: flicker 0.5s ease-in-out infinite alternate;
+            transform-origin: 50% 100%;
+        }
+        .candle-btn.out .flame { display: none; }
+        .cake-body {
+            width: 240px; height: 90px;
+            border-radius: 16px 16px 24px 24px;
+            background:
+                radial-gradient(circle, #fff 4px, transparent 5px) 0 0 / 26px 26px,
+                linear-gradient(180deg, #fbcfe8 0 30%, #f472b6 30% 34%, #fde68a 34% 66%, #f472b6 66% 70%, #fbcfe8 70%);
+            box-shadow: 0 6px 0 #db2777;
+        }
+        .din-again { margin-top: 14px; display: none; }
+        .din-again.show { display: flex; }
+
         @media (max-width: 500px) {
             h1 { font-size: 1.2rem; margin-top: 28px; }
             .arrow { width: 54px; height: 54px; font-size: 24px; }
@@ -2805,6 +3229,7 @@
             <div class="door-fade" id="doorFade"></div>
             <div class="night" id="night"></div>
             <button class="wand-btn" id="wandBtn" aria-label="Toveren">🪄</button>
+            <button class="map-btn" id="mapBtn" aria-label="Kaart">🗺️</button>
             <div class="dance-bar" id="danceBar">
                 <button class="dance-btn" data-m="spin">🌀<small>Draaien</small></button>
                 <button class="dance-btn" data-m="jump">⬆️<small>Springen</small></button>
@@ -2832,6 +3257,46 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="mapov" id="mapOv">
+                <div class="nails-title">🗺️ Waar wil je heen?</div>
+                <div class="map-sec">🏰 In het kasteel</div>
+                <div class="map-grid" id="mapIn"></div>
+                <div class="map-sec">🌳 Buiten</div>
+                <div class="map-grid" id="mapOut"></div>
+                <button class="scope-close" id="mapClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="dressup" id="dressup">
+                <div class="nails-title">🧸 Verkleedkist</div>
+                <div class="du-main">
+                    <div class="du-preview" id="duPreview"></div>
+                    <div class="du-side">
+                        <div class="du-tabs" id="duTabs"></div>
+                        <div class="du-opts" id="duOpts"></div>
+                    </div>
+                </div>
+                <div class="du-actions">
+                    <button class="tool-btn wide" id="duRandom">🎲 Verrassing</button>
+                    <button class="tool-btn wide" id="duDone">✅ Klaar!</button>
+                </div>
+                <button class="scope-close" id="duClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="dinner" id="dinner">
+                <div class="nails-title">🍽️ Dinertje</div>
+                <div class="din-stage" id="dinStage">
+                    <div class="din-seats" id="dinSeats"></div>
+                    <div class="din-table"></div>
+                    <div class="din-cake" id="dinCake">
+                        <div class="candles" id="candles"></div>
+                        <div class="cake-body"></div>
+                        <div class="din-again" id="dinAgain"><button class="tool-btn wide" id="dinAgainBtn">🔄 Nog een keer!</button></div>
+                    </div>
+                </div>
+                <div class="din-foods" id="dinFoods"></div>
+                <button class="scope-close" id="dinClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="embroid" id="embroid">
@@ -2910,7 +3375,9 @@
             { name: 'Torenkamer',    icon: '🔭', say: 'De torenkamer' },
             { name: 'Slaapkamer',    icon: '🛏️', say: 'De slaapkamer' },
             { name: 'Dierensalon',   icon: '🛁', say: 'De dierensalon' },
-            { name: 'Borduurkamer',  icon: '🧵', say: 'De borduurkamer' }
+            { name: 'Borduurkamer',  icon: '🧵', say: 'De borduurkamer' },
+            { name: 'Eetkamer',      icon: '🍽️', say: 'De eetkamer' },
+            { name: 'Speelkamer',    icon: '🧸', say: 'De speelkamer' }
         ];
         const ROOMS_OUT = [
             { name: 'Kasteelplein',  icon: '⛲', say: 'Het kasteelplein' },
@@ -2936,7 +3403,7 @@
 
         const playfield = document.getElementById('playfield');
         const SCENES = {
-            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 22, door: null },
+            in:  { key: 'in',  rooms: ROOMS_IN,  el: document.getElementById('worldIn'),  gems: [], gemsGot: 0, gemCount: 26, door: null },
             out: { key: 'out', rooms: ROOMS_OUT, el: document.getElementById('worldOut'), gems: [], gemsGot: 0, gemCount: 12, door: null }
         };
         let scene = SCENES.in;
@@ -2971,9 +3438,79 @@
             targetAlt: 0,
             flapT: 0,
             pet: { following: false, x: 200, facing: -1, key: 'in' },
+            look: { hat: 'crown', back: 'none', face: 'none', hair: 0 },
             partyUntil: 0,
             lastTime: performance.now()
         };
+
+
+        // Dress-up layers drawn on the princess (toggled by applyLook)
+        const PRINCESS_LAYERS = `
+            <g class="lk" data-k="face" data-v="glasses" style="display:none">
+                <path d="M43 39 c-2.5-3-7-1-6 2.5 c0.8 2.6 6 5.5 6 5.5 s5.2-2.9 6-5.5 c1-3.5-3.5-5.5-6-2.5 Z" fill="rgba(244,114,182,0.55)" stroke="#db2777" stroke-width="1.4"/>
+                <path d="M57 39 c-2.5-3-7-1-6 2.5 c0.8 2.6 6 5.5 6 5.5 s5.2-2.9 6-5.5 c1-3.5-3.5-5.5-6-2.5 Z" fill="rgba(244,114,182,0.55)" stroke="#db2777" stroke-width="1.4"/>
+                <path d="M49 41 Q50 40 51 41" stroke="#db2777" stroke-width="1.4" fill="none"/>
+            </g>
+            <g class="lk" data-k="face" data-v="whiskers" style="display:none">
+                <ellipse cx="50" cy="47" rx="2.2" ry="1.6" fill="#f472b6"/>
+                <path d="M41 47 L30 45 M41 49 L30 50 M59 47 L70 45 M59 49 L70 50" stroke="#374151" stroke-width="1" stroke-linecap="round"/>
+            </g>
+            <g class="lk" data-k="face" data-v="mask" style="display:none">
+                <path fill-rule="evenodd" fill="#a855f7" stroke="#7e22ce" stroke-width="1"
+                    d="M32 38 Q50 33 68 38 Q69 47 59 47 Q50 43 41 47 Q31 47 32 38 Z M39.5 42 a3.5 4 0 1 0 7 0 a3.5 4 0 1 0 -7 0 Z M53.5 42 a3.5 4 0 1 0 7 0 a3.5 4 0 1 0 -7 0 Z"/>
+            </g>
+            <g class="lk" data-k="face" data-v="stars" style="display:none">
+                <text x="37" y="51" font-size="7" text-anchor="middle">⭐</text>
+                <text x="63" y="51" font-size="7" text-anchor="middle">💖</text>
+                <text x="50" y="31" font-size="5" text-anchor="middle">✨</text>
+            </g>
+            <g class="lk" data-k="hat" data-v="crown">
+                <path d="M36 24 L39 11 L45 19 L50 6 L55 19 L61 11 L64 24 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
+                <circle cx="50" cy="17" r="2.6" fill="#ec4899"/>
+                <circle cx="42" cy="20" r="1.8" fill="#38bdf8"/>
+                <circle cx="58" cy="20" r="1.8" fill="#a855f7"/>
+            </g>
+            <g class="lk" data-k="hat" data-v="tiara" style="display:none">
+                <path d="M37 26 Q50 14 63 26" stroke="#e5e7eb" stroke-width="3" fill="none" stroke-linecap="round"/>
+                <path d="M47 19 L50 12 L53 19 Z" fill="#e5e7eb"/>
+                <circle cx="50" cy="17" r="2.8" fill="#38bdf8" stroke="#fff"/>
+                <circle cx="42.5" cy="21" r="1.8" fill="#f472b6"/><circle cx="57.5" cy="21" r="1.8" fill="#f472b6"/>
+            </g>
+            <g class="lk" data-k="hat" data-v="witch" style="display:none">
+                <path d="M36 25 L53 -16 Q58 -18 57 -11 L64 25 Z" fill="#7c3aed"/>
+                <path d="M36 20 L63 20 L64 25 L36 25 Z" fill="#facc15"/>
+                <path d="M22 27 Q50 19 78 27 Q50 33 22 27 Z" fill="#6d28d9"/>
+                <text x="52" y="10" font-size="8" text-anchor="middle">⭐</text>
+            </g>
+            <g class="lk" data-k="hat" data-v="pirate" style="display:none">
+                <path d="M24 29 Q28 2 50 5 Q72 2 76 29 Q50 21 24 29 Z" fill="#1f2937"/>
+                <path d="M27 25 Q50 17 73 25" stroke="#facc15" stroke-width="2" fill="none"/>
+                <circle cx="50" cy="13" r="4" fill="#fff"/>
+                <circle cx="48.6" cy="12.5" r="0.9" fill="#1f2937"/><circle cx="51.4" cy="12.5" r="0.9" fill="#1f2937"/>
+            </g>
+            <g class="lk" data-k="hat" data-v="bunny" style="display:none">
+                <ellipse cx="41" cy="6" rx="6" ry="16" transform="rotate(-14 41 6)" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+                <ellipse cx="41" cy="7" rx="2.8" ry="11" transform="rotate(-14 41 7)" fill="#fbcfe8"/>
+                <ellipse cx="59" cy="6" rx="6" ry="16" transform="rotate(14 59 6)" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+                <ellipse cx="59" cy="7" rx="2.8" ry="11" transform="rotate(14 59 7)" fill="#fbcfe8"/>
+                <path d="M33 26 Q50 14 67 26" stroke="#f472b6" stroke-width="3" fill="none"/>
+            </g>
+            <g class="lk" data-k="hat" data-v="unicorn" style="display:none">
+                <path d="M34 26 L36 14 L43 22 Z" fill="#fbcfe8" stroke="#f472b6" stroke-width="1"/>
+                <path d="M66 26 L64 14 L57 22 Z" fill="#fbcfe8" stroke="#f472b6" stroke-width="1"/>
+                <path d="M45 24 L50 -8 L55 24 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
+                <path d="M46.5 16 L53 14 M47.5 8 L52.3 6.5 M48.5 0 L51.5 -1" stroke="#f59e0b" stroke-width="1.3"/>
+            </g>
+            <g class="lk" data-k="hat" data-v="flowers" style="display:none">
+                ${[[-160, '🌸'], [-135, '🌼'], [-110, '🌷'], [-90, '🌸'], [-70, '🌼'], [-45, '🌷'], [-20, '🌸']].map(([a, f]) => {
+                    const r = a * Math.PI / 180;
+                    return `<text x="${(50 + Math.cos(r) * 19).toFixed(1)}" y="${(43 + Math.sin(r) * 19).toFixed(1)}" font-size="9" text-anchor="middle" dominant-baseline="central">${f}</text>`;
+                }).join('')}
+            </g>
+            <g class="lk" data-k="hat" data-v="cat" style="display:none">
+                <path d="M33 30 L34 9 L46 22 Z" fill="#374151"/><path d="M35.5 25 L36 14 L42.5 21.5 Z" fill="#f9a8d4"/>
+                <path d="M67 30 L66 9 L54 22 Z" fill="#374151"/><path d="M64.5 25 L64 14 L57.5 21.5 Z" fill="#f9a8d4"/>
+            </g>`;
 
         /* ─────────── Princess SVG ─────────── */
         function princessSVG(prefix) {
@@ -2995,7 +3532,24 @@
                 </defs>
                 <ellipse cx="50" cy="156" rx="30" ry="4" fill="rgba(0,0,0,0.18)"/>
                 <g class="bob">
-                    <path d="M31 36 Q24 70 30 100 Q50 106 70 100 Q76 70 69 36 Z" fill="url(#${prefix}hair)"/>
+                    <g class="lk lk-wings" data-k="back" data-v="wings" style="display:none">
+                        <ellipse cx="24" cy="66" rx="17" ry="27" transform="rotate(-28 24 66)" fill="rgba(186,230,253,0.75)" stroke="#c4b5fd" stroke-width="1.5"/>
+                        <ellipse cx="28" cy="96" rx="11" ry="16" transform="rotate(24 28 96)" fill="rgba(251,207,232,0.75)" stroke="#c4b5fd" stroke-width="1.5"/>
+                        <ellipse cx="76" cy="66" rx="17" ry="27" transform="rotate(28 76 66)" fill="rgba(186,230,253,0.75)" stroke="#c4b5fd" stroke-width="1.5"/>
+                        <ellipse cx="72" cy="96" rx="11" ry="16" transform="rotate(-24 72 96)" fill="rgba(251,207,232,0.75)" stroke="#c4b5fd" stroke-width="1.5"/>
+                        <circle cx="20" cy="60" r="2" fill="#fff"/><circle cx="80" cy="60" r="2" fill="#fff"/>
+                    </g>
+                    <g class="lk lk-wings" data-k="back" data-v="butterfly" style="display:none">
+                        <path d="M50 70 C20 30 4 50 14 74 C4 92 26 112 50 84 Z" fill="#fb923c" stroke="#7c2d12" stroke-width="2"/>
+                        <path d="M50 70 C80 30 96 50 86 74 C96 92 74 112 50 84 Z" fill="#fb923c" stroke="#7c2d12" stroke-width="2"/>
+                        <circle cx="24" cy="62" r="5" fill="#fde68a"/><circle cx="76" cy="62" r="5" fill="#fde68a"/>
+                        <circle cx="26" cy="90" r="3.5" fill="#f472b6"/><circle cx="74" cy="90" r="3.5" fill="#f472b6"/>
+                    </g>
+                    <g class="lk" data-k="back" data-v="cape" style="display:none">
+                        <path d="M36 62 Q18 110 20 150 L80 150 Q82 110 64 62 Z" fill="#dc2626"/>
+                        <path d="M36 62 Q50 70 64 62" stroke="#fcd34d" stroke-width="4" fill="none" stroke-linecap="round"/>
+                    </g>
+                    <path class="hair" d="M31 36 Q24 70 30 100 Q50 106 70 100 Q76 70 69 36 Z" fill="url(#${prefix}hair)"/>
                     <ellipse cx="42" cy="152" rx="7" ry="4" fill="#ec4899"/>
                     <ellipse cx="58" cy="152" rx="7" ry="4" fill="#ec4899"/>
                     <g class="skirt">
@@ -3018,7 +3572,7 @@
                     <path class="wand-star" d="M88 50 L90.5 55.5 L96.5 56 L92 60 L93.5 66 L88 63 L82.5 66 L84 60 L79.5 56 L85.5 55.5 Z" fill="#fde047" stroke="#f59e0b" stroke-width="1"/>
                     <rect x="46" y="54" width="8" height="10" fill="#ffd7c2"/>
                     <circle cx="50" cy="40" r="18" fill="#ffe4d6"/>
-                    <path d="M32 40 Q32 20 50 20 Q68 20 68 40 Q62 28 54 30 Q48 26 42 31 Q36 30 32 40 Z" fill="url(#${prefix}hair)"/>
+                    <path class="hair" d="M32 40 Q32 20 50 20 Q68 20 68 40 Q62 28 54 30 Q48 26 42 31 Q36 30 32 40 Z" fill="url(#${prefix}hair)"/>
                     <ellipse cx="43" cy="42" rx="2.6" ry="3.4" fill="#3b0764"/>
                     <ellipse cx="57" cy="42" rx="2.6" ry="3.4" fill="#3b0764"/>
                     <circle cx="44" cy="40.6" r="1" fill="#fff"/>
@@ -3026,12 +3580,52 @@
                     <circle cx="39" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
                     <circle cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
                     <path d="M45 50 Q50 55 55 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round"/>
-                    <path d="M36 24 L39 11 L45 19 L50 6 L55 19 L61 11 L64 24 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
-                    <circle cx="50" cy="17" r="2.6" fill="#ec4899"/>
-                    <circle cx="42" cy="20" r="1.8" fill="#38bdf8"/>
-                    <circle cx="58" cy="20" r="1.8" fill="#a855f7"/>
+                    ${PRINCESS_LAYERS}
                 </g>
             </svg>`;
+        }
+
+        const HAIRS = [
+            ['#fde047', '#f59e0b'], ['#a16207', '#713f12'], ['#4b5563', '#111827'], ['#fb923c', '#c2410c'],
+            ['#f9a8d4', '#ec4899'], ['#7dd3fc', '#3b82f6'], ['#d8b4fe', '#9333ea'], 'rainbow'
+        ];
+        const LOOK_KEY = 'noor-prinses-look';
+
+        function applyLook() {
+            const look = state.look;
+            document.querySelectorAll('svg[data-prefix]').forEach(svg => {
+                const pre = svg.dataset.prefix;
+                svg.querySelectorAll('.lk').forEach(g => {
+                    g.style.display = look[g.dataset.k] === g.dataset.v ? '' : 'none';
+                });
+                const h = HAIRS[look.hair] || HAIRS[0];
+                if (h === 'rainbow') {
+                    svg.querySelectorAll('.hair').forEach(x => x.setAttribute('fill', `url(#${pre}rb)`));
+                } else {
+                    svg.querySelectorAll('.hair').forEach(x => x.setAttribute('fill', `url(#${pre}hair)`));
+                    const stops = svg.querySelectorAll(`#${pre}hair stop`);
+                    if (stops.length === 2) {
+                        stops[0].setAttribute('stop-color', h[0]);
+                        stops[1].setAttribute('stop-color', h[1]);
+                    }
+                }
+            });
+            applyDress();
+        }
+
+        function saveLook() {
+            try { localStorage.setItem(LOOK_KEY, JSON.stringify({ ...state.look, dress: state.dressIdx })); } catch (e) {}
+        }
+
+        function loadLook() {
+            try {
+                const d = JSON.parse(localStorage.getItem(LOOK_KEY));
+                if (d && typeof d === 'object') {
+                    ['hat', 'back', 'face'].forEach(k => { if (typeof d[k] === 'string') state.look[k] = d[k]; });
+                    if (Number.isInteger(d.hair) && d.hair >= 0 && d.hair < HAIRS.length) state.look.hair = d.hair;
+                    if (Number.isInteger(d.dress) && d.dress >= 0 && d.dress < DRESSES.length) state.dressIdx = d.dress;
+                }
+            } catch (e) {}
         }
 
         function applyDress() {
@@ -3226,6 +3820,47 @@
             </div>`, rd + 240, 222, rd + 400, () => openCare(0));
             CARE_PETS.slice(0, 3).forEach((pet, i) =>
                 addObj(`<div class="emoji-obj">${pet.e}</div>`, rd + 70 + i * 60, 380 - (i % 2) * 8, rd + 150, () => openCare(i)));
+
+            /* Room: Eetkamer */
+            const rf = ROOM_W * 10;
+            place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), rf + 325, 10);
+            addObj('<div class="frame" style="font-size:56px">🎂</div>', rf + 40, 90, rf + 100, () => { playCorrect(); sparkleShower(rf + 100, 130, 30); });
+            addObj('<div class="frame" style="font-size:56px">🍓</div>', rf + 640, 90, rf + 700, () => { playCorrect(); sparkleShower(rf + 700, 130, 30); });
+            addObj(`<div class="dining">
+                ${[30, 160, 290, 420].map((x, i) => `<div class="chairback" style="left:${x}px"></div><span class="guest-e" style="left:${x + 8}px;animation-delay:${-i * 0.5}s">${['🐶', '🐰', '🐻', '🐱'][i]}</span>`).join('')}
+                <div class="tabletop"></div>
+                ${[38, 168, 298, 428].map(x => `<div class="plate" style="left:${x}px"></div>`).join('')}
+                <span class="candle" style="left:120px">🕯️</span><span class="candle" style="left:375px">🕯️</span>
+                <div class="cloth"></div>
+                <div class="tleg" style="left:40px"></div><div class="tleg" style="left:464px"></div>
+                <div class="tap-hint" style="top:-44px">👇</div>
+            </div>`, rf + 140, 222, rf + 400, openDinner);
+
+            /* Room: Speelkamer */
+            const rp = ROOM_W * 11;
+            addObj(`<div class="chest">
+                <span class="clothes">👗👒🎩👑</span>
+                <div class="lid"></div>
+                <div class="box"></div>
+                <div class="tap-hint" style="top:-50px">👇</div>
+            </div>`, rp + 290, 210, rp + 405, openDressup);
+            addObj('<div class="toy-ball">⚽</div>', rp + 90, 380, rp + 120, (node) => {
+                node.classList.remove('bounce'); void node.offsetWidth; node.classList.add('bounce');
+                [0, 240, 480, 720].forEach((t, i) => setTimeout(() => playTone(500 - i * 60, 0.08, 0.2, 'triangle'), t));
+            });
+            addObj('<div class="toy-train">🚂</div>', rp + 640, 375, rp + 640, (node) => {
+                node.classList.remove('drive'); void node.offsetWidth; node.classList.add('drive');
+                playTone(660, 0.3, 0.15, 'square'); setTimeout(() => playTone(880, 0.4, 0.12, 'square'), 300);
+            });
+            addObj(`<div class="blocks">
+                <span style="top:104px;background:#ef4444">A</span>
+                <span style="top:56px;background:#3b82f6">B</span>
+                <span style="top:8px;background:#22c55e">C</span>
+            </div>`, rp + 560, 260, rp + 595, (node) => {
+                const tumbled = node.classList.toggle('tumble');
+                playFreqSweep(tumbled ? 600 : 300, tumbled ? 150 : 700, 0.4, 0.15);
+            });
+            addObj('<div class="emoji-obj">🧸</div>', rp + 30, 380, rp + 60, teddyHug);
 
             /* Room: Borduurkamer */
             const re = ROOM_W * 9;
@@ -4357,6 +4992,9 @@
             if (e.key === 'Escape' && teaOpen) closeTea();
             if (e.key === 'Escape' && careOpen) closeCare();
             if (e.key === 'Escape' && embOpen) closeEmbroid(false);
+            if (e.key === 'Escape' && dressOpen) closeDressup();
+            if (e.key === 'Escape' && dinOpen) closeDinner();
+            if (e.key === 'Escape' && mapOpen) closeMap();
             if (e.key === ' ' || e.key === 't') castSpell();
         });
         document.addEventListener('keyup', (e) => {
@@ -6251,7 +6889,398 @@
         });
         window.addEventListener('resize', () => { if (embOpen) sizeEmbFrame(); });
 
-        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen; }
+
+        /* ─────────── Kaart (snel reizen) ─────────── */
+        const mapOv = document.getElementById('mapOv');
+        let mapOpen = false;
+
+        function openMap() {
+            if (state.busy || overlayOpen()) return;
+            mapOpen = true;
+            const btn = (key, r, i) => `<button class="map-room${scene.key === key && state.room === i ? ' here' : ''}" data-k="${key}" data-i="${i}">${r.icon}<small>${r.name}</small></button>`;
+            document.getElementById('mapIn').innerHTML = ROOMS_IN.map((r, i) => btn('in', r, i)).join('');
+            document.getElementById('mapOut').innerHTML = ROOMS_OUT.map((r, i) => btn('out', r, i)).join('');
+            mapOv.querySelectorAll('.map-room').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                travelTo(b.dataset.k, +b.dataset.i);
+            }));
+            mapOv.classList.add('open');
+            playPop();
+        }
+
+        function closeMap() {
+            mapOpen = false;
+            mapOv.classList.remove('open');
+        }
+
+        function travelTo(key, room) {
+            closeMap();
+            state.busy = true;
+            state.hold = 0;
+            state.pending = null;
+            const fade = document.getElementById('doorFade');
+            [1568, 2093, 2637, 3136].forEach((f, i) => setTimeout(() => playTone(f, 0.25, 0.08, 'sine'), i * 60));
+            burst(state.x, 320, 40);
+            fade.classList.add('show');
+            setTimeout(() => {
+                if (key !== scene.key) {
+                    dismountUnicorn(true);
+                    setScene(key);
+                }
+                state.x = state.targetX = Math.min(WORLD_W - 100, room * ROOM_W + 400);
+                if (state.riding) state.uniX = state.x;
+                state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));
+                if (state.pet.following) state.pet.x = state.x - 90;
+            }, 420);
+            setTimeout(() => {
+                fade.classList.remove('show');
+                burst(state.x, 320, 50);
+                state.busy = false;
+            }, 560);
+        }
+
+        document.getElementById('mapBtn').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            openMap();
+        });
+        document.getElementById('mapClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeMap();
+        });
+        mapOv.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        /* ─────────── Verkleedkist ─────────── */
+        const dressEl = document.getElementById('dressup');
+        let dressOpen = false;
+        let duTab = 'hat';
+        const DU_CATS = [
+            { k: 'hat', icon: '👑', opts: [['crown', '👑'], ['tiara', '💎'], ['witch', '🧙'], ['pirate', '🏴‍☠️'], ['bunny', '🐰'], ['unicorn', '🦄'], ['flowers', '🌸'], ['cat', '🐱'], ['none', '🚫']] },
+            { k: 'dress', icon: '👗' },
+            { k: 'hair', icon: '💇' },
+            { k: 'back', icon: '🧚', opts: [['none', '🚫'], ['wings', '🧚'], ['butterfly', '🦋'], ['cape', '🦸']] },
+            { k: 'face', icon: '😎', opts: [['none', '🚫'], ['glasses', '😍'], ['whiskers', '😺'], ['mask', '🎭'], ['stars', '🤩']] }
+        ];
+
+        function dressSwatch(c) {
+            return c === 'rainbow' ? 'linear-gradient(180deg,#ef4444,#facc15,#4ade80,#60a5fa,#c084fc)' : c;
+        }
+
+        function renderDuTabs() {
+            const box = document.getElementById('duTabs');
+            box.innerHTML = DU_CATS.map(c => `<button class="du-tab${duTab === c.k ? ' active' : ''}" data-k="${c.k}">${c.icon}</button>`).join('');
+            box.querySelectorAll('.du-tab').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                duTab = b.dataset.k;
+                renderDuTabs();
+                renderDuOpts();
+                playPop();
+            }));
+        }
+
+        function renderDuOpts() {
+            const box = document.getElementById('duOpts');
+            const cat = DU_CATS.find(c => c.k === duTab);
+            if (duTab === 'dress') {
+                box.innerHTML = DRESSES.map((c, i) => `<button class="du-opt${state.dressIdx === i ? ' sel' : ''}" data-v="${i}"><span class="sw" style="background:${dressSwatch(c)}"></span></button>`).join('');
+            } else if (duTab === 'hair') {
+                box.innerHTML = HAIRS.map((h, i) => `<button class="du-opt${state.look.hair === i ? ' sel' : ''}" data-v="${i}"><span class="sw" style="background:${h === 'rainbow' ? dressSwatch('rainbow') : `linear-gradient(180deg, ${h[0]}, ${h[1]})`}"></span></button>`).join('');
+            } else {
+                box.innerHTML = cat.opts.map(([v, ic]) => `<button class="du-opt${state.look[duTab] === v ? ' sel' : ''}" data-v="${v}">${ic}</button>`).join('');
+            }
+            box.querySelectorAll('.du-opt').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                const v = b.dataset.v;
+                if (duTab === 'dress') state.dressIdx = +v;
+                else if (duTab === 'hair') state.look.hair = +v;
+                else state.look[duTab] = v;
+                applyLook();
+                renderDuOpts();
+                duSparkle();
+            }));
+        }
+
+        function duSparkle() {
+            const pv = document.getElementById('duPreview');
+            pv.classList.remove('pop');
+            void pv.offsetWidth;
+            pv.classList.add('pop');
+            const r = pv.getBoundingClientRect();
+            const o = dressEl.getBoundingClientRect();
+            for (let i = 0; i < 10; i++) {
+                const s = document.createElement('span');
+                s.className = 'scope-spark';
+                s.textContent = randomPick(['✨', '⭐', '💖', '🌟']);
+                const a = Math.random() * Math.PI * 2;
+                const d = 60 + Math.random() * 80;
+                s.style.left = (r.left + r.width / 2 - o.left) + 'px';
+                s.style.top = (r.top + r.height * 0.4 - o.top) + 'px';
+                s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                dressEl.appendChild(s);
+                setTimeout(() => s.remove(), 900);
+            }
+            [1319, 1760].forEach((f, i) => setTimeout(() => playTone(f, 0.15, 0.08, 'sine'), i * 60));
+        }
+
+        function openDressup() {
+            dressOpen = true;
+            dressEl.classList.add('open');
+            const pv = document.getElementById('duPreview');
+            if (!pv.firstElementChild) pv.innerHTML = princessSVG('dz');
+            applyLook();
+            renderDuTabs();
+            renderDuOpts();
+            playMusicBox();
+        }
+
+        function closeDressup() {
+            dressOpen = false;
+            dressEl.classList.remove('open');
+            saveLook();
+            twirl();
+            burst(state.x, 320, 50);
+            playSparkleSound();
+        }
+
+        document.getElementById('duRandom').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            DU_CATS.forEach(c => { if (c.opts) state.look[c.k] = randomPick(c.opts)[0]; });
+            state.look.hair = Math.floor(Math.random() * HAIRS.length);
+            state.dressIdx = Math.floor(Math.random() * DRESSES.length);
+            applyLook();
+            renderDuOpts();
+            duSparkle();
+            playFreqSweep(300, 1500, 0.4, 0.12);
+        });
+        document.getElementById('duDone').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            playWin();
+            closeDressup();
+        });
+        document.getElementById('duClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeDressup();
+        });
+        dressEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        /* ─────────── Dinertje ─────────── */
+        const dinEl = document.getElementById('dinner');
+        let dinOpen = false;
+        const DIN_ANIMALS = [
+            { e: '🐶', likes: ['🦴', '🍖'], snd: () => { playTone(320, 0.1, 0.2, 'square'); setTimeout(() => playTone(280, 0.12, 0.2, 'square'), 160); } },
+            { e: '🐱', likes: ['🐟', '🥛'], snd: () => { playFreqSweep(700, 1000, 0.15, 0.18); setTimeout(() => playFreqSweep(1000, 600, 0.3, 0.18), 150); } },
+            { e: '🐰', likes: ['🥕', '🥬'], snd: () => playFreqSweep(1400, 1900, 0.1, 0.14) },
+            { e: '🐻', likes: ['🍯', '🍓'], snd: () => playTone(150, 0.3, 0.2, 'sawtooth') },
+            { e: '🐷', likes: ['🌽', '🍎'], snd: () => { playTone(180, 0.1, 0.18, 'sawtooth'); setTimeout(() => playTone(160, 0.12, 0.18, 'sawtooth'), 150); } },
+            { e: '🐵', likes: ['🍌', '🍉'], snd: () => [900, 1200, 900].forEach((f, i) => setTimeout(() => playTone(f, 0.08, 0.12, 'square'), i * 90)) },
+            { e: '🐭', likes: ['🧀', '🍪'], snd: () => playFreqSweep(2000, 2600, 0.08, 0.12) }
+        ];
+        const DIN_MEALS = 3;
+        let din = { seats: [], selected: null, drag: null, candlesOut: 0 };
+
+        function newDinner() {
+            const picks = shuffle(DIN_ANIMALS.slice()).slice(0, 4);
+            din.seats = picks.map(a => ({ a, wish: randomPick(a.likes), fed: 0 }));
+            din.selected = null;
+            din.candlesOut = 0;
+            document.getElementById('dinCake').classList.remove('show');
+            document.getElementById('dinAgain').classList.remove('show');
+            renderDinner();
+        }
+
+        function renderDinner() {
+            const seats = document.getElementById('dinSeats');
+            seats.innerHTML = din.seats.map((st, i) => `<div class="din-seat" data-i="${i}">
+                    <div class="din-bubble new">${st.fed >= DIN_MEALS ? '😋' : st.wish}</div>
+                    <div class="din-animal">${st.a.e}</div>
+                    <div class="din-plate"></div>
+                    <div class="din-stars">${'⭐'.repeat(st.fed)}</div>
+                </div>`).join('');
+            seats.querySelectorAll('.din-seat').forEach(seat => seat.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (din.selected) feedSeat(+seat.dataset.i, din.selected);
+            }));
+            const foods = [...new Set(din.seats.flatMap(st => st.a.likes))];
+            const box = document.getElementById('dinFoods');
+            box.innerHTML = shuffle(foods).map(f => `<button class="din-food" data-f="${f}">${f}</button>`).join('');
+            box.querySelectorAll('.din-food').forEach(b => b.addEventListener('pointerdown', (e) => startFoodDrag(e, b)));
+        }
+
+        function dinPoint(e) {
+            const o = dinEl.getBoundingClientRect();
+            return { x: e.clientX - o.left, y: e.clientY - o.top };
+        }
+
+        function startFoodDrag(e, btn) {
+            e.stopPropagation();
+            const ghost = document.createElement('div');
+            ghost.className = 'din-ghost';
+            ghost.textContent = btn.dataset.f;
+            const pt = dinPoint(e);
+            ghost.style.left = pt.x + 'px';
+            ghost.style.top = pt.y + 'px';
+            dinEl.appendChild(ghost);
+            din.drag = { food: btn.dataset.f, ghost, btn, sx: e.clientX, sy: e.clientY, moved: false };
+            playPop();
+        }
+
+        window.addEventListener('pointermove', (e) => {
+            const d = din.drag;
+            if (!d) return;
+            if (Math.hypot(e.clientX - d.sx, e.clientY - d.sy) > 12) d.moved = true;
+            const pt = dinPoint(e);
+            d.ghost.style.left = pt.x + 'px';
+            d.ghost.style.top = pt.y + 'px';
+        });
+
+        window.addEventListener('pointerup', (e) => {
+            const d = din.drag;
+            if (!d) return;
+            din.drag = null;
+            const seatEl = [...document.querySelectorAll('.din-seat')].find(s => {
+                const r = s.getBoundingClientRect();
+                return e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+            });
+            if (seatEl && d.moved) {
+                feedSeat(+seatEl.dataset.i, d.food, d.ghost);
+                return;
+            }
+            d.ghost.remove();
+            if (!d.moved) {
+                // Plain tap: select this food, then tap an animal
+                din.selected = din.selected === d.food ? null : d.food;
+                document.querySelectorAll('.din-food').forEach(b => b.classList.toggle('sel', b.dataset.f === din.selected));
+            }
+        });
+
+        function feedSeat(i, food, ghost) {
+            const st = din.seats[i];
+            const seat = document.querySelector(`.din-seat[data-i="${i}"]`);
+            const animal = seat.querySelector('.din-animal');
+            const bubble = seat.querySelector('.din-bubble');
+            const plate = seat.querySelector('.din-plate');
+            if (!ghost) {
+                ghost = document.createElement('div');
+                ghost.className = 'din-ghost';
+                ghost.textContent = food;
+                const fb = document.querySelector(`.din-food[data-f="${food}"]`).getBoundingClientRect();
+                const o = dinEl.getBoundingClientRect();
+                ghost.style.left = (fb.left + fb.width / 2 - o.left) + 'px';
+                ghost.style.top = (fb.top + fb.height / 2 - o.top) + 'px';
+                dinEl.appendChild(ghost);
+            }
+            din.selected = null;
+            document.querySelectorAll('.din-food').forEach(b => b.classList.remove('sel'));
+            if (st.fed >= DIN_MEALS || food !== st.wish) {
+                ghost.remove();
+                animal.classList.remove('nope'); void animal.offsetWidth; animal.classList.add('nope');
+                bubble.classList.remove('wobble'); void bubble.offsetWidth; bubble.classList.add('wobble');
+                playTone(220, 0.12, 0.1, 'triangle');
+                setTimeout(() => playTone(180, 0.15, 0.1, 'triangle'), 140);
+                return;
+            }
+            // Correct: food flies onto the plate, the animal munches it
+            const pr = plate.getBoundingClientRect();
+            const o = dinEl.getBoundingClientRect();
+            requestAnimationFrame(() => {
+                ghost.classList.add('fly');
+                ghost.style.left = (pr.left + pr.width / 2 - o.left) + 'px';
+                ghost.style.top = (pr.top + pr.height / 2 - o.top - 10) + 'px';
+                ghost.style.transform = 'translate(-50%, -50%) scale(0.75)';
+            });
+            setTimeout(() => {
+                animal.classList.remove('eat'); void animal.offsetWidth; animal.classList.add('eat');
+                [0, 220, 440].forEach(t => setTimeout(() => playTone(260 + Math.random() * 60, 0.08, 0.18, 'triangle'), t));
+                ghost.style.opacity = '0';
+                ghost.style.transform = 'translate(-50%, -80%) scale(0.2)';
+            }, 380);
+            setTimeout(() => {
+                ghost.remove();
+                st.fed++;
+                st.a.snd();
+                const r = animal.getBoundingClientRect();
+                dinSpark(r.left + r.width / 2, r.top + r.height / 2);
+                if (st.fed < DIN_MEALS) {
+                    let next = randomPick(st.a.likes);
+                    if (st.a.likes.length > 1 && next === st.wish && Math.random() < 0.6) next = st.a.likes.find(f => f !== st.wish);
+                    st.wish = next;
+                }
+                bubble.textContent = st.fed >= DIN_MEALS ? '😋' : st.wish;
+                bubble.classList.remove('new'); void bubble.offsetWidth; bubble.classList.add('new');
+                seat.querySelector('.din-stars').textContent = '⭐'.repeat(st.fed);
+                if (din.seats.every(x => x.fed >= DIN_MEALS)) setTimeout(showCake, 700);
+            }, 1250);
+        }
+
+        function dinSpark(cx, cy) {
+            const o = dinEl.getBoundingClientRect();
+            for (let i = 0; i < 8; i++) {
+                const s = document.createElement('span');
+                s.className = 'scope-spark';
+                s.textContent = randomPick(['💖', '✨', '😋', '⭐']);
+                const a = Math.random() * Math.PI * 2;
+                const d = 40 + Math.random() * 50;
+                s.style.left = (cx - o.left) + 'px';
+                s.style.top = (cy - o.top) + 'px';
+                s.style.setProperty('--dx', Math.cos(a) * d + 'px');
+                s.style.setProperty('--dy', Math.sin(a) * d + 'px');
+                dinEl.appendChild(s);
+                setTimeout(() => s.remove(), 900);
+            }
+        }
+
+        function showCake() {
+            const box = document.getElementById('candles');
+            box.innerHTML = Array.from({ length: 5 }, (_, i) => `<button class="candle-btn" data-i="${i}"><span class="wax"></span><span class="flame"></span></button>`).join('');
+            box.querySelectorAll('.candle-btn').forEach(b => b.addEventListener('pointerdown', (e) => {
+                e.stopPropagation();
+                if (b.classList.contains('out')) return;
+                b.classList.add('out');
+                din.candlesOut++;
+                playFreqSweep(900, 200, 0.25, 0.12);
+                const r = b.getBoundingClientRect();
+                dinSpark(r.left + r.width / 2, r.top);
+                if (din.candlesOut === 5) {
+                    playWin();
+                    setTimeout(playMusicBox, 500);
+                    document.querySelectorAll('.din-animal').forEach((a, k) => setTimeout(() => {
+                        a.classList.remove('eat'); void a.offsetWidth; a.classList.add('eat');
+                        const ar = a.getBoundingClientRect();
+                        dinSpark(ar.left + ar.width / 2, ar.top);
+                    }, k * 150));
+                    setTimeout(() => document.getElementById('dinAgain').classList.add('show'), 900);
+                }
+            }));
+            document.getElementById('dinCake').classList.add('show');
+            playSparkleSound();
+        }
+
+        document.getElementById('dinAgainBtn').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            newDinner();
+            playPop();
+        });
+
+        function openDinner() {
+            dinOpen = true;
+            dinEl.classList.add('open');
+            newDinner();
+            playMusicBox();
+        }
+
+        function closeDinner() {
+            dinOpen = false;
+            dinEl.classList.remove('open');
+            if (din.drag) { din.drag.ghost.remove(); din.drag = null; }
+            _playWhoosh();
+        }
+        document.getElementById('dinClose').addEventListener('pointerdown', (e) => {
+            e.stopPropagation();
+            closeDinner();
+        });
+        dinEl.addEventListener('pointerdown', (e) => e.stopPropagation());
+
+        function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen; }
 
         /* ─────────── Verrekijker ─────────── */
         const scope = document.getElementById('scope');
@@ -6437,7 +7466,8 @@
         buildHands();
         buildNailTools();
         renderWallFrames();
-        applyDress();
+        loadLook();
+        applyLook();
         spawnGems();
         resize();
         state.camX = Math.max(0, state.x - state.viewW / 2);
