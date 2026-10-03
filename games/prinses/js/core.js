@@ -299,9 +299,11 @@ function place(node, x, y) {
 function addObj(html, x, y, walkX, action) {
     const node = place(el(html), x, y);
     node.classList.add('obj');
+    registerStickerObj(node, walkX);
     node.addEventListener('pointerdown', (e) => {
         e.stopPropagation();
         if (state.busy) return;
+        stickerTap(node);
         node.classList.remove('tap');
         void node.offsetWidth;
         node.classList.add('tap');

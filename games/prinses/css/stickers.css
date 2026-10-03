@@ -1,0 +1,226 @@
+/* ── Stickerboek ── */
+.stick-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 30;
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: 4px solid #fff;
+    background: linear-gradient(135deg, #fbcfe8, #f472b6);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+.stick-btn.bump { animation: stickBump 0.5s ease; }
+@keyframes stickBump {
+    0%, 100% { transform: scale(1); }
+    40% { transform: scale(1.3) rotate(-8deg); }
+}
+.stick-count {
+    position: absolute;
+    left: -10px;
+    bottom: -8px;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 6px;
+    border-radius: 13px;
+    border: 3px solid #fff;
+    background: #facc15;
+    color: #9a3412;
+    font-family: 'Fredoka One', cursive;
+    font-size: 13px;
+    line-height: 20px;
+    text-align: center;
+}
+
+/* Sticker that flies from the room to the book button */
+.sticker-fly {
+    position: absolute;
+    z-index: 60;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background: radial-gradient(circle at 35% 30%, #fff, #fef3c7);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    pointer-events: none;
+    transform: scale(0) rotate(-30deg);
+    transition: transform 0.45s cubic-bezier(.34, 1.56, .64, 1);
+}
+.sticker-fly.pop { transform: scale(1.25) rotate(8deg); }
+.sticker-fly.go {
+    transform: scale(0.35) rotate(-10deg);
+    transition: left 0.7s ease-in, top 0.7s ease-in, transform 0.7s ease-in;
+}
+
+/* ── Het boek ── */
+.stickov {
+    position: absolute;
+    inset: 0;
+    z-index: 55;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    container-type: size;
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.5) 3px, transparent 4px) 0 0 / 36px 36px,
+        linear-gradient(135deg, #fce7f3, #ede9fe);
+}
+.stickov.open { display: flex; }
+.stick-book {
+    /* Sticker size: 3 across in a row (6 fit in two rows), plus header and nav */
+    --s: clamp(64px, min(calc((100cqw - 140px) / 3.6), calc((100cqh - 230px) / 2.6)), 150px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 14px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #db2777, #be185d);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.3), inset 0 0 0 4px rgba(255,255,255,0.25);
+    max-width: 100%;
+    max-height: 100%;
+}
+.stick-page {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    min-width: min(calc(var(--s) * 3.6), calc(100cqw - 60px));
+    padding: 12px 18px 18px;
+    border-radius: 18px;
+    border-left: 10px solid var(--c);
+    background:
+        radial-gradient(circle, rgba(0,0,0,0.05) 1.5px, transparent 2px) 0 0 / 22px 22px,
+        #fffbeb;
+    box-shadow: inset 0 0 18px rgba(180,83,9,0.12);
+}
+.stick-page.turn-r { animation: pageR 0.35s ease; }
+.stick-page.turn-l { animation: pageL 0.35s ease; }
+@keyframes pageR { from { transform: perspective(900px) rotateY(-35deg); opacity: 0.4; } }
+@keyframes pageL { from { transform: perspective(900px) rotateY(35deg); opacity: 0.4; } }
+.stick-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.3rem;
+    color: #9d174d;
+}
+.stick-head .sh-icon { font-size: 1.8rem; }
+.stick-head .sh-count {
+    margin-left: 8px;
+    padding: 2px 12px;
+    border-radius: 999px;
+    background: var(--c);
+    color: #fff;
+    font-size: 1rem;
+}
+.stick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, var(--s));
+    justify-content: center;
+    gap: 12px 16px;
+}
+
+.sticker {
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,0.9) 0 12%, transparent 30%),
+        radial-gradient(circle, #fff 0 55%, var(--c) 56% 100%);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.22);
+    transform: rotate(var(--r));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    touch-action: none;
+    padding: 0;
+}
+.sticker .st-icon { font-size: calc(var(--s) * 0.42); line-height: 1; }
+.sticker small {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(9px, calc(var(--s) * 0.1), 13px);
+    color: #9d174d;
+    max-width: 70%;
+    line-height: 1.05;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+.sticker.empty {
+    background: rgba(255,255,255,0.5);
+    border: 4px dashed rgba(157,23,77,0.3);
+    box-shadow: none;
+    transform: none;
+}
+.sticker.empty .st-icon { filter: grayscale(1); opacity: 0.25; }
+.sticker.empty small { color: rgba(157,23,77,0.45); }
+.sticker.fresh { animation: freshSticker 1s ease 2, stickerShine 1.6s ease-in-out 2s infinite; }
+@keyframes freshSticker {
+    0% { transform: scale(0.4) rotate(-40deg); }
+    60% { transform: scale(1.15) rotate(calc(var(--r) + 8deg)); }
+    100% { transform: scale(1) rotate(var(--r)); }
+}
+@keyframes stickerShine {
+    0%, 100% { box-shadow: 0 5px 12px rgba(0,0,0,0.22); }
+    50% { box-shadow: 0 0 0 6px rgba(250,204,21,0.6), 0 5px 18px rgba(250,204,21,0.8); }
+}
+.sticker.wiggle { animation: stickerWiggle 0.5s ease; }
+@keyframes stickerWiggle {
+    0%, 100% { transform: rotate(var(--r)); }
+    25% { transform: rotate(calc(var(--r) - 12deg)) scale(1.08); }
+    75% { transform: rotate(calc(var(--r) + 12deg)) scale(1.08); }
+}
+.stick-grid.full .sticker:not(.empty) { box-shadow: 0 0 0 4px #facc15, 0 5px 12px rgba(0,0,0,0.22); }
+
+.stick-nav { display: flex; align-items: center; gap: 10px; }
+.stick-arrow {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background: #fde68a;
+    color: #be185d;
+    font-size: 22px;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.stick-arrow:active { transform: scale(0.9); }
+.stick-tabs { display: flex; gap: 6px; }
+.stick-tab {
+    position: relative;
+    width: 46px;
+    height: 46px;
+    border-radius: 14px;
+    border: 3px solid rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.35);
+    font-size: 24px;
+    cursor: pointer;
+    touch-action: none;
+    padding: 0;
+}
+.stick-tab.on { background: #fff; border-color: var(--c); transform: translateY(-4px); }
+.stick-tab.done::after { content: '👑'; position: absolute; top: -12px; right: -8px; font-size: 16px; }
+.stick-total { font-family: 'Fredoka One', cursive; color: #fff; font-size: 1rem; }
+
+/* Portrait or narrow: smaller nav */
+@container (max-width: 560px) {
+    .stick-tab { width: 38px; height: 38px; font-size: 20px; }
+    .stick-arrow { width: 44px; height: 44px; }
+}

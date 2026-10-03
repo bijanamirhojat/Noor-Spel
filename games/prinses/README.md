@@ -14,6 +14,7 @@ js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer
 js/sea.js       onder water
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
 js/map.js       toverlift + kaart
+js/stickers.js  stickerboek
 js/main.js      alles opbouwen en starten
 
 css/core.css    basis (kamers, prinses, knoppen, toast, toverstaf)
@@ -25,6 +26,14 @@ css/rooms/*.css stijl per kamer (kamer-klasse: .room.rm-<key>)
 
 Het kasteel heeft vier verdiepingen (`WINGS` in `js/world.js`), elk een eigen wereld met een toverlift
 in de eerste kamer. De kaart tekent het kasteel als doorsnede: toren boven, beneden onder, buiten en zee eronder.
+
+## Stickerboek
+
+Elke kamer heeft een sticker (het kamer-icoon). Je verdient hem door een hoofdactiviteit te doen
+(een object met een `.tap-hint` 👇) of door 3 verschillende objecten in die kamer aan te tikken
+(minder als de kamer minder objecten heeft). Dat gaat automatisch via `addObj`; deur en lift tellen niet mee.
+Voor dingen die niet via `addObj` gaan: `earnSticker('<key>', node)`. Opgeslagen in `localStorage`
+(`noor-prinses-stickers`).
 
 ## Een kamer toevoegen
 

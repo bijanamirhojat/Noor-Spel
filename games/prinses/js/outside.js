@@ -211,6 +211,7 @@ function buildOutside() {
 function unicornEl() { return document.getElementById('unicorn'); }
 
 function mountUnicorn() {
+    earnSticker('eenhoornweide', unicornEl());
     state.riding = true;
     state.x = state.targetX = state.uniX;
     princessEl().classList.add('riding');

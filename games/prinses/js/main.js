@@ -20,6 +20,7 @@ renderWallFrames();
 renderRoomSnowman();
 renderVitrine();
 renderToyShelf();
+updateStickerBtn();
 loadLook();
 applyLook();
 resize();

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="prinses/css/overlay.css">
     <link rel="stylesheet" href="prinses/css/outside.css">
     <link rel="stylesheet" href="prinses/css/map.css">
+    <link rel="stylesheet" href="prinses/css/stickers.css">
     <link rel="stylesheet" href="prinses/css/sea.css">
     <link rel="stylesheet" href="prinses/css/rooms/kasteelhal.css">
     <link rel="stylesheet" href="prinses/css/rooms/spiegelkamer.css">
@@ -58,6 +59,7 @@
             <div class="night" id="night"></div>
             <button class="wand-btn" id="wandBtn" aria-label="Toveren">🪄</button>
             <button class="map-btn" id="mapBtn" aria-label="Kaart">🗺️</button>
+            <button class="stick-btn" id="stickBtn" aria-label="Stickerboek">📒<span class="stick-count">0</span></button>
             <div class="dance-bar" id="danceBar">
                 <button class="dance-btn" data-m="spin">🌀<small>Draaien</small></button>
                 <button class="dance-btn" data-m="jump">⬆️<small>Springen</small></button>
@@ -167,6 +169,22 @@
                     </div>
                 </div>
                 <button class="scope-close" id="mapClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="stickov" id="stickOv">
+                <div class="stick-book">
+                    <div class="stick-page" id="stickPage">
+                        <div class="stick-head" id="stickHead"></div>
+                        <div class="stick-grid" id="stickGrid"></div>
+                    </div>
+                    <div class="stick-nav">
+                        <button class="stick-arrow" id="stickPrev" aria-label="Vorige bladzijde">◀</button>
+                        <div class="stick-tabs" id="stickTabs"></div>
+                        <button class="stick-arrow" id="stickNext" aria-label="Volgende bladzijde">▶</button>
+                    </div>
+                    <div class="stick-total">📒 <span id="stickTotal"></span></div>
+                </div>
+                <button class="scope-close" id="stickClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="liftov" id="liftOv">
@@ -295,6 +313,7 @@
     <script src="prinses/js/rooms/sterrenkamer.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <script src="prinses/js/map.js"></script>
+    <script src="prinses/js/stickers.js"></script>
     <script src="prinses/js/main.js"></script>
 </body>
 </html>
