@@ -1,0 +1,133 @@
+.room.rm-regenboogzaal .wall {
+    background: linear-gradient(180deg, #fff7ed 0%, #fdf2f8 55%, #ecfeff 100%);
+}
+
+.room.rm-regenboogzaal .floor {
+    background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
+}
+
+/* Rainbow room */
+.rainbow-window {
+    width: 300px;
+    height: 170px;
+    border-radius: 150px 150px 0 0;
+    border: 10px solid #fff;
+    border-bottom: none;
+    background:
+        radial-gradient(circle at 50% 100%,
+            #bae6fd 0 30%,
+            #a855f7 30% 37%,
+            #3b82f6 37% 44%,
+            #22c55e 44% 51%,
+            #facc15 51% 58%,
+            #fb923c 58% 65%,
+            #ef4444 65% 72%,
+            #bae6fd 72%);
+    box-shadow: 0 0 30px rgba(255,255,255,0.9);
+    pointer-events: none;
+}
+
+.pedestal {
+    width: 110px;
+    height: 170px;
+}
+
+.pedestal .col {
+    position: absolute;
+    left: 25px;
+    bottom: 0;
+    width: 60px;
+    height: 90px;
+    background: linear-gradient(90deg, #f5f5f4, #fff, #e7e5e4);
+    border-top: 8px solid #fcd34d;
+    border-bottom: 8px solid #fcd34d;
+}
+
+.pedestal .ball {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background:
+        conic-gradient(from 0deg, #f472b6, #facc15, #4ade80, #60a5fa, #c084fc, #f472b6);
+    box-shadow: 0 0 30px #f0abfc, inset -12px -12px 24px rgba(0,0,0,0.25), inset 12px 12px 24px rgba(255,255,255,0.7);
+    animation: spinBall 6s linear infinite;
+}
+
+@keyframes spinBall { to { filter: hue-rotate(360deg); } }
+
+.discoball {
+    width: 70px;
+    height: 110px;
+}
+
+.discoball .chain {
+    position: absolute;
+    left: 33px;
+    top: 0;
+    width: 4px;
+    height: 40px;
+    background: #d4d4d8;
+}
+
+.discoball .ball {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background:
+        repeating-linear-gradient(0deg, transparent 0 8px, rgba(0,0,0,0.15) 8px 9px),
+        repeating-linear-gradient(90deg, transparent 0 8px, rgba(0,0,0,0.15) 8px 9px),
+        radial-gradient(circle at 35% 35%, #fff, #d4d4d8 60%, #a1a1aa);
+    box-shadow: 0 0 20px rgba(255,255,255,0.8);
+}
+
+.rainbow-arc {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 800px;
+    height: 500px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.rainbow-arc path {
+    fill: none;
+    stroke-width: 22;
+    stroke-linecap: round;
+    stroke-dasharray: 1400;
+    stroke-dashoffset: 1400;
+}
+
+.rainbow-arc.show path {
+    animation: drawArc 1.6s ease forwards;
+}
+
+@keyframes drawArc { to { stroke-dashoffset: 0; } }
+
+.disco-light {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    opacity: 0;
+    z-index: 1;
+}
+
+.party .disco-light {
+    opacity: 0.55;
+    animation: discoMove 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes discoMove {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(180px, 60px); }
+    100% { transform: translate(-120px, 120px); }
+}

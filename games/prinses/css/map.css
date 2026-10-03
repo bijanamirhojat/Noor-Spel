@@ -1,0 +1,305 @@
+/* ── Kaart ── */
+.map-btn {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 30;
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: 4px solid #fff;
+    background: linear-gradient(135deg, #a7f3d0, #60a5fa);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+.mapov {
+    position: absolute;
+    inset: 0;
+    z-index: 55;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+    gap: 8px;
+    overflow-y: auto;
+    container-type: size;
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.6) 3px, transparent 4px) 0 0 / 36px 36px,
+        linear-gradient(180deg, #e0f2fe, #fdf2f8 70%, #dcfce7);
+}
+
+.mapov.open { display: flex; }
+
+/* Center vertically, but never clip the top when it overflows */
+.mapov::before, .mapov::after { content: ''; flex: 1 1 0; }
+
+.map-sec { font-family: 'Fredoka One', cursive; color: #be185d; font-size: 1.1rem; }
+
+.map-grid { display: flex; justify-content: center; gap: 6px; }
+
+.map-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 8px 28px; }
+
+.map-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+
+#mapOut, #mapSea { display: grid; grid-template-columns: repeat(6, auto); }
+#mapSea { grid-template-columns: repeat(3, auto); }
+
+/* The castle as a cross-section: tower on top, floors stacked, grass underneath */
+.map-castle {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 0 8px 8px;
+    border-bottom: 8px solid #86efac;
+    border-radius: 0 0 6px 6px;
+}
+
+.map-floor {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px 5px 6px;
+    border-radius: 18px;
+    border: 3px solid var(--c);
+    background: linear-gradient(rgba(255,255,255,0.78), rgba(255,255,255,0.78)), var(--c);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.map-floor.here { box-shadow: 0 0 0 4px #fff, 0 0 18px 4px var(--c); }
+
+/* Tower: narrower, centred, with a pointy roof */
+.map-floor.map-tower {
+    align-self: center;
+    margin-top: calc(var(--t) * 0.42);
+}
+.map-floor.map-tower::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 100%;
+    width: 70%;
+    height: calc(var(--t) * 0.44);
+    transform: translateX(-50%);
+    background: var(--c);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.map-floor-name {
+    width: calc(var(--t) * 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: calc(var(--t) * 0.4);
+    line-height: 1;
+    pointer-events: none;
+}
+.map-floor-name small {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(8px, calc(var(--t) * 0.11), 11px);
+    color: #4c1d95;
+    text-align: center;
+    line-height: 1.05;
+}
+
+/* Tile size (cq units resolve against .mapov, so set it on its children):
+   9 tiles across the buiten + zee row, 5 tile rows down (4 floors + buiten) */
+.map-castle, .map-row {
+    --t: clamp(48px, min(calc((100cqw - 130px) / 9), calc((100cqh - 210px) / 4.7)), 100px);
+}
+/* Portrait (iPad rechtop): buiten wraps to 3 wide, so one more row must fit */
+@container (aspect-ratio < 1.1) {
+    .map-castle, .map-row { --t: clamp(48px, min(calc((100cqw - 100px) / 7.6), calc((100cqh - 260px) / 6.2)), 116px); }
+    #mapOut { grid-template-columns: repeat(3, auto); }
+}
+
+.map-room {
+    width: var(--t);
+    height: calc(var(--t) * 0.92);
+    border-radius: 18px;
+    border: 3px solid #fbcfe8;
+    background: #fff;
+    cursor: pointer;
+    touch-action: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0 3px;
+    font-size: calc(var(--t) * 0.36);
+    line-height: 1;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.map-room small {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(9px, calc(var(--t) * 0.115), 11px);
+    line-height: 1.05;
+    color: #be185d;
+    max-width: 100%;
+    text-align: center;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: anywhere;
+}
+
+.map-room.here { border-color: #f472b6; background: #fdf2f8; box-shadow: 0 0 0 3px #f472b6; }
+
+.map-room:active { transform: scale(0.92); }
+
+/* ── Toverlift (object in de kamer) ── */
+.lift {
+    width: 150px;
+    height: 250px;
+}
+.lift-frame {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border: 10px solid #fcd34d;
+    border-bottom: none;
+    border-radius: 18px 18px 0 0;
+    background: radial-gradient(ellipse at 50% 60%, #fff 0 25%, #fef9c3 50%, #f5d0fe 100%);
+    box-shadow: 0 0 0 4px var(--c), 0 8px 18px rgba(0,0,0,0.25);
+}
+.lift-door {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    background:
+        linear-gradient(90deg, rgba(255,255,255,0.45), transparent 40%, rgba(255,255,255,0.25) 70%, transparent),
+        var(--c);
+    transition: transform 0.45s ease;
+}
+.lift-door.l { left: 0; border-right: 2px solid rgba(0,0,0,0.15); }
+.lift-door.r { right: 0; border-left: 2px solid rgba(255,255,255,0.4); }
+.lift-door::after {
+    content: '✨';
+    position: absolute;
+    top: 40%;
+    font-size: 22px;
+}
+.lift-door.l::after { right: 6px; }
+.lift-door.r::after { left: 6px; }
+.lift.open .lift-door.l { transform: translateX(-100%); }
+.lift.open .lift-door.r { transform: translateX(100%); }
+.lift-sign {
+    position: absolute;
+    top: -52px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 44px;
+    border-radius: 14px;
+    border: 4px solid #fcd34d;
+    background: #1e1b4b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 0 12px rgba(253,224,71,0.6);
+}
+.lift-call {
+    position: absolute;
+    right: -40px;
+    top: 100px;
+    width: 30px;
+    height: 54px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #fde68a, #f59e0b);
+    border: 3px solid #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 11px;
+    color: #fff;
+    text-shadow: 0 0 4px #b45309;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+.lift .tap-hint { top: 40px; z-index: 1; }
+
+/* ── Lift-paneel (overlay) ── */
+.liftov {
+    position: absolute;
+    inset: 0;
+    z-index: 55;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(30, 27, 75, 0.55);
+}
+.liftov.open { display: flex; }
+.lift-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px 20px;
+    border-radius: 30px;
+    border: 6px solid #fff;
+    background: linear-gradient(160deg, #fef3c7, #fcd34d 55%, #f59e0b);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.35);
+    max-height: calc(100% - 24px);
+}
+.lift-display {
+    width: 96px;
+    height: 56px;
+    border-radius: 14px;
+    background: #1e1b4b;
+    border: 4px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    box-shadow: inset 0 0 14px rgba(253,224,71,0.5);
+}
+.lift-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 0;
+}
+.lift-floor {
+    width: min(300px, 72vw);
+    height: clamp(56px, 11vh, 80px);
+    border-radius: 999px;
+    border: 4px solid #fff;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.35), transparent 60%),
+        var(--c);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 20px 0 10px;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 5px 0 rgba(0,0,0,0.18);
+}
+.lift-floor .lf-icon {
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(24px, 4.4vh, 34px);
+}
+.lift-floor small {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.15rem;
+    color: #fff;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+}
+.lift-floor.here { outline: 5px solid #1e1b4b; outline-offset: 2px; }
+.lift-floor.here small::after { content: ' 📍'; }
+.lift-floor:active { transform: translateY(4px); box-shadow: 0 1px 0 rgba(0,0,0,0.18); }

@@ -34,6 +34,59 @@ const PRECACHE_URLS = [
     './games/plaatjefout.html',
     './games/poetsen.html',
     './games/prinses.html',
+    './games/prinses/css/core.css',
+    './games/prinses/css/map.css',
+    './games/prinses/css/outside.css',
+    './games/prinses/css/overlay.css',
+    './games/prinses/css/rooms/badkamer.css',
+    './games/prinses/css/rooms/bakkerij.css',
+    './games/prinses/css/rooms/balzaal.css',
+    './games/prinses/css/rooms/borduurkamer.css',
+    './games/prinses/css/rooms/cadeaukamer.css',
+    './games/prinses/css/rooms/dierensalon.css',
+    './games/prinses/css/rooms/eetkamer.css',
+    './games/prinses/css/rooms/hartjeskamer.css',
+    './games/prinses/css/rooms/ijskamer.css',
+    './games/prinses/css/rooms/juwelierskamer.css',
+    './games/prinses/css/rooms/kasteelhal.css',
+    './games/prinses/css/rooms/nagelsalon.css',
+    './games/prinses/css/rooms/poppenhuis.css',
+    './games/prinses/css/rooms/regenboogzaal.css',
+    './games/prinses/css/rooms/slaapkamer.css',
+    './games/prinses/css/rooms/speelkamer.css',
+    './games/prinses/css/rooms/spiegelkamer.css',
+    './games/prinses/css/rooms/sterrenkamer.css',
+    './games/prinses/css/rooms/torenkamer.css',
+    './games/prinses/css/rooms/troonzaal.css',
+    './games/prinses/css/sea.css',
+    './games/prinses/js/core.js',
+    './games/prinses/js/engine.js',
+    './games/prinses/js/main.js',
+    './games/prinses/js/map.js',
+    './games/prinses/js/outside.js',
+    './games/prinses/js/rooms/badkamer.js',
+    './games/prinses/js/rooms/bakkerij.js',
+    './games/prinses/js/rooms/balzaal.js',
+    './games/prinses/js/rooms/borduurkamer.js',
+    './games/prinses/js/rooms/cadeaukamer.js',
+    './games/prinses/js/rooms/dierensalon.js',
+    './games/prinses/js/rooms/eetkamer.js',
+    './games/prinses/js/rooms/hartjeskamer.js',
+    './games/prinses/js/rooms/ijskamer.js',
+    './games/prinses/js/rooms/juwelierskamer.js',
+    './games/prinses/js/rooms/kasteelhal.js',
+    './games/prinses/js/rooms/nagelsalon.js',
+    './games/prinses/js/rooms/poppenhuis.js',
+    './games/prinses/js/rooms/regenboogzaal.js',
+    './games/prinses/js/rooms/slaapkamer.js',
+    './games/prinses/js/rooms/speelkamer.js',
+    './games/prinses/js/rooms/spiegelkamer.js',
+    './games/prinses/js/rooms/sterrenkamer.js',
+    './games/prinses/js/rooms/torenkamer.js',
+    './games/prinses/js/rooms/troonzaal.js',
+    './games/prinses/js/sea.js',
+    './games/prinses/js/wand.js',
+    './games/prinses/js/world.js',
     './games/sokken.html',
     './games/zaklamp.html',
     './games/zoekenvind.html',
@@ -103,7 +156,25 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Cache-first for static assets with background refresh.
+    // Network-first for scripts and styles too: the princess game is split over many
+    // files, and mixing a fresh page with stale cached code from an older release breaks it.
+    if (isSameOrigin && /\.(js|css)$/.test(url.pathname)) {
+        event.respondWith((async () => {
+            try {
+                const fresh = await fetch(request);
+                if (fresh && fresh.status === 200) {
+                    const cache = await caches.open(CACHE_NAME);
+                    cache.put(request, fresh.clone());
+                }
+                return fresh;
+            } catch (_) {
+                return (await caches.match(request)) || Response.error();
+            }
+        })());
+        return;
+    }
+
+    // Cache-first for other static assets with background refresh.
     event.respondWith((async () => {
         const cached = await caches.match(request);
         if (cached) {

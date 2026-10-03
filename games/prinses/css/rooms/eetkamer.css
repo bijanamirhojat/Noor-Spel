@@ -1,0 +1,250 @@
+.room.rm-eetkamer .wall {
+    background:
+        repeating-linear-gradient(90deg, #fecaca 0 36px, #fee2e2 36px 72px),
+        #fee2e2;
+}
+
+.room.rm-eetkamer .floor {
+    background: conic-gradient(#fff7ed 25%, #fdba74 0 50%, #fff7ed 0 75%, #fdba74 0) 0 0 / 50px 50px;
+}
+
+.dining { width: 520px; height: 210px; }
+
+.dining > div, .dining > span { position: absolute; }
+
+.dining .chairback {
+    top: 0; width: 70px; height: 120px;
+    border-radius: 35px 35px 6px 6px;
+    background: linear-gradient(180deg, #f472b6, #be185d);
+    border: 5px solid #fcd34d;
+}
+
+.dining .guest-e { top: 30px; font-size: 54px; line-height: 1; animation: carousel 2.2s ease-in-out infinite; }
+
+.dining .tabletop {
+    left: 0; top: 104px; width: 520px; height: 40px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 4px 0 #e5e7eb;
+}
+
+.dining .cloth {
+    left: 10px; top: 130px; width: 500px; height: 46px;
+    background: repeating-linear-gradient(90deg, #f472b6 0 20px, #fbcfe8 20px 40px);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 90% 70%, 85% 100%, 80% 70%, 75% 100%, 70% 70%, 65% 100%, 60% 70%, 55% 100%, 50% 70%, 45% 100%, 40% 70%, 35% 100%, 30% 70%, 25% 100%, 20% 70%, 15% 100%, 10% 70%, 5% 100%, 0 70%);
+}
+
+.dining .tleg { top: 170px; width: 16px; height: 40px; background: #b45309; border-radius: 4px; }
+
+.dining .plate {
+    top: 98px; width: 54px; height: 20px; border-radius: 50%;
+    background: radial-gradient(ellipse, #fff 45%, #e5e7eb 46%, #fff 60%);
+    box-shadow: 0 2px 0 #d1d5db;
+}
+
+.dining .candle { top: 46px; font-size: 40px; }
+
+.dinner {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        repeating-linear-gradient(90deg, rgba(254,202,202,0.6) 0 36px, transparent 36px 72px),
+        linear-gradient(180deg, #fff1f2, #fee2e2);
+}
+
+.dinner.open { display: flex; }
+
+.din-stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.din-seats {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    width: min(100%, 760px);
+    z-index: 2;
+}
+
+.din-seat {
+    position: relative;
+    flex: 1;
+    max-width: 170px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.din-bubble {
+    position: relative;
+    min-width: 70px;
+    height: 66px;
+    border-radius: 33px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    font-size: 40px;
+    line-height: 66px;
+    text-align: center;
+    margin-bottom: 14px;
+    transition: transform 0.2s ease;
+}
+
+.din-bubble::after {
+    content: '';
+    position: absolute;
+    left: 50%; bottom: -12px;
+    width: 16px; height: 16px;
+    margin-left: -8px;
+    border-radius: 50%;
+    background: #fff;
+}
+
+.din-bubble.new { animation: sprout 0.4s cubic-bezier(.2,1.6,.4,1); }
+
+.din-bubble.wobble { animation: petWiggle 0.5s ease; }
+
+.din-animal { font-size: 72px; line-height: 1; transition: transform 0.2s ease; }
+
+.din-animal.eat { animation: eat 0.9s ease; }
+
+.din-animal.nope { animation: nope 0.5s ease; }
+
+@keyframes eat {
+    0%, 100% { transform: scale(1); }
+    20%, 60% { transform: scale(1.15, 0.9); }
+    40%, 80% { transform: scale(0.95, 1.1); }
+}
+
+@keyframes nope {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px) rotate(-6deg); }
+    75% { transform: translateX(10px) rotate(6deg); }
+}
+
+.din-plate {
+    position: relative;
+    width: 92px; height: 34px;
+    margin-top: -8px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, #fff 45%, #e5e7eb 47%, #fff 62%);
+    box-shadow: 0 3px 0 #d1d5db;
+    font-size: 32px;
+    line-height: 20px;
+    text-align: center;
+}
+
+.din-stars { font-size: 16px; min-height: 20px; margin-top: 6px; letter-spacing: 2px; }
+
+.din-table {
+    width: min(100%, 780px);
+    height: 26px;
+    margin-top: -20px;
+    border-radius: 12px;
+    background: repeating-linear-gradient(90deg, #f472b6 0 24px, #fbcfe8 24px 48px);
+    box-shadow: 0 6px 0 #db2777;
+    z-index: 1;
+}
+
+.din-foods {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.din-food {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    border: 3px solid #fecaca;
+    background: #fff;
+    font-size: 38px;
+    line-height: 1;
+    cursor: grab;
+    touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.din-food.sel { border-color: #f472b6; transform: translateY(-6px) scale(1.1); }
+
+.din-ghost {
+    position: absolute;
+    font-size: 56px;
+    line-height: 1;
+    pointer-events: none;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 6px 6px rgba(0,0,0,0.25));
+}
+
+.din-ghost.fly { transition: left 0.35s ease-in, top 0.35s ease-in, transform 0.35s ease-in, opacity 0.35s ease; }
+
+.din-cake {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: 6;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 24px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.din-cake.show { display: flex; animation: sprout 0.5s cubic-bezier(.2,1.6,.4,1); }
+
+.candles { display: flex; gap: 10px; margin-bottom: -6px; }
+
+.candle-btn {
+    position: relative;
+    width: 30px; height: 90px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.candle-btn .wax {
+    position: absolute; left: 7px; bottom: 0; width: 16px; height: 54px;
+    border-radius: 4px;
+    background: repeating-linear-gradient(160deg, #fff 0 6px, #f472b6 6px 12px);
+}
+
+.candle-btn .flame {
+    position: absolute; left: 5px; top: 4px; width: 20px; height: 30px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: radial-gradient(circle at 50% 70%, #fff 0 20%, #fde047 45%, #fb923c 75%, transparent 76%);
+    animation: flicker 0.5s ease-in-out infinite alternate;
+    transform-origin: 50% 100%;
+}
+
+.candle-btn.out .flame { display: none; }
+
+.cake-body {
+    width: 240px; height: 90px;
+    border-radius: 16px 16px 24px 24px;
+    background:
+        radial-gradient(circle, #fff 4px, transparent 5px) 0 0 / 26px 26px,
+        linear-gradient(180deg, #fbcfe8 0 30%, #f472b6 30% 34%, #fde68a 34% 66%, #f472b6 66% 70%, #fbcfe8 70%);
+    box-shadow: 0 6px 0 #db2777;
+}

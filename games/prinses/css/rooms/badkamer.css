@@ -1,0 +1,145 @@
+.room.rm-badkamer .wall {
+    background:
+        linear-gradient(90deg, rgba(255,255,255,0.95) 2px, transparent 2px) 0 0 / 46px 46px,
+        linear-gradient(0deg, rgba(255,255,255,0.95) 2px, transparent 2px) 0 0 / 46px 46px,
+        linear-gradient(180deg, #fce7f3, #fbcfe8);
+}
+
+.room.rm-badkamer .floor {
+    background:
+        conic-gradient(#fff 25%, #f9a8d4 0 50%, #fff 0 75%, #f9a8d4 0) 0 0 / 30px 30px;
+}
+
+.ptub-back, .ptub-front { pointer-events: none; }
+
+.ptub-back {
+    width: 300px; height: 150px;
+    border-radius: 30px 30px 0 0;
+    background:
+        radial-gradient(circle at 12% 60%, #fff 0 26px, transparent 27px),
+        radial-gradient(circle at 30% 40%, #fff 0 32px, transparent 33px),
+        radial-gradient(circle at 52% 55%, #fff 0 28px, transparent 29px),
+        radial-gradient(circle at 74% 42%, #fff 0 32px, transparent 33px),
+        radial-gradient(circle at 90% 62%, #fff 0 24px, transparent 25px);
+    filter: drop-shadow(0 2px 3px rgba(125,211,252,0.6));
+}
+
+.ptub-front {
+    width: 320px; height: 130px;
+    z-index: 12;
+    border-radius: 18px 18px 90px 90px;
+    background: linear-gradient(180deg, #fff, #fce7f3);
+    border: 6px solid #f9a8d4;
+    box-shadow: inset 0 -12px 20px rgba(244,114,182,0.2);
+}
+
+.ptub-front::before, .ptub-front::after {
+    content: '';
+    position: absolute; top: 112px; width: 30px; height: 30px;
+    border-radius: 0 0 14px 14px; background: #fcd34d;
+}
+
+.ptub-front::before { left: 34px; }
+
+.ptub-front::after { right: 34px; }
+
+.ptub-hit { width: 320px; height: 200px; cursor: pointer; }
+
+.ptub-duck { font-size: 44px; z-index: 13; pointer-events: none; animation: carousel 2.4s ease-in-out infinite; }
+
+.shower-cab { width: 170px; height: 330px; }
+
+.shower-cab > div { position: absolute; }
+
+.shower-cab .pipe { left: 80px; top: 0; width: 10px; height: 40px; background: #cbd5e1; }
+
+.shower-cab .head { left: 50px; top: 36px; width: 70px; height: 18px; border-radius: 0 0 35px 35px; background: linear-gradient(180deg, #e2e8f0, #94a3b8); }
+
+.shower-cab .glass {
+    left: 0; top: 10px; width: 170px; height: 320px;
+    border-radius: 14px;
+    border: 5px solid #e2e8f0;
+    background: linear-gradient(120deg, rgba(186,230,253,0.25), rgba(255,255,255,0.45) 40%, rgba(186,230,253,0.2));
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.7);
+}
+
+.shower-cab .tray { left: -6px; top: 316px; width: 182px; height: 16px; border-radius: 8px; background: #e2e8f0; }
+
+.shower-cab.on .glass { background: linear-gradient(120deg, rgba(186,230,253,0.45), rgba(255,255,255,0.75) 40%, rgba(186,230,253,0.4)); }
+
+.sink { width: 200px; height: 240px; }
+
+.sink > div, .sink > span { position: absolute; }
+
+.sink .mirror2 {
+    left: 30px; top: 0; width: 140px; height: 110px; border-radius: 70px 70px 14px 14px;
+    border: 7px solid #fcd34d;
+    background: linear-gradient(135deg, #e0f2fe, #fdf2f8 50%, #fff);
+}
+
+.sink .basin { left: 10px; top: 130px; width: 180px; height: 40px; border-radius: 10px 10px 60px 60px; background: #fff; border: 5px solid #f9a8d4; }
+
+.sink .tap { left: 90px; top: 112px; width: 20px; height: 24px; border-radius: 6px 6px 0 0; background: #cbd5e1; }
+
+.sink .ped { left: 80px; top: 170px; width: 40px; height: 70px; background: linear-gradient(90deg, #fff, #fce7f3); }
+
+.sink .cup { left: 150px; top: 96px; font-size: 34px; }
+
+.bathrobe { width: 80px; height: 160px; pointer-events: none; }
+
+.bathrobe::before { content: ''; position: absolute; left: 30px; top: 0; width: 20px; height: 14px; border-radius: 10px; background: #fcd34d; }
+
+.bathrobe span { position: absolute; left: 0; top: 10px; width: 80px; height: 150px; border-radius: 30px 30px 14px 14px; background: repeating-linear-gradient(90deg, #f9a8d4 0 10px, #fbcfe8 10px 20px); }
+
+.teethov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        linear-gradient(90deg, rgba(255,255,255,0.8) 2px, transparent 2px) 0 0 / 44px 44px,
+        linear-gradient(0deg, rgba(255,255,255,0.8) 2px, transparent 2px) 0 0 / 44px 44px,
+        linear-gradient(180deg, #e0f2fe, #cffafe);
+}
+
+.teethov.open { display: flex; }
+
+.tb-stage { position: relative; flex: 1; min-height: 0; width: 100%; touch-action: none; }
+
+.tb-stage svg.mouth { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(96%, 680px); height: 96%; overflow: visible; }
+
+.tb-dirt { transition: opacity 0.25s ease; }
+
+.tb-germ { transform-box: fill-box; transform-origin: 50% 50%; animation: germWiggle 0.8s ease-in-out infinite alternate; }
+
+.tb-germ.flee { animation: germFlee 0.8s ease-in forwards; }
+
+@keyframes germWiggle { from { transform: rotate(-10deg); } to { transform: rotate(10deg) translateY(-3px); } }
+
+@keyframes germFlee { to { transform: translate(var(--dx), -220px) rotate(360deg) scale(0.3); opacity: 0; } }
+
+.tb-foam { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 30% 30%, #fff 0 40%, #e0f2fe 75%, #bae6fd); transition: opacity 0.6s ease; animation: sprout 0.2s ease-out; }
+
+.tb-foam.rinse { opacity: 0; }
+
+.tb-brush { position: absolute; width: 150px; height: 60px; margin: -30px 0 0 -18px; pointer-events: none; display: none; z-index: 4; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2)); }
+
+.tb-brush.show { display: block; }
+
+.tb-brush.scrub { animation: scrub 0.12s linear infinite alternate; }
+
+@keyframes scrub { from { transform: translateX(-5px) rotate(-4deg); } to { transform: translateX(5px) rotate(4deg); } }
+
+.tb-hint { font-family: 'Fredoka One', cursive; color: #0369a1; background: rgba(255,255,255,0.85); border-radius: 999px; padding: 4px 14px; z-index: 2; }
+
+.tb-btn.pulse { animation: hintPulse 0.8s ease infinite; }
+
+.tb-btn.hint { animation: hintPulse 0.5s ease 3; }
+
+svg.mouth.shine .tooth { filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 8px #bae6fd); }

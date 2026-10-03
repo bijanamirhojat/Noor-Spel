@@ -1,0 +1,202 @@
+.room.rm-torenkamer .wall {
+    background:
+        radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px,
+        radial-gradient(circle at 70% 70%, #fde68a 1.5px, transparent 2.5px) 0 0 / 90px 80px,
+        linear-gradient(180deg, #1e1b4b, #4c1d95);
+}
+
+.room.rm-torenkamer .floor {
+    background:
+        repeating-linear-gradient(90deg, #7c3aed 0 60px, #6d28d9 60px 62px);
+}
+
+.telescope {
+    width: 150px;
+    height: 190px;
+}
+
+.telescope .tube {
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    width: 140px;
+    height: 38px;
+    border-radius: 12px 20px 20px 12px;
+    background: linear-gradient(180deg, #fde68a, #f59e0b 60%, #b45309);
+    transform: rotate(-28deg);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.telescope .tube::before {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: -6px;
+    width: 22px;
+    height: 50px;
+    border-radius: 8px;
+    background: #fcd34d;
+}
+
+.telescope .tube::after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 4px;
+    width: 26px;
+    height: 30px;
+    border-radius: 6px;
+    background: #ec4899;
+}
+
+.telescope .legs {
+    position: absolute;
+    left: 50px;
+    top: 80px;
+    width: 60px;
+    height: 110px;
+    background:
+        linear-gradient(100deg, transparent 44%, #7c2d12 44% 52%, transparent 52%),
+        linear-gradient(80deg, transparent 48%, #7c2d12 48% 56%, transparent 56%),
+        linear-gradient(90deg, transparent 46%, #92400e 46% 54%, transparent 54%);
+}
+
+.scope {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    background: #000;
+    display: none;
+    touch-action: none;
+    overflow: hidden;
+}
+
+.scope.open { display: block; }
+
+.pano {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #d9f99d 62%, #86efac 100%);
+}
+
+.pano.base {
+    filter: brightness(0.3) blur(2px);
+}
+
+.lens-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.pano .p {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    line-height: 1;
+    pointer-events: none;
+}
+
+.pano .sun {
+    position: absolute;
+    left: 8%;
+    top: 12%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #fde047;
+    box-shadow: 0 0 40px #fde047;
+}
+
+.pano .hill {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.pano .rb {
+    position: absolute;
+    left: 30%;
+    top: 20%;
+    width: 40%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        transparent 0 50%,
+        rgba(168,85,247,0.7) 50% 54%,
+        rgba(59,130,246,0.7) 54% 58%,
+        rgba(34,197,94,0.7) 58% 62%,
+        rgba(250,204,21,0.7) 62% 66%,
+        rgba(251,146,60,0.7) 66% 70%,
+        rgba(239,68,68,0.7) 70% 74%,
+        transparent 74%);
+}
+
+.pano .lake {
+    position: absolute;
+    left: 50%;
+    top: 76%;
+    width: 26%;
+    height: 12%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, #7dd3fc, #38bdf8);
+}
+
+.pano .find.found {
+    animation: foundJump 0.7s ease;
+    filter: drop-shadow(0 0 6px #fff) drop-shadow(0 0 12px #f0abfc);
+}
+
+@keyframes foundJump {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    40% { transform: translate(-50%, -80%) scale(1.5); }
+}
+
+.lens-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 8px solid #1f2937;
+    box-shadow: 0 0 0 3px #f472b6, inset 0 0 18px rgba(0,0,0,0.6);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.find-list {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 999px;
+    padding: 6px 14px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.find-list span {
+    font-size: 28px;
+    filter: grayscale(1) opacity(0.35);
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.find-list span.found {
+    filter: none;
+    transform: scale(1.2);
+}
+
+.scope-hint {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.92);
+    color: #be185d;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1rem;
+    padding: 6px 16px;
+    border-radius: 999px;
+    z-index: 3;
+    pointer-events: none;
+    white-space: nowrap;
+}

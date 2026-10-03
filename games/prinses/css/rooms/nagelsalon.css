@@ -1,0 +1,203 @@
+.room.rm-nagelsalon .wall {
+    background:
+        radial-gradient(circle, #f9a8d4 4px, transparent 5px) 0 0 / 50px 50px,
+        radial-gradient(circle, #fde68a 3px, transparent 4px) 25px 25px / 50px 50px,
+        linear-gradient(180deg, #ccfbf1, #99f6e4);
+}
+
+.room.rm-nagelsalon .floor {
+    background: conic-gradient(#fff 25%, #fbcfe8 0 50%, #fff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
+}
+
+.vanity { width: 280px; height: 230px; }
+
+.vanity > div { position: absolute; }
+
+.vanity .vmirror {
+    left: 80px; top: 0; width: 120px; height: 110px;
+    border-radius: 50%;
+    border: 8px solid #fcd34d;
+    background: linear-gradient(135deg, #e0f2fe, #fdf2f8 50%, #fff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 54px;
+}
+
+.vanity .vtop {
+    left: 0; top: 112px; width: 280px; height: 24px;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #fbcfe8, #f472b6);
+    border: 4px solid #fcd34d;
+}
+
+.vanity .vbody {
+    left: 20px; top: 136px; width: 240px; height: 70px;
+    background: linear-gradient(180deg, #fdf2f8, #fbcfe8);
+    border-radius: 0 0 16px 16px;
+    border: 4px solid #fcd34d;
+    border-top: none;
+}
+
+.vanity .vbody::before, .vanity .vbody::after {
+    content: '';
+    position: absolute;
+    top: 24px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #fcd34d;
+}
+
+.vanity .vbody::before { left: 50px; }
+
+.vanity .vbody::after { right: 50px; }
+
+.vanity .bottles {
+    left: 18px; top: 72px; width: 250px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+}
+
+.mini-bottle {
+    position: relative;
+    width: 22px; height: 30px;
+    border-radius: 6px 6px 9px 9px;
+    box-shadow: inset -4px -4px 0 rgba(0,0,0,0.12), inset 3px 3px 0 rgba(255,255,255,0.5);
+}
+
+.mini-bottle::before {
+    content: '';
+    position: absolute;
+    left: 6px; top: -14px;
+    width: 10px; height: 14px;
+    border-radius: 3px;
+    background: #1f2937;
+}
+
+.stool {
+    width: 90px; height: 90px;
+    pointer-events: none;
+}
+
+.stool::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; width: 90px; height: 34px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, #fdf2f8, #f9a8d4);
+    box-shadow: 0 4px 0 #f472b6;
+}
+
+.stool::after {
+    content: '';
+    position: absolute;
+    left: 38px; top: 30px; width: 14px; height: 60px;
+    background: #fcd34d;
+}
+
+.nails {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.7) 3px, transparent 4px) 0 0 / 36px 36px,
+        linear-gradient(135deg, #fdf2f8, #f5d0fe 50%, #ccfbf1);
+}
+
+.nails.open { display: flex; }
+
+.palette, .nail-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    z-index: 2;
+}
+
+.bottle-btn {
+    position: relative;
+    width: 52px;
+    height: 70px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    touch-action: none;
+}
+
+.bottle-btn .cap {
+    position: absolute;
+    left: 17px; top: 0;
+    width: 18px; height: 24px;
+    border-radius: 5px;
+    background: linear-gradient(90deg, #111827, #4b5563, #111827);
+}
+
+.bottle-btn .glass {
+    position: absolute;
+    left: 4px; top: 22px;
+    width: 44px; height: 46px;
+    border-radius: 12px 12px 16px 16px;
+    box-shadow: inset -6px -6px 0 rgba(0,0,0,0.12), inset 5px 5px 0 rgba(255,255,255,0.55), 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.bottle-btn.sel { transform: translateY(-10px) scale(1.15); }
+
+.bottle-btn.sel .glass { outline: 4px solid #fff; outline-offset: 2px; }
+
+.hands-wrap {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hands-wrap svg { width: 100%; height: 100%; }
+
+.finger { cursor: pointer; }
+
+.paint {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: paintIn 0.45s ease-out;
+}
+
+@keyframes paintIn {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+.finger .gl { opacity: 0; transition: opacity 0.3s ease; }
+
+.hands.glitter .finger.painted .gl { opacity: 1; }
+
+.gl circle { animation: glTwinkle 1s ease-in-out infinite alternate; }
+
+.gl circle:nth-child(2) { animation-delay: -0.3s; }
+
+.gl circle:nth-child(3) { animation-delay: -0.6s; }
+
+.gl circle:nth-child(4) { animation-delay: -0.8s; }
+
+@keyframes glTwinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+.stk { pointer-events: none; }
+
+.stk.pop { animation: stkPop 0.4s cubic-bezier(.2,1.8,.4,1); transform-box: fill-box; transform-origin: 50% 50%; }
+
+@keyframes stkPop { from { transform: scale(0); } to { transform: scale(1); } }
+
+.hands.drying { animation: drying 0.25s ease-in-out 6 alternate; }
+
+@keyframes drying {
+    from { transform: translateX(-4px); }
+    to { transform: translateX(4px); }
+}

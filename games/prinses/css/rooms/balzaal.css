@@ -1,0 +1,195 @@
+.room.rm-balzaal .wall {
+    background:
+        radial-gradient(circle, #fde68a 3px, transparent 4px) 0 0 / 40px 40px,
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 2px, transparent 2px 80px),
+        linear-gradient(180deg, #f5d0fe, #f0abfc 60%, #e879f9);
+}
+
+.room.rm-balzaal .floor {
+    background: conic-gradient(#fef3c7 25%, #fde68a 0 50%, #fef3c7 0 75%, #fde68a 0) 0 0 / 50px 50px;
+}
+
+.ball-window {
+    width: 110px;
+    height: 200px;
+    border-radius: 55px 55px 0 0;
+    border: 8px solid #fcd34d;
+    background:
+        radial-gradient(circle at 60% 30%, #fff 2px, transparent 3px) 0 0 / 26px 26px,
+        linear-gradient(180deg, #312e81, #6d28d9);
+    pointer-events: none;
+    box-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+
+.ball-window::before, .ball-window::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 30px;
+    height: 210px;
+    background: linear-gradient(90deg, #db2777, #f472b6);
+    border-radius: 0 0 20px 20px;
+}
+
+.ball-window::before { left: -30px; }
+
+.ball-window::after { right: -30px; }
+
+.tile {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.35);
+    pointer-events: none;
+    z-index: 1;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.tile.lit {
+    background: var(--c);
+    box-shadow: 0 0 22px var(--c), inset 0 0 12px rgba(255,255,255,0.8);
+    transition: none;
+}
+
+.orchestra {
+    width: 170px;
+    height: 150px;
+}
+
+.orchestra .stage {
+    position: absolute;
+    left: 0; bottom: 0; width: 170px; height: 36px;
+    border-radius: 12px 12px 0 0;
+    background: linear-gradient(180deg, #f472b6, #be185d);
+    border-top: 5px solid #fcd34d;
+}
+
+.orchestra .inst {
+    position: absolute;
+    bottom: 30px;
+    font-size: 50px;
+    line-height: 1;
+}
+
+.music .orchestra .inst { animation: instBop 0.6s ease-in-out infinite alternate; }
+
+.music .orchestra .inst:nth-child(2) { animation-delay: -0.2s; }
+
+.music .orchestra .inst:nth-child(3) { animation-delay: -0.4s; }
+
+@keyframes instBop {
+    from { transform: translateY(0) rotate(-8deg); }
+    to { transform: translateY(-10px) rotate(8deg); }
+}
+
+.orchestra .notes {
+    position: absolute;
+    left: 50px; top: -10px;
+    font-size: 28px;
+    opacity: 0;
+}
+
+.music .orchestra .notes { animation: notesUp 1.8s ease-out infinite; }
+
+@keyframes notesUp {
+    0% { transform: translate(0, 20px); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translate(30px, -50px); opacity: 0; }
+}
+
+.ball-guest {
+    font-size: 56px;
+    line-height: 1;
+    transform-origin: 50% 100%;
+}
+
+.music .ball-guest { animation: guestDance 1.2s ease-in-out infinite; }
+
+@keyframes guestDance {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    33% { transform: translateY(-16px) rotate(-10deg); }
+    66% { transform: translateY(-4px) rotate(10deg); }
+}
+
+.ball-guest.cheer { animation: cheer 0.6s ease !important; }
+
+@keyframes cheer {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-40px) scale(1.2); }
+}
+
+.cannon { font-size: 60px; line-height: 1; }
+
+.garland-balloons {
+    font-size: 34px;
+    letter-spacing: 10px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
+.prince {
+    position: absolute;
+    left: 0; top: 0;
+    width: 120px;
+    height: 192px;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.prince .pface { width: 100%; height: 100%; transition: transform 0.2s ease; }
+
+.prince.left .pface { transform: scaleX(-1); }
+
+.prince svg { width: 100%; height: 100%; overflow: visible; }
+
+.music .prince .pbody { animation: princeSway 1.2s ease-in-out infinite; transform-origin: 50px 150px; }
+
+@keyframes princeSway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+.dance-bar {
+    position: absolute;
+    left: 50%;
+    top: 12px;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: none;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.dance-bar.show { display: flex; }
+
+.dance-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #f9a8d4;
+    background: linear-gradient(135deg, #fdf2f8, #f5d0fe);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+}
+
+.dance-btn small {
+    font-family: 'Fredoka One', cursive;
+    font-size: 10px;
+    color: #be185d;
+}
+
+.dance-btn:active { transform: scale(0.9); }
+
+@media (max-width: 620px) {
+    .dance-btn { width: 54px; height: 54px; font-size: 24px; }
+}

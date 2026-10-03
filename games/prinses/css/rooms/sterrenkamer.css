@@ -1,0 +1,173 @@
+.room.rm-sterrenkamer .wall {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath d='M35 22 L38.5 31 L48 31.5 L40.5 37.5 L43 47 L35 41.5 L27 47 L29.5 37.5 L22 31.5 L31.5 31 Z' fill='%23fde68a' opacity='.85'/%3E%3C/svg%3E") 0 0 / 70px 70px,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath d='M35 22 L38.5 31 L48 31.5 L40.5 37.5 L43 47 L35 41.5 L27 47 L29.5 37.5 L22 31.5 L31.5 31 Z' fill='%23fde68a' opacity='.85'/%3E%3C/svg%3E") 35px 35px / 70px 70px,
+        radial-gradient(circle, #fff 1.2px, transparent 2px) 10px 20px / 40px 46px,
+        linear-gradient(180deg, #0f0c3d, #312e81 70%, #4c1d95);
+}
+
+.room.rm-sterrenkamer .floor {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='70' height='70'%3E%3Cpath d='M35 22 L38.5 31 L48 31.5 L40.5 37.5 L43 47 L35 41.5 L27 47 L29.5 37.5 L22 31.5 L31.5 31 Z' fill='%23fde68a' opacity='.85'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+        linear-gradient(180deg, #1e1b4b, #312e81);
+}
+
+.shooting {
+    width: 120px;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #fff);
+    pointer-events: none;
+    opacity: 0;
+    animation: shoot 6s ease-in infinite;
+}
+
+.shooting::after {
+    content: '';
+    position: absolute; right: -4px; top: -3px; width: 9px; height: 9px;
+    border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff, 0 0 20px #fde68a;
+}
+
+@keyframes shoot {
+    0%, 70% { transform: translate(0, 0) rotate(20deg); opacity: 0; }
+    72% { opacity: 1; }
+    90% { transform: translate(380px, 140px) rotate(20deg); opacity: 0; }
+    100% { opacity: 0; }
+}
+
+.big-moon {
+    width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fefce8, #fde68a 60%, #facc15);
+    box-shadow: 0 0 40px rgba(253,230,138,0.8), inset -14px -10px 0 rgba(0,0,0,0.08);
+    pointer-events: none;
+}
+
+.star-mobile-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #fcd34d, #f59e0b); pointer-events: none; }
+
+.hang-star { width: 54px; transform-origin: 50% 0; }
+
+.hang-star::before {
+    content: '';
+    position: absolute; left: 26px; top: 0; width: 2px; height: var(--len);
+    background: #fde68a;
+}
+
+.hang-star svg { position: absolute; left: 0; top: var(--len); width: 54px; height: 54px; filter: drop-shadow(0 0 8px #fde68a); }
+
+.hang-star.ring { animation: bellRing 0.6s ease; }
+
+.star-board { width: 240px; height: 250px; }
+
+.star-board > div { position: absolute; }
+
+.star-board .leg { top: 150px; width: 12px; height: 100px; background: #b45309; border-radius: 5px; }
+
+.star-board .board {
+    left: 10px; top: 0; width: 220px; height: 170px;
+    border-radius: 14px;
+    border: 10px solid #fcd34d;
+    background: radial-gradient(circle at 30% 30%, #312e81, #0f0c3d);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+}
+
+.star-board svg { position: absolute; left: 20px; top: 10px; width: 200px; height: 150px; }
+
+.star-rug {
+    width: 300px; height: 60px; border-radius: 50%;
+    background: radial-gradient(ellipse, #fde68a 0 25%, #f59e0b 26% 45%, #7c3aed 46% 100%);
+    pointer-events: none; z-index: 1;
+}
+
+.stargame {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, #fff 1px, transparent 1.8px) 0 0 / 34px 38px,
+        radial-gradient(circle, #fde68a 1px, transparent 1.8px) 17px 19px / 52px 46px,
+        linear-gradient(180deg, #0f0c3d, #312e81 70%, #4c1d95);
+}
+
+.stargame.open { display: flex; }
+
+.stargame .nails-title { color: #fde68a; text-shadow: 0 0 10px rgba(253,230,138,0.6); }
+
+.sg-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+
+.sg-stage svg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: visible; touch-action: none; }
+
+.sg-star { cursor: pointer; }
+
+.sg-star .shape { transform-box: fill-box; transform-origin: 50% 50%; transition: fill 0.3s ease; }
+
+.sg-star.next .shape { animation: sgPulse 0.9s ease-in-out infinite; }
+
+.sg-star.lit .shape { fill: #fde047; filter: drop-shadow(0 0 2px #fde68a); }
+
+.sg-star.nope .shape { animation: sgNope 0.4s ease; }
+
+@keyframes sgPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+}
+
+@keyframes sgNope {
+    0%, 100% { transform: translateX(0); }
+    30% { transform: translateX(-2px); }
+    70% { transform: translateX(2px); }
+}
+
+.sg-num {
+    font-family: 'Fredoka One', cursive;
+    fill: #fff;
+    stroke: #1e1b4b;
+    stroke-width: 1.2px;
+    paint-order: stroke;
+    pointer-events: none;
+}
+
+.sg-line { stroke: #fde047; stroke-width: 1.6; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 1.5px #fde68a); stroke-dasharray: 1; stroke-dashoffset: 1; animation: sgDraw 0.35s ease-out forwards; }
+
+@keyframes sgDraw { to { stroke-dashoffset: 0; } }
+
+.sg-fill { opacity: 0; transition: opacity 0.8s ease; }
+
+.sg-fill.show { opacity: 0.6; }
+
+.sg-emoji { opacity: 0; transform-box: fill-box; transform-origin: 50% 50%; }
+
+.sg-emoji.show { animation: sgReveal 0.8s cubic-bezier(.2,1.6,.4,1) forwards; }
+
+@keyframes sgReveal {
+    from { opacity: 0; transform: scale(0.2) rotate(-30deg); }
+    to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+.sg-picks { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 2; }
+
+.sg-pick {
+    position: relative;
+    width: 58px; height: 58px;
+    border-radius: 18px;
+    border: 3px solid rgba(253,230,138,0.5);
+    background: rgba(255,255,255,0.12);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+}
+
+.sg-pick.sel { border-color: #fde047; background: rgba(253,224,71,0.25); transform: translateY(-4px) scale(1.08); }
+
+.sg-pick .done { position: absolute; right: -6px; top: -8px; font-size: 18px; display: none; }
+
+.sg-pick.is-done .done { display: block; }
+
+.sg-pick.hint { animation: hintPulse 0.6s ease infinite; }

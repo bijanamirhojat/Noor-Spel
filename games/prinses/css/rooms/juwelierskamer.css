@@ -1,0 +1,90 @@
+.room.rm-juwelierskamer .wall {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath d='M25 14 L32 25 L25 36 L18 25 Z' fill='%23fcd34d' opacity='.55'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+        linear-gradient(180deg, #581c87, #7e22ce 60%, #a855f7);
+}
+
+.room.rm-juwelierskamer .floor {
+    background: conic-gradient(#fef3c7 25%, #e9d5ff 0 50%, #fef3c7 0 75%, #e9d5ff 0) 0 0 / 50px 50px;
+}
+
+.jewel-case {
+    width: 150px; height: 170px;
+    pointer-events: none;
+}
+
+.jewel-case .glass {
+    position: absolute; left: 0; top: 0; width: 150px; height: 110px;
+    border-radius: 70px 70px 8px 8px;
+    border: 5px solid #fcd34d;
+    background: linear-gradient(160deg, rgba(255,255,255,0.55), rgba(255,255,255,0.12));
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    font-size: 34px;
+    box-shadow: inset 0 0 18px rgba(255,255,255,0.6), 0 0 20px rgba(253,230,138,0.4);
+}
+
+.jewel-case .stand { position: absolute; left: 50px; top: 110px; width: 50px; height: 60px; background: linear-gradient(90deg, #fde68a, #f59e0b); border-radius: 0 0 8px 8px; }
+
+.jewel-case .glass span { animation: gleam 2s ease-in-out infinite; }
+
+.musicbox { width: 160px; height: 190px; }
+
+.musicbox > div, .musicbox > span { position: absolute; }
+
+.musicbox .box { left: 0; top: 110px; width: 160px; height: 80px; border-radius: 10px; background: linear-gradient(180deg, #f9a8d4, #db2777); border: 4px solid #fcd34d; }
+
+.musicbox .lid {
+    left: 0; top: 100px; width: 160px; height: 20px; border-radius: 10px 10px 4px 4px;
+    background: linear-gradient(180deg, #fbcfe8, #f472b6); border: 4px solid #fcd34d;
+    transform-origin: 0 100%;
+    transition: transform 0.5s cubic-bezier(.2,1.6,.4,1);
+}
+
+.musicbox .ballerina { left: 50px; top: 30px; font-size: 64px; line-height: 1; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; transform: translateY(40px); }
+
+.musicbox.open .lid { transform: rotate(-60deg); }
+
+.musicbox.open .ballerina { opacity: 1; transform: translateY(0); animation: ballerinaSpin 1.2s linear infinite; }
+
+@keyframes ballerinaSpin {
+    from { transform: perspective(300px) rotateY(0); }
+    to { transform: perspective(300px) rotateY(360deg); }
+}
+
+.bead-table { width: 240px; height: 140px; }
+
+.bead-table .top { position: absolute; left: 0; top: 50px; width: 240px; height: 22px; border-radius: 8px; background: #fde68a; border: 4px solid #f59e0b; }
+
+.bead-table .legs { position: absolute; left: 14px; right: 14px; top: 72px; height: 68px; border-left: 12px solid #b45309; border-right: 12px solid #b45309; }
+
+.bead-table .bowl {
+    position: absolute; top: 16px; width: 54px; height: 36px; border-radius: 0 0 27px 27px;
+    background: #fff; box-shadow: inset 0 -6px 0 #e5e7eb;
+    display: flex; justify-content: center; font-size: 15px; letter-spacing: -3px; line-height: 14px; padding-top: 2px;
+}
+
+.beadov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50'%3E%3Cpath d='M25 14 L32 25 L25 36 L18 25 Z' fill='%23fcd34d' opacity='.55'/%3E%3C/svg%3E") 0 0 / 50px 50px,
+        linear-gradient(180deg, #faf5ff, #f3e8ff);
+}
+
+.beadov.open { display: flex; }
+
+.bd-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+
+.bd-stage svg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(96%, 640px); height: 96%; overflow: visible; }
+
+.bd-new { transform-box: fill-box; transform-origin: 50% 50%; animation: beadIn 0.35s cubic-bezier(.2,1.8,.4,1); }
+
+@keyframes beadIn { from { transform: translateY(-60px) scale(0.3); } to { transform: translateY(0) scale(1); } }

@@ -1,0 +1,172 @@
+.room.rm-ijskamer .wall {
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg stroke='%23ffffff' stroke-width='2' stroke-linecap='round' opacity='.7'%3E%3Cpath d='M30 18 V42 M19.6 24 L40.4 36 M19.6 36 L40.4 24'/%3E%3C/g%3E%3C/svg%3E") 0 0 / 60px 60px,
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg stroke='%23ffffff' stroke-width='2' stroke-linecap='round' opacity='.7'%3E%3Cpath d='M30 18 V42 M19.6 24 L40.4 36 M19.6 36 L40.4 24'/%3E%3C/g%3E%3C/svg%3E") 30px 30px / 60px 60px,
+        linear-gradient(180deg, #e0f2fe, #bae6fd 60%, #7dd3fc);
+}
+
+.room.rm-ijskamer .floor {
+    background:
+        radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 24px 18px,
+        linear-gradient(180deg, #f8fafc, #e0f2fe);
+}
+
+.icicles { width: 800px; height: 50px; pointer-events: none; }
+
+.icicles svg { width: 100%; height: 100%; }
+
+.ice-rink {
+    height: 70px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.8) 45%, transparent 55%) 0 0 / 200px 100%,
+        radial-gradient(ellipse, #e0f2fe, #93c5fd 80%);
+    box-shadow: inset 0 0 12px rgba(59,130,246,0.4), 0 0 0 4px rgba(255,255,255,0.8);
+    animation: iceShine 4s linear infinite;
+}
+
+@keyframes iceShine { to { background-position: 400px 0, 0 0; } }
+
+.princess.skating .bob { transform: rotate(-8deg); }
+
+.princess.skating.walking .bob { animation: none; }
+
+.snow-globe { width: 110px; height: 160px; }
+
+.snow-globe .globe {
+    position: absolute; left: 5px; top: 0; width: 100px; height: 100px; border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9) 0 10%, transparent 20%),
+        radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 16px 18px,
+        radial-gradient(circle at 50% 70%, #a5f3fc, #38bdf8);
+    border: 4px solid rgba(255,255,255,0.9);
+    box-shadow: 0 0 20px rgba(186,230,253,0.9);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 44px;
+}
+
+.snow-globe .stand {
+    position: absolute; left: 15px; top: 92px; width: 80px; height: 30px;
+    border-radius: 8px 8px 14px 14px;
+    background: linear-gradient(180deg, #f472b6, #be185d);
+}
+
+.snow-globe .ped { position: absolute; left: 35px; top: 120px; width: 40px; height: 40px; background: #fff; border-radius: 4px; }
+
+.snow-globe.shake .globe { animation: globeShake 0.6s ease; }
+
+@keyframes globeShake {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-18deg); }
+    40% { transform: rotate(16deg); }
+    60% { transform: rotate(-12deg); }
+    80% { transform: rotate(8deg); }
+}
+
+.penguin { font-size: 54px; line-height: 1; }
+
+.penguin.slide { animation: penguinSlide 7s ease-in-out infinite; }
+
+@keyframes penguinSlide {
+    0%, 100% { transform: translateX(0) rotate(0) scaleX(1); }
+    40% { transform: translateX(-200px) rotate(-70deg) scaleX(1); }
+    50% { transform: translateX(-200px) rotate(0) scaleX(-1); }
+    90% { transform: translateX(0) rotate(70deg) scaleX(-1); }
+}
+
+.penguin.hop { animation: toyJump 0.5s ease 2; }
+
+.skate-sign { font-size: 34px; line-height: 1; background: #fff; border: 4px solid #93c5fd; border-radius: 14px; padding: 6px 10px; }
+
+.room-snowman { width: 150px; height: 195px; }
+
+.room-snowman svg { width: 100%; height: 100%; overflow: visible; }
+
+.snowov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background: linear-gradient(180deg, #bae6fd, #e0f2fe 60%, #f8fafc);
+}
+
+.snowov.open { display: flex; }
+
+.snowov::before {
+    content: '';
+    position: absolute; inset: -100px 0 0 0;
+    background:
+        radial-gradient(circle, #fff 2.5px, transparent 3.5px) 0 0 / 50px 60px,
+        radial-gradient(circle, #fff 1.8px, transparent 2.8px) 25px 30px / 70px 50px;
+    animation: snowFall 6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes snowFall { to { transform: translateY(100px); } }
+
+.snowov .nails-title { color: #0369a1; z-index: 1; }
+
+.sm-stage { position: relative; flex: 1; min-height: 0; width: 100%; z-index: 1; }
+
+.sm-stage::after {
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 18%;
+    border-radius: 50% 50% 0 0 / 40% 40% 0 0;
+    background: #fff;
+    box-shadow: 0 -4px 12px rgba(125,211,252,0.5);
+}
+
+.sm-stage svg { position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); height: 88%; overflow: visible; z-index: 1; }
+
+.sm-ball.drop { animation: smDrop 0.6s cubic-bezier(.3,1.5,.5,1); transform-box: fill-box; transform-origin: 50% 100%; }
+
+@keyframes smDrop {
+    from { transform: translateY(-260px) scale(0.6); }
+    to { transform: translateY(0) scale(1); }
+}
+
+.sm-alive .sm-body { animation: smDance 0.6s ease-in-out infinite alternate; transform-origin: 100px 250px; }
+
+.sm-alive .sm-arm-l { animation: smWaveL 0.4s ease-in-out infinite alternate; transform-origin: 62px 125px; }
+
+.sm-alive .sm-arm-r { animation: smWaveR 0.4s ease-in-out infinite alternate; transform-origin: 138px 125px; }
+
+@keyframes smDance { from { transform: rotate(-5deg) translateY(0); } to { transform: rotate(5deg) translateY(-10px); } }
+
+@keyframes smWaveL { from { transform: rotate(10deg); } to { transform: rotate(-30deg); } }
+
+@keyframes smWaveR { from { transform: rotate(-10deg); } to { transform: rotate(30deg); } }
+
+.sm-tray { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; z-index: 2; }
+
+.sm-btn {
+    min-width: 60px; height: 60px;
+    border-radius: 18px;
+    border: 3px solid #bae6fd;
+    background: #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 2px 10px;
+}
+
+.sm-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #0369a1; }
+
+.sm-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+
+.sm-btn.big { font-size: 34px; padding: 4px 18px; border-color: #7dd3fc; }
+
+.sm-btn.big small { font-size: 13px; }
+
+.sm-btn .sw { width: 30px; height: 12px; border-radius: 6px; margin-top: 2px; }

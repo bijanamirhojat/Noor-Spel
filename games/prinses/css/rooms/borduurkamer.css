@@ -1,0 +1,174 @@
+.room.rm-borduurkamer .wall {
+    background:
+        radial-gradient(circle at 25% 25%, #f9a8d4 3px, transparent 4px) 0 0 / 46px 46px,
+        radial-gradient(circle at 75% 75%, #86efac 3px, transparent 4px) 0 0 / 46px 46px,
+        linear-gradient(180deg, #ffedd5, #fed7aa);
+}
+
+.room.rm-borduurkamer .floor {
+    background: repeating-linear-gradient(90deg, #d6a77a 0 60px, #c8966a 60px 63px);
+}
+
+.art-frame {
+    width: 116px;
+    height: 116px;
+    padding: 10px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #fde68a, #f59e0b, #fef3c7, #d97706);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.art-frame .art {
+    width: 96px;
+    height: 96px;
+    background: #fdf6e3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    opacity: 1;
+}
+
+.art-frame .art svg { width: 100%; height: 100%; display: block; }
+
+.art-frame.empty { background: rgba(255,255,255,0.35); box-shadow: none; border: 3px dashed #fdba74; }
+
+.art-frame.empty .art { background: transparent; opacity: 0.55; }
+
+.emb-station { width: 230px; height: 250px; }
+
+.emb-station > div, .emb-station > span { position: absolute; }
+
+.emb-station .leg {
+    top: 140px; width: 12px; height: 110px;
+    background: linear-gradient(90deg, #b45309, #d97706);
+    border-radius: 5px;
+}
+
+.emb-station .hoop {
+    left: 20px; top: 0; width: 190px; height: 160px;
+    border: 12px solid #d97706;
+    border-radius: 14px;
+    background:
+        radial-gradient(circle, #e7dcc1 1.2px, transparent 1.6px) 0 0 / 11px 11px,
+        #fdf6e3;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2), inset 0 0 0 3px #fbbf24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+}
+
+.emb-station .needle { left: 170px; top: -24px; font-size: 40px; transform: rotate(20deg); }
+
+.yarn { font-size: 54px; line-height: 1; }
+
+.embroid {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 6px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 25% 25%, rgba(249,168,212,0.6) 3px, transparent 4px) 0 0 / 40px 40px,
+        linear-gradient(180deg, #fff7ed, #ffedd5);
+}
+
+.embroid.open { display: flex; }
+
+.spools { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; z-index: 2; }
+
+.spool {
+    position: relative;
+    width: 40px;
+    height: 54px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    touch-action: none;
+    transition: transform 0.15s ease;
+}
+
+.spool::before, .spool::after {
+    content: '';
+    position: absolute;
+    left: 2px; width: 36px; height: 8px;
+    border-radius: 4px;
+    background: #d6a77a;
+}
+
+.spool::before { top: 0; }
+
+.spool::after { bottom: 0; }
+
+.spool span {
+    position: absolute;
+    left: 6px; top: 7px; width: 28px; height: 40px;
+    border-radius: 4px;
+    background-image: repeating-linear-gradient(170deg, rgba(255,255,255,0.35) 0 2px, transparent 2px 5px);
+    box-shadow: inset -4px 0 0 rgba(0,0,0,0.15);
+}
+
+.spool.sel { transform: translateY(-8px) scale(1.15); }
+
+.spool.sel span { outline: 3px solid #fff; outline-offset: 2px; }
+
+.emb-stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+}
+
+.emb-frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 14px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #f59e0b, #d97706 50%, #b45309);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.25), inset 0 0 0 4px #fbbf24;
+}
+
+.emb-frame svg { display: block; width: 100%; height: 100%; border-radius: 6px; touch-action: none; cursor: crosshair; }
+
+.stitch-new { animation: stitchIn 0.22s ease-out; transform-box: fill-box; transform-origin: 50% 50%; }
+
+@keyframes stitchIn { from { transform: scale(0.2); } to { transform: scale(1); } }
+
+.emb-tools { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; z-index: 2; }
+
+.emb-tool {
+    min-width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: 3px solid #fed7aa;
+    background: #fff;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    padding: 2px 8px;
+}
+
+.emb-tool small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #c2410c; }
+
+.emb-tool.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+
+.emb-tool.big { border-color: #86efac; }
+
+.emb-tool.hidden { display: none; }
+
+.emb-tool.hint { animation: hintPulse 0.5s ease 3; }

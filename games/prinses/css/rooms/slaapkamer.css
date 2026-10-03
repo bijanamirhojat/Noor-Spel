@@ -1,0 +1,105 @@
+.room.rm-slaapkamer .wall {
+    background:
+        radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 60px 60px,
+        radial-gradient(circle, #fde68a 2.5px, transparent 3.5px) 30px 30px / 60px 60px,
+        linear-gradient(180deg, #c7d2fe, #a5b4fc);
+}
+
+.room.rm-slaapkamer .floor {
+    background: repeating-linear-gradient(90deg, #fcd9b6 0 70px, #f5c79a 70px 73px);
+}
+
+.bed { width: 320px; height: 230px; }
+
+.bed > div { position: absolute; }
+
+.bed .post {
+    top: 0; width: 10px; height: 230px;
+    background: linear-gradient(90deg, #fcd34d, #fde68a, #f59e0b);
+    border-radius: 5px;
+}
+
+.bed .canopy {
+    left: -10px; top: -6px; width: 340px; height: 44px;
+    background:
+        radial-gradient(circle at 50% 100%, transparent 18px, #f9a8d4 19px) 0 0 / 40px 44px;
+    border-top: 8px solid #f472b6;
+    border-radius: 12px 12px 0 0;
+}
+
+.bed .curtain {
+    top: 30px; width: 36px; height: 150px;
+    background: linear-gradient(90deg, rgba(251,207,232,0.95), rgba(244,114,182,0.8));
+    border-radius: 0 0 30px 30px;
+}
+
+.bed .head {
+    left: 12px; top: 70px; width: 70px; height: 140px;
+    border-radius: 35px 35px 6px 6px;
+    background: linear-gradient(180deg, #f9a8d4, #f472b6);
+    border: 5px solid #fcd34d;
+    display: flex; justify-content: center; padding-top: 16px;
+    font-size: 28px;
+}
+
+.bed .mattress {
+    left: 24px; top: 150px; width: 290px; height: 40px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 4px 0 #e5e7eb;
+}
+
+.bed .pillow {
+    left: 36px; top: 124px; width: 76px; height: 34px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: inset 0 -4px 0 #f3f4f6;
+}
+
+.bed .blanket, .bed-cover {
+    background:
+        radial-gradient(circle, #fff 3px, transparent 4px) 0 0 / 28px 28px,
+        linear-gradient(180deg, #c084fc, #a855f7);
+    border-radius: 16px 16px 20px 20px;
+}
+
+.bed .blanket { left: 110px; top: 140px; width: 206px; height: 58px; }
+
+.bed .bedleg { top: 190px; width: 16px; height: 40px; background: #f59e0b; border-radius: 4px; }
+
+.bed-cover {
+    width: 214px;
+    height: 76px;
+    z-index: 12;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.bed-cover.show { opacity: 1; }
+
+.night {
+    position: absolute;
+    inset: 0;
+    z-index: 14;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    background: radial-gradient(circle at 50% 40%, rgba(49,46,129,0.45), rgba(15,23,42,0.8));
+}
+
+.night.show { opacity: 1; }
+
+.zzz {
+    position: absolute;
+    font-size: 34px;
+    pointer-events: none;
+    z-index: 13;
+    animation: zzz 2.2s ease-out forwards;
+}
+
+@keyframes zzz {
+    from { transform: translate(0, 0) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    to { transform: translate(50px, -140px) scale(1.3); opacity: 0; }
+}
