@@ -17,9 +17,14 @@ defineRoom({
         });
         fairy.style.zIndex = 4;
         place(el('<div class="door-sign">🌳 Naar beneden</div>'), w0 + 590, 120);
+        // Six parallel bands: quarter circles around the bottom-left corner, so the slide
+        // starts flat at the top and curves down to the right
         addObj(`<div class="rainbow-slide"><svg viewBox="0 0 220 280">
-            ${['#ef4444', '#fb923c', '#facc15', '#4ade80', '#60a5fa', '#a855f7'].map((c, i) =>
-                `<path d="M${10 + i * 7} 70 Q${150 + i * 5} ${60 + i * 6} ${200} ${290}" stroke="${c}" stroke-width="7" fill="none" stroke-linecap="round"/>`).join('')}
+            ${['#ef4444', '#fb923c', '#facc15', '#4ade80', '#60a5fa', '#a855f7'].map((c, i) => {
+                const r = 205 - i * 13;
+                return `<path d="M0 ${290 - r} A${r} ${r} 0 0 1 ${r} 290" stroke="${c}" stroke-width="13.5" fill="none"/>`;
+            }).join('')}
+            <path d="M0 78 A212 212 0 0 1 212 290" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/>
             </svg><div class="tap-hint" style="left:30px;top:20px">👇</div></div>`, w0 + 590, 150, w0 + 640, slideToEarth);
     }
 });
