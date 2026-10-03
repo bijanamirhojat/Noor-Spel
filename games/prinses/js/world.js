@@ -17,6 +17,10 @@ const WINGS = [
       rooms: ['slaapkamer', 'sterrenkamer', 'torenkamer'] }
 ];
 
+// Het dorp: met de koets bereikbaar vanaf het kasteelplein (js/village.js)
+const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', gems: 9,
+    rooms: ['dorpsplein', 'markt', 'ijssalon'] };
+
 const SCENES = {};
 let scene = null;
 let world = null;
@@ -39,6 +43,7 @@ function initScenes() {
     });
     SCENES.out = { key: 'out', rooms: ROOMS_OUT, el: makeWorldEl('out'), gems: [], gemsGot: 0, gemCount: 14, door: null };
     SCENES.sea = { key: 'sea', rooms: ROOMS_SEA, el: makeWorldEl('sea'), gems: [], gemsGot: 0, gemCount: 12, door: null };
+    SCENES.dorp = { key: 'dorp', rooms: VILLAGE.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('dorp'), gems: [], gemsGot: 0, gemCount: VILLAGE.gems, door: null, koets: null };
     Object.values(SCENES).forEach(sc => sc.rooms.forEach((r, idx) => { ROOM_AT[r.key] = { scene: sc, idx }; }));
     scene = SCENES.hal;
     world = scene.el;

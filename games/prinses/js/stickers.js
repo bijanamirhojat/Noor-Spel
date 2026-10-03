@@ -22,12 +22,13 @@ function saveStickers() {
     try { localStorage.setItem(STICKER_KEY, JSON.stringify([...stickers])); } catch (e) {}
 }
 
-// Book pages: the floors from top to bottom, then buiten and onder water
+// Book pages: the floors from top to bottom, then buiten, onder water and het dorp
 function stickerPages() {
     return [
         ...WINGS.slice().reverse().map(w => ({ icon: w.icon, name: w.name, color: w.color, scene: SCENES[w.key] })),
         { icon: '🌳', name: 'Buiten', color: '#22c55e', scene: SCENES.out },
-        { icon: '🧜‍♀️', name: 'Onder water', color: '#06b6d4', scene: SCENES.sea }
+        { icon: '🧜‍♀️', name: 'Onder water', color: '#06b6d4', scene: SCENES.sea },
+        { icon: VILLAGE.icon, name: VILLAGE.name, color: VILLAGE.color, scene: SCENES.dorp }
     ];
 }
 
@@ -41,7 +42,7 @@ function updateStickerBtn() {
 
 // Called by addObj while a scene is being built: the room is where the princess walks to
 function registerStickerObj(node, walkX) {
-    if (node.matches('.lift, .castle-door')) return;
+    if (node.matches('.lift, .castle-door, .koets')) return;
     const room = ROOMS[Math.max(0, Math.min(ROOMS.length - 1, Math.floor(walkX / ROOM_W)))];
     node.dataset.room = room.key;
     stickObjs[room.key] = (stickObjs[room.key] || 0) + 1;

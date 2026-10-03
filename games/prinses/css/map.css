@@ -41,12 +41,14 @@
 
 .map-grid { display: flex; justify-content: center; gap: 6px; }
 
-.map-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 8px 28px; }
-
 .map-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 
-#mapOut, #mapSea { display: grid; grid-template-columns: repeat(6, auto); }
-#mapSea { grid-template-columns: repeat(3, auto); }
+/* Landscape: castle on the left, buiten / onder water / dorp stacked on the right */
+.map-body { display: flex; align-items: center; justify-content: center; gap: 24px; }
+.map-outdoors { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.map-col2 { gap: 6px; }
+
+#mapOut, #mapSea, #mapDorp { display: grid; grid-template-columns: repeat(3, auto); }
 
 /* The castle as a cross-section: tower on top, floors stacked, grass underneath */
 .map-castle {
@@ -108,15 +110,19 @@
     line-height: 1.05;
 }
 
-/* Tile size (cq units resolve against .mapov, so set it on its children):
-   9 tiles across the buiten + zee row, 5 tile rows down (4 floors + buiten) */
-.map-castle, .map-row {
-    --t: clamp(48px, min(calc((100cqw - 130px) / 9), calc((100cqh - 210px) / 4.7)), 100px);
+/* Tile size (cq units resolve against .mapov, so set it on its children).
+   Landscape: castle (~7 tiles) + outdoor column (3 tiles) across, 4 floors down. */
+.map-body {
+    --t: clamp(46px, min(calc((100cqw - 150px) / 9.8), calc((100cqh - 170px) / 4.2)), 100px);
 }
-/* Portrait (iPad rechtop): buiten wraps to 3 wide, so one more row must fit */
+/* Portrait (iPad rechtop): castle on top, outdoor groups side by side underneath */
 @container (aspect-ratio < 1.1) {
-    .map-castle, .map-row { --t: clamp(48px, min(calc((100cqw - 100px) / 7.6), calc((100cqh - 260px) / 6.2)), 116px); }
-    #mapOut { grid-template-columns: repeat(3, auto); }
+    .map-body {
+        flex-direction: column;
+        gap: 10px;
+        --t: clamp(46px, min(calc((100cqw - 100px) / 7.6), calc((100cqh - 240px) / 6)), 116px);
+    }
+    .map-outdoors { flex-direction: row; align-items: flex-start; gap: 28px; }
 }
 
 .map-room {

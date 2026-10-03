@@ -60,6 +60,7 @@ function buildOutside() {
         walkX: o0 + 310,
         node: addObj('<div class="castle-door"><div class="tap-hint" style="top:90px">👇</div></div>', o0 + 220, 120, o0 + 310, (node) => goThroughDoor(node, 'hal'))
     };
+    SCENES.out.koets = addKoets(o0 + 395, o0 + 545, 'dorp');
     addObj('<div class="fountain"><div class="basin"></div><div class="water"></div><div class="col"></div><div class="bowl"></div><div class="jet"></div></div>', o0 + 610, 205, o0 + 700, fountainSplash);
     addObj('<div class="sun">🌞</div>', o0 + 640, 10, o0 + 700, () => { sayRandom(['Hallo zon!', 'Wat een mooi weer!']); sparkleShower(o0 + 690, 0, 40); });
 

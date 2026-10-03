@@ -103,6 +103,7 @@ function openMap() {
     }).join('');
     document.getElementById('mapOut').innerHTML = mapTiles(SCENES.out);
     document.getElementById('mapSea').innerHTML = mapTiles(SCENES.sea);
+    document.getElementById('mapDorp').innerHTML = mapTiles(SCENES.dorp);
     mapOv.querySelectorAll('.map-room').forEach(b => b.addEventListener('pointerdown', (e) => {
         e.stopPropagation();
         travelTo(b.dataset.k, +b.dataset.i);

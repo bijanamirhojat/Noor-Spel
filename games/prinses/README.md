@@ -12,6 +12,8 @@ js/engine.js    edelstenen, bewegen, glitter, camera/main loop, tweens, poes
 js/wand.js      toverstaf-spreuken
 js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer + bootje
 js/sea.js       onder water
+js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
+js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
 js/map.js       toverlift + kaart
 js/stickers.js  stickerboek
@@ -26,6 +28,12 @@ css/rooms/*.css stijl per kamer (kamer-klasse: .room.rm-<key>)
 
 Het kasteel heeft vier verdiepingen (`WINGS` in `js/world.js`), elk een eigen wereld met een toverlift
 in de eerste kamer. De kaart tekent het kasteel als doorsnede: toren boven, beneden onder, buiten en zee eronder.
+
+## Dorp
+
+Een eigen wereld (`VILLAGE` in `js/world.js`, scene `dorp`). De koets op het kasteelplein rijdt erheen
+(`addKoets` / `rideCarriage` in `js/village.js`); op het dorpsplein staat de koets terug.
+De dorpskamers gebruiken ook `defineRoom`, dus `roomX`, `inRoom` en stickers werken er hetzelfde.
 
 ## Stickerboek
 

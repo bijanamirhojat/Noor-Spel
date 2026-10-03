@@ -1,0 +1,197 @@
+/* ── Markt overlay ── */
+.marketov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, rgba(251,146,60,0.25) 5px, transparent 6px) 0 0 / 54px 54px,
+        linear-gradient(180deg, #fff7ed, #ffedd5);
+}
+.marketov.open { display: flex; }
+.marketov .nails-title { color: #c2410c; }
+
+.mk-main {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+/* Shopping list: a little paper note */
+.mk-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    min-width: 120px;
+    padding: 8px 16px 14px;
+    border-radius: 6px 6px 12px 12px;
+    border-top: 14px solid #fca5a5;
+    background:
+        repeating-linear-gradient(180deg, transparent 0 46px, #bfdbfe 46px 48px),
+        #fff;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transform: rotate(-2deg);
+}
+.mk-list-title { font-size: 26px; }
+.mk-line { font-size: 40px; line-height: 1.1; white-space: nowrap; }
+.mk-line span { position: relative; display: inline-block; }
+.mk-line span.have { opacity: 0.5; }
+.mk-line span.have::after {
+    content: '✔';
+    position: absolute;
+    right: -6px;
+    bottom: -2px;
+    font-size: 26px;
+    color: #16a34a;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff;
+    opacity: 1;
+}
+
+/* The stall with all goods and their prices */
+.mk-stall {
+    position: relative;
+    padding: 76px 14px 14px;
+    border-radius: 18px;
+    background: #fffbeb;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+.mk-awning {
+    position: absolute;
+    top: 0;
+    left: -8px;
+    right: -8px;
+    height: 46px;
+    border-radius: 14px 14px 4px 4px;
+    background: repeating-linear-gradient(90deg, #ef4444 0 30px, #fff 30px 60px);
+}
+.mk-seller {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-left: -32px;
+    font-size: 60px;
+    line-height: 1;
+    z-index: 2;
+}
+.mk-goods {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    gap: 8px;
+}
+.mk-good {
+    width: clamp(62px, 9vw, 86px);
+    height: clamp(74px, 10.5vw, 98px);
+    border-radius: 14px;
+    border: 3px solid #fed7aa;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+.mk-good:active { transform: scale(0.92); }
+.mk-e { font-size: clamp(30px, 4.6vw, 44px); line-height: 1; }
+.mk-price { line-height: 1; white-space: nowrap; }
+.mk-coin { font-size: 14px; }
+
+.mk-basket {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    min-width: 200px;
+    min-height: 62px;
+    padding: 4px 20px 6px;
+    border-radius: 0 0 44px 44px;
+    border: 5px solid #92400e;
+    border-top-width: 8px;
+    background: repeating-linear-gradient(90deg, #d97706 0 12px, #b45309 12px 14px);
+    font-size: 34px;
+}
+.mk-basket::before { content: '🧺'; margin-right: 6px; }
+.mk-bag { font-size: 44px; }
+
+/* Paying: the goods make room for the coin slots and the purse */
+.mk-pay { display: none; flex-direction: column; align-items: center; gap: 8px; }
+.marketov.paying .mk-goods { display: none; }
+.marketov.paying .mk-stall { min-width: 200px; padding-top: 96px; }
+.marketov.paying .mk-seller { top: 20px; margin-left: -38px; font-size: 72px; }
+.marketov.paying .mk-pay { display: flex; }
+.mk-slots { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 90vw; }
+.mk-slot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 4px dashed #f59e0b;
+    background: rgba(255,255,255,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: 22px;
+    color: rgba(180,83,9,0.35);
+}
+.mk-slot.paid {
+    border-style: solid;
+    border-color: #fff;
+    background: radial-gradient(circle at 35% 30%, #fef9c3, #facc15 55%, #d97706);
+    color: #fff;
+    text-shadow: 0 2px 2px #b45309;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+.mk-count {
+    min-height: 64px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 60px;
+    line-height: 1;
+    color: #f59e0b;
+    text-shadow: 0 3px 0 #fff, 0 6px 10px rgba(0,0,0,0.2);
+}
+.mk-purse {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    max-width: 420px;
+    padding: 10px 16px;
+    border-radius: 28px;
+    border: 4px solid #fff;
+    background: linear-gradient(180deg, #c084fc, #7c3aed);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+.mk-pcoin {
+    width: 58px;
+    height: 58px;
+    border: none;
+    background: none;
+    font-size: 42px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    padding: 0;
+}
+.mk-pcoin:active { transform: scale(0.9); }
+.mk-pcoin.used { visibility: hidden; }
+.marketov.done .mk-purse { opacity: 0.4; }
+
+@media (orientation: portrait) {
+    .mk-main { flex-direction: column; gap: 10px; }
+    .mk-list { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 4px 14px; }
+    .mk-good { width: min(15vw, 116px); height: min(17.5vw, 132px); }
+    .mk-e { font-size: min(7.5vw, 58px); }
+    .mk-coin { font-size: 18px; }
+}

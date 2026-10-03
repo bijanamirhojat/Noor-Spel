@@ -1,0 +1,363 @@
+/* ── Dorp ── */
+.d-room .wall {
+    background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 40%, #bae6fd 70%, #fef3c7 100%);
+}
+.d-room .floor {
+    background:
+        radial-gradient(ellipse 20px 11px at 50% 50%, #e7e5e4 62%, transparent 66%) 0 0 / 48px 26px,
+        radial-gradient(ellipse 20px 11px at 50% 50%, #d6d3d1 62%, transparent 66%) 24px 13px / 48px 26px,
+        #a8a29e;
+}
+
+/* Houses in the background */
+.d-house {
+    z-index: 1;
+    pointer-events: none;
+    background:
+        repeating-linear-gradient(0deg, transparent 0 28px, rgba(0,0,0,0.04) 28px 30px),
+        var(--c);
+    border: 4px solid rgba(0,0,0,0.08);
+    border-bottom: none;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+.d-roof {
+    position: absolute;
+    left: -20px;
+    right: -20px;
+    top: -92px;
+    height: 94px;
+    background: var(--roof);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.d-win {
+    position: absolute;
+    width: 44px;
+    height: 54px;
+    border-radius: 22px 22px 4px 4px;
+    border: 4px solid #fff;
+    background: linear-gradient(180deg, #e0f2fe, #bae6fd);
+}
+.d-win.lit { background: linear-gradient(180deg, #fef9c3, #fde68a); }
+.d-door {
+    position: absolute;
+    bottom: 0;
+    width: 56px;
+    height: 88px;
+    border-radius: 28px 28px 0 0;
+    border: 4px solid #fff;
+    border-bottom: none;
+    background: #b45309;
+}
+.d-door::after {
+    content: '';
+    position: absolute;
+    right: 9px;
+    top: 44px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fde68a;
+}
+.d-box {
+    position: absolute;
+    width: 90px;
+    padding-bottom: 2px;
+    border-bottom: 10px solid #a16207;
+    font-size: 18px;
+    text-align: center;
+    line-height: 1;
+}
+/* Little bounces used by the village rooms and their overlays */
+.v-jump { animation: vJump 0.45s ease; }
+@keyframes vJump { 40% { transform: translateY(-14px) scale(1.06); } }
+.v-nope { animation: vNope 0.45s ease; }
+@keyframes vNope { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+.v-pulse { animation: vPulse 0.5s ease 2; }
+@keyframes vPulse { 50% { transform: scale(1.1); } }
+.v-wobble { animation: vWobble 0.6s ease; }
+@keyframes vWobble { 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+
+.ov-fly {
+    position: absolute;
+    z-index: 6;
+    transform: translate(-50%, -50%);
+    font-size: 42px;
+    line-height: 1;
+    pointer-events: none;
+}
+
+/* ── Koets ── */
+.koets { width: 240px; height: 170px; }
+.k-ride { position: absolute; inset: 0; }
+.k-horse {
+    position: absolute;
+    left: -8px;
+    bottom: 4px;
+    font-size: 96px;
+    line-height: 1;
+}
+.k-body {
+    position: absolute;
+    left: 86px;
+    bottom: 34px;
+    width: 140px;
+    height: 110px;
+    border-radius: 64px 64px 28px 28px;
+    border: 5px solid #fcd34d;
+    background: radial-gradient(circle at 35% 30%, #fce7f3, #f472b6 55%, #db2777);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+}
+.k-win {
+    position: absolute;
+    left: 40px;
+    top: 22px;
+    width: 50px;
+    height: 44px;
+    border-radius: 22px 22px 6px 6px;
+    border: 4px solid #fcd34d;
+    background: linear-gradient(180deg, #fef9c3, #fde68a);
+}
+.k-crown {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+}
+.k-wheel {
+    position: absolute;
+    bottom: 0;
+    width: 56px;
+    height: 56px;
+    margin-left: -28px;
+    border-radius: 50%;
+    border: 5px solid #f59e0b;
+    background: repeating-conic-gradient(#fcd34d 0 10deg, transparent 10deg 45deg), #fff7ed;
+}
+.koets.drive .k-ride { animation: kDrive 1.1s ease-in forwards; }
+.koets.arrive .k-ride { animation: kArrive 0.95s ease-out; }
+.koets.drive .k-wheel, .koets.arrive .k-wheel { animation: kWheel 0.35s linear infinite; }
+.koets.drive .k-horse, .koets.arrive .k-horse { animation: kTrot 0.25s ease-in-out infinite alternate; }
+.koets.drive .tap-hint, .koets.arrive .tap-hint { display: none; }
+@keyframes kDrive { to { transform: translateX(-700px); } }
+@keyframes kArrive { from { transform: translateX(700px); } }
+@keyframes kWheel { to { transform: rotate(-360deg); } }
+@keyframes kTrot { to { transform: translateY(-6px) rotate(-4deg); } }
+
+/* ── Dorpsplein ── */
+.well { width: 140px; height: 170px; }
+.w-wall {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 140px;
+    height: 70px;
+    border-radius: 14px 14px 4px 4px;
+    border-top: 10px solid #78716c;
+    background:
+        repeating-linear-gradient(90deg, transparent 0 32px, #78716c 32px 34px),
+        repeating-linear-gradient(0deg, #d6d3d1 0 18px, #a8a29e 18px 20px);
+}
+.w-post {
+    position: absolute;
+    bottom: 60px;
+    width: 12px;
+    height: 100px;
+    background: #92400e;
+}
+.w-post.l { left: 12px; }
+.w-post.r { right: 12px; }
+.w-roof {
+    position: absolute;
+    top: 0;
+    left: -14px;
+    right: -14px;
+    height: 46px;
+    background: #b91c1c;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.w-bucket {
+    position: absolute;
+    left: 52px;
+    top: 56px;
+    font-size: 34px;
+    transform-origin: 50% 0;
+    animation: wSway 2.4s ease-in-out infinite alternate;
+}
+.well.wish .w-bucket { animation: wDip 1.6s ease-in-out; }
+@keyframes wSway { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+@keyframes wDip { 40%, 60% { transform: translateY(40px); } }
+
+.lamppost { width: 50px; height: 250px; }
+.lp-pole {
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+    width: 10px;
+    height: 210px;
+    border-radius: 5px;
+    background: #1f2937;
+}
+.lp-lamp {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 40px;
+    height: 46px;
+    border-radius: 10px 10px 18px 18px;
+    border: 4px solid #1f2937;
+    background: #4b5563;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.lamppost.on .lp-lamp { background: #fde68a; box-shadow: 0 0 30px 14px rgba(253,224,71,0.7); }
+
+.pigeon {
+    font-size: 40px;
+    line-height: 1;
+    animation: peck 1.6s ease-in-out infinite;
+}
+.pigeon.fly { animation: pigeonFly 3s ease-in-out; }
+@keyframes peck { 0%, 70%, 100% { transform: rotate(0); } 80% { transform: rotate(-25deg) translateY(4px); } }
+@keyframes pigeonFly {
+    35% { transform: translate(-180px, -280px) rotate(-10deg); opacity: 1; }
+    50% { transform: translate(-240px, -380px); opacity: 0; }
+    70% { transform: translate(60px, -300px); opacity: 0; }
+    100% { transform: translate(0, 0); opacity: 1; }
+}
+
+/* ── Markt (kraam in de wereld) ── */
+.stall { width: 320px; height: 250px; }
+.st-awning {
+    position: absolute;
+    top: 0;
+    left: -12px;
+    right: -12px;
+    height: 58px;
+    border-radius: 12px 12px 4px 4px;
+    background: repeating-linear-gradient(90deg, #ef4444 0 34px, #fff 34px 68px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    z-index: 2;
+}
+.st-pole {
+    position: absolute;
+    top: 50px;
+    width: 12px;
+    height: 200px;
+    background: #a16207;
+}
+.st-pole.l { left: 8px; }
+.st-pole.r { right: 8px; }
+.st-seller {
+    position: absolute;
+    left: 50%;
+    top: 62px;
+    transform: translateX(-50%);
+    font-size: 70px;
+    line-height: 1;
+}
+.st-counter {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 104px;
+    border-radius: 8px 8px 0 0;
+    border-top: 8px solid #fbbf24;
+    background: linear-gradient(180deg, #d97706, #b45309);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    line-height: 1.15;
+}
+.crate, .hen { transform-origin: 50% 100%; }
+
+/* ── IJssalon (winkel in de wereld) ── */
+.icecream-shop { width: 360px; height: 280px; }
+.is-front {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 220px;
+    border-radius: 12px 12px 0 0;
+    border: 5px solid #f9a8d4;
+    border-bottom: none;
+    background: repeating-linear-gradient(90deg, #fdf2f8 0 24px, #fce7f3 24px 48px);
+}
+.is-window {
+    position: absolute;
+    left: 20px;
+    top: 50px;
+    width: 180px;
+    height: 110px;
+    border-radius: 10px;
+    border: 6px solid #fff;
+    background: linear-gradient(180deg, #e0f2fe, #fff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    box-shadow: inset 0 0 10px rgba(14,165,233,0.25);
+}
+.is-door {
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+    width: 84px;
+    height: 150px;
+    border-radius: 42px 42px 0 0;
+    border: 5px solid #fff;
+    border-bottom: none;
+    background: #f472b6;
+}
+.is-awning {
+    position: absolute;
+    top: 52px;
+    left: -18px;
+    right: -18px;
+    height: 44px;
+    border-radius: 10px;
+    background: repeating-linear-gradient(90deg, #f472b6 0 30px, #fff 30px 60px);
+    box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+}
+.is-sign {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 84px;
+    line-height: 1;
+    animation: hintBob 2.4s ease-in-out infinite;
+}
+
+.ice-table { width: 120px; height: 180px; }
+.ice-table .umbrella {
+    position: absolute;
+    top: 0;
+    left: -24px;
+    right: -24px;
+    height: 54px;
+    border-radius: 84px 84px 0 0;
+    background: repeating-conic-gradient(from -90deg at 50% 100%, #38bdf8 0 22.5deg, #fff 22.5deg 45deg);
+}
+.ice-table .pole {
+    position: absolute;
+    left: 56px;
+    top: 50px;
+    width: 8px;
+    height: 130px;
+    background: #9ca3af;
+}
+.ice-table .top {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 104px;
+    height: 14px;
+    border-radius: 7px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.ice-table .cup { position: absolute; top: 70px; left: 14px; font-size: 34px; }

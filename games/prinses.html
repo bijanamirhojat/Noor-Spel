@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="prinses/css/outside.css">
     <link rel="stylesheet" href="prinses/css/map.css">
     <link rel="stylesheet" href="prinses/css/stickers.css">
+    <link rel="stylesheet" href="prinses/css/village.css">
+    <link rel="stylesheet" href="prinses/css/dorp/markt.css">
+    <link rel="stylesheet" href="prinses/css/dorp/ijssalon.css">
     <link rel="stylesheet" href="prinses/css/sea.css">
     <link rel="stylesheet" href="prinses/css/rooms/kasteelhal.css">
     <link rel="stylesheet" href="prinses/css/rooms/spiegelkamer.css">
@@ -157,18 +160,56 @@
 
             <div class="mapov" id="mapOv">
                 <div class="nails-title">🗺️ Waar wil je heen?</div>
-                <div class="map-castle" id="mapCastle"></div>
-                <div class="map-row">
-                    <div class="map-col">
-                        <div class="map-sec">🌳 Buiten</div>
-                        <div class="map-grid" id="mapOut"></div>
-                    </div>
-                    <div class="map-col">
-                        <div class="map-sec">🧜‍♀️ Onder water</div>
-                        <div class="map-grid" id="mapSea"></div>
+                <div class="map-body">
+                    <div class="map-castle" id="mapCastle"></div>
+                    <div class="map-outdoors">
+                        <div class="map-col">
+                            <div class="map-sec">🌳 Buiten</div>
+                            <div class="map-grid" id="mapOut"></div>
+                        </div>
+                        <div class="map-col map-col2">
+                            <div class="map-sec">🧜‍♀️ Onder water</div>
+                            <div class="map-grid" id="mapSea"></div>
+                            <div class="map-sec">🏘️ Dorp</div>
+                            <div class="map-grid" id="mapDorp"></div>
+                        </div>
                     </div>
                 </div>
                 <button class="scope-close" id="mapClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="marketov" id="marketOv">
+                <div class="nails-title">🍎 Markt</div>
+                <div class="mk-main">
+                    <div class="mk-list" id="mkList"></div>
+                    <div class="mk-stall">
+                        <div class="mk-awning"></div>
+                        <div class="mk-seller" id="mkSeller">🐻</div>
+                        <div class="mk-goods" id="mkGoods"></div>
+                    </div>
+                </div>
+                <div class="mk-pay">
+                    <div class="mk-slots" id="mkSlots"></div>
+                    <div class="mk-count" id="mkCount"></div>
+                    <div class="mk-purse" id="mkPurse"></div>
+                </div>
+                <div class="mk-basket" id="mkBasket"></div>
+                <div class="din-again" id="mkAgain"><button class="tool-btn wide" id="mkAgainBtn">🔄 Nog een keer!</button></div>
+                <button class="scope-close" id="mkClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="iceov" id="iceOv">
+                <div class="nails-title">🍦 IJssalon</div>
+                <div class="ic-main">
+                    <div class="ic-customer" id="icCustomer">
+                        <div class="ic-bubble" id="icBubble"><svg viewBox="0 0 100 150" id="icOrder"></svg></div>
+                        <span class="ic-animal" id="icAnimal">🐰</span>
+                    </div>
+                    <div class="ic-make" id="icMake"><svg viewBox="0 0 100 150" id="icSvg"></svg></div>
+                    <div class="ic-kassa" id="icKassa"><span class="ic-till">🧾</span><span class="ic-coins">🪙 <b id="icCoins">0</b></span></div>
+                </div>
+                <div class="bd-tray ic-tray" id="icTray"></div>
+                <button class="scope-close" id="icClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="stickov" id="stickOv">
@@ -291,6 +332,7 @@
     <script src="prinses/js/wand.js"></script>
     <script src="prinses/js/outside.js"></script>
     <script src="prinses/js/sea.js"></script>
+    <script src="prinses/js/village.js"></script>
     <!-- Kamers: elk bestand meldt zich aan met defineRoom(); de indeling staat in WINGS (js/world.js) -->
     <script src="prinses/js/rooms/kasteelhal.js"></script>
     <script src="prinses/js/rooms/troonzaal.js"></script>
@@ -312,6 +354,10 @@
     <script src="prinses/js/rooms/slaapkamer.js"></script>
     <script src="prinses/js/rooms/sterrenkamer.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
+    <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
+    <script src="prinses/js/dorp/dorpsplein.js"></script>
+    <script src="prinses/js/dorp/markt.js"></script>
+    <script src="prinses/js/dorp/ijssalon.js"></script>
     <script src="prinses/js/map.js"></script>
     <script src="prinses/js/stickers.js"></script>
     <script src="prinses/js/main.js"></script>

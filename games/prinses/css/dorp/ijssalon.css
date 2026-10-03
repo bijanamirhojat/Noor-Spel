@@ -1,0 +1,90 @@
+/* ── IJssalon overlay ── */
+.iceov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, rgba(244,114,182,0.25) 5px, transparent 6px) 0 0 / 50px 50px,
+        linear-gradient(180deg, #fdf2f8, #e0f2fe);
+}
+.iceov.open { display: flex; }
+
+.ic-main {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(10px, 3vw, 34px);
+    padding-bottom: 6px;
+}
+
+/* Customer with the wish in a speech bubble */
+.ic-customer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.ic-customer.leave { transform: translateX(-260px); opacity: 0; }
+.ic-customer.v-arrive { animation: icArrive 0.6s cubic-bezier(.3,1.4,.5,1); }
+@keyframes icArrive { from { transform: translateX(-260px); opacity: 0; } }
+.ic-bubble {
+    position: relative;
+    width: clamp(90px, 13vw, 130px);
+    aspect-ratio: 100 / 150;
+    padding: 6px;
+    border-radius: 26px;
+    border: 4px solid #fbcfe8;
+    background: #fff;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+.ic-bubble::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -16px;
+    margin-left: -12px;
+    border: 12px solid transparent;
+    border-top-color: #fbcfe8;
+    border-bottom: none;
+}
+.ic-bubble svg { width: 100%; height: 100%; display: block; }
+.ic-animal { font-size: clamp(64px, 10vw, 96px); line-height: 1; }
+
+/* The ice cream being made */
+.ic-make {
+    height: min(100%, 360px);
+    aspect-ratio: 100 / 150;
+    border-radius: 50% 50% 18px 18px;
+    background: radial-gradient(ellipse at 50% 70%, #fff 0 45%, rgba(255,255,255,0.4) 70%, transparent 72%);
+}
+.ic-make svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.ic-new { transform-box: fill-box; transform-origin: 50% 100%; animation: scoopDrop 0.35s cubic-bezier(.3,1.6,.5,1); }
+@keyframes scoopDrop { from { transform: translateY(-40px) scale(0.6); } }
+
+.ic-kassa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 14px;
+    border-radius: 20px;
+    border: 4px solid #fff;
+    background: linear-gradient(180deg, #f9a8d4, #ec4899);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+.ic-till { font-size: 44px; line-height: 1; }
+.ic-coins { font-family: 'Fredoka One', cursive; font-size: 24px; color: #fff; white-space: nowrap; }
+
+.ic-tray .bd-btn { font-size: 26px; }
+.ic-give { background: #bbf7d0; border-color: #4ade80; }
