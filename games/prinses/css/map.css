@@ -111,16 +111,16 @@
 }
 
 /* Tile size (cq units resolve against .mapov, so set it on its children).
-   Landscape: castle (~7 tiles) + outdoor column (3 tiles) across, 4 floors down. */
+   Landscape: castle (~7 tiles) + outdoor column (3 tiles) across, clouds + 4 floors down. */
 .map-body {
-    --t: clamp(46px, min(calc((100cqw - 150px) / 9.8), calc((100cqh - 170px) / 4.2)), 100px);
+    --t: clamp(46px, min(calc((100cqw - 150px) / 9.8), calc((100cqh - 190px) / 5)), 100px);
 }
 /* Portrait (iPad rechtop): castle on top, outdoor groups side by side underneath */
 @container (aspect-ratio < 1.1) {
     .map-body {
         flex-direction: column;
         gap: 10px;
-        --t: clamp(46px, min(calc((100cqw - 100px) / 7.6), calc((100cqh - 240px) / 6)), 116px);
+        --t: clamp(46px, min(calc((100cqw - 100px) / 7.6), calc((100cqh - 260px) / 7)), 116px);
     }
     .map-outdoors { flex-direction: row; align-items: flex-start; gap: 28px; }
 }

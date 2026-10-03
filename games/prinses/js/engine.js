@@ -3,7 +3,7 @@ function spawnGems() {
     scene.gems.forEach(g => g.node.remove());
     scene.gems = [];
     scene.gemsGot = 0;
-    const kinds = scene.key === 'sea' ? ['🐚', '🦪', '💎', '🌟', '🐚'] : ['💎', '💎', '💎', '⭐', '💖', '🌟'];
+    const kinds = scene.key === 'sea' ? ['🐚', '🦪', '💎', '🌟', '🐚'] : scene.key === 'wolken' ? ['⭐', '🌟', '💫', '⭐', '💖'] : ['💎', '💎', '💎', '⭐', '💖', '🌟'];
     const n = scene.gemCount;
     for (let i = 0; i < n; i++) {
         const x = 120 + (i + Math.random() * 0.6) * ((WORLD_W - 240) / n);
@@ -72,7 +72,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));
@@ -473,6 +473,7 @@ function frame(now) {
             });
         }
         checkSkyStars();
+        checkCloudPortal();
     }
 
     // Wand sparkles
@@ -492,6 +493,7 @@ function frame(now) {
     updatePet(dt);
     p.classList.toggle('left', state.facing < 0);
 
+    if (scene.key === 'out') updateCloudPortal();
     if (scene.key === 'out') {
         // Unicorn: carries the princess, or waits and looks at her
         const u = unicornEl();

@@ -1,0 +1,54 @@
+/* ── Wolkjes kijken overlay ── */
+.cloudov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 10px;
+    touch-action: none;
+    overflow: hidden;
+    background: linear-gradient(180deg, #38bdf8, #7dd3fc 60%, #e0f2fe);
+}
+.cloudov.open { display: flex; }
+.cloudov .nails-title { color: #fff; text-shadow: 0 2px 6px rgba(2,132,199,0.6); }
+
+.cw-sky { position: relative; flex: 1; width: 100%; min-height: 0; }
+.cw-cloud {
+    position: absolute;
+    left: 100%;
+    padding: 10px 24px;
+    cursor: pointer;
+    touch-action: none;
+    animation: cwDrift linear forwards;
+}
+@keyframes cwDrift { to { left: -40%; } }
+/* The shape as a white, puffy silhouette until she taps it */
+.cw-cloud span {
+    display: inline-block;
+    font-size: clamp(90px, 18vmin, 170px);
+    line-height: 1;
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px #fff) drop-shadow(0 0 18px #fff) blur(1.5px);
+    opacity: 0.95;
+    transition: filter 0.6s ease, transform 0.6s cubic-bezier(.3,1.6,.5,1);
+}
+.cw-cloud.seen span { filter: drop-shadow(0 0 14px #fff); transform: scale(1.15); }
+
+.cw-seen {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    max-width: min(96%, 820px);
+    padding: 8px 14px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.75);
+}
+.cw-seen span {
+    font-size: clamp(20px, 3.8vmin, 32px);
+    line-height: 1;
+    filter: grayscale(1) opacity(0.25);
+}
+.cw-seen span.got { filter: none; }

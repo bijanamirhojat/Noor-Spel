@@ -93,8 +93,11 @@ function mapTiles(sc) {
 function openMap() {
     if (state.busy || overlayOpen()) return;
     mapOpen = true;
-    // The castle drawn as a cross-section: top floor first, ground floor last
-    document.getElementById('mapCastle').innerHTML = WINGS.slice().reverse().map(w => {
+    // The castle drawn as a cross-section: the clouds above it, then top floor first, ground floor last
+    document.getElementById('mapCastle').innerHTML = `<div class="map-floor map-sky${scene === SCENES.wolken ? ' here' : ''}" style="--c:${SKY.color}">
+            <div class="map-floor-name">${SKY.icon}<small>${SKY.name}</small></div>
+            <div class="map-grid">${mapTiles(SCENES.wolken)}</div>
+        </div>` + WINGS.slice().reverse().map(w => {
         const sc = SCENES[w.key];
         return `<div class="map-floor${scene === sc ? ' here' : ''}${w.key === 'toren' ? ' map-tower' : ''}" style="--c:${w.color}">
             <div class="map-floor-name">${w.icon}<small>${w.name}</small></div>

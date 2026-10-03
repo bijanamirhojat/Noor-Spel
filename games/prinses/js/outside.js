@@ -152,6 +152,7 @@ function buildOutside() {
     </svg><div class="tap-hint" style="left:30px;top:-44px">👇</div></div>`, o4 + 400, 172, o4 + 430, slideRide);
     addObj('<div class="carousel">🎠</div>', o4 + 690, 300, o4 + 690, () => { playMusicBox(); sayRandom(['Draaimolen! Hoera!', 'Een paardje!']); });
 
+    buildCloudPortal();
     state.skyStars = [];
     for (let i = 0; i < 10; i++) {
         const star = { node: el('<div class="skystar">🌟</div>'), got: false };

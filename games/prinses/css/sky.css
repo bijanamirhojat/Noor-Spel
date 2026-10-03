@@ -1,0 +1,320 @@
+/* ── Wolkenrijk ── */
+.w-room .wall {
+    background:
+        radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 90px 70px,
+        radial-gradient(circle, #fef9c3 1.5px, transparent 2.5px) 45px 35px / 90px 70px,
+        linear-gradient(180deg, #a5b4fc 0%, #c4b5fd 30%, #f5d0fe 65%, #fff1f2 100%);
+}
+.w-room .floor {
+    overflow: visible;
+    box-shadow: none;
+    background:
+        radial-gradient(circle at 50% 0, #fff 30px, transparent 31px) 0 6px / 70px 50px repeat-x,
+        linear-gradient(180deg, #ffffff 20%, #e0e7ff);
+}
+.w-room .floor::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -26px;
+    height: 40px;
+    background: radial-gradient(circle at 50% 100%, #fff 26px, transparent 27px) 0 0 / 56px 40px repeat-x;
+}
+.sky-cloud { opacity: 0.85; }
+
+/* ── De gouden wolk boven de eenhoornweide (buiten) ── */
+.sky-portal {
+    position: absolute;
+    width: 220px;
+    height: 130px;
+    z-index: 3;
+    cursor: pointer;
+    animation: portalFloat 3s ease-in-out infinite alternate;
+}
+@keyframes portalFloat { to { transform: translateY(14px); } }
+.sp-cloud {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 64px;
+    border-radius: 40px;
+    background: linear-gradient(180deg, #fff, #fef3c7);
+    box-shadow: 0 0 24px rgba(253,224,71,0.8), inset 0 -6px 0 #fde68a;
+}
+.sp-cloud::before, .sp-cloud::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+}
+.sp-cloud::before { width: 90px; height: 90px; left: 30px; top: -40px; }
+.sp-cloud::after { width: 70px; height: 70px; left: 110px; top: -28px; }
+.sp-castle {
+    position: absolute;
+    left: 66px;
+    bottom: 54px;
+    width: 90px;
+    height: 70px;
+    z-index: 1;
+}
+.sp-castle span {
+    position: absolute;
+    bottom: 0;
+    width: 26px;
+    background: linear-gradient(180deg, #fde68a, #f59e0b);
+    border-radius: 3px 3px 0 0;
+}
+.sp-castle span::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    right: -5px;
+    top: -22px;
+    height: 24px;
+    background: #f472b6;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.sp-castle span:nth-child(1) { left: 0; height: 40px; }
+.sp-castle span:nth-child(2) { left: 32px; height: 58px; }
+.sp-castle span:nth-child(3) { left: 64px; height: 40px; }
+.sp-hint {
+    position: absolute;
+    right: -10px;
+    top: -6px;
+    font-size: 30px;
+    animation: hintBob 1.2s ease-in-out infinite;
+}
+.sky-portal.near .sp-hint { display: none; }
+.sky-portal.near .sp-cloud { box-shadow: 0 0 40px 10px rgba(253,224,71,0.9), inset 0 -6px 0 #fde68a; }
+.unicorn.nudge { animation: uniNudge 0.8s ease 2; }
+@keyframes uniNudge { 50% { filter: drop-shadow(0 0 16px #fde047); transform-origin: 50% 100%; } }
+
+/* ── Wolkenpoort ── */
+.cloud-gate {
+    width: 220px;
+    height: 290px;
+    z-index: 1;
+    pointer-events: none;
+    border: 14px solid #fcd34d;
+    border-bottom: none;
+    border-radius: 110px 110px 0 0;
+    box-shadow: 0 0 24px rgba(253,224,71,0.7), inset 0 0 24px rgba(253,224,71,0.5);
+}
+.cg-pearls {
+    position: absolute;
+    inset: -14px -14px auto;
+    height: 120px;
+    border-radius: 120px 120px 0 0;
+    background: radial-gradient(circle, #fff 5px, transparent 6px) 0 0 / 24px 24px;
+    -webkit-mask: radial-gradient(circle at 50% 100%, transparent 96px, #000 97px);
+    mask: radial-gradient(circle at 50% 100%, transparent 96px, #000 97px);
+}
+.cg-star {
+    position: absolute;
+    top: -46px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 44px;
+    animation: wandTwinkle 1.5s ease-in-out infinite;
+}
+.tramp-cloud { width: 170px; height: 70px; }
+.tc-puff {
+    position: absolute;
+    inset: 0;
+    border-radius: 40px;
+    background: linear-gradient(180deg, #fff, #dbeafe);
+    box-shadow: 0 8px 14px rgba(99,102,241,0.25);
+}
+.tc-puff::before, .tc-puff::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: #fff;
+}
+.tc-puff::before { width: 70px; height: 70px; left: 20px; top: -30px; }
+.tc-puff::after { width: 60px; height: 60px; left: 80px; top: -24px; }
+.tramp-cloud.boing .tc-puff { animation: boing 0.6s ease-in-out 3; }
+@keyframes boing { 50% { transform: scaleY(0.7) scaleX(1.1); } }
+.fairy {
+    font-size: 64px;
+    line-height: 1;
+    animation: fairyFloat 2.6s ease-in-out infinite alternate;
+}
+@keyframes fairyFloat { to { transform: translate(14px, -24px) rotate(6deg); } }
+.rainbow-slide { width: 220px; height: 280px; }
+.rainbow-slide svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* ── Weermakerij ── */
+.vane { width: 70px; height: 270px; }
+.vane-bird { position: absolute; left: 4px; top: 0; font-size: 56px; line-height: 1; display: inline-block; }
+.vane-pole { position: absolute; left: 32px; top: 56px; width: 8px; height: 214px; background: #94a3b8; border-radius: 4px; }
+.v-spin { animation: vSpin 0.9s ease; }
+@keyframes vSpin { to { transform: rotateY(720deg); } }
+
+.wx-machine { width: 330px; height: 270px; }
+.wxm-body {
+    position: absolute;
+    left: 20px;
+    bottom: 0;
+    width: 260px;
+    height: 200px;
+    border-radius: 60px 60px 18px 18px;
+    border: 6px solid #fff;
+    background: linear-gradient(180deg, #e0e7ff, #a5b4fc);
+    box-shadow: 0 8px 18px rgba(79,70,229,0.3);
+}
+.wxm-screen {
+    position: absolute;
+    left: 100px;
+    bottom: 110px;
+    width: 100px;
+    height: 70px;
+    border-radius: 16px;
+    border: 5px solid #fcd34d;
+    background: #1e1b4b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    animation: wxScreen 6s steps(1) infinite;
+}
+@keyframes wxScreen { 33% { filter: hue-rotate(160deg); } 66% { filter: hue-rotate(260deg); } }
+.wxm-knobs {
+    position: absolute;
+    left: 50px;
+    bottom: 26px;
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+.wxm-knobs span {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    background: #fef3c7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+.wxm-pipe {
+    position: absolute;
+    right: 34px;
+    top: 30px;
+    width: 26px;
+    height: 110px;
+    border-radius: 13px 13px 0 0;
+    background: linear-gradient(90deg, #fcd34d, #f59e0b);
+}
+.wxm-puff {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    font-size: 48px;
+    animation: puffUp 2.4s ease-out infinite;
+}
+@keyframes puffUp { from { transform: translateY(20px) scale(0.5); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(-40px) scale(1.2); opacity: 0; } }
+.rain-cloud { width: 150px; height: 80px; }
+.rc-body {
+    position: absolute;
+    inset: 0;
+    border-radius: 40px;
+    background: linear-gradient(180deg, #cbd5e1, #94a3b8);
+}
+.rc-body::before, .rc-body::after { content: ''; position: absolute; border-radius: 50%; background: #cbd5e1; }
+.rc-body::before { width: 70px; height: 70px; left: 20px; top: -34px; }
+.rc-body::after { width: 56px; height: 56px; left: 76px; top: -24px; }
+
+/* ── Wolkenkasteel ── */
+.cloud-castle { width: 340px; height: 340px; z-index: 1; pointer-events: none; }
+.cc-body {
+    position: absolute;
+    left: -20px;
+    right: -20px;
+    bottom: 0;
+    height: 150px;
+    border-radius: 60px 60px 20px 20px;
+    background: linear-gradient(180deg, #fff, #ede9fe);
+    box-shadow: 0 0 30px rgba(255,255,255,0.9);
+}
+.cc-body::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -30px;
+    height: 50px;
+    background: radial-gradient(circle at 50% 100%, #fff 28px, transparent 29px) 0 0 / 60px 50px repeat-x;
+}
+.cc-door {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 80px;
+    height: 110px;
+    margin-left: -40px;
+    border-radius: 40px 40px 0 0;
+    border: 6px solid #fcd34d;
+    border-bottom: none;
+    background: linear-gradient(180deg, #fef9c3, #fde68a);
+}
+.cc-tower {
+    position: absolute;
+    bottom: 120px;
+    width: 70px;
+    border-radius: 14px 14px 0 0;
+    background:
+        radial-gradient(circle at 50% 40px, #fde68a 12px, transparent 13px),
+        linear-gradient(180deg, #fff, #f5f3ff);
+    box-shadow: inset 0 0 0 4px #fde68a;
+}
+.cc-tower::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    top: -70px;
+    height: 72px;
+    background: linear-gradient(90deg, #f59e0b, #fde047 50%, #f59e0b);
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.cc-tower::after {
+    content: '';
+    position: absolute;
+    left: 34px;
+    top: -110px;
+    width: 40px;
+    height: 26px;
+    background: #f472b6;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    border-left: 3px solid #fcd34d;
+    animation: flag 1s ease-in-out infinite alternate;
+    transform-origin: 0 50%;
+}
+.harp { width: 100px; height: 170px; }
+.harp svg { width: 100%; height: 100%; }
+.cloud-bed { width: 240px; height: 90px; }
+.cb-puffs {
+    position: absolute;
+    inset: 0;
+    border-radius: 45px;
+    background: linear-gradient(180deg, #fce7f3, #f5d0fe);
+    box-shadow: 0 10px 18px rgba(168,85,247,0.3), 0 0 0 4px #fff;
+}
+.cb-puffs::before, .cb-puffs::after { content: ''; position: absolute; border-radius: 50%; background: #fce7f3; box-shadow: 0 -3px 0 4px #fff; }
+.cb-puffs::before { width: 90px; height: 90px; left: 20px; top: -40px; }
+.cb-puffs::after { width: 80px; height: 80px; left: 120px; top: -32px; }
+.cb-pillow { position: absolute; left: 30px; top: -24px; font-size: 44px; z-index: 1; }
+.cloud-sheep { filter: drop-shadow(0 0 8px #fff); }
+
+/* Kaart: de wolken zweven boven het kasteel */
+.map-floor.map-sky {
+    align-self: center;
+    margin-bottom: 2px;
+    border-radius: 999px;
+    border-style: dashed;
+    background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), var(--c);
+}

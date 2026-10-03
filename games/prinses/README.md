@@ -14,6 +14,8 @@ js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
 js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken)
+js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
+js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
 js/map.js       toverlift + kaart
 js/stickers.js  stickerboek
@@ -34,6 +36,12 @@ in de eerste kamer. De kaart tekent het kasteel als doorsnede: toren boven, bene
 Een eigen wereld (`VILLAGE` in `js/world.js`, scene `dorp`). De koets op het kasteelplein rijdt erheen
 (`addKoets` / `rideCarriage` in `js/village.js`); op het dorpsplein staat de koets terug.
 De dorpskamers gebruiken ook `defineRoom`, dus `roomX`, `inRoom` en stickers werken er hetzelfde.
+
+## Wolken
+
+Nog een eigen wereld (`SKY` in `js/world.js`, scene `wolken`). Boven de eenhoornweide hangt een gouden wolk
+(`buildCloudPortal`, `PORTAL_X` in `js/sky.js`); vlieg er met de eenhoorn tegenaan om naar boven te gaan.
+Terug via de regenboogglijbaan op de wolkenpoort. Op de kaart zweven de wolken boven het kasteel.
 
 ## Stickerboek
 

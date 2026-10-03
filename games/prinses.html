@@ -21,6 +21,9 @@
     <link rel="stylesheet" href="prinses/css/village.css">
     <link rel="stylesheet" href="prinses/css/dorp/markt.css">
     <link rel="stylesheet" href="prinses/css/dorp/ijssalon.css">
+    <link rel="stylesheet" href="prinses/css/sky.css">
+    <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
+    <link rel="stylesheet" href="prinses/css/wolken/wolkenkasteel.css">
     <link rel="stylesheet" href="prinses/css/sea.css">
     <link rel="stylesheet" href="prinses/css/rooms/kasteelhal.css">
     <link rel="stylesheet" href="prinses/css/rooms/spiegelkamer.css">
@@ -212,6 +215,42 @@
                 <button class="scope-close" id="icClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="weatherov" id="weatherOv">
+                <div class="nails-title">🌦️ Weermaker</div>
+                <div class="wx-stage wx-zon" id="wxStage">
+                    <div class="wx-sun" id="wxSun">☀️</div>
+                    <div class="wx-clouds"><span>☁️</span><span>☁️</span><span>☁️</span></div>
+                    <svg class="wx-rainbow" viewBox="0 0 400 210">
+                        <path d="M20 205 A180 180 0 0 1 380 205" stroke="#ef4444" stroke-width="14" fill="none"/>
+                        <path d="M34 205 A166 166 0 0 1 366 205" stroke="#fb923c" stroke-width="14" fill="none"/>
+                        <path d="M48 205 A152 152 0 0 1 352 205" stroke="#facc15" stroke-width="14" fill="none"/>
+                        <path d="M62 205 A138 138 0 0 1 338 205" stroke="#4ade80" stroke-width="14" fill="none"/>
+                        <path d="M76 205 A124 124 0 0 1 324 205" stroke="#60a5fa" stroke-width="14" fill="none"/>
+                        <path d="M90 205 A110 110 0 0 1 310 205" stroke="#a855f7" stroke-width="14" fill="none"/>
+                    </svg>
+                    <div class="wx-kite">🪁</div>
+                    <div class="wx-hill"></div>
+                    <div class="wx-snowcap"></div>
+                    <div class="wx-puddle"></div>
+                    <div class="wx-house">🏡</div>
+                    <div class="wx-tree">🌳</div>
+                    <div class="wx-flowers"><span>🌷</span><span>🌼</span><span>🌸</span><span>🌻</span><span>🌷</span></div>
+                    <div class="wx-umbrella">☂️</div>
+                    <div class="wx-snowman">⛄</div>
+                    <div class="wx-fall" id="wxFall"></div>
+                    <div class="wx-flash"></div>
+                </div>
+                <div class="bd-tray" id="wxTray"></div>
+                <button class="scope-close" id="wxClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="cloudov" id="cloudOv">
+                <div class="nails-title">☁️ Wolkjes kijken</div>
+                <div class="cw-sky" id="cwSky"></div>
+                <div class="cw-seen" id="cwSeen"></div>
+                <button class="scope-close" id="cwClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="stickov" id="stickOv">
                 <div class="stick-book">
                     <div class="stick-page" id="stickPage">
@@ -333,6 +372,7 @@
     <script src="prinses/js/outside.js"></script>
     <script src="prinses/js/sea.js"></script>
     <script src="prinses/js/village.js"></script>
+    <script src="prinses/js/sky.js"></script>
     <!-- Kamers: elk bestand meldt zich aan met defineRoom(); de indeling staat in WINGS (js/world.js) -->
     <script src="prinses/js/rooms/kasteelhal.js"></script>
     <script src="prinses/js/rooms/troonzaal.js"></script>
@@ -358,6 +398,10 @@
     <script src="prinses/js/dorp/dorpsplein.js"></script>
     <script src="prinses/js/dorp/markt.js"></script>
     <script src="prinses/js/dorp/ijssalon.js"></script>
+    <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
+    <script src="prinses/js/wolken/wolkenpoort.js"></script>
+    <script src="prinses/js/wolken/weermakerij.js"></script>
+    <script src="prinses/js/wolken/wolkenkasteel.js"></script>
     <script src="prinses/js/map.js"></script>
     <script src="prinses/js/stickers.js"></script>
     <script src="prinses/js/main.js"></script>

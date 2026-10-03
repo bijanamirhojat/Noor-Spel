@@ -21,6 +21,10 @@ const WINGS = [
 const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', gems: 9,
     rooms: ['dorpsplein', 'markt', 'ijssalon'] };
 
+// Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
+const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 9,
+    rooms: ['wolkenpoort', 'weermakerij', 'wolkenkasteel'] };
+
 const SCENES = {};
 let scene = null;
 let world = null;
@@ -43,6 +47,7 @@ function initScenes() {
     });
     SCENES.out = { key: 'out', rooms: ROOMS_OUT, el: makeWorldEl('out'), gems: [], gemsGot: 0, gemCount: 14, door: null };
     SCENES.sea = { key: 'sea', rooms: ROOMS_SEA, el: makeWorldEl('sea'), gems: [], gemsGot: 0, gemCount: 12, door: null };
+    SCENES.wolken = { key: 'wolken', rooms: SKY.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('wolken'), gems: [], gemsGot: 0, gemCount: SKY.gems, door: null, arriveX: 150 };
     SCENES.dorp = { key: 'dorp', rooms: VILLAGE.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('dorp'), gems: [], gemsGot: 0, gemCount: VILLAGE.gems, door: null, koets: null };
     Object.values(SCENES).forEach(sc => sc.rooms.forEach((r, idx) => { ROOM_AT[r.key] = { scene: sc, idx }; }));
     scene = SCENES.hal;
