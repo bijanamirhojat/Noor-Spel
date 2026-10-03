@@ -88,7 +88,7 @@
 .salon-shelf span { position: absolute; font-size: 36px; line-height: 1; }
 
 /* Glitter in het haar (op de prinses zelf) */
-.hair-glit text { animation: glitTwinkle 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.hair-glit path { animation: glitTwinkle 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
 @keyframes glitTwinkle { 0%, 100% { opacity: 0.2; transform: scale(0.6); } 50% { opacity: 1; transform: scale(1.2); } }
 
 /* ── Kapsalon (overlay) ── */

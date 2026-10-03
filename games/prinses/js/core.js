@@ -203,7 +203,7 @@ const HAIR_EXTRAS = `
     <g class="lk" data-k="clip" data-v="shell" style="display:none"><text x="69" y="33" font-size="10" text-anchor="middle">🐚</text></g>
     <g class="lk hair-glit" data-k="sparkle" data-v="on" style="display:none">
         ${[[30, 46], [70, 52], [28, 68], [72, 78], [38, 24], [62, 23], [50, 96]].map(([x, y], i) =>
-            `<text x="${x}" y="${y}" font-size="6" text-anchor="middle" style="animation-delay:${i * -0.3}s">✨</text>`).join('')}
+            `<path d="M${x} ${y - 3.5} L${x + 1} ${y - 1} L${x + 3.5} ${y} L${x + 1} ${y + 1} L${x} ${y + 3.5} L${x - 1} ${y + 1} L${x - 3.5} ${y} L${x - 1} ${y - 1} Z" fill="#fff" stroke="#fde047" stroke-width="0.6" style="animation-delay:${i * -0.3}s"/>`).join('')}
     </g>`;
 
 /* ─────────── Princess SVG ─────────── */

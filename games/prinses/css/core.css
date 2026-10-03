@@ -75,6 +75,9 @@ h1 {
     width: 4000px;
     height: 500px;
     transform-origin: 0 0;
+    /* Own compositor layer: the camera pans every frame while walking,
+       without this the iPad repaints the whole room on every step */
+    will-change: transform;
 }
 
 #fx {
@@ -336,6 +339,7 @@ h1 {
     height: 192px;
     z-index: 10;
     pointer-events: none;
+    will-change: transform;
 }
 
 .princess .flip {
