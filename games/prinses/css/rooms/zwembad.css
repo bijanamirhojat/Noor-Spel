@@ -1,0 +1,120 @@
+/* 🏊 Zwembad */
+.room.rm-zwembad .wall {
+    background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.85) 2px, transparent 2px) 0 0 / 40px 40px,
+        linear-gradient(0deg, rgba(255, 255, 255, 0.85) 2px, transparent 2px) 0 0 / 40px 40px,
+        linear-gradient(180deg, #bae6fd, #7dd3fc 70%, #38bdf8);
+}
+
+.room.rm-zwembad .floor {
+    background: conic-gradient(#fff 25%, #a5f3fc 0 50%, #fff 0 75%, #a5f3fc 0) 0 0 / 34px 34px;
+}
+
+.pool-sun { font-size: 70px; pointer-events: none; animation: gleam 3s ease-in-out infinite; }
+
+.dive-score {
+    min-width: 190px;
+    padding: 8px 14px;
+    border-radius: 16px;
+    border: 5px solid #fcd34d;
+    background: #1e3a8a;
+    color: #fef08a;
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    line-height: 1.3;
+    text-align: center;
+    pointer-events: none;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+}
+.dive-score b {
+    display: inline-block;
+    min-width: 34px;
+    margin: 2px;
+    border-radius: 8px;
+    background: #fff;
+    color: #db2777;
+}
+.dive-score.pop { animation: duPop 0.5s cubic-bezier(.2, 1.6, .4, 1); }
+
+.pool-back { width: 424px; height: 152px; pointer-events: none; }
+.pool-back > div, .pool-back > span { position: absolute; }
+.pool-back .pool-water {
+    left: 12px; top: 22px; width: 400px; height: 122px;
+    background:
+        radial-gradient(ellipse 30px 6px at 50% 30%, rgba(255, 255, 255, 0.5), transparent) 0 0 / 90px 40px,
+        linear-gradient(180deg, #67e8f9, #22d3ee 40%, #0891b2);
+    border-radius: 0 0 14px 14px;
+}
+.pool-back .pool-water::before {
+    content: '';
+    position: absolute; left: 0; right: 0; top: -8px; height: 16px;
+    background: radial-gradient(circle at 50% 100%, #a5f3fc 0 9px, transparent 10px) 0 0 / 30px 16px;
+    animation: poolWave 2s linear infinite;
+}
+@keyframes poolWave { to { background-position: 30px 0; } }
+.pool-back .pool-rim {
+    left: 0; top: 140px; width: 424px; height: 12px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 -3px 0 #e0f2fe;
+}
+.pool-back::before, .pool-back::after {
+    content: '';
+    position: absolute; top: 10px; width: 14px; height: 142px;
+    border-radius: 7px;
+    background: repeating-linear-gradient(180deg, #fff 0 18px, #e0f2fe 18px 20px);
+}
+.pool-back::before { left: 0; }
+.pool-back::after { right: 0; }
+.pool-bubble {
+    bottom: 16px; width: 12px; height: 12px; border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    animation: poolBubble 3.6s ease-in infinite;
+}
+@keyframes poolBubble {
+    0% { transform: translateY(0); opacity: 0; }
+    20% { opacity: 1; }
+    90% { transform: translateY(-100px) translateX(8px); opacity: 1; }
+    100% { transform: translateY(-104px); opacity: 0; }
+}
+
+/* Front water: covers the princess's legs while she swims */
+.pool-cover {
+    width: 400px;
+    height: 118px;
+    z-index: 12;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    border-radius: 0 0 14px 14px;
+    background: linear-gradient(180deg, rgba(103, 232, 249, 0.8), rgba(8, 145, 178, 0.92));
+}
+.pool-cover.show { opacity: 1; }
+
+.pool-float { font-size: 54px; z-index: 13; pointer-events: none; animation: carousel 2.6s ease-in-out infinite; }
+
+.pool-hit { width: 320px; height: 150px; cursor: pointer; }
+
+.pool-slide { width: 280px; height: 272px; }
+.pool-slide svg { overflow: visible; }
+
+.dive-tower { width: 200px; height: 216px; }
+.dive-tower > div { position: absolute; }
+.dive-tower .dt-post { top: 0; width: 10px; height: 216px; border-radius: 5px; background: linear-gradient(90deg, #e2e8f0, #fff, #cbd5e1); }
+.dive-tower .dt-rung { left: 150px; width: 46px; height: 7px; border-radius: 4px; background: #cbd5e1; }
+.dive-tower .dt-board {
+    left: 0; top: 0; width: 200px; height: 14px;
+    border-radius: 7px;
+    background: linear-gradient(180deg, #60a5fa, #2563eb);
+    box-shadow: 0 4px 0 #1e40af;
+    transform-origin: 100% 50%;
+}
+.dive-tower .dt-board.boing { animation: boardBoing 0.7s ease; }
+@keyframes boardBoing {
+    0%, 50%, 100% { transform: rotate(0); }
+    25%, 75% { transform: rotate(-4deg); }
+}
+
+.pool-ring { font-size: 56px; }
+.pool-ring.wiggle { animation: ringWiggle 0.6s ease; }
+@keyframes ringWiggle { 25% { transform: rotate(-15deg); } 75% { transform: rotate(15deg); } }

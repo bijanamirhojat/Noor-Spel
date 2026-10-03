@@ -68,7 +68,7 @@ const state = {
     targetAlt: 0,
     flapT: 0,
     pet: { following: false, x: 200, facing: -1, key: 'hal' },
-    look: { hat: 'crown', back: 'none', face: 'none', hair: 0, neck: null },
+    look: { hat: 'crown', back: 'none', face: 'none', hair: 0, neck: null, hairdo: 'long', clip: 'none', sparkle: 'none' },
     partyUntil: 0,
     lastTime: performance.now()
 };
@@ -141,6 +141,71 @@ const PRINCESS_LAYERS = `
         <path d="M67 30 L66 9 L54 22 Z" fill="#374151"/><path d="M64.5 25 L64 14 L57.5 21.5 Z" fill="#f9a8d4"/>
     </g>`;
 
+/* ─────────── Kapsels (kapsalon, js/rooms/kapsalon.js) ─────────── */
+const HAIRDOS = [
+    ['long', 'Lang'], ['rapunzel', 'Rapunzel'], ['short', 'Kort'], ['pigtails', 'Staartjes'],
+    ['buns', 'Knotjes'], ['braid', 'Vlecht'], ['ponytail', 'Paardenstaart'], ['curls', 'Krullen']
+];
+const HAIR_SHORT = 'M31 34 Q29 48 33 56 L67 56 Q71 48 69 34 Z';
+
+function HAIRDO_BACK(pre) {
+    const f = `fill="url(#${pre}hair)"`;
+    const curls = [[30, 34], [70, 34], [26, 46], [74, 46], [25, 58], [75, 58], [27, 70], [73, 70], [31, 82], [69, 82],
+        [38, 88], [50, 90], [62, 88], [36, 76], [64, 76], [50, 78], [40, 64], [60, 64]];
+    return `
+            <g class="lk" data-k="hairdo" data-v="long"><path class="hair" d="M31 36 Q24 70 30 100 Q50 106 70 100 Q76 70 69 36 Z" ${f}/></g>
+            <g class="lk" data-k="hairdo" data-v="rapunzel" style="display:none">
+                <path class="hair" d="M31 36 Q18 90 22 150 Q50 158 78 150 Q82 90 69 36 Z" ${f}/>
+                <text x="24" y="120" font-size="7">🌸</text><text x="70" y="136" font-size="7">🌼</text><text x="22" y="146" font-size="6">🌷</text>
+            </g>
+            <g class="lk" data-k="hairdo" data-v="short" style="display:none"><path class="hair" d="M30 34 Q25 52 29 62 Q50 68 71 62 Q75 52 70 34 Z" ${f}/></g>
+            <g class="lk" data-k="hairdo" data-v="pigtails" style="display:none">
+                <path class="hair" d="${HAIR_SHORT}" ${f}/>
+                <ellipse class="hair" cx="23" cy="62" rx="8" ry="20" transform="rotate(18 23 62)" ${f}/>
+                <ellipse class="hair" cx="77" cy="62" rx="8" ry="20" transform="rotate(-18 77 62)" ${f}/>
+                <circle cx="29" cy="45" r="3.2" fill="#f472b6"/><circle cx="71" cy="45" r="3.2" fill="#f472b6"/>
+            </g>
+            <g class="lk" data-k="hairdo" data-v="buns" style="display:none">
+                <path class="hair" d="${HAIR_SHORT}" ${f}/>
+                <circle class="hair" cx="31" cy="24" r="9.5" ${f}/><circle class="hair" cx="69" cy="24" r="9.5" ${f}/>
+                <path d="M25 22 Q31 17 37 22 M63 22 Q69 17 75 22" stroke="rgba(0,0,0,0.15)" stroke-width="1.2" fill="none"/>
+            </g>
+            <g class="lk" data-k="hairdo" data-v="braid" style="display:none"><path class="hair" d="${HAIR_SHORT}" ${f}/></g>
+            <g class="lk" data-k="hairdo" data-v="ponytail" style="display:none">
+                <path class="hair" d="${HAIR_SHORT}" ${f}/>
+                <path class="hair" d="M58 24 Q84 18 88 46 Q90 72 78 94 Q82 68 74 50 Q68 38 60 34 Z" ${f}/>
+                <circle cx="63" cy="26" r="3.2" fill="#f472b6"/>
+            </g>
+            <g class="lk" data-k="hairdo" data-v="curls" style="display:none">
+                ${curls.map(([x, y]) => `<circle class="hair" cx="${x}" cy="${y}" r="9" ${f} stroke="rgba(0,0,0,0.12)" stroke-width="1"/>`).join('')}
+            </g>`;
+}
+
+// The braid hangs over the shoulder, in front of the dress
+function HAIRDO_FRONT(pre) {
+    return `
+            <g class="lk" data-k="hairdo" data-v="braid" style="display:none">
+                ${[58, 68, 78, 88, 98].map((y, i) => `<ellipse class="hair" cx="${63 + i * 0.7}" cy="${y}" rx="5.5" ry="6.5" fill="url(#${pre}hair)" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>`).join('')}
+                <text x="66.5" y="111" font-size="8" text-anchor="middle">🎀</text>
+            </g>`;
+}
+
+const HAIR_CLIPS = [
+    ['none', '🚫'], ['bow', '🎀'], ['flowers', '🌸'], ['butterfly', '🦋'], ['stars', '⭐'], ['hearts', '💖'], ['gems', '💎'], ['shell', '🐚']
+];
+const HAIR_EXTRAS = `
+    <g class="lk" data-k="clip" data-v="bow" style="display:none"><text x="69" y="33" font-size="13" text-anchor="middle">🎀</text></g>
+    <g class="lk" data-k="clip" data-v="flowers" style="display:none"><text x="32" y="33" font-size="9" text-anchor="middle">🌸</text><text x="68" y="33" font-size="9" text-anchor="middle">🌼</text></g>
+    <g class="lk" data-k="clip" data-v="butterfly" style="display:none"><text x="69" y="31" font-size="11" text-anchor="middle">🦋</text></g>
+    <g class="lk" data-k="clip" data-v="stars" style="display:none"><text x="32" y="33" font-size="7" text-anchor="middle">⭐</text><text x="68" y="33" font-size="7" text-anchor="middle">⭐</text><text x="70" y="25" font-size="5" text-anchor="middle">✨</text></g>
+    <g class="lk" data-k="clip" data-v="hearts" style="display:none"><text x="32" y="33" font-size="8" text-anchor="middle">💖</text><text x="68" y="33" font-size="8" text-anchor="middle">💖</text></g>
+    <g class="lk" data-k="clip" data-v="gems" style="display:none"><text x="32" y="34" font-size="7" text-anchor="middle">💎</text><text x="68" y="34" font-size="7" text-anchor="middle">💎</text></g>
+    <g class="lk" data-k="clip" data-v="shell" style="display:none"><text x="69" y="33" font-size="10" text-anchor="middle">🐚</text></g>
+    <g class="lk hair-glit" data-k="sparkle" data-v="on" style="display:none">
+        ${[[30, 46], [70, 52], [28, 68], [72, 78], [38, 24], [62, 23], [50, 96]].map(([x, y], i) =>
+            `<text x="${x}" y="${y}" font-size="6" text-anchor="middle" style="animation-delay:${i * -0.3}s">✨</text>`).join('')}
+    </g>`;
+
 /* ─────────── Princess SVG ─────────── */
 function princessSVG(prefix) {
     return `
@@ -178,7 +243,7 @@ function princessSVG(prefix) {
                 <path d="M36 62 Q18 110 20 150 L80 150 Q82 110 64 62 Z" fill="#dc2626"/>
                 <path d="M36 62 Q50 70 64 62" stroke="#fcd34d" stroke-width="4" fill="none" stroke-linecap="round"/>
             </g>
-            <path class="hair" d="M31 36 Q24 70 30 100 Q50 106 70 100 Q76 70 69 36 Z" fill="url(#${prefix}hair)"/>
+            ${HAIRDO_BACK(prefix)}
             <ellipse class="feet" cx="42" cy="152" rx="7" ry="4" fill="#ec4899"/>
             <ellipse class="feet" cx="58" cy="152" rx="7" ry="4" fill="#ec4899"/>
             <g class="tail" style="display:none">
@@ -220,15 +285,18 @@ function princessSVG(prefix) {
             <circle cx="39" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
             <circle cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
             <path d="M45 50 Q50 55 55 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round"/>
+            ${HAIRDO_FRONT(prefix)}
             <g class="necklace"></g>
             ${PRINCESS_LAYERS}
+            ${HAIR_EXTRAS}
         </g>
     </svg>`;
 }
 
 const HAIRS = [
     ['#fde047', '#f59e0b'], ['#a16207', '#713f12'], ['#4b5563', '#111827'], ['#fb923c', '#c2410c'],
-    ['#f9a8d4', '#ec4899'], ['#7dd3fc', '#3b82f6'], ['#d8b4fe', '#9333ea'], 'rainbow'
+    ['#f9a8d4', '#ec4899'], ['#7dd3fc', '#3b82f6'], ['#d8b4fe', '#9333ea'], 'rainbow',
+    ['#f8fafc', '#94a3b8'], ['#fca5a5', '#dc2626'], ['#86efac', '#16a34a']
 ];
 const LOOK_KEY = 'noor-prinses-look';
 
@@ -264,7 +332,7 @@ function loadLook() {
     try {
         const d = JSON.parse(localStorage.getItem(LOOK_KEY));
         if (d && typeof d === 'object') {
-            ['hat', 'back', 'face'].forEach(k => { if (typeof d[k] === 'string') state.look[k] = d[k]; });
+            ['hat', 'back', 'face', 'hairdo', 'clip', 'sparkle'].forEach(k => { if (typeof d[k] === 'string') state.look[k] = d[k]; });
             if (Number.isInteger(d.hair) && d.hair >= 0 && d.hair < HAIRS.length) state.look.hair = d.hair;
             if (d.neck && Array.isArray(d.neck.beads)) state.look.neck = { beads: d.neck.beads.slice(0, 14), pendant: d.neck.pendant || null };
             if (Number.isInteger(d.dress) && d.dress >= 0 && d.dress < DRESSES.length) state.dressIdx = d.dress;

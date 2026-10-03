@@ -6,7 +6,7 @@ De code staat in deze map.
 ## Indeling
 
 ```
-js/core.js      constanten, state, prinses-SVG, look, el/place/addObj
+js/core.js      constanten, state, prinses-SVG (met kapsels), look, el/place/addObj
 js/world.js     kamer-register (defineRoom), WINGS (verdiepingen), scenes, setScene, deur
 js/engine.js    edelstenen, bewegen, glitter, camera/main loop, tweens, poes
 js/wand.js      toverstaf-spreuken

@@ -47,6 +47,8 @@
     <link rel="stylesheet" href="prinses/css/rooms/badkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/ouderslaapkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/elvenkamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/zwembad.css">
+    <link rel="stylesheet" href="prinses/css/rooms/kapsalon.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
@@ -97,6 +99,24 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="dressup salon" id="salonOv">
+                <div class="nails-title">💇‍♀️ Kapsalon</div>
+                <div class="du-main">
+                    <div class="du-preview" id="salonPreview"></div>
+                    <div class="du-side">
+                        <div class="du-tabs" id="salonTabs"></div>
+                        <div class="du-opts" id="salonOpts"></div>
+                    </div>
+                </div>
+                <div class="du-actions">
+                    <button class="tool-btn wide" id="salonWash">🧴 Wassen</button>
+                    <button class="tool-btn wide" id="salonDry">💨 Föhnen</button>
+                    <button class="tool-btn wide" id="salonGlit">✨ Glitter</button>
+                    <button class="tool-btn wide" id="salonDone">✅ Klaar!</button>
+                </div>
+                <button class="scope-close" id="salonClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="elfov" id="elfOv">
@@ -406,6 +426,8 @@
     <script src="prinses/js/rooms/ouderslaapkamer.js"></script>
     <script src="prinses/js/rooms/sterrenkamer.js"></script>
     <script src="prinses/js/rooms/elvenkamer.js"></script>
+    <script src="prinses/js/rooms/zwembad.js"></script>
+    <script src="prinses/js/rooms/kapsalon.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>
