@@ -17,6 +17,7 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
+js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/map.js       toverlift + kaart
 js/stickers.js  stickerboek
 js/main.js      alles opbouwen en starten

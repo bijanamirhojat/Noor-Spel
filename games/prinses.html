@@ -45,6 +45,9 @@
     <link rel="stylesheet" href="prinses/css/rooms/juwelierskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/cadeaukamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/badkamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/ouderslaapkamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/elvenkamer.css">
+    <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
     <div class="game-container">
@@ -94,6 +97,14 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="elfov" id="elfOv">
+                <div class="nails-title">🧚 Elfjes verstoppertje</div>
+                <div class="elf-found" id="elfFound"></div>
+                <div class="elf-stage" id="elfStage"></div>
+                <div class="bd-tray"><button class="bd-btn" id="elfAgain" style="display:none">✨<small>Nog een keer</small></button></div>
+                <button class="scope-close" id="elfClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="teethov" id="teethOv">
@@ -392,7 +403,9 @@
     <script src="prinses/js/rooms/hartjeskamer.js"></script>
     <script src="prinses/js/rooms/ijskamer.js"></script>
     <script src="prinses/js/rooms/slaapkamer.js"></script>
+    <script src="prinses/js/rooms/ouderslaapkamer.js"></script>
     <script src="prinses/js/rooms/sterrenkamer.js"></script>
+    <script src="prinses/js/rooms/elvenkamer.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>
@@ -402,6 +415,7 @@
     <script src="prinses/js/wolken/wolkenpoort.js"></script>
     <script src="prinses/js/wolken/weermakerij.js"></script>
     <script src="prinses/js/wolken/wolkenkasteel.js"></script>
+    <script src="prinses/js/parents.js"></script>
     <script src="prinses/js/map.js"></script>
     <script src="prinses/js/stickers.js"></script>
     <script src="prinses/js/main.js"></script>

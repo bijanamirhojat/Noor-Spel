@@ -1,0 +1,155 @@
+/* 🧚 Elvenkamer */
+.room.rm-elvenkamer .wall {
+    background:
+        radial-gradient(circle, rgba(190, 242, 100, 0.55) 1.5px, transparent 2.5px) 0 0 / 46px 52px,
+        radial-gradient(ellipse 500px 300px at 50% 80%, rgba(167, 243, 208, 0.35), transparent 70%),
+        linear-gradient(180deg, #0f172a, #134e4a 55%, #166534);
+}
+
+.room.rm-elvenkamer .floor {
+    background:
+        radial-gradient(circle, #bbf7d0 2px, transparent 3px) 0 0 / 40px 26px,
+        linear-gradient(180deg, #15803d, #14532d);
+}
+
+.firefly {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fef08a;
+    box-shadow: 0 0 10px 4px rgba(254, 240, 138, 0.8);
+    pointer-events: none;
+    animation: firefly 6s ease-in-out infinite;
+}
+
+@keyframes firefly {
+    0%, 100% { transform: translate(0, 0); opacity: 0.2; }
+    25% { transform: translate(30px, -20px); opacity: 1; }
+    50% { transform: translate(-10px, -40px); opacity: 0.4; }
+    75% { transform: translate(-30px, 10px); opacity: 1; }
+}
+
+.elf-tree { width: 260px; height: 380px; }
+.elf-tree .crown {
+    position: absolute; left: 0; top: 0; width: 260px; height: 200px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 30% 40%, #4ade80 0 30%, transparent 31%),
+        radial-gradient(circle at 70% 35%, #22c55e 0 32%, transparent 33%),
+        radial-gradient(circle at 50% 65%, #16a34a 0 38%, transparent 39%);
+    filter: drop-shadow(0 0 18px rgba(134, 239, 172, 0.5));
+}
+.elf-tree .trunk {
+    position: absolute; left: 90px; top: 150px; width: 80px; height: 230px;
+    border-radius: 20px 20px 6px 6px;
+    background: repeating-linear-gradient(90deg, #92400e 0 10px, #78350f 10px 14px);
+}
+.elf-tree .elf-door {
+    position: absolute; left: 18px; top: 120px; width: 44px; height: 70px;
+    border-radius: 22px 22px 0 0;
+    background: radial-gradient(ellipse at 50% 70%, #fef9c3, #fbbf24 60%, #b45309);
+    box-shadow: 0 0 20px #fde68a;
+    animation: gleam 2s ease-in-out infinite;
+}
+
+.glow-shroom { width: calc(90px * var(--s)); height: calc(110px * var(--s)); }
+.glow-shroom .cap {
+    position: absolute; left: 0; top: 0; width: 100%; height: 55%;
+    border-radius: 50% 50% 10% 10%;
+    background:
+        radial-gradient(circle, #fff 0 12%, transparent 13%) 20% 30% / 40% 40%,
+        radial-gradient(circle at 50% 80%, #f0abfc, #a855f7);
+    box-shadow: 0 0 22px rgba(240, 171, 252, 0.8);
+}
+.glow-shroom .stem {
+    position: absolute; left: 35%; top: 50%; width: 30%; height: 50%;
+    border-radius: 8px; background: linear-gradient(90deg, #fef3c7, #fde68a);
+}
+.glow-shroom.pulse .cap { animation: shroomPulse 0.6s ease; }
+@keyframes shroomPulse {
+    50% { transform: scale(1.15); filter: brightness(1.5) hue-rotate(60deg); }
+}
+
+.ring-shroom { font-size: 26px; line-height: 1; pointer-events: none; z-index: 2; }
+
+.elf-fly {
+    font-size: 46px;
+    line-height: 1;
+    filter: hue-rotate(var(--h)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.9));
+    z-index: 6;
+}
+.elf-fly span { display: inline-block; animation: elfFlap 0.4s ease-in-out infinite alternate; }
+@keyframes elfFlap { from { transform: translateY(0) rotate(-6deg); } to { transform: translateY(-6px) rotate(6deg); } }
+.elf-fly.path0 { animation: elfPath0 9s ease-in-out infinite; }
+.elf-fly.path1 { animation: elfPath1 11s ease-in-out infinite; }
+.elf-fly.path2 { animation: elfPath2 10s ease-in-out infinite; }
+.elf-fly.path3 { animation: elfPath3 12s ease-in-out infinite; }
+@keyframes elfPath0 { 0%, 100% { translate: 0 0; } 25% { translate: 120px -40px; } 50% { translate: 60px 80px; } 75% { translate: -60px 30px; } }
+@keyframes elfPath1 { 0%, 100% { translate: 0 0; } 25% { translate: -100px 50px; } 50% { translate: 40px 120px; } 75% { translate: 110px -20px; } }
+@keyframes elfPath2 { 0%, 100% { translate: 0 0; } 33% { translate: 90px 60px; } 66% { translate: -120px 20px; } }
+@keyframes elfPath3 { 0%, 100% { translate: 0 0; } 25% { translate: -80px -30px; } 50% { translate: -140px 90px; } 75% { translate: 40px 60px; } }
+.elf-fly.spin span { animation: elfSpin 0.8s ease; }
+@keyframes elfSpin { to { transform: rotate(360deg) scale(1.4); } }
+
+/* ── Elfjes verstoppertje (overlay) ── */
+.elfov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, rgba(254, 240, 138, 0.7) 1.5px, transparent 2.5px) 0 0 / 40px 44px,
+        linear-gradient(180deg, #134e4a, #166534 60%, #15803d);
+}
+.elfov.open { display: flex; }
+.elfov .nails-title { color: #fef08a; text-shadow: 0 0 10px rgba(254, 240, 138, 0.6); }
+.elf-found { display: flex; gap: 8px; font-size: 32px; background: rgba(255, 255, 255, 0.15); border-radius: 999px; padding: 4px 14px; z-index: 2; }
+.elf-found span { opacity: 0.5; }
+.elf-found span.got { opacity: 1; filter: hue-rotate(var(--h)) drop-shadow(0 0 6px #fff); animation: sprout 0.4s cubic-bezier(.2, 1.8, .4, 1); }
+.elf-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
+.elf-spot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: none;
+    background: none;
+    font-size: 72px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3));
+}
+.elf-spot.wiggle { animation: spotWiggle 0.5s ease; }
+@keyframes spotWiggle {
+    0%, 100% { transform: translate(-50%, -50%) rotate(0); }
+    25% { transform: translate(-50%, -50%) rotate(-12deg); }
+    75% { transform: translate(-50%, -50%) rotate(12deg); }
+}
+.elf-spot.hint { animation: spotHint 1.2s ease; }
+@keyframes spotHint {
+    0%, 100% { filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.3)); }
+    50% { filter: drop-shadow(0 0 16px #fef08a) drop-shadow(0 0 30px #fff); }
+}
+.elf-pop {
+    position: absolute;
+    font-size: 64px;
+    line-height: 1;
+    pointer-events: none;
+    filter: hue-rotate(var(--h)) drop-shadow(0 0 12px #fff);
+    animation: elfPop 0.7s cubic-bezier(.2, 1.6, .4, 1) forwards;
+    z-index: 3;
+}
+@keyframes elfPop {
+    from { transform: translate(-50%, -50%) scale(0.2); }
+    to { transform: translate(-50%, -150%) scale(1); }
+}
+.elf-pop.dance { animation: elfDance 2.4s linear infinite; left: 50% !important; top: 45% !important; }
+@keyframes elfDance {
+    from { transform: translate(-50%, -50%) rotate(var(--a)) translateX(120px) rotate(calc(-1 * var(--a))); }
+    to { transform: translate(-50%, -50%) rotate(calc(var(--a) + 360deg)) translateX(120px) rotate(calc(-1 * var(--a) - 360deg)); }
+}

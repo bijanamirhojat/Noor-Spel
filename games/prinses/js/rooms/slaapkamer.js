@@ -34,6 +34,7 @@ function sleepInBed() {
         cover.classList.add('show');
         night.classList.add('show');
         playLullaby();
+        parentsSing();
         const zzzTimer = setInterval(() => {
             const z = el('<div class="zzz">💤</div>');
             place(z, state.x - 90, 280);
@@ -43,6 +44,7 @@ function sleepInBed() {
             clearInterval(zzzTimer);
             night.classList.remove('show');
             cover.classList.remove('show');
+            parentsWake();
             speak('Goedemorgen prinses! Kukeleku!');
             playWin();
             sparkleShower(state.x, 100, 60);

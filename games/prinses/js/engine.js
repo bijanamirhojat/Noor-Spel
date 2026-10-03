@@ -72,7 +72,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));
@@ -213,6 +213,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && beadOpen) closeBeads(false);
     if (e.key === 'Escape' && giftOpen) closeGifts();
     if (e.key === 'Escape' && teethOpen) closeTeeth();
+    if (e.key === 'Escape' && elfOpen) closeElfGame();
     if (e.key === ' ' || e.key === 't') castSpell();
 });
 document.addEventListener('keyup', (e) => {
@@ -491,6 +492,7 @@ function frame(now) {
     const boatBob = state.boating ? Math.sin(now / 450) * 3 - BOAT_LIFT : 0;
     p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt + an.dy + boatBob}px) rotate(${an.rot}deg)`;
     updatePet(dt);
+    updateParents(dt, now);
     p.classList.toggle('left', state.facing < 0);
 
     if (scene.key === 'out') updateCloudPortal();
