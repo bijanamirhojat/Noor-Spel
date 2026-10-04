@@ -318,7 +318,25 @@
             font-size: 0.6rem;
             color: #ccc;
             margin-top: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
         }
+
+        .update-check {
+            border: 2px solid #ffd2d2;
+            border-radius: 999px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #e84d4d;
+            font-family: 'Fredoka One', cursive;
+            font-size: 0.85rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .update-check:disabled { opacity: 0.8; cursor: default; }
 
         .update-banner {
             position: fixed;
@@ -525,7 +543,10 @@
 
         <div id="themes"></div>
 
-        <div class="footer" id="releaseBadge"></div>
+        <div class="footer">
+            <button type="button" class="update-check" id="updateCheckBtn">🔄 Updates zoeken</button>
+            <div id="releaseBadge"></div>
+        </div>
     </div>
 
     <div class="update-banner" id="updateBanner" role="status" aria-live="polite">
@@ -790,6 +811,46 @@
                 }
             });
         }
+
+        /* ── "Updates zoeken": ask the server for the newest release, and if it is newer
+           than this page, throw away the old caches and service worker and load it fresh ── */
+        async function checkForUpdates() {
+            const btn = document.getElementById('updateCheckBtn');
+            const done = (label, ms = 2500) => {
+                btn.textContent = label;
+                setTimeout(() => { btn.textContent = '🔄 Updates zoeken'; btn.disabled = false; }, ms);
+            };
+            btn.disabled = true;
+            btn.textContent = '⏳ Even kijken...';
+            let latest = null;
+            try {
+                const res = await fetch(`index.html?check=${Date.now()}`, { cache: 'no-store' });
+                const m = (await res.text()).match(/const RELEASE_ID = '([^']+)'/);
+                latest = m && m[1];
+            } catch (_) {
+                done('📡 Geen internet');
+                return;
+            }
+            if (!latest || latest === RELEASE_ID) {
+                done('✅ Je hebt de nieuwste versie');
+                return;
+            }
+            btn.textContent = '✨ Nieuwe versie! Bijwerken...';
+            try {
+                if ('caches' in window) {
+                    const keys = await caches.keys();
+                    await Promise.all(keys.map(k => caches.delete(k)));
+                }
+                if ('serviceWorker' in navigator) {
+                    const regs = await navigator.serviceWorker.getRegistrations();
+                    await Promise.all(regs.map(r => r.unregister()));
+                }
+            } catch (_) {}
+            _refreshing = true;
+            window.location.replace(`./?v=${encodeURIComponent(latest)}`);
+        }
+
+        document.getElementById('updateCheckBtn').addEventListener('click', checkForUpdates);
 
         if ('serviceWorker' in navigator) {
             wireUpdateButton();
