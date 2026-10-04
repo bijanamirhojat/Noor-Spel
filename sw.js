@@ -136,8 +136,10 @@ self.addEventListener('install', (event) => {
     event.waitUntil((async () => {
         const cache = await caches.open(CACHE_NAME);
         await Promise.all(
+            // cache: 'reload' skips the browser's HTTP cache (GitHub Pages says max-age=600),
+            // otherwise a new release can be filled with files from the previous one
             PRECACHE_URLS.map((url) =>
-                cache.add(url).catch(() => null)
+                cache.add(new Request(url, { cache: 'reload' })).catch(() => null)
             )
         );
     })());
@@ -156,6 +158,17 @@ self.addEventListener('message', (event) => {
         self.skipWaiting();
     }
 });
+
+// Always ask the server whether a file changed (a cheap 304 when it didn't),
+// instead of trusting the browser's HTTP cache for up to 10 minutes after a deploy.
+function fetchFresh(request) {
+    if (request.mode === 'navigate') {
+        // Safari refuses redirected responses for page loads; fall back to the plain request then
+        return fetch(request.url, { cache: 'no-cache', credentials: 'same-origin' })
+            .then((res) => (res.redirected ? fetch(request) : res));
+    }
+    return fetch(new Request(request, { cache: 'no-cache' }));
+}
 
 self.addEventListener('fetch', (event) => {
     const { request } = event;
@@ -179,7 +192,7 @@ self.addEventListener('fetch', (event) => {
     if (isNavigation || (isSameOrigin && request.headers.get('accept')?.includes('text/html'))) {
         event.respondWith((async () => {
             try {
-                const fresh = await fetch(request);
+                const fresh = await fetchFresh(request);
                 const cache = await caches.open(CACHE_NAME);
                 cache.put(request, fresh.clone());
                 return fresh;
@@ -197,7 +210,7 @@ self.addEventListener('fetch', (event) => {
     if (isSameOrigin && /\.(js|css)$/.test(url.pathname)) {
         event.respondWith((async () => {
             try {
-                const fresh = await fetch(request);
+                const fresh = await fetchFresh(request);
                 if (fresh && fresh.status === 200) {
                     const cache = await caches.open(CACHE_NAME);
                     cache.put(request, fresh.clone());
