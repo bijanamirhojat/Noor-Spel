@@ -1,0 +1,70 @@
+/* 💐 Parfumerie */
+.room.rm-parfumerie .wall {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(249, 168, 212, 0.7) 0 5px, transparent 6px) 0 0 / 48px 48px,
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0 2px, transparent 3px) 24px 24px / 48px 48px,
+        linear-gradient(180deg, #f5d0fe, #fbcfe8);
+}
+
+.room.rm-parfumerie .floor {
+    background: conic-gradient(#fff 25%, #e9d5ff 0 50%, #fff 0 75%, #e9d5ff 0) 0 0 / 36px 36px;
+}
+
+.pf-sign {
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: #fff;
+    border: 4px solid #f472b6;
+    color: #db2777;
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.pf-lab { width: 230px; height: 202px; }
+.pf-lab > div { position: absolute; }
+.pf-lab .flasks { left: 24px; top: 0; width: 180px; height: 80px; display: flex; align-items: flex-end; justify-content: space-around; }
+.pf-lab .flasks span {
+    width: 30px; height: 58px;
+    border-radius: 6px 6px 14px 14px;
+    border: 3px solid #fff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0 30%, var(--c) 30%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: gleam 2s ease-in-out infinite;
+}
+.pf-lab .flasks span:nth-child(2) { animation-delay: -0.5s; }
+.pf-lab .flasks span:nth-child(3) { animation-delay: -1s; }
+.pf-lab .top { left: 0; top: 80px; width: 230px; height: 16px; border-radius: 8px; background: #f472b6; }
+.pf-lab .front {
+    left: 12px; top: 96px; width: 206px; height: 106px;
+    border-radius: 0 0 14px 14px;
+    background: linear-gradient(180deg, #fff, #fce7f3);
+    border: 4px solid #f9a8d4; border-top: none;
+    display: flex; align-items: center; justify-content: space-around;
+    font-size: 34px;
+}
+
+.pf-shelf { width: 400px; height: 12px; border-radius: 6px; background: linear-gradient(180deg, #fcd34d, #d97706); box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2); pointer-events: none; }
+.pf-slot { width: 64px; height: 90px; border-radius: 12px; border: 3px dashed rgba(219, 39, 119, 0.3); }
+.pf-slot.has { border-color: transparent; }
+.pf-slot svg { width: 64px; height: 90px; overflow: visible; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.15)); }
+.pf-slot.new svg { animation: trophyArrive 1s cubic-bezier(.2, 1.6, .4, 1); }
+
+.pf-pot { font-size: 56px; }
+
+/* ── Parfum maken (overlay) ── */
+.dressup.perfume {
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.7) 2px, transparent 3px) 0 0 / 30px 30px,
+        linear-gradient(180deg, #fce7f3, #e9d5ff);
+}
+.dressup.perfume .du-preview { background: radial-gradient(ellipse at 50% 80%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.35) 70%); }
+.dressup.perfume .du-preview svg { inset: 6% 15%; width: 70%; height: 88%; filter: drop-shadow(0 8px 10px rgba(168, 85, 247, 0.3)); }
+.dressup.perfume .du-actions { flex-wrap: wrap; justify-content: center; }
+.pf-opt { background: linear-gradient(180deg, #e9d5ff, #fbcfe8); }
+.pf-opt svg { width: 56px; height: 70px; }
+#pfStage.wiggle svg { animation: petWiggle 0.5s ease; }
+#pfStage.shake svg { animation: pfShake 0.12s linear infinite alternate; }
+@keyframes pfShake { from { transform: rotate(-10deg) translateX(-8px); } to { transform: rotate(10deg) translateX(8px); } }
