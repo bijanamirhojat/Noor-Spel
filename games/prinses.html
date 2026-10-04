@@ -58,6 +58,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/muziekkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/lieveheersbeestjes.css">
     <link rel="stylesheet" href="prinses/css/rooms/fotostudio.css">
+    <link rel="stylesheet" href="prinses/css/rooms/plakboek.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
@@ -375,6 +376,24 @@
                 <button class="scope-close" id="bqClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="scrapov" id="scrapOv">
+                <div class="nails-title">📖 Mijn plakboek</div>
+                <div class="scrap-main">
+                    <button class="scrap-arrow" id="scrapPrev" aria-label="Vorige bladzijde">◀</button>
+                    <div class="scrap-wrap"><div class="scrap-book" id="scrapBook">
+                        <canvas id="scrapCanvas" width="800" height="600"></canvas>
+                        <div class="scrap-page-no" id="scrapPageNo"></div>
+                    </div></div>
+                    <button class="scrap-arrow" id="scrapNext" aria-label="Volgende bladzijde">▶</button>
+                </div>
+                <div class="scrap-bar">
+                    <div class="du-tabs" id="scrapTools"></div>
+                    <div class="scrap-opts" id="scrapOpts"></div>
+                </div>
+                <button class="tool-btn wide scrap-clear" id="scrapClear" aria-label="Bladzijde leegmaken">🗑️</button>
+                <button class="scope-close" id="scrapClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="studioov" id="studioOv">
                 <div class="nails-title">📸 Fotostudio</div>
                 <div class="studio-main">
@@ -536,6 +555,7 @@
     <script src="prinses/js/rooms/muziekkamer.js"></script>
     <script src="prinses/js/rooms/lieveheersbeestjes.js"></script>
     <script src="prinses/js/rooms/fotostudio.js"></script>
+    <script src="prinses/js/rooms/plakboek.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>
