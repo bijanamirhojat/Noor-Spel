@@ -15,7 +15,7 @@ js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
 js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen)
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
-js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken)
+js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/map.js       toverlift + kaart

@@ -10,7 +10,7 @@ const WINGS = [
     { key: 'hal',   name: 'Beneden',           icon: '🏰', color: '#f472b6', gems: 12, liftX: 340,
       rooms: ['kasteelhal', 'troonzaal', 'balzaal', 'eetkamer', 'eetzaal', 'bakkerij', 'dierensalon'] },
     { key: 'mooi',  name: 'Mooi maken',        icon: '💅', color: '#a855f7', gems: 10, liftX: 30,
-      rooms: ['spiegelkamer', 'kapsalon', 'badkamer', 'nagelsalon', 'juwelierskamer', 'borduurkamer', 'parfumerie'] },
+      rooms: ['spiegelkamer', 'kapsalon', 'badkamer', 'nagelsalon', 'juwelierskamer', 'borduurkamer', 'parfumerie', 'fotostudio'] },
     { key: 'speel', name: 'Speelverdieping',   icon: '🧸', color: '#f59e0b', gems: 12, liftX: 30,
       rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad', 'lieveheersbeestjes'] },
     { key: 'toren', name: 'Toren',             icon: '🌙', color: '#6366f1', gems: 12, liftX: 30,
@@ -22,8 +22,8 @@ const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', 
     rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij'] };
 
 // Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
-const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 9,
-    rooms: ['wolkenpoort', 'weermakerij', 'wolkenkasteel'] };
+const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 12,
+    rooms: ['wolkenpoort', 'weermakerij', 'wolkenkasteel', 'regenboogmakerij'] };
 
 const SCENES = {};
 let scene = null;

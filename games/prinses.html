@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
     <link rel="stylesheet" href="prinses/css/wolken/wolkenkasteel.css">
+    <link rel="stylesheet" href="prinses/css/wolken/regenboogmakerij.css">
     <link rel="stylesheet" href="prinses/css/sea.css">
     <link rel="stylesheet" href="prinses/css/rooms/kasteelhal.css">
     <link rel="stylesheet" href="prinses/css/rooms/spiegelkamer.css">
@@ -56,6 +57,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/parfumerie.css">
     <link rel="stylesheet" href="prinses/css/rooms/muziekkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/lieveheersbeestjes.css">
+    <link rel="stylesheet" href="prinses/css/rooms/fotostudio.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
@@ -373,6 +375,41 @@
                 <button class="scope-close" id="bqClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="studioov" id="studioOv">
+                <div class="nails-title">📸 Fotostudio</div>
+                <div class="studio-main">
+                    <div class="studio-wrap"><div class="studio-stage" id="studioStage"><div class="studio-bg"></div></div></div>
+                    <div class="studio-side">
+                        <div class="du-tabs" id="studioTabs"></div>
+                        <div class="du-opts" id="studioOpts"></div>
+                        <div class="studio-edit" id="studioEdit">
+                            <button class="tool-btn" id="studioSmaller" aria-label="Kleiner">➖</button>
+                            <button class="tool-btn" id="studioBigger" aria-label="Groter">➕</button>
+                            <button class="tool-btn" id="studioDelete" aria-label="Weg">🗑️</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="tool-btn wide studio-snap" id="studioSnap">📸 Foto maken!</button>
+                <div class="studio-flash" id="studioFlash"></div>
+                <div class="studio-card" id="studioCard"><img alt="">Hangt aan de muur! 💖</div>
+                <button class="scope-close" id="studioClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="photoview" id="photoView">
+                <img alt="Foto">
+                <div class="du-actions"><button class="tool-btn wide" id="photoSave">💾 Bewaren</button></div>
+                <button class="scope-close" id="photoViewClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="rbov" id="rbOv">
+                <div class="nails-title">🌈 Regenboog schilderen</div>
+                <div class="rb-hint" id="rbHint"></div>
+                <div class="rb-stage"><svg class="rb-arc" id="rbArc" viewBox="-10 0 420 232"></svg></div>
+                <div class="rb-pots" id="rbPots"></div>
+                <div class="bd-tray"><button class="bd-btn" id="rbAgain" style="display:none">🌈<small>Nog een keer</small></button></div>
+                <button class="scope-close" id="rbClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="bugov" id="bugOv">
                 <div class="nails-title">🐞 Stippen zoeken</div>
                 <div class="bug-hud" id="bugHud"></div>
@@ -498,6 +535,7 @@
     <script src="prinses/js/rooms/parfumerie.js"></script>
     <script src="prinses/js/rooms/muziekkamer.js"></script>
     <script src="prinses/js/rooms/lieveheersbeestjes.js"></script>
+    <script src="prinses/js/rooms/fotostudio.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>
@@ -509,6 +547,7 @@
     <script src="prinses/js/wolken/wolkenpoort.js"></script>
     <script src="prinses/js/wolken/weermakerij.js"></script>
     <script src="prinses/js/wolken/wolkenkasteel.js"></script>
+    <script src="prinses/js/wolken/regenboogmakerij.js"></script>
     <script src="prinses/js/parents.js"></script>
     <script src="prinses/js/map.js"></script>
     <script src="prinses/js/stickers.js"></script>

@@ -1,0 +1,94 @@
+/* 📸 Fotostudio */
+.room.rm-fotostudio .wall {
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.6) 2px, transparent 3px) 0 0 / 40px 40px,
+        linear-gradient(180deg, #fde68a, #fbcfe8);
+}
+.room.rm-fotostudio .floor { background: repeating-linear-gradient(90deg, #a16207 0 50px, #854d0e 50px 53px); }
+
+.studio-light { width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #fff, #fef08a 50%, rgba(254, 240, 138, 0)); pointer-events: none; animation: gleam 2.5s ease-in-out infinite; }
+.studio-camera { width: 120px; height: 282px; }
+.studio-camera > div { position: absolute; }
+.studio-camera .cam { left: 10px; top: 0; width: 100px; height: 70px; border-radius: 14px; background: linear-gradient(180deg, #374151, #111827); box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); }
+.studio-camera .lens { position: absolute; left: 28px; top: 13px; width: 44px; height: 44px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #93c5fd, #1e3a8a 60%, #0f172a); border: 5px solid #9ca3af; }
+.studio-camera .flash { position: absolute; right: 8px; top: -10px; width: 26px; height: 14px; border-radius: 4px 4px 0 0; background: #e5e7eb; }
+.studio-camera .leg { top: 66px; width: 8px; height: 216px; border-radius: 4px; background: #6b7280; transform-origin: 50% 0; }
+.studio-camera .leg.l { left: 56px; transform: rotate(14deg); }
+.studio-camera .leg.r { left: 56px; transform: rotate(-14deg); }
+.studio-camera .leg.m { left: 56px; }
+
+.photo-wall-title { padding: 4px 16px; border-radius: 999px; background: #fff; color: #db2777; font-family: 'Fredoka One', cursive; font-size: 20px; pointer-events: none; white-space: nowrap; }
+.photo-frame { width: 128px; height: 100px; padding: 6px; border-radius: 6px; background: #fff; border: 3px dashed rgba(219, 39, 119, 0.35); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); transform: rotate(-2deg); }
+.photo-frame:nth-child(odd) { transform: rotate(2deg); }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 3px; display: none; }
+.photo-frame.has { border: 3px solid #fff; }
+.photo-frame.has img { display: block; }
+
+/* ── Fotostudio (overlay) ── */
+.studioov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 2px, transparent 3px) 0 0 / 30px 30px, linear-gradient(180deg, #fce7f3, #fde68a);
+}
+.studioov.open { display: flex; }
+.studio-main { flex: 1; min-height: 0; width: 100%; display: flex; gap: 12px; align-items: center; justify-content: center; }
+.studio-wrap { flex: 2; min-width: 0; height: 100%; display: flex; align-items: center; justify-content: center; container-type: size; }
+.studio-stage {
+    position: relative;
+    width: min(100cqw, 133cqh);
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    border: 8px solid #fff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    container-type: inline-size;
+    touch-action: none;
+}
+.studio-bg { position: absolute; inset: 0; }
+.studio-bg span { position: absolute; transform: translate(-50%, -50%); font-size: calc(var(--s) * 1cqw); line-height: 1; pointer-events: none; }
+.studio-item { position: absolute; transform: translate(-50%, -50%); cursor: grab; touch-action: none; line-height: 1; }
+.studio-item > span { display: block; font-size: calc(var(--s) * 1cqw); }
+.studio-item .person { width: calc(var(--s) * 1cqw); aspect-ratio: 100 / 160; }
+.studio-item .person svg { width: 100%; height: 100%; overflow: visible; }
+.studio-item.sel { outline: 3px dashed #f472b6; outline-offset: 4px; border-radius: 10px; }
+.studio-item.pop > * { animation: sprout 0.3s cubic-bezier(.2, 1.8, .4, 1); }
+.studio-side { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; gap: 8px; }
+.studio-edit { display: flex; gap: 6px; justify-content: center; visibility: hidden; }
+.studio-edit.show { visibility: visible; }
+.studio-snap { font-size: 1.3rem; padding: 0 22px; height: 64px; background: linear-gradient(180deg, #fff, #fce7f3); }
+.studio-flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; z-index: 6; }
+.studio-flash.go { animation: studioFlash 0.6s ease-out; }
+@keyframes studioFlash { 0% { opacity: 1; } 100% { opacity: 0; } }
+.studio-card {
+    position: absolute; left: 50%; top: 50%; z-index: 7;
+    width: min(60%, 420px); padding: 10px 10px 34px; border-radius: 6px;
+    background: #fff; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    transform: translate(-50%, -50%) scale(0) rotate(-8deg);
+    pointer-events: none; text-align: center;
+    font-family: 'Fredoka One', cursive; color: #db2777;
+}
+.studio-card img { width: 100%; display: block; border-radius: 3px; margin-bottom: 6px; }
+.studio-card.show { animation: studioCard 2.6s ease forwards; }
+@keyframes studioCard {
+    0% { transform: translate(-50%, -50%) scale(0.2) rotate(-20deg); }
+    15%, 75% { transform: translate(-50%, -50%) scale(1) rotate(-3deg); opacity: 1; }
+    100% { transform: translate(120%, -120%) scale(0.2) rotate(20deg); opacity: 0; }
+}
+@media (max-width: 700px) {
+    .studio-main { flex-direction: column; }
+    .studio-wrap { flex: 1.4; width: 100%; }
+    .studio-side { flex: 1; width: 100%; }
+}
+
+/* Foto bekijken */
+.photoview { position: absolute; inset: 0; z-index: 56; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px; background: rgba(30, 27, 75, 0.75); }
+.photoview.open { display: flex; }
+.photoview img { max-width: 92%; max-height: 72%; border: 10px solid #fff; border-radius: 6px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4); animation: duPop 0.4s cubic-bezier(.2, 1.6, .4, 1); }
