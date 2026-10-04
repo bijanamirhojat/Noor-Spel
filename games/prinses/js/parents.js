@@ -127,6 +127,17 @@ function updateParents(dt, now) {
                 p.wait = now + 2500 + Math.random() * 5000;
             }
         }
+        // Walking to a spot for an activity (family dinner)
+        if (p.mode !== 'wander' && p.goalX != null) {
+            const dx = p.goalX - p.x;
+            if (Math.abs(dx) > 3) {
+                p.x += Math.sign(dx) * Math.min(Math.abs(dx), 170 * dt);
+                p.facing = Math.sign(dx);
+                moving = true;
+            } else {
+                p.goalX = null;
+            }
+        }
         if (p.mode === 'wander' && scene.key === p.wing && Math.abs(p.x - state.x) < 170) {
             if (!moving) p.facing = state.x < p.x ? -1 : 1;
             if (now - p.greeted > 20000) {

@@ -39,6 +39,7 @@ function stickerCount() {
 
 function updateStickerBtn() {
     stickerBtn.querySelector('.stick-count').textContent = stickerCount();
+    updateBookStand();
 }
 
 // Called by addObj while a scene is being built: the room is where the princess walks to
@@ -97,7 +98,7 @@ function earnSticker(key, fromNode) {
     const pageFull = page.scene.rooms.every(r => stickers.has(r.key));
     setTimeout(() => {
         if (all) {
-            showToast('📒 Alle stickers! Wat knap! 👑', 3500);
+            showToast('📒 Alle stickers! Ruil je boek in voor een trofee! 🏆', 3500);
             playWin();
             spellRain(['⭐', '💖', '👑', '✨']);
         } else if (pageFull) {
@@ -144,7 +145,9 @@ function renderStickerPage() {
         e.stopPropagation();
         turnStickerPage(+b.dataset.i);
     }));
-    document.getElementById('stickTotal').textContent = `${stickerCount()} / ${Object.keys(ROOM_AT).length}`;
+    document.getElementById('stickTotal').textContent = `${stickerCount()} / ${Object.keys(ROOM_AT).length}` + (trophies ? `  🏆 ${trophies}` : '');
+    // Whole book full: trade it in for a trophy
+    document.getElementById('stickTrade').classList.toggle('show', stickerCount() === Object.keys(ROOM_AT).length);
 }
 
 function turnStickerPage(i) {
@@ -183,6 +186,10 @@ stickerBtn.addEventListener('pointerdown', (e) => {
 document.getElementById('stickClose').addEventListener('pointerdown', (e) => {
     e.stopPropagation();
     closeStickers();
+});
+document.getElementById('stickTrade').addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    tradeStickers();
 });
 document.getElementById('stickPrev').addEventListener('pointerdown', (e) => {
     e.stopPropagation();

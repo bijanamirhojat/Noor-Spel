@@ -1,0 +1,55 @@
+/* 🏆 Trofeeënkamer */
+.room.rm-trofeekamer .wall {
+    background:
+        radial-gradient(circle, rgba(253, 224, 71, 0.6) 2px, transparent 3px) 0 0 / 44px 44px,
+        linear-gradient(180deg, #1e1b4b, #312e81 60%, #4338ca);
+}
+
+.room.rm-trofeekamer .floor {
+    background: repeating-linear-gradient(90deg, #b45309 0 50px, #92400e 50px 53px);
+}
+
+.trophy-banner {
+    min-width: 300px;
+    padding: 8px 18px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #dc2626, #991b1b);
+    border: 4px solid #fcd34d;
+    color: #fef3c7;
+    font-family: 'Fredoka One', cursive;
+    font-size: 18px;
+    text-align: center;
+    pointer-events: none;
+}
+
+.trophy-shelf {
+    width: 600px; height: 14px;
+    border-radius: 6px;
+    background: linear-gradient(180deg, #fcd34d, #b45309);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+
+.trophy-slot {
+    width: 72px; height: 66px;
+    border-radius: 14px;
+    border: 3px dashed rgba(253, 230, 138, 0.35);
+    display: flex; align-items: flex-end; justify-content: center;
+}
+.trophy-slot .tr-e { font-size: 54px; line-height: 1; }
+.trophy-slot.has { border-color: transparent; }
+.trophy-slot.has .tr-e { filter: drop-shadow(0 0 10px rgba(253, 224, 71, 0.9)); }
+.trophy-slot.spin .tr-e { display: inline-block; animation: elfSpin 0.8s ease; }
+.trophy-slot.new .tr-e { display: inline-block; animation: trophyArrive 1.2s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes trophyArrive { from { transform: translateY(-200px) scale(2.5) rotate(-30deg); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.book-stand { width: 120px; height: 122px; }
+.book-stand > div { position: absolute; }
+.book-stand .book { left: 22px; top: 0; font-size: 64px; line-height: 1; animation: gleam 2s ease-in-out infinite; }
+.book-stand .count {
+    left: 6px; top: 58px; width: 108px;
+    border-radius: 10px;
+    background: #fef3c7; color: #b45309;
+    font-family: 'Fredoka One', cursive; font-size: 16px; text-align: center;
+}
+.book-stand .col { left: 40px; top: 84px; width: 40px; height: 38px; background: linear-gradient(90deg, #e5e7eb, #fff, #d1d5db); border-radius: 4px 4px 0 0; }

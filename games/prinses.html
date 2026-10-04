@@ -49,6 +49,8 @@
     <link rel="stylesheet" href="prinses/css/rooms/elvenkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/zwembad.css">
     <link rel="stylesheet" href="prinses/css/rooms/kapsalon.css">
+    <link rel="stylesheet" href="prinses/css/rooms/eetzaal.css">
+    <link rel="stylesheet" href="prinses/css/rooms/trofeekamer.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
@@ -294,6 +296,7 @@
                         <button class="stick-arrow" id="stickNext" aria-label="Volgende bladzijde">▶</button>
                     </div>
                     <div class="stick-total">📒 <span id="stickTotal"></span></div>
+                    <button class="tool-btn wide stick-trade" id="stickTrade">🏆 Inruilen voor een trofee!</button>
                 </div>
                 <button class="scope-close" id="stickClose" aria-label="Sluiten">✖</button>
             </div>
@@ -335,6 +338,18 @@
                 </div>
                 <div class="din-foods" id="dinFoods"></div>
                 <button class="scope-close" id="dinClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="famdin" id="famDin">
+                <div class="nails-title">👨‍👩‍👧 Eten met Mama en Papa</div>
+                <div class="fd-course" id="fdCourse"></div>
+                <div class="fd-stage">
+                    <div class="fd-seats" id="fdSeats"></div>
+                    <div class="fd-table"><div class="fd-plates" id="fdPlates"></div></div>
+                </div>
+                <div class="fd-foods" id="fdFoods"></div>
+                <div class="din-again" id="fdAgain"><button class="tool-btn wide" id="fdAgainBtn">🔄 Nog een keer!</button></div>
+                <button class="scope-close" id="fdClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="embroid" id="embroid">
@@ -428,6 +443,8 @@
     <script src="prinses/js/rooms/elvenkamer.js"></script>
     <script src="prinses/js/rooms/zwembad.js"></script>
     <script src="prinses/js/rooms/kapsalon.js"></script>
+    <script src="prinses/js/rooms/eetzaal.js"></script>
+    <script src="prinses/js/rooms/trofeekamer.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>

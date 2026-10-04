@@ -49,6 +49,8 @@ Terug via de regenboogglijbaan op de wolkenpoort. Op de kaart zweven de wolken b
 Elke kamer heeft een sticker (het kamer-icoon). Je verdient hem door een hoofdactiviteit te doen
 (een object met een `.tap-hint` 👇) of door 3 verschillende objecten in die kamer aan te tikken
 (minder als de kamer minder objecten heeft). Dat gaat automatisch via `addObj`; deur en lift tellen niet mee.
+Een vol boek ruil je in voor een trofee (`tradeStickers` in `js/rooms/trofeekamer.js`, opgeslagen in
+`noor-prinses-trofeeen`); daarna begint het boek weer leeg.
 Voor dingen die niet via `addObj` gaan: `earnSticker('<key>', node)`. Opgeslagen in `localStorage`
 (`noor-prinses-stickers`).
 

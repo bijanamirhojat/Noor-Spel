@@ -224,3 +224,7 @@
     .stick-tab { width: 38px; height: 38px; font-size: 20px; }
     .stick-arrow { width: 44px; height: 44px; }
 }
+
+/* Full book: trade it in for a trophy (js/rooms/trofeekamer.js) */
+.stick-trade { display: none; margin-top: 6px; animation: hintPulse 1s ease infinite; }
+.stick-trade.show { display: inline-block; }
