@@ -1,0 +1,80 @@
+/* 🐔 Kinderboerderij */
+.room.rm-boerderij .floor {
+    background:
+        radial-gradient(circle, #86efac 2px, transparent 3px) 0 0 / 30px 18px,
+        linear-gradient(180deg, #65a30d, #4d7c0f);
+}
+
+.farm-fence {
+    width: 800px; height: 84px;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, transparent 18px, #fef3c7 18px 30px, transparent 30px 54px, #fef3c7 54px 66px, transparent 66px) 0 0 / 100% 100%,
+        linear-gradient(90deg, #fde68a 0 14px, transparent 14px) 0 0 / 70px 100%;
+    filter: drop-shadow(0 3px 0 rgba(146, 64, 14, 0.4));
+}
+
+.barn { width: 240px; height: 280px; }
+.barn > div { position: absolute; }
+.barn .roof { left: -14px; top: 0; width: 268px; height: 90px; background: #7f1d1d; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.barn .wall {
+    left: 0; top: 88px; width: 240px; height: 192px;
+    background: repeating-linear-gradient(90deg, #dc2626 0 28px, #b91c1c 28px 30px);
+    border: 6px solid #fff; border-bottom: none;
+}
+.barn .loft { position: absolute; left: 90px; top: 10px; width: 48px; height: 48px; border-radius: 50%; background: #fef3c7; border: 4px solid #fff; font-size: 30px; display: flex; align-items: center; justify-content: center; }
+.barn .door { position: absolute; left: 50px; top: 74px; width: 128px; height: 118px; display: flex; border: 5px solid #fff; border-bottom: none; }
+.barn .door span { flex: 1; background: linear-gradient(45deg, transparent 47%, #fff 47% 53%, transparent 53%), linear-gradient(-45deg, transparent 47%, #fff 47% 53%, transparent 53%), #991b1b; border: 3px solid #fff; }
+
+.hay { font-size: 60px; line-height: 1; pointer-events: none; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2)); }
+.farm-animal { font-size: 74px; }
+
+.chick-yard { width: 400px; height: 40px; pointer-events: none; }
+.yard-chick { position: absolute; top: 0; font-size: 28px; line-height: 1; animation: chickWalk 6s ease-in-out infinite alternate; }
+.yard-chick b { display: inline-block; font-weight: normal; animation: chickPeck 0.9s ease-in-out infinite; }
+@keyframes chickWalk { from { translate: 0 0; } to { translate: 60px 0; } }
+@keyframes chickPeck { 0%, 70%, 100% { transform: rotate(0); } 80% { transform: rotate(25deg) translateY(3px); } }
+
+/* ── Eieren rapen (overlay) ── */
+.eggov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background: linear-gradient(180deg, #bae6fd, #e0f2fe 30%, #86efac 30%, #4ade80);
+}
+.eggov.open { display: flex; }
+.egg-count { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #92400e; background: #fff; border-radius: 999px; padding: 4px 18px; z-index: 2; }
+.egg-count small { font-size: 1rem; color: #ca8a04; }
+.egg-hint { font-family: 'Fredoka One', cursive; color: #166534; background: rgba(255, 255, 255, 0.85); border-radius: 999px; padding: 4px 14px; z-index: 2; }
+.egg-field { position: relative; flex: 1; min-height: 0; width: 100%; }
+.egg-hen { position: absolute; top: 2%; width: 110px; margin-left: -55px; text-align: center; }
+.egg-hen span { position: relative; z-index: 1; display: inline-block; font-size: 72px; line-height: 1; }
+.egg-hen .nest { width: 110px; height: 34px; margin-top: -26px; border-radius: 50%; background: repeating-linear-gradient(30deg, #ca8a04 0 4px, #a16207 4px 8px); }
+.egg-hen.lay span { animation: henLay 0.5s ease; }
+@keyframes henLay { 30% { transform: scale(1.15, 0.85) translateY(6px); } 60% { transform: scale(0.95, 1.1) translateY(-10px); } }
+.egg-basket { position: absolute; left: 50%; bottom: 2%; transform: translateX(-50%); font-size: 96px; line-height: 1; pointer-events: none; filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.25)); }
+.egg-basket.bump { animation: basketBump 0.35s ease; }
+@keyframes basketBump { 50% { transform: translateX(-50%) scale(1.15); } }
+.egg {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: none; background: none; padding: 6px;
+    font-size: 56px; line-height: 1;
+    cursor: pointer; touch-action: none;
+    z-index: 2;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+.egg.roll { transition: left 0.8s cubic-bezier(.2, .8, .3, 1), top 0.8s cubic-bezier(.3, 1.6, .5, 1); animation: eggRoll 0.8s ease-out; }
+@keyframes eggRoll { from { rotate: -360deg; } }
+.egg.got { transition: left 0.45s ease-in, top 0.45s ease-in, transform 0.45s ease-in; transform: translate(-50%, -50%) scale(0.5); z-index: 3; }
+.egg.golden { font-size: 84px; filter: sepia(1) saturate(6) hue-rotate(-10deg) brightness(1.15) drop-shadow(0 0 16px #fde047); animation: eggRoll 0.8s ease-out, hintPulse 1s ease 0.8s infinite; }
+.egg.golden.hatch { animation: eggHatch 0.25s linear 7 alternate; }
+.egg.golden.chick { filter: drop-shadow(0 0 16px #fde047); animation: sprout 0.4s cubic-bezier(.2, 1.8, .4, 1); }
+@keyframes eggHatch { from { rotate: -12deg; } to { rotate: 12deg; } }

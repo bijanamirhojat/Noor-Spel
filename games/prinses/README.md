@@ -13,7 +13,7 @@ js/wand.js      toverstaf-spreuken
 js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer + bootje
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
-js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken)
+js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), kinderboerderij (eieren rapen)
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
