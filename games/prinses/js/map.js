@@ -90,27 +90,64 @@ function mapTiles(sc) {
     return sc.rooms.map((r, i) => `<button class="map-room${scene === sc && state.room === i ? ' here' : ''}" data-k="${sc.key}" data-i="${i}">${r.icon}<small>${r.name}</small></button>`).join('');
 }
 
-function openMap() {
-    if (state.busy || overlayOpen()) return;
-    mapOpen = true;
-    // The castle drawn as a cross-section: the clouds above it, then top floor first, ground floor last
-    document.getElementById('mapCastle').innerHTML = `<div class="map-floor map-sky${scene === SCENES.wolken ? ' here' : ''}" style="--c:${SKY.color}">
-            <div class="map-floor-name">${SKY.icon}<small>${SKY.name}</small></div>
-            <div class="map-grid">${mapTiles(SCENES.wolken)}</div>
-        </div>` + WINGS.slice().reverse().map(w => {
-        const sc = SCENES[w.key];
-        return `<div class="map-floor${scene === sc ? ' here' : ''}${w.key === 'toren' ? ' map-tower' : ''}" style="--c:${w.color}">
-            <div class="map-floor-name">${w.icon}<small>${w.name}</small></div>
-            <div class="map-grid">${mapTiles(sc)}</div>
-        </div>`;
-    }).join('');
-    document.getElementById('mapOut').innerHTML = mapTiles(SCENES.out);
-    document.getElementById('mapSea').innerHTML = mapTiles(SCENES.sea);
-    document.getElementById('mapDorp').innerHTML = mapTiles(SCENES.dorp);
-    mapOv.querySelectorAll('.map-room').forEach(b => b.addEventListener('pointerdown', (e) => {
+// One tab per world; the castle tab shows the floors as a cross-section
+let mapTab = 'kasteel';
+function mapWorlds() {
+    return [
+        { key: 'kasteel', icon: '🏰', name: 'Kasteel', color: '#f472b6', scenes: WINGS.map(w => SCENES[w.key]) },
+        { key: 'out', icon: '🌳', name: 'Buiten', color: '#22c55e', scenes: [SCENES.out] },
+        { key: 'sea', icon: '🧜‍♀️', name: 'Onder water', color: '#06b6d4', scenes: [SCENES.sea] },
+        { key: 'dorp', icon: VILLAGE.icon, name: VILLAGE.name, color: VILLAGE.color, scenes: [SCENES.dorp] },
+        { key: 'wolken', icon: SKY.icon, name: SKY.name, color: SKY.color, scenes: [SCENES.wolken] }
+    ];
+}
+
+function renderMapTabs() {
+    document.getElementById('mapTabs').innerHTML = mapWorlds().map(w =>
+        `<button class="map-tab${w.key === mapTab ? ' on' : ''}${w.scenes.includes(scene) ? ' here' : ''}" data-w="${w.key}" style="--c:${w.color}">
+            <span>${w.icon}</span><small>${w.name}</small></button>`).join('');
+    document.querySelectorAll('.map-tab').forEach(b => b.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        if (mapTab === b.dataset.w) return;
+        mapTab = b.dataset.w;
+        renderMapTabs();
+        renderMapBody();
+        playFreqSweep(900, 1300, 0.12, 0.08);
+    }));
+}
+
+function renderMapBody() {
+    const body = document.getElementById('mapBody');
+    const w = mapWorlds().find(x => x.key === mapTab);
+    body.className = 'map-body' + (mapTab === 'kasteel' ? ' castle' : ' places');
+    body.style.setProperty('--c', w.color);
+    if (mapTab === 'kasteel') {
+        body.innerHTML = `<div class="map-castle">${WINGS.slice().reverse().map(wing => {
+            const sc = SCENES[wing.key];
+            return `<div class="map-floor${scene === sc ? ' here' : ''}${wing.key === 'toren' ? ' map-tower' : ''}" style="--c:${wing.color}">
+                <div class="map-floor-name">${wing.icon}<small>${wing.name}</small></div>
+                <div class="map-grid">${mapTiles(sc)}</div>
+            </div>`;
+        }).join('')}</div>`;
+    } else {
+        body.innerHTML = `<div class="map-world${w.scenes.includes(scene) ? ' here' : ''}"><div class="map-grid">${mapTiles(w.scenes[0])}</div></div>`;
+    }
+    body.querySelectorAll('.map-room').forEach(b => b.addEventListener('pointerdown', (e) => {
         e.stopPropagation();
         travelTo(b.dataset.k, +b.dataset.i);
     }));
+    body.classList.remove('pop');
+    void body.offsetWidth;
+    body.classList.add('pop');
+}
+
+function openMap() {
+    if (state.busy || overlayOpen()) return;
+    mapOpen = true;
+    // Open on the world the princess is in
+    mapTab = (mapWorlds().find(w => w.scenes.includes(scene)) || mapWorlds()[0]).key;
+    renderMapTabs();
+    renderMapBody();
     mapOv.classList.add('open');
     playPop();
 }
