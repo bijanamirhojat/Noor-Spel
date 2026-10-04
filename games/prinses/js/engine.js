@@ -72,7 +72,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));
@@ -217,6 +217,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && salonOpen) closeSalon();
     if (e.key === 'Escape' && fdOpen) closeFamDinner();
     if (e.key === 'Escape' && pfOpen) closePerfume();
+    if (e.key === 'Escape' && pianoOpen) closePiano();
     if (e.key === ' ' || e.key === 't') castSpell();
 });
 document.addEventListener('keyup', (e) => {

@@ -14,7 +14,7 @@ const WINGS = [
     { key: 'speel', name: 'Speelverdieping',   icon: '🧸', color: '#f59e0b', gems: 12, liftX: 30,
       rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad'] },
     { key: 'toren', name: 'Toren',             icon: '🌙', color: '#6366f1', gems: 12, liftX: 30,
-      rooms: ['slaapkamer', 'ouderslaapkamer', 'sterrenkamer', 'elvenkamer', 'torenkamer', 'trofeekamer'] }
+      rooms: ['slaapkamer', 'ouderslaapkamer', 'sterrenkamer', 'elvenkamer', 'torenkamer', 'muziekkamer', 'trofeekamer'] }
 ];
 
 // Het dorp: met de koets bereikbaar vanaf het kasteelplein (js/village.js)
