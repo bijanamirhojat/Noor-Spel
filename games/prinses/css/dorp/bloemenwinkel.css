@@ -1,0 +1,48 @@
+/* 💐 Bloemenwinkel */
+.flower-shop { width: 320px; height: 290px; }
+.flower-shop > div { position: absolute; }
+.fs-front { left: 0; top: 50px; width: 320px; height: 240px; background: #fdf2f8; border: 6px solid #fff; border-bottom: none; border-radius: 10px 10px 0 0; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15); }
+.fs-window {
+    position: absolute; left: 18px; top: 60px; width: 170px; height: 120px;
+    border-radius: 12px; border: 6px solid #16a34a;
+    background: linear-gradient(135deg, #ecfccb, #fff);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 34px; line-height: 1.15;
+}
+.fs-door { position: absolute; right: 22px; top: 60px; width: 80px; height: 180px; border-radius: 40px 40px 0 0; background: linear-gradient(180deg, #4ade80, #15803d); border: 5px solid #fff; }
+.fs-awning {
+    left: -12px; top: 40px; width: 344px; height: 50px;
+    border-radius: 0 0 20px 20px;
+    background: repeating-linear-gradient(90deg, #16a34a 0 30px, #fff 30px 60px);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 90% 70%, 85% 100%, 80% 70%, 75% 100%, 70% 70%, 65% 100%, 60% 70%, 55% 100%, 50% 70%, 45% 100%, 40% 70%, 35% 100%, 30% 70%, 25% 100%, 20% 70%, 15% 100%, 10% 70%, 5% 100%, 0 70%);
+}
+.fs-sign {
+    left: 70px; top: 0; padding: 4px 18px;
+    border-radius: 999px; background: #fff; border: 4px solid #16a34a;
+    color: #15803d; font-family: 'Fredoka One', cursive; font-size: 22px; white-space: nowrap;
+}
+
+.fs-bucket { width: 56px; height: 90px; }
+.fs-bucket span { position: absolute; left: -8px; top: 0; width: 72px; text-align: center; font-size: 22px; letter-spacing: -6px; }
+.fs-bucket .pail { position: absolute; left: 6px; top: 34px; width: 44px; height: 54px; border-radius: 4px 4px 12px 12px; background: linear-gradient(90deg, #cbd5e1, #f1f5f9, #94a3b8); }
+
+.fs-bee { font-size: 30px; pointer-events: none; animation: beeFly 7s ease-in-out infinite; }
+@keyframes beeFly {
+    0%, 100% { translate: 0 0; } 25% { translate: 80px -40px; } 50% { translate: 20px 30px; } 75% { translate: -60px -20px; }
+}
+
+/* Bouquet in the dining hall window (js/rooms/eetzaal.js) */
+.fam-vase { width: 110px; height: 121px; pointer-events: none; z-index: 1; }
+.fam-vase svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)); }
+
+/* ── Boeket maken (overlay) ── */
+.dressup.bouquet {
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.7) 2px, transparent 3px) 0 0 / 30px 30px,
+        linear-gradient(180deg, #dcfce7, #fce7f3);
+}
+.dressup.bouquet .nails-title { color: #15803d; }
+.dressup.bouquet .du-preview { background: radial-gradient(ellipse at 50% 85%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.35) 70%); }
+.dressup.bouquet .du-preview svg { inset: 4% 8%; width: 84%; height: 92%; }
+#bqStage.pop svg { animation: duPop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
+#bqStage text.grow { transform-box: fill-box; transform-origin: 50% 100%; animation: sprout 0.4s cubic-bezier(.2, 1.8, .4, 1); }

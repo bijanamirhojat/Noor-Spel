@@ -9,6 +9,8 @@ defineRoom({
     build(x) {
         place(el('<div class="fam-portrait"><span>🤴</span><span>👧</span><span>👸</span></div>'), x + 315, 50);
         [80, 650].forEach(wx => place(el('<div class="fam-window"></div>'), x + wx, 70));
+        place(el('<div class="fam-vase" id="famVase"></div>'), x + 635, 122);
+        renderFamBouquet();
         place(el('<div class="fam-chair king"><span>👑</span></div>'), x + FD_SEATS.papa - 55, 220);
         place(el('<div class="fam-chair kid"><span>💖</span></div>'), x + FD_SEATS.prinses - 45, 250);
         place(el('<div class="fam-chair queen"><span>👑</span></div>'), x + FD_SEATS.mama - 55, 220);
