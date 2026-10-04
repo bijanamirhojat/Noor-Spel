@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/trofeekamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/parfumerie.css">
     <link rel="stylesheet" href="prinses/css/rooms/muziekkamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/lieveheersbeestjes.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
@@ -372,6 +373,14 @@
                 <button class="scope-close" id="bqClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="bugov" id="bugOv">
+                <div class="nails-title">🐞 Stippen zoeken</div>
+                <div class="bug-hud" id="bugHud"></div>
+                <div class="bug-stage" id="bugStage"><div class="bug-player" id="bugPlayer"></div></div>
+                <div class="bd-tray"><button class="bd-btn" id="bugAgain" style="display:none">🐞<small>Nog een keer</small></button></div>
+                <button class="scope-close" id="bugClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="eggov" id="eggOv">
                 <div class="nails-title">🥚 Eieren rapen</div>
                 <div class="egg-count" id="eggCount"></div>
@@ -488,6 +497,7 @@
     <script src="prinses/js/rooms/trofeekamer.js"></script>
     <script src="prinses/js/rooms/parfumerie.js"></script>
     <script src="prinses/js/rooms/muziekkamer.js"></script>
+    <script src="prinses/js/rooms/lieveheersbeestjes.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>

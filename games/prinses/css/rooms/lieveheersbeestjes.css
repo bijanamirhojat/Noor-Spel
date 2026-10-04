@@ -1,0 +1,77 @@
+/* 🐞 Lieveheersbeestjeskamer */
+.room.rm-lieveheersbeestjes .wall {
+    background:
+        radial-gradient(ellipse 30px 300px at 50% 100%, #4ade80 60%, transparent 62%) 0 100% / 70px 360px repeat-x,
+        radial-gradient(ellipse 24px 220px at 50% 100%, #22c55e 60%, transparent 62%) 35px 100% / 70px 260px repeat-x,
+        radial-gradient(circle, rgba(255, 255, 255, 0.7) 3px, transparent 4px) 0 0 / 60px 60px,
+        linear-gradient(180deg, #e0f2fe, #f0fdf4);
+}
+
+.room.rm-lieveheersbeestjes .floor {
+    background:
+        radial-gradient(circle, #fde047 3px, transparent 4px) 10px 10px / 46px 30px,
+        radial-gradient(circle, #fff 2.5px, transparent 3.5px) 30px 22px / 46px 30px,
+        linear-gradient(180deg, #4ade80, #16a34a);
+}
+
+.giant-flower { font-size: 200px; line-height: 1; pointer-events: none; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.15)); animation: flowerSway 5s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes flowerSway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+.giant-leaf { width: 150px; height: 46px; border-radius: 0 100% 0 100%; background: linear-gradient(135deg, #22c55e, #15803d); pointer-events: none; transform: rotate(-8deg); }
+.wall-bug { font-size: 30px; pointer-events: none; animation: wallCrawl 9s linear infinite; }
+@keyframes wallCrawl {
+    0% { translate: 0 0; rotate: 90deg; } 25% { translate: 60px 0; rotate: 90deg; } 30% { translate: 60px 0; rotate: 180deg; }
+    50% { translate: 60px 50px; rotate: 180deg; } 55% { translate: 60px 50px; rotate: 270deg; } 75% { translate: 0 50px; rotate: 270deg; }
+    80% { translate: 0 50px; rotate: 0deg; } 100% { translate: 0 0; rotate: 0deg; }
+}
+
+.magic-shroom { font-size: 90px; line-height: 1; filter: drop-shadow(0 0 14px rgba(244, 114, 182, 0.8)); animation: gleam 2s ease-in-out infinite; }
+
+.ride-bug { width: 110px; height: 74px; pointer-events: none; z-index: 11; }
+.ride-bug svg { width: 100%; height: 100%; overflow: visible; }
+.lb-wing { opacity: 0; transform-origin: 70px 30px; }
+.flying .lb-wing, .bug-player .lb-wing { opacity: 1; animation: lbFlap 0.08s linear infinite alternate; }
+@keyframes lbFlap { from { transform: rotate(-12deg); } to { transform: rotate(10deg); } }
+
+/* Small princess (riding the ladybug) */
+.princess svg { transition: transform 0.6s cubic-bezier(.3, 1.4, .5, 1); transform-origin: 50% 97%; }
+.princess.tiny svg { transform: scale(0.42); }
+
+/* ── Stippen zoeken (overlay) ── */
+.bugov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 6px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.7) 3px, transparent 4px) 0 0 / 60px 60px,
+        linear-gradient(180deg, #bae6fd, #e0f2fe 60%, #bbf7d0);
+}
+.bugov.open { display: flex; }
+.bugov .nails-title { color: #b91c1c; }
+.bug-hud { display: flex; align-items: center; gap: 8px; padding: 2px 16px 2px 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.9); font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #b91c1c; z-index: 3; }
+.bug-hud svg { width: 84px; height: 56px; }
+.bug-hud svg.bump { animation: duPop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
+.bug-stage { position: relative; flex: 1; min-height: 0; width: 100%; touch-action: none; border-radius: 24px; }
+.bug-deco { position: absolute; font-size: 54px; line-height: 1; pointer-events: none; }
+.bug-spot {
+    position: absolute;
+    width: 34px; height: 34px; margin: -17px 0 0 -17px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #6b7280, #111827 60%);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.7), 0 0 16px rgba(255, 255, 255, 0.9);
+    pointer-events: none;
+    animation: spotFloat 4s ease-in-out infinite;
+}
+@keyframes spotFloat { 0%, 100% { translate: 0 0; } 33% { translate: 14px -12px; } 66% { translate: -12px 10px; } }
+.bug-spot.got { transition: left 0.5s ease-in, top 0.5s ease-in, transform 0.5s ease-in; transform: scale(0.5); animation: none; z-index: 4; }
+.bug-player { position: absolute; left: 0; top: 0; width: 120px; height: 100px; pointer-events: none; z-index: 2; }
+.bug-player svg { position: absolute; left: 0; bottom: 0; width: 120px; height: 80px; overflow: visible; }
+.bug-player.right svg { transform: scaleX(-1); }
+.bug-rider { position: absolute; left: 44px; top: -4px; font-size: 34px; z-index: 1; }
+.bug-player.happy svg { animation: elfSpin 0.8s ease 2; }

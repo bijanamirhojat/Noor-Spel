@@ -69,7 +69,7 @@
 .map-body.pop { animation: duPop 0.35s cubic-bezier(.2,1.6,.4,1); }
 
 /* Castle tab: 4 floors of up to 7 rooms. Tile size from the space left (cq units resolve against .mapov). */
-.map-body.castle { --t: clamp(44px, min(calc((100cqw - 130px) / 8.2), calc((100cqh - 200px) / 4.7)), 112px); }
+.map-body.castle { --t: clamp(44px, min(calc((100cqw - 130px) / (var(--n, 7) + 1.2)), calc((100cqh - 200px) / 4.7)), 112px); }
 
 /* Other worlds: a few big tiles, 3 per row */
 .map-body.places { --t: clamp(70px, min(calc((100cqw - 110px) / 3.6), calc((100cqh - 240px) / 2.2)), 150px); }
@@ -334,7 +334,7 @@
 
 /* Portrait (iPad rechtop): floor name above its rooms, so the tiles can be wider */
 @container (aspect-ratio < 1.1) {
-    .map-body.castle { --t: clamp(44px, min(calc((100cqw - 80px) / 7.5), calc((100cqh - 230px) / 5.4)), 112px); }
+    .map-body.castle { --t: clamp(44px, min(calc((100cqw - 80px) / (var(--n, 7) + 0.5)), calc((100cqh - 230px) / 5.4)), 112px); }
     .map-body.castle .map-floor { flex-direction: column; gap: 4px; padding: 4px 8px 8px; }
     .map-body.castle .map-floor-name { flex-direction: row; width: auto; gap: 6px; font-size: calc(var(--t) * 0.3); }
     .map-body.castle .map-floor-name small { font-size: 13px; }
