@@ -2,39 +2,52 @@
 const UNICORN_W = 200;
 const UNICORN_H = 188;
 
-function unicornSVG() {
-    const mane = ['#ef4444', '#fb923c', '#facc15', '#4ade80', '#60a5fa', '#a855f7'];
+// The unicorn, dressed up with `look` (see js/unicornstyle.js); `pre` keeps gradient ids unique
+function unicornSVG(look = uniLook, pre = 'u') {
+    const coat = UNI_COATS[look.coat] || UNI_COATS.wit;
+    const mane = UNI_MANES[look.mane] || UNI_MANES.regenboog;
+    const horn = UNI_HORNS[look.horn] || UNI_HORNS.goud;
+    const hoof = look.hoof || '#f472b6';
+    const [fill, line] = coat;
+    const leg = (x) => `<rect x="${x}" y="76" width="11" height="44" rx="5" fill="${fill}" stroke="${line}" stroke-width="2"/><rect x="${x}" y="114" width="11" height="8" rx="3" fill="${hoof}"/>`;
+    const hornFill = horn.rainbow ? `url(#${pre}hornGrad)` : horn.c[0];
     return `
     <svg viewBox="0 -20 160 150">
+        <defs>
+            <linearGradient id="${pre}wingGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#fbcfe8"/><stop offset=".5" stop-color="#e9d5ff"/><stop offset="1" stop-color="#bae6fd"/>
+            </linearGradient>
+            <linearGradient id="${pre}hornGrad" x1="0" y1="1" x2="0" y2="0">
+                ${UNI_MANES.regenboog.map((c, i) => `<stop offset="${i / 5}" stop-color="${c}"/>`).join('')}
+            </linearGradient>
+        </defs>
         <ellipse class="ushadow" cx="80" cy="126" rx="56" ry="5" fill="rgba(0,0,0,0.18)"/>
         <g class="ubody">
             <g class="utail">
                 ${mane.map((c, i) => `<path d="M36 ${48 + i * 2} Q${14 - i} ${60 + i * 4} ${20 - i * 2} ${92 + i * 3}" stroke="${c}" stroke-width="5" fill="none" stroke-linecap="round"/>`).join('')}
             </g>
-            <g class="leg-b"><rect x="40" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="40" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
-            <g class="leg-a"><rect x="102" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="102" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
-            <g class="leg-a"><rect x="54" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="54" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
-            <g class="leg-b"><rect x="116" y="76" width="11" height="44" rx="5" fill="#fff" stroke="#e9d5ff" stroke-width="2"/><rect x="116" y="114" width="11" height="8" rx="3" fill="#f472b6"/></g>
-            <ellipse cx="82" cy="64" rx="50" ry="27" fill="#fff" stroke="#e9d5ff" stroke-width="2"/>
-            <defs><linearGradient id="uwingGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#fbcfe8"/><stop offset=".5" stop-color="#e9d5ff"/><stop offset="1" stop-color="#bae6fd"/>
-            </linearGradient></defs>
+            <g class="leg-b">${leg(40)}</g>
+            <g class="leg-a">${leg(102)}</g>
+            <g class="leg-a">${leg(54)}</g>
+            <g class="leg-b">${leg(116)}</g>
+            <ellipse cx="82" cy="64" rx="50" ry="27" fill="${fill}" stroke="${line}" stroke-width="2"/>
+            ${UNI_PATTERNS[look.pattern] ? UNI_PATTERNS[look.pattern].svg : '<circle cx="60" cy="58" r="3" fill="#fbcfe8"/><circle cx="74" cy="72" r="2.5" fill="#bae6fd"/><circle cx="96" cy="60" r="3" fill="#fde68a"/>'}
             <g class="uwing">
                 <path d="M66 46 C46 16 18 2 0 -16 C20 -12 32 -6 40 2 C24 -4 10 6 4 10 C22 8 36 14 44 22 C32 20 20 28 16 34 C36 30 52 38 66 52 Z"
-                    fill="url(#uwingGrad)" stroke="#f0abfc" stroke-width="2" stroke-linejoin="round"/>
+                    fill="url(#${pre}wingGrad)" stroke="#f0abfc" stroke-width="2" stroke-linejoin="round"/>
                 <path d="M60 44 C44 24 30 14 14 4 M58 46 C44 34 32 28 20 24" stroke="#fff" stroke-width="2" fill="none" opacity=".8"/>
             </g>
-            <circle cx="60" cy="58" r="3" fill="#fbcfe8"/><circle cx="74" cy="72" r="2.5" fill="#bae6fd"/><circle cx="96" cy="60" r="3" fill="#fde68a"/>
-            <path d="M106 52 L118 12 L140 16 L130 62 Z" fill="#fff" stroke="#e9d5ff" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M106 52 L118 12 L140 16 L130 62 Z" fill="${fill}" stroke="${line}" stroke-width="2" stroke-linejoin="round"/>
             ${mane.map((c, i) => `<circle cx="${116 - i * 2}" cy="${10 + i * 9}" r="7" fill="${c}"/>`).join('')}
-            <ellipse cx="138" cy="20" rx="19" ry="13" fill="#fff" stroke="#e9d5ff" stroke-width="2"/>
+            <ellipse cx="138" cy="20" rx="19" ry="13" fill="${fill}" stroke="${line}" stroke-width="2"/>
             <ellipse cx="152" cy="27" rx="9" ry="8" fill="#fce7f3"/>
             <circle cx="154" cy="26" r="1.4" fill="#be185d"/>
-            <path d="M128 9 L131 -3 L137 8 Z" fill="#fff" stroke="#e9d5ff" stroke-width="1.5"/>
-            <path d="M136 8 L141 -18 L145 8 Z" fill="#fcd34d" stroke="#f59e0b" stroke-width="1.5" stroke-linejoin="round"/>
-            <path d="M137.5 2 L144 0 M138.5 -5 L143 -7" stroke="#f59e0b" stroke-width="1.2"/>
+            <path d="M128 9 L131 -3 L137 8 Z" fill="${fill}" stroke="${line}" stroke-width="1.5"/>
+            <path d="M136 8 L141 -18 L145 8 Z" fill="${hornFill}" stroke="${horn.c[1]}" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M137.5 2 L144 0 M138.5 -5 L143 -7" stroke="${horn.c[1]}" stroke-width="1.2"/>
             <path d="M136 17 Q140 13 144 17" stroke="#3b0764" stroke-width="2.4" fill="none" stroke-linecap="round"/>
             <circle cx="146" cy="24" r="3.5" fill="#fda4af" opacity=".7"/>
+            ${UNI_HEADS[look.head] ? UNI_HEADS[look.head] : ''}
         </g>
     </svg>`;
 }
@@ -119,6 +132,8 @@ function buildOutside() {
     place(el('<div class="sky-rainbow"></div>'), o3 + 50, -60);
     place(el('<div class="fence"></div>'), o3, 330).style.width = ROOM_W + 'px';
     place(el('<div class="haystack"></div>'), o3 + 620, 312);
+    addObj(`<div class="uni-chest"><div class="lid"></div><div class="box"><span>🦄</span></div><span class="peek">🎀🌸</span>
+        <div class="tap-hint" style="left:22px;top:-56px">👇</div></div>`, o3 + 690, 352, o3 + 690, openUniStyle);
     const tree = addObj(`<div class="tree"><span class="crown">🌳</span>
         <span class="apple" style="left:50px;top:60px">🍎</span>
         <span class="apple" style="left:110px;top:40px">🍎</span>

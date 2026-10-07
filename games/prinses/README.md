@@ -11,6 +11,7 @@ js/world.js     kamer-register (defineRoom), WINGS (verdiepingen), scenes, setSc
 js/engine.js    edelstenen, bewegen, glitter, camera/main loop, tweens, poes
 js/wand.js      toverstaf-spreuken
 js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer + bootje
+js/unicornstyle.js  eenhoorn-verkleedkist: de look van de eenhoorn (unicornSVG in outside.js)
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
 js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen)
