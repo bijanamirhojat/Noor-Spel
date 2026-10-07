@@ -1,0 +1,48 @@
+/* 🥕 Moestuin */
+.room.rm-moestuin .floor { background: radial-gradient(circle, #86efac 2px, transparent 3px) 0 0 / 30px 18px, linear-gradient(180deg, #65a30d, #4d7c0f); }
+
+.scarecrow { width: 120px; height: 250px; transform-origin: 50% 100%; }
+.scarecrow > * { position: absolute; }
+.scarecrow .pole { left: 56px; top: 90px; width: 10px; height: 160px; background: #92400e; }
+.scarecrow .arms { left: 0; top: 96px; width: 120px; height: 12px; border-radius: 6px; background: #a16207; }
+.scarecrow .body { left: 30px; top: 86px; width: 62px; height: 80px; border-radius: 10px 10px 4px 4px; background: repeating-linear-gradient(45deg, #ef4444 0 10px, #b91c1c 10px 20px); }
+.scarecrow .head { left: 36px; top: 34px; font-size: 50px; line-height: 1; }
+.scarecrow .hat { left: 28px; top: 0; font-size: 60px; line-height: 1; z-index: 1; }
+.scarecrow.wiggle { animation: harpStrum 0.8s ease; }
+
+.garden-beds { width: 380px; height: 110px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 8px; border-radius: 10px; background: #a16207; }
+.g-plot { border-radius: 8px; background: repeating-linear-gradient(0deg, #78350f 0 8px, #92400e 8px 16px); display: flex; align-items: flex-end; justify-content: center; }
+.g-plot span { font-size: 34px; line-height: 1; margin-bottom: 4px; }
+.g-plot.ripe span { animation: gleam 1.6s ease-in-out infinite; }
+
+.wheelbarrow { width: 140px; height: 90px; }
+.wheelbarrow .tub { position: absolute; left: 10px; top: 10px; width: 100px; height: 50px; border-radius: 6px 6px 30px 30px; background: linear-gradient(180deg, #22c55e, #15803d); border: 3px solid #fff; display: flex; justify-content: center; }
+.wheelbarrow .tub span { margin-top: -18px; font-size: 26px; letter-spacing: -6px; }
+.wheelbarrow .wheel { position: absolute; left: 44px; top: 54px; width: 34px; height: 34px; border-radius: 50%; background: #111827; border: 5px solid #9ca3af; }
+.wheelbarrow .handle { position: absolute; left: 100px; top: 30px; width: 40px; height: 8px; border-radius: 4px; background: #92400e; transform: rotate(-20deg); }
+
+/* ── Moestuin (overlay) ── */
+.gardenov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
+    background: linear-gradient(180deg, #bae6fd, #e0f2fe 30%, #86efac 30%, #4ade80);
+}
+.gardenov.open { display: flex; }
+.gardenov .nails-title { color: #166534; }
+.gd-basket { font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #166534; background: #fff; border-radius: 999px; padding: 4px 18px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.gd-basket b { font-size: 0.95rem; color: #ca8a04; margin-right: 4px; }
+.gd-basket small { font-size: 0.9rem; color: #65a30d; }
+.gd-basket.bump { animation: basketBump2 0.35s ease; }
+.gd-hint { font-family: 'Fredoka One', cursive; color: #166534; background: rgba(255, 255, 255, 0.85); border-radius: 999px; padding: 2px 14px; font-size: 0.95rem; }
+.gd-plots { flex: 1; min-height: 0; width: min(100%, 760px); display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 1fr); gap: 12px; padding: 12px; border-radius: 20px; background: #a16207; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); }
+.gd-plot { position: relative; border: none; border-radius: 14px; background: repeating-linear-gradient(0deg, #78350f 0 12px, #92400e 12px 24px); display: flex; align-items: center; justify-content: center; cursor: pointer; touch-action: none; }
+.gd-plot span { font-size: clamp(40px, 9vh, 90px); line-height: 1; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25)); }
+.gd-plot i { position: absolute; left: 0; right: 0; bottom: 6px; font-style: normal; font-size: 18px; }
+.gd-plot.empty::after { content: '+'; position: absolute; font-family: 'Fredoka One', cursive; font-size: 40px; color: rgba(255, 255, 255, 0.35); }
+.gd-plot.ripe { box-shadow: 0 0 0 4px #fde047, 0 0 20px rgba(253, 224, 71, 0.8); }
+.gd-plot.ripe span { animation: gleam 1.4s ease-in-out infinite; }
+.gd-plot.pop span { animation: sprout 0.4s cubic-bezier(.2, 1.8, .4, 1); }
+.gd-seeds { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.gd-can { position: absolute; font-size: 54px; transform: translate(-80%, -40%) rotate(-30deg); pointer-events: none; z-index: 4; animation: gdCan 0.9s ease forwards; }
+@keyframes gdCan { 0% { opacity: 0; transform: translate(-80%, -80%) rotate(0); } 25% { opacity: 1; } 60% { transform: translate(-80%, -40%) rotate(-45deg); } 100% { opacity: 0; transform: translate(-80%, -60%) rotate(0); } }

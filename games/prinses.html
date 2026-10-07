@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="prinses/css/dorp/bloemenwinkel.css">
     <link rel="stylesheet" href="prinses/css/dorp/station.css">
     <link rel="stylesheet" href="prinses/css/dorp/spookhuis.css">
+    <link rel="stylesheet" href="prinses/css/dorp/moestuin.css">
+    <link rel="stylesheet" href="prinses/css/rooms/wc.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
     <link rel="stylesheet" href="prinses/css/wolken/wolkenkasteel.css">
@@ -380,6 +382,36 @@
                 <button class="scope-close" id="bqClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="wcov" id="wcOv">
+                <div class="nails-title">🚽 Wie moet er plassen?</div>
+                <div class="wc-count" id="wcCount"></div>
+                <div class="wc-hint" id="wcHint"></div>
+                <div class="wc-stage" id="wcStage">
+                    <div class="wc-paper"><div class="roll"></div><div class="wc-paper-strip"></div></div>
+                    <div class="wc-big-toilet"><div class="tank"></div><div class="wc-bowl"><div class="swirlw"></div></div><div class="base"></div></div>
+                    <span class="wc-duckpop">🦆</span>
+                    <div class="wc-tapsink"><div class="tap"></div><div class="basin"></div><div class="wc-foam"></div></div>
+                    <div class="wc-who" id="wcWho"></div>
+                    <div class="wc-bubble" id="wcBubble"></div>
+                    <span class="wc-puff" id="wcPuff">💨</span>
+                </div>
+                <div class="wc-btns">
+                    <button class="tool-btn wide wc-btn" data-s="paper">🧻 Papier</button>
+                    <button class="tool-btn wide wc-btn" data-s="flush">🚽 Doortrekken</button>
+                    <button class="tool-btn wide wc-btn" data-s="wash">🧼 Handen wassen</button>
+                </div>
+                <button class="scope-close" id="wcClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="gardenov" id="gardenOv">
+                <div class="nails-title">🥕 Moestuin</div>
+                <div class="gd-basket" id="gdBasket"></div>
+                <div class="gd-hint">Tik op een vakje: zaaien 🟤 → water 💧💧💧 → oogsten!</div>
+                <div class="gd-plots" id="gdPlots"></div>
+                <div class="gd-seeds" id="gdSeeds"></div>
+                <button class="scope-close" id="gardenClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -626,6 +658,8 @@
     <script src="prinses/js/dorp/bloemenwinkel.js"></script>
     <script src="prinses/js/dorp/station.js"></script>
     <script src="prinses/js/dorp/spookhuis.js"></script>
+    <script src="prinses/js/dorp/moestuin.js"></script>
+    <script src="prinses/js/rooms/wc.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>
     <script src="prinses/js/wolken/weermakerij.js"></script>

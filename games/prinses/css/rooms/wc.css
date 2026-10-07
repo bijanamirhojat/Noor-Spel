@@ -1,0 +1,81 @@
+/* 🚽 WC */
+.room.rm-wc .wall { background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 2px, transparent 2px) 0 0 / 40px 40px, linear-gradient(0deg, rgba(255, 255, 255, 0.9) 2px, transparent 2px) 0 0 / 40px 40px, linear-gradient(180deg, #ccfbf1, #a7f3d0); }
+.room.rm-wc .floor { background: conic-gradient(#fff 25%, #5eead4 0 50%, #fff 0 75%, #5eead4 0) 0 0 / 30px 30px; }
+
+.wc-sign { width: 110px; height: 44px; border-radius: 12px; background: #fff; border: 4px solid #0d9488; display: flex; align-items: center; justify-content: center; font-family: 'Fredoka One', cursive; font-size: 16px; color: #0f766e; }
+.wc-sign .busy { display: none; }
+.wc-sign.on .busy { display: inline; }
+.wc-sign.on .free { display: none; }
+
+.wc-roll { width: 70px; height: 70px; }
+.wc-roll .holder { position: absolute; left: 0; top: 20px; width: 70px; height: 10px; border-radius: 5px; background: #94a3b8; }
+.wc-roll .roll { position: absolute; left: 12px; top: 0; width: 46px; height: 46px; border-radius: 50%; background: radial-gradient(circle, #d6d3d1 0 20%, #fff 22%); box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); }
+.wc-roll .strip { position: absolute; left: 14px; top: 40px; width: 42px; height: 0; background: repeating-linear-gradient(180deg, #fff 0 34px, #e7e5e4 34px 36px); transition: height 0.4s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+
+.wc-toilet { width: 150px; height: 252px; }
+.wc-toilet > div { position: absolute; }
+.wc-toilet .tank { left: 20px; top: 0; width: 110px; height: 110px; border-radius: 14px; background: linear-gradient(180deg, #fff, #f1f5f9); border: 4px solid #cbd5e1; }
+.wc-toilet .tank .btn { position: absolute; left: 40px; top: 10px; width: 30px; height: 12px; border-radius: 6px; background: #94a3b8; }
+.wc-toilet .lid { left: 6px; top: 104px; width: 138px; height: 20px; border-radius: 10px; background: #f9a8d4; }
+.wc-toilet .bowl { left: 0; top: 120px; width: 150px; height: 80px; border-radius: 10px 10px 75px 75px; background: #fff; border: 4px solid #cbd5e1; overflow: hidden; }
+.wc-toilet .bowl .water { position: absolute; left: 30px; top: 6px; width: 90px; height: 24px; border-radius: 50%; background: #7dd3fc; }
+.wc-toilet .foot { left: 45px; top: 196px; width: 60px; height: 56px; background: linear-gradient(90deg, #f1f5f9, #fff, #e2e8f0); border-radius: 0 0 8px 8px; }
+.wc-sink { width: 130px; height: 272px; }
+.wc-sink > div, .wc-sink > span { position: absolute; }
+.wc-sink .mirror { left: 20px; top: 0; width: 90px; height: 100px; border-radius: 45px 45px 10px 10px; border: 6px solid #5eead4; background: linear-gradient(135deg, #e0f2fe, #fff); }
+.wc-sink .basin { left: 0; top: 120px; width: 130px; height: 36px; border-radius: 8px 8px 50px 50px; background: #fff; border: 4px solid #cbd5e1; }
+.wc-sink .ped { left: 45px; top: 156px; width: 40px; height: 116px; background: linear-gradient(90deg, #f1f5f9, #fff); }
+.wc-sink .soap { left: 92px; top: 96px; font-size: 26px; }
+.wc-spray { font-size: 50px; }
+.wc-duck { font-size: 40px; pointer-events: none; animation: carousel 2.6s ease-in-out infinite; }
+
+/* ── Wie moet er plassen? (overlay) ── */
+.wcov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 2px, transparent 2px) 0 0 / 48px 48px, linear-gradient(0deg, rgba(255, 255, 255, 0.85) 2px, transparent 2px) 0 0 / 48px 48px, linear-gradient(180deg, #ccfbf1, #99f6e4);
+}
+.wcov.open { display: flex; }
+.wcov .nails-title { color: #0f766e; }
+.wc-count { position: absolute; left: 16px; top: 14px; font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #0f766e; background: #fff; border-radius: 999px; padding: 2px 14px; }
+.wc-hint { font-family: 'Fredoka One', cursive; color: #0f766e; background: #fff; border-radius: 999px; padding: 4px 16px; font-size: 1.1rem; min-height: 1.6em; }
+.wc-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 900px; }
+.wc-stage::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 18%; border-radius: 0 0 20px 20px; background: conic-gradient(#fff 25%, #5eead4 0 50%, #fff 0 75%, #5eead4 0) 0 0 / 36px 36px; z-index: 0; }
+.wc-paper { position: absolute; left: 14%; top: 28%; width: 90px; z-index: 1; }
+.wc-paper .roll { width: 70px; height: 70px; margin-left: 10px; border-radius: 50%; background: radial-gradient(circle, #d6d3d1 0 20%, #fff 22%); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
+.wc-paper-strip { width: 60px; margin: -14px 0 0 15px; height: 0; background: repeating-linear-gradient(180deg, #fff 0 46px, #e7e5e4 46px 49px); transition: height 0.35s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+.wc-big-toilet { position: absolute; left: 45%; bottom: 14%; width: 200px; height: 300px; transform: translateX(-50%); z-index: 1; }
+.wc-big-toilet .tank { position: absolute; left: 30px; top: 0; width: 140px; height: 130px; border-radius: 18px; background: linear-gradient(180deg, #fff, #f1f5f9); border: 5px solid #cbd5e1; }
+.wc-bowl { position: absolute; left: 0; top: 150px; width: 200px; height: 100px; border-radius: 12px 12px 100px 100px; background: #fff; border: 5px solid #cbd5e1; border-top: 18px solid #f9a8d4; overflow: hidden; }
+.wc-bowl .swirlw { position: absolute; left: 40px; top: 4px; width: 120px; height: 34px; border-radius: 50%; background: conic-gradient(#7dd3fc, #38bdf8, #bae6fd, #7dd3fc); }
+.wc-bowl.swirl .swirlw { animation: wcSwirl 1.2s linear; }
+@keyframes wcSwirl { 50% { transform: rotate(540deg) scale(0.4); } 100% { transform: rotate(1080deg) scale(1); } }
+.wc-big-toilet .base { position: absolute; left: 60px; top: 246px; width: 80px; height: 54px; background: linear-gradient(90deg, #f1f5f9, #fff, #e2e8f0); }
+.wc-duckpop { position: absolute; left: 45%; bottom: 40%; font-size: 50px; transform: translateX(-50%) scale(0); z-index: 3; pointer-events: none; }
+.wc-duckpop.go { animation: wcDuck 1.8s ease forwards; }
+@keyframes wcDuck { 0% { transform: translateX(-50%) scale(0); } 50% { transform: translate(-50%, -140px) scale(1.2) rotate(360deg); } 80% { transform: translate(-50%, -120px) scale(1); opacity: 1; } 100% { transform: translate(-50%, -120px) scale(1); opacity: 0; } }
+.wc-who { position: absolute; left: 76%; bottom: 18%; font-size: 96px; line-height: 1; transform: translateX(-50%); transition: left 0.7s ease, bottom 0.7s ease; z-index: 2; pointer-events: none; }
+.wc-who.dance { animation: wcDance 0.35s ease-in-out infinite alternate; }
+@keyframes wcDance { from { transform: translateX(-50%) rotate(-10deg); } to { transform: translateX(-50%) rotate(10deg) translateY(-8px); } }
+.wc-who.sit { left: 45%; bottom: 40%; animation: none; }
+.wc-who.blush::after { content: '😳'; position: absolute; right: -24px; top: -10px; font-size: 34px; }
+.wc-who.off { left: 74%; bottom: 18%; }
+.wc-who.happy { left: 74%; bottom: 18%; animation: wcHappy 0.5s ease 3; }
+@keyframes wcHappy { 50% { transform: translateX(-50%) translateY(-30px) rotate(-8deg); } }
+.wc-who.leave { left: 115%; }
+.wc-bubble { position: absolute; left: 58%; top: 6%; padding: 6px 14px; border-radius: 18px; background: #fff; font-family: 'Fredoka One', cursive; color: #0f766e; font-size: 1.1rem; transform: scale(0); transition: transform 0.3s cubic-bezier(.2, 1.6, .4, 1); z-index: 3; }
+.wc-bubble.show { transform: scale(1); }
+.wc-puff { position: absolute; left: 36%; bottom: 40%; font-size: 50px; opacity: 0; pointer-events: none; z-index: 3; }
+.wc-puff.go { animation: wcPuff 1.2s ease-out; }
+@keyframes wcPuff { 0% { opacity: 0; transform: scale(0.3); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(-60px, -40px) scale(1.6); } }
+.wc-tapsink { position: absolute; right: 6%; bottom: 14%; width: 150px; height: 200px; z-index: 1; }
+.wc-tapsink .tap { position: absolute; left: 60px; top: 0; width: 30px; height: 40px; border-radius: 8px 8px 0 0; background: #94a3b8; }
+.wc-tapsink .basin { position: absolute; left: 0; top: 36px; width: 150px; height: 50px; border-radius: 10px 10px 60px 60px; background: #fff; border: 5px solid #cbd5e1; }
+.wc-tapsink::after { content: ''; position: absolute; left: 55px; top: 86px; width: 40px; height: 114px; background: linear-gradient(90deg, #f1f5f9, #fff); }
+.wc-foam { position: absolute; left: 20px; top: 0; width: 110px; height: 60px; border-radius: 30px; background: radial-gradient(circle at 30% 50%, #fff 0 20px, transparent 21px), radial-gradient(circle at 60% 40%, #fff 0 24px, transparent 25px), radial-gradient(circle at 80% 60%, #e0f2fe 0 18px, transparent 19px); opacity: 0; transform: scale(0.4); transition: opacity 0.3s, transform 0.3s; }
+.wc-foam.on { opacity: 1; transform: scale(1); }
+.wc-btns { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; z-index: 2; }
+.wc-btn { font-size: 1.1rem; }
+.wc-btn.next { animation: hintPulse 0.9s ease infinite; border-color: #14b8a6; }
+.wc-btn.nope { animation: petWiggle 0.5s ease; }
