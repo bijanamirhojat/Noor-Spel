@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="prinses/css/dorp/boerderij.css">
     <link rel="stylesheet" href="prinses/css/dorp/bloemenwinkel.css">
     <link rel="stylesheet" href="prinses/css/dorp/station.css">
+    <link rel="stylesheet" href="prinses/css/dorp/spookhuis.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
     <link rel="stylesheet" href="prinses/css/wolken/wolkenkasteel.css">
@@ -379,6 +380,15 @@
                 <button class="scope-close" id="bqClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="ghostov" id="ghostOv">
+                <div class="nails-title">👻 Spookjes zoeken</div>
+                <div class="ghost-tray" id="ghostTray"></div>
+                <div class="ghost-hint" id="ghostHint"></div>
+                <div class="ghost-room" id="ghostRoom"><span class="sp-furn" style="left:14%;top:46%;font-size:110px">🗄️</span><span class="sp-furn" style="left:30%;top:80%;font-size:120px">🛏️</span><span class="sp-furn" style="left:50%;top:22%;font-size:90px">🖼️</span><span class="sp-furn" style="left:66%;top:68%;font-size:120px">🛋️</span><span class="sp-furn" style="left:84%;top:40%;font-size:100px">🪞</span><span class="sp-furn" style="left:90%;top:76%;font-size:90px">🕰️</span><span class="sp-furn" style="left:8%;top:84%;font-size:70px">🧺</span><span class="sp-furn" style="left:44%;top:58%;font-size:80px">🪑</span><span class="sp-furn" style="left:74%;top:20%;font-size:60px">🕯️</span><span class="sp-furn" style="left:58%;top:88%;font-size:70px">📦</span><div class="sp-dark"></div></div>
+                <div class="bd-tray"><button class="bd-btn" id="ghostAgain" style="display:none">👻<small>Nog een keer</small></button></div>
+                <button class="scope-close" id="ghostClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="trainov" id="trainOv">
                 <div class="tr-cam">
                     <div class="tr-scene" id="trScene">
@@ -615,6 +625,7 @@
     <script src="prinses/js/dorp/boerderij.js"></script>
     <script src="prinses/js/dorp/bloemenwinkel.js"></script>
     <script src="prinses/js/dorp/station.js"></script>
+    <script src="prinses/js/dorp/spookhuis.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>
     <script src="prinses/js/wolken/weermakerij.js"></script>

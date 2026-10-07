@@ -1,0 +1,75 @@
+/* 👻 Spookhuis */
+.room.rm-spookhuis .wall { background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 2px) 0 0 / 50px 60px, linear-gradient(180deg, #312e81, #6d28d9 60%, #a78bfa); }
+.room.rm-spookhuis .floor { background: radial-gradient(circle, #a3e635 2px, transparent 3px) 0 0 / 40px 26px, linear-gradient(180deg, #4d7c0f, #365314); }
+
+.sp-moon { font-size: 90px; line-height: 1; pointer-events: none; filter: drop-shadow(0 0 30px rgba(254, 240, 138, 0.8)); }
+.sp-bat { font-size: 36px; pointer-events: none; animation: spBat 6s ease-in-out infinite; }
+@keyframes spBat { 0%, 100% { translate: 0 0; } 25% { translate: 70px -30px; } 50% { translate: 140px 10px; } 75% { translate: 60px 30px; } }
+.sp-bat { transform-origin: 50% 50%; }
+
+.sp-house { width: 330px; height: 330px; }
+.sp-house > div { position: absolute; }
+.sp-house .body { left: 20px; top: 120px; width: 290px; height: 210px; background: linear-gradient(180deg, #7c3aed, #4c1d95); border: 5px solid #c4b5fd; border-bottom: none; border-radius: 8px 8px 0 0; }
+.sp-house .roof { left: 0; top: 46px; width: 330px; height: 80px; background: #1e1b4b; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.sp-house .tower { left: 200px; top: 0; width: 80px; height: 120px; background: linear-gradient(180deg, #6d28d9, #4c1d95); border: 4px solid #c4b5fd; border-radius: 40px 40px 0 0; }
+.sp-house .win { position: absolute; width: 56px; height: 64px; border-radius: 28px 28px 6px 6px; background: #1e1b4b; border: 4px solid #c4b5fd; }
+.sp-house .win.lit { background: radial-gradient(circle, #fef08a, #f59e0b); box-shadow: 0 0 18px #fde68a; animation: gleam 2.4s ease-in-out infinite; }
+.sp-house .body .win:nth-child(1) { left: 30px; top: 30px; }
+.sp-house .body .win:nth-child(2) { left: 200px; top: 30px; }
+.sp-house .tower .win { left: 8px; top: 30px; width: 56px; height: 60px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+.sp-house .tower .win span { font-size: 34px; line-height: 1; animation: spPeek 3s ease-in-out infinite; }
+@keyframes spPeek { 0%, 60%, 100% { transform: translateY(40px); } 70%, 90% { transform: translateY(4px); } }
+.sp-house .door { left: 112px; top: 100px; width: 66px; height: 110px; border-radius: 33px 33px 0 0; background: #78350f; border: 4px solid #c4b5fd; }
+.sp-house .door span { position: absolute; right: 10px; top: 54px; width: 10px; height: 10px; border-radius: 50%; background: #fcd34d; }
+.sp-house .web { left: 10px; top: 110px; font-size: 50px; opacity: 0.85; }
+
+.sp-pumpkin { font-size: 56px; line-height: 1; }
+.sp-pumpkin.glow span { display: inline-block; filter: drop-shadow(0 0 16px #fb923c) brightness(1.3); animation: gleam 1s ease-in-out infinite; }
+.sp-cauldron { width: 100px; height: 110px; }
+.sp-cauldron .pot { position: absolute; left: 0; top: 40px; width: 100px; height: 70px; border-radius: 20px 20px 50px 50px; background: radial-gradient(ellipse at 50% 10%, #84cc16 0 30%, #1f2937 32%); border-top: 8px solid #374151; }
+.sp-cauldron .b { position: absolute; left: 24px; top: 10px; font-size: 28px; animation: spBubble 1.4s ease-in infinite; }
+@keyframes spBubble { 0% { transform: translateY(30px) scale(0.4); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(-40px) scale(1); opacity: 0; } }
+.sp-friend { position: relative; font-size: 70px; line-height: 1; animation: spFloat 3s ease-in-out infinite; }
+.sp-friend b { position: absolute; left: 60px; top: -20px; padding: 2px 10px; border-radius: 14px; background: #fff; color: #7c3aed; font-family: 'Fredoka One', cursive; font-size: 20px; transform: scale(0); transition: transform 0.3s cubic-bezier(.2, 1.6, .4, 1); }
+.sp-friend.boo span { display: inline-block; animation: spBoo 0.9s ease; }
+.sp-friend.boo b { transform: scale(1); }
+@keyframes spFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -16px; } }
+@keyframes spBoo { 30% { transform: scale(1.5) rotate(-10deg); } 60% { transform: scale(0.9) rotate(10deg); } }
+
+/* ── Spookjes zoeken (overlay) ── */
+.ghostov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
+    background: #0b0618;
+}
+.ghostov.open { display: flex; }
+.ghostov .nails-title { color: #e9d5ff; }
+.ghost-tray { display: flex; gap: 6px; font-size: 30px; z-index: 3; padding: 2px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); }
+.ghost-tray span { opacity: 0.25; filter: grayscale(1); transition: opacity 0.3s; }
+.ghost-tray span.got { opacity: 1; filter: drop-shadow(0 0 8px #e9d5ff); animation: sprout 0.4s cubic-bezier(.2, 1.8, .4, 1); }
+.ghost-hint { font-family: 'Fredoka One', cursive; color: #e9d5ff; font-size: 1.05rem; z-index: 3; min-height: 1.4em; }
+.ghost-room {
+    position: relative; flex: 1; min-height: 0; width: 100%;
+    border-radius: 20px; overflow: hidden; touch-action: none; cursor: none;
+    background:
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 70px),
+        linear-gradient(180deg, #4c1d95, #6d28d9 70%, #78350f 70%, #92400e);
+}
+.sp-furn { position: absolute; transform: translate(-50%, -50%); line-height: 1; pointer-events: none; }
+.sp-ghost { position: absolute; transform: translate(-50%, -50%); pointer-events: none; animation: spFloat 2.6s ease-in-out infinite; }
+.sp-ghost .g { display: block; font-size: 64px; line-height: 1; filter: hue-rotate(var(--h)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); }
+.sp-ghost .d { position: absolute; left: 50%; top: -14px; transform: translateX(-50%); font-size: 26px; }
+.sp-ghost.seen .g { animation: spBoo 0.6s ease infinite; }
+.sp-ghost.found .g { filter: hue-rotate(var(--h)) drop-shadow(0 0 16px #fff) brightness(1.2); }
+.sp-ghost.found::after { content: '💜'; position: absolute; right: -10px; top: 0; font-size: 22px; }
+.sp-ghost.dance { left: 50% !important; top: 50% !important; animation: elfDance 3s linear infinite; }
+.sp-dark {
+    position: absolute; inset: 0; pointer-events: none; z-index: 2;
+    background: radial-gradient(circle at var(--lx, 50%) var(--ly, 50%), transparent 0 80px, rgba(8, 4, 24, 0.55) 105px, rgba(8, 4, 24, 0.97) 150px);
+    transition: opacity 1.2s ease;
+}
+.sp-dark::after { content: '🔦'; position: absolute; left: var(--lx, 50%); top: var(--ly, 50%); font-size: 40px; transform: translate(20px, 30px) rotate(-30deg); }
+.ghostov.lights .sp-dark { opacity: 0; }
+.ghostov.lights .ghost-room { cursor: default; }
+.sp-ghost.found { z-index: 3; }
