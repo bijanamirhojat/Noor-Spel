@@ -8,7 +8,7 @@ function defineRoom(def) { ROOM_DEFS[def.key] = def; }
 // Van beneden naar boven (zo staan ze ook in de lift en op de kaart)
 const WINGS = [
     { key: 'hal',   name: 'Beneden',           icon: '🏰', color: '#f472b6', gems: 12, liftX: 340,
-      rooms: ['kasteelhal', 'troonzaal', 'balzaal', 'eetkamer', 'eetzaal', 'bakkerij', 'dierensalon'] },
+      rooms: ['kasteelhal', 'troonzaal', 'balzaal', 'feestzaal', 'eetkamer', 'eetzaal', 'bakkerij', 'dierensalon'] },
     { key: 'mooi',  name: 'Mooi maken',        icon: '💅', color: '#a855f7', gems: 10, liftX: 30,
       rooms: ['spiegelkamer', 'kapsalon', 'badkamer', 'nagelsalon', 'juwelierskamer', 'borduurkamer', 'parfumerie', 'fotostudio'] },
     { key: 'speel', name: 'Speelverdieping',   icon: '🧸', color: '#f59e0b', gems: 12, liftX: 30,

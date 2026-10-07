@@ -1,0 +1,130 @@
+/* 🎂 Feestzaal */
+.room.rm-feestzaal .wall {
+    background:
+        radial-gradient(circle, #f472b6 4px, transparent 5px) 0 0 / 70px 70px,
+        radial-gradient(circle, #60a5fa 4px, transparent 5px) 35px 35px / 70px 70px,
+        radial-gradient(circle, #facc15 3px, transparent 4px) 17px 52px / 70px 70px,
+        linear-gradient(180deg, #fdf4ff, #ede9fe);
+}
+.room.rm-feestzaal .floor { background: repeating-linear-gradient(90deg, #f9a8d4 0 40px, #c4b5fd 40px 80px); }
+
+.bunting { width: 800px; height: 60px; display: flex; justify-content: space-around; pointer-events: none; border-top: 3px solid #a16207; }
+.bunting span { width: 40px; height: 48px; clip-path: polygon(0 0, 100% 0, 50% 100%); background: #f472b6; transform-origin: 50% 0; animation: buntingSway 3s ease-in-out infinite; }
+.bunting span:nth-child(4n+2) { background: #facc15; animation-delay: -0.6s; }
+.bunting span:nth-child(4n+3) { background: #60a5fa; animation-delay: -1.2s; }
+.bunting span:nth-child(4n+4) { background: #4ade80; animation-delay: -1.8s; }
+@keyframes buntingSway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+
+.party-banner { width: 300px; display: flex; justify-content: center; flex-wrap: wrap; gap: 2px; pointer-events: none; }
+.party-banner span {
+    display: inline-block;
+    font-family: 'Fredoka One', cursive; font-size: 38px; line-height: 1;
+    color: hsl(calc(var(--i) * 45), 85%, 55%);
+    -webkit-text-stroke: 2px #fff;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, 0.15);
+    animation: bannerHop 1.6s ease-in-out infinite;
+    animation-delay: calc(var(--i) * -0.12s);
+}
+.party-banner i { width: 14px; }
+@keyframes bannerHop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
+.balloon-bunch { width: 90px; height: 160px; pointer-events: none; }
+.balloon-bunch span { position: absolute; font-size: 54px; line-height: 1; animation: bunchFloat 4s ease-in-out infinite; }
+.balloon-bunch span:nth-child(1) { left: 0; top: 10px; filter: hue-rotate(200deg); }
+.balloon-bunch span:nth-child(2) { left: 30px; top: 0; filter: hue-rotate(60deg); animation-delay: -1.3s; }
+.balloon-bunch span:nth-child(3) { left: 16px; top: 44px; filter: hue-rotate(280deg); animation-delay: -2.6s; }
+@keyframes bunchFloat { 0%, 100% { translate: 0 0; } 50% { translate: 6px -10px; } }
+
+.party-table { width: 280px; height: 202px; }
+.party-table > div, .party-table > span { position: absolute; }
+.party-table .top { left: 0; top: 112px; width: 280px; height: 16px; border-radius: 8px; background: #fff; box-shadow: 0 3px 0 #fbcfe8; }
+.party-table .cloth { left: 8px; top: 126px; width: 264px; height: 76px; border-radius: 0 0 20px 20px; background: repeating-linear-gradient(90deg, #f9a8d4 0 22px, #fbcfe8 22px 44px); }
+.party-table .cup { top: 76px; font-size: 34px; line-height: 1; }
+.party-table .cake { left: 80px; top: 0; width: 120px; height: 114px; }
+.party-table .cake .tier { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 10px 10px 4px 4px; background: linear-gradient(180deg, #fff 0 22%, #f9a8d4 22%); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.06); }
+.party-table .cake .t1 { bottom: 0; width: 120px; height: 52px; }
+.party-table .cake .t2 { bottom: 50px; width: 84px; height: 40px; background: linear-gradient(180deg, #fff 0 25%, #c4b5fd 25%); }
+.party-table .cake .flames { position: absolute; left: 22px; top: 0; width: 76px; display: flex; justify-content: space-between; }
+.party-table .cake .flames span { width: 6px; height: 24px; border-radius: 3px; background: repeating-linear-gradient(180deg, #fff 0 4px, #60a5fa 4px 8px); position: relative; }
+.party-table .cake .flames span::before { content: ''; position: absolute; left: -3px; top: -14px; width: 12px; height: 16px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: radial-gradient(circle at 50% 70%, #fef08a, #fb923c 60%, #ef4444); opacity: 0; transition: opacity 0.3s; animation: flicker 0.3s ease-in-out infinite alternate; }
+.party-table .cake.lit .flames span::before { opacity: 1; }
+
+.party-pinata-deco { font-size: 80px; line-height: 1; transform-origin: 50% -60px; animation: pinataSwing 2.4s ease-in-out infinite; }
+.party-pinata-deco::before { content: ''; position: absolute; left: 50%; top: -80px; width: 3px; height: 84px; background: #a16207; }
+@keyframes pinataSwing { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+.confetti-cannon { width: 100px; height: 100px; }
+.confetti-cannon .barrel { position: absolute; left: 20px; top: 10px; width: 80px; height: 36px; border-radius: 10px 18px 18px 10px; background: repeating-linear-gradient(90deg, #f472b6 0 14px, #facc15 14px 28px); transform: rotate(-30deg); transform-origin: 0 50%; }
+.confetti-cannon .base { position: absolute; left: 0; top: 50px; width: 60px; height: 50px; border-radius: 10px; background: #7c3aed; }
+.gift-pile { width: 110px; height: 90px; pointer-events: auto; }
+.gift-pile span { position: absolute; font-size: 48px; line-height: 1; }
+.gift-pile span:nth-child(1) { left: 0; top: 38px; }
+.gift-pile span:nth-child(2) { left: 46px; top: 38px; filter: hue-rotate(120deg); }
+.gift-pile span:nth-child(3) { left: 22px; top: 0; filter: hue-rotate(240deg); }
+
+/* ── Feestje! (overlay) ── */
+.partyov {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    gap: 8px;
+    touch-action: none;
+    overflow: hidden;
+    background:
+        radial-gradient(circle, #f472b6 3px, transparent 4px) 0 0 / 50px 50px,
+        radial-gradient(circle, #60a5fa 3px, transparent 4px) 25px 25px / 50px 50px,
+        linear-gradient(180deg, #fdf4ff, #fae8ff);
+}
+.partyov.open { display: flex; }
+.partyov .nails-title { color: #a21caf; }
+.party-hint { font-family: 'Fredoka One', cursive; color: #a21caf; background: #fff; border-radius: 999px; padding: 4px 16px; font-size: 1.15rem; z-index: 3; }
+.party-field { position: relative; flex: 1; min-height: 0; width: 100%; overflow: hidden; }
+.pinata-rope { position: absolute; left: 50%; top: 0; width: 4px; height: 12%; background: #a16207; }
+.pinata {
+    position: absolute; left: 50%; top: 10%;
+    border: none; background: none; padding: 0;
+    font-size: min(30vh, 200px); line-height: 1;
+    cursor: pointer; touch-action: none;
+    transform: translateX(-50%);
+    transform-origin: 50% 0;
+    animation: pinataBig 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2)) saturate(calc(1 + var(--crack, 0)));
+}
+@keyframes pinataBig { 0%, 100% { transform: translateX(-50%) rotate(-6deg); } 50% { transform: translateX(-50%) rotate(6deg); } }
+.pinata.hit { animation: pinataHit 0.35s ease; }
+@keyframes pinataHit { 30% { transform: translateX(-50%) rotate(-22deg) scale(0.92); } 70% { transform: translateX(-50%) rotate(16deg) scale(1.05); } }
+.pinata.burst { animation: pinataBurst 0.5s ease-out forwards; }
+@keyframes pinataBurst { to { transform: translateX(-50%) scale(1.8) rotate(30deg); opacity: 0; } }
+.party-bag { position: absolute; right: 4%; bottom: 4%; font-size: 84px; line-height: 1; pointer-events: none; z-index: 2; }
+.party-bag b { position: absolute; right: -6px; top: -4px; min-width: 34px; padding: 2px 6px; border-radius: 999px; background: #a21caf; color: #fff; font-family: 'Fredoka One', cursive; font-size: 18px; text-align: center; border: 3px solid #fff; }
+.party-bag.bump { animation: basketBump2 0.35s ease; }
+@keyframes basketBump2 { 50% { transform: scale(1.15); } }
+.party-candy {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border: none; background: none; padding: 6px;
+    font-size: 50px; line-height: 1;
+    cursor: pointer; touch-action: none;
+    z-index: 2;
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.2));
+}
+.party-candy.fall { transition: left 0.7s cubic-bezier(.2, .8, .3, 1), top 0.7s cubic-bezier(.4, 1.5, .6, 1); }
+.party-candy.got { transition: left 0.4s ease-in, top 0.4s ease-in, transform 0.4s ease-in; transform: translate(-50%, -50%) scale(0.4); }
+.party-balloon {
+    position: absolute; bottom: -120px;
+    border: none; background: none; padding: 0;
+    font-size: 80px; line-height: 1;
+    cursor: pointer; touch-action: none;
+    filter: hue-rotate(var(--h)) drop-shadow(0 6px 6px rgba(0, 0, 0, 0.15));
+    animation: balloonRise 6s linear forwards;
+}
+.party-balloon span { display: inline-block; animation: balloonWobble 1.6s ease-in-out infinite; }
+@keyframes balloonRise { to { transform: translateY(calc(-100vh - 160px)); } }
+@keyframes balloonWobble { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+.party-balloon.pop span { animation: balloonPop 0.25s ease-out forwards; }
+@keyframes balloonPop { to { transform: scale(1.8); opacity: 0; } }
+.party-cake-big { position: absolute; left: 50%; top: 50%; font-size: min(34vh, 220px); line-height: 1; transform: translate(-50%, -50%); animation: sprout 0.6s cubic-bezier(.2, 1.8, .4, 1); filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9)); pointer-events: none; }
