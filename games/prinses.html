@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="prinses/css/dorp/ijssalon.css">
     <link rel="stylesheet" href="prinses/css/dorp/boerderij.css">
     <link rel="stylesheet" href="prinses/css/dorp/bloemenwinkel.css">
+    <link rel="stylesheet" href="prinses/css/dorp/station.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
     <link rel="stylesheet" href="prinses/css/wolken/wolkenkasteel.css">
@@ -378,6 +379,28 @@
                 <button class="scope-close" id="bqClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="trainov" id="trainOv">
+                <div class="tr-cam">
+                    <div class="tr-scene" id="trScene">
+                        <div class="tr-layer" id="trL_far"></div>
+                        <div class="tr-layer" id="trL_mid"></div>
+                        <div class="tr-ground" id="trGround"></div>
+                        <div class="tr-cloudfloor"></div>
+                        <div class="tr-layer" id="trL_near"></div>
+                        <div class="tr-runner" id="trRunner"></div>
+                        <div class="tr-train" id="trTrain"></div>
+                        <div class="tr-layer" id="trL_front"></div>
+                        <div class="tr-dark"></div>
+                    </div>
+                </div>
+                <div class="tr-bar top"></div><div class="tr-bar bot"></div>
+                <div class="tr-title" id="trTitle"></div>
+                <div class="tr-end" id="trEnd">🚂 Wat een mooie rit!
+                    <div><button class="tool-btn wide" id="trAgain">🔁 Nog een rondje</button><button class="tool-btn wide" id="trEndClose">🏘️ Uitstappen</button></div>
+                </div>
+                <button class="scope-close" id="trClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="dressup unistyle" id="uniOv">
                 <div class="nails-title">🦄 Eenhoorn verkleden</div>
                 <div class="du-main">
@@ -591,6 +614,7 @@
     <script src="prinses/js/dorp/ijssalon.js"></script>
     <script src="prinses/js/dorp/boerderij.js"></script>
     <script src="prinses/js/dorp/bloemenwinkel.js"></script>
+    <script src="prinses/js/dorp/station.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>
     <script src="prinses/js/wolken/weermakerij.js"></script>

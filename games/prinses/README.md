@@ -14,7 +14,8 @@ js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer
 js/unicornstyle.js  eenhoorn-verkleedkist: de look van de eenhoorn (unicornSVG in outside.js)
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
-js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen)
+js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen),
+                station (filmische treinrit langs het hele koninkrijk)
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
