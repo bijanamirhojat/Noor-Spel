@@ -1,5 +1,5 @@
 /* ⛳ Glow-golf: een donkere kamer met neon. Binnen: minigolf in het donker, 6 holes.
-   Trek de bal naar achteren en laat los (of tik gewoon waar hij heen moet). Een gat trekt de bal een beetje
+   Sleep vanaf de bal de kant op waar hij heen moet en laat los (of tik gewoon waar hij heen moet). Een gat trekt de bal een beetje
    naar zich toe, dus hij gaat er makkelijk in. Het baantje is getekend op een canvas (1000 x 600). */
 const GOLF_W = 1000;
 const GOLF_H = 600;
@@ -233,8 +233,8 @@ function golfRelease() {
     gg.aim = null;
     if (golfMoving()) return;
     if (gg.drag) {
-        // Slingshot: pull back, it flies the other way
-        golfShoot(gg.ball.x - a.x, gg.ball.y - a.y);
+        // Drag towards where it should go: it rolls that way, further the longer you drag
+        golfShoot(a.x - gg.ball.x, a.y - gg.ball.y);
     } else {
         // Tap: roll towards where you tapped (a bit more power so it gets there)
         golfShoot((a.x - gg.ball.x) * 0.55, (a.y - gg.ball.y) * 0.55);
@@ -302,8 +302,9 @@ function golfDraw() {
     // Aim: a dotted glow line showing where the ball will go
     const b = gg.ball;
     if (gg.aim && !golfMoving()) {
-        let dx = gg.drag ? b.x - gg.aim.x : (gg.aim.x - b.x) * 0.55;
-        let dy = gg.drag ? b.y - gg.aim.y : (gg.aim.y - b.y) * 0.55;
+        const pow = gg.drag ? 1 : 0.55;
+        const dx = (gg.aim.x - b.x) * pow;
+        const dy = (gg.aim.y - b.y) * pow;
         const len = Math.min(GOLF_MAX_V / 5, Math.hypot(dx, dy));
         const d = Math.hypot(dx, dy) || 1;
         c.shadowColor = '#fde047';
