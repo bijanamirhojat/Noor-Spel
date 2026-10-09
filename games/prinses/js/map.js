@@ -186,6 +186,12 @@ function travelTo(key, room) {
             setScene(key);
         }
         state.x = state.targetX = clampX(room * ROOM_W + 400);
+        if (key === 'out' && room * ROOM_W > LAKE_X0) {
+            // Out on the water (the pirate bay): you arrive in your boat
+            state.boating = true;
+            document.getElementById('boatBtns').classList.add('show');
+            state.x = state.targetX = clampX(room * ROOM_W + 120);
+        }
         state.alt = state.targetAlt = key === 'sea' || key === 'ruimte' ? 140 : 0;
         if (state.riding) state.uniX = state.x;
         state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));

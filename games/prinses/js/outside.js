@@ -189,6 +189,9 @@ function buildOutside() {
     place(el('<div class="lake-fish">🐠</div>'), o5 + 560, 400);
     addObj(`<div class="island"><div class="sand"></div><span class="palm">🌴</span>
         <div class="treasure" id="treasure"><div class="tbox"></div><div class="tlid"></div></div></div>`, o5 + 570, 250, o5 + 640, openTreasure);
+    /* o6: Piratenbaai (alleen met het bootje, js/piraten.js) */
+    buildPirateBay(ROOM_W * 6);
+
     const boatSail = el(`<div class="boat-part boat-sail" id="boatSail"><div class="bflip"><svg viewBox="0 0 220 170">
         <line x1="150" y1="112" x2="150" y2="8" stroke="#92400e" stroke-width="6" stroke-linecap="round"/>
         <path d="M154 14 L154 100 L214 100 Z" fill="#fff" stroke="#f9a8d4" stroke-width="3"/>

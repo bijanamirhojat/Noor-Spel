@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="prinses/css/core.css">
     <link rel="stylesheet" href="prinses/css/overlay.css">
     <link rel="stylesheet" href="prinses/css/outside.css">
+    <link rel="stylesheet" href="prinses/css/piraten.css">
     <link rel="stylesheet" href="prinses/css/map.css">
     <link rel="stylesheet" href="prinses/css/stickers.css">
     <link rel="stylesheet" href="prinses/css/village.css">
@@ -576,6 +577,18 @@
                 <button class="scope-close" id="plushPickClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="pirateov" id="pirateOv" data-phase="kijk">
+                <div class="nails-title" id="pvTitle"></div>
+                <div class="pv-coins" id="pvCoins"></div>
+                <div class="pv-hint" id="pvHint"></div>
+                <div class="pv-box" id="pvView"><div class="pv-pano" id="pvPano"></div><div class="pv-lens" id="pvLens"></div></div>
+                <div class="pv-box" id="pvSail"><span class="pv-goal">🏝️</span><span class="pv-sailship" id="pvSailShip">⛵</span></div>
+                <div class="pv-box" id="pvMap"></div>
+                <div class="pv-box pv-dig" id="pvDig"></div>
+                <button class="pv-again" id="pvAgain">⛵ Nog een avontuur</button>
+                <button class="scope-close" id="pirateClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -777,6 +790,7 @@
     <script src="prinses/js/engine.js"></script>
     <script src="prinses/js/wand.js"></script>
     <script src="prinses/js/outside.js"></script>
+    <script src="prinses/js/piraten.js"></script>
     <script src="prinses/js/sea.js"></script>
     <script src="prinses/js/village.js"></script>
     <script src="prinses/js/sky.js"></script>

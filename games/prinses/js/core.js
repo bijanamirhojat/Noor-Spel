@@ -11,7 +11,8 @@ const ROOMS_OUT = [
     { key: 'vijver',        name: 'Vijver',        icon: '🦢', say: 'De vijver' },
     { key: 'eenhoornweide', name: 'Eenhoornweide', icon: '🦄', say: 'De eenhoornweide' },
     { key: 'speeltuin',     name: 'Speeltuin',     icon: '🎠', say: 'De speeltuin' },
-    { key: 'meer',          name: 'Meer',          icon: '⛵', say: 'Het meer' }
+    { key: 'meer',          name: 'Meer',          icon: '⛵', say: 'Het meer' },
+    { key: 'piratenbaai',   name: 'Piratenbaai',   icon: '🏴‍☠️', say: 'De piratenbaai' }
 ];
 const ROOMS_SEA = [
     { key: 'koraalrif', name: 'Koraalrif',         icon: '🐠', say: 'Het koraalrif' },
