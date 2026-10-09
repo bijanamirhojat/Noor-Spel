@@ -167,7 +167,7 @@ function closeBedtime(toBed) {
     const pr = princessEl();
     BED_ALL.forEach(c => pr.classList.toggle(c, btDoll.classList.contains(c)));
     sparkleShower(state.x, 120, 40);
-    walkTo(roomX('slaapkamer') + 386, sleepInBed);
+    walkTo(roomX('slaapkamer') + 386, chooseBedPlush);
 }
 document.getElementById('bedtimeClose').addEventListener('pointerdown', (e) => { e.stopPropagation(); closeBedtime(false); });
 btEl.addEventListener('pointerdown', (e) => e.stopPropagation());

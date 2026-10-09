@@ -184,3 +184,12 @@ svg .pjp, svg .pjt, svg .pjc { display: none; }
 .sk-plush .toys span { margin: 0 -4px; }
 .sk-plush.hug .toys span { display: inline-block; animation: vJump 0.4s ease 2; }
 .sk-plush b { position: absolute; z-index: 3; left: 0; right: 0; bottom: 14px; text-align: center; font-family: 'Fredoka One', cursive; font-weight: normal; font-size: 13px; color: #fff; text-shadow: 0 1px 2px #9d174d; }
+
+/* Knuffel mee in bed */
+.bed-plush { font-size: 50px; line-height: 1; z-index: 13; pointer-events: none; transform: rotate(-20deg); animation: sprout 0.5s cubic-bezier(.2, 1.8, .4, 1); }
+.plushpickov { position: absolute; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; background: rgba(30, 27, 75, 0.6); touch-action: none; }
+.plushpickov.open { display: flex; }
+.pp-card { max-width: min(92%, 720px); padding: 18px 22px 22px; border-radius: 28px; background: linear-gradient(180deg, #fdf2f8, #ede9fe); border: 6px solid #f9a8d4; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; align-items: center; gap: 14px; animation: duPop 0.4s cubic-bezier(.2, 1.6, .4, 1); }
+.pp-card .nails-title { color: #7c3aed; text-align: center; }
+.pp-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.pp-pick { width: clamp(70px, 13vh, 100px); height: clamp(70px, 13vh, 100px); border-radius: 50%; border: 5px solid #fff; background: radial-gradient(circle, #fff, #fbcfe8); font-size: clamp(42px, 8vh, 62px); line-height: 1; cursor: pointer; touch-action: none; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); animation: carousel 2.4s ease-in-out infinite; }

@@ -18,7 +18,7 @@ defineRoom({
             <div class="mattress"></div><div class="pillow"></div><div class="blanket"></div>
             <div class="bedleg" style="left:30px"></div><div class="bedleg" style="left:280px"></div>
             <div class="tap-hint" style="top:-44px">👇</div>
-        </div>`, r6 + 250, 202, r6 + 386, sleepInBed);
+        </div>`, r6 + 250, 202, r6 + 386, chooseBedPlush);
         place(el('<div class="bed-cover" id="bedCover"></div>'), r6 + 356, 330);
         addObj('<div class="sk-plush"><span class="toys" id="plushPile"></span><div class="mand"></div><b>Knuffels</b></div>', r6 + 172, 300, r6 + 210, plushHug);
         addObj('<div class="emoji-obj" style="font-size:44px">🎶</div>', r6 + 610, 110, r6 + 640, () => { playLullaby(); speak('Een slaapliedje!'); });
@@ -37,6 +37,8 @@ function sleepInBed() {
     }, () => {
         cover.classList.add('show');
         night.classList.add('show');
+        // The cuddly toy you picked lies next to you, peeking out from under the blanket
+        const plush = plushInBed >= 0 ? place(el(`<div class="bed-plush">${plushAll()[plushInBed]}</div>`), state.x - 62, 290) : null;
         playLullaby();
         parentsSing();
         const zzzTimer = setInterval(() => {
@@ -48,6 +50,9 @@ function sleepInBed() {
             clearInterval(zzzTimer);
             night.classList.remove('show');
             cover.classList.remove('show');
+            if (plush) plush.remove();
+            plushInBed = -1;
+            renderPlushBasket();
             parentsWake();
             speak('Goedemorgen prinses! Kukeleku!');
             playWin();
@@ -70,11 +75,46 @@ function playLullaby() {
 }
 
 // The cuddly toy basket: the teddy plus the toys won at the claw machine
+let plushInBed = -1;     // index in plushAll() of the toy that is in bed with you
+function plushAll() { return ['🧸', ...knuffels]; }
+
 function renderPlushBasket() {
     const n = document.getElementById('plushPile');
     if (!n) return;
-    n.innerHTML = ['🧸', ...knuffels].slice(-9).map((k, i) => `<span style="animation-delay:${-i * 0.3}s">${k}</span>`).join('');
+    n.innerHTML = plushAll().filter((k, i) => i !== plushInBed).slice(-9).map((k, i) => `<span style="animation-delay:${-i * 0.3}s">${k}</span>`).join('');
 }
+
+/* ─────────── Met welke knuffel ga je slapen? ─────────── */
+const ppEl = document.getElementById('plushPickOv');
+let plushPickOpen = false;
+
+function chooseBedPlush() {
+    const all = plushAll();
+    if (all.length < 2) { sleepWithPlush(0); return; }
+    plushPickOpen = true;
+    ppEl.classList.add('open');
+    document.getElementById('plushPickList').innerHTML = all.map((k, i) => `<button class="pp-pick" data-i="${i}" style="animation-delay:${-i * 0.2}s">${k}</button>`).join('');
+    document.querySelectorAll('.pp-pick').forEach(b => b.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        bounceEl(b, 'jump');
+        playCorrect();
+        setTimeout(() => { closePlushPick(); sleepWithPlush(+b.dataset.i); }, 350);
+    }));
+    playMusicBox();
+}
+
+function closePlushPick() {
+    plushPickOpen = false;
+    ppEl.classList.remove('open');
+}
+
+function sleepWithPlush(i) {
+    plushInBed = i;
+    renderPlushBasket();
+    sleepInBed();
+}
+document.getElementById('plushPickClose').addEventListener('pointerdown', (e) => { e.stopPropagation(); closePlushPick(); });
+ppEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 
 function plushHug(node) {
     node.classList.remove('hug'); void node.offsetWidth; node.classList.add('hug');
