@@ -29,6 +29,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/wc.css">
     <link rel="stylesheet" href="prinses/css/dorp/strand.css">
     <link rel="stylesheet" href="prinses/css/dorp/pluktuin.css">
+    <link rel="stylesheet" href="prinses/css/dorp/vlinderkas.css">
     <link rel="stylesheet" href="prinses/css/rooms/minigolf.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
@@ -471,6 +472,22 @@
                 <button class="scope-close" id="glitterClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="bflyov" id="bflyOv">
+                <div class="nails-title">🦋 Vlinderkas</div>
+                <div class="vk-count" id="bflyCount"></div>
+                <div class="vk-hint" id="bflyHint"></div>
+                <div class="vk-stage" id="bflyStage">
+                    <span class="vk-leaves" id="bflyLeaves">🍃🍃</span>
+                    <div class="vk-flowers"><span class="vk-flower">🌷</span><span class="vk-flower">🌼</span><span class="vk-flower">🌸</span><span class="vk-flower">🌻</span><span class="vk-flower">🌺</span></div>
+                    <div class="vk-pots">
+                        <div class="vk-opot" data-i="0"><div class="branch"></div><div class="pot"></div><div class="who"></div></div>
+                        <div class="vk-opot" data-i="1"><div class="branch"></div><div class="pot"></div><div class="who"></div></div>
+                        <div class="vk-opot" data-i="2"><div class="branch"></div><div class="pot"></div><div class="who"></div></div>
+                    </div>
+                </div>
+                <button class="scope-close" id="bflyClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -722,6 +739,7 @@
     <script src="prinses/js/rooms/wc.js"></script>
     <script src="prinses/js/dorp/strand.js"></script>
     <script src="prinses/js/dorp/pluktuin.js"></script>
+    <script src="prinses/js/dorp/vlinderkas.js"></script>
     <script src="prinses/js/rooms/minigolf.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>

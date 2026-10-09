@@ -19,7 +19,7 @@ const WINGS = [
 
 // Het dorp: met de koets bereikbaar vanaf het kasteelplein (js/village.js)
 const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', gems: 12,
-    rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'pluktuin', 'station', 'spookhuis', 'strand'] };
+    rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'pluktuin', 'vlinderkas', 'station', 'spookhuis', 'strand'] };
 
 // Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
 const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 12,

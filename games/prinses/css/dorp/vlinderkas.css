@@ -1,0 +1,82 @@
+/* 🦋 Vlinderkas */
+.room.rm-vlinderkas .wall { background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 4px, transparent 4px) 0 0 / 100px 100%, linear-gradient(0deg, rgba(255, 255, 255, 0.7) 3px, transparent 3px) 0 0 / 100% 120px, linear-gradient(180deg, #bae6fd, #d9f99d 70%, #bbf7d0); }
+.room.rm-vlinderkas .floor { background: repeating-linear-gradient(90deg, #a8a29e 0 48px, #d6d3d1 48px 50px), #a8a29e; }
+
+.vk-roof { width: 800px; height: 120px; pointer-events: none; background: repeating-linear-gradient(60deg, rgba(255, 255, 255, 0.5) 0 4px, transparent 4px 70px), repeating-linear-gradient(-60deg, rgba(255, 255, 255, 0.5) 0 4px, transparent 4px 70px); }
+.vk-sign { padding: 8px 16px; border-radius: 12px; background: #fff; border: 4px solid #4ade80; color: #15803d; font-family: 'Fredoka One', cursive; font-size: 20px; pointer-events: none; }
+
+.vk-table { width: 320px; height: 180px; }
+.vk-table .top { position: absolute; left: 0; top: 70px; width: 320px; height: 18px; border-radius: 6px; background: #92400e; }
+.vk-table .leg { position: absolute; top: 86px; width: 14px; height: 94px; background: #78350f; }
+.vk-table .leg.l { left: 20px; }
+.vk-table .leg.r { right: 20px; }
+.vk-pot { position: absolute; top: 0; width: 80px; height: 72px; }
+.vk-pot::after { content: ''; position: absolute; left: 14px; top: 40px; width: 52px; height: 32px; border-radius: 4px 4px 14px 14px; background: linear-gradient(180deg, #ea580c, #c2410c); }
+.vk-pot .plant { position: absolute; left: 12px; top: -10px; font-size: 56px; line-height: 1; }
+.vk-pot .cat { position: absolute; left: 28px; top: 0; font-size: 34px; animation: vkCrawl 1.6s ease-in-out infinite; }
+@keyframes vkCrawl { 50% { transform: translateX(8px) scaleY(0.85); } }
+.cocoon { position: absolute; left: 34px; top: 0; width: 18px; height: 36px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: repeating-linear-gradient(170deg, #84cc16 0 5px, #65a30d 5px 8px); transform-origin: 50% 0; animation: vkSway 2.4s ease-in-out infinite; }
+.cocoon::before { content: ''; position: absolute; left: 8px; top: -10px; width: 2px; height: 10px; background: #a3a3a3; }
+@keyframes vkSway { 50% { transform: rotate(8deg); } }
+
+.vk-bigpot { width: 110px; height: 170px; }
+.vk-bigpot .fl { position: absolute; left: 10px; top: 0; font-size: 90px; line-height: 1; transform-origin: 50% 100%; }
+.vk-bigpot.grow .fl { animation: sprout 0.6s cubic-bezier(.2, 1.8, .4, 1); }
+.vk-bigpot .pot { position: absolute; left: 15px; top: 90px; width: 80px; height: 80px; border-radius: 6px 6px 22px 22px; background: linear-gradient(180deg, #f472b6, #db2777); }
+.vk-mist { width: 60px; height: 50px; border-radius: 0 0 20px 20px; background: #94a3b8; display: flex; justify-content: center; }
+.vk-mist span { margin-top: 36px; font-size: 26px; }
+.vk-air { width: 800px; height: 600px; pointer-events: none; z-index: 3; }
+.vk-flutter { position: absolute; pointer-events: auto; cursor: pointer; animation: vkFlutter 7s ease-in-out infinite; }
+@keyframes vkFlutter { 0%, 100% { translate: 0 0; } 25% { translate: 90px -50px; } 50% { translate: 160px 10px; } 75% { translate: 60px 40px; } }
+
+/* A butterfly drawn with CSS so it can have any colours (--c1 wings, --c2 dots) */
+.bfly { position: absolute; left: 0; top: 0; width: 60px; height: 50px; pointer-events: auto; cursor: pointer; }
+.bfly .w { position: absolute; top: 0; width: 30px; height: 50px; animation: bfFlapL 0.28s ease-in-out infinite alternate; }
+.bfly .w.l { left: 0; transform-origin: 100% 50%;
+    background: radial-gradient(circle at 55% 30%, var(--c2) 0 13%, transparent 14%),
+        radial-gradient(ellipse 50% 34% at 52% 32%, var(--c1) 0 95%, transparent 100%),
+        radial-gradient(ellipse 40% 26% at 62% 74%, var(--c1) 0 95%, transparent 100%); }
+.bfly .w.r { left: 30px; transform-origin: 0 50%;
+    background: radial-gradient(circle at 45% 30%, var(--c2) 0 13%, transparent 14%),
+        radial-gradient(ellipse 50% 34% at 48% 32%, var(--c1) 0 95%, transparent 100%),
+        radial-gradient(ellipse 40% 26% at 38% 74%, var(--c1) 0 95%, transparent 100%); }
+@keyframes bfFlapL { from { transform: scaleX(1); } to { transform: scaleX(0.25); } }
+.bfly b { position: absolute; left: 27px; top: 10px; width: 6px; height: 34px; border-radius: 3px; background: #3f3f46; }
+.bfly b::before, .bfly b::after { content: ''; position: absolute; top: -10px; width: 2px; height: 12px; background: #3f3f46; border-radius: 1px; }
+.bfly b::before { left: -2px; transform: rotate(-25deg); }
+.bfly b::after { left: 6px; transform: rotate(25deg); }
+.bfly.resting .w { animation-duration: 1.6s; }
+.bfly.fresh { filter: drop-shadow(0 0 10px #fff); }
+
+/* ── Vlinderkas (overlay) ── */
+.bflyov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.6) 3px, transparent 3px) 0 0 / 120px 100%, linear-gradient(180deg, #bae6fd, #d9f99d 75%, #86efac);
+}
+.bflyov.open { display: flex; }
+.bflyov .nails-title { color: #15803d; }
+.vk-count { position: absolute; left: 16px; top: 14px; font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #15803d; background: #fff; border-radius: 999px; padding: 2px 14px; }
+.vk-hint { font-family: 'Fredoka One', cursive; color: #15803d; background: #fff; border-radius: 999px; padding: 2px 16px; font-size: 1rem; pointer-events: none; }
+.vk-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 1000px; }
+.vk-stage .bfly { z-index: 3; will-change: transform; }
+.vk-flowers { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 2%; pointer-events: none; }
+.vk-flower { font-size: clamp(40px, 8vh, 70px); line-height: 1; }
+.vk-pots { position: absolute; left: 12%; right: 12%; bottom: 16%; height: 46%; display: flex; justify-content: space-around; align-items: flex-end; }
+.vk-opot { position: relative; width: 30%; max-width: 200px; height: 100%; cursor: pointer; touch-action: none; }
+.vk-opot .branch { position: absolute; left: 50%; bottom: 22%; width: 10px; height: 70%; margin-left: -5px; background: #65a30d; border-radius: 5px; }
+.vk-opot .branch::before, .vk-opot .branch::after { content: '🍃'; position: absolute; font-size: clamp(30px, 6vh, 50px); }
+.vk-opot .branch::before { left: -44px; top: 20%; transform: scaleX(-1); }
+.vk-opot .branch::after { left: 6px; top: 50%; }
+.vk-opot .pot { position: absolute; left: 20%; right: 20%; bottom: 0; height: 24%; border-radius: 6px 6px 24px 24px; background: linear-gradient(180deg, #ea580c, #c2410c); }
+.vk-opot .who { position: absolute; left: 0; right: 0; top: 0; height: 40%; display: flex; justify-content: center; align-items: flex-end; }
+.vk-opot .cat { display: inline-block; font-size: clamp(46px, 9vh, 76px); line-height: 1; transform: scale(var(--s)); transition: transform 0.3s cubic-bezier(.2, 1.8, .4, 1); animation: vkCrawl2 1.6s ease-in-out infinite; }
+@keyframes vkCrawl2 { 50% { translate: 10px 0; } }
+.vk-opot .cat.munch { animation: vkMunch 0.2s ease 3; }
+@keyframes vkMunch { 50% { translate: 0 -6px; } }
+.vk-opot .cocoon.big { position: relative; left: auto; top: 20px; width: clamp(30px, 6vh, 46px); height: clamp(60px, 12vh, 92px); }
+.vk-opot .cocoon.big::before { left: 50%; top: -20px; height: 20px; }
+.vk-opot .cocoon.wiggle { animation: vkWiggle 0.5s ease; }
+@keyframes vkWiggle { 20%, 60% { transform: rotate(-16deg); } 40%, 80% { transform: rotate(16deg); } }
+.vk-leaves { position: absolute; right: 2%; top: 4%; font-size: 44px; pointer-events: none; }
