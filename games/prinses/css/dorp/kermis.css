@@ -94,3 +94,10 @@
 .kc-base { display: flex; justify-content: center; padding: 10px; border-radius: 0 0 20px 20px; background: linear-gradient(180deg, #db2777, #9d174d); }
 .kc-grab { min-width: 160px; height: 64px; border-radius: 999px; border: 5px solid #fff; background: #fde047; color: #9d174d; font-family: 'Fredoka One', cursive; font-size: 1.6rem; box-shadow: 0 6px 0 #ca8a04; cursor: pointer; touch-action: none; }
 .kc-grab:active { transform: translateY(4px); box-shadow: 0 2px 0 #ca8a04; }
+
+/* Het bakje onderaan de grijpmachine: haal je knuffel eruit */
+.kc-base { align-items: center; gap: 24px; }
+.kc-bakje { position: relative; width: 110px; height: 70px; border-radius: 12px; background: #1f2937; box-shadow: inset 0 8px 12px rgba(0, 0, 0, 0.6); border: 4px solid #fbcfe8; display: flex; align-items: center; justify-content: center; }
+.kc-bakje::before { content: '🎁'; position: absolute; left: -2px; top: -26px; font-size: 18px; opacity: 0.8; }
+.kc-won { border: none; background: none; padding: 0; font-size: 52px; line-height: 1; cursor: pointer; touch-action: none; animation: vJump 0.8s ease infinite; }
+.kc-bakje .tap-hint { left: 34px; top: -54px; }

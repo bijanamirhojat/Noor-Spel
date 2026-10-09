@@ -1,8 +1,15 @@
 /* 🎡 Kermis: reuzenrad, suikerspinkraam, eendjes vissen en een grijpmachine.
    Eendjes vissen: tik een eendje, het hengeltje vist hem op en onder het eendje zit een prijsje.
-   Grijpmachine: tik in de kast om de grijper te verplaatsen, dan "Pak!". Prijzen komen op de prijzenplank
-   in de kamer (localStorage). */
+   Grijpmachine: tik in de kast om de grijper te verplaatsen, dan "Pak!". De knuffel valt in het bakje; haal hem
+   er zelf uit, dan gaat hij mee naar huis in de knuffelmand in de slaapkamer (KNUFFEL_KEY).
+   Prijzen van het eendjes vissen komen op de prijzenplank in de kamer (localStorage). */
 const KERMIS_KEY = 'noor-prinses-kermis';
+const KNUFFEL_KEY = 'noor-prinses-knuffels';
+let knuffels = [];
+try {
+    const d = JSON.parse(localStorage.getItem(KNUFFEL_KEY));
+    if (Array.isArray(d)) knuffels = d.filter(p => typeof p === 'string' && p.length <= 8).slice(-30);
+} catch (e) {}
 const KERMIS_SMALL = ['🎈', '🍭', '🪀', '🎀', '🍬', '🪁', '🧃', '🎏'];
 const KERMIS_BIG = ['⭐', '👑', '🏆', '💎'];
 const KERMIS_PLUSH = ['🧸', '🐰', '🦄', '🐻', '🐶', '🐱', '🐼', '🐸', '🐵', '🐧'];
@@ -31,7 +38,9 @@ function kermisWin(prize, ov, fromEl, trayId) {
 
 function renderKermisTrays() {
     const last = kermisPrizes.slice(-8).join('');
-    ['kdTray', 'kcTray'].forEach(id => {
+    const mand = document.getElementById('kcMand');
+    if (mand) mand.innerHTML = `🧺 ${knuffels.length}<span>${knuffels.slice(-8).join('')}</span>`;
+    ['kdTray'].forEach(id => {
         const t = document.getElementById(id);
         if (t) t.innerHTML = `🏆 ${kermisPrizes.length}<span>${last}</span>`;
     });
@@ -190,7 +199,7 @@ const kcGlass = document.getElementById('kcGlass');
 const kcClaw = document.getElementById('kcClaw');
 let kermisClawOpen = false;
 // Claw x in % of the glass; plush: { node, x (%), e }
-const kc = { x: 50, busy: false, plush: [] };
+const kc = { x: 50, busy: false, plush: [], won: null };
 
 function kcFill() {
     kcGlass.querySelectorAll('.kc-plush').forEach(p => p.remove());
@@ -218,6 +227,12 @@ kcGlass.addEventListener('pointerdown', (e) => {
 });
 
 function kcGrab() {
+    if (kc.won) {
+        // First take your cuddly toy out of the tray
+        bounceEl(document.getElementById('kcBakje'), 'jump');
+        document.getElementById('kcHint').textContent = 'Haal eerst je knuffel uit het bakje! 👇';
+        return;
+    }
     if (kc.busy) return;
     kc.busy = true;
     const btn = document.getElementById('kcGrab');
@@ -257,10 +272,17 @@ function kcGrab() {
             chute.appendChild(drop);
             playFreqSweep(900, 200, 0.4, 0.1);
             setTimeout(() => {
-                kermisTune();
-                ovCheer(kcEl, chute, ['💖', '✨', '🎉']);
-                kermisWin(near.e, kcEl, drop, 'kcTray').then(() => drop.remove());
-                document.getElementById('kcHint').textContent = 'Gewonnen! Nog een keer? 🧸';
+                // Out of the chute into the tray at the bottom: tap it to take it out
+                const bakje = document.getElementById('kcBakje');
+                ovFly(kcEl, drop, bakje, near.e, 350).then(() => {
+                    drop.remove();
+                    bakje.innerHTML = `<button class="kc-won">${near.e}</button><div class="tap-hint">👇</div>`;
+                    bakje.querySelector('.kc-won').addEventListener('pointerdown', (e) => { e.stopPropagation(); kcTakeOut(); });
+                    kc.won = near.e;
+                    kermisTune();
+                    ovCheer(kcEl, bakje, ['💖', '✨', '🎉']);
+                    document.getElementById('kcHint').textContent = 'Gewonnen! Haal je knuffel uit het bakje 👇';
+                });
                 kcMove(50);
                 kcAddPlush(24 + Math.random() * 66);
                 kc.busy = false;
@@ -268,6 +290,28 @@ function kcGrab() {
         }, 900);
     }, 1900);
 }
+// Take the toy out of the tray: it goes home into the cuddly toy basket in the bedroom
+function kcTakeOut() {
+    const e = kc.won;
+    if (!e) return;
+    kc.won = null;
+    const bakje = document.getElementById('kcBakje');
+    const btn = bakje.querySelector('.kc-won');
+    knuffels.push(e);
+    if (knuffels.length > 30) knuffels = knuffels.slice(-30);
+    try { localStorage.setItem(KNUFFEL_KEY, JSON.stringify(knuffels)); } catch (err) {}
+    playCorrect();
+    const mand = document.getElementById('kcMand');
+    ovFly(kcEl, btn, mand, e, 700).then(() => {
+        renderKermisTrays();
+        renderPlushBasket();
+        bounceEl(mand, 'jump');
+        showToast(`${e} gaat mee naar huis, in je knuffelmand! 🧺`, 2000);
+        document.getElementById('kcHint').textContent = 'Nog een keer? 🧸';
+    });
+    bakje.innerHTML = '';
+}
+
 document.getElementById('kcGrab').addEventListener('pointerdown', (e) => { e.stopPropagation(); kcGrab(); });
 
 function openKermisClaw() {
@@ -275,6 +319,7 @@ function openKermisClaw() {
     kcEl.classList.add('open');
     kc.busy = false;
     kcClaw.className = 'kc-claw';
+    document.getElementById('kcBakje').innerHTML = '';
     kcClaw.querySelector('.held').textContent = '';
     kcFill();
     kcMove(50);
@@ -284,6 +329,13 @@ function openKermisClaw() {
 }
 function closeKermisClaw() {
     kermisClawOpen = false;
+    if (kc.won) {
+        // Forgot it in the tray: it comes home anyway
+        knuffels.push(kc.won);
+        try { localStorage.setItem(KNUFFEL_KEY, JSON.stringify(knuffels)); } catch (err) {}
+        kc.won = null;
+        renderPlushBasket();
+    }
     kcEl.classList.remove('open');
     renderKermisTrays();
     _playWhoosh();

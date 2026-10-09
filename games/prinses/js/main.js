@@ -33,6 +33,7 @@ renderWallFrames();
 renderRoomSnowman();
 renderVitrine();
 renderToyShelf();
+renderPlushBasket();
 updateStickerBtn();
 loadLook();
 applyLook();

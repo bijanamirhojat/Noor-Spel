@@ -1,4 +1,5 @@
-/* 🛏️ Slaapkamer: hemelbed, kledingkast ("Klaar voor bed", js/rooms/pyjama.js) en de wasmand */
+/* 🛏️ Slaapkamer: hemelbed, kledingkast ("Klaar voor bed", js/rooms/pyjama.js), de wasmand en de knuffelmand
+   (met het teddybeertje en de knuffels uit de grijpmachine op de kermis, zie knuffels in js/dorp/kermis.js) */
 defineRoom({
     key: 'slaapkamer',
     name: 'Slaapkamer',
@@ -19,7 +20,7 @@ defineRoom({
             <div class="tap-hint" style="top:-44px">👇</div>
         </div>`, r6 + 250, 202, r6 + 386, sleepInBed);
         place(el('<div class="bed-cover" id="bedCover"></div>'), r6 + 356, 330);
-        addObj('<div class="emoji-obj">🧸</div>', r6 + 196, 380, r6 + 210, teddyHug);
+        addObj('<div class="sk-plush"><span class="toys" id="plushPile"></span><div class="mand"></div><b>Knuffels</b></div>', r6 + 172, 300, r6 + 210, plushHug);
         addObj('<div class="emoji-obj" style="font-size:44px">🎶</div>', r6 + 610, 110, r6 + 640, () => { playLullaby(); speak('Een slaapliedje!'); });
     }
 });
@@ -66,4 +67,16 @@ function playLullaby() {
     // Altijd is Kortjakje ziek / Twinkle twinkle
     const notes = [523, 523, 784, 784, 880, 880, 784, 0, 698, 698, 659, 659, 587, 587, 523];
     notes.forEach((f, i) => { if (f) setTimeout(() => playTone(f, 0.4, 0.12, 'sine'), i * 420); });
+}
+
+// The cuddly toy basket: the teddy plus the toys won at the claw machine
+function renderPlushBasket() {
+    const n = document.getElementById('plushPile');
+    if (!n) return;
+    n.innerHTML = ['🧸', ...knuffels].slice(-9).map((k, i) => `<span style="animation-delay:${-i * 0.3}s">${k}</span>`).join('');
+}
+
+function plushHug(node) {
+    node.classList.remove('hug'); void node.offsetWidth; node.classList.add('hug');
+    teddyHug(node);
 }
