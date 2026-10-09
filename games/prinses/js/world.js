@@ -31,7 +31,7 @@ const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', g
 
 // De ruimte: met de raket op de raketwolk (js/ruimte.js); de prinses zweeft er
 const SPACE = { key: 'ruimte', name: 'Ruimte', icon: '🪐', color: '#7c3aed', gems: 10,
-    rooms: ['maan', 'spiraal', 'poezenplaneten'] };
+    rooms: ['maan', 'spiraal', 'poezenplaneten', 'ruimtehaven'] };
 
 const SCENES = {};
 let scene = null;

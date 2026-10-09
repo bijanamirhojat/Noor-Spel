@@ -47,6 +47,7 @@
     <link rel="stylesheet" href="prinses/css/ruimte/maan.css">
     <link rel="stylesheet" href="prinses/css/ruimte/spiraal.css">
     <link rel="stylesheet" href="prinses/css/ruimte/poezenplaneten.css">
+    <link rel="stylesheet" href="prinses/css/ruimte/ruimtehaven.css">
     <link rel="stylesheet" href="prinses/css/sea.css">
     <link rel="stylesheet" href="prinses/css/rooms/kasteelhal.css">
     <link rel="stylesheet" href="prinses/css/rooms/spiegelkamer.css">
@@ -539,6 +540,20 @@
                 <button class="scope-close" id="kittenClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="tripov" id="tripOv" data-phase="map">
+                <div class="nails-title" id="tripTitle"></div>
+                <div class="rt-bar"><span class="rt-pill" id="tripPass"></span><span class="rt-pill" id="tripStars"></span></div>
+                <div class="rt-map" id="tripMap"></div>
+                <div class="rt-fly">
+                    <div class="rt-progress"><span class="rk" id="tripRocket">🚀</span><span class="goal" id="tripGoal"></span></div>
+                    <canvas class="rt-canvas" id="tripCanvas"></canvas>
+                    <div class="rt-fly-hint">👆 Stuur de raket met je vinger en vang de sterren!</div>
+                </div>
+                <div class="rt-land" id="tripLand"></div>
+                <button class="rt-back" id="tripBack">🚀 Verder vliegen</button>
+                <button class="scope-close" id="tripClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -811,6 +826,7 @@
     <script src="prinses/js/ruimte/maan.js"></script>
     <script src="prinses/js/ruimte/spiraal.js"></script>
     <script src="prinses/js/ruimte/poezenplaneten.js"></script>
+    <script src="prinses/js/ruimte/ruimtehaven.js"></script>
     <script src="prinses/js/parents.js"></script>
     <script src="prinses/js/map.js"></script>
     <script src="prinses/js/stickers.js"></script>

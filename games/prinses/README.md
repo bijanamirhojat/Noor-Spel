@@ -23,7 +23,8 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
 js/dierentuin.js   de dierentuin: bus (addBus, vanaf het strand), dierengeluiden, zooToss/zooAnim
 js/dierentuin/*.js ingang, apenhuis, savanne (voederkar: "Wie eet wat?"), pinguins, olifanten
 js/ruimte.js       de ruimte: raket (addRocket), poezenplaneten (catPlanetHTML), miauw/spinnen
-js/ruimte/*.js     maan, spiraal (erin = ergens anders in de ruimte uitkomen), poezenplaneten ("Poesjes naar huis")
+js/ruimte/*.js     maan, spiraal (erin = ergens anders in de ruimte uitkomen), poezenplaneten ("Poesjes naar huis"),
+                   ruimtehaven (ruimtereis: sterrenkaart → zelf de raket sturen → landen op 6 planeten + paspoort)
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen), raketwolk (raket naar de ruimte)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
