@@ -1,0 +1,21 @@
+/* 🐧 Pinguïns */
+.room.rm-pinguins .wall { background: radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 40px 40px, linear-gradient(180deg, #7dd3fc, #e0f2fe 70%, #f8fafc); }
+.room.rm-pinguins .floor { background: linear-gradient(180deg, #f8fafc, #cbd5e1); }
+.zp-water { width: 300px; height: 60px; border-radius: 30px 30px 10px 10px; background: linear-gradient(180deg, #0ea5e9, #0369a1); overflow: hidden; pointer-events: none; }
+.zp-water .wave { position: absolute; left: -30px; right: -30px; top: 0; height: 14px; background: radial-gradient(ellipse 20px 8px at 50% 0, #e0f2fe 60%, transparent 64%) 0 0 / 40px 14px repeat-x; animation: bcWave 2.4s ease-in-out infinite; }
+.zp-slide { width: 300px; height: 290px; }
+.zp-slide .ice { position: absolute; left: 0; top: 0; width: 300px; height: 290px; background: linear-gradient(180deg, #f0f9ff, #bae6fd); clip-path: polygon(0 0, 22% 0, 100% 86%, 100% 100%, 0 100%); }
+.zp-slide .pg { position: absolute; left: 20px; top: -46px; font-size: 54px; line-height: 1; }
+.zp-slide.go .pg { animation: zSlide 2.4s ease-in forwards; }
+@keyframes zSlide { 15% { transform: rotate(-60deg); } 40% { transform: translate(230px, 220px) rotate(-60deg); } 50% { transform: translate(290px, 270px) rotate(-60deg); opacity: 1; } 55% { opacity: 0; } 85% { transform: translate(0, 0); opacity: 0; } 100% { transform: translate(0, 0); opacity: 1; } }
+.zp-pen { font-size: 64px; line-height: 1; animation: zWaddle 0.8s ease-in-out infinite alternate; }
+@keyframes zWaddle { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+.zp-pen.jump { animation: vJump 0.4s ease 2; }
+.zp-pen.gulp { animation: zfMunch 0.18s ease 5 alternate; }
+.zp-bucket { width: 70px; height: 80px; }
+.zp-bucket .bk { position: absolute; left: 0; top: 20px; font-size: 60px; line-height: 1; }
+.zp-bucket .f { position: absolute; left: 18px; top: 0; font-size: 32px; transform: rotate(-30deg); }
+.zp-floe { width: 170px; height: 130px; animation: carousel 3.4s ease-in-out infinite; }
+.zp-floe .ice { position: absolute; left: 0; top: 80px; width: 170px; height: 40px; border-radius: 50%; background: linear-gradient(180deg, #fff, #bae6fd); }
+.zp-floe span { position: absolute; left: 35px; top: 0; font-size: 96px; line-height: 1; }
+.zp-floe.bob span { animation: zfNope 0.6s ease; }

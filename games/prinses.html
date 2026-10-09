@@ -31,6 +31,12 @@
     <link rel="stylesheet" href="prinses/css/dorp/pluktuin.css">
     <link rel="stylesheet" href="prinses/css/dorp/vlinderkas.css">
     <link rel="stylesheet" href="prinses/css/dorp/kermis.css">
+    <link rel="stylesheet" href="prinses/css/dierentuin.css">
+    <link rel="stylesheet" href="prinses/css/dierentuin/ingang.css">
+    <link rel="stylesheet" href="prinses/css/dierentuin/apenhuis.css">
+    <link rel="stylesheet" href="prinses/css/dierentuin/savanne.css">
+    <link rel="stylesheet" href="prinses/css/dierentuin/pinguins.css">
+    <link rel="stylesheet" href="prinses/css/dierentuin/olifanten.css">
     <link rel="stylesheet" href="prinses/css/rooms/minigolf.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
@@ -512,6 +518,14 @@
                 <button class="scope-close" id="kermisClawClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="zooov" id="zooFeedOv">
+                <div class="nails-title">🍽️ Wie eet wat?</div>
+                <div class="zf-count" id="zfCount"></div>
+                <div class="zf-stage"><div class="zf-bubble" id="zfBubble"></div><div class="zf-animal" id="zfAnimal"></div></div>
+                <div class="zf-choices" id="zfChoices"></div>
+                <button class="scope-close" id="zooFeedClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -765,6 +779,13 @@
     <script src="prinses/js/dorp/pluktuin.js"></script>
     <script src="prinses/js/dorp/vlinderkas.js"></script>
     <script src="prinses/js/dorp/kermis.js"></script>
+    <!-- De dierentuin (scene 'dierentuin', zie ZOO in js/world.js) -->
+    <script src="prinses/js/dierentuin.js"></script>
+    <script src="prinses/js/dierentuin/ingang.js"></script>
+    <script src="prinses/js/dierentuin/apenhuis.js"></script>
+    <script src="prinses/js/dierentuin/savanne.js"></script>
+    <script src="prinses/js/dierentuin/pinguins.js"></script>
+    <script src="prinses/js/dierentuin/olifanten.js"></script>
     <script src="prinses/js/rooms/minigolf.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>

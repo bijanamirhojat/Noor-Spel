@@ -71,8 +71,8 @@
 /* Castle tab: 4 floors of up to 7 rooms. Tile size from the space left (cq units resolve against .mapov). */
 .map-body.castle { --t: clamp(44px, min(calc((100cqw - 130px) / (var(--n, 7) + 1.2)), calc((100cqh - 200px) / 4.7)), 112px); }
 
-/* Other worlds: a few big tiles, 3 per row */
-.map-body.places { --t: clamp(70px, min(calc((100cqw - 110px) / 3.6), calc((100cqh - 240px) / 2.2)), 150px); }
+/* Other worlds: big tiles; js/map.js picks --cols/--rows so they all fit */
+.map-body.places { --t: clamp(60px, min(calc((100cqw - 110px) / (var(--cols, 3) + 0.6)), calc((100cqh - 240px) / (var(--rows, 2) + 0.2))), 150px); }
 .map-world {
     padding: 14px;
     border-radius: 26px;
@@ -81,7 +81,7 @@
     box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 .map-world.here { box-shadow: 0 0 0 4px #fff, 0 0 18px 4px var(--c); }
-.map-world .map-grid { display: grid; grid-template-columns: repeat(3, auto); gap: 10px; }
+.map-world .map-grid { display: grid; grid-template-columns: repeat(var(--cols, 3), auto); gap: 10px; }
 
 /* The castle as a cross-section: tower on top, floors stacked, grass underneath */
 .map-castle {

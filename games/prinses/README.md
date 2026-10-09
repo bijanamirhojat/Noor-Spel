@@ -20,6 +20,8 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
                 vlinderkas (rupsjes voeren, cocon, vlinders laten uitkomen),
                 kermis (eendjes vissen, grijpmachine, suikerspin, reuzenrad),
                 strand (hooghouden met de strandbal; de zeehond kopt hem terug)
+js/dierentuin.js   de dierentuin: bus (addBus, vanaf het strand), dierengeluiden, zooToss/zooAnim
+js/dierentuin/*.js ingang, apenhuis, savanne (voederkar: "Wie eet wat?"), pinguins, olifanten
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
@@ -43,6 +45,12 @@ in de eerste kamer. De kaart tekent het kasteel als doorsnede: toren boven, bene
 Een eigen wereld (`VILLAGE` in `js/world.js`, scene `dorp`). De koets op het kasteelplein rijdt erheen
 (`addKoets` / `rideCarriage` in `js/village.js`); op het dorpsplein staat de koets terug.
 De dorpskamers gebruiken ook `defineRoom`, dus `roomX`, `inRoom` en stickers werken er hetzelfde.
+
+## Dierentuin
+
+Een eigen wereld (`ZOO` in `js/world.js`, scene `dierentuin`). De dierentuinbus staat op het strand aan het eind
+van het dorp (`scene.rides.dierentuin`) en bij de ingang (`scene.koets`, terug naar het dorp). `rideCarriage`
+zet je neer bij het voertuig in de nieuwe wereld dat terug gaat naar waar je vandaan kwam (`scene.rides[van]`, anders `scene.koets`).
 
 ## Wolken
 

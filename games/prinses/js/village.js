@@ -48,7 +48,9 @@ function clipClop(ms) {
     }
 }
 
-function rideCarriage(node, toKey) {
+// Ride a vehicle to another world. The vehicle you arrive in is the one there that goes back to where you
+// came from (scene.rides[fromKey]), else that world's koets. opts: { sound(ms), toast }
+function rideCarriage(node, toKey, opts = {}) {
     if (state.busy) return;
     state.busy = true;
     state.hold = 0;
@@ -57,14 +59,16 @@ function rideCarriage(node, toKey) {
     const p = princessEl();
     p.classList.add('entering');
     playFreqSweep(500, 900, 0.2, 0.1);
-    clipClop(2300);
+    (opts.sound || clipClop)(2300);
     setTimeout(() => node.classList.add('drive'), 350);
     const fade = document.getElementById('doorFade');
+    let k = null;
     setTimeout(() => fade.classList.add('show'), 1000);
     setTimeout(() => {
         node.classList.remove('drive');
+        const from = scene.key;
         setScene(toKey);
-        const k = scene.koets;
+        k = (scene.rides && scene.rides[from]) || scene.koets;
         state.x = state.targetX = k.walkX;
         state.facing = -1;
         if (state.pet.following) state.pet.x = state.x + 90;
@@ -73,11 +77,11 @@ function rideCarriage(node, toKey) {
     }, 1450);
     setTimeout(() => fade.classList.remove('show'), 1550);
     setTimeout(() => {
-        scene.koets.node.classList.remove('arrive');
+        k.node.classList.remove('arrive');
         p.classList.remove('entering');
         burst(state.x, 320, 40);
         playSparkleSound();
-        showToast(toKey === 'dorp' ? '🏘️ Het dorp!' : '🏰 Terug bij het kasteel!', 1600);
+        showToast(opts.toast || (toKey === 'dorp' ? '🏘️ Het dorp!' : '🏰 Terug bij het kasteel!'), 1600);
         state.busy = false;
     }, 2500);
 }

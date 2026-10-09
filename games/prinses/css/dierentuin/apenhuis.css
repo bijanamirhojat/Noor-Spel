@@ -1,0 +1,19 @@
+/* 🐒 Apenhuis */
+.room.rm-apenhuis .wall { background: radial-gradient(ellipse 60px 40px, #15803d 60%, transparent 62%) 0 0 / 120px 90px, radial-gradient(ellipse 60px 40px, #16a34a 60%, transparent 62%) 60px 45px / 120px 90px, linear-gradient(180deg, #14532d, #22c55e 70%, #86efac); }
+.room.rm-apenhuis .floor { background: radial-gradient(circle, #65a30d 3px, transparent 4px) 0 0 / 30px 20px, linear-gradient(180deg, #a16207, #78350f); }
+.za-leaves { width: 800px; height: 90px; pointer-events: none; background: radial-gradient(ellipse 50px 40px at 50% 0, #166534 70%, transparent 72%) 0 0 / 80px 90px repeat-x; }
+.za-vine { width: 8px; border-radius: 4px; background: #65a30d; transform-origin: 50% 0; animation: zVine 4s ease-in-out infinite; }
+.za-vine::before { content: '🍃'; position: absolute; left: -12px; top: 40%; font-size: 20px; }
+.za-vine .m { position: absolute; left: -30px; bottom: -50px; font-size: 64px; line-height: 1; }
+@keyframes zVine { 50% { transform: rotate(6deg); } }
+.za-vine.swing { animation: zSwing 1.6s ease-in-out; }
+@keyframes zSwing { 25% { transform: rotate(-35deg); } 60% { transform: rotate(30deg); } 85% { transform: rotate(-10deg); } }
+.za-vine.eat .m { animation: vJump 0.3s ease 3; }
+.za-tree { width: 130px; height: 260px; }
+.za-tree::before { content: ''; position: absolute; left: 56px; top: 80px; width: 18px; height: 180px; background: repeating-linear-gradient(0deg, #92400e 0 12px, #a16207 12px 24px); border-radius: 6px; }
+.za-tree .top { position: absolute; left: 0; top: -20px; font-size: 130px; line-height: 1; }
+.za-tree .bn { position: absolute; top: 80px; font-size: 30px; }
+.za-gorilla { font-size: 90px; line-height: 1; }
+.za-gorilla.drum span { display: inline-block; animation: zDrum 0.12s ease 6 alternate; }
+@keyframes zDrum { to { transform: scale(1.08) translateY(-4px); } }
+.za-net { width: 120px; height: 150px; pointer-events: none; background: linear-gradient(45deg, transparent 46%, #d6b98c 46% 54%, transparent 54%) 0 0 / 30px 30px, linear-gradient(-45deg, transparent 46%, #d6b98c 46% 54%, transparent 54%) 0 0 / 30px 30px; border-left: 6px solid #78350f; border-right: 6px solid #78350f; }

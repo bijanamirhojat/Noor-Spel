@@ -1,4 +1,4 @@
-/* 🏐 Strand: zee met golfjes, een parasol, een zandkasteel, een krabbetje en schelpen.
+/* 🏐 Strand: zee met golfjes, een parasol, een zandkasteel, een krabbetje, schelpen en de bus naar de dierentuin.
    Binnen: hooghouden! Tik de strandbal omhoog; vliegt hij over het net, dan kopt de zeehond hem terug.
    Het record wordt bewaard (localStorage). */
 const BEACH_KEY = 'noor-prinses-strand';
@@ -20,14 +20,14 @@ defineRoom({
         place(el('<div class="bc-sea"><div class="wave"></div><div class="wave w2"></div></div>'), x, 300);
         place(el('<div class="bc-sun">☀️</div>'), x + 640, -40);
         place(el('<div class="bc-gull">🕊️</div>'), x + 120, 40);
-        place(el('<div class="bc-boat">⛵</div>'), x + 520, 260);
+        place(el('<div class="bc-boat">⛵</div>'), x + 470, 258);
         addObj(`<div class="bc-parasol"><div class="top"></div><div class="pole"></div><div class="towel"></div></div>`, x + 20, 180, x + 110, (node) => {
             node.classList.remove('spin'); void node.offsetWidth; node.classList.add('spin');
             playFreqSweep(400, 900, 0.4, 0.1);
         });
         addObj(`<div class="bc-net"><div class="post"></div><div class="mesh"></div><div class="post r"></div><span class="ball">🏐</span>
-            <div class="tap-hint" style="left:96px;top:-70px">👇</div></div>`, x + 250, 210, x + 360, openBeach);
-        addObj('<div class="bc-castle"><span class="flag">🚩</span><div class="t l"></div><div class="t r"></div><div class="keep"></div><span class="shell">🐚</span></div>', x + 500, 300, x + 560, (node) => {
+            <div class="tap-hint" style="left:96px;top:-70px">👇</div></div>`, x + 215, 210, x + 330, openBeach);
+        addObj('<div class="bc-castle"><span class="flag">🚩</span><div class="t l"></div><div class="t r"></div><div class="keep"></div><span class="shell">🐚</span></div>', x + 440, 300, x + 500, (node) => {
             bounceEl(node, 'jump');
             node.classList.toggle('flag-on');
             playTone(node.classList.contains('flag-on') ? 784 : 523, 0.18, 0.1, 'triangle');
@@ -35,10 +35,11 @@ defineRoom({
             const p = screenToWorld(r.left + r.width / 2, r.top);
             for (let i = 0; i < 18; i++) spawnSparkle(p.x + (Math.random() - 0.5) * 80, p.y + 20, { vy: -60 - Math.random() * 50, vx: (Math.random() - 0.5) * 60, hue: 40 + Math.random() * 20, size: 4 + Math.random() * 4, max: 1.2 });
         });
-        addObj('<div class="bc-crab"><span>🦀</span></div>', x + 660, 380, x + 650, (node) => {
+        addObj('<div class="bc-crab"><span>🦀</span></div>', x + 380, 385, x + 380, (node) => {
             node.classList.remove('run'); void node.offsetWidth; node.classList.add('run');
             [700, 900, 700, 900].forEach((f, i) => setTimeout(() => playTone(f, 0.05, 0.08, 'square'), i * 90));
         });
+        scene.rides = { dierentuin: addBus(x + 560, x + 610, 'dierentuin', -56) };
         addObj('<div class="emoji-obj bc-shell">🐚</div>', x + 190, 400, x + 210, (node) => {
             bounceEl(node, 'wobble');
             beachWaves(1400);

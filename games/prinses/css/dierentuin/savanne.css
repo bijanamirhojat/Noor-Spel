@@ -1,0 +1,51 @@
+/* 🦒 Savanne */
+.room.rm-savanne .wall { background: linear-gradient(180deg, #fb923c 0%, #fdba74 40%, #fde68a 80%, #fef3c7); }
+.room.rm-savanne .floor { background: radial-gradient(circle, #a16207 1.5px, transparent 2.5px) 0 0 / 24px 16px, linear-gradient(180deg, #facc15, #ca8a04); }
+.zs-sun { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, #fef08a, #f59e0b); box-shadow: 0 0 60px #fde047; pointer-events: none; }
+.zs-acacia { width: 260px; height: 370px; pointer-events: none; }
+.zs-acacia .crown { position: absolute; left: 0; top: 0; width: 260px; height: 70px; border-radius: 50%; background: radial-gradient(circle at 30% 40%, #4d7c0f, #365314); }
+.zs-acacia .trunk { position: absolute; left: 120px; top: 50px; width: 20px; height: 320px; background: #78350f; border-radius: 8px; }
+.zs-giraffe { font-size: 200px; line-height: 1; transform-origin: 50% 100%; }
+.zs-giraffe span { display: inline-block; transform: scaleX(-1); }   /* facing the tree */
+.zs-giraffe.stretch { animation: zStretch 1.6s ease; }
+@keyframes zStretch { 30%, 70% { transform: scaleY(1.18) translateX(20px); } }
+.zs-rock { width: 200px; height: 170px; }
+.zs-rock .stone { position: absolute; left: 0; top: 80px; width: 200px; height: 90px; border-radius: 50% 50% 10px 10px; background: linear-gradient(180deg, #a8a29e, #78716c); }
+.zs-rock .lion { position: absolute; left: 50px; top: 0; font-size: 100px; line-height: 1; transform-origin: 50% 100%; }
+.zs-rock .lion.roar { animation: zRoar 0.9s ease; }
+.zs-zebra { font-size: 90px; line-height: 1; }
+.zs-zebra.hop { animation: vJump 0.4s ease 2; }
+.zs-cart { width: 170px; height: 120px; }
+.zs-cart .box { position: absolute; left: 0; top: 20px; width: 150px; height: 60px; border-radius: 10px; background: #dc2626; border: 4px solid #fff; display: flex; justify-content: center; }
+.zs-cart .box span { margin-top: -22px; font-size: 28px; letter-spacing: -4px; }
+.zs-cart .wheel { position: absolute; top: 76px; width: 40px; height: 40px; border-radius: 50%; background: #1f2937; border: 5px solid #9ca3af; }
+.zs-cart .wheel.l { left: 14px; }
+.zs-cart .wheel.r { left: 96px; }
+.zs-cart .handle { position: absolute; left: 146px; top: 30px; width: 30px; height: 8px; border-radius: 4px; background: #78350f; }
+.zs-cart .sign { position: absolute; left: 20px; top: 44px; color: #fff; font-family: 'Fredoka One', cursive; font-size: 14px; }
+
+/* ── Wie eet wat? (overlay) ── */
+.zooov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
+    background: linear-gradient(180deg, #fdba74, #fde68a 55%, #facc15 55%, #ca8a04);
+}
+.zooov.open { display: flex; }
+.zooov .nails-title { color: #9a3412; }
+.zf-count { position: absolute; left: 16px; top: 14px; font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #9a3412; background: #fff; border-radius: 999px; padding: 2px 14px; }
+.zf-stage { position: relative; flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.zf-animal { font-size: clamp(110px, 30vh, 240px); line-height: 1; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.25)); }
+.zf-animal.enter { animation: zfEnter 0.6s cubic-bezier(.2, 1.6, .4, 1); }
+@keyframes zfEnter { from { transform: translateX(60vw) scale(0.6); } }
+.zf-animal.leave { animation: zfLeave 0.5s ease-in forwards; }
+@keyframes zfLeave { to { transform: translateX(-60vw) scale(0.6); } }
+.zf-animal.munch { animation: zfMunch 0.18s ease 5 alternate; }
+@keyframes zfMunch { to { transform: scale(1.06, 0.94); } }
+.zf-animal.nope { animation: zfNope 0.5s ease; }
+@keyframes zfNope { 25%, 75% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+.zf-bubble { position: absolute; left: 50%; top: 4%; padding: 8px 18px; border-radius: 20px; background: #fff; font-family: 'Fredoka One', cursive; color: #9a3412; font-size: 1.3rem; transform: translateX(-50%) scale(0); transition: transform 0.3s cubic-bezier(.2, 1.6, .4, 1); white-space: nowrap; }
+.zf-bubble.show { transform: translateX(-50%) scale(1); }
+.zf-choices { display: flex; gap: 16px; justify-content: center; padding-bottom: 8px; }
+.zf-food { width: clamp(90px, 16vh, 130px); height: clamp(90px, 16vh, 130px); border-radius: 28px; border: 5px solid #fff; background: #fff7ed; font-size: clamp(50px, 9vh, 76px); cursor: pointer; touch-action: none; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18); }
+.zf-food.used { visibility: hidden; }

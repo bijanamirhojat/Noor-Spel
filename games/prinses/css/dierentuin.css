@@ -1,0 +1,18 @@
+/* ── Dierentuin ── */
+.z-room .wall { background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 45%, #d9f99d 85%, #bef264 100%); }
+.z-room .floor { background: radial-gradient(circle, #a3e635 2px, transparent 3px) 0 0 / 34px 20px, linear-gradient(180deg, #d6b98c, #b08a5a); }
+
+.zoo-toss { font-size: 40px; line-height: 1; pointer-events: none; z-index: 12; }
+
+/* De dierentuinbus (rijdt met dezelfde drive/arrive-animatie als de koets) */
+.zbus .zb-stop { position: absolute; left: 196px; top: -70px; display: flex; flex-direction: column; align-items: center; pointer-events: none; }
+.zbus .zb-stop span { font-size: 56px; line-height: 1; }
+.zbus .zb-stop b { margin-top: -6px; padding: 2px 8px; border-radius: 8px; background: #fff; color: #15803d; font-family: 'Fredoka One', cursive; font-size: 13px; font-weight: normal; white-space: nowrap; }
+.zb-body { position: absolute; left: 0; top: 40px; width: 220px; height: 110px; border-radius: 20px 30px 10px 10px; background: linear-gradient(180deg, #facc15 0 70%, #16a34a 70%); border: 4px solid #fff; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); }
+.zb-win { position: absolute; top: 12px; width: 44px; height: 40px; border-radius: 8px; background: #bae6fd; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; }
+.zb-win span { font-size: 30px; line-height: 1; }
+.zb-win:nth-child(1) { left: 12px; }
+.zb-win:nth-child(2) { left: 64px; }
+.zb-win:nth-child(3) { left: 116px; }
+.zb-front { position: absolute; right: 8px; top: 12px; width: 40px; height: 52px; border-radius: 6px 18px 6px 6px; background: #bae6fd; }
+.zbus .k-wheel { width: 44px; height: 44px; margin-left: -22px; border-color: #1f2937; background: repeating-conic-gradient(#9ca3af 0 10deg, transparent 10deg 45deg), #374151; }

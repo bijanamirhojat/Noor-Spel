@@ -1,0 +1,28 @@
+/* 🎟️ Ingang */
+.zi-gate { width: 220px; height: 340px; }
+.zi-gate .post { position: absolute; top: 60px; width: 40px; height: 280px; border-radius: 6px 6px 0 0; background: repeating-linear-gradient(0deg, #78350f 0 20px, #92400e 20px 40px); }
+.zi-gate .post.l { left: 0; }
+.zi-gate .post.r { right: 0; }
+.zi-gate .arch { position: absolute; left: -20px; top: 0; width: 260px; height: 80px; border-radius: 130px 130px 12px 12px; background: linear-gradient(180deg, #16a34a, #15803d); border: 5px solid #fde047; display: flex; align-items: center; justify-content: center; gap: 6px; color: #fff; font-family: 'Fredoka One', cursive; font-size: 22px; text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); }
+.zi-gate .arch span { font-size: 32px; }
+.zi-gate .arch.roar span:first-child { animation: zRoar 0.8s ease; display: inline-block; }
+.zi-gate .bars { position: absolute; left: 40px; top: 120px; width: 140px; height: 220px; background: repeating-linear-gradient(90deg, #1f2937 0 6px, transparent 6px 34px); opacity: 0.35; }
+@keyframes zRoar { 30%, 70% { transform: scale(1.5) rotate(-6deg); } }
+
+.zi-booth { width: 150px; height: 250px; }
+.zi-booth .roof { position: absolute; left: -10px; top: 0; width: 170px; height: 46px; border-radius: 0 0 16px 16px; background: repeating-linear-gradient(90deg, #f97316 0 24px, #fff 24px 48px); }
+.zi-booth::before { content: ''; position: absolute; left: 0; top: 46px; width: 150px; height: 204px; background: #fef3c7; border: 4px solid #f97316; border-top: none; }
+.zi-booth .win { position: absolute; left: 25px; top: 66px; width: 100px; height: 80px; border-radius: 10px 10px 0 0; background: #bae6fd; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+.zi-booth .win span { font-size: 54px; line-height: 1; }
+.zi-booth .slot { position: absolute; left: 45px; top: 150px; width: 60px; height: 8px; border-radius: 4px; background: #1f2937; }
+.zi-booth .ticket { position: absolute; left: 55px; top: 140px; font-size: 40px; line-height: 1; transform: scale(0); }
+.zi-booth.print .ticket { animation: zTicket 1.6s ease forwards; }
+@keyframes zTicket { 30% { transform: translateY(30px) scale(1); } 80% { transform: translateY(30px) scale(1.1); opacity: 1; } 100% { transform: translateY(30px) scale(1.1); opacity: 0; } }
+.zi-booth .sign { position: absolute; left: 20px; top: 190px; width: 110px; text-align: center; font-family: 'Fredoka One', cursive; color: #c2410c; font-size: 16px; }
+
+.zi-balloons { width: 110px; height: 230px; }
+.zi-balloons .b { position: absolute; top: 0; font-size: 50px; line-height: 1; filter: hue-rotate(var(--h)); animation: carousel 2.6s ease-in-out infinite; }
+.zi-balloons .b.away { animation: zAway 3.4s ease-in forwards; }
+@keyframes zAway { 80% { opacity: 1; } 100% { transform: translate(40px, -500px) rotate(10deg); opacity: 0; } }
+.zi-balloons .strings { position: absolute; left: 40px; top: 50px; width: 2px; height: 110px; background: #64748b; box-shadow: -24px -4px 0 #64748b, 24px -4px 0 #64748b; }
+.zi-balloons .seller { position: absolute; left: 14px; top: 150px; font-size: 70px; line-height: 1; }

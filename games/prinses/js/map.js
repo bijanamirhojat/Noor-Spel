@@ -98,6 +98,7 @@ function mapWorlds() {
         { key: 'out', icon: '🌳', name: 'Buiten', color: '#22c55e', scenes: [SCENES.out] },
         { key: 'sea', icon: '🧜‍♀️', name: 'Onder water', color: '#06b6d4', scenes: [SCENES.sea] },
         { key: 'dorp', icon: VILLAGE.icon, name: VILLAGE.name, color: VILLAGE.color, scenes: [SCENES.dorp] },
+        { key: 'dierentuin', icon: ZOO.icon, name: ZOO.name, color: ZOO.color, scenes: [SCENES.dierentuin] },
         { key: 'wolken', icon: SKY.icon, name: SKY.name, color: SKY.color, scenes: [SCENES.wolken] }
     ];
 }
@@ -131,6 +132,16 @@ function renderMapBody() {
             </div>`;
         }).join('')}</div>`;
     } else {
+        // Spread the places over as many columns as gives the biggest tiles, so everything fits without scrolling
+        const n = w.scenes[0].rooms.length;
+        const W = mapOv.clientWidth - 110, H = mapOv.clientHeight - 240;
+        let cols = 1, best = 0;
+        for (let c = 1; c <= n; c++) {
+            const t = Math.min(W / (c + 0.6), H / (Math.ceil(n / c) + 0.2));
+            if (t > best + 1) { best = t; cols = c; }
+        }
+        body.style.setProperty('--cols', cols);
+        body.style.setProperty('--rows', Math.ceil(n / cols));
         body.innerHTML = `<div class="map-world${w.scenes.includes(scene) ? ' here' : ''}"><div class="map-grid">${mapTiles(w.scenes[0])}</div></div>`;
     }
     body.querySelectorAll('.map-room').forEach(b => b.addEventListener('pointerdown', (e) => {
@@ -147,9 +158,9 @@ function openMap() {
     mapOpen = true;
     // Open on the world the princess is in
     mapTab = (mapWorlds().find(w => w.scenes.includes(scene)) || mapWorlds()[0]).key;
+    mapOv.classList.add('open');
     renderMapTabs();
     renderMapBody();
-    mapOv.classList.add('open');
     playPop();
 }
 

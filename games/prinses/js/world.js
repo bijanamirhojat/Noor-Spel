@@ -21,6 +21,10 @@ const WINGS = [
 const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', gems: 12,
     rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'pluktuin', 'vlinderkas', 'station', 'kermis', 'spookhuis', 'strand'] };
 
+// De dierentuin: met de bus bereikbaar vanaf het strand aan het eind van het dorp (js/dierentuin.js)
+const ZOO = { key: 'dierentuin', name: 'Dierentuin', icon: '🦁', color: '#65a30d', gems: 10,
+    rooms: ['zooingang', 'apenhuis', 'savanne', 'pinguins', 'olifanten'] };
+
 // Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
 const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 12,
     rooms: ['wolkenpoort', 'weermakerij', 'wolkenkasteel', 'regenboogmakerij'] };
@@ -48,6 +52,7 @@ function initScenes() {
     SCENES.out = { key: 'out', rooms: ROOMS_OUT, el: makeWorldEl('out'), gems: [], gemsGot: 0, gemCount: 14, door: null };
     SCENES.sea = { key: 'sea', rooms: ROOMS_SEA, el: makeWorldEl('sea'), gems: [], gemsGot: 0, gemCount: 12, door: null };
     SCENES.wolken = { key: 'wolken', rooms: SKY.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('wolken'), gems: [], gemsGot: 0, gemCount: SKY.gems, door: null, arriveX: 150 };
+    SCENES.dierentuin = { key: 'dierentuin', rooms: ZOO.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('dierentuin'), gems: [], gemsGot: 0, gemCount: ZOO.gems, door: null, koets: null };
     SCENES.dorp = { key: 'dorp', rooms: VILLAGE.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('dorp'), gems: [], gemsGot: 0, gemCount: VILLAGE.gems, door: null, koets: null };
     Object.values(SCENES).forEach(sc => sc.rooms.forEach((r, idx) => { ROOM_AT[r.key] = { scene: sc, idx }; }));
     scene = SCENES.hal;
