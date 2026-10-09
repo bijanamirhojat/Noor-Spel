@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="prinses/css/dorp/strand.css">
     <link rel="stylesheet" href="prinses/css/dorp/pluktuin.css">
     <link rel="stylesheet" href="prinses/css/dorp/vlinderkas.css">
+    <link rel="stylesheet" href="prinses/css/dorp/kermis.css">
     <link rel="stylesheet" href="prinses/css/rooms/minigolf.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
@@ -488,6 +489,29 @@
                 <button class="scope-close" id="bflyClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="kermisov" id="kermisDuckOv">
+                <div class="nails-title">🦆 Eendjes vissen</div>
+                <div class="km-tray" id="kdTray"></div>
+                <div class="km-hint">Tik op een eendje om hem op te vissen 🎣</div>
+                <div class="kd-stage" id="kdStage"><div class="pool"></div><div class="kd-line" id="kdLine"></div></div>
+                <button class="scope-close" id="kermisDuckClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="kermisov" id="kermisClawOv">
+                <div class="nails-title">🧸 Grijpmachine</div>
+                <div class="km-tray" id="kcTray"></div>
+                <div class="km-hint" id="kcHint"></div>
+                <div class="kc-machine">
+                    <div class="kc-top">⭐ Grijp een knuffel ⭐</div>
+                    <div class="kc-glass" id="kcGlass">
+                        <div class="kc-chute" id="kcChute"></div>
+                        <div class="kc-claw" id="kcClaw"><div class="rope"></div><div class="head"></div><span class="held"></span></div>
+                    </div>
+                    <div class="kc-base"><button class="kc-grab" id="kcGrab">⬇️ Pak!</button></div>
+                </div>
+                <button class="scope-close" id="kermisClawClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -740,6 +764,7 @@
     <script src="prinses/js/dorp/strand.js"></script>
     <script src="prinses/js/dorp/pluktuin.js"></script>
     <script src="prinses/js/dorp/vlinderkas.js"></script>
+    <script src="prinses/js/dorp/kermis.js"></script>
     <script src="prinses/js/rooms/minigolf.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>

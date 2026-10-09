@@ -18,6 +18,7 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
                 station (filmische treinrit langs het hele koninkrijk), spookhuis (spookjes zoeken met de zaklamp),
                 moestuin (zaaien, water geven, oogsten), pluktuin (bloemen plukken voor een boeket),
                 vlinderkas (rupsjes voeren, cocon, vlinders laten uitkomen),
+                kermis (eendjes vissen, grijpmachine, suikerspin, reuzenrad),
                 strand (hooghouden met de strandbal; de zeehond kopt hem terug)
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen)
