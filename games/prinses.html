@@ -62,6 +62,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/eetzaal.css">
     <link rel="stylesheet" href="prinses/css/rooms/trofeekamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/parfumerie.css">
+    <link rel="stylesheet" href="prinses/css/rooms/glitterkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/muziekkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/lieveheersbeestjes.css">
     <link rel="stylesheet" href="prinses/css/rooms/fotostudio.css">
@@ -448,6 +449,28 @@
                 <button class="scope-close" id="golfClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="glitterov" id="glitterOv">
+                <div class="nails-title">✨ Glitterplaatje</div>
+                <div class="gl-hint" id="glitterHint"></div>
+                <div class="gl-work">
+                    <div class="gl-paper" id="glitterPaper">
+                        <canvas id="glitterGlue"></canvas><canvas id="glitterStuck"></canvas><canvas id="glitterFx"></canvas>
+                    </div>
+                </div>
+                <div class="gl-bar">
+                    <button class="tool-btn wide gl-tool" data-t="glue">🧴 Lijm</button>
+                    <button class="tool-btn gl-shape" data-s="❤️">❤️</button>
+                    <button class="tool-btn gl-shape" data-s="⭐">⭐</button>
+                    <button class="tool-btn gl-shape" data-s="👑">👑</button>
+                    <button class="tool-btn gl-shape" data-s="🟣">🟣</button>
+                    <button class="tool-btn wide gl-tool" data-t="glitter">✨ Glitter</button>
+                    <button class="tool-btn wide gl-tool" data-t="shake">👋 Schudden</button>
+                    <button class="tool-btn wide gl-tool" data-t="new">📄 Nieuw</button>
+                </div>
+                <div class="gl-colors" id="glitterColors"></div>
+                <button class="scope-close" id="glitterClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -679,6 +702,7 @@
     <script src="prinses/js/rooms/eetzaal.js"></script>
     <script src="prinses/js/rooms/trofeekamer.js"></script>
     <script src="prinses/js/rooms/parfumerie.js"></script>
+    <script src="prinses/js/rooms/glitterkamer.js"></script>
     <script src="prinses/js/rooms/muziekkamer.js"></script>
     <script src="prinses/js/rooms/lieveheersbeestjes.js"></script>
     <script src="prinses/js/rooms/fotostudio.js"></script>

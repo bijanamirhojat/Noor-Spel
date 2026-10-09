@@ -1,0 +1,66 @@
+/* ✨ Glitterkamer */
+.room.rm-glitterkamer .wall { background: radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 46px 40px, radial-gradient(circle, #fde047 1.5px, transparent 2.5px) 23px 20px / 46px 40px, linear-gradient(180deg, #f0abfc, #f9a8d4 50%, #c4b5fd); animation: glWall 3s linear infinite; }
+@keyframes glWall { 50% { background-position: 4px 6px, 19px 14px, 0 0; } }
+.room.rm-glitterkamer .floor { background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 1.5px, transparent 2.5px) 0 0 / 22px 16px, linear-gradient(180deg, #a855f7, #7e22ce); }
+
+.gl-cord { width: 4px; height: 520px; background: #e9d5ff; pointer-events: none; }
+.gl-disco { font-size: 90px; line-height: 1; filter: drop-shadow(0 0 20px #fff); animation: carousel 3s ease-in-out infinite; }
+.gl-disco.spin { animation: glSpin 1.2s ease; }
+@keyframes glSpin { 100% { transform: rotate(720deg); } }
+
+.gl-frame { width: 210px; height: 160px; padding: 10px; border-radius: 12px; pointer-events: none; background: linear-gradient(135deg, #fde047, #facc15, #fef9c3, #eab308); box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: center; }
+.gl-frame img { display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+.gl-frame span { font-size: 60px; }
+.gl-frame.has img { display: block; }
+.gl-frame.has span { display: none; }
+
+.gl-shelf { width: 210px; height: 14px; border-radius: 4px; pointer-events: none; background: #a16207; box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); }
+.gl-jar { width: 40px; height: 58px; }
+.gl-jar .lid { position: absolute; left: 4px; top: 0; width: 32px; height: 10px; border-radius: 4px; background: #e2e8f0; }
+.gl-jar .glass { position: absolute; left: 0; top: 8px; width: 40px; height: 50px; border-radius: 8px 8px 12px 12px; border: 3px solid rgba(255, 255, 255, 0.8); background: radial-gradient(circle, #fff 1px, transparent 2px) 0 0 / 7px 7px, var(--c); box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.7); }
+
+.gl-globe { width: 120px; height: 150px; }
+.gl-globe .ball { position: absolute; left: 0; top: 0; width: 120px; height: 120px; border-radius: 50%; overflow: hidden; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9), rgba(196, 181, 253, 0.6) 40%, rgba(167, 139, 250, 0.8)); border: 3px solid #fff; }
+.gl-globe .ball span { position: absolute; left: 32px; top: 44px; font-size: 52px; line-height: 1; }
+.gl-globe i { position: absolute; width: 6px; height: 6px; border-radius: 2px; background: #fde047; bottom: 8px; box-shadow: 0 0 4px #fff; }
+.gl-globe i:nth-of-type(1) { left: 20px; } .gl-globe i:nth-of-type(2) { left: 34px; background: #f9a8d4; } .gl-globe i:nth-of-type(3) { left: 48px; background: #fff; }
+.gl-globe i:nth-of-type(4) { left: 60px; } .gl-globe i:nth-of-type(5) { left: 72px; background: #67e8f9; } .gl-globe i:nth-of-type(6) { left: 84px; background: #f9a8d4; }
+.gl-globe i:nth-of-type(7) { left: 96px; background: #fff; } .gl-globe i:nth-of-type(8) { left: 44px; background: #67e8f9; }
+.gl-globe.shake .ball { animation: glGlobe 0.5s ease; }
+@keyframes glGlobe { 25% { transform: rotate(-14deg); } 75% { transform: rotate(14deg); } }
+.gl-globe.shake i { animation: glFlurry 3s ease-out; }
+.gl-globe.shake i:nth-of-type(even) { animation-duration: 3.6s; }
+@keyframes glFlurry { 0% { transform: translate(0, 0); } 15% { transform: translate(var(--dx, 10px), -80px) rotate(180deg); } 100% { transform: translate(0, 0) rotate(720deg); } }
+.gl-globe i:nth-of-type(odd) { --dx: -14px; }
+.gl-globe .foot { position: absolute; left: 20px; top: 112px; width: 80px; height: 38px; border-radius: 8px 8px 14px 14px; background: linear-gradient(180deg, #f472b6, #be185d); }
+
+.gl-table { width: 300px; height: 170px; }
+.gl-table .top { position: absolute; left: 0; top: 40px; width: 300px; height: 22px; border-radius: 8px; background: linear-gradient(180deg, #fbcfe8, #f472b6); }
+.gl-table .paper { position: absolute; left: 70px; top: -24px; width: 120px; height: 28px; background: #4c1d95; transform: skewX(-30deg); border: 2px solid #fff; box-shadow: inset 0 0 0 3px rgba(253, 224, 71, 0.8); }
+.gl-table .glue { position: absolute; left: 210px; top: -50px; font-size: 44px; line-height: 1; }
+.gl-table .spark { position: absolute; left: 110px; top: -54px; font-size: 32px; animation: gleam 1.6s ease-in-out infinite; }
+.gl-table .leg { position: absolute; top: 60px; width: 14px; height: 110px; background: #db2777; border-radius: 0 0 6px 6px; }
+.gl-table .leg.l { left: 24px; }
+.gl-table .leg.r { right: 24px; }
+
+/* ── Glitterplaatje (overlay) ── */
+.glitterov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 10px; gap: 6px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1.5px, transparent 2.5px) 0 0 / 40px 36px, linear-gradient(180deg, #fbcfe8, #e9d5ff);
+}
+.glitterov.open { display: flex; }
+.glitterov .nails-title { color: #a21caf; }
+.gl-hint { font-family: 'Fredoka One', cursive; color: #a21caf; background: #fff; border-radius: 999px; padding: 2px 16px; font-size: 1rem; pointer-events: none; }
+.gl-work { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; container-type: size; }
+.gl-paper { position: relative; aspect-ratio: 10 / 7; width: min(100cqw, 100cqh * 10 / 7); border-radius: 12px; border: 6px solid #fff; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); overflow: hidden; touch-action: none; cursor: crosshair; }
+.gl-paper canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.gl-paper.shake { animation: glPaperShake 1.2s ease; }
+@keyframes glPaperShake { 10%, 30%, 50%, 70% { transform: translateX(-14px) rotate(-2deg); } 20%, 40%, 60%, 80% { transform: translateX(14px) rotate(2deg); } }
+.gl-bar { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center; }
+.gl-tool.sel { transform: translateY(-4px) scale(1.08); border-color: #c026d3; background: #fdf4ff; }
+.gl-shape { font-size: 26px; min-width: 50px; height: 50px; }
+.gl-colors { display: flex; gap: 6px; }
+.gl-color { width: 42px; height: 42px; border-radius: 50%; border: 3px solid #fff; background: var(--g); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2); cursor: pointer; touch-action: none; }
+.gl-color.sel { transform: scale(1.2); box-shadow: 0 0 0 3px #c026d3, 0 0 14px #fff; }
