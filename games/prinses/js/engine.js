@@ -75,7 +75,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen || kittenOpen || tripOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen || kittenOpen || tripOpen || bedtimeOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));
@@ -244,6 +244,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && zooFeedOpen) closeZooFeed();
     if (e.key === 'Escape' && kittenOpen) closeKittens();
     if (e.key === 'Escape' && tripOpen) closeTrip();
+    if (e.key === 'Escape' && bedtimeOpen) closeBedtime(false);
     if (e.key === ' ' || e.key === 't') castSpell();
 });
 document.addEventListener('keyup', (e) => {

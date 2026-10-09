@@ -554,6 +554,20 @@
                 <button class="scope-close" id="tripClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="bedtimeov" id="bedtimeOv">
+                <div class="nails-title">🌙 Klaar voor bed</div>
+                <div class="bt-hint" id="btHint"></div>
+                <div class="bt-stage" id="btStage">
+                    <div class="bt-dest" data-to="kussen"><div class="pile"></div><span class="lbl">Kroonkussen</span></div>
+                    <div class="bt-dest" data-to="rek"><div class="pile"></div><span class="lbl">Schoenenrek</span></div>
+                    <div class="bt-dest" data-to="wasmand"><div class="pile"></div><span class="lbl">🧺 Wasmand</span></div>
+                    <div class="bt-dollwrap"><div class="bt-doll" id="btDoll"></div></div>
+                    <div class="bt-drawer" id="btDrawer"><b>Pyjama</b><div class="items"></div></div>
+                </div>
+                <button class="bt-bed" id="btBedBtn">🛏️ Naar bed</button>
+                <button class="scope-close" id="bedtimeClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -777,6 +791,7 @@
     <script src="prinses/js/rooms/hartjeskamer.js"></script>
     <script src="prinses/js/rooms/ijskamer.js"></script>
     <script src="prinses/js/rooms/slaapkamer.js"></script>
+    <script src="prinses/js/rooms/pyjama.js"></script>
     <script src="prinses/js/rooms/ouderslaapkamer.js"></script>
     <script src="prinses/js/rooms/sterrenkamer.js"></script>
     <script src="prinses/js/rooms/elvenkamer.js"></script>

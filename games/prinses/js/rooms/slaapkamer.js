@@ -1,4 +1,4 @@
-/* 🛏️ Slaapkamer */
+/* 🛏️ Slaapkamer: hemelbed, kledingkast ("Klaar voor bed", js/rooms/pyjama.js) en de wasmand */
 defineRoom({
     key: 'slaapkamer',
     name: 'Slaapkamer',
@@ -6,6 +6,9 @@ defineRoom({
     say: 'De slaapkamer',
     build(r6) {
         place(el('<div class="tower-window"></div>'), r6 + 565, 70);
+        addObj(`<div class="sk-wardrobe"><div class="door l"><i></i></div><div class="door r"><i></i></div><span class="pj">🌙</span>
+            <div class="tap-hint" style="left:36px;top:-50px">👇</div></div>`, r6 + 680, 190, r6 + 700, openBedtime);
+        addObj('<div class="sk-basket"><span id="laundryPile"></span><div class="mand"></div></div>', r6 + 585, 318, r6 + 620, washLaundry);
         addObj(`<div class="bed">
             <div class="post" style="left:0"></div><div class="post" style="left:310px"></div>
             <div class="curtain" style="left:-8px"></div><div class="curtain" style="left:292px"></div>
@@ -16,8 +19,8 @@ defineRoom({
             <div class="tap-hint" style="top:-44px">👇</div>
         </div>`, r6 + 250, 202, r6 + 386, sleepInBed);
         place(el('<div class="bed-cover" id="bedCover"></div>'), r6 + 356, 330);
-        addObj('<div class="emoji-obj">🧸</div>', r6 + 640, 380, r6 + 630, teddyHug);
-        addObj('<div class="emoji-obj" style="font-size:44px">🎶</div>', r6 + 690, 200, r6 + 690, () => { playLullaby(); speak('Een slaapliedje!'); });
+        addObj('<div class="emoji-obj">🧸</div>', r6 + 196, 380, r6 + 210, teddyHug);
+        addObj('<div class="emoji-obj" style="font-size:44px">🎶</div>', r6 + 610, 110, r6 + 640, () => { playLullaby(); speak('Een slaapliedje!'); });
     }
 });
 

@@ -267,7 +267,17 @@ function princessSVG(prefix) {
                 <circle cx="72" cy="140" r="1.6" fill="#fff"/>
                 <circle cx="26" cy="138" r="1.6" fill="#fff"/>
             </g>
+            <g class="pjp">
+                <path d="M38 78 L35 148 L48 148 L50 94 L52 148 L65 148 L62 78 Z" fill="#a5b4fc" stroke="#6366f1" stroke-width="1"/>
+                <path d="M35 144 L48 144 M52 144 L65 144" stroke="#fff" stroke-width="3"/>
+                <circle cx="42" cy="100" r="1.6" fill="#fff"/><circle cx="58" cy="112" r="1.6" fill="#fff"/><circle cx="41" cy="126" r="1.6" fill="#fff"/><circle cx="59" cy="134" r="1.4" fill="#fff"/>
+            </g>
             <path class="dress" d="M38 64 Q50 60 62 64 L63 82 Q50 86 37 82 Z" fill="#f472b6"/>
+            <g class="pjt">
+                <path d="M44 63 L50 70 L56 63" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/>
+                <circle cx="50" cy="74" r="1.3" fill="#fff"/><circle cx="50" cy="79" r="1.3" fill="#fff"/>
+                <path d="M41 70 l1.2 2.4 2.6 .4 -1.9 1.8 .5 2.6 -2.4 -1.3 -2.4 1.3 .5 -2.6 -1.9 -1.8 2.6 -.4 Z" fill="#fde047"/>
+            </g>
             <path d="M37 80 Q50 86 63 80" fill="none" stroke="#fde68a" stroke-width="3"/>
             <path d="M39 68 Q30 80 28 92" stroke="#ffd7c2" stroke-width="6" stroke-linecap="round" fill="none"/>
             <circle cx="28" cy="93" r="4" fill="#ffd7c2"/>
@@ -286,6 +296,12 @@ function princessSVG(prefix) {
             <circle cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
             <path d="M45 50 Q50 55 55 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round"/>
             ${HAIRDO_FRONT(prefix)}
+            <g class="pjc">
+                <path d="M30 34 Q34 14 54 16 Q72 18 84 40 L78 44 Q66 28 54 26 Q40 26 34 38 Z" fill="#818cf8"/>
+                <path d="M30 34 Q50 26 70 32" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                <circle cx="82" cy="44" r="5" fill="#fff"/>
+                <circle cx="48" cy="22" r="1.4" fill="#fde047"/><circle cx="62" cy="24" r="1.4" fill="#fde047"/>
+            </g>
             <g class="necklace"></g>
             ${PRINCESS_LAYERS}
             ${HAIR_EXTRAS}

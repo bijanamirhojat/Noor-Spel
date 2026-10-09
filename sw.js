@@ -172,6 +172,7 @@ const PRECACHE_URLS = [
     './games/prinses/js/rooms/poppenhuis.js',
     './games/prinses/js/rooms/regenboogzaal.js',
     './games/prinses/js/rooms/slaapkamer.js',
+    './games/prinses/js/rooms/pyjama.js',
     './games/prinses/js/rooms/speelkamer.js',
     './games/prinses/js/rooms/spiegelkamer.js',
     './games/prinses/js/rooms/sterrenkamer.js',

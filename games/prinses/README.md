@@ -28,6 +28,8 @@ js/ruimte/*.js     maan, spiraal (erin = ergens anders in de ruimte uitkomen), p
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen), raketwolk (raket naar de ruimte)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
+                js/rooms/pyjama.js: "Klaar voor bed" vanuit de kledingkast in de slaapkamer (uitkleden, opruimen in de wasmand,
+                pyjama aan, naar bed); de pyjama zit in de prinses-SVG (.pjt/.pjp/.pjc) en gaat aan met klassen pj-* op .princess
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/map.js       toverlift + kaart
 js/stickers.js  stickerboek

@@ -103,3 +103,76 @@
     20% { opacity: 1; }
     to { transform: translate(50px, -140px) scale(1.3); opacity: 0; }
 }
+
+/* Kledingkast en wasmand */
+.sk-wardrobe { width: 104px; height: 210px; border-radius: 14px 14px 4px 4px; background: #c084fc; box-shadow: inset 0 0 0 6px #a855f7; }
+.sk-wardrobe .door { position: absolute; top: 12px; width: 38px; height: 186px; border-radius: 6px; background: linear-gradient(135deg, #f5d0fe, #e9d5ff); transition: transform 0.4s ease; }
+.sk-wardrobe .door.l { left: 12px; transform-origin: 0 50%; }
+.sk-wardrobe .door.r { right: 12px; transform-origin: 100% 50%; }
+.sk-wardrobe .door i { position: absolute; top: 80px; width: 8px; height: 26px; border-radius: 4px; background: #facc15; }
+.sk-wardrobe .door.l i { right: 6px; }
+.sk-wardrobe .door.r i { left: 6px; }
+.sk-wardrobe .pj { position: absolute; left: 34px; top: -38px; font-size: 36px; }
+.sk-wardrobe.tap .door.l { transform: perspective(300px) rotateY(-50deg); }
+.sk-wardrobe.tap .door.r { transform: perspective(300px) rotateY(50deg); }
+.sk-basket { width: 80px; height: 82px; }
+.sk-basket .mand { position: absolute; left: 0; bottom: 0; width: 80px; height: 60px; border-radius: 6px 6px 18px 18px; background: repeating-linear-gradient(90deg, #d97706 0 8px, #b45309 8px 10px), #d97706; box-shadow: inset 0 6px 0 #92400e; }
+.sk-basket span { position: absolute; left: 0; right: 0; top: 0; text-align: center; font-size: 26px; letter-spacing: -8px; }
+.sk-basket.wash { animation: vWobble 0.6s ease 2; }
+
+/* Pyjama op de prinses (klassen op .princess of op de pop in "Klaar voor bed") */
+svg .pjp, svg .pjt, svg .pjc { display: none; }
+.no-dress svg .dress { fill: #fff; }
+.no-dress svg .skirt circle { display: none; }
+.no-shoes svg .feet { fill: #ffd7c2; }
+.no-hat svg .lk[data-k="hat"], .pj-cap svg .lk[data-k="hat"] { display: none !important; }
+.pj-top svg .dress { fill: #a5b4fc; }
+.pj-top svg .pjt, .pj-pants svg .pjp, .pj-cap svg .pjc { display: inline; }
+.pj-pants svg .skirt { display: none; }
+.pj-slippers svg .feet { fill: #c4b5fd; }
+
+/* ── Klaar voor bed (overlay) ── */
+.bedtimeov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 1.5px, transparent 2.5px) 0 0 / 44px 40px, linear-gradient(180deg, #312e81, #6d28d9 60%, #c4b5fd);
+}
+.bedtimeov.open { display: flex; }
+.bedtimeov .nails-title { color: #fde68a; }
+.bt-hint { font-family: 'Fredoka One', cursive; color: #4c1d95; background: #fff; border-radius: 999px; padding: 2px 16px; font-size: 1.05rem; pointer-events: none; }
+.bt-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 1000px; }
+.bt-stage::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 16%; border-radius: 0 0 20px 20px; background: repeating-linear-gradient(90deg, #a16207 0 60px, #92400e 60px 62px); z-index: 0; }
+.bt-dollwrap { position: absolute; left: 50%; bottom: 4%; height: 84%; aspect-ratio: 100 / 160; transform: translateX(-50%); z-index: 1; }
+.bt-doll, .bt-doll svg { width: 100%; height: 100%; }
+.bt-doll { transition: filter 0.3s; }
+.bt-doll.got { animation: vJump 0.4s ease; }
+.bt-item { position: absolute; transform: translate(-50%, -50%); border: none; background: none; padding: 0; font-size: clamp(40px, 9vh, 72px); line-height: 1; cursor: grab; touch-action: none; z-index: 3; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3)); }
+.bt-item.worn { font-size: clamp(34px, 8vh, 60px); animation: hintPulse 1.6s ease infinite; }
+.bt-item.floor { animation: carousel 2.6s ease-in-out infinite; }
+.bt-item.drag { animation: none; transform: translate(-50%, -50%) scale(1.2); z-index: 9; cursor: grabbing; }
+.bt-item.back { transition: translate 0.35s ease; }
+.bt-item.gone { visibility: hidden; }
+.bt-dest { position: absolute; z-index: 2; display: flex; align-items: flex-end; justify-content: center; }
+.bt-dest .pile { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: center; flex-wrap: wrap; font-size: clamp(22px, 5vh, 36px); line-height: 1; letter-spacing: -6px; pointer-events: none; }
+.bt-dest.got { animation: vJump 0.35s ease; }
+.bt-dest.nope { animation: zfNope 0.5s ease; }
+.bt-dest .lbl { font-family: 'Fredoka One', cursive; color: #fff; font-size: 0.9rem; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); margin-bottom: -22px; }
+.bt-dest[data-to="kussen"] { left: 4%; top: 6%; width: clamp(110px, 18vw, 160px); height: clamp(80px, 16vh, 110px); }
+.bt-dest[data-to="kussen"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 50%; border-radius: 40px; background: radial-gradient(circle at 50% 40%, #f9a8d4, #db2777); box-shadow: 0 6px 0 #9d174d; }
+.bt-dest[data-to="kussen"] .pile { top: auto; bottom: 40%; }
+.bt-dest[data-to="rek"] { left: 4%; bottom: 8%; width: clamp(120px, 20vw, 180px); height: clamp(90px, 18vh, 130px); }
+.bt-dest[data-to="rek"]::before { content: ''; position: absolute; inset: 20% 0 0; background: linear-gradient(#92400e 0 8px, transparent 8px) 0 40% / 100% 50% no-repeat, linear-gradient(#92400e 0 8px, transparent 8px) 0 100% / 100% 8px no-repeat; border-left: 8px solid #92400e; border-right: 8px solid #92400e; }
+.bt-dest[data-to="rek"] .pile { top: 30%; }
+.bt-dest[data-to="wasmand"] { right: 4%; bottom: 6%; width: clamp(130px, 20vw, 190px); height: clamp(110px, 24vh, 170px); }
+.bt-dest[data-to="wasmand"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 70%; border-radius: 10px 10px 30px 30px; background: repeating-linear-gradient(90deg, #d97706 0 12px, #b45309 12px 15px); box-shadow: inset 0 10px 0 #92400e, 0 6px 12px rgba(0, 0, 0, 0.25); }
+.bt-dest[data-to="wasmand"] .pile { top: 4%; z-index: 0; }
+.bt-drawer { position: absolute; right: 3%; top: 4%; display: none; flex-direction: column; align-items: center; gap: 4px; padding: 10px; border-radius: 16px; background: #c084fc; border: 5px solid #f5d0fe; z-index: 4; }
+.bt-drawer.open { display: flex; animation: duPop 0.4s cubic-bezier(.2, 1.6, .4, 1); }
+.bt-drawer b { font-family: 'Fredoka One', cursive; color: #fff; font-weight: normal; }
+.bt-drawer .items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.bt-drawer .bt-item { position: relative; transform: none; width: clamp(60px, 11vh, 86px); height: clamp(60px, 11vh, 86px); border-radius: 18px; background: #fff; font-size: clamp(36px, 7vh, 54px); }
+.bt-drawer .bt-item.drag { transform: scale(1.15); }
+.bt-cap { display: inline-block; width: 1em; height: 0.9em; background: #818cf8; clip-path: polygon(0 100%, 20% 30%, 55% 0, 100% 45%, 85% 55%, 60% 30%, 40% 60%, 100% 100%); position: relative; }
+.bt-bed { display: none; min-width: 220px; height: 60px; border-radius: 999px; border: 4px solid #fff; background: linear-gradient(135deg, #818cf8, #4f46e5); color: #fff; font-family: 'Fredoka One', cursive; font-size: 1.4rem; cursor: pointer; touch-action: none; box-shadow: 0 0 18px #a5b4fc; }
+.bt-bed.show { display: block; animation: hintPulse 1.2s ease infinite; }
