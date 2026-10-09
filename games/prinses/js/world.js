@@ -27,7 +27,11 @@ const ZOO = { key: 'dierentuin', name: 'Dierentuin', icon: '🦁', color: '#65a3
 
 // Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
 const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 12,
-    rooms: ['wolkenpoort', 'weermakerij', 'wolkenkasteel', 'regenboogmakerij'] };
+    rooms: ['wolkenpoort', 'weermakerij', 'wolkenkasteel', 'regenboogmakerij', 'raketwolk'] };
+
+// De ruimte: met de raket op de raketwolk (js/ruimte.js); de prinses zweeft er
+const SPACE = { key: 'ruimte', name: 'Ruimte', icon: '🪐', color: '#7c3aed', gems: 10,
+    rooms: ['maan', 'spiraal', 'poezenplaneten'] };
 
 const SCENES = {};
 let scene = null;
@@ -53,6 +57,7 @@ function initScenes() {
     SCENES.sea = { key: 'sea', rooms: ROOMS_SEA, el: makeWorldEl('sea'), gems: [], gemsGot: 0, gemCount: 12, door: null };
     SCENES.wolken = { key: 'wolken', rooms: SKY.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('wolken'), gems: [], gemsGot: 0, gemCount: SKY.gems, door: null, arriveX: 150 };
     SCENES.dierentuin = { key: 'dierentuin', rooms: ZOO.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('dierentuin'), gems: [], gemsGot: 0, gemCount: ZOO.gems, door: null, koets: null };
+    SCENES.ruimte = { key: 'ruimte', rooms: SPACE.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('ruimte'), gems: [], gemsGot: 0, gemCount: SPACE.gems, door: null, koets: null };
     SCENES.dorp = { key: 'dorp', rooms: VILLAGE.rooms.map(k => ROOM_DEFS[k]), el: makeWorldEl('dorp'), gems: [], gemsGot: 0, gemCount: VILLAGE.gems, door: null, koets: null };
     Object.values(SCENES).forEach(sc => sc.rooms.forEach((r, idx) => { ROOM_AT[r.key] = { scene: sc, idx }; }));
     scene = SCENES.hal;
@@ -129,6 +134,7 @@ function setScene(key) {
     const pr = princessEl();
     if (pr) world.appendChild(pr);
     if (pr) pr.classList.toggle('mermaid', key === 'sea');
+    if (pr) pr.classList.toggle('astronaut', key === 'ruimte');
     const pet = petEl();
     if (pet && state.pet.following && key !== 'sea') {
         world.appendChild(pet);

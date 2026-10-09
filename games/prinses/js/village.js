@@ -68,8 +68,9 @@ function rideCarriage(node, toKey, opts = {}) {
         node.classList.remove('drive');
         const from = scene.key;
         setScene(toKey);
-        k = (scene.rides && scene.rides[from]) || scene.koets;
+        k = (scene.rides && scene.rides[from]) || scene.koets || { walkX: 150, node: el('<div></div>') };
         state.x = state.targetX = k.walkX;
+        state.alt = state.targetAlt = 0;
         state.facing = -1;
         if (state.pet.following) state.pet.x = state.x + 90;
         state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));

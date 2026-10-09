@@ -22,8 +22,10 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
                 strand (hooghouden met de strandbal; de zeehond kopt hem terug)
 js/dierentuin.js   de dierentuin: bus (addBus, vanaf het strand), dierengeluiden, zooToss/zooAnim
 js/dierentuin/*.js ingang, apenhuis, savanne (voederkar: "Wie eet wat?"), pinguins, olifanten
+js/ruimte.js       de ruimte: raket (addRocket), poezenplaneten (catPlanetHTML), miauw/spinnen
+js/ruimte/*.js     maan, spiraal (erin = ergens anders in de ruimte uitkomen), poezenplaneten ("Poesjes naar huis")
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
-js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen)
+js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen), raketwolk (raket naar de ruimte)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/map.js       toverlift + kaart
@@ -57,6 +59,12 @@ zet je neer bij het voertuig in de nieuwe wereld dat terug gaat naar waar je van
 Nog een eigen wereld (`SKY` in `js/world.js`, scene `wolken`). Boven de eenhoornweide hangt een gouden wolk
 (`buildCloudPortal`, `PORTAL_X` in `js/sky.js`); vlieg er met de eenhoorn tegenaan om naar boven te gaan.
 Terug via de regenboogglijbaan op de wolkenpoort. Op de kaart zweven de wolken boven het kasteel.
+
+## Ruimte
+
+Een eigen wereld (`SPACE` in `js/world.js`, scene `ruimte`). De raket staat op de raketwolk (laatste wolkenplek,
+`scene.rides.ruimte`) en op de maan (`scene.koets`, terug naar de wolken). In de ruimte zweeft de prinses net als onder
+water (`floatyScene()` in `js/engine.js`) en draagt ze een astronautenhelm (klasse `astronaut`).
 
 ## Stickerboek
 

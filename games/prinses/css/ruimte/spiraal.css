@@ -1,0 +1,17 @@
+/* 🌀 Spiraal */
+.sv-spiral { width: 340px; height: 340px; border-radius: 50%; }
+.sv-spiral .arms { position: absolute; inset: 0; width: 100%; height: 100%; animation: svSpin 7s linear infinite; filter: drop-shadow(0 0 10px #f0abfc); }
+.sv-spiral .core { position: absolute; left: 50%; top: 50%; width: 70px; height: 70px; margin: -35px 0 0 -35px; border-radius: 50%; background: radial-gradient(circle, #fff, #f0abfc 40%, #7c3aed 70%, transparent 72%); box-shadow: 0 0 40px #e879f9; animation: gleam 1.4s ease-in-out infinite; }
+.sv-spiral::before { content: ''; position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle, rgba(192, 132, 252, 0.35), transparent 70%); }
+.sv-spiral.fast .arms { animation-duration: 0.7s; }
+@keyframes svSpin { to { rotate: 360deg; } }
+.sv-ufo { width: 140px; height: 330px; }
+.sv-ufo .u { position: absolute; left: 10px; top: 0; font-size: 110px; line-height: 1; animation: carousel 3s ease-in-out infinite; }
+.sv-ufo .beam { position: absolute; left: 30px; top: 90px; width: 80px; height: 240px; background: linear-gradient(180deg, rgba(163, 230, 53, 0.7), rgba(163, 230, 53, 0)); clip-path: polygon(30% 0, 70% 0, 100% 100%, 0 100%); opacity: 0; transition: opacity 0.3s; }
+.sv-ufo .cow { position: absolute; left: 40px; top: 270px; font-size: 54px; line-height: 1; opacity: 0; }
+.sv-ufo.beam-on .beam { opacity: 1; }
+.sv-ufo.beam-on .cow { animation: svCow 3s ease-in-out forwards; }
+@keyframes svCow { 0% { opacity: 1; transform: none; } 60% { transform: translateY(-200px) rotate(360deg) scale(0.5); opacity: 1; } 70%, 100% { transform: translateY(-200px) scale(0); opacity: 0; } }
+.sv-comet { font-size: 70px; line-height: 1; }
+.sv-comet.shoot { animation: svShoot 1.4s ease-in; }
+@keyframes svShoot { 60% { transform: translate(-240px, 200px); opacity: 0; } 61% { transform: translate(200px, -200px); opacity: 0; } 100% { transform: none; opacity: 1; } }

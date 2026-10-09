@@ -1,0 +1,42 @@
+/* 🐱 Poezenplaneten */
+.pp-float { animation: carousel 5s ease-in-out infinite; }
+.pp-yarn { width: 50px; height: 50px; pointer-events: none; animation: ppOrbit 6s linear infinite; transform-origin: 95px 160px; }
+.pp-yarn span { font-size: 44px; line-height: 1; }
+@keyframes ppOrbit { to { transform: rotate(360deg); } }
+.pp-ship { width: 220px; height: 140px; }
+.pp-ship .dome { position: absolute; left: 45px; top: 0; width: 130px; height: 70px; border-radius: 65px 65px 0 0; background: rgba(186, 230, 253, 0.55); border: 4px solid #e0f2fe; display: flex; justify-content: center; align-items: flex-end; overflow: hidden; }
+.pp-ship .dome span { font-size: 34px; line-height: 1; margin: 0 -2px; animation: carousel 1.6s ease-in-out infinite; }
+.pp-ship .dome span:nth-child(2) { animation-delay: -0.5s; }
+.pp-ship .dome span:nth-child(3) { animation-delay: -1s; }
+.pp-ship .saucer { position: absolute; left: 0; top: 64px; width: 220px; height: 50px; border-radius: 50%; background: linear-gradient(180deg, #e9d5ff, #a78bfa); box-shadow: 0 0 20px #a78bfa; }
+.pp-ship .lights { position: absolute; left: 30px; top: 84px; width: 160px; display: flex; justify-content: space-between; }
+.pp-ship .lights i { width: 14px; height: 14px; border-radius: 50%; background: #fde047; box-shadow: 0 0 10px #fde047; animation: kmBulb 0.8s ease-in-out infinite; }
+.pp-ship .lights i:nth-child(even) { animation-delay: -0.4s; background: #f472b6; box-shadow: 0 0 10px #f472b6; }
+
+/* ── Poesjes naar huis (overlay) ── */
+.kittenov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 2px) 0 0 / 50px 46px, radial-gradient(ellipse at 50% 50%, #4c1d95, #1e1b4b 70%, #020617);
+}
+.kittenov.open { display: flex; }
+.kittenov .nails-title { color: #f9a8d4; text-shadow: 0 0 10px #f472b6; }
+.kit-count { position: absolute; left: 16px; top: 14px; font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #4c1d95; background: #fff; border-radius: 999px; padding: 2px 14px; }
+.kit-hint { font-family: 'Fredoka One', cursive; color: #e9d5ff; font-size: 1.05rem; pointer-events: none; }
+.kit-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 1000px; touch-action: none; }
+.kit-planet { position: absolute; cursor: pointer; }
+.kit-planet .catpl { --s: clamp(90px, 20vh, 160px) !important; }
+.kit-planet.p0 { left: 3%; top: 4%; }
+.kit-planet.p1 { right: 5%; top: 4%; }
+.kit-planet.p2 { left: 3%; bottom: 6%; }
+.kit-planet.p3 { right: 5%; bottom: 6%; }
+.kit-planet.nope { animation: zfNope 0.5s ease; }
+.kit { position: absolute; width: 76px; height: 76px; margin: -38px 0 0 -38px; cursor: grab; touch-action: none; z-index: 5; animation: kitBob 2.4s ease-in-out infinite; }
+.kit .helm { position: absolute; inset: 0; border-radius: 50%; border: 5px solid var(--c); background: radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.8) 0 10%, transparent 16%), rgba(186, 230, 253, 0.25); box-shadow: 0 0 14px var(--c); }
+.kit .cat { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 46px; line-height: 1; }
+@keyframes kitBob { 50% { transform: translateY(-10px) rotate(8deg); } }
+.kit.drag { animation: none; transform: scale(1.2); z-index: 9; cursor: grabbing; }
+.kit.sel { animation: hintPulse 0.9s ease infinite; }
+.kit.back { transition: left 0.5s ease, top 0.5s ease; }
+.kit.home { transition: left 0.5s ease, top 0.5s ease, transform 0.5s ease; animation: none; transform: scale(0.75); pointer-events: none; }

@@ -22,7 +22,7 @@ function saveStickers() {
     try { localStorage.setItem(STICKER_KEY, JSON.stringify([...stickers])); } catch (e) {}
 }
 
-// Book pages: the floors from top to bottom, then buiten, onder water, het dorp, de dierentuin and de wolken
+// Book pages: the floors from top to bottom, then buiten, onder water, het dorp, de dierentuin, de wolken and de ruimte
 function stickerPages() {
     return [
         ...WINGS.slice().reverse().map(w => ({ icon: w.icon, name: w.name, color: w.color, scene: SCENES[w.key] })),
@@ -30,7 +30,8 @@ function stickerPages() {
         { icon: '🧜‍♀️', name: 'Onder water', color: '#06b6d4', scene: SCENES.sea },
         { icon: VILLAGE.icon, name: VILLAGE.name, color: VILLAGE.color, scene: SCENES.dorp },
         { icon: ZOO.icon, name: ZOO.name, color: ZOO.color, scene: SCENES.dierentuin },
-        { icon: SKY.icon, name: SKY.name, color: SKY.color, scene: SCENES.wolken }
+        { icon: SKY.icon, name: SKY.name, color: SKY.color, scene: SCENES.wolken },
+        { icon: SPACE.icon, name: SPACE.name, color: SPACE.color, scene: SCENES.ruimte }
     ];
 }
 

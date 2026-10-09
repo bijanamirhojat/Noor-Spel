@@ -99,7 +99,8 @@ function mapWorlds() {
         { key: 'sea', icon: '🧜‍♀️', name: 'Onder water', color: '#06b6d4', scenes: [SCENES.sea] },
         { key: 'dorp', icon: VILLAGE.icon, name: VILLAGE.name, color: VILLAGE.color, scenes: [SCENES.dorp] },
         { key: 'dierentuin', icon: ZOO.icon, name: ZOO.name, color: ZOO.color, scenes: [SCENES.dierentuin] },
-        { key: 'wolken', icon: SKY.icon, name: SKY.name, color: SKY.color, scenes: [SCENES.wolken] }
+        { key: 'wolken', icon: SKY.icon, name: SKY.name, color: SKY.color, scenes: [SCENES.wolken] },
+        { key: 'ruimte', icon: SPACE.icon, name: SPACE.name, color: SPACE.color, scenes: [SCENES.ruimte] }
     ];
 }
 
@@ -185,7 +186,7 @@ function travelTo(key, room) {
             setScene(key);
         }
         state.x = state.targetX = clampX(room * ROOM_W + 400);
-        state.alt = state.targetAlt = key === 'sea' ? 140 : 0;
+        state.alt = state.targetAlt = key === 'sea' || key === 'ruimte' ? 140 : 0;
         if (state.riding) state.uniX = state.x;
         state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));
         if (state.pet.following) state.pet.x = state.x - 90;

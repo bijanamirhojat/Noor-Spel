@@ -1,13 +1,16 @@
 /* ─────────── Gems ─────────── */
+// Under water and in space the princess floats: tap high up and she goes there
+function floatyScene() { return scene.key === 'sea' || scene.key === 'ruimte'; }
+
 function spawnGems() {
     scene.gems.forEach(g => g.node.remove());
     scene.gems = [];
     scene.gemsGot = 0;
-    const kinds = scene.key === 'sea' ? ['🐚', '🦪', '💎', '🌟', '🐚'] : scene.key === 'wolken' ? ['⭐', '🌟', '💫', '⭐', '💖'] : ['💎', '💎', '💎', '⭐', '💖', '🌟'];
+    const kinds = scene.key === 'sea' ? ['🐚', '🦪', '💎', '🌟', '🐚'] : scene.key === 'wolken' ? ['⭐', '🌟', '💫', '⭐', '💖'] : scene.key === 'ruimte' ? ['⭐', '🌟', '💫', '🪐', '💎'] : ['💎', '💎', '💎', '⭐', '💖', '🌟'];
     const n = scene.gemCount;
     for (let i = 0; i < n; i++) {
         const x = 120 + (i + Math.random() * 0.6) * ((WORLD_W - 240) / n);
-        const y = scene.key === 'sea' ? 80 + Math.random() * 300 : 330 + Math.random() * 70;
+        const y = floatyScene() ? 80 + Math.random() * 300 : 330 + Math.random() * 70;
         const node = el(`<div class="gem">${randomPick(kinds)}</div>`);
         node.style.animationDelay = (-Math.random() * 1.6) + 's';
         place(node, x, y);
@@ -23,7 +26,7 @@ function updateGemPill() {
 }
 
 function checkGems() {
-    if (scene.key === 'sea') {
+    if (floatyScene()) {
         const py = FEET_Y - 100 - state.alt;
         for (const g of scene.gems) {
             if (!g.got && Math.abs(g.x - state.x) < 50 && Math.abs(g.y + 20 - py) < 75) collectGem(g);
@@ -72,7 +75,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen || kittenOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));
@@ -159,14 +162,14 @@ playfield.addEventListener('pointerdown', (e) => {
     const p = screenToWorld(e.clientX, e.clientY);
     burst(p.x, p.y, 10);
     walkTo(p.x, null);
-    if (state.flying || scene.key === 'sea') state.targetAlt = Math.max(0, Math.min(maxAlt(), FEET_Y - 110 - p.y));
+    if (state.flying || floatyScene()) state.targetAlt = Math.max(0, Math.min(maxAlt(), FEET_Y - 110 - p.y));
     dragId = e.pointerId;
 });
 playfield.addEventListener('pointermove', (e) => {
     if (e.pointerId !== dragId || state.busy || overlayOpen()) return;
     const p = screenToWorld(e.clientX, e.clientY);
     walkTo(p.x, null);
-    if (state.flying || scene.key === 'sea') state.targetAlt = Math.max(0, Math.min(maxAlt(), FEET_Y - 110 - p.y));
+    if (state.flying || floatyScene()) state.targetAlt = Math.max(0, Math.min(maxAlt(), FEET_Y - 110 - p.y));
     if (Math.random() < 0.4) spawnSparkle(p.x, p.y, { speed: 60 });
 });
 const endDrag = (e) => { if (e.pointerId === dragId) dragId = null; };
@@ -239,6 +242,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && kermisDuckOpen) closeKermisDucks();
     if (e.key === 'Escape' && kermisClawOpen) closeKermisClaw();
     if (e.key === 'Escape' && zooFeedOpen) closeZooFeed();
+    if (e.key === 'Escape' && kittenOpen) closeKittens();
     if (e.key === ' ' || e.key === 't') castSpell();
 });
 document.addEventListener('keyup', (e) => {
@@ -485,7 +489,7 @@ function frame(now) {
     if (!state.busy) {
         state.alt += (state.targetAlt - state.alt) * Math.min(1, dt * 3);
         if (!state.flying && state.alt < 1) state.alt = 0;
-        if (scene.key === 'sea' && Math.abs(state.targetAlt - state.alt) > 2) checkGems();
+        if (floatyScene() && Math.abs(state.targetAlt - state.alt) > 2) checkGems();
     }
     if (state.flying) {
         state.flapT -= dt;
