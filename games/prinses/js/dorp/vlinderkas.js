@@ -9,15 +9,25 @@ const BFLY_COLORS = [
     ['#f472b6', '#fde047'], ['#38bdf8', '#a78bfa'], ['#fb923c', '#1f2937'], ['#4ade80', '#fde047'],
     ['#c084fc', '#f9a8d4'], ['#f87171', '#fef08a'], ['#22d3ee', '#f0abfc'], ['#facc15', '#2563eb']
 ];
+// Some butterflies are tiny, some are big
+const BFLY_SIZES = [0.6, 0.8, 1, 1.3, 1.7];
+function bflyNew() {
+    return { c: Math.floor(Math.random() * BFLY_COLORS.length), z: randomPick(BFLY_SIZES) };
+}
+// Saved as { c: colour index, z: size }; older saves were just the colour index
 let bflySaved = [];
 try {
     const d = JSON.parse(localStorage.getItem(BFLY_KEY));
-    if (Array.isArray(d)) bflySaved = d.filter(i => Number.isInteger(i) && i >= 0 && i < BFLY_COLORS.length);
+    if (Array.isArray(d)) {
+        bflySaved = d.map(b => (Number.isInteger(b) ? { c: b, z: randomPick(BFLY_SIZES) } : b))
+            .filter(b => b && Number.isInteger(b.c) && b.c >= 0 && b.c < BFLY_COLORS.length && BFLY_SIZES.includes(b.z));
+        localStorage.setItem(BFLY_KEY, JSON.stringify(bflySaved));
+    }
 } catch (e) {}
 
-function bflyHTML(ci, cls = '') {
-    const [c1, c2] = BFLY_COLORS[ci];
-    return `<div class="bfly ${cls}" style="--c1:${c1};--c2:${c2}"><i class="w l"></i><i class="w r"></i><b></b></div>`;
+function bflyHTML(b, cls = '') {
+    const [c1, c2] = BFLY_COLORS[b.c];
+    return `<div class="bfly ${cls}" style="--c1:${c1};--c2:${c2};--z:${b.z}"><i class="w l"></i><i class="w r"></i><b></b></div>`;
 }
 function bflyChime() {
     [1047, 1319, 1568, 2093].forEach((f, i) => setTimeout(() => playTone(f, 0.15, 0.07, 'sine'), i * 80));
@@ -57,8 +67,8 @@ function renderBflyRoom() {
     const air = document.getElementById('bflyRoomAir');
     if (!air) return;
     const list = bflySaved.slice(-6);
-    air.innerHTML = list.map((ci, i) =>
-        `<div class="vk-flutter" style="left:${60 + (i * 127) % 640}px;top:${200 + (i * 71) % 260}px;animation-delay:${-i * 1.3}s;animation-duration:${7 + (i % 3)}s">${bflyHTML(ci)}</div>`).join('');
+    air.innerHTML = list.map((b, i) =>
+        `<div class="vk-flutter" style="left:${60 + (i * 127) % 640}px;top:${200 + (i * 71) % 260}px;animation-delay:${-i * 1.3}s;animation-duration:${7 + (i % 3)}s">${bflyHTML(b)}</div>`).join('');
     air.querySelectorAll('.vk-flutter').forEach(f => f.addEventListener('pointerdown', (e) => {
         e.stopPropagation();
         bounceEl(f.firstElementChild, 'jump');
@@ -141,15 +151,15 @@ function bfTapPot(i) {
 }
 
 function bfHatch(i, who) {
-    const ci = Math.floor(Math.random() * BFLY_COLORS.length);
+    const b = bflyNew();
     bf.pots[i] = { stage: 'empty', n: 0 };
     bfRenderPot(i);
-    bflySaved.push(ci);
+    bflySaved.push(b);
     if (bflySaved.length > 40) bflySaved = bflySaved.slice(-40);
     try { localStorage.setItem(BFLY_KEY, JSON.stringify(bflySaved)); } catch (e) {}
     const s = bfStage.getBoundingClientRect();
     const r = who.getBoundingClientRect();
-    bfAddFly(ci, r.left + r.width / 2 - s.left, r.top - s.top, true);
+    bfAddFly(b, r.left + r.width / 2 - s.left, r.top - s.top, true);
     playWin();
     setTimeout(bflyChime, 400);
     ovCheer(bfEl, who, ['✨', '💖', '🌸', '⭐']);
@@ -157,12 +167,12 @@ function bfHatch(i, who) {
     setTimeout(() => { if (butterflyOpen) bfNewCat(i); }, 3500);
 }
 
-function bfAddFly(ci, x, y, fresh) {
+function bfAddFly(b, x, y, fresh) {
     if (bf.flies.length >= BFLY_MAX) {
         const old = bf.flies.shift();
         old.node.remove();
     }
-    const node = el(bflyHTML(ci, fresh ? 'fresh' : ''));
+    const node = el(bflyHTML(b, fresh ? 'fresh' : ''));
     bfStage.appendChild(node);
     const f = { node, x, y, tx: x, ty: y - 160, land: -1, rest: 0, ph: Math.random() * 6, face: 1 };
     node.addEventListener('pointerdown', (e) => {
@@ -239,8 +249,8 @@ function openButterfly() {
     bf.pots = [];
     [0, 1, 2].forEach(i => bfNewCat(i));
     const s = bfStage.getBoundingClientRect();
-    bflySaved.slice(-BFLY_MAX).forEach(ci => {
-        const f = bfAddFly(ci, 40 + Math.random() * (s.width - 80), 30 + Math.random() * s.height * 0.5, false);
+    bflySaved.slice(-BFLY_MAX).forEach(b => {
+        const f = bfAddFly(b, 40 + Math.random() * (s.width - 80), 30 + Math.random() * s.height * 0.5, false);
         f.x = f.tx; f.y = f.ty;
         bfPick(f);
     });

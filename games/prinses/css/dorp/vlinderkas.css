@@ -30,8 +30,9 @@
 @keyframes vkFlutter { 0%, 100% { translate: 0 0; } 25% { translate: 90px -50px; } 50% { translate: 160px 10px; } 75% { translate: 60px 40px; } }
 
 /* A butterfly drawn with CSS so it can have any colours (--c1 wings, --c2 dots) */
-.bfly { position: absolute; left: 0; top: 0; width: 60px; height: 50px; pointer-events: auto; cursor: pointer; }
-.bfly .w { position: absolute; top: 0; width: 30px; height: 50px; animation: bfFlapL 0.28s ease-in-out infinite alternate; }
+.bfly { position: absolute; left: 0; top: 0; width: 60px; height: 50px; pointer-events: auto; cursor: pointer; scale: var(--z, 1); }
+/* Small ones flap fast, big ones slow */
+.bfly .w { position: absolute; top: 0; width: 30px; height: 50px; animation: bfFlapL calc(0.28s * var(--z, 1)) ease-in-out infinite alternate; }
 .bfly .w.l { left: 0; transform-origin: 100% 50%;
     background: radial-gradient(circle at 55% 30%, var(--c2) 0 13%, transparent 14%),
         radial-gradient(ellipse 50% 34% at 52% 32%, var(--c1) 0 95%, transparent 100%),
