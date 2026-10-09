@@ -16,7 +16,8 @@ js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
 js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen),
                 station (filmische treinrit langs het hele koninkrijk), spookhuis (spookjes zoeken met de zaklamp),
-                moestuin (zaaien, water geven, oogsten)
+                moestuin (zaaien, water geven, oogsten), pluktuin (bloemen plukken voor een boeket),
+                strand (hooghouden met de strandbal; de zeehond kopt hem terug)
 js/sky.js       het wolkenrijk: gouden wolk buiten, aankomst, regenboogglijbaan terug
 js/wolken/*.js  wolkenpoort, weermakerij (weer maken), wolkenkasteel (wolkjes kijken), regenboogmakerij (regenboog schilderen)
 js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) }) + de activiteit

@@ -1,0 +1,44 @@
+/* ⛳ Glow-golf */
+.room.rm-minigolf .wall { background: radial-gradient(circle, rgba(240, 171, 252, 0.5) 1.5px, transparent 2.5px) 0 0 / 60px 50px, radial-gradient(circle, rgba(34, 211, 238, 0.5) 1.5px, transparent 2.5px) 30px 25px / 60px 50px, linear-gradient(180deg, #0b0620, #1e1048 70%, #2e1065); }
+.room.rm-minigolf .floor { background: linear-gradient(90deg, rgba(163, 230, 53, 0.25) 2px, transparent 2px) 0 0 / 50px 50px, #120a2e; box-shadow: inset 0 4px 0 #a3e635, 0 -4px 20px rgba(163, 230, 53, 0.6); }
+.room.rm-minigolf .room-sign { background: #1e1048; color: #f0abfc; box-shadow: 0 0 14px #f0abfc; }
+
+.gg-star { font-size: 26px; color: var(--c); text-shadow: 0 0 10px var(--c), 0 0 20px var(--c); pointer-events: none; animation: gleam 2.4s ease-in-out infinite; }
+.gg-sign { display: flex; flex-direction: column; align-items: center; padding: 10px 18px; border-radius: 16px; border: 4px solid #f0abfc; box-shadow: 0 0 16px #f0abfc, inset 0 0 16px #f0abfc; font-family: 'Fredoka One', cursive; font-size: 34px; line-height: 1.1; letter-spacing: 4px; }
+.gg-sign span:first-child { color: #fde047; text-shadow: 0 0 8px #fde047, 0 0 22px #facc15; animation: ggFlicker 4s linear infinite; }
+.gg-sign span:last-child { color: #22d3ee; text-shadow: 0 0 8px #22d3ee, 0 0 22px #06b6d4; }
+.gg-sign.alt span:first-child { color: #a3e635; text-shadow: 0 0 8px #a3e635, 0 0 22px #84cc16; }
+.gg-sign.alt span:last-child { color: #fb7185; text-shadow: 0 0 8px #fb7185, 0 0 22px #f43f5e; }
+.gg-sign.alt { border-color: #22d3ee; box-shadow: 0 0 16px #22d3ee, inset 0 0 16px #22d3ee; }
+@keyframes ggFlicker { 0%, 46%, 50%, 54%, 100% { opacity: 1; } 48%, 52% { opacity: 0.3; } }
+
+.gg-course { width: 340px; height: 110px; border-radius: 55px; background: #120a2e; border: 5px solid #22d3ee; box-shadow: 0 0 18px #22d3ee, inset 0 0 18px rgba(34, 211, 238, 0.5); }
+.gg-course .hole { position: absolute; left: 250px; top: 38px; width: 34px; height: 24px; border-radius: 50%; background: #000; box-shadow: 0 0 0 4px #a3e635, 0 0 18px #a3e635; }
+.gg-course .flag { position: absolute; left: 252px; top: -30px; font-size: 54px; line-height: 1; filter: drop-shadow(0 0 8px #fb7185); }
+.gg-course .ball { position: absolute; left: 40px; top: 40px; width: 22px; height: 22px; border-radius: 50%; background: #ecfeff; box-shadow: 0 0 12px #22d3ee, 0 0 24px #22d3ee; animation: ggRoll 3s ease-in-out infinite; }
+@keyframes ggRoll { 0%, 15% { transform: translateX(0); } 60% { transform: translateX(200px); opacity: 1; } 70% { transform: translateX(212px) scale(0.3); opacity: 0; } 100% { opacity: 0; } }
+
+.gg-sticks { width: 110px; height: 150px; --h: 0deg; filter: hue-rotate(var(--h)); }
+.gg-sticks i { position: absolute; bottom: 0; width: 14px; height: 130px; border-radius: 7px; transform-origin: 50% 100%; }
+.gg-sticks i:nth-child(1) { left: 10px; background: #f0abfc; box-shadow: 0 0 14px #f0abfc; transform: rotate(-14deg); }
+.gg-sticks i:nth-child(2) { left: 38px; background: #22d3ee; box-shadow: 0 0 14px #22d3ee; transform: rotate(-4deg); }
+.gg-sticks i:nth-child(3) { left: 62px; background: #a3e635; box-shadow: 0 0 14px #a3e635; transform: rotate(6deg); }
+.gg-sticks i:nth-child(4) { left: 86px; background: #fde047; box-shadow: 0 0 14px #fde047; transform: rotate(16deg); }
+.gg-ufo { font-size: 60px; line-height: 1; filter: drop-shadow(0 0 14px #a3e635); animation: carousel 3s ease-in-out infinite; }
+.gg-ufo.zoom { animation: ggZoom 1.4s ease; }
+@keyframes ggZoom { 40% { transform: translate(260px, -120px) scale(0.4); opacity: 0; } 41% { transform: translate(-260px, -120px) scale(0.4); } 100% { transform: none; opacity: 1; } }
+
+/* ── Glow-golf (overlay) ── */
+.golfov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(240, 171, 252, 0.35) 1.5px, transparent 2.5px) 0 0 / 60px 50px, linear-gradient(180deg, #0b0620, #1e1048);
+}
+.golfov.open { display: flex; }
+.golfov .nails-title { color: #f0abfc; text-shadow: 0 0 10px #f0abfc; }
+.gg-hud { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.gg-hud span { font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: #fde047; background: rgba(255, 255, 255, 0.08); border: 2px solid #22d3ee; box-shadow: 0 0 10px rgba(34, 211, 238, 0.6); border-radius: 999px; padding: 2px 14px; min-height: 1.6em; }
+.gg-hud span:empty { display: none; }
+.gg-hint { font-family: 'Fredoka One', cursive; color: #a5f3fc; font-size: 0.95rem; pointer-events: none; }
+.gg-canvas { flex: 1; min-height: 0; width: 100%; max-width: 1100px; touch-action: none; cursor: crosshair; }

@@ -72,7 +72,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));
@@ -231,6 +231,9 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && ghostOpen) closeGhostHunt();
     if (e.key === 'Escape' && wcOpen) closeWc();
     if (e.key === 'Escape' && gardenOpen) closeGarden();
+    if (e.key === 'Escape' && beachOpen) closeBeach();
+    if (e.key === 'Escape' && pickOpen) closePick();
+    if (e.key === 'Escape' && golfOpen) closeGolf();
     if (e.key === ' ' || e.key === 't') castSpell();
 });
 document.addEventListener('keyup', (e) => {

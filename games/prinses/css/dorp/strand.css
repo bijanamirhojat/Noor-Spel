@@ -1,0 +1,68 @@
+/* 🏐 Strand */
+.room.rm-strand .wall { background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 55%, #e0f2fe 88%); }
+.room.rm-strand .floor { background: radial-gradient(circle, #fef3c7 2px, transparent 3px) 0 0 / 26px 18px, radial-gradient(circle, #d97706 1.5px, transparent 2.5px) 13px 9px / 26px 18px, linear-gradient(180deg, #fde68a, #fbbf24); }
+
+.bc-sea { width: 800px; height: 100px; pointer-events: none; background: linear-gradient(180deg, #0ea5e9, #0284c7 70%, #7dd3fc); overflow: hidden; }
+.bc-sea .wave { position: absolute; left: -40px; right: -40px; bottom: 0; height: 26px; background: radial-gradient(ellipse 30px 14px at 50% 100%, #fff 60%, transparent 64%) 0 0 / 60px 26px repeat-x; animation: bcWave 3s ease-in-out infinite; }
+.bc-sea .wave.w2 { bottom: 34px; opacity: 0.5; animation-delay: -1.5s; }
+@keyframes bcWave { 50% { transform: translateX(30px); } }
+.bc-sun { font-size: 110px; line-height: 1; pointer-events: none; filter: drop-shadow(0 0 30px rgba(253, 224, 71, 0.9)); }
+.bc-gull { font-size: 40px; pointer-events: none; animation: spBat 9s ease-in-out infinite; }
+.bc-boat { font-size: 44px; pointer-events: none; animation: carousel 4s ease-in-out infinite; }
+
+.bc-parasol { width: 190px; height: 220px; }
+.bc-parasol .top { position: absolute; left: 0; top: 0; width: 190px; height: 80px; border-radius: 95px 95px 0 0; background: repeating-conic-gradient(from -90deg at 50% 100%, #f472b6 0 22.5deg, #fff 22.5deg 45deg); transform-origin: 50% 100%; }
+.bc-parasol.spin .top { animation: bcParasol 0.8s ease; }
+@keyframes bcParasol { 50% { transform: rotate(-12deg) scale(1.08); } }
+.bc-parasol .pole { position: absolute; left: 91px; top: 78px; width: 8px; height: 140px; background: #a16207; }
+.bc-parasol .towel { position: absolute; left: 10px; top: 196px; width: 170px; height: 26px; border-radius: 6px; background: repeating-linear-gradient(90deg, #38bdf8 0 20px, #fff 20px 40px); transform: skewX(-20deg); }
+
+.bc-net { width: 230px; height: 190px; }
+.bc-net .post { position: absolute; left: 0; top: 30px; width: 10px; height: 160px; border-radius: 5px; background: #fff; box-shadow: 0 0 0 2px #94a3b8; }
+.bc-net .post.r { left: 220px; }
+.bc-net .mesh { position: absolute; left: 10px; top: 34px; width: 210px; height: 60px; border-top: 6px solid #fff; background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 2px, transparent 2px) 0 0 / 14px 14px, linear-gradient(0deg, rgba(255, 255, 255, 0.8) 2px, transparent 2px) 0 0 / 14px 14px; }
+.bc-net .ball { position: absolute; left: 90px; top: -40px; font-size: 50px; line-height: 1; animation: bcBounce 1.4s ease-in-out infinite; }
+@keyframes bcBounce { 50% { transform: translateY(-30px) rotate(180deg); } }
+
+.bc-castle { width: 150px; height: 100px; }
+.bc-castle > * { position: absolute; }
+.bc-castle .keep { left: 30px; top: 40px; width: 90px; height: 60px; background: #f59e0b; border-radius: 6px 6px 0 0; box-shadow: inset 0 -10px 0 #d97706; }
+.bc-castle .t { top: 18px; width: 36px; height: 82px; background: #fbbf24; border-radius: 4px 4px 0 0; box-shadow: inset 0 -10px 0 #d97706; }
+.bc-castle .t::before { content: ''; position: absolute; left: 0; top: -10px; width: 36px; height: 10px; background: repeating-linear-gradient(90deg, #fbbf24 0 9px, transparent 9px 14px); }
+.bc-castle .t.l { left: 6px; }
+.bc-castle .t.r { left: 108px; }
+.bc-castle .flag { left: 58px; top: -10px; font-size: 40px; line-height: 1; transform: scale(0); transform-origin: 20% 100%; transition: transform 0.3s cubic-bezier(.2, 1.8, .4, 1); }
+.bc-castle.flag-on .flag { transform: scale(1); }
+.bc-castle .shell { left: 60px; top: 60px; font-size: 24px; }
+
+.bc-crab { font-size: 46px; line-height: 1; }
+.bc-crab span { display: inline-block; animation: bcSide 1.6s ease-in-out infinite; }
+@keyframes bcSide { 50% { transform: translateX(16px); } }
+.bc-crab.run span { animation: bcRun 1.6s ease-in-out; }
+@keyframes bcRun { 40% { transform: translateX(-120px); } 60% { transform: translateX(-120px) rotate(-10deg); } }
+.bc-shell { font-size: 36px; }
+
+/* ── Hooghouden (overlay) ── */
+.beachov {
+    position: absolute; inset: 0; z-index: 50;
+    display: none; flex-direction: column; align-items: center;
+    padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: linear-gradient(180deg, #38bdf8, #bae6fd 55%, #0ea5e9 55%, #0284c7 66%, #fde68a 66%, #fbbf24);
+}
+.beachov.open { display: flex; }
+.beachov .nails-title { color: #0c4a6e; }
+.bc-scores { display: flex; gap: 10px; }
+.bc-scores span { font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #0c4a6e; background: #fff; border-radius: 999px; padding: 2px 16px; }
+.bc-scores span.bump { animation: basketBump2 0.35s ease; }
+.bc-hint { font-family: 'Fredoka One', cursive; color: #0c4a6e; background: rgba(255, 255, 255, 0.85); border-radius: 999px; padding: 2px 14px; font-size: 0.95rem; pointer-events: none; }
+.bc-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 1000px; touch-action: none; cursor: pointer; }
+.bc-stage .net { position: absolute; left: 62%; top: 50%; bottom: 14%; width: 10px; margin-left: -5px; background: #fff; border-radius: 5px; box-shadow: 0 0 0 2px #94a3b8; pointer-events: none; }
+.bc-stage .net::after { content: ''; position: absolute; left: -60px; top: 0; width: 130px; height: 40%; border-top: 6px solid #fff; background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 2px, transparent 2px) 0 0 / 14px 14px, linear-gradient(0deg, rgba(255, 255, 255, 0.8) 2px, transparent 2px) 0 0 / 14px 14px; }
+.bc-ball { position: absolute; left: 0; top: 0; line-height: 1; pointer-events: none; will-change: transform; z-index: 2; }
+.bc-ball.flat { filter: brightness(0.95); }
+.bc-seal { position: absolute; bottom: 14%; font-size: clamp(60px, 14vh, 110px); line-height: 1; transform: translateX(-50%); pointer-events: none; z-index: 1; }
+.bc-seal.head { animation: bcHead 0.4s ease; }
+@keyframes bcHead { 40% { transform: translateX(-50%) translateY(-24px) rotate(-12deg); } }
+.bc-me { position: absolute; left: 6%; bottom: 14%; font-size: clamp(50px, 11vh, 90px); line-height: 1; pointer-events: none; }
+.bc-bubble { position: absolute; left: 50%; top: 10%; padding: 6px 16px; border-radius: 18px; background: #fff; font-family: 'Fredoka One', cursive; color: #0c4a6e; font-size: 1.2rem; transform: translateX(-50%) scale(0); transition: transform 0.3s cubic-bezier(.2, 1.6, .4, 1); z-index: 3; pointer-events: none; }
+.bc-bubble.show { transform: translateX(-50%) scale(1); }

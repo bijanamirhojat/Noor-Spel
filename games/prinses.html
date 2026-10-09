@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="prinses/css/dorp/spookhuis.css">
     <link rel="stylesheet" href="prinses/css/dorp/moestuin.css">
     <link rel="stylesheet" href="prinses/css/rooms/wc.css">
+    <link rel="stylesheet" href="prinses/css/dorp/strand.css">
+    <link rel="stylesheet" href="prinses/css/dorp/pluktuin.css">
+    <link rel="stylesheet" href="prinses/css/rooms/minigolf.css">
     <link rel="stylesheet" href="prinses/css/sky.css">
     <link rel="stylesheet" href="prinses/css/wolken/weermakerij.css">
     <link rel="stylesheet" href="prinses/css/wolken/wolkenkasteel.css">
@@ -412,6 +415,39 @@
                 <button class="scope-close" id="gardenClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="beachov" id="beachOv">
+                <div class="nails-title">🏐 Hooghouden</div>
+                <div class="bc-scores"><span id="beachCount">🏐 0</span><span id="beachBest">🏆 0</span></div>
+                <div class="bc-hint">Tik op de bal om hem hoog te houden! 🦭 kopt hem terug</div>
+                <div class="bc-stage" id="beachStage">
+                    <div class="net"></div>
+                    <span class="bc-me">👸</span>
+                    <span class="bc-seal" id="beachSeal">🦭</span>
+                    <span class="bc-ball" id="beachBall">🏐</span>
+                    <div class="bc-bubble" id="beachBubble"></div>
+                </div>
+                <button class="scope-close" id="beachClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="pickov" id="pickOv">
+                <div class="nails-title">🌼 Bloemen plukken</div>
+                <div class="pk-count" id="pickCount"></div>
+                <div class="pk-wish" id="pickWish"></div>
+                <div class="pk-main">
+                    <div class="pk-fieldov" id="pickField"></div>
+                    <div class="pk-bouquet" id="pickBouquet"><div class="flowers"></div><div class="wrap"></div><span class="bow">🎀</span></div>
+                </div>
+                <button class="scope-close" id="pickClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="golfov" id="golfOv">
+                <div class="nails-title">⛳ Glow-golf</div>
+                <div class="gg-hud"><span id="golfHole"></span><span id="golfStrokes"></span><span id="golfDone"></span></div>
+                <div class="gg-hint">Trek de bal naar achteren en laat los ✨ (of tik waar hij heen moet)</div>
+                <canvas class="gg-canvas" id="golfCanvas"></canvas>
+                <button class="scope-close" id="golfClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="ghostov" id="ghostOv">
                 <div class="nails-title">👻 Spookjes zoeken</div>
                 <div class="ghost-tray" id="ghostTray"></div>
@@ -660,6 +696,9 @@
     <script src="prinses/js/dorp/spookhuis.js"></script>
     <script src="prinses/js/dorp/moestuin.js"></script>
     <script src="prinses/js/rooms/wc.js"></script>
+    <script src="prinses/js/dorp/strand.js"></script>
+    <script src="prinses/js/dorp/pluktuin.js"></script>
+    <script src="prinses/js/rooms/minigolf.js"></script>
     <!-- Het wolkenrijk (scene 'wolken', zie SKY in js/world.js) -->
     <script src="prinses/js/wolken/wolkenpoort.js"></script>
     <script src="prinses/js/wolken/weermakerij.js"></script>

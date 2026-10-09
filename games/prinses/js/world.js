@@ -12,14 +12,14 @@ const WINGS = [
     { key: 'mooi',  name: 'Mooi maken',        icon: '💅', color: '#a855f7', gems: 10, liftX: 30,
       rooms: ['spiegelkamer', 'kapsalon', 'badkamer', 'wc', 'nagelsalon', 'juwelierskamer', 'borduurkamer', 'parfumerie', 'fotostudio'] },
     { key: 'speel', name: 'Speelverdieping',   icon: '🧸', color: '#f59e0b', gems: 12, liftX: 30,
-      rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad', 'lieveheersbeestjes', 'plakboek'] },
+      rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad', 'lieveheersbeestjes', 'minigolf', 'plakboek'] },
     { key: 'toren', name: 'Toren',             icon: '🌙', color: '#6366f1', gems: 12, liftX: 30,
       rooms: ['slaapkamer', 'ouderslaapkamer', 'sterrenkamer', 'elvenkamer', 'torenkamer', 'muziekkamer', 'trofeekamer'] }
 ];
 
 // Het dorp: met de koets bereikbaar vanaf het kasteelplein (js/village.js)
 const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', gems: 12,
-    rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'station', 'spookhuis'] };
+    rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'pluktuin', 'station', 'spookhuis', 'strand'] };
 
 // Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
 const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 12,
