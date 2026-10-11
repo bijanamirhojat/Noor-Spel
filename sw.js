@@ -243,6 +243,39 @@ function fetchFresh(request) {
     return fetch(new Request(request, { cache: 'no-cache' }));
 }
 
+// Games are opened as games/x.html?v=<release>, but precached without the query
+function fromCache(request) {
+    return caches.match(request, { ignoreSearch: true });
+}
+
+// On slow wifi, don't keep the child waiting: after NETWORK_TIMEOUT use the cached copy
+// (the fetch still finishes in the background and refreshes the cache).
+const NETWORK_TIMEOUT = 2500;
+
+function networkFirst(event, request, fallback) {
+    const network = fetchFresh(request).then(async (fresh) => {
+        if (fresh && fresh.ok && !fresh.redirected) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, fresh.clone());
+        }
+        return fresh;
+    });
+    event.waitUntil(network.catch(() => {}));
+    const timeout = new Promise((resolve) => setTimeout(resolve, NETWORK_TIMEOUT));
+    return (async () => {
+        const first = await Promise.race([network.catch(() => null), timeout]);
+        if (first && first.ok) return first;
+        const cached = await fromCache(request);
+        if (cached) return cached;
+        // Nothing cached: wait for the network after all (or show the server's answer)
+        try {
+            return first || (await network);
+        } catch {
+            return fallback();
+        }
+    })();
+}
+
 self.addEventListener('fetch', (event) => {
     const { request } = event;
     if (request.method !== 'GET') return;
@@ -263,42 +296,20 @@ self.addEventListener('fetch', (event) => {
 
     // Network-first for HTML/navigation so updates appear quickly in iPad PWA.
     if (isNavigation || (isSameOrigin && request.headers.get('accept')?.includes('text/html'))) {
-        event.respondWith((async () => {
-            try {
-                const fresh = await fetchFresh(request);
-                const cache = await caches.open(CACHE_NAME);
-                cache.put(request, fresh.clone());
-                return fresh;
-            } catch (_) {
-                const cached = await caches.match(request);
-                if (cached) return cached;
-                return caches.match('./index.html');
-            }
-        })());
+        event.respondWith(networkFirst(event, request, async () => caches.match('./index.html')));
         return;
     }
 
     // Network-first for scripts and styles too: the princess game is split over many
     // files, and mixing a fresh page with stale cached code from an older release breaks it.
     if (isSameOrigin && /\.(js|css)$/.test(url.pathname)) {
-        event.respondWith((async () => {
-            try {
-                const fresh = await fetchFresh(request);
-                if (fresh && fresh.status === 200) {
-                    const cache = await caches.open(CACHE_NAME);
-                    cache.put(request, fresh.clone());
-                }
-                return fresh;
-            } catch (_) {
-                return (await caches.match(request)) || Response.error();
-            }
-        })());
+        event.respondWith(networkFirst(event, request, async () => Response.error()));
         return;
     }
 
     // Cache-first for other static assets with background refresh.
     event.respondWith((async () => {
-        const cached = await caches.match(request);
+        const cached = await fromCache(request);
         if (cached) {
             if (isSameOrigin) {
                 fetch(request)

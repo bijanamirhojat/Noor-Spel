@@ -1,111 +1,61 @@
 # Noor's Speelgoed - Web Games
 
-Een verzameling van leuke, kindvriendelijke spelletjes voor Noor.
+Een verzameling kindvriendelijke spelletjes voor Noor.
 
-## Project info
-
-- **Doelgroep:** Kinderen (peuters tot basisschoolleeftijd)
-- **Technologie:** HTML, CSS, JavaScript (geen frameworks)
-- **PWA:** Installable als app op mobiel/tablet
-- **Offline:** Werkt offline na eerste bezoek
+- **Doelgroep:** peuter / kleuter die nog niet leest: alles werkt met plaatjes, tikken en gesproken tekst
+- **Apparaat:** iPad, liggend, als app op het beginscherm (PWA)
+- **Techniek:** gewone HTML, CSS en JavaScript, geen frameworks en geen build-stap
+- **Offline:** werkt offline na het eerste bezoek (service worker)
 
 ## Spelletjes
 
-### 1. Flip (Verzorgingsspel)
-Een kat simulator waarin je voor Flip zorgt:
-- 🐟 Eten geven (toets: E)
-- 💕 Aaien (toets: A)  
-- 🧶 Spelen (toets: S)
-- 😴 Slapen (toets: Z)
-- 💩 Poepen (toets: P)
+De homepage (`index.html`) toont bovenaan het **Prinsessenkasteel** en daaronder vier groepen
+(de lijst staat in `GAMES` en `THEMES` in `index.html`):
 
-### 2. Memory
-Kaartspel met dierenplaatjes. Draai kaarten om en vind alle paren!
+| Groep | Spelletjes |
+|---|---|
+| 🐾 Dieren | flip (kat verzorgen), kleurensorteren, draakjes, boerderij, zaklamp |
+| 🎵 Muziek en maken | piano, muziektuin, kleuren (kleurplaten), kleurenmixen, mixen, pizza |
+| 🏡 Thuis | poetsen, kamer, aankleden, bellen, kiekeboe, bommetjes |
+| 🧩 Puzzelen | memory, letters, cijfers, plaatjefout, sokken, zoekenvind |
 
-### 3. Kleuren
-Kleurplaten waar je op kunt klikken om vlakken in te kleuren.
-
-### 4. Letters
-Leer lowercase letters herkennen:
-- **Easy:** 3 keuzemogelijkheden
-- **Moeilijk:** 5 keuzemogelijkheden
-
-### 5. Cijfers
-Leer cijfers herkennen:
-- **Easy:** cijfers 0-9, 3 keuzemogelijkheden
-- **Moeilijk:** cijfers 0-99, 5 keuzemogelijkheden
-
-## PWA Installatie
-
-Op **iPhone (Safari)**:
-1. Open de website
-2. Tik op het deel-icoon (☁️)
-3. Selecteer "Toevoegen aan beginscherm"
-
-Op **Android (Chrome)**:
-1. Open de website
-2. Tik op "Installeren" of in het menu "Toevoegen aan beginscherm"
+Het **Prinsessenkasteel** (`games/prinses.html`) is veruit het grootste spel: een kasteel met vier
+verdiepingen, buiten, onder water, een dorp, een dierentuin, de wolken, de ruimte en een piratenbaai.
+Zie [games/prinses/README.md](games/prinses/README.md) voor de opbouw.
 
 ## Structuur
 
 ```
-Noor-Spel/
-├── index.html          # Hoofdmenu met alle spelletjes
-├── manifest.json       # PWA manifest
-├── sw.js               # Service worker voor offline gebruik
-├── games/
-│   ├── flip.html       # Flip het verzorgingsspel
-│   ├── memory.html     # Memory kaartspel
-│   ├── kleuren.html   # Kleuren/kleurplaat
-│   ├── letters.html   # Letters herkennen
-│   └── cijfers.html   # Cijfers herkennen
-└── README.md           # Dit bestand
+index.html            homepage met alle spelletjes + "Updates zoeken"
+manifest.json         PWA-manifest
+sw.js                 service worker (PRECACHE_URLS = alles wat offline moet werken)
+games/shared.css|js   gedeelde stijl en hulpjes (terugknop, geluid, spraak)
+games/<spel>.html     één bestand per los spel
+games/prinses/        code van het prinsessenkasteel (js/, css/)
+kleurplaten/          SVG-kleurplaten (index.json wordt gebouwd door build-kleurplaten.sh)
+scripts/              controles en de smoketest (zie hieronder)
 ```
 
-## Responsive Design
+## Ontwikkelen
 
-- **Mobiel:** Verticaal gestapelde layouts, geoptimaliseerd voor touch
-- **Tablet/Desktop:** Horizontale layouts met grotere elementen
+Start een lokale server in de projectmap (bijv. `npx serve .`) en open `index.html`.
+Op localhost slaat de service worker zichzelf over, dus je ziet altijd de nieuwste bestanden.
 
-Breakpoints:
-- 600px: Tablet
-- 768px: Grotere tablet/kleine desktop
-- 900px+: Desktop
+Controles (draaien ook in GitHub Actions vóór elke deploy):
 
-## Touch & Zoom Bescherming
-
-De app is geoptimaliseerd voor jonge kinderen:
-- Zoom is uitgeschakeld
-- Tekstselectie is uitgeschakeld
-- Onbedoelde swipe-acties zijn geblokkeerd
-
-## Ontwikkeling
-
-Open `index.html` in je browser om te testen.
-
-### Linting/Validatie
-- HTML: https://validator.w3.org/
-- CSS: geen speciale tools nodig
-
-### Git push naar main
 ```bash
-git add .
-git commit -m "Add PWA support and new games"
-git push origin main
+node scripts/check-assets.mjs
 ```
 
-## Geschiedenis
+```bash
+npx -y eslint@9 .
+```
 
-- **2026-02-22:** Project gestart met 3 spelletjes (Flip, Memory, Kleuren)
-- Responsive design toegevoegd voor mobiel/tablet/desktop
-- PWA ondersteuning toegevoegd (manifest, service worker)
-- Letters en Cijfers spellen toegevoegd
+```bash
+node scripts/smoke.mjs
+```
 
-## TODO / Wensen
+## Deploy
 
-- [ ] Puzzel spelletje
-- [ ] Muziekspeler
-- [ ] Dieren informatie
-- [ ] Rennend spelletje
-- [ ] Geluidseffecten
-- [ ] High scores opslaan (localStorage)
+Elke push naar `main` wordt via GitHub Actions naar GitHub Pages gezet. `bump-release-id.sh` geeft
+elke deploy een nieuwe `RELEASE_ID`, zodat de service worker een verse cache vult.

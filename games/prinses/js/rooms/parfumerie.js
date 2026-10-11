@@ -39,7 +39,7 @@ function bottleSVG(p, id) {
     const b = PF_BOTTLES[p.b];
     const ing = p.ing.map(k => PF_ING_BY[k]).filter(Boolean);
     const layerH = (b.bottom - b.top) / PF_MAX_LAYERS;
-    let liquid = '';
+    let liquid;
     if (ing.length && p.mixed) {
         const stops = ing.map((g, i) => `<stop offset="${ing.length > 1 ? i / (ing.length - 1) : 0}" stop-color="${g.c}"/>`).join('');
         const top = b.bottom - layerH * ing.length;

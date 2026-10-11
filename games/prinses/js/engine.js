@@ -428,8 +428,6 @@ function resize() {
     canvas.height = Math.round(h * dpr);
     if (scopeOpen) layoutScope();
 }
-window.addEventListener('resize', resize);
-if (window.ResizeObserver) new ResizeObserver(resize).observe(playfield);
 
 /* ─────────── Main loop ─────────── */
 function frame(now) {

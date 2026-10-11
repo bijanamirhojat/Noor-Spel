@@ -38,6 +38,9 @@ renderPlushBasket();
 updateStickerBtn();
 loadLook();
 applyLook();
+// Only now: resize() also lays out overlays from files loaded after engine.js
+window.addEventListener('resize', resize);
+if (window.ResizeObserver) new ResizeObserver(resize).observe(playfield);
 resize();
 state.camX = Math.max(0, state.x - state.viewW / 2);
 requestAnimationFrame(frame);

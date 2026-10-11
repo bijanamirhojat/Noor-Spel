@@ -2,11 +2,12 @@
     "name": "Noor's Games",
     "short_name": "Noor's Games",
     "description": "Leuke spelletjes voor Noor",
-    "start_url": "https://bijanamirhojat.github.io/Noor-Spel/index.html",
+    "id": "/Noor-Spel/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ff6b6b",
     "theme_color": "#ff6b6b",
-    "orientation": "portrait",
+    "orientation": "any",
     "icons": [
         {
             "src": "icons/icon-192.png",
@@ -32,5 +33,5 @@
         "entertainment"
     ],
     "lang": "nl",
-    "scope": "/"
+    "scope": "./"
 }
