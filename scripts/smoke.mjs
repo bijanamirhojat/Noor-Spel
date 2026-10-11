@@ -84,6 +84,8 @@ const IN_PAGE = () => {
         n.dispatchEvent(new PointerEvent('pointerup', o));
         n.dispatchEvent(new MouseEvent('click', o));
     };
+    // Independent of the registry: an overlay is open when its ✖ is on screen
+    const closeVisible = () => [...document.querySelectorAll('.scope-close')].some(visible);
     // Walking is not what we test here: arrive instantly
     window.walkTo = (x, action) => {
         state.x = state.targetX = clampX(x);
@@ -96,18 +98,18 @@ const IN_PAGE = () => {
         await until(() => !state.busy, 5000);
         await sleep(150);
     }
-    async function closeOverlay(warn) {
+    async function closeOverlay(fail) {
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape', bubbles: true }));
-        if (await until(() => !overlayOpen(), 600)) return true;
-        log.push(`error ${key} ${name}: Escape sluit de overlay niet (registerOverlay vergeten?)`);
+        if (await until(() => !overlayOpen() && !closeVisible(), 600)) return true;
+        fail('Escape sluit de overlay niet (registerOverlay vergeten?)');
         for (const c of [...document.querySelectorAll('.scope-close')].filter(visible).reverse()) {
             tap(c);
-            if (await until(() => !overlayOpen(), 1500)) return true;
+            if (await until(() => !overlayOpen() && !closeVisible(), 1500)) return true;
         }
         return false;
     }
-    return { sleep, until, visible, tap, goTo, closeOverlay };
+    return { sleep, until, visible, tap, goTo, closeOverlay, closeVisible };
 };
 
 async function smokeScene(sceneKey) {
@@ -119,7 +121,7 @@ async function smokeScene(sceneKey) {
         const key = rooms[idx];
         page.where = ' ' + key;
         const result = await page.evaluate(async ({ sceneKey, idx, key, helpers }) => {
-            const { sleep, until, visible, tap, goTo, closeOverlay } = eval(`(${helpers})`)();
+            const { sleep, until, visible, tap, goTo, closeOverlay, closeVisible } = eval(`(${helpers})`)();
             const log = [];
             await goTo(sceneKey, idx);
             const objs = [...SCENES[sceneKey].el.querySelectorAll('.obj')].filter((n) =>
@@ -127,15 +129,16 @@ async function smokeScene(sceneKey) {
             for (let i = 0; i < objs.length; i++) {
                 const n = objs[i];
                 const name = n.className.split(' ')[0];
-                const warn = (m) => log.push(`warn ${key} ${name}: ${m}`);
+                const fail = (m) => log.push(`error ${key} ${name}: ${m}`);
                 if (!document.contains(n)) continue;
                 if (scene.key !== sceneKey) await goTo(sceneKey, idx);
                 await until(() => !state.busy && !overlayOpen(), 15000);
                 tap(n);
                 await sleep(400);
                 // Some activities open after a little walk or animation (e.g. dinner once Mama and Papa sit down)
-                await until(() => overlayOpen() || !state.busy, 15000);
-                if (overlayOpen()) {
+                await until(() => overlayOpen() || closeVisible() || !state.busy, 15000);
+                if (closeVisible() && !overlayOpen()) fail('overlay staat open maar overlayOpen() weet het niet (registerOverlay vergeten?)');
+                if (overlayOpen() || closeVisible()) {
                     await sleep(400);
                     // Press up to 10 buttons in the activity (not the close button)
                     const ov = [...document.querySelectorAll('.open, .show')].filter((o) =>
@@ -144,13 +147,13 @@ async function smokeScene(sceneKey) {
                         const btns = [...ov.querySelectorAll('button, [role=button], .tool-btn, .bd-btn')]
                             .filter((b) => visible(b) && !b.matches('.scope-close')).slice(0, 10);
                         for (const b of btns) {
-                            if (!overlayOpen()) break;
+                            if (!closeVisible()) break;
                             tap(b);
                             await sleep(120);
                         }
                     }
                     await sleep(200);
-                    if (overlayOpen() && !(await closeOverlay(warn))) {
+                    if ((overlayOpen() || closeVisible()) && !(await closeOverlay(fail))) {
                         log.push(`error ${key} ${name}: overlay gaat niet dicht`);
                         return log;
                     }
