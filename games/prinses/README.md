@@ -40,6 +40,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/smoothiebar.js: smoothies maken (fruit + melk/yoghurt in de blender, mixknop ingedrukt houden, inschenken, toppings)
                 js/rooms/kristalgrot.js: geheime grot onder het kasteel: kristallen die muziek maken, hartjeskristallen,
                 schatkisten uitgraven door de aarde weg te vegen (canvas); gevonden schatten in noor-prinses-grotschatten
+                js/rooms/legokamer.js: bouwen met legosteentjes (kleur kiezen, slepen of tikken; steentjes vallen op elkaar,
+                oppakken en eraf slepen kan ook); het bouwwerk staat in noor-prinses-lego en in het klein op de tafel
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
