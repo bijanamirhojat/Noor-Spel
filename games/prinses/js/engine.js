@@ -390,9 +390,12 @@ function resize() {
 const CULL_MARGIN = 400;
 const cullW = new WeakMap();
 let cullT = 0;
+let cullCamX = 0;
 function cullOffscreen(now) {
-    if (now < cullT) return;
+    // Every 250ms, or straight away when the camera jumped (travelling, a door)
+    if (now < cullT && Math.abs(state.camX - cullCamX) < CULL_MARGIN / 2) return;
     cullT = now + 250;
+    cullCamX = state.camX;
     const x0 = state.camX - CULL_MARGIN, x1 = state.camX + state.viewW + CULL_MARGIN;
     for (const n of world.children) {
         const left = parseFloat(n.style.left);

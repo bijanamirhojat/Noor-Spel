@@ -1,6 +1,7 @@
 // Smoke test: opens every game, then walks the princess through every room of every world,
 // taps every object, presses some buttons in each activity and closes it again.
-// Fails on any JavaScript error. Run: node scripts/smoke.mjs  (add --only=<scene> to test one world)
+// Fails on any JavaScript error. Run: node scripts/smoke.mjs
+// Options: --only=<scene> to test one world, --cpu=4 to run as on a slow device
 import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -8,6 +9,7 @@ import { chromium } from 'playwright';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const only = process.argv.find((a) => a.startsWith('--only='))?.slice(7);
+const cpu = Number(process.argv.find((a) => a.startsWith('--cpu='))?.slice(6) || 1);
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json',
     '.svg': 'image/svg+xml', '.png': 'image/png' };
 
@@ -32,6 +34,9 @@ async function newPage(label) {
     const ctx = await browser.newContext({ viewport: { width: 1180, height: 820 }, hasTouch: true });
     const page = await ctx.newPage();
     page.where = '';
+    // Eleven pages load at once; give slow machines (CI) time
+    page.setDefaultTimeout(120000);
+    if (cpu > 1) await (await ctx.newCDPSession(page)).send('Emulation.setCPUThrottlingRate', { rate: cpu });
     // Google Fonts etc.: answer locally so the test doesn't depend on the internet
     await page.route((url) => !url.href.startsWith(base), (route) =>
         route.fulfill({ status: 200, contentType: 'text/css', body: '' }));
