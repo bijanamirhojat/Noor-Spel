@@ -281,6 +281,7 @@ function tripThing(p, b, i) {
 }
 
 function openTrip() {
+    dragHint(rtCanvas);
     tripOpen = true;
     rtEl.classList.add('open');
     tripMap();

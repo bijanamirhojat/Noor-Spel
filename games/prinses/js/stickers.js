@@ -43,6 +43,8 @@ function stickerCount() {
 function updateStickerBtn() {
     stickerBtn.querySelector('.stick-count').textContent = stickerCount();
     updateBookStand();
+    // Rooms whose sticker you have: their 👇 calms down, so new things stand out
+    document.querySelectorAll('.obj[data-room]').forEach(n => n.classList.toggle('sticker-got', stickers.has(n.dataset.room)));
 }
 
 // Called by addObj while a scene is being built: the room is where the princess walks to
@@ -101,7 +103,7 @@ function earnSticker(key, fromNode) {
     const pageFull = page.scene.rooms.every(r => stickers.has(r.key));
     setTimeout(() => {
         if (all) {
-            showToast('📒 Alle stickers! Ruil je boek in voor een trofee! 🏆', 3500);
+            showToast('📒 Alle stickers! Ruil je boek in voor een trofee! 🏆', 3500, 'Alle stickers! Ruil je boek in voor een trofee in de trofeeënkamer!');
             playWin();
             spellRain(['⭐', '💖', '👑', '✨']);
         } else if (pageFull) {

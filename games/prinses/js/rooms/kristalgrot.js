@@ -291,6 +291,7 @@ document.getElementById('kgAgain').addEventListener('pointerdown', (e) => {
 });
 
 function openCave() {
+    dragHint(kgCanvas);
     caveOpen = true;
     kgEl.classList.add('open');
     kgUpdateCount();

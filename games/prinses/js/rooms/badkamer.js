@@ -306,6 +306,7 @@ document.getElementById('tbAgain').addEventListener('pointerdown', (e) => {
 });
 
 function openTeeth() {
+    dragHint(tbStageEl);
     teethOpen = true;
     document.getElementById('teethOv').classList.add('open');
     newTeeth();

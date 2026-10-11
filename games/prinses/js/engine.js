@@ -79,8 +79,13 @@ function sayRandom(list) {
 }
 
 let toastTimer = null;
-function showToast(html, ms = 2200) {
+// say: also speak it (Noor can't read yet), for instructions and "not now" messages
+function showToast(html, ms = 2200, say) {
     toastEl.innerHTML = html;
+    if (say) {
+        if (window.speechSynthesis) speechSynthesis.cancel();
+        speak(say);
+    }
     toastEl.classList.add('show');
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms);
@@ -511,7 +516,7 @@ function frame(now) {
     const room = Math.max(0, Math.min(ROOMS.length - 1, Math.floor(state.x / ROOM_W)));
     if (room !== state.room) {
         state.room = room;
-        roomPill.textContent = `${ROOMS[room].icon} ${ROOMS[room].name}`;
+        roomPill.textContent = roomPillText(ROOMS[room]);
         roomPill.classList.add('bump');
         setTimeout(() => roomPill.classList.remove('bump'), 200);
         if (window.speechSynthesis) speechSynthesis.cancel();

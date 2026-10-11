@@ -29,7 +29,7 @@ function buildCloudPortal() {
         playPop();
         if (!state.riding) {
             // Point the way: you need the unicorn to fly up there
-            showToast('🦄 Vlieg erheen met de eenhoorn!', 2000);
+            showToast('🦄 Vlieg erheen met de eenhoorn!', 2000, 'Vlieg erheen met de eenhoorn!');
             const u = unicornEl();
             u.classList.remove('nudge'); void u.offsetWidth; u.classList.add('nudge');
             sparkleShower(state.uniX, 250, 30);

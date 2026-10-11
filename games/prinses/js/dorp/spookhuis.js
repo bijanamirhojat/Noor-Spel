@@ -155,6 +155,7 @@ spRoom.addEventListener('pointerdown', (e) => { e.stopPropagation(); lightAt(e);
 spRoom.addEventListener('pointermove', (e) => { if (e.buttons || e.pointerType !== 'mouse') lightAt(e); });
 
 function openGhostHunt() {
+    dragHint(spRoom);
     ghostOpen = true;
     spEl.classList.add('open');
     newGhostHunt();

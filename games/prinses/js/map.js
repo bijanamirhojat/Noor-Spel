@@ -156,6 +156,14 @@ function renderMapBody() {
     body.classList.add('pop');
 }
 
+// Room pill above the playfield: which world, and which room in it
+function roomPillText(room) {
+    const w = mapWorlds().find(x => x.scenes.includes(scene));
+    if (!w) return `${room.icon} ${room.name}`;
+    // No double 🏰 in the castle hall
+    return `${w.icon === room.icon ? '' : w.icon + ' '}${w.name} · ${room.icon} ${room.name}`;
+}
+
 function openMap() {
     if (state.busy || overlayOpen()) return;
     mapOpen = true;
@@ -215,6 +223,10 @@ function travelTo(key, room) {
 document.getElementById('mapBtn').addEventListener('pointerdown', (e) => {
     e.stopPropagation();
     openMap();
+});
+document.getElementById('mapHome').addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    travelTo('hal', 0);
 });
 document.getElementById('mapClose').addEventListener('pointerdown', (e) => {
     e.stopPropagation();

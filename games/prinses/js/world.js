@@ -143,6 +143,6 @@ function setScene(key) {
     }
     particles.length = 0;
     state.room = 0;
-    roomPill.textContent = `${ROOMS[0].icon} ${ROOMS[0].name}`;
+    roomPill.textContent = roomPillText(ROOMS[0]);
     updateGemPill();
 }

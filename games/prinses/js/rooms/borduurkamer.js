@@ -340,6 +340,7 @@ window.addEventListener('pointerup', () => { emb.drawing = false; });
 embEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 
 function openEmbroid(slot) {
+    dragHint(embSvg);
     embOpen = true;
     embEl.classList.add('open');
     emb.slot = slot;

@@ -204,6 +204,7 @@ window.addEventListener('pointerup', () => { sg.dragging = false; });
 sgEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 
 function openStarGame() {
+    dragHint(sgSvg);
     sgOpen = true;
     sgEl.classList.add('open');
     const first = STAR_PICS.findIndex((_, i) => !sg.done.has(i));

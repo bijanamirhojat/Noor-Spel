@@ -92,6 +92,7 @@ function renderLens() {
 }
 
 function openScope() {
+    dragHint(scope);
     scopeOpen = true;
     scope.classList.add('open');
     lens.x = 0;

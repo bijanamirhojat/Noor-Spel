@@ -17,6 +17,29 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ─────────── Helpers for things inside an overlay ─────────── */
+// A finger that shows how to drag over a drawing/scratching/steering area,
+// but only if nobody touched anything for a moment. Gone at the first touch.
+function dragHint(stage, { dx = 110, dy = 0, delay = 1500 } = {}) {
+    let hint = null;
+    const stop = () => {
+        clearTimeout(timer);
+        window.removeEventListener('pointerdown', stop, true);
+        if (hint) hint.remove();
+    };
+    const timer = setTimeout(() => {
+        const r = stage.getBoundingClientRect();
+        if (!overlayOpen() || !r.width) { stop(); return; }
+        hint = el('<div class="drag-hint">👆</div>');
+        hint.style.left = r.left + r.width / 2 + 'px';
+        hint.style.top = r.top + r.height / 2 + 'px';
+        hint.style.setProperty('--dx', dx + 'px');
+        hint.style.setProperty('--dy', dy + 'px');
+        document.body.appendChild(hint);
+        setTimeout(stop, 9000);
+    }, delay);
+    window.addEventListener('pointerdown', stop, true);
+}
+
 // Fly a little thing inside an overlay from one element to another (with a small arc)
 function ovFly(ov, fromEl, toEl, html, ms = 600) {
     const o = ov.getBoundingClientRect();

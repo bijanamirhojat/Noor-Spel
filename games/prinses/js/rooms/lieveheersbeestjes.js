@@ -245,6 +245,7 @@ bugStage.addEventListener('pointerdown', (e) => { e.stopPropagation(); bugPointe
 bugStage.addEventListener('pointermove', (e) => { if (e.buttons || e.pointerType !== 'mouse') bugPointer(e); });
 
 function openBugGame() {
+    dragHint(bugStage);
     bugOpen = true;
     bugEl.classList.add('open');
     newBugRound();

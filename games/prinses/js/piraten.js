@@ -36,7 +36,7 @@ function buildPirateBay(o6) {
     });
     addObj('<div class="pb-parrot">🦜</div>', o6 + 330, 0, o6 + 200, () => {
         squawk();
-        showToast('🦜 Ahoy, prinses! Kom aan boord!', 1800);
+        showToast('🦜 Ahoy, prinses! Kom aan boord!', 1800, 'Ahoy, prinses! Kom aan boord!');
     });
     addObj('<div class="pb-cannon"><div class="barrel"></div><div class="wheel"></div></div>', o6 + 560, 300, o6 + 560, (node) => {
         if (!state.boating) { pirateNeedBoat(); return; }
@@ -47,7 +47,7 @@ function buildPirateBay(o6) {
         for (let i = 0; i < 50; i++) spawnSparkle(p.x, p.y, { vx: 120 + Math.random() * 260, vy: -220 - Math.random() * 180, g: 300, size: 5 + Math.random() * 6, max: 1.6 });
     });
     addObj('<div class="pb-isle"><div class="sand"></div><span class="palm">🌴</span><b>❌</b></div>', o6 + 640, 260, o6 + 640, () => {
-        showToast('🔭 Kijk met de verrekijker op het piratenschip!', 2000);
+        showToast('🔭 Kijk met de verrekijker op het piratenschip!', 2000, 'Kijk met de verrekijker op het piratenschip!');
     });
 }
 
@@ -56,7 +56,7 @@ function pirateNeedBoat() {
     const hit = document.querySelector('.boat-hit');
     if (hit) { hit.classList.remove('tap'); void hit.offsetWidth; hit.classList.add('tap'); }
     splash(BOAT_HOME, 440);
-    showToast('⛵ Vaar erheen met je bootje!', 1800);
+    showToast('⛵ Vaar erheen met je bootje!', 1800, 'Vaar erheen met je bootje!');
 }
 
 /* ─────────── Piratenavontuur (overlay) ─────────── */
@@ -214,6 +214,7 @@ document.getElementById('pvAgain').addEventListener('pointerdown', (e) => {
 });
 
 function openPirate() {
+    dragHint(pvView);
     pirateOpen = true;
     pvEl.classList.add('open');
     document.getElementById('pvAgain').classList.remove('show');

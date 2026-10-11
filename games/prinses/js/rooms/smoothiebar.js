@@ -169,6 +169,7 @@ function blAdd(item, btn) {
 function blStartHold() {
     if (bl.busy || bl.glass || !bl.items.length || bl.blended || bl.holding) return;
     bl.holding = true;
+    bl.holdStart = performance.now();
     document.getElementById('blBlender').classList.add('on');
     startNoise('blend');
     bl.holdT = setInterval(() => {
@@ -191,6 +192,8 @@ function blStopHold() {
     bl.holding = false;
     clearInterval(bl.holdT);
     stopNoise();
+    // Just a quick tap: explain that you have to keep pressing
+    if (!bl.blended && performance.now() - bl.holdStart < 600) speak('Blijf drukken!');
     document.getElementById('blBlender').classList.remove('on');
     blRender();
 }

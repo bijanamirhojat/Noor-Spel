@@ -75,10 +75,10 @@ function setNight(night, quiet) {
     nightOutside(night);
     if (quiet) return;
     if (night) {
-        showToast('🌙 Het wordt nacht! Doe de lampen aan 💡', 2600);
+        showToast('🌙 Het wordt nacht! Doe de lampen aan 💡', 2600, 'Het wordt nacht! Doe de lampen aan.');
         [784, 659, 523, 392].forEach((f, i) => setTimeout(() => playTone(f, 0.4, 0.06, 'sine'), i * 220));
     } else {
-        showToast('☀️ Goedemorgen! Het is weer dag!', 2200);
+        showToast('☀️ Goedemorgen! Het is weer dag!', 2200, 'Goedemorgen! Het is weer dag!');
         [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => playTone(f, 0.3, 0.07, 'triangle'), i * 160));
     }
 }

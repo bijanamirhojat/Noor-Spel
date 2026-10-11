@@ -366,6 +366,7 @@ function golfLoop(t) {
 }
 
 function openGolf() {
+    dragHint(ggCanvas);
     golfOpen = true;
     ggEl.classList.add('open');
     golfFit();

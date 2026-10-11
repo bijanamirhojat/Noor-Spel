@@ -282,6 +282,7 @@ document.getElementById('scrapClear').addEventListener('pointerdown', (e) => {
 });
 
 function openScrapbook() {
+    dragHint(sbCanvas);
     scrapOpen = true;
     sbEl.classList.add('open');
     loadScrapPage(scrapLast);

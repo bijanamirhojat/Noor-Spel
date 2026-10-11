@@ -375,6 +375,7 @@ function glSave() {
 }
 
 function openGlitter() {
+    dragHint(glPaper);
     glitterOpen = true;
     glEl.classList.add('open');
     if (!gl.dirty) glClear(false);

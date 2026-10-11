@@ -34,7 +34,7 @@ function startFamilyDinner() {
     // Papa stops working for dinner
     parents.forEach(p => parentStopWork(p));
     if (parents.some(p => p.mode !== 'wander')) {
-        showToast('Mama en Papa zijn even bezig…');
+        showToast('👑 Mama en Papa zijn even bezig…', 2200, 'Mama en Papa zijn even bezig. Straks gaan we eten!');
         return;
     }
     state.busy = true;
@@ -42,7 +42,7 @@ function startFamilyDinner() {
     const rx = roomX('eetzaal');
     const key = sceneOf('eetzaal').key;
     [1568, 1319, 1568, 1319, 1568].forEach((f, i) => setTimeout(() => playTone(f, 0.3, 0.1, 'sine'), i * 180));
-    showToast('🔔 Etenstijd! Mama en Papa komen eraan!', 2400);
+    showToast('🔔 Etenstijd! Mama en Papa komen eraan!', 2400, 'Etenstijd! Mama en Papa komen eraan!');
     parents.forEach(p => {
         // They come walking in from the sides of the room
         const fromLeft = p.id === 'papa';

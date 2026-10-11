@@ -298,6 +298,7 @@ h1 {
     animation: hintBob 1.2s ease-in-out infinite;
     pointer-events: none;
 }
+.obj.sticker-got .tap-hint { opacity: 0.35; animation: none; }
 
 @keyframes hintBob {
     0%, 100% { transform: translate(-50%, 0); }

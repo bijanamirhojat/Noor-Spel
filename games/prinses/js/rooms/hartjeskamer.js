@@ -267,6 +267,7 @@ function sendHeartPost() {
 }
 
 function openHeartPost(theme = 'heart') {
+    dragHint(hpPaper);
     hpOpen = true;
     if (hp.theme !== theme) {
         hpHearts.innerHTML = '';

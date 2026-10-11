@@ -104,3 +104,19 @@
     line-height: 1;
     pointer-events: none;
 }
+
+/* Drag hint (dragHint in js/overlay.js) */
+.drag-hint {
+    position: fixed;
+    z-index: 1000;
+    font-size: 56px;
+    line-height: 1;
+    pointer-events: none;
+    transform: translate(-30%, -10%);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    animation: dragHint 1.8s ease-in-out infinite;
+}
+@keyframes dragHint {
+    0%, 100% { translate: calc(var(--dx) * -0.5) calc(var(--dy) * -0.5); }
+    50% { translate: calc(var(--dx) * 0.5) calc(var(--dy) * 0.5); }
+}
