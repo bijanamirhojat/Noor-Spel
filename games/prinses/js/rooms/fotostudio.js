@@ -73,6 +73,7 @@ function renderPhotoWall() {
 const studioEl = document.getElementById('studioOv');
 const studioStage = document.getElementById('studioStage');
 let studioOpen = false;
+registerOverlay(() => studioOpen, closeStudio);
 let studioTab = 'props';
 const st = { bd: 'kasteel', items: [], sel: null, drag: null };
 
@@ -299,6 +300,7 @@ studioEl.addEventListener('pointerdown', (e) => e.stopPropagation());
 /* ─────────── Foto bekijken + bewaren ─────────── */
 const photoViewEl = document.getElementById('photoView');
 let photoViewOpen = false;
+registerOverlay(() => photoViewOpen, closePhotoView);
 
 function openPhotoView(src) {
     photoViewOpen = true;

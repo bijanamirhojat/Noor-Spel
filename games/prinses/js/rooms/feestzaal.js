@@ -78,6 +78,7 @@ function renderPartyBanner() {
 const partyEl = document.getElementById('partyOv');
 const partyField = document.getElementById('partyField');
 let partyOpen = false;
+registerOverlay(() => partyOpen, closeParty);
 const pty = { stage: 'pinata', hits: 0, candy: 0, candyTotal: 0, popped: 0, spawnT: null };
 
 function partyHint(t) { document.getElementById('partyHint').textContent = t; }

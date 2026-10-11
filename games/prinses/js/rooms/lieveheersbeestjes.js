@@ -129,6 +129,7 @@ function landAndGrow() {
 const bugEl = document.getElementById('bugOv');
 const bugStage = document.getElementById('bugStage');
 let bugOpen = false;
+registerOverlay(() => bugOpen, closeBugGame);
 const bg = { x: 0, y: 0, tx: 0, ty: 0, facing: 1, got: 0, raf: 0, last: 0, done: false };
 
 function renderBugHud() {

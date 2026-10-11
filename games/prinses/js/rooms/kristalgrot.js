@@ -109,6 +109,7 @@ const kgStage = document.getElementById('kgStage');
 const kgCanvas = document.getElementById('kgDirt');
 const kgCtx = kgCanvas.getContext('2d', { willReadFrequently: true });
 let caveOpen = false;
+registerOverlay(() => caveOpen, closeCave);
 const kg = { items: [], last: null, checkT: 0, scrapeT: 0, chests: 0, opened: 0 };
 
 function kgDrawDirt() {

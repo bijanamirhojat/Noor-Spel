@@ -19,6 +19,7 @@ const BEAD_SHAPES = ['round', 'heart', 'star', 'flower', 'diamond'];
 const PENDANTS = [['💖', '💖'], ['⭐', '⭐'], ['🐚', '🐚'], ['💎', '💎'], ['🌸', '🌸'], ['none', '🚫']];
 const bd = { color: 7, beads: [], pendant: null };
 let beadOpen = false;
+registerOverlay(() => beadOpen, () => closeBeads(false));
 
 function beadShape(shape, c, x, y, r) {
     const st = `stroke="rgba(0,0,0,0.25)" stroke-width="${r * 0.12}"`;

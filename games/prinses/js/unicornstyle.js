@@ -56,6 +56,7 @@ function applyUniLook() {
 /* ─────────── Verkleedkist (overlay) ─────────── */
 const uniEl = document.getElementById('uniOv');
 let uniOpen = false;
+registerOverlay(() => uniOpen, closeUniStyle);
 let uniTab = 'coat';
 const UNI_TABS = [['coat', '🎨'], ['mane', '💇'], ['horn', '🦄'], ['hoof', '👢'], ['head', '👑'], ['pattern', '✨']];
 const UNI_HEAD_ICONS = { none: '🚫', flowers: '🌸', bow: '🎀', crown: '👑', tiara: '💎' };

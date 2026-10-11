@@ -55,6 +55,7 @@ function renderChicks() {
 const eggEl = document.getElementById('eggOv');
 const eggField = document.getElementById('eggField');
 let eggOpen = false;
+registerOverlay(() => eggOpen, closeEggs);
 const eg = { count: 0, timer: null, golden: false };
 const HENS = [20, 50, 80];   // % from the left
 

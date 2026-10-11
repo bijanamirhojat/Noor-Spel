@@ -28,6 +28,7 @@ const ringR = document.getElementById('ringR');
 const findList = document.getElementById('findList');
 const ZOOM = 2.4;
 let scopeOpen = false;
+registerOverlay(() => scopeOpen, closeScope);
 let lens = { x: 0, y: 0, r: 60 };
 
 const FINDS = [

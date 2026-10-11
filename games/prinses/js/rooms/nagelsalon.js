@@ -22,6 +22,7 @@ defineRoom({
 const nailsEl = document.getElementById('nails');
 const handsSvg = document.getElementById('hands');
 let nailsOpen = false;
+registerOverlay(() => nailsOpen, closeNails);
 const NAIL_COLORS = [
     { c: '#f472b6', name: 'Roze!' },
     { c: '#ef4444', name: 'Rood!' },

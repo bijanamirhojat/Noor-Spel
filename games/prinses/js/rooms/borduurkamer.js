@@ -45,6 +45,7 @@ const EMB_PATTERNS = [
 const embEl = document.getElementById('embroid');
 const embSvg = document.getElementById('embSvg');
 let embOpen = false;
+registerOverlay(() => embOpen, () => closeEmbroid(false));
 const emb = {
     cells: Array(EMB_N * EMB_N).fill('.'),
     color: '1',

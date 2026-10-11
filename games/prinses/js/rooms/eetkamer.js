@@ -23,6 +23,7 @@ defineRoom({
 /* ─────────── Dinertje ─────────── */
 const dinEl = document.getElementById('dinner');
 let dinOpen = false;
+registerOverlay(() => dinOpen, closeDinner);
 const DIN_ANIMALS = [
     { e: '🐶', likes: ['🦴', '🍖'], snd: () => { playTone(320, 0.1, 0.2, 'square'); setTimeout(() => playTone(280, 0.12, 0.2, 'square'), 160); } },
     { e: '🐱', likes: ['🐟', '🥛'], snd: () => { playFreqSweep(700, 1000, 0.15, 0.18); setTimeout(() => playFreqSweep(1000, 600, 0.3, 0.18), 150); } },

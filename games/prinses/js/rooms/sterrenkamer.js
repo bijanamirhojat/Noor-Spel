@@ -76,6 +76,7 @@ const STAR_PICS = [
 const sgEl = document.getElementById('starGame');
 const sgSvg = document.getElementById('sgSvg');
 let sgOpen = false;
+registerOverlay(() => sgOpen, closeStarGame);
 const sg = { pic: 0, next: 0, done: new Set(), finished: false, dragging: false };
 
 function sizeStarGame() {

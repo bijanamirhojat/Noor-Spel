@@ -464,6 +464,7 @@ const cupWrap = document.getElementById('cupWrap');
 const potWrap = document.getElementById('potWrap');
 const streamEl = document.getElementById('stream');
 let teaOpen = false;
+registerOverlay(() => teaOpen, closeTea);
 let teaTab = 'cup';
 let teaBusy = false;
 

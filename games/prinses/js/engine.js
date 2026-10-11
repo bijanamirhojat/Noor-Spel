@@ -74,9 +74,6 @@ function allGemsFound() {
 }
 
 /* ─────────── Interactions ─────────── */
-// True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen || kittenOpen || tripOpen || bedtimeOpen || plushPickOpen || pirateOpen || pcOpen || ranjaOpen || caveOpen || blendOpen || ticketOpen; }
-
 function sayRandom(list) {
     speak(randomPick(list));
 }
@@ -200,53 +197,6 @@ bindHold(document.getElementById('btnRight'), 1);
 document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') { state.hold = -1; state.pending = null; }
     if (e.key === 'ArrowRight') { state.hold = 1; state.pending = null; }
-    if (e.key === 'Escape' && scopeOpen) closeScope();
-    if (e.key === 'Escape' && nailsOpen) closeNails();
-    if (e.key === 'Escape' && teaOpen) closeTea();
-    if (e.key === 'Escape' && careOpen) closeCare();
-    if (e.key === 'Escape' && embOpen) closeEmbroid(false);
-    if (e.key === 'Escape' && dressOpen) closeDressup();
-    if (e.key === 'Escape' && dinOpen) closeDinner();
-    if (e.key === 'Escape' && mapOpen) closeMap();
-    if (e.key === 'Escape' && hpOpen) closeHeartPost();
-    if (e.key === 'Escape' && dollOpen) closeDollhouse();
-    if (e.key === 'Escape' && sgOpen) closeStarGame();
-    if (e.key === 'Escape' && smOpen) closeSnowman();
-    if (e.key === 'Escape' && bakeOpen) closeBakery();
-    if (e.key === 'Escape' && beadOpen) closeBeads(false);
-    if (e.key === 'Escape' && giftOpen) closeGifts();
-    if (e.key === 'Escape' && teethOpen) closeTeeth();
-    if (e.key === 'Escape' && elfOpen) closeElfGame();
-    if (e.key === 'Escape' && salonOpen) closeSalon();
-    if (e.key === 'Escape' && fdOpen) closeFamDinner();
-    if (e.key === 'Escape' && pfOpen) closePerfume();
-    if (e.key === 'Escape' && pianoOpen) closePiano();
-    if (e.key === 'Escape' && eggOpen) closeEggs();
-    if (e.key === 'Escape' && bqOpen) closeBouquet();
-    if (e.key === 'Escape' && bugOpen) closeBugGame();
-    if (e.key === 'Escape' && rbOpen) closeRainbow();
-    if (e.key === 'Escape' && studioOpen) closeStudio();
-    if (e.key === 'Escape' && photoViewOpen) closePhotoView();
-    if (e.key === 'Escape' && scrapOpen) closeScrapbook();
-    if (e.key === 'Escape' && partyOpen) closeParty();
-    if (e.key === 'Escape' && uniOpen) closeUniStyle();
-    if (e.key === 'Escape' && trainOpen) closeTrainRide();
-    if (e.key === 'Escape' && ghostOpen) closeGhostHunt();
-    if (e.key === 'Escape' && wcOpen) closeWc();
-    if (e.key === 'Escape' && gardenOpen) closeGarden();
-    if (e.key === 'Escape' && beachOpen) closeBeach();
-    if (e.key === 'Escape' && pickOpen) closePick();
-    if (e.key === 'Escape' && golfOpen) closeGolf();
-    if (e.key === 'Escape' && glitterOpen) closeGlitter();
-    if (e.key === 'Escape' && butterflyOpen) closeButterfly();
-    if (e.key === 'Escape' && kermisDuckOpen) closeKermisDucks();
-    if (e.key === 'Escape' && kermisClawOpen) closeKermisClaw();
-    if (e.key === 'Escape' && zooFeedOpen) closeZooFeed();
-    if (e.key === 'Escape' && kittenOpen) closeKittens();
-    if (e.key === 'Escape' && tripOpen) closeTrip();
-    if (e.key === 'Escape' && bedtimeOpen) closeBedtime(false);
-    if (e.key === 'Escape' && plushPickOpen) closePlushPick();
-    if (e.key === 'Escape' && pirateOpen) closePirate();
     if (e.key === ' ' || e.key === 't') castSpell();
 });
 document.addEventListener('keyup', (e) => {

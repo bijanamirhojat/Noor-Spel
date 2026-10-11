@@ -85,3 +85,22 @@
 .bd-btn svg { width: 34px; height: 34px; }
 
 .bd-btn .sw { width: 34px; height: 34px; border-radius: 50%; box-shadow: inset -4px -4px 0 rgba(0,0,0,0.15), inset 3px 3px 0 rgba(255,255,255,0.5); }
+
+/* Little bounces (bounceEl in js/overlay.js) */
+.v-jump { animation: vJump 0.45s ease; }
+@keyframes vJump { 40% { transform: translateY(-14px) scale(1.06); } }
+.v-nope { animation: vNope 0.45s ease; }
+@keyframes vNope { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
+.v-pulse { animation: vPulse 0.5s ease 2; }
+@keyframes vPulse { 50% { transform: scale(1.1); } }
+.v-wobble { animation: vWobble 0.6s ease; }
+@keyframes vWobble { 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
+
+.ov-fly {
+    position: absolute;
+    z-index: 6;
+    transform: translate(-50%, -50%);
+    font-size: 42px;
+    line-height: 1;
+    pointer-events: none;
+}

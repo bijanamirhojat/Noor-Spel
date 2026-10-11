@@ -53,6 +53,7 @@ const ELF_SPOTS = [
 ];
 const elf = { round: 1, hidden: [], found: 0, lastFind: 0, hintT: null };
 let elfOpen = false;
+registerOverlay(() => elfOpen, closeElfGame);
 
 function newElfRound() {
     const count = Math.min(2 + elf.round, 5);

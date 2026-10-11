@@ -48,6 +48,7 @@ const ggEl = document.getElementById('golfOv');
 const ggCanvas = document.getElementById('golfCanvas');
 const ggCtx = ggCanvas.getContext('2d');
 let golfOpen = false;
+registerOverlay(() => golfOpen, closeGolf);
 const gg = { lvl: 0, ball: null, vx: 0, vy: 0, strokes: 0, done: 0, aim: null, drag: false, sink: 0, raf: 0, last: 0, t: 0, trail: [], scale: 1, ox: 0, oy: 0 };
 
 function golfLevel() { return GOLF_LEVELS[gg.lvl % GOLF_LEVELS.length]; }

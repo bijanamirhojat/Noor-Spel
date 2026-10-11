@@ -33,6 +33,7 @@ const IC_CUSTOMERS = ['🐰', '🐻', '🐱', '🐶', '🦊', '🐼', '🐨', '�
 const iceOv = document.getElementById('iceOv');
 const ic = { cont: null, scoops: [], top: null, order: null, served: 0, coins: 0, busy: false };
 let iceOpen = false;
+registerOverlay(() => iceOpen, closeIceShop);
 
 function iceSVG(d, id) {
     const cont = d.cont;

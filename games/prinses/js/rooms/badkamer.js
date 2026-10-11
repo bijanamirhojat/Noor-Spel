@@ -86,6 +86,7 @@ function takeBath() {
 const TEETH_X = [80, 108, 136, 164, 192, 220];
 const tb = { teeth: [], paste: false, drawing: false, last: 0, rinsed: false, done: false };
 let teethOpen = false;
+registerOverlay(() => teethOpen, closeTeeth);
 
 function upperTop(x) { return 70 - 20 * (1 - Math.pow((x - 150) / 100, 2)); }
 function lowerBottom(x) { return 162 - 14 * Math.pow((x - 150) / 100, 2); }

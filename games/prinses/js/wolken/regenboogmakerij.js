@@ -64,6 +64,7 @@ function renderRainbowSky() {
 /* ─────────── Regenboog schilderen (overlay) ─────────── */
 const rbEl = document.getElementById('rbOv');
 let rbOpen = false;
+registerOverlay(() => rbOpen, closeRainbow);
 const rbg = { next: 0, busy: false };
 
 function renderRbArc() {

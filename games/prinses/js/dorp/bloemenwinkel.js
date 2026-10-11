@@ -69,6 +69,7 @@ defineRoom({
 /* ─────────── Boeket maken (overlay) ─────────── */
 const bqEl = document.getElementById('bqOv');
 let bqOpen = false;
+registerOverlay(() => bqOpen, closeBouquet);
 let bqTab = 'f';
 let bq = null;
 const BQ_TABS = [['f', '🌷'], ['w', '🎁'], ['r', '🎀']];

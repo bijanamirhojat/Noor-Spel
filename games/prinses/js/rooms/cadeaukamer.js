@@ -31,6 +31,7 @@ let gifts = [];
 try { const g = JSON.parse(localStorage.getItem(GIFT_KEY)); if (Array.isArray(g)) gifts = g.filter(x => typeof x === 'string').slice(-40); } catch (e) {}
 const gf = { paper: 0, ribbon: 0, pattern: 0, stage: 0, toy: null, busy: false };
 let giftOpen = false;
+registerOverlay(() => giftOpen, closeGifts);
 
 function renderToyShelf() {
     if (!state.toyShelf) return;

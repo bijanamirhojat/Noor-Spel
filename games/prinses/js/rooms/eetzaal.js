@@ -65,6 +65,7 @@ function startFamilyDinner() {
 /* ─────────── Eten met Mama en Papa (overlay) ─────────── */
 const fdEl = document.getElementById('famDin');
 let fdOpen = false;
+registerOverlay(() => fdOpen, closeFamDinner);
 const FD_COURSES = [
     { icon: '🥣', name: 'Voorgerecht', foods: ['🍅', '🥗', '🥖', '🧀', '🍇', '🥕'] },
     { icon: '🍝', name: 'Hoofdgerecht', foods: ['🍝', '🍕', '🍗', '🥞', '🍟', '🍔'] },

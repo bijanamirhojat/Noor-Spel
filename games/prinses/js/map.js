@@ -1,6 +1,7 @@
 /* ─────────── Toverlift (tussen de verdiepingen) ─────────── */
 const liftOv = document.getElementById('liftOv');
 let liftOpen = false;
+registerOverlay(() => liftOpen, closeLift);
 
 function buildLift(wing) {
     const x = wing.liftX;
@@ -85,6 +86,7 @@ liftOv.addEventListener('pointerdown', (e) => {
 /* ─────────── Kaart (snel reizen) ─────────── */
 const mapOv = document.getElementById('mapOv');
 let mapOpen = false;
+registerOverlay(() => mapOpen, closeMap);
 
 function mapTiles(sc) {
     return sc.rooms.map((r, i) => `<button class="map-room${scene === sc && state.room === i ? ' here' : ''}" data-k="${sc.key}" data-i="${i}">${r.icon}<small>${r.name}</small></button>`).join('');

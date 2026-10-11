@@ -100,7 +100,7 @@ const IN_PAGE = () => {
         document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
         document.dispatchEvent(new KeyboardEvent('keyup', { key: 'Escape', bubbles: true }));
         if (await until(() => !overlayOpen(), 600)) return true;
-        warn('Escape sluit de overlay niet');
+        log.push(`error ${key} ${name}: Escape sluit de overlay niet (registerOverlay vergeten?)`);
         for (const c of [...document.querySelectorAll('.scope-close')].filter(visible).reverse()) {
             tap(c);
             if (await until(() => !overlayOpen(), 1500)) return true;

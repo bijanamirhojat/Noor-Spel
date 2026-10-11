@@ -34,6 +34,7 @@ defineRoom({
 /* ─────────── Verkleedkist ─────────── */
 const dressEl = document.getElementById('dressup');
 let dressOpen = false;
+registerOverlay(() => dressOpen, closeDressup);
 let duTab = 'hat';
 const DU_CATS = [
     { k: 'hat', icon: '👑', opts: [['crown', '👑'], ['tiara', '💎'], ['witch', '🧙'], ['pirate', '🏴‍☠️'], ['bunny', '🐰'], ['unicorn', '🦄'], ['flowers', '🌸'], ['cat', '🐱'], ['none', '🚫']] },

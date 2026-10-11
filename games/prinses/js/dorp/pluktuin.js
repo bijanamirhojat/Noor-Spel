@@ -53,6 +53,7 @@ function renderPickRoom() {
 const pkEl = document.getElementById('pickOv');
 const pkField = document.getElementById('pickField');
 let pickOpen = false;
+registerOverlay(() => pickOpen, closePick);
 const pk = { wish: [], got: 0, spots: [], busy: false };
 
 function pickNewWish() {

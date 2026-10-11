@@ -53,6 +53,7 @@ defineRoom({
 /* ─────────── Wie moet er plassen? (overlay) ─────────── */
 const wcEl = document.getElementById('wcOv');
 let wcOpen = false;
+registerOverlay(() => wcOpen, closeWc);
 const wc = { queue: [], who: null, step: 0, paper: 0, washes: 0, helped: 0, busy: false };
 
 function wcUpdateButtons() {

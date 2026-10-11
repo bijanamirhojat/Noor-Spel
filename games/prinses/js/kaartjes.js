@@ -66,6 +66,7 @@ function needTicket(type, node, go) {
 /* ─────────── Kaartjesautomaat (overlay) ─────────── */
 const tkEl = document.getElementById('tkOv');
 let ticketOpen = false;
+registerOverlay(() => ticketOpen, closeTickets);
 const tk = { pick: null, step: 'pick', busy: false };
 
 function tkWallet() {

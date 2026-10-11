@@ -24,6 +24,7 @@ defineRoom({
 const kitEl = document.getElementById('kittenOv');
 const kitStage = document.getElementById('kitStage');
 let kittenOpen = false;
+registerOverlay(() => kittenOpen, closeKittens);
 const kit = { list: [], sel: null, home: 0, round: 0, drag: null };
 
 function kitPlanets() { return [...kitStage.querySelectorAll('.kit-planet')]; }

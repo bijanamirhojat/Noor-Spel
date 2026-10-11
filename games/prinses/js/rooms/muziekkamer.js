@@ -60,6 +60,7 @@ defineRoom({
 /* ─────────── Piano (overlay) ─────────── */
 const pnEl = document.getElementById('pianoOv');
 let pianoOpen = false;
+registerOverlay(() => pianoOpen, closePiano);
 const pn = { song: -1, notes: [], pos: 0, playing: false };
 
 function renderPnSongs() {

@@ -35,6 +35,7 @@ defineRoom({
 /* ─────────── Wie eet wat? (overlay) ─────────── */
 const zfEl = document.getElementById('zooFeedOv');
 let zooFeedOpen = false;
+registerOverlay(() => zooFeedOpen, closeZooFeed);
 const zf = { queue: [], cur: null, fed: 0, busy: false };
 
 function zfNext() {

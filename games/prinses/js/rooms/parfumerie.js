@@ -128,6 +128,7 @@ function sprayPerfume(p) {
 /* ─────────── Parfum maken (overlay) ─────────── */
 const pfEl = document.getElementById('pfOv');
 let pfOpen = false;
+registerOverlay(() => pfOpen, closePerfume);
 let pfBusy = false;
 let pfTab = 'ing';
 let pf = null;

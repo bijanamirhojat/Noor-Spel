@@ -63,6 +63,7 @@ function pirateNeedBoat() {
 const pvEl = document.getElementById('pirateOv');
 const pvPano = document.getElementById('pvPano');
 let pirateOpen = false;
+registerOverlay(() => pirateOpen, closePirate);
 const pv = { phase: 'kijk', pan: 0, drag: null, isle: 0, found: false, step: 0, dig: 0 };
 
 function pvPhase(ph, title, hint) {

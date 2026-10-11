@@ -37,6 +37,7 @@ const DH_SOUNDS = {
 };
 const dollEl = document.getElementById('dollOv');
 let dollOpen = false;
+registerOverlay(() => dollOpen, closeDollhouse);
 let dh = { chars: [], drag: null, selected: null, placed: 0 };
 
 function sizeDollhouse() {

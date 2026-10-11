@@ -61,6 +61,7 @@ function hoodDry(hood) {
 /* ─────────── Kapsalon (overlay) ─────────── */
 const salonEl = document.getElementById('salonOv');
 let salonOpen = false;
+registerOverlay(() => salonOpen, closeSalon);
 let salonTab = 'hairdo';
 let salonBusy = false;
 const SALON_TABS = [['hairdo', '✂️'], ['hair', '🎨'], ['clip', '🎀']];

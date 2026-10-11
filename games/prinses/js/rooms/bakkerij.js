@@ -36,6 +36,7 @@ try {
 } catch (e) {}
 const bk = { step: 'shape', item: null, top: 0, bites: 0, busy: false };
 let bakeOpen = false;
+registerOverlay(() => bakeOpen, closeBakery);
 
 function bakeSVG(it, idp = 'bk') {
     const baked = it.baked;

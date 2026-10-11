@@ -33,6 +33,7 @@ const petLayer = document.getElementById('petLayer');
 const petAcc = document.getElementById('petAcc');
 const toolCursor = document.getElementById('toolCursor');
 let careOpen = false;
+registerOverlay(() => careOpen, closeCare);
 
 const DRYER_SVG = `<svg viewBox="0 0 40 40"><rect x="10" y="20" width="9" height="17" rx="3" fill="#db2777"/><rect x="4" y="8" width="26" height="15" rx="7.5" fill="#f472b6"/><rect x="0" y="11" width="8" height="9" rx="2" fill="#f9a8d4"/><circle cx="21" cy="15.5" r="3.5" fill="#fff"/></svg>`;
 const BRUSH_SVG = `<svg viewBox="0 0 40 40"><rect x="17" y="2" width="7" height="20" rx="3.5" fill="#a855f7"/><rect x="7" y="20" width="27" height="10" rx="4" fill="#fcd34d"/><g stroke="#92400e" stroke-width="2" stroke-linecap="round">${[10, 14, 18, 22, 26, 30].map(x => `<line x1="${x}" y1="30" x2="${x}" y2="37"/>`).join('')}</g></svg>`;
@@ -242,10 +243,6 @@ function twinkleAt(px, py, n) {
     }
 }
 
-function near(item, pt, r) {
-    return Math.hypot(item.x - pt.px, item.y - pt.py) < r;
-}
-
 function removeItem(list, item) {
     item.node.classList.add('gone');
     setTimeout(() => item.node.remove(), 350);
@@ -401,39 +398,6 @@ const careUp = () => {
 window.addEventListener('pointerup', careUp);
 window.addEventListener('pointercancel', careUp);
 careEl.addEventListener('pointerdown', (e) => e.stopPropagation());
-
-// Looping filtered noise for the shower and the hair dryer
-let noise = null;
-function startNoise(kind) {
-    stopNoise();
-    try {
-        const ctx = getAudioContext();
-        const buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
-        const data = buf.getChannelData(0);
-        for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
-        const src = ctx.createBufferSource();
-        src.buffer = buf;
-        src.loop = true;
-        const filter = ctx.createBiquadFilter();
-        filter.type = kind === 'shower' ? 'highpass' : 'bandpass';
-        filter.frequency.value = kind === 'shower' ? 2500 : 700;
-        const gain = ctx.createGain();
-        gain.gain.value = kind === 'shower' ? 0.05 : 0.07;
-        src.connect(filter);
-        filter.connect(gain);
-        gain.connect(ctx.destination);
-        src.start();
-        noise = { src, gain, ctx };
-    } catch (e) {}
-}
-function stopNoise() {
-    if (!noise) return;
-    try {
-        noise.gain.gain.setTargetAtTime(0, noise.ctx.currentTime, 0.05);
-        noise.src.stop(noise.ctx.currentTime + 0.2);
-    } catch (e) {}
-    noise = null;
-}
 
 function openCare(i) {
     careOpen = true;

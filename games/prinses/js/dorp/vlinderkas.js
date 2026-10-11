@@ -83,6 +83,7 @@ function renderBflyRoom() {
 const bfEl = document.getElementById('bflyOv');
 const bfStage = document.getElementById('bflyStage');
 let butterflyOpen = false;
+registerOverlay(() => butterflyOpen, closeButterfly);
 // pots: { stage: 'cat' | 'cocoon' | 'empty', n }, flies: flying butterflies inside the overlay
 const bf = { pots: [], flies: [], raf: 0, last: 0 };
 

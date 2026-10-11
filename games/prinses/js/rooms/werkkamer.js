@@ -77,6 +77,7 @@ defineRoom({
 /* ─────────── Werken op de computer (overlay) ─────────── */
 const pcEl = document.getElementById('pcOv');
 let pcOpen = false;
+registerOverlay(() => pcOpen, closePc);
 const pc = { app: null, done: new Set(), mails: [], mail: null, mailsSent: 0, word: null, words: [], typed: 0, call: null, busy: false, timers: [] };
 
 function pcLater(fn, ms) { pc.timers.push(setTimeout(fn, ms)); }

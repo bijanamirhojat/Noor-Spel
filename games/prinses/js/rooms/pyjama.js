@@ -27,6 +27,7 @@ const btEl = document.getElementById('bedtimeOv');
 const btStage = document.getElementById('btStage');
 const btDoll = document.getElementById('btDoll');
 let bedtimeOpen = false;
+registerOverlay(() => bedtimeOpen, () => closeBedtime(false));
 const bt = { step: 1, left: 0, drag: null };
 
 function btHint(t) { document.getElementById('btHint').textContent = t; }

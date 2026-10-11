@@ -89,6 +89,7 @@ function trWheels(big) {
 /* ─────────── Treinrit (overlay) ─────────── */
 const trEl = document.getElementById('trainOv');
 let trainOpen = false;
+registerOverlay(() => trainOpen, closeTrainRide);
 const tr = { dist: 0, speed: 0, seg: -1, raf: 0, last: 0, total: 0, starts: [], chugT: 0, puffT: 0, scale: 1, viewW: 1000, done: false };
 
 function trBuild() {

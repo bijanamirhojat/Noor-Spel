@@ -7,6 +7,7 @@ const STICKER_TAPS = 3;           // distinct objects needed when no main activi
 const stickerOv = document.getElementById('stickOv');
 const stickerBtn = document.getElementById('stickBtn');
 let stickOpen = false;
+registerOverlay(() => stickOpen, closeStickers);
 let stickPage = 0;
 let stickers = new Set();
 const stickFresh = new Set();     // earned since the book was last opened

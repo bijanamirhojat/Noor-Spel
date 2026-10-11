@@ -50,6 +50,7 @@ const rtEl = document.getElementById('tripOv');
 const rtCanvas = document.getElementById('tripCanvas');
 const rtCtx = rtCanvas.getContext('2d');
 let tripOpen = false;
+registerOverlay(() => tripOpen, closeTrip);
 const trip = { phase: 'map', planet: null, t0: 0, last: 0, raf: 0, W: 0, H: 0, dpr: 1, y: 0, ty: 0, stars: [], things: [], bg: [], got: 0, bonk: 0, landT: 0 };
 
 function tripPhase(ph) {

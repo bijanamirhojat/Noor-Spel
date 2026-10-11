@@ -70,6 +70,7 @@ const sbEl = document.getElementById('scrapOv');
 const sbCanvas = document.getElementById('scrapCanvas');
 const sbCtx = sbCanvas.getContext('2d');
 let scrapOpen = false;
+registerOverlay(() => scrapOpen, closeScrapbook);
 const sb = { page: 0, tool: 'pen', color: SCRAP_COLORS[1], size: 1, sticker: '🦄', letter: 'A', drawing: false, last: null, hue: 0, dirty: false, saveT: 0, clearArm: 0 };
 
 function sbPaper() {

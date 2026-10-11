@@ -48,6 +48,7 @@ defineRoom({
 /* ─────────── Smoothie maken (overlay) ─────────── */
 const blEl = document.getElementById('blOv');
 let blendOpen = false;
+registerOverlay(() => blendOpen, closeBlender);
 const bl = { items: [], progress: 0, blended: false, holding: false, holdT: null, glass: null, cream: false, sprinkles: false, made: 0, busy: false };
 
 const blFruitCount = () => bl.items.filter(i => i.fruit).length;

@@ -90,6 +90,7 @@ const kdEl = document.getElementById('kermisDuckOv');
 const kdStage = document.getElementById('kdStage');
 const kdLine = document.getElementById('kdLine');
 let kermisDuckOpen = false;
+registerOverlay(() => kermisDuckOpen, closeKermisDucks);
 const kd = { ducks: [], raf: 0, last: 0, busy: false };
 const KD_N = 8;
 
@@ -198,6 +199,7 @@ const kcEl = document.getElementById('kermisClawOv');
 const kcGlass = document.getElementById('kcGlass');
 const kcClaw = document.getElementById('kcClaw');
 let kermisClawOpen = false;
+registerOverlay(() => kermisClawOpen, closeKermisClaw);
 // Claw x in % of the glass; plush: { node, x (%), e }
 const kc = { x: 50, busy: false, plush: [], won: null };
 

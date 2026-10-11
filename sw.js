@@ -147,6 +147,8 @@ const PRECACHE_URLS = [
     './games/prinses/js/ruimte/poezenplaneten.js',
     './games/prinses/js/ruimte/ruimtehaven.js',
     './games/prinses/js/core.js',
+    './games/prinses/js/overlay.js',
+    './games/prinses/js/audio.js',
     './games/prinses/js/engine.js',
     './games/prinses/js/main.js',
     './games/prinses/js/map.js',

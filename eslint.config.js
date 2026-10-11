@@ -44,5 +44,10 @@ export default [
     {
         files: ['scripts/**/*.mjs', 'eslint.config.js'],
         languageOptions: { sourceType: 'module', globals: globals.node }
+    },
+    {
+        // Parts of the smoke test run inside the game page
+        files: ['scripts/smoke.mjs'],
+        languageOptions: { globals: { ...globals.node, ...globals.browser, ...shared, GAMES: 'readonly' } }
     }
 ];

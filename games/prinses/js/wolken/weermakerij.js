@@ -30,6 +30,7 @@ defineRoom({
 const weatherOv = document.getElementById('weatherOv');
 const wx = { now: 'zon', wet: 0, snow: 0, flowers: 0, timer: null, flashTimer: null };
 let weatherOpen = false;
+registerOverlay(() => weatherOpen, closeWeather);
 const WX_BUTTONS = [
     ['zon', '☀️', 'Zon'], ['regen', '🌧️', 'Regen'], ['sneeuw', '❄️', 'Sneeuw'],
     ['onweer', '⚡', 'Onweer'], ['wind', '💨', 'Wind'], ['regenboog', '🌈', 'Regenboog']

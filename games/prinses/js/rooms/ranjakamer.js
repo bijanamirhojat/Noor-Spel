@@ -48,6 +48,7 @@ defineRoom({
 /* ─────────── Ranja maken (overlay) ─────────── */
 const rjEl = document.getElementById('rjOv');
 let ranjaOpen = false;
+registerOverlay(() => ranjaOpen, closeRanja);
 const rj = { syr: {}, water: 0, stirred: true, ice: 0, slice: null, drunk: 0, busy: false };
 
 function rjSyrup() { return Object.values(rj.syr).reduce((a, b) => a + b, 0); }

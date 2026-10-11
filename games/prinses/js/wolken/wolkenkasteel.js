@@ -34,6 +34,7 @@ const CLOUD_SHAPES = ['🐰', '🐶', '🐱', '🐳', '🦋', '🐘', '🦄', '�
 const CLOUD_KEY = 'noor-prinses-wolkjes';
 const cloudOv = document.getElementById('cloudOv');
 let cloudOpen = false;
+registerOverlay(() => cloudOpen, closeCloudWatch);
 let cloudTimer = null;
 let cloudSeen = new Set();
 try {

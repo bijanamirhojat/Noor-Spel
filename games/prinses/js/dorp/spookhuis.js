@@ -55,6 +55,7 @@ defineRoom({
 const spEl = document.getElementById('ghostOv');
 const spRoom = document.getElementById('ghostRoom');
 let ghostOpen = false;
+registerOverlay(() => ghostOpen, closeGhostHunt);
 const sp = { lx: 0, ly: 0, found: 0, raf: 0, last: 0, done: false };
 
 function renderGhostTray() {

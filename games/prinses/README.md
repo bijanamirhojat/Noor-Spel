@@ -7,6 +7,8 @@ De code staat in deze map.
 
 ```
 js/core.js      constanten, state, prinses-SVG (met kapsels), look, el/place/addObj
+js/overlay.js   overlay-register (registerOverlay, overlayOpen, Escape) en hulpjes in overlays (ovFly, ovCheer, bounceEl, near)
+js/audio.js     geluiden die meerdere kamers gebruiken (startNoise/stopNoise, playLullaby)
 js/world.js     kamer-register (defineRoom), WINGS (verdiepingen), scenes, setScene, deur
 js/engine.js    edelstenen, bewegen, glitter, camera/main loop, tweens, poes
 js/wand.js      toverstaf-spreuken
@@ -14,7 +16,7 @@ js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer
 js/piraten.js   piratenbaai (achter het meer, alleen met het bootje): piratenschip + avontuur (verrekijker, varen, schatkaart, graven)
 js/unicornstyle.js  eenhoorn-verkleedkist: de look van de eenhoorn (unicornSVG in outside.js)
 js/sea.js       onder water
-js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
+js/village.js   het dorp: huisjes, koets
 js/kaartjes.js  kaartjes voor koets, trein, bootje, bus en raket: kaartjesautomaat (addTicketMachine, bij elk vertrekpunt),
                 needTicket(type, node, go) knipt een kaartje of wijst naar de automaat; bewaard in noor-prinses-kaartjes
 js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen),
@@ -96,7 +98,9 @@ Voor dingen die niet via `addObj` gaan: `earnSticker('<key>', node)`. Opgeslagen
 2. Eventueel `css/rooms/<key>.css` met `.room.rm-<key> .wall` / `.floor`.
 3. Voeg de key toe aan een verdieping in `WINGS` en de `<script>`/`<link>` aan `prinses.html`.
 4. Zet de nieuwe bestanden in `PRECACHE_URLS` in `sw.js`.
-5. Heeft de kamer een overlay? Voeg de `xxxOpen`-vlag toe aan `overlayOpen()` in `js/engine.js`.
+5. Heeft de kamer een overlay? Zet direct onder de vlag `registerOverlay(() => xxxOpen, closeXxx);`
+   (dan weet `overlayOpen()` ervan en sluit Escape hem).
+6. Draai `npm test` (bestandscontrole, lint en de smoketest die elke kamer en activiteit afloopt).
 
 Alle scripts zijn gewone (klassieke) scripts die dezelfde globale scope delen. Een bestand mag bij het laden
 nog geen functies uit latere bestanden aanroepen; dat gebeurt pas in `main.js`.

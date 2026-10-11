@@ -62,6 +62,7 @@ function renderGardenRoom() {
 /* ─────────── Moestuin (overlay) ─────────── */
 const gdEl = document.getElementById('gardenOv');
 let gardenOpen = false;
+registerOverlay(() => gardenOpen, closeGarden);
 let gardenSeed = GARDEN_CROPS[0];
 
 function renderGarden() {

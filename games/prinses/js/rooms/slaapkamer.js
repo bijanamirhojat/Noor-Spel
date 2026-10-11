@@ -70,12 +70,6 @@ function sleepInBed() {
     });
 }
 
-function playLullaby() {
-    // Altijd is Kortjakje ziek / Twinkle twinkle
-    const notes = [523, 523, 784, 784, 880, 880, 784, 0, 698, 698, 659, 659, 587, 587, 523];
-    notes.forEach((f, i) => { if (f) setTimeout(() => playTone(f, 0.4, 0.12, 'sine'), i * 420); });
-}
-
 // The cuddly toy basket: the teddy plus the toys won at the claw machine
 let plushInBed = -1;     // index in plushAll() of the toy that is in bed with you
 function plushAll() { return ['🧸', ...knuffels]; }
@@ -89,6 +83,7 @@ function renderPlushBasket() {
 /* ─────────── Met welke knuffel ga je slapen? ─────────── */
 const ppEl = document.getElementById('plushPickOv');
 let plushPickOpen = false;
+registerOverlay(() => plushPickOpen, closePlushPick);
 
 function chooseBedPlush() {
     const all = plushAll();

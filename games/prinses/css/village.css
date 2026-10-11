@@ -67,25 +67,6 @@
     text-align: center;
     line-height: 1;
 }
-/* Little bounces used by the village rooms and their overlays */
-.v-jump { animation: vJump 0.45s ease; }
-@keyframes vJump { 40% { transform: translateY(-14px) scale(1.06); } }
-.v-nope { animation: vNope 0.45s ease; }
-@keyframes vNope { 20%, 60% { transform: translateX(-8px); } 40%, 80% { transform: translateX(8px); } }
-.v-pulse { animation: vPulse 0.5s ease 2; }
-@keyframes vPulse { 50% { transform: scale(1.1); } }
-.v-wobble { animation: vWobble 0.6s ease; }
-@keyframes vWobble { 25% { transform: rotate(-12deg); } 75% { transform: rotate(12deg); } }
-
-.ov-fly {
-    position: absolute;
-    z-index: 6;
-    transform: translate(-50%, -50%);
-    font-size: 42px;
-    line-height: 1;
-    pointer-events: none;
-}
-
 /* ── Koets ── */
 .koets { width: 240px; height: 170px; }
 .k-ride { position: absolute; inset: 0; }

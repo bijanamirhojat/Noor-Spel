@@ -103,6 +103,7 @@ const hpHearts = document.getElementById('hpHearts');
 const hpNameEl = document.getElementById('hpName');
 const hpKbd = document.getElementById('hpKbd');
 let hpOpen = false;
+registerOverlay(() => hpOpen, closeHeartPost);
 const HP_THEMES = {
     heart: { title: '💌 Hartjespost', stamps: ['❤️', '🧡', '💛', '💚', '💙', '💜', '💖', '🌈'], env: '💌', sizeIcon: '💗',
              letters: ['#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#a855f7', '#ec4899'] },

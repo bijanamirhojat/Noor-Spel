@@ -38,6 +38,7 @@ const SM_KEY = 'noor-prinses-sneeuwpop';
 const SM_SCARVES = ['#ef4444', '#f472b6', '#3b82f6', '#22c55e', '#a855f7', '#facc15'];
 const sm = { cfg: { balls: 0, hat: 'none', nose: false, eyes: 'coal', scarf: -1, buttons: false, arms: false }, alive: false };
 let smOpen = false;
+registerOverlay(() => smOpen, closeSnowman);
 let smSaved = null;
 try { smSaved = JSON.parse(localStorage.getItem(SM_KEY)); } catch (e) {}
 

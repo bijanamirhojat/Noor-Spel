@@ -55,6 +55,7 @@ const bcStage = document.getElementById('beachStage');
 const bcBall = document.getElementById('beachBall');
 const bcSeal = document.getElementById('beachSeal');
 let beachOpen = false;
+registerOverlay(() => beachOpen, closeBeach);
 // Positions in px inside the stage; ground/net come from the stage size
 const bc = { x: 0, y: 0, vx: 0, vy: 0, rot: 0, sealX: 0, hits: 0, raf: 0, last: 0, down: false, W: 0, H: 0, R: 40 };
 

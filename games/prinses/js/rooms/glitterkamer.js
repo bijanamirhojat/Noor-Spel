@@ -70,6 +70,7 @@ const glGlue = glGlueC.getContext('2d');
 const glStuck = glStuckC.getContext('2d');
 const glFx = glFxC.getContext('2d');
 let glitterOpen = false;
+registerOverlay(() => glitterOpen, closeGlitter);
 const gl = {
     tool: 'glue', color: GL_COLORS[0], paper: 0, mask: new Uint8Array((GL_W / GL_CELL) * (GL_H / GL_CELL)),
     falling: [], loose: [], stuckPts: [], stuckN: 0, twinkles: [], last: null, down: false, shaking: 0, raf: 0, t: 0, tick: 0, dirty: false

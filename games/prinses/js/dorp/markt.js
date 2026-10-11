@@ -32,6 +32,7 @@ const MK_SELLERS = ['🐻', '🐷', '🐮', '🦊', '🐰'];
 const marketOv = document.getElementById('marketOv');
 const mk = { list: [], phase: 'shop', paid: 0, total: 0, rounds: 0, busy: false };
 let marketOpen = false;
+registerOverlay(() => marketOpen, closeMarket);
 
 function newShoppingList() {
     // Small lists first: two things, later up to three with doubles. Never more than 8 coins.
