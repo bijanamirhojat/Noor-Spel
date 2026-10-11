@@ -40,6 +40,7 @@ defineRoom({
             [700, 900, 700, 900].forEach((f, i) => setTimeout(() => playTone(f, 0.05, 0.08, 'square'), i * 90));
         });
         scene.rides = { dierentuin: addBus(x + 560, x + 610, 'dierentuin', -56) };
+        addTicketMachine(x + 128);
         addObj('<div class="emoji-obj bc-shell">🐚</div>', x + 190, 400, x + 210, (node) => {
             bounceEl(node, 'wobble');
             beachWaves(1400);

@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="prinses/css/map.css">
     <link rel="stylesheet" href="prinses/css/stickers.css">
     <link rel="stylesheet" href="prinses/css/village.css">
+    <link rel="stylesheet" href="prinses/css/kaartjes.css">
     <link rel="stylesheet" href="prinses/css/dorp/markt.css">
     <link rel="stylesheet" href="prinses/css/dorp/ijssalon.css">
     <link rel="stylesheet" href="prinses/css/dorp/boerderij.css">
@@ -548,6 +549,29 @@
                 <button class="scope-close" id="blClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="tkov" id="tkOv">
+                <div class="nails-title">🎫 Kaartjesautomaat</div>
+                <div class="tk-main">
+                    <div class="tk-big" id="tkMachine">
+                        <div class="tk-bighead">🎫 Kaartjes</div>
+                        <div class="tk-screen">
+                            <div class="tk-msg" id="tkMsg"></div>
+                            <div class="tk-step" data-step="pick"><div class="tk-picks" id="tkPicks"></div></div>
+                            <div class="tk-step" data-step="coin"><div id="tkChosen"></div><button class="tk-back" id="tkBack">↩️</button></div>
+                            <div class="tk-step" data-step="take"><div class="tk-arrow">👇</div></div>
+                        </div>
+                        <div class="tk-slotrow"><div class="tk-slot" id="tkSlot"></div><span>🪙</span></div>
+                        <div class="tk-outslot"><div class="tk-out" id="tkOut"></div></div>
+                    </div>
+                    <div class="tk-side">
+                        <button class="tk-purse" id="tkPurse" aria-label="Muntje"><span>👛</span><b>🪙🪙🪙</b></button>
+                        <div class="tk-wallettitle">Mijn kaartjes</div>
+                        <div class="tk-wallet" id="tkWallet"></div>
+                    </div>
+                </div>
+                <button class="scope-close" id="tkClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="gardenov" id="gardenOv">
                 <div class="nails-title">🥕 Moestuin</div>
                 <div class="gd-basket" id="gdBasket"></div>
@@ -919,6 +943,7 @@
     <script src="prinses/js/piraten.js"></script>
     <script src="prinses/js/sea.js"></script>
     <script src="prinses/js/village.js"></script>
+    <script src="prinses/js/kaartjes.js"></script>
     <script src="prinses/js/sky.js"></script>
     <!-- Kamers: elk bestand meldt zich aan met defineRoom(); de indeling staat in WINGS (js/world.js) -->
     <script src="prinses/js/rooms/kasteelhal.js"></script>

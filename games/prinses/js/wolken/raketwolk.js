@@ -7,6 +7,7 @@ defineRoom({
     build(x) {
         place(el('<div class="rw-pad"></div>'), x + 240, 330);
         scene.rides = { ruimte: addRocket(x + 300, 70, x + 450, 'ruimte') };
+        addTicketMachine(x + 520);
         addObj('<div class="rw-scope"><div class="tube"></div><div class="legs"></div></div>', x + 60, 250, x + 120, (node) => {
             zooAnim(node, 'v-wobble');
             [1568, 2093, 2637].forEach((f, i) => setTimeout(() => playTone(f, 0.2, 0.06, 'sine'), i * 120));

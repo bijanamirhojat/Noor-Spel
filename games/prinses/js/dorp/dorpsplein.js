@@ -10,6 +10,7 @@ defineRoom({
         villageHouse(d0 + 600, 190, 280, '#bae6fd', '#f97316', { flowers: true });
 
         scene.koets = addKoets(d0 + 20, d0 + 285, 'out');
+        addTicketMachine(d0 + 450);
         addObj(`<div class="well"><div class="w-roof"></div><div class="w-post l"></div><div class="w-post r"></div>
             <span class="w-bucket">🪣</span><div class="w-wall"></div><div class="tap-hint" style="left:62px;top:-30px">👇</div></div>`,
             d0 + 290, 230, d0 + 420, wishWell);

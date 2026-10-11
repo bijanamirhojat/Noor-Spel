@@ -74,6 +74,7 @@ function buildOutside() {
         node: addObj('<div class="castle-door"><div class="tap-hint" style="top:90px">👇</div></div>', o0 + 220, 120, o0 + 310, (node) => goThroughDoor(node, 'hal'))
     };
     SCENES.out.koets = addKoets(o0 + 395, o0 + 545, 'dorp');
+    addTicketMachine(o0 + 130);
     addObj('<div class="fountain"><div class="basin"></div><div class="water"></div><div class="col"></div><div class="bowl"></div><div class="jet"></div></div>', o0 + 610, 205, o0 + 700, fountainSplash);
     addObj('<div class="sun">🌞</div>', o0 + 640, 10, o0 + 700, () => { sayRandom(['Hallo zon!', 'Wat een mooi weer!']); sparkleShower(o0 + 690, 0, 40); });
 
@@ -182,6 +183,7 @@ function buildOutside() {
     place(el('<div class="lake"></div>'), LAKE_X0 - 20, 330).style.width = (ROOM_W * ROOMS_OUT.length - LAKE_X0 + 20) + 'px';
     place(el('<div class="dock"></div>'), o5 + 60, 430).style.width = (LAKE_X0 - o5 - 30) + 'px';
     [o5 + 90, LAKE_X0 - 10].forEach(x => place(el('<div class="dock-post"></div>'), x, 420));
+    addTicketMachine(o5 + 100);
     [[o5 + 330, 360], [o5 + 470, 392], [o5 + 560, 350]].forEach(([x, y], i) => place(el(`<div class="lily">${i % 2 ? '' : '<span>🌸</span>'}</div>`), x, y));
     addObj('<div class="lake-duck">🦆</div>', o5 + 640, 340, o5 + 640, () => { quack(); });
     const fish = place(el('<div class="lake-fish">🐟</div>'), o5 + 420, 380);
@@ -214,7 +216,7 @@ function buildOutside() {
         playPop();
         dismountUnicorn(true);
         if (state.flying) setFlying(false, true);
-        walkTo(LAKE_X0, boardBoat);
+        walkTo(LAKE_X0, () => needTicket('boot', boatHit, boardBoat));
     });
 
     const uni = el(`<div class="unicorn" id="unicorn"><div class="uflip">${unicornSVG()}</div><div class="tap-hint" style="top:-40px">👇</div></div>`);

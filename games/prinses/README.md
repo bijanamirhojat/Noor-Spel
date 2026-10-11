@@ -15,6 +15,8 @@ js/piraten.js   piratenbaai (achter het meer, alleen met het bootje): piratensch
 js/unicornstyle.js  eenhoorn-verkleedkist: de look van de eenhoorn (unicornSVG in outside.js)
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets, overlay-hulpjes (ovFly, ovCheer, bounceEl)
+js/kaartjes.js  kaartjes voor koets, trein, bootje, bus en raket: kaartjesautomaat (addTicketMachine, bij elk vertrekpunt),
+                needTicket(type, node, go) knipt een kaartje of wijst naar de automaat; bewaard in noor-prinses-kaartjes
 js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen),
                 station (filmische treinrit langs het hele koninkrijk), spookhuis (spookjes zoeken met de zaklamp),
                 moestuin (zaaien, water geven, oogsten), pluktuin (bloemen plukken voor een boeket),

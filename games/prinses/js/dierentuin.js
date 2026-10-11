@@ -28,7 +28,7 @@ function addBus(x, walkX, toKey, stopX = 196) {
             <div class="k-wheel" style="left:30px"></div><div class="k-wheel" style="left:150px"></div>
         </div>
         <div class="tap-hint" style="left:100px;top:-30px">👇</div>
-    </div>`, x, 230, walkX, (n) => rideCarriage(n, toKey, { sound: busVroom, toast: zoo ? '🦁 De dierentuin!' : '🏘️ Terug in het dorp!' }));
+    </div>`, x, 230, walkX, (n) => needTicket('bus', n, () => rideCarriage(n, toKey, { sound: busVroom, toast: zoo ? '🦁 De dierentuin!' : '🏘️ Terug in het dorp!' })));
     return { node, walkX };
 }
 

@@ -64,7 +64,8 @@ defineRoom({
         place(el('<div class="st-sign">🚂 Station</div>'), x + 70, 70);
         place(el('<div class="st-clock"><span></span></div>'), x + 330, 60);
         place(el('<div class="st-platform"></div>'), x, 395).style.width = ROOM_W + 'px';
-        addObj(`<div class="st-train">${trainHTML(false)}<div class="tap-hint" style="left:300px;top:-50px">👇</div></div>`, x + 40, 236, x + 380, openTrainRide);
+        addObj(`<div class="st-train">${trainHTML(false)}<div class="tap-hint" style="left:300px;top:-50px">👇</div></div>`, x + 40, 236, x + 380, (n) => needTicket('trein', n, openTrainRide));
+        addTicketMachine(x + 720);
     }
 });
 

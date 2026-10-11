@@ -1,4 +1,4 @@
-/* 🎟️ Ingang: de bus terug naar het dorp, de grote poort, een kaartjeshuisje en een ballonnenverkoper */
+/* 🎟️ Ingang: de bus terug naar het dorp, de grote poort, een kaartjeshuisje (kaartjes voor de bus) en een ballonnenverkoper */
 const ZI_BALLOONS = ['🎈', '🎈', '🎈'];
 
 defineRoom({
@@ -14,9 +14,9 @@ defineRoom({
             zooRoar();
         });
         addObj('<div class="zi-booth"><div class="roof"></div><div class="win"><span>🐼</span></div><div class="slot"></div><span class="ticket">🎟️</span><div class="sign">Kaartjes</div></div>', x + 640, 150, x + 680, (node) => {
+            // The panda sells tickets for the bus (js/kaartjes.js)
             zooAnim(node, 'print');
-            for (let i = 0; i < 6; i++) setTimeout(() => playTone(1200 + (i % 2) * 300, 0.04, 0.05, 'square'), i * 60);
-            setTimeout(() => { playCorrect(); showToast('🎟️ Kaartje! Welkom in de dierentuin!', 1800); }, 500);
+            openTickets();
         });
         addObj(`<div class="zi-balloons">${ZI_BALLOONS.map((b, i) => `<span class="b" style="--h:${i * 110}deg;left:${i * 30}px;animation-delay:${-i * 0.7}s">${b}</span>`).join('')}<div class="strings"></div><span class="seller">🤡</span></div>`,
         x + 535, 170, x + 570, (node) => {

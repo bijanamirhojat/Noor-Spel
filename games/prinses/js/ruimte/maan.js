@@ -7,6 +7,7 @@ defineRoom({
     build(x) {
         place(el('<div class="mn-earth">🌍</div>'), x + 560, -60);
         scene.koets = addRocket(x + 30, 130, x + 200, 'wolken');
+        addTicketMachine(x + 410);
         [[260, 380, 90], [470, 400, 120], [690, 384, 70]].forEach(([cx, cy, w]) =>
             place(el(`<div class="mn-crater" style="width:${w}px;height:${w * 0.32}px"></div>`), x + cx, cy));
         addObj('<div class="mn-flag"><div class="pole"></div><div class="cloth">👑</div></div>', x + 300, 220, x + 320, (node) => {

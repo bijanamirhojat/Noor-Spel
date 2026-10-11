@@ -26,7 +26,7 @@ function addRocket(x, y, walkX, toKey) {
         <div class="k-ride"><div class="rk-body"><div class="rk-win"><span>${up ? '🐱' : '👽'}</span></div><div class="rk-fin l"></div><div class="rk-fin r"></div></div><div class="rk-flame"></div></div>
         <div class="rk-sign">${up ? '🚀 Naar de ruimte' : '☁️ Naar de wolken'}</div>
         <div class="tap-hint" style="left:62px;top:-40px">👇</div>
-    </div>`, x, y, walkX, (n) => rideCarriage(n, toKey, { sound: rocketRumble, toast: up ? '🚀 De ruimte!' : '☁️ Terug in de wolken!' }));
+    </div>`, x, y, walkX, (n) => needTicket('raket', n, () => rideCarriage(n, toKey, { sound: rocketRumble, toast: up ? '🚀 De ruimte!' : '☁️ Terug in de wolken!' })));
     return { node, walkX };
 }
 

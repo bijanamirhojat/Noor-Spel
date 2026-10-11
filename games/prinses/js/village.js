@@ -38,7 +38,7 @@ function addKoets(x, walkX, toKey) {
             <div class="k-wheel" style="left:92px"></div><div class="k-wheel" style="left:170px"></div>
         </div>
         <div class="tap-hint" style="left:150px;top:-10px">👇</div>
-    </div>`, x, 230, walkX, (n) => rideCarriage(n, toKey));
+    </div>`, x, 230, walkX, (n) => needTicket('koets', n, () => rideCarriage(n, toKey)));
     return { node, walkX };
 }
 
