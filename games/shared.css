@@ -64,6 +64,12 @@ body {
     transform: scale(1.05);
 }
 
+/* Smaller back button for games that need the whole screen */
+.back-btn.compact { padding: 6px 10px; border-radius: 12px; font-size: 0.78rem; }
+@media (min-width: 768px) {
+    .back-btn.compact { padding: 9px 16px; font-size: 0.95rem; }
+}
+
 /* Game title */
 h1 {
     font-family: 'Fredoka One', cursive;
