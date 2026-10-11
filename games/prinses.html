@@ -69,6 +69,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/ijskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/bakkerij.css">
     <link rel="stylesheet" href="prinses/css/rooms/ranjakamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/smoothiebar.css">
     <link rel="stylesheet" href="prinses/css/rooms/juwelierskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/cadeaukamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/badkamer.css">
@@ -509,6 +510,44 @@
                 <button class="scope-close" id="kgClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="blov" id="blOv">
+                <div class="nails-title">🥤 Smoothie maken</div>
+                <div class="bl-count" id="blCount">🥤 0</div>
+                <div class="bl-fruits" id="blFruits"></div>
+                <div class="bl-hint" id="blHint"></div>
+                <div class="bl-stage">
+                    <div class="bl-blender" id="blBlender">
+                        <div class="bl-top">
+                            <div class="bl-lid"></div>
+                            <div class="bl-jar" id="blJar">
+                                <div class="bl-milk" id="blMilk"></div>
+                                <div class="bl-mix" id="blMix"></div>
+                                <div class="bl-chunks" id="blChunks"></div>
+                                <div class="bl-blade"></div>
+                            </div>
+                        </div>
+                        <div class="bl-base" id="blBase"><i></i></div>
+                    </div>
+                    <div class="bl-glass" id="blGlass">
+                        <div class="bl-stream" id="blStream"></div>
+                        <div class="bl-cup"><div class="bl-fill" id="blFill"></div></div>
+                        <div class="bl-cream"></div>
+                        <div class="bl-sprinkles"></div>
+                        <div class="bl-straw"></div>
+                    </div>
+                    <div class="bl-face" id="blFace"></div>
+                </div>
+                <div class="bl-tools">
+                    <button class="tool-btn wide bl-tool" data-t="blend">⚡ Mixen</button>
+                    <button class="tool-btn wide bl-tool" data-t="pour">🫗 Inschenken</button>
+                    <button class="tool-btn bl-tool" data-t="cream" aria-label="Slagroom">🍦</button>
+                    <button class="tool-btn bl-tool" data-t="sprinkles" aria-label="Hagelslag">🌈</button>
+                    <button class="tool-btn wide bl-tool" data-t="drink">🥤 Opdrinken</button>
+                    <button class="tool-btn bl-tool" data-t="reset" aria-label="Weggooien">🗑️</button>
+                </div>
+                <button class="scope-close" id="blClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="gardenov" id="gardenOv">
                 <div class="nails-title">🥕 Moestuin</div>
                 <div class="gd-basket" id="gdBasket"></div>
@@ -888,6 +927,7 @@
     <script src="prinses/js/rooms/eetkamer.js"></script>
     <script src="prinses/js/rooms/bakkerij.js"></script>
     <script src="prinses/js/rooms/ranjakamer.js"></script>
+    <script src="prinses/js/rooms/smoothiebar.js"></script>
     <script src="prinses/js/rooms/dierensalon.js"></script>
     <script src="prinses/js/rooms/kristalgrot.js"></script>
     <script src="prinses/js/rooms/spiegelkamer.js"></script>

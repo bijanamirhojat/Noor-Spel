@@ -33,6 +33,7 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 pyjama aan, naar bed); de pyjama zit in de prinses-SVG (.pjt/.pjp/.pjc) en gaat aan met klassen pj-* op .princess
                 js/rooms/werkkamer.js: computer om op te "werken" (mailtjes beantwoorden, woordjes typen, videobellen); Papa werkt er soms zelf (parentStartWork in js/parents.js)
                 js/rooms/ranjakamer.js: ranja maken (siroopjes kiezen = kleuren mengen, water, roeren, ijs, opdrinken)
+                js/rooms/smoothiebar.js: smoothies maken (fruit + melk/yoghurt in de blender, mixknop ingedrukt houden, inschenken, toppings)
                 js/rooms/kristalgrot.js: geheime grot onder het kasteel: kristallen die muziek maken, hartjeskristallen,
                 schatkisten uitgraven door de aarde weg te vegen (canvas); gevonden schatten in noor-prinses-grotschatten
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
