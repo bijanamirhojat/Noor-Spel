@@ -124,6 +124,14 @@ async function smokeScene(sceneKey) {
             const { sleep, until, visible, tap, goTo, closeOverlay, closeVisible } = eval(`(${helpers})`)();
             const log = [];
             await goTo(sceneKey, idx);
+            // Offscreen culling must never pause something you can see
+            await sleep(350);
+            const pf = playfield.getBoundingClientRect();
+            const paused = [...SCENES[sceneKey].el.querySelectorAll(':scope > .anim-off')].filter((n) => {
+                const r = n.getBoundingClientRect();
+                return r.width > 0 && r.right > pf.left && r.left < pf.right;
+            });
+            if (paused.length) log.push(`error ${key}: animatie gepauzeerd terwijl in beeld: ${paused.map((n) => n.className).join(', ')}`);
             const objs = [...SCENES[sceneKey].el.querySelectorAll('.obj')].filter((n) =>
                 n.dataset.room === key && !n.matches('.lift, .castle-door'));
             for (let i = 0; i < objs.length; i++) {

@@ -142,6 +142,7 @@ function setScene(key) {
         state.pet.x = state.x - 90;
     }
     particles.length = 0;
+    cullT = 0;
     state.room = 0;
     roomPill.textContent = roomPillText(ROOMS[0]);
     updateGemPill();

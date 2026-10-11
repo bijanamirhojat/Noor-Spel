@@ -718,3 +718,8 @@ h1 {
     h1 { font-size: 1.2rem; margin-top: 28px; }
     .arrow { width: 54px; height: 54px; font-size: 24px; }
 }
+
+/* Far outside the view: animations wait (cullOffscreen in js/engine.js) */
+.world > .anim-off, .world > .anim-off *,
+.world > .anim-off::before, .world > .anim-off::after,
+.world > .anim-off *::before, .world > .anim-off *::after { animation-play-state: paused !important; }

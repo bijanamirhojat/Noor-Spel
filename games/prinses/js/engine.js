@@ -384,6 +384,27 @@ function resize() {
     if (scopeOpen) layoutScope();
 }
 
+/* ─────────── Offscreen animations ───────────
+   Every room is full of looping CSS animations. Things far outside the view pause them,
+   so the iPad only animates what you can see. */
+const CULL_MARGIN = 400;
+const cullW = new WeakMap();
+let cullT = 0;
+function cullOffscreen(now) {
+    if (now < cullT) return;
+    cullT = now + 250;
+    const x0 = state.camX - CULL_MARGIN, x1 = state.camX + state.viewW + CULL_MARGIN;
+    for (const n of world.children) {
+        const left = parseFloat(n.style.left);
+        // Things that move with transforms (princess, parents, unicorn, ride-bug, ...) are left alone
+        if (Number.isNaN(left) || n.style.transform) continue;
+        let w = cullW.get(n);
+        if (w === undefined) { w = n.offsetWidth; cullW.set(n, w); }
+        const off = left > x1 || left + w < x0;
+        if (off !== n.classList.contains('anim-off')) n.classList.toggle('anim-off', off);
+    }
+}
+
 /* ─────────── Main loop ─────────── */
 function frame(now) {
     const dt = Math.min(0.05, (now - state.lastTime) / 1000);
@@ -534,6 +555,7 @@ function frame(now) {
     }
     for (const r of ROOMS) if (r.tick) r.tick(dt, now);
 
+    cullOffscreen(now);
     updateParticles(dt, now);
     drawParticles(now);
     requestAnimationFrame(frame);
