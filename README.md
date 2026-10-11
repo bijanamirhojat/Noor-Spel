@@ -41,19 +41,24 @@ scripts/              controles en de smoketest (zie hieronder)
 Start een lokale server in de projectmap (bijv. `npx serve .`) en open `index.html`.
 Op localhost slaat de service worker zichzelf over, dus je ziet altijd de nieuwste bestanden.
 
-Controles (draaien ook in GitHub Actions vóór elke deploy):
+Controles (draaien ook in GitHub Actions vóór elke deploy; een fout houdt de deploy tegen).
+Eenmalig installeren:
 
 ```bash
-node scripts/check-assets.mjs
+npm install && npx playwright install chromium
 ```
 
-```bash
-npx -y eslint@9 .
-```
+Daarna:
 
 ```bash
-node scripts/smoke.mjs
+npm test
 ```
+
+Dat doet drie dingen:
+- `scripts/check-assets.mjs`: staat elk bestand in `sw.js` (offline) en in `prinses.html`, en zijn er geen dubbele globale namen?
+- `eslint`: tikfouten en onbekende namen in de JavaScript
+- `scripts/smoke.mjs`: opent elk spel, loopt in het kasteel door elke kamer van elke wereld, tikt alles aan,
+  opent en sluit elke activiteit en faalt bij elke JavaScript-fout (`--only=dorp` voor één wereld)
 
 ## Deploy
 
