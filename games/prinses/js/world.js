@@ -145,5 +145,4 @@ function setScene(key) {
     state.room = 0;
     roomPill.textContent = `${ROOMS[0].icon} ${ROOMS[0].name}`;
     updateGemPill();
-    if (document.getElementById('prince')) updateBallroom();
 }

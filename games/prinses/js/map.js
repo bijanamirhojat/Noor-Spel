@@ -198,6 +198,12 @@ function travelTo(key, room) {
         if (state.riding) state.uniX = state.x;
         state.camX = Math.max(0, Math.min(Math.max(0, WORLD_W - state.viewW), state.x - state.viewW / 2));
         if (state.pet.following) state.pet.x = state.x - 90;
+        // Arriving in the room the main loop thinks you are already in (the first room of a world):
+        // it won't announce it, so say where you are here
+        if (Math.floor(state.x / ROOM_W) === state.room) {
+            if (window.speechSynthesis) speechSynthesis.cancel();
+            setTimeout(() => speak(ROOMS[state.room].say), 60);
+        }
     }, 420);
     setTimeout(() => {
         fade.classList.remove('show');

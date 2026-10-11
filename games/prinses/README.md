@@ -95,6 +95,8 @@ Voor dingen die niet via `addObj` gaan: `earnSticker('<key>', node)`. Opgeslagen
 
 1. `js/rooms/<key>.js` met `defineRoom({ key, name, icon, say, build(x) { ... } })`.
    Gebruik in `build` altijd `x + ...` voor posities; elders `roomX('<key>')`, `inRoom('<key>')` en `sceneOf('<key>')`.
+   Optioneel: `onEnter()` / `onLeave()` (binnenlopen en weggaan) en `tick(dt, now)` (elke frame zolang de wereld
+   van de kamer actief is), bijv. muziek in de balzaal of de spiegel die meebeweegt.
 2. Eventueel `css/rooms/<key>.css` met `.room.rm-<key> .wall` / `.floor`.
 3. Voeg de key toe aan een verdieping in `WINGS` en de `<script>`/`<link>` aan `prinses.html`.
 4. Zet de nieuwe bestanden in `PRECACHE_URLS` in `sw.js`.

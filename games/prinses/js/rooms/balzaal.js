@@ -4,6 +4,10 @@ defineRoom({
     name: 'Balzaal',
     icon: '💃',
     say: 'De balzaal',
+    // Music and the dance buttons while you are in the ballroom; the floor lights up under your feet
+    onEnter: updateBallroom,
+    onLeave: updateBallroom,
+    tick: (dt, now) => updateTiles(now),
     lampX: 720,
     build(rb) {
         place(el('<div class="garland-balloons">🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈</div>'), rb + 30, 60);

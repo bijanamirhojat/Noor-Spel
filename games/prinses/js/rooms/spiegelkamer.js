@@ -4,6 +4,12 @@ defineRoom({
     name: 'Spiegelkamer',
     icon: '🪞',
     say: 'De spiegelkamer',
+    // The reflection follows the princess a little
+    tick() {
+        const refl = document.getElementById('reflection');
+        const off = Math.max(-45, Math.min(45, (state.x - (roomX('spiegelkamer') + 400)) * 0.25));
+        refl.style.marginLeft = (-75 - off) + 'px';
+    },
     build(r1) {
         const garland = '🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸🌷🌼🌸';
         place(el(`<div class="garland">${garland}</div>`), r1 + 20, 64);

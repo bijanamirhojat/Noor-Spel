@@ -500,13 +500,6 @@ function frame(now) {
         }
     }
 
-    // Mirror reflection follows princess a little
-    const refl = document.getElementById('reflection');
-    if (refl && scene === sceneOf('spiegelkamer')) {
-        const off = Math.max(-45, Math.min(45, (state.x - (roomX('spiegelkamer') + 400)) * 0.25));
-        refl.style.marginLeft = (-75 - off) + 'px';
-    }
-
     // Camera
     let target = state.x - state.viewW / 2;
     if (state.viewW >= WORLD_W) target = (WORLD_W - state.viewW) / 2;
@@ -525,9 +518,16 @@ function frame(now) {
         const say = ROOMS[room].say;
         setTimeout(() => speak(say), 60);
         playSparkleSound();
-        updateBallroom();
     }
-    updateTiles(now);
+    // Room hooks from defineRoom: onEnter/onLeave (also when only the scene changed), tick every frame
+    const def = ROOMS[room];
+    if (def !== state.roomDef) {
+        const prev = state.roomDef;
+        state.roomDef = def;
+        if (prev && prev.onLeave) prev.onLeave();
+        if (def.onEnter) def.onEnter();
+    }
+    for (const r of ROOMS) if (r.tick) r.tick(dt, now);
 
     updateParticles(dt, now);
     drawParticles(now);
