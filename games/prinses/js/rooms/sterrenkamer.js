@@ -4,6 +4,7 @@ defineRoom({
     name: 'Sterrenkamer',
     icon: '⭐',
     say: 'De sterrenkamer',
+    lampX: 570,
     build(rst) {
         place(el('<div class="big-moon"></div>'), rst + 620, 60);
         [[60, 40, 0], [300, 20, -2.5], [480, 60, -4]].forEach(([x, y, d]) => {

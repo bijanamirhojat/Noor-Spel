@@ -4,6 +4,7 @@ defineRoom({
     name: 'Balzaal',
     icon: '💃',
     say: 'De balzaal',
+    lampX: 720,
     build(rb) {
         place(el('<div class="garland-balloons">🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈🎀🎈</div>'), rb + 30, 60);
         [100, 330, 590].forEach(x => place(el('<div class="ball-window"></div>'), rb + x, 110));

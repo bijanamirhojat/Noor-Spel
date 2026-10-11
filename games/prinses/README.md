@@ -39,6 +39,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/kristalgrot.js: geheime grot onder het kasteel: kristallen die muziek maken, hartjeskristallen,
                 schatkisten uitgraven door de aarde weg te vegen (canvas); gevonden schatten in noor-prinses-grotschatten
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
+js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
+                (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
 js/map.js       toverlift + kaart
 js/stickers.js  stickerboek
 js/main.js      alles opbouwen en starten

@@ -4,6 +4,7 @@ defineRoom({
     name: 'Kasteelhal',
     icon: '🏰',
     say: 'De kasteelhal',
+    lampX: 700,
     build(r0) {
         place(el('<div class="door-sign">🌳 Naar buiten</div>'), r0 + 78, 78);
         scene.door = {

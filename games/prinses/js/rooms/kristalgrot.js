@@ -33,6 +33,7 @@ defineRoom({
     name: 'Kristallengrot',
     icon: '🔮',
     say: 'De geheime kristallengrot!',
+    lampX: 240,
     build(x) {
         place(el(`<div class="kg-drips">${Array.from({ length: 11 }, (_, i) => `<i style="left:${i * 72 + (i % 3) * 9}px;height:${30 + (i * 37) % 60}px"></i>`).join('')}</div>`), x, 0);
         // Little wall crystals that twinkle by themselves

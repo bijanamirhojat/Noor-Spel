@@ -37,6 +37,7 @@ function sleepInBed() {
     }, () => {
         cover.classList.add('show');
         night.classList.add('show');
+        setNight(true, true);
         // The cuddly toy you picked lies next to you, peeking out from under the blanket
         const plush = plushInBed >= 0 ? place(el(`<div class="bed-plush">${plushAll()[plushInBed]}</div>`), state.x - 62, 290) : null;
         playLullaby();
@@ -54,6 +55,7 @@ function sleepInBed() {
             plushInBed = -1;
             renderPlushBasket();
             parentsWake();
+            setNight(false, true);
             speak('Goedemorgen prinses! Kukeleku!');
             playWin();
             sparkleShower(state.x, 100, 60);

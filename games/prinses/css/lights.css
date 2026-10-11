@@ -1,0 +1,73 @@
+/* 💡 Dag en nacht en lampen (js/lights.js) */
+
+/* A dark layer over every room: above the furniture, below Mama, Papa and the princess */
+.night-shade {
+    position: absolute;
+    top: -500px;
+    width: 800px;
+    height: 1000px;
+    z-index: 8;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.6s ease, background 0.4s ease;
+    background: rgba(12, 16, 58, 0.72);
+}
+.playfield.is-night .night-shade { opacity: 1; }
+/* Lamp on: warm light around the lamp, only a little dark in the corners */
+.night-shade.lit {
+    background: radial-gradient(ellipse 520px 560px at var(--lx) var(--ly), rgba(255, 214, 120, 0.2), rgba(255, 214, 120, 0.06) 45%, rgba(12, 16, 58, 0.22) 85%);
+}
+/* Outside: a dark sky with twinkling stars above the ground */
+.night-shade.outdoor { background: linear-gradient(180deg, rgba(10, 12, 50, 0.75) 55%, rgba(12, 16, 58, 0.5) 85%); }
+.night-shade.outdoor::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 260px 0;
+    background:
+        radial-gradient(circle, #fff 1.6px, transparent 2.6px) 13px 7px / 97px 83px,
+        radial-gradient(circle, rgba(255, 255, 255, 0.8) 1.1px, transparent 2px) 52px 41px / 61px 71px,
+        radial-gradient(circle, #fef9c3 2px, transparent 3px) 30px 60px / 173px 131px;
+    animation: nightTwinkle 3s ease-in-out infinite alternate;
+}
+@keyframes nightTwinkle { to { opacity: 0.55; } }
+
+/* Hanging lamp: from the ceiling (500 units above the world) down to just under it */
+.lamp { position: absolute; width: 60px; height: 600px; z-index: 9; pointer-events: none; }
+/* Only the lamp itself can be tapped, not the long cord */
+.lamp .shade-top, .lamp .bulb { pointer-events: auto; cursor: pointer; }
+.lamp .cord { position: absolute; left: 29px; top: 0; width: 2px; height: 526px; background: #78716c; pointer-events: none; }
+.lamp .shade-top { position: absolute; left: 4px; top: 520px; width: 52px; height: 28px; border-radius: 26px 26px 6px 6px; background: linear-gradient(180deg, #f9a8d4, #ec4899); box-shadow: inset 0 -4px rgba(0, 0, 0, 0.15); }
+.lamp .bulb { position: absolute; left: 20px; top: 544px; width: 20px; height: 18px; border-radius: 50%; background: #e7e5e4; transition: background 0.2s, box-shadow 0.2s; }
+.lamp .beam { position: absolute; left: -70px; top: 556px; width: 200px; height: 300px; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    background: radial-gradient(ellipse at 50% 0, rgba(255, 228, 140, 0.45), transparent 70%); clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%); }
+.lamp.on .bulb { background: #fef08a; box-shadow: 0 0 18px 8px rgba(254, 240, 138, 0.8); }
+.lamp.on .beam { opacity: 0.35; }
+.playfield.is-night .lamp.on .beam { opacity: 1; }
+.lamp:active .shade-top { transform: translateY(2px); }
+
+/* Buttons next to the map and the sticker book */
+.day-btn, .lamp-btn {
+    position: absolute;
+    top: 12px;
+    z-index: 30;
+    width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    border: 4px solid #fff;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    padding: 0;
+}
+.day-btn { left: 148px; background: linear-gradient(135deg, #fef08a, #fb923c); transition: background 0.4s; }
+.day-btn.moon { background: linear-gradient(135deg, #312e81, #6366f1); }
+.lamp-btn { left: 216px; display: none; background: linear-gradient(135deg, #f1f5f9, #cbd5e1); font-size: 22px; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.lamp-btn.show { display: flex; }
+.lamp-btn .sw { position: relative; width: 20px; height: 22px; border-radius: 5px; background: #fff; box-shadow: 0 0 0 2px #94a3b8; }
+.lamp-btn .sw i { position: absolute; left: 6px; top: 12px; width: 8px; height: 8px; border-radius: 2px; background: #64748b; transition: top 0.15s; }
+.lamp-btn.on { background: linear-gradient(135deg, #fef9c3, #fde047); }
+.lamp-btn.on .sw i { top: 2px; background: #f59e0b; }
+.lamp-btn.call { animation: lampCall 0.6s ease 4; }
+@keyframes lampCall { 50% { transform: scale(1.18) rotate(-6deg); box-shadow: 0 0 0 8px rgba(253, 224, 71, 0.6); } }

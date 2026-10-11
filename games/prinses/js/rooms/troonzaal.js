@@ -4,6 +4,7 @@ defineRoom({
     name: 'Troonzaal',
     icon: '👑',
     say: 'De troonzaal',
+    lampX: 700,
     build(r2) {
         place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), r2 + 150, 20);
         place(el('<div class="chandelier"><div class="chain"></div><div class="candles">🕯️🕯️🕯️</div><div class="body"></div><div class="drops">💎💎💎💎</div></div>'), r2 + 500, 20);

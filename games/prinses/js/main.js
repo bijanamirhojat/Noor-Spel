@@ -25,6 +25,7 @@ WINGS.slice().reverse().forEach(wing => {
     spawnGems();
 });
 buildParents();
+buildLights();
 world.appendChild(el(`<div class="princess" id="princess"><div class="dancer"><div class="flip">${princessSVG('pr')}</div></div></div>`));
 buildScope();
 buildHands();
