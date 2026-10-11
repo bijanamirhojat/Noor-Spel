@@ -75,7 +75,7 @@ function allGemsFound() {
 
 /* ─────────── Interactions ─────────── */
 // True while any full-screen overlay (map, lift or a room activity) is open
-function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen || kittenOpen || tripOpen || bedtimeOpen || plushPickOpen || pirateOpen || pcOpen; }
+function overlayOpen() { return scopeOpen || nailsOpen || teaOpen || careOpen || embOpen || dressOpen || dinOpen || mapOpen || liftOpen || stickOpen || marketOpen || iceOpen || weatherOpen || cloudOpen || hpOpen || dollOpen || sgOpen || smOpen || bakeOpen || beadOpen || giftOpen || teethOpen || elfOpen || salonOpen || fdOpen || pfOpen || pianoOpen || eggOpen || bqOpen || bugOpen || rbOpen || studioOpen || photoViewOpen || scrapOpen || partyOpen || uniOpen || trainOpen || ghostOpen || wcOpen || gardenOpen || beachOpen || pickOpen || golfOpen || glitterOpen || butterflyOpen || kermisDuckOpen || kermisClawOpen || zooFeedOpen || kittenOpen || tripOpen || bedtimeOpen || plushPickOpen || pirateOpen || pcOpen || ranjaOpen; }
 
 function sayRandom(list) {
     speak(randomPick(list));

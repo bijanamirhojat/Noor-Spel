@@ -67,6 +67,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/sterrenkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/ijskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/bakkerij.css">
+    <link rel="stylesheet" href="prinses/css/rooms/ranjakamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/juwelierskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/cadeaukamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/badkamer.css">
@@ -467,6 +468,34 @@
                 <button class="scope-close" id="pcClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="rjov" id="rjOv">
+                <div class="nails-title">🧃 Ranja maken</div>
+                <div class="rj-count" id="rjCount">🥤 0</div>
+                <div class="rj-bottles" id="rjBottles"></div>
+                <div class="rj-hint" id="rjHint"></div>
+                <div class="rj-stage">
+                    <div class="rj-glass" id="rjGlass">
+                        <div class="rj-stream" id="rjStream"></div>
+                        <div class="rj-cup">
+                            <div class="rj-liquid" id="rjLiquid"><div class="rj-water" id="rjWaterLayer"></div><div class="rj-syr" id="rjSyrLayer"></div><div class="rj-ice" id="rjIce"></div></div>
+                        </div>
+                        <div class="rj-spoon">🥄</div>
+                        <div class="rj-straw"></div>
+                        <div class="rj-slice" id="rjSlice"></div>
+                    </div>
+                    <div class="rj-face" id="rjFace"></div>
+                </div>
+                <div class="rj-tools">
+                    <button class="tool-btn wide rj-tool" data-t="water">💧 Water</button>
+                    <button class="tool-btn wide rj-tool" data-t="stir">🥄 Roeren</button>
+                    <button class="tool-btn rj-tool" data-t="ice" aria-label="IJsblokje">🧊</button>
+                    <button class="tool-btn rj-tool" data-t="slice" aria-label="Schijfje fruit">🍋</button>
+                    <button class="tool-btn wide rj-tool" data-t="drink">🥤 Opdrinken</button>
+                    <button class="tool-btn rj-tool" data-t="reset" aria-label="Weggooien">🗑️</button>
+                </div>
+                <button class="scope-close" id="rjClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="gardenov" id="gardenOv">
                 <div class="nails-title">🥕 Moestuin</div>
                 <div class="gd-basket" id="gdBasket"></div>
@@ -845,6 +874,7 @@
     <script src="prinses/js/rooms/balzaal.js"></script>
     <script src="prinses/js/rooms/eetkamer.js"></script>
     <script src="prinses/js/rooms/bakkerij.js"></script>
+    <script src="prinses/js/rooms/ranjakamer.js"></script>
     <script src="prinses/js/rooms/dierensalon.js"></script>
     <script src="prinses/js/rooms/spiegelkamer.js"></script>
     <script src="prinses/js/rooms/badkamer.js"></script>
