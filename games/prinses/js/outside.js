@@ -76,7 +76,7 @@ function buildOutside() {
     SCENES.out.koets = addKoets(o0 + 395, o0 + 545, 'dorp');
     addTicketMachine(o0 + 130);
     addObj('<div class="fountain"><div class="basin"></div><div class="water"></div><div class="col"></div><div class="bowl"></div><div class="jet"></div></div>', o0 + 610, 205, o0 + 700, fountainSplash);
-    addObj('<div class="sun">🌞</div>', o0 + 640, 10, o0 + 700, () => { sayRandom(['Hallo zon!', 'Wat een mooi weer!']); sparkleShower(o0 + 690, 0, 40); });
+    addObj('<div class="sun">🌞</div>', o0 + 640, 10, o0 + 700, () => { sayRandom(lights.night ? ['Hallo maan!', 'Welterusten maan!'] : ['Hallo zon!', 'Wat een mooi weer!']); sparkleShower(o0 + 690, 0, 40); });
 
     /* o1: Bloementuin */
     const o1 = ROOM_W;
@@ -226,6 +226,8 @@ function buildOutside() {
         if (state.busy || state.riding) return;
         playPop();
         burst(state.uniX, 330, 20);
+        // At night it sleeps: the first tap wakes it up (js/lights.js)
+        if (unicornAsleep()) { walkTo(state.uniX - 90, wakeUnicorn); return; }
         walkTo(state.uniX - 70, mountUnicorn);
     });
 }
