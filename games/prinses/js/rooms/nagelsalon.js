@@ -30,8 +30,13 @@ const NAIL_COLORS = [
     { c: '#34d399', name: 'Groen!' },
     { c: 'gold', name: 'Goud!', css: 'linear-gradient(135deg, #fde68a, #f59e0b, #fef3c7, #d97706)' },
     { c: 'rainbow', name: 'Regenboog!', css: 'linear-gradient(180deg, #ef4444, #fb923c, #facc15, #4ade80, #60a5fa, #c084fc)' },
-    { c: 'silver', name: 'Zilver glitter!', css: 'radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 10px 10px, linear-gradient(135deg, #e5e7eb, #9ca3af, #f9fafb)' }
+    { c: 'silver', name: 'Zilver glitter!', css: 'radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 10px 10px, linear-gradient(135deg, #e5e7eb, #9ca3af, #f9fafb)' },
+    // Glow in the dark: shines when the light is off
+    { c: '#ff5ce1', glow: true, name: 'Glow in the dark roze! Doe het licht uit!' },
+    { c: '#7dff6b', glow: true, name: 'Glow in the dark groen! Doe het licht uit!' },
+    { c: '#4fe6ff', glow: true, name: 'Glow in the dark blauw! Doe het licht uit!' }
 ];
+const NAIL_GLOW = new Set(NAIL_COLORS.filter(c => c.glow).map(c => c.c));
 const STICKERS = [
     { s: '💎', name: 'Een diamantje!' },
     { s: '⭐', name: 'Een sterretje!' },
@@ -90,6 +95,7 @@ function buildHands() {
             <stop offset="0" stop-color="#e5e7eb"/><stop offset=".5" stop-color="#9ca3af"/><stop offset="1" stop-color="#f9fafb"/>
         </linearGradient>
         <linearGradient id="nsilver" href="#nsilverBase"/>
+        <filter id="nglowBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="7"/></filter>
     </defs>`;
     let idx = 0;
     [[230, true], [590, false]].forEach(([cx, mirror]) => {
@@ -105,6 +111,7 @@ function buildHands() {
                 <path d="M${-f.w * 0.3} ${-f.len + f.w * 1.4} q${f.w * 0.3} 6 ${f.w * 0.6} 0" stroke="#f1b8a0" stroke-width="2" fill="none"/>
                 <g class="ring-slot" data-w="${f.w}" transform="translate(0,${-f.len * 0.36})"></g>
                 <clipPath id="nc${i}"><rect x="${nx}" y="${ny}" width="${nw}" height="${nh}" rx="${nw * 0.45}"/></clipPath>
+                <rect class="halo" x="${nx - 4}" y="${ny - 4}" width="${nw + 8}" height="${nh + 8}" rx="${nw * 0.5}" filter="url(#nglowBlur)"/>
                 <rect x="${nx}" y="${ny}" width="${nw}" height="${nh}" rx="${nw * 0.45}" fill="#fde2e4" stroke="#f9a8d4" stroke-width="2"/>
                 <g class="paint-layer" clip-path="url(#nc${i})"></g>
                 <g class="gl" clip-path="url(#nc${i})">
@@ -129,12 +136,13 @@ function buildNailTools() {
     const palette = document.getElementById('palette');
     palette.innerHTML = NAIL_COLORS.map((c, i) =>
         `<button class="bottle-btn${i === 0 ? ' sel' : ''}" data-i="${i}" aria-label="${c.name}">
-            <span class="cap"></span><span class="glass" style="background:${c.css || c.c}"></span>
+            <span class="cap"></span><span class="glass${c.glow ? ' glow' : ''}" style="background:${c.css || c.c};--g:${c.c}">${c.glow ? '🌙' : ''}</span>
         </button>`).join('');
     const tools = document.getElementById('nailTools');
     tools.innerHTML = STICKERS.map((s, i) => `<button class="tool-btn" data-s="${i}">${s.s}</button>`).join('') +
         RINGS.map((r, i) => `<button class="tool-btn" data-r="${i}"><svg viewBox="-24 -28 48 40" width="44" height="38">${ringSVG(r, 34)}</svg></button>`).join('') +
-        `<button class="tool-btn wide" id="glitterBtn">✨ Glitter</button>
+        `<button class="tool-btn wide" id="nailLight">💡 Licht uit</button>
+         <button class="tool-btn wide" id="glitterBtn">✨ Glitter</button>
          <button class="tool-btn wide" id="wipeBtn">🧽 Weg</button>
          <button class="tool-btn wide" id="doneBtn">✅ Klaar!</button>`;
 
@@ -172,6 +180,10 @@ function buildNailTools() {
             speak(st.name);
         });
     });
+    document.getElementById('nailLight').addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+        nailsDark(!nailsEl.classList.contains('dark'));
+    });
     document.getElementById('glitterBtn').addEventListener('pointerdown', (e) => {
         e.stopPropagation();
         handsSvg.classList.toggle('glitter');
@@ -184,7 +196,7 @@ function buildNailTools() {
         handsSvg.querySelectorAll('.paint-layer').forEach(l => l.innerHTML = '');
         handsSvg.querySelectorAll('text.stk').forEach(t => t.textContent = '');
         handsSvg.querySelectorAll('.ring-slot').forEach(r => r.innerHTML = '');
-        handsSvg.querySelectorAll('.finger').forEach(f => f.classList.remove('painted'));
+        handsSvg.querySelectorAll('.finger').forEach(f => f.classList.remove('painted', 'glowing'));
         handsSvg.classList.remove('glitter');
         nails.forEach(n => { n.color = null; n.sticker = null; n.ring = null; });
         playFreqSweep(600, 200, 0.4, 0.15);
@@ -237,6 +249,10 @@ function paintNail(i, isTap) {
         r.setAttribute('fill', nailFill(nailTool.value));
         r.setAttribute('class', 'paint');
         layer.appendChild(r);
+        // Glow polish: the nail gets a glowing halo that shows in the dark
+        const glow = NAIL_GLOW.has(nailTool.value);
+        finger.classList.toggle('glowing', glow);
+        if (glow) finger.querySelector('.halo').setAttribute('fill', nailTool.value);
         if (nailTool.value === 'silver') {
             const d = r.cloneNode();
             d.setAttribute('fill', 'url(#nsilverDots)');
@@ -316,10 +332,32 @@ function nailsDone() {
     setTimeout(() => handsSvg.classList.remove('drying'), 1600);
 }
 
+// Light off in the salon: the room goes dark and glow-in-the-dark nails shine
+function nailsDark(dark, quiet) {
+    nailsEl.classList.toggle('dark', dark);
+    document.getElementById('nailLight').textContent = dark ? '💡 Licht aan' : '💡 Licht uit';
+    playTone(dark ? 900 : 1400, 0.03, 0.15, 'square');
+    setTimeout(() => playTone(dark ? 600 : 1800, 0.03, 0.1, 'square'), 40);
+    if (quiet) return;
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    const glowing = handsSvg.querySelectorAll('.finger.glowing').length;
+    if (dark && glowing) {
+        speak('Oooh! Je nagels geven licht in het donker!');
+        setTimeout(() => handsSvg.querySelectorAll('.finger.glowing').forEach(f => { const c = nailCenter(+f.dataset.nail); nailSpark(c.x, c.y); }), 300);
+    } else if (dark) {
+        speak('Het is donker! Probeer de glow in the dark lak, met het maantje!');
+    } else {
+        speak('Licht aan!');
+    }
+}
+
 function openNails() {
     nailsOpen = true;
     nailsEl.classList.add('open');
-    speak('De nagelsalon! Kies een kleurtje en tik op een nagel!');
+    // At night with the lamp off, the salon is dark too (js/lights.js)
+    const dark = lights.night && !lights.on.has('nagelsalon');
+    nailsDark(dark, true);
+    speak(dark ? 'Het is donker in de nagelsalon! Probeer de glow in the dark lak, met het maantje!' : 'De nagelsalon! Kies een kleurtje en tik op een nagel!');
     playSparkleSound();
 }
 

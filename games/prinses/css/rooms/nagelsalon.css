@@ -201,3 +201,25 @@
     from { transform: translateX(-4px); }
     to { transform: translateX(4px); }
 }
+
+/* ── Glow in the dark ── */
+.bottle-btn .glass.glow { display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: inset -6px -6px 0 rgba(0,0,0,0.12), inset 5px 5px 0 rgba(255,255,255,0.55), 0 0 12px 2px var(--g); }
+.finger .halo { opacity: 0; transition: opacity 0.6s; pointer-events: none; }
+
+/* Light off: dark room, dark hands, normal polish goes dim, glow polish shines */
+.nails.dark {
+    background:
+        radial-gradient(circle, rgba(255,255,255,0.35) 1.5px, transparent 2.5px) 0 0 / 46px 46px,
+        linear-gradient(135deg, #0b0820, #1e1b4b 60%, #0b0820);
+}
+.nails.dark .nails-title { color: #f0abfc; }
+.nails.dark .hands rect[fill="#ffd7c2"], .nails.dark .hands ellipse[fill="#ffd7c2"] { fill: #3b3350; transition: fill 0.6s; }
+.nails.dark .hands rect[fill="#fde2e4"] { fill: #4c4060; stroke: #5b4b73; }
+.nails.dark .hands path[stroke="#f1b8a0"] { stroke: #2a2238; }
+.nails.dark .finger:not(.glowing) .paint-layer { filter: brightness(0.3); }
+.nails.dark .finger .paint-layer, .nails.dark .finger .halo { transition: opacity 0.6s, filter 0.6s; }
+.nails.dark .finger.glowing .halo { opacity: 0.9; animation: nailGlow 1.6s ease-in-out infinite alternate; }
+.nails.dark .finger.glowing .paint-layer { filter: brightness(1.25) saturate(1.4); }
+@keyframes nailGlow { from { opacity: 0.55; } to { opacity: 1; } }
+.nails.dark .ring-slot, .nails.dark text.stk { filter: brightness(0.45); }
+.nails.dark .bottle-btn:not(:has(.glow)) { filter: brightness(0.55); }
