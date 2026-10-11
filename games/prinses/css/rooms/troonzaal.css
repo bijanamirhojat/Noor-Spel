@@ -7,7 +7,7 @@
 .room.rm-troonzaal .floor {
     background:
         linear-gradient(90deg, transparent 290px, #e11d48 290px 510px, transparent 510px),
-        conic-gradient(#fef3c7 25%, #fcd34d 0 50%, #fef3c7 0 75%, #fcd34d 0) 0 0 / 50px 50px;
+        conic-gradient(#fef3c7 25%, var(--amber-300) 0 50%, #fef3c7 0 75%, var(--amber-300) 0) 0 0 / 50px 50px;
 }
 
 /* Throne */

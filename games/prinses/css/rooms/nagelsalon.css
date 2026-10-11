@@ -1,12 +1,12 @@
 .room.rm-nagelsalon .wall {
     background:
-        radial-gradient(circle, #f9a8d4 4px, transparent 5px) 0 0 / 50px 50px,
-        radial-gradient(circle, #fde68a 3px, transparent 4px) 25px 25px / 50px 50px,
+        radial-gradient(circle, var(--pink-300) 4px, transparent 5px) 0 0 / 50px 50px,
+        radial-gradient(circle, var(--amber-200) 3px, transparent 4px) 25px 25px / 50px 50px,
         linear-gradient(180deg, #ccfbf1, #99f6e4);
 }
 
 .room.rm-nagelsalon .floor {
-    background: conic-gradient(#fff 25%, #fbcfe8 0 50%, #fff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
+    background: conic-gradient(#fff 25%, var(--pink-200) 0 50%, #fff 0 75%, var(--pink-200) 0) 0 0 / 50px 50px;
 }
 
 .vanity { width: 280px; height: 230px; }
@@ -16,7 +16,7 @@
 .vanity .vmirror {
     left: 80px; top: 0; width: 120px; height: 110px;
     border-radius: 50%;
-    border: 8px solid #fcd34d;
+    border: 8px solid var(--amber-300);
     background: linear-gradient(135deg, #e0f2fe, #fdf2f8 50%, #fff);
     display: flex; align-items: center; justify-content: center;
     font-size: 54px;
@@ -25,15 +25,15 @@
 .vanity .vtop {
     left: 0; top: 112px; width: 280px; height: 24px;
     border-radius: 10px;
-    background: linear-gradient(180deg, #fbcfe8, #f472b6);
-    border: 4px solid #fcd34d;
+    background: linear-gradient(180deg, var(--pink-200), var(--pink-400));
+    border: 4px solid var(--amber-300);
 }
 
 .vanity .vbody {
     left: 20px; top: 136px; width: 240px; height: 70px;
-    background: linear-gradient(180deg, #fdf2f8, #fbcfe8);
+    background: linear-gradient(180deg, #fdf2f8, var(--pink-200));
     border-radius: 0 0 16px 16px;
-    border: 4px solid #fcd34d;
+    border: 4px solid var(--amber-300);
     border-top: none;
 }
 
@@ -43,7 +43,7 @@
     top: 24px;
     width: 14px; height: 14px;
     border-radius: 50%;
-    background: #fcd34d;
+    background: var(--amber-300);
 }
 
 .vanity .vbody::before { left: 50px; }
@@ -81,21 +81,21 @@
     position: absolute;
     left: 0; top: 0; width: 90px; height: 34px;
     border-radius: 50%;
-    background: radial-gradient(ellipse, #fdf2f8, #f9a8d4);
-    box-shadow: 0 4px 0 #f472b6;
+    background: radial-gradient(ellipse, #fdf2f8, var(--pink-300));
+    box-shadow: 0 4px 0 var(--pink-400);
 }
 
 .stool::after {
     content: '';
     position: absolute;
     left: 38px; top: 30px; width: 14px; height: 60px;
-    background: #fcd34d;
+    background: var(--amber-300);
 }
 
 .nails {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;

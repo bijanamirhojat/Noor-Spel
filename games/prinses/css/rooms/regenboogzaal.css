@@ -3,7 +3,7 @@
 }
 
 .room.rm-regenboogzaal .floor {
-    background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, #fbcfe8 0) 0 0 / 50px 50px;
+    background: conic-gradient(#ffffff 25%, #bae6fd 0 50%, #ffffff 0 75%, var(--pink-200) 0) 0 0 / 50px 50px;
 }
 
 /* Rainbow room */
@@ -39,8 +39,8 @@
     width: 60px;
     height: 90px;
     background: linear-gradient(90deg, #f5f5f4, #fff, #e7e5e4);
-    border-top: 8px solid #fcd34d;
-    border-bottom: 8px solid #fcd34d;
+    border-top: 8px solid var(--amber-300);
+    border-bottom: 8px solid var(--amber-300);
 }
 
 .pedestal .ball {
@@ -51,7 +51,7 @@
     height: 90px;
     border-radius: 50%;
     background:
-        conic-gradient(from 0deg, #f472b6, #facc15, #4ade80, #60a5fa, #c084fc, #f472b6);
+        conic-gradient(from 0deg, var(--pink-400), #facc15, #4ade80, #60a5fa, #c084fc, var(--pink-400));
     box-shadow: 0 0 30px #f0abfc, inset -12px -12px 24px rgba(0,0,0,0.25), inset 12px 12px 24px rgba(255,255,255,0.7);
     animation: spinBall 6s linear infinite;
 }

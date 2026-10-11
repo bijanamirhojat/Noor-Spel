@@ -1,10 +1,10 @@
 .room.rm-kasteelhal .wall {
     background:
-        repeating-linear-gradient(90deg, #fbcfe8 0 40px, #f9a8d4 40px 80px);
+        repeating-linear-gradient(90deg, var(--pink-200) 0 40px, var(--pink-300) 40px 80px);
 }
 
 .room.rm-kasteelhal .floor {
-    background: conic-gradient(#fdf2f8 25%, #f9a8d4 0 50%, #fdf2f8 0 75%, #f9a8d4 0) 0 0 / 50px 50px;
+    background: conic-gradient(#fdf2f8 25%, var(--pink-300) 0 50%, #fdf2f8 0 75%, var(--pink-300) 0) 0 0 / 50px 50px;
 }
 
 /* Torch */
@@ -19,7 +19,7 @@
     left: 9px;
     width: 12px;
     height: 70px;
-    background: linear-gradient(90deg, #fbbf24, #fde68a, #f59e0b);
+    background: linear-gradient(90deg, #fbbf24, var(--amber-200), #f59e0b);
     border-radius: 4px;
 }
 
@@ -55,7 +55,7 @@
     width: 240px;
     height: 50px;
     border-radius: 50%;
-    background: radial-gradient(ellipse, #f0abfc 0 30%, #c084fc 31% 55%, #f472b6 56% 100%);
+    background: radial-gradient(ellipse, #f0abfc 0 30%, #c084fc 31% 55%, var(--pink-400) 56% 100%);
     opacity: 0.9;
     z-index: 1;
     pointer-events: none;

@@ -50,7 +50,7 @@
 .snow-globe .stand {
     position: absolute; left: 15px; top: 92px; width: 80px; height: 30px;
     border-radius: 8px 8px 14px 14px;
-    background: linear-gradient(180deg, #f472b6, #be185d);
+    background: linear-gradient(180deg, var(--pink-400), #be185d);
 }
 
 .snow-globe .ped { position: absolute; left: 35px; top: 120px; width: 40px; height: 40px; background: #fff; border-radius: 4px; }
@@ -87,7 +87,7 @@
 .snowov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -163,7 +163,7 @@
 
 .sm-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #0369a1; }
 
-.sm-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+.sm-btn.sel { border-color: var(--pink-400); background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
 
 .sm-btn.big { font-size: 34px; padding: 4px 18px; border-color: #7dd3fc; }
 

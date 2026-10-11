@@ -6,7 +6,7 @@
 }
 
 .room.rm-cadeaukamer .floor {
-    background: conic-gradient(#fff 25%, #fde68a 0 50%, #fff 0 75%, #fde68a 0) 0 0 / 50px 50px;
+    background: conic-gradient(#fff 25%, var(--amber-200) 0 50%, #fff 0 75%, var(--amber-200) 0) 0 0 / 50px 50px;
 }
 
 .bunting { width: 800px; height: 60px; pointer-events: none; }
@@ -35,7 +35,7 @@
 .giftov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;

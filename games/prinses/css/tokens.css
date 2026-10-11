@@ -1,0 +1,25 @@
+/* Design tokens for the castle: the stacking layers and the main colours in one place.
+   Loaded before every other castle stylesheet. */
+:root {
+    /* Layers in the playfield, bottom to top */
+    --z-shade: 8;        /* night layer over each room (lights.css) */
+    --z-lamp: 9;         /* hanging lamps */
+    --z-actor: 10;       /* the princess; things she sits in go a little higher */
+    --z-fx: 20;          /* glitter canvas */
+    --z-hud: 30;         /* map, sticker book, day/night and lamp buttons, arrows, wand */
+    --z-toast: 40;
+    --z-fade: 45;        /* door fade */
+    --z-overlay: 50;     /* room activities */
+    --z-modal: 55;       /* map, lift and sticker book */
+    --z-photo: 56;       /* photo viewer over the photo studio */
+    --z-ride: 58;        /* the train ride */
+    --z-fly: 60;         /* sticker flying to the book */
+
+    /* Colours used everywhere in the castle */
+    --pink-200: #fbcfe8;
+    --pink-300: #f9a8d4;
+    --pink-400: #f472b6;
+    --pink-600: #db2777;
+    --amber-200: #fde68a;
+    --amber-300: #fcd34d;
+}

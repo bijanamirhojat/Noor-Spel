@@ -16,7 +16,7 @@
 .wc-toilet > div { position: absolute; }
 .wc-toilet .tank { left: 20px; top: 0; width: 110px; height: 110px; border-radius: 14px; background: linear-gradient(180deg, #fff, #f1f5f9); border: 4px solid #cbd5e1; }
 .wc-toilet .tank .btn { position: absolute; left: 40px; top: 10px; width: 30px; height: 12px; border-radius: 6px; background: #94a3b8; }
-.wc-toilet .lid { left: 6px; top: 104px; width: 138px; height: 20px; border-radius: 10px; background: #f9a8d4; }
+.wc-toilet .lid { left: 6px; top: 104px; width: 138px; height: 20px; border-radius: 10px; background: var(--pink-300); }
 .wc-toilet .bowl { left: 0; top: 120px; width: 150px; height: 80px; border-radius: 10px 10px 75px 75px; background: #fff; border: 4px solid #cbd5e1; overflow: hidden; }
 .wc-toilet .bowl .water { position: absolute; left: 30px; top: 6px; width: 90px; height: 24px; border-radius: 50%; background: #7dd3fc; }
 .wc-toilet .foot { left: 45px; top: 196px; width: 60px; height: 56px; background: linear-gradient(90deg, #f1f5f9, #fff, #e2e8f0); border-radius: 0 0 8px 8px; }
@@ -31,7 +31,7 @@
 
 /* ── Wie moet er plassen? (overlay) ── */
 .wcov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
     background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 2px, transparent 2px) 0 0 / 48px 48px, linear-gradient(0deg, rgba(255, 255, 255, 0.85) 2px, transparent 2px) 0 0 / 48px 48px, linear-gradient(180deg, #ccfbf1, #99f6e4);
@@ -47,7 +47,7 @@
 .wc-paper-strip { width: 60px; margin: -14px 0 0 15px; height: 0; background: repeating-linear-gradient(180deg, #fff 0 46px, #e7e5e4 46px 49px); transition: height 0.35s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
 .wc-big-toilet { position: absolute; left: 45%; bottom: 14%; width: 200px; height: 300px; transform: translateX(-50%); z-index: 1; }
 .wc-big-toilet .tank { position: absolute; left: 30px; top: 0; width: 140px; height: 130px; border-radius: 18px; background: linear-gradient(180deg, #fff, #f1f5f9); border: 5px solid #cbd5e1; }
-.wc-bowl { position: absolute; left: 0; top: 150px; width: 200px; height: 100px; border-radius: 12px 12px 100px 100px; background: #fff; border: 5px solid #cbd5e1; border-top: 18px solid #f9a8d4; overflow: hidden; }
+.wc-bowl { position: absolute; left: 0; top: 150px; width: 200px; height: 100px; border-radius: 12px 12px 100px 100px; background: #fff; border: 5px solid #cbd5e1; border-top: 18px solid var(--pink-300); overflow: hidden; }
 .wc-bowl .swirlw { position: absolute; left: 40px; top: 4px; width: 120px; height: 34px; border-radius: 50%; background: conic-gradient(#7dd3fc, #38bdf8, #bae6fd, #7dd3fc); }
 .wc-bowl.swirl .swirlw { animation: wcSwirl 1.2s linear; }
 @keyframes wcSwirl { 50% { transform: rotate(540deg) scale(0.4); } 100% { transform: rotate(1080deg) scale(1); } }

@@ -32,7 +32,7 @@
 
 /* ── Ranja maken (overlay) ── */
 .rjov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 10px 12px; gap: 6px; touch-action: none; overflow: hidden;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 5px, transparent 6px) 0 0 / 50px 50px, linear-gradient(180deg, #fef9c3, #fed7aa);
@@ -70,7 +70,7 @@
 .rj-spoon { position: absolute; left: 50%; top: -6%; font-size: clamp(36px, 10vh, 60px); opacity: 0; transform: translateX(-50%) rotate(180deg); pointer-events: none; z-index: 2; }
 .rj-glass.stir .rj-spoon { animation: rjStir 0.9s ease; }
 @keyframes rjStir { 0%, 100% { opacity: 0; } 10%, 90% { opacity: 1; } 25% { transform: translateX(-90%) rotate(160deg); } 50% { transform: translateX(-10%) rotate(200deg); } 75% { transform: translateX(-90%) rotate(160deg); } }
-.rj-straw { position: absolute; left: 58%; top: -18%; width: 8%; height: 90%; border-radius: 6px; background: repeating-linear-gradient(180deg, #fff 0 12px, #f472b6 12px 24px); transform: rotate(12deg); opacity: 0; transition: opacity 0.3s; z-index: 1; }
+.rj-straw { position: absolute; left: 58%; top: -18%; width: 8%; height: 90%; border-radius: 6px; background: repeating-linear-gradient(180deg, #fff 0 12px, var(--pink-400) 12px 24px); transform: rotate(12deg); opacity: 0; transition: opacity 0.3s; z-index: 1; }
 .rj-glass.straw .rj-straw { opacity: 1; }
 .rj-slice { position: absolute; right: -10%; top: 6%; font-size: clamp(30px, 9vh, 52px); line-height: 1; transform: rotate(20deg); z-index: 2; pointer-events: none; }
 

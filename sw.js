@@ -66,6 +66,7 @@ const PRECACHE_URLS = [
     './games/prinses/css/ruimte/spiraal.css',
     './games/prinses/css/ruimte/poezenplaneten.css',
     './games/prinses/css/ruimte/ruimtehaven.css',
+    './games/prinses/css/tokens.css',
     './games/prinses/css/core.css',
     './games/prinses/css/map.css',
     './games/prinses/css/outside.css',

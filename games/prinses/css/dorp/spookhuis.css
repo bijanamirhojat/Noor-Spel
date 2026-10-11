@@ -13,14 +13,14 @@
 .sp-house .roof { left: 0; top: 46px; width: 330px; height: 80px; background: #1e1b4b; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .sp-house .tower { left: 200px; top: 0; width: 80px; height: 120px; background: linear-gradient(180deg, #6d28d9, #4c1d95); border: 4px solid #c4b5fd; border-radius: 40px 40px 0 0; }
 .sp-house .win { position: absolute; width: 56px; height: 64px; border-radius: 28px 28px 6px 6px; background: #1e1b4b; border: 4px solid #c4b5fd; }
-.sp-house .win.lit { background: radial-gradient(circle, #fef08a, #f59e0b); box-shadow: 0 0 18px #fde68a; animation: gleam 2.4s ease-in-out infinite; }
+.sp-house .win.lit { background: radial-gradient(circle, #fef08a, #f59e0b); box-shadow: 0 0 18px var(--amber-200); animation: gleam 2.4s ease-in-out infinite; }
 .sp-house .body .win:nth-child(1) { left: 30px; top: 30px; }
 .sp-house .body .win:nth-child(2) { left: 200px; top: 30px; }
 .sp-house .tower .win { left: 8px; top: 30px; width: 56px; height: 60px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
 .sp-house .tower .win span { font-size: 34px; line-height: 1; animation: spPeek 3s ease-in-out infinite; }
 @keyframes spPeek { 0%, 60%, 100% { transform: translateY(40px); } 70%, 90% { transform: translateY(4px); } }
 .sp-house .door { left: 112px; top: 100px; width: 66px; height: 110px; border-radius: 33px 33px 0 0; background: #78350f; border: 4px solid #c4b5fd; }
-.sp-house .door span { position: absolute; right: 10px; top: 54px; width: 10px; height: 10px; border-radius: 50%; background: #fcd34d; }
+.sp-house .door span { position: absolute; right: 10px; top: 54px; width: 10px; height: 10px; border-radius: 50%; background: var(--amber-300); }
 .sp-house .web { left: 10px; top: 110px; font-size: 50px; opacity: 0.85; }
 
 .sp-pumpkin { font-size: 56px; line-height: 1; }
@@ -38,7 +38,7 @@
 
 /* ── Spookjes zoeken (overlay) ── */
 .ghostov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
     background: #0b0618;

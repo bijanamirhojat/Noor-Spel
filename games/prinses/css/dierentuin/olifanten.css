@@ -1,5 +1,5 @@
 /* 🐘 Olifanten */
-.room.rm-olifanten .wall { background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 50%, #fde68a 90%); }
+.room.rm-olifanten .wall { background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 50%, var(--amber-200) 90%); }
 .room.rm-olifanten .floor { background: radial-gradient(circle, #a8a29e 2px, transparent 3px) 0 0 / 30px 22px, linear-gradient(180deg, #d6b98c, #a16207); }
 .zo-pool { width: 300px; height: 60px; border-radius: 50%; background: radial-gradient(ellipse, #92400e, #78350f 70%); pointer-events: none; }
 .zo-big { font-size: 250px; line-height: 1; transform-origin: 50% 100%; }

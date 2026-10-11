@@ -11,7 +11,7 @@
 .awning {
     height: 54px;
     pointer-events: none;
-    background: repeating-linear-gradient(90deg, #f472b6 0 40px, #fff 40px 80px);
+    background: repeating-linear-gradient(90deg, var(--pink-400) 0 40px, #fff 40px 80px);
     clip-path: polygon(0 0, 100% 0, 100% 70%, 97.5% 100%, 95% 70%, 92.5% 100%, 90% 70%, 87.5% 100%, 85% 70%, 82.5% 100%, 80% 70%, 77.5% 100%, 75% 70%, 72.5% 100%, 70% 70%, 67.5% 100%, 65% 70%, 62.5% 100%, 60% 70%, 57.5% 100%, 55% 70%, 52.5% 100%, 50% 70%, 47.5% 100%, 45% 70%, 42.5% 100%, 40% 70%, 37.5% 100%, 35% 70%, 32.5% 100%, 30% 70%, 27.5% 100%, 25% 70%, 22.5% 100%, 20% 70%, 17.5% 100%, 15% 70%, 12.5% 100%, 10% 70%, 7.5% 100%, 5% 70%, 2.5% 100%, 0 70%);
 }
 
@@ -19,11 +19,11 @@
 
 .oven > div { position: absolute; }
 
-.oven .body { left: 0; top: 30px; width: 170px; height: 170px; border-radius: 16px; background: linear-gradient(180deg, #f9a8d4, #ec4899); border: 5px solid #fff; }
+.oven .body { left: 0; top: 30px; width: 170px; height: 170px; border-radius: 16px; background: linear-gradient(180deg, var(--pink-300), #ec4899); border: 5px solid #fff; }
 
 .oven .knobs { left: 20px; top: 40px; width: 130px; display: flex; justify-content: space-around; }
 
-.oven .knobs span { width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: inset -3px -3px 0 #fbcfe8; }
+.oven .knobs span { width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: inset -3px -3px 0 var(--pink-200); }
 
 .oven .window {
     left: 22px; top: 76px; width: 126px; height: 90px; border-radius: 12px;
@@ -39,7 +39,7 @@
 .vitrine {
     width: 300px; height: 150px;
     border-radius: 14px;
-    border: 6px solid #fcd34d;
+    border: 6px solid var(--amber-300);
     background: linear-gradient(180deg, rgba(255,255,255,0.75), rgba(224,242,254,0.6));
     box-shadow: inset 0 0 20px rgba(255,255,255,0.9), 0 8px 14px rgba(0,0,0,0.15);
     display: grid;
@@ -51,7 +51,7 @@
 
 .vitrine::after {
     content: '';
-    position: absolute; left: 8px; right: 8px; top: 66px; height: 4px; background: #fcd34d; border-radius: 2px;
+    position: absolute; left: 8px; right: 8px; top: 66px; height: 4px; background: var(--amber-300); border-radius: 2px;
 }
 
 .vit-slot { display: flex; align-items: center; justify-content: center; cursor: pointer; }
@@ -64,16 +64,16 @@
 
 .counter { width: 280px; height: 110px; pointer-events: none; }
 
-.counter .top { position: absolute; left: 0; top: 0; width: 280px; height: 24px; border-radius: 8px; background: #fde68a; border: 4px solid #f59e0b; }
+.counter .top { position: absolute; left: 0; top: 0; width: 280px; height: 24px; border-radius: 8px; background: var(--amber-200); border: 4px solid #f59e0b; }
 
-.counter .front { position: absolute; left: 10px; top: 24px; width: 260px; height: 86px; background: repeating-linear-gradient(90deg, #fbcfe8 0 26px, #f9a8d4 26px 52px); }
+.counter .front { position: absolute; left: 10px; top: 24px; width: 260px; height: 86px; background: repeating-linear-gradient(90deg, var(--pink-200) 0 26px, var(--pink-300) 26px 52px); }
 
 .counter span { position: absolute; top: -40px; font-size: 40px; }
 
 .bakeov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -118,7 +118,7 @@
 .bk-btn {
     min-width: 62px; height: 62px;
     border-radius: 18px;
-    border: 3px solid #fbcfe8;
+    border: 3px solid var(--pink-200);
     background: #fff;
     font-size: 32px;
     line-height: 1;
@@ -131,7 +131,7 @@
 
 .bk-btn small { font-family: 'Fredoka One', cursive; font-size: 11px; color: #be185d; }
 
-.bk-btn.sel { border-color: #f472b6; background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
+.bk-btn.sel { border-color: var(--pink-400); background: #fdf2f8; transform: translateY(-4px) scale(1.06); }
 
 .bk-btn.big { font-size: 36px; padding: 4px 18px; border-color: #fda4af; }
 

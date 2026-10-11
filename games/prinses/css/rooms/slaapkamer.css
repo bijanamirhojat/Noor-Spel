@@ -1,7 +1,7 @@
 .room.rm-slaapkamer .wall {
     background:
         radial-gradient(circle, #fff 2px, transparent 3px) 0 0 / 60px 60px,
-        radial-gradient(circle, #fde68a 2.5px, transparent 3.5px) 30px 30px / 60px 60px,
+        radial-gradient(circle, var(--amber-200) 2.5px, transparent 3.5px) 30px 30px / 60px 60px,
         linear-gradient(180deg, #c7d2fe, #a5b4fc);
 }
 
@@ -15,15 +15,15 @@
 
 .bed .post {
     top: 0; width: 10px; height: 230px;
-    background: linear-gradient(90deg, #fcd34d, #fde68a, #f59e0b);
+    background: linear-gradient(90deg, var(--amber-300), var(--amber-200), #f59e0b);
     border-radius: 5px;
 }
 
 .bed .canopy {
     left: -10px; top: -6px; width: 340px; height: 44px;
     background:
-        radial-gradient(circle at 50% 100%, transparent 18px, #f9a8d4 19px) 0 0 / 40px 44px;
-    border-top: 8px solid #f472b6;
+        radial-gradient(circle at 50% 100%, transparent 18px, var(--pink-300) 19px) 0 0 / 40px 44px;
+    border-top: 8px solid var(--pink-400);
     border-radius: 12px 12px 0 0;
 }
 
@@ -36,8 +36,8 @@
 .bed .head {
     left: 12px; top: 70px; width: 70px; height: 140px;
     border-radius: 35px 35px 6px 6px;
-    background: linear-gradient(180deg, #f9a8d4, #f472b6);
-    border: 5px solid #fcd34d;
+    background: linear-gradient(180deg, var(--pink-300), var(--pink-400));
+    border: 5px solid var(--amber-300);
     display: flex; justify-content: center; padding-top: 16px;
     font-size: 28px;
 }
@@ -133,13 +133,13 @@ svg .pjp, svg .pjt, svg .pjc { display: none; }
 
 /* ── Klaar voor bed (overlay) ── */
 .bedtimeov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 1.5px, transparent 2.5px) 0 0 / 44px 40px, linear-gradient(180deg, #312e81, #6d28d9 60%, #c4b5fd);
 }
 .bedtimeov.open { display: flex; }
-.bedtimeov .nails-title { color: #fde68a; }
+.bedtimeov .nails-title { color: var(--amber-200); }
 .bt-hint { font-family: 'Fredoka One', cursive; color: #4c1d95; background: #fff; border-radius: 999px; padding: 2px 16px; font-size: 1.05rem; pointer-events: none; }
 .bt-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 1000px; }
 .bt-stage::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 16%; border-radius: 0 0 20px 20px; background: repeating-linear-gradient(90deg, #a16207 0 60px, #92400e 60px 62px); z-index: 0; }
@@ -159,7 +159,7 @@ svg .pjp, svg .pjt, svg .pjc { display: none; }
 .bt-dest.nope { animation: zfNope 0.5s ease; }
 .bt-dest .lbl { font-family: 'Fredoka One', cursive; color: #fff; font-size: 0.9rem; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); margin-bottom: -22px; }
 .bt-dest[data-to="kussen"] { left: 4%; top: 6%; width: clamp(110px, 18vw, 160px); height: clamp(80px, 16vh, 110px); }
-.bt-dest[data-to="kussen"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 50%; border-radius: 40px; background: radial-gradient(circle at 50% 40%, #f9a8d4, #db2777); box-shadow: 0 6px 0 #9d174d; }
+.bt-dest[data-to="kussen"]::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 50%; border-radius: 40px; background: radial-gradient(circle at 50% 40%, var(--pink-300), var(--pink-600)); box-shadow: 0 6px 0 #9d174d; }
 .bt-dest[data-to="kussen"] .pile { top: auto; bottom: 40%; }
 .bt-dest[data-to="rek"] { left: 4%; bottom: 8%; width: clamp(120px, 20vw, 180px); height: clamp(90px, 18vh, 130px); }
 .bt-dest[data-to="rek"]::before { content: ''; position: absolute; inset: 20% 0 0; background: linear-gradient(#92400e 0 8px, transparent 8px) 0 40% / 100% 50% no-repeat, linear-gradient(#92400e 0 8px, transparent 8px) 0 100% / 100% 8px no-repeat; border-left: 8px solid #92400e; border-right: 8px solid #92400e; }
@@ -179,7 +179,7 @@ svg .pjp, svg .pjt, svg .pjc { display: none; }
 
 /* Knuffelmand */
 .sk-plush { width: 110px; height: 110px; }
-.sk-plush .mand { position: absolute; z-index: 2; left: 0; bottom: 0; width: 110px; height: 56px; border-radius: 8px 8px 26px 26px; background: repeating-linear-gradient(90deg, #f9a8d4 0 10px, #f472b6 10px 13px); box-shadow: inset 0 8px 0 #db2777; }
+.sk-plush .mand { position: absolute; z-index: 2; left: 0; bottom: 0; width: 110px; height: 56px; border-radius: 8px 8px 26px 26px; background: repeating-linear-gradient(90deg, var(--pink-300) 0 10px, var(--pink-400) 10px 13px); box-shadow: inset 0 8px 0 var(--pink-600); }
 .sk-plush .toys { position: absolute; left: -10px; right: -10px; bottom: 44px; z-index: 1; display: flex; flex-wrap: wrap-reverse; justify-content: center; font-size: 38px; line-height: 0.85; }
 .sk-plush .toys span { margin: 0 -4px; }
 .sk-plush.hug .toys span { display: inline-block; animation: vJump 0.4s ease 2; }
@@ -187,9 +187,9 @@ svg .pjp, svg .pjt, svg .pjc { display: none; }
 
 /* Knuffel mee in bed */
 .bed-plush { font-size: 50px; line-height: 1; z-index: 13; pointer-events: none; transform: rotate(-20deg); animation: sprout 0.5s cubic-bezier(.2, 1.8, .4, 1); }
-.plushpickov { position: absolute; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center; background: rgba(30, 27, 75, 0.6); touch-action: none; }
+.plushpickov { position: absolute; inset: 0; z-index: var(--z-overlay); display: none; align-items: center; justify-content: center; background: rgba(30, 27, 75, 0.6); touch-action: none; }
 .plushpickov.open { display: flex; }
-.pp-card { max-width: min(92%, 720px); padding: 18px 22px 22px; border-radius: 28px; background: linear-gradient(180deg, #fdf2f8, #ede9fe); border: 6px solid #f9a8d4; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; align-items: center; gap: 14px; animation: duPop 0.4s cubic-bezier(.2, 1.6, .4, 1); }
+.pp-card { max-width: min(92%, 720px); padding: 18px 22px 22px; border-radius: 28px; background: linear-gradient(180deg, #fdf2f8, #ede9fe); border: 6px solid var(--pink-300); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); display: flex; flex-direction: column; align-items: center; gap: 14px; animation: duPop 0.4s cubic-bezier(.2, 1.6, .4, 1); }
 .pp-card .nails-title { color: #7c3aed; text-align: center; }
 .pp-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-.pp-pick { width: clamp(70px, 13vh, 100px); height: clamp(70px, 13vh, 100px); border-radius: 50%; border: 5px solid #fff; background: radial-gradient(circle, #fff, #fbcfe8); font-size: clamp(42px, 8vh, 62px); line-height: 1; cursor: pointer; touch-action: none; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); animation: carousel 2.4s ease-in-out infinite; }
+.pp-pick { width: clamp(70px, 13vh, 100px); height: clamp(70px, 13vh, 100px); border-radius: 50%; border: 5px solid #fff; background: radial-gradient(circle, #fff, var(--pink-200)); font-size: clamp(42px, 8vh, 62px); line-height: 1; cursor: pointer; touch-action: none; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); animation: carousel 2.4s ease-in-out infinite; }

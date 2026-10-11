@@ -1,5 +1,5 @@
 /* 🌼 Pluktuin */
-.room.rm-pluktuin .floor { background: radial-gradient(circle, #fde047 2.5px, transparent 3.5px) 0 0 / 40px 24px, radial-gradient(circle, #f9a8d4 2.5px, transparent 3.5px) 20px 12px / 40px 24px, linear-gradient(180deg, #4ade80, #16a34a); }
+.room.rm-pluktuin .floor { background: radial-gradient(circle, #fde047 2.5px, transparent 3.5px) 0 0 / 40px 24px, radial-gradient(circle, var(--pink-300) 2.5px, transparent 3.5px) 20px 12px / 40px 24px, linear-gradient(180deg, #4ade80, #16a34a); }
 
 .pk-sign { padding: 8px 14px; border-radius: 10px; background: #a16207; border: 4px solid #fef3c7; color: #fff; font-family: 'Fredoka One', cursive; font-size: 18px; pointer-events: none; }
 .pk-sign::after { content: ''; position: absolute; left: 50%; top: 100%; width: 10px; height: 80px; margin-left: -5px; background: #92400e; }
@@ -18,7 +18,7 @@
 
 /* ── Bloemen plukken (overlay) ── */
 .pickov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
     background: linear-gradient(180deg, #bae6fd, #fef9c3 30%, #86efac 30%, #22c55e);
@@ -26,7 +26,7 @@
 .pickov.open { display: flex; }
 .pickov .nails-title { color: #be185d; }
 .pk-count { position: absolute; left: 16px; top: 14px; font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #be185d; background: #fff; border-radius: 999px; padding: 2px 14px; }
-.pk-wish { display: flex; gap: 6px; align-items: center; padding: 6px 14px; border-radius: 14px; background: #fff; border: 3px dashed #f9a8d4; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); }
+.pk-wish { display: flex; gap: 6px; align-items: center; padding: 6px 14px; border-radius: 14px; background: #fff; border: 3px dashed var(--pink-300); box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); }
 .pk-wish::before { content: '📝'; font-size: 28px; margin-right: 4px; }
 .pk-wish span { font-size: 40px; line-height: 1; filter: grayscale(0.2); opacity: 0.55; }
 .pk-wish span.got { opacity: 1; filter: none; }
@@ -47,7 +47,7 @@
 .pk-bouquet { position: relative; width: clamp(120px, 20vw, 200px); align-self: flex-end; height: 70%; }
 .pk-bouquet .flowers { position: absolute; left: 0; right: 0; top: 0; height: 60%; display: flex; justify-content: center; align-items: flex-end; }
 .pk-bouquet .flowers span { font-size: clamp(36px, 8vh, 64px); line-height: 1; margin: 0 -10px; transform: rotate(var(--r)); transform-origin: 50% 160%; }
-.pk-bouquet .wrap { position: absolute; left: 15%; right: 15%; top: 50%; bottom: 0; clip-path: polygon(0 0, 100% 0, 60% 100%, 40% 100%); background: linear-gradient(90deg, #fbcfe8, #fdf2f8, #f9a8d4); }
+.pk-bouquet .wrap { position: absolute; left: 15%; right: 15%; top: 50%; bottom: 0; clip-path: polygon(0 0, 100% 0, 60% 100%, 40% 100%); background: linear-gradient(90deg, var(--pink-200), #fdf2f8, var(--pink-300)); }
 .pk-bouquet .bow { position: absolute; left: 50%; top: 62%; transform: translateX(-50%) scale(0); font-size: clamp(36px, 7vh, 56px); transition: transform 0.4s cubic-bezier(.2, 1.8, .4, 1); z-index: 1; }
 .pk-bouquet.done .bow { transform: translateX(-50%) scale(1); }
 .pk-bouquet.done { animation: vJump 0.5s ease 2; }

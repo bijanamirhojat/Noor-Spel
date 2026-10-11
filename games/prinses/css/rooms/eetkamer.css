@@ -15,8 +15,8 @@
 .dining .chairback {
     top: 0; width: 70px; height: 120px;
     border-radius: 35px 35px 6px 6px;
-    background: linear-gradient(180deg, #f472b6, #be185d);
-    border: 5px solid #fcd34d;
+    background: linear-gradient(180deg, var(--pink-400), #be185d);
+    border: 5px solid var(--amber-300);
 }
 
 .dining .guest-e { top: 30px; font-size: 54px; line-height: 1; animation: carousel 2.2s ease-in-out infinite; }
@@ -30,7 +30,7 @@
 
 .dining .cloth {
     left: 10px; top: 130px; width: 500px; height: 46px;
-    background: repeating-linear-gradient(90deg, #f472b6 0 20px, #fbcfe8 20px 40px);
+    background: repeating-linear-gradient(90deg, var(--pink-400) 0 20px, var(--pink-200) 20px 40px);
     clip-path: polygon(0 0, 100% 0, 100% 70%, 95% 100%, 90% 70%, 85% 100%, 80% 70%, 75% 100%, 70% 70%, 65% 100%, 60% 70%, 55% 100%, 50% 70%, 45% 100%, 40% 70%, 35% 100%, 30% 70%, 25% 100%, 20% 70%, 15% 100%, 10% 70%, 5% 100%, 0 70%);
 }
 
@@ -47,7 +47,7 @@
 .dinner {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -157,8 +157,8 @@
     height: 26px;
     margin-top: -20px;
     border-radius: 12px;
-    background: repeating-linear-gradient(90deg, #f472b6 0 24px, #fbcfe8 24px 48px);
-    box-shadow: 0 6px 0 #db2777;
+    background: repeating-linear-gradient(90deg, var(--pink-400) 0 24px, var(--pink-200) 24px 48px);
+    box-shadow: 0 6px 0 var(--pink-600);
     z-index: 1;
 }
 
@@ -182,7 +182,7 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-.din-food.sel { border-color: #f472b6; transform: translateY(-6px) scale(1.1); }
+.din-food.sel { border-color: var(--pink-400); transform: translateY(-6px) scale(1.1); }
 
 .din-ghost {
     position: absolute;
@@ -227,7 +227,7 @@
 .candle-btn .wax {
     position: absolute; left: 7px; bottom: 0; width: 16px; height: 54px;
     border-radius: 4px;
-    background: repeating-linear-gradient(160deg, #fff 0 6px, #f472b6 6px 12px);
+    background: repeating-linear-gradient(160deg, #fff 0 6px, var(--pink-400) 6px 12px);
 }
 
 .candle-btn .flame {
@@ -245,6 +245,6 @@
     border-radius: 16px 16px 24px 24px;
     background:
         radial-gradient(circle, #fff 4px, transparent 5px) 0 0 / 26px 26px,
-        linear-gradient(180deg, #fbcfe8 0 30%, #f472b6 30% 34%, #fde68a 34% 66%, #f472b6 66% 70%, #fbcfe8 70%);
-    box-shadow: 0 6px 0 #db2777;
+        linear-gradient(180deg, var(--pink-200) 0 30%, var(--pink-400) 30% 34%, var(--amber-200) 34% 66%, var(--pink-400) 66% 70%, var(--pink-200) 70%);
+    box-shadow: 0 6px 0 var(--pink-600);
 }

@@ -1,7 +1,7 @@
 .room.rm-torenkamer .wall {
     background:
         radial-gradient(circle at 20% 30%, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px,
-        radial-gradient(circle at 70% 70%, #fde68a 1.5px, transparent 2.5px) 0 0 / 90px 80px,
+        radial-gradient(circle at 70% 70%, var(--amber-200) 1.5px, transparent 2.5px) 0 0 / 90px 80px,
         linear-gradient(180deg, #1e1b4b, #4c1d95);
 }
 
@@ -22,7 +22,7 @@
     width: 140px;
     height: 38px;
     border-radius: 12px 20px 20px 12px;
-    background: linear-gradient(180deg, #fde68a, #f59e0b 60%, #b45309);
+    background: linear-gradient(180deg, var(--amber-200), #f59e0b 60%, #b45309);
     transform: rotate(-28deg);
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
@@ -35,7 +35,7 @@
     width: 22px;
     height: 50px;
     border-radius: 8px;
-    background: #fcd34d;
+    background: var(--amber-300);
 }
 
 .telescope .tube::after {
@@ -64,7 +64,7 @@
 .scope {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     background: #000;
     display: none;
     touch-action: none;
@@ -155,7 +155,7 @@
     position: absolute;
     border-radius: 50%;
     border: 8px solid #1f2937;
-    box-shadow: 0 0 0 3px #f472b6, inset 0 0 18px rgba(0,0,0,0.6);
+    box-shadow: 0 0 0 3px var(--pink-400), inset 0 0 18px rgba(0,0,0,0.6);
     pointer-events: none;
     transform: translate(-50%, -50%);
 }

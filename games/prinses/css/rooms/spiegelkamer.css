@@ -18,7 +18,7 @@
     position: absolute;
     inset: 20px;
     border-radius: 50%;
-    border: 12px solid #fcd34d;
+    border: 12px solid var(--amber-300);
     background: linear-gradient(135deg, #e0f2fe 0%, #f5d0fe 45%, #ffffff 55%, #cffafe 100%);
     overflow: hidden;
     box-shadow: 0 0 30px rgba(255,255,255,0.8), inset 0 0 30px rgba(255,255,255,0.8);

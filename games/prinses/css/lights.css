@@ -6,7 +6,7 @@
     top: -500px;
     width: 800px;
     height: 1000px;
-    z-index: 8;
+    z-index: var(--z-shade);
     pointer-events: none;
     opacity: 0;
     transition: opacity 1.6s ease, background 0.4s ease;
@@ -32,11 +32,11 @@
 @keyframes nightTwinkle { to { opacity: 0.55; } }
 
 /* Hanging lamp: from the ceiling (500 units above the world) down to just under it */
-.lamp { position: absolute; width: 60px; height: 600px; z-index: 9; pointer-events: none; }
+.lamp { position: absolute; width: 60px; height: 600px; z-index: var(--z-lamp); pointer-events: none; }
 /* Only the lamp itself can be tapped, not the long cord */
 .lamp .shade-top, .lamp .bulb { pointer-events: auto; cursor: pointer; }
 .lamp .cord { position: absolute; left: 29px; top: 0; width: 2px; height: 526px; background: #78716c; pointer-events: none; }
-.lamp .shade-top { position: absolute; left: 4px; top: 520px; width: 52px; height: 28px; border-radius: 26px 26px 6px 6px; background: linear-gradient(180deg, #f9a8d4, #ec4899); box-shadow: inset 0 -4px rgba(0, 0, 0, 0.15); }
+.lamp .shade-top { position: absolute; left: 4px; top: 520px; width: 52px; height: 28px; border-radius: 26px 26px 6px 6px; background: linear-gradient(180deg, var(--pink-300), #ec4899); box-shadow: inset 0 -4px rgba(0, 0, 0, 0.15); }
 .lamp .bulb { position: absolute; left: 20px; top: 544px; width: 20px; height: 18px; border-radius: 50%; background: #e7e5e4; transition: background 0.2s, box-shadow 0.2s; }
 .lamp .beam { position: absolute; left: -70px; top: 556px; width: 200px; height: 300px; pointer-events: none; opacity: 0; transition: opacity 0.3s;
     background: radial-gradient(ellipse at 50% 0, rgba(255, 228, 140, 0.45), transparent 70%); clip-path: polygon(38% 0, 62% 0, 100% 100%, 0 100%); }
@@ -49,7 +49,7 @@
 .day-btn, .lamp-btn {
     position: absolute;
     top: 12px;
-    z-index: 30;
+    z-index: var(--z-hud);
     width: 58px;
     height: 58px;
     border-radius: 18px;
@@ -83,7 +83,7 @@
 .lantern .ln-head i { position: absolute; left: 10px; top: 10px; width: 12px; height: 16px; border-radius: 50%; background: #9ca3af; }
 .lantern .ln-glow { position: absolute; left: -95px; top: -60px; width: 240px; height: 360px; pointer-events: none; opacity: 0; transition: opacity 0.6s;
     background: radial-gradient(ellipse 50% 22% at 50% 22%, rgba(253, 224, 71, 0.45), transparent), radial-gradient(ellipse 40% 50% at 50% 70%, rgba(253, 224, 71, 0.12), transparent); }
-.lantern.on .ln-head { background: #fde68a; box-shadow: 0 0 26px 10px rgba(253, 224, 71, 0.7); }
+.lantern.on .ln-head { background: var(--amber-200); box-shadow: 0 0 26px 10px rgba(253, 224, 71, 0.7); }
 .lantern.on .ln-head i { background: #fff; }
 .lantern.on .ln-glow { opacity: 1; }
 
@@ -92,7 +92,7 @@
 
 /* Glowing windows (warm copies on top of the dark layer) */
 .night-win { position: absolute; z-index: 9; pointer-events: none; opacity: 0; transition: opacity 1.4s;
-    background: linear-gradient(180deg, #fef9c3, #fcd34d); box-shadow: 0 0 18px 4px rgba(253, 224, 71, 0.45); border: 4px solid rgba(255, 255, 255, 0.5); box-sizing: border-box; }
+    background: linear-gradient(180deg, #fef9c3, var(--amber-300)); box-shadow: 0 0 18px 4px rgba(253, 224, 71, 0.45); border: 4px solid rgba(255, 255, 255, 0.5); box-sizing: border-box; }
 .playfield.is-night .night-win { opacity: 0.9; animation: winFlicker 4s ease-in-out infinite; }
 @keyframes winFlicker { 50% { opacity: 0.75; } }
 

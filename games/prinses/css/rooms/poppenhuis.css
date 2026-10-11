@@ -14,13 +14,13 @@
 .dollhouse-prop .roof {
     left: -15px; top: 0; width: 290px; height: 90px;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    background: repeating-linear-gradient(90deg, #f472b6 0 24px, #f9a8d4 24px 48px);
+    background: repeating-linear-gradient(90deg, var(--pink-400) 0 24px, var(--pink-300) 24px 48px);
 }
 
 .dollhouse-prop .body {
     left: 10px; top: 88px; width: 240px; height: 182px;
     background: #fff7ed;
-    border: 6px solid #f472b6;
+    border: 6px solid var(--pink-400);
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -51,7 +51,7 @@
 .dollov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -74,7 +74,7 @@
     position: absolute;
     left: -5%; top: 0; width: 110%; height: 18%;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    background: repeating-linear-gradient(90deg, #f472b6 0 30px, #f9a8d4 30px 60px);
+    background: repeating-linear-gradient(90deg, var(--pink-400) 0 30px, var(--pink-300) 30px 60px);
 }
 
 .dh-roof::after {
@@ -92,7 +92,7 @@
     grid-template-rows: 1fr 1fr 1fr;
     gap: 6px;
     padding: 6px;
-    background: #f472b6;
+    background: var(--pink-400);
     border-radius: 0 0 14px 14px;
 }
 
@@ -201,7 +201,7 @@
     line-height: 34px;
 }
 
-.dh-char.sel { transform: translateY(-6px) scale(1.1); filter: drop-shadow(0 0 8px #f472b6); }
+.dh-char.sel { transform: translateY(-6px) scale(1.1); filter: drop-shadow(0 0 8px var(--pink-400)); }
 
 .dh-char.nope { animation: nope 0.5s ease; }
 

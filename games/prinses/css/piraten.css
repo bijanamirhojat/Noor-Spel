@@ -7,10 +7,10 @@
 .pb-ship .mast { position: absolute; width: 12px; background: #78350f; border-radius: 4px; }
 .pb-ship .mast.m1 { left: 130px; top: 20px; height: 190px; }
 .pb-ship .mast.m2 { left: 250px; top: 50px; height: 160px; }
-.pb-ship .sail { position: absolute; border-radius: 6px 6px 30px 30px / 6px 6px 16px 16px; background: linear-gradient(90deg, #fef3c7, #fff, #fde68a); box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: center; }
+.pb-ship .sail { position: absolute; border-radius: 6px 6px 30px 30px / 6px 6px 16px 16px; background: linear-gradient(90deg, #fef3c7, #fff, var(--amber-200)); box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: center; }
 .pb-ship .sail.s1 { left: 76px; top: 40px; width: 120px; height: 120px; }
 .pb-ship .sail.s1 span { font-size: 54px; }
-.pb-ship .sail.s2 { left: 206px; top: 76px; width: 100px; height: 100px; background: repeating-linear-gradient(90deg, #f9a8d4 0 20px, #fff 20px 40px); }
+.pb-ship .sail.s2 { left: 206px; top: 76px; width: 100px; height: 100px; background: repeating-linear-gradient(90deg, var(--pink-300) 0 20px, #fff 20px 40px); }
 .pb-ship .flag { position: absolute; left: 136px; top: -16px; font-size: 40px; transform-origin: 0 50%; animation: kmFlag 1.2s ease-in-out infinite alternate; }
 @keyframes kmFlag { to { transform: skewY(8deg) scaleX(0.9); } }
 .pb-parrot { font-size: 54px; line-height: 1; transform: scaleX(-1); animation: carousel 2.4s ease-in-out infinite; }
@@ -19,13 +19,13 @@
 .pb-cannon .wheel { position: absolute; left: 20px; top: 34px; width: 36px; height: 36px; border-radius: 50%; background: #78350f; border: 5px solid #fbbf24; }
 .pb-cannon.boom { animation: zfNope 0.4s ease; }
 .pb-isle { width: 160px; height: 140px; }
-.pb-isle .sand { position: absolute; left: 0; bottom: 0; width: 160px; height: 50px; border-radius: 50% 50% 40% 40%; background: radial-gradient(ellipse at 50% 30%, #fde68a, #f59e0b); }
+.pb-isle .sand { position: absolute; left: 0; bottom: 0; width: 160px; height: 50px; border-radius: 50% 50% 40% 40%; background: radial-gradient(ellipse at 50% 30%, var(--amber-200), #f59e0b); }
 .pb-isle .palm { position: absolute; left: 20px; bottom: 30px; font-size: 90px; line-height: 1; }
 .pb-isle b { position: absolute; left: 100px; bottom: 18px; font-size: 24px; }
 
 /* ── Piratenavontuur (overlay) ── */
 .pirateov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
     background: linear-gradient(180deg, #7dd3fc, #bae6fd 45%, #0284c7 45%, #075985);
@@ -44,7 +44,7 @@
 .pv-sea::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 30px; background: radial-gradient(ellipse 30px 10px at 50% 0, #e0f2fe 60%, transparent 64%) 0 0 / 60px 30px repeat-x; }
 .pv-deco { position: absolute; transform: translate(-50%, -50%); font-size: clamp(40px, 9vh, 70px); line-height: 1; animation: carousel 3s ease-in-out infinite; }
 .pv-isle { position: absolute; top: 34%; width: 16%; height: 30%; transform: translateX(-50%); }
-.pv-isle .sand { position: absolute; left: 0; right: 0; bottom: 0; height: 35%; border-radius: 50% 50% 40% 40%; background: radial-gradient(ellipse at 50% 30%, #fde68a, #f59e0b); }
+.pv-isle .sand { position: absolute; left: 0; right: 0; bottom: 0; height: 35%; border-radius: 50% 50% 40% 40%; background: radial-gradient(ellipse at 50% 30%, var(--amber-200), #f59e0b); }
 .pv-isle .palm { position: absolute; left: 10%; bottom: 20%; font-size: clamp(50px, 12vh, 100px); line-height: 1; }
 .pv-isle b { position: absolute; right: 18%; bottom: 8%; font-size: clamp(20px, 4vh, 34px); }
 .pv-lens { position: absolute; left: 50%; top: 50%; width: min(60vh, 70%); aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; border: 14px solid #92400e; box-shadow: 0 0 0 4px #fbbf24, 0 0 0 200vmax rgba(12, 10, 30, 0.88); pointer-events: none; }
@@ -58,7 +58,7 @@
 @keyframes pvSailGo { 50% { transform: translate(30vw, -10px) rotate(-4deg); } 100% { transform: translate(58vw, 0); } }
 
 /* 3. Schatkaart */
-#pvMap { background: radial-gradient(ellipse at 50% 50%, #fef3c7, #fde68a 70%, #d97706); box-shadow: inset 0 0 40px rgba(146, 64, 14, 0.5); }
+#pvMap { background: radial-gradient(ellipse at 50% 50%, #fef3c7, var(--amber-200) 70%, #d97706); box-shadow: inset 0 0 40px rgba(146, 64, 14, 0.5); }
 #pvMap .path { position: absolute; inset: 0; width: 100%; height: 100%; }
 #pvMap .path polyline { fill: none; stroke: #92400e; stroke-width: 0.8; stroke-dasharray: 2 2; vector-effect: non-scaling-stroke; stroke-width: 5px; }
 .pv-start, .pv-palm { position: absolute; transform: translate(-50%, -50%); font-size: clamp(36px, 8vh, 60px); pointer-events: none; }
@@ -70,7 +70,7 @@
 .pv-x.next { animation: hintPulse 0.9s ease infinite; }
 
 /* 4. Graven */
-#pvDig { background: linear-gradient(180deg, #7dd3fc 0 30%, #fde68a 30%, #f59e0b); --dig: 0; }
+#pvDig { background: linear-gradient(180deg, #7dd3fc 0 30%, var(--amber-200) 30%, #f59e0b); --dig: 0; }
 .pv-dig .hole { position: absolute; left: 50%; top: 66%; width: calc(10% + var(--dig) * 26%); aspect-ratio: 2.2; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(ellipse, #78350f, #92400e 60%, #b45309); transition: width 0.3s ease; }
 .pv-spot { position: absolute; left: 50%; top: 66%; transform: translate(-50%, -50%); border: none; background: none; font-size: clamp(60px, 14vh, 100px); cursor: pointer; touch-action: none; animation: hintPulse 1s ease infinite; }
 .pv-shovel { position: absolute; left: 60%; top: 40%; font-size: clamp(60px, 14vh, 100px); transform-origin: 20% 90%; pointer-events: none; }

@@ -37,7 +37,7 @@
         radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.55), transparent 45%), var(--c);
     box-shadow: inset -10px -12px 0 rgba(0, 0, 0, 0.12), 0 0 30px color-mix(in srgb, var(--c) 60%, transparent); }
 .catpl .ear { position: absolute; top: -12%; width: 36%; height: 38%; background: var(--c); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
-.catpl .ear::after { content: ''; position: absolute; inset: 30% 25% 0; background: #fbcfe8; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.catpl .ear::after { content: ''; position: absolute; inset: 30% 25% 0; background: var(--pink-200); clip-path: polygon(50% 0, 100% 100%, 0 100%); }
 .catpl .ear.l { left: 4%; transform: rotate(-18deg); }
 .catpl .ear.r { right: 4%; transform: rotate(18deg); }
 .catpl .eye { position: absolute; top: 36%; width: 12%; height: 17%; border-radius: 50%; background: #1f2937; box-shadow: inset 3px 3px 0 rgba(255, 255, 255, 0.8); animation: catBlink 4.5s ease-in-out infinite; }
@@ -46,7 +46,7 @@
 @keyframes catBlink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
 .catpl.happy .eye, .catpl.sleepy .eye { height: 7%; top: 42%; background: none; box-shadow: none; border-top: calc(var(--s) * 0.03) solid #1f2937; border-radius: 50% 50% 0 0; animation: none; }
 .catpl.sleepy .eye { border-top: none; border-bottom: calc(var(--s) * 0.03) solid #1f2937; border-radius: 0 0 50% 50%; }
-.catpl .nose { position: absolute; left: 45%; top: 55%; width: 10%; height: 7%; background: #f472b6; clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.catpl .nose { position: absolute; left: 45%; top: 55%; width: 10%; height: 7%; background: var(--pink-400); clip-path: polygon(0 0, 100% 0, 50% 100%); }
 .catpl .mouth { position: absolute; left: 0; right: 0; top: 57%; text-align: center; font-size: calc(var(--s) * 0.14); line-height: 1; color: #1f2937; font-family: sans-serif; }
 .catpl .wh { position: absolute; top: 58%; width: 26%; height: calc(var(--s) * 0.014); background: #1f2937; box-shadow: 0 calc(var(--s) * 0.06) 0 #1f2937; }
 .catpl .wh.l { left: -8%; transform: rotate(6deg); }

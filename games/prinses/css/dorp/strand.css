@@ -1,6 +1,6 @@
 /* 🏐 Strand */
 .room.rm-strand .wall { background: linear-gradient(180deg, #38bdf8 0%, #7dd3fc 55%, #e0f2fe 88%); }
-.room.rm-strand .floor { background: radial-gradient(circle, #fef3c7 2px, transparent 3px) 0 0 / 26px 18px, radial-gradient(circle, #d97706 1.5px, transparent 2.5px) 13px 9px / 26px 18px, linear-gradient(180deg, #fde68a, #fbbf24); }
+.room.rm-strand .floor { background: radial-gradient(circle, #fef3c7 2px, transparent 3px) 0 0 / 26px 18px, radial-gradient(circle, #d97706 1.5px, transparent 2.5px) 13px 9px / 26px 18px, linear-gradient(180deg, var(--amber-200), #fbbf24); }
 
 .bc-sea { width: 800px; height: 100px; pointer-events: none; background: linear-gradient(180deg, #0ea5e9, #0284c7 70%, #7dd3fc); overflow: hidden; }
 .bc-sea .wave { position: absolute; left: -40px; right: -40px; bottom: 0; height: 26px; background: radial-gradient(ellipse 30px 14px at 50% 100%, #fff 60%, transparent 64%) 0 0 / 60px 26px repeat-x; animation: bcWave 3s ease-in-out infinite; }
@@ -11,7 +11,7 @@
 .bc-boat { font-size: 44px; pointer-events: none; animation: carousel 4s ease-in-out infinite; }
 
 .bc-parasol { width: 190px; height: 220px; }
-.bc-parasol .top { position: absolute; left: 0; top: 0; width: 190px; height: 80px; border-radius: 95px 95px 0 0; background: repeating-conic-gradient(from -90deg at 50% 100%, #f472b6 0 22.5deg, #fff 22.5deg 45deg); transform-origin: 50% 100%; }
+.bc-parasol .top { position: absolute; left: 0; top: 0; width: 190px; height: 80px; border-radius: 95px 95px 0 0; background: repeating-conic-gradient(from -90deg at 50% 100%, var(--pink-400) 0 22.5deg, #fff 22.5deg 45deg); transform-origin: 50% 100%; }
 .bc-parasol.spin .top { animation: bcParasol 0.8s ease; }
 @keyframes bcParasol { 50% { transform: rotate(-12deg) scale(1.08); } }
 .bc-parasol .pole { position: absolute; left: 91px; top: 78px; width: 8px; height: 140px; background: #a16207; }
@@ -44,10 +44,10 @@
 
 /* ── Hooghouden (overlay) ── */
 .beachov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
-    background: linear-gradient(180deg, #38bdf8, #bae6fd 55%, #0ea5e9 55%, #0284c7 66%, #fde68a 66%, #fbbf24);
+    background: linear-gradient(180deg, #38bdf8, #bae6fd 55%, #0ea5e9 55%, #0284c7 66%, var(--amber-200) 66%, #fbbf24);
 }
 .beachov.open { display: flex; }
 .beachov .nails-title { color: #0c4a6e; }

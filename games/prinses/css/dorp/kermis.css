@@ -1,10 +1,10 @@
 /* 🎡 Kermis */
 .room.rm-kermis .wall { background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 1.5px, transparent 2.5px) 0 0 / 50px 44px, linear-gradient(180deg, #312e81, #7c3aed 50%, #f0abfc 90%); }
-.room.rm-kermis .floor { background: radial-gradient(circle, #fde047 2px, transparent 3px) 0 0 / 30px 30px, radial-gradient(circle, #f472b6 2px, transparent 3px) 15px 15px / 30px 30px, #a8a29e; }
+.room.rm-kermis .floor { background: radial-gradient(circle, #fde047 2px, transparent 3px) 0 0 / 30px 30px, radial-gradient(circle, var(--pink-400) 2px, transparent 3px) 15px 15px / 30px 30px, #a8a29e; }
 
 .km-lights { width: 800px; height: 30px; display: flex; justify-content: space-around; pointer-events: none; border-top: 3px solid #1f2937; border-radius: 0 0 50% 50% / 0 0 30px 30px; }
 .km-lights i { width: 14px; height: 18px; margin-top: 4px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: #fde047; box-shadow: 0 0 10px #fde047; animation: kmBulb 1.2s ease-in-out infinite; }
-.km-lights i:nth-child(3n+1) { background: #f472b6; box-shadow: 0 0 10px #f472b6; }
+.km-lights i:nth-child(3n+1) { background: var(--pink-400); box-shadow: 0 0 10px var(--pink-400); }
 .km-lights i:nth-child(3n+2) { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
 @keyframes kmBulb { 50% { opacity: 0.4; } }
 
@@ -31,14 +31,14 @@
 .km-claw .arm { position: absolute; left: 60px; top: 0; width: 4px; height: 40px; background: #64748b; }
 .km-claw .arm::after { content: ''; position: absolute; left: -12px; top: 38px; width: 28px; height: 16px; border: 4px solid #64748b; border-top: none; border-radius: 0 0 14px 14px; }
 .km-claw .pile { position: absolute; left: 0; right: 0; bottom: 0; font-size: 22px; line-height: 1.1; text-align: center; letter-spacing: -2px; }
-.km-claw .base { position: absolute; left: 0; top: 180px; width: 130px; height: 90px; background: linear-gradient(180deg, #db2777, #9d174d); border-radius: 0 0 10px 10px; }
+.km-claw .base { position: absolute; left: 0; top: 180px; width: 130px; height: 90px; background: linear-gradient(180deg, var(--pink-600), #9d174d); border-radius: 0 0 10px 10px; }
 .km-claw .base .slot { position: absolute; left: 14px; top: 20px; width: 40px; height: 34px; border-radius: 6px; background: #1f2937; }
 .km-claw .base .btn { position: absolute; right: 18px; top: 22px; width: 30px; height: 30px; border-radius: 50%; background: #fde047; box-shadow: 0 4px 0 #ca8a04; }
 
 .km-candy { width: 130px; height: 170px; }
-.km-candy .tub { position: absolute; left: 15px; top: 110px; width: 100px; height: 60px; border-radius: 6px 6px 20px 20px; background: repeating-linear-gradient(90deg, #f472b6 0 14px, #fff 14px 28px); }
+.km-candy .tub { position: absolute; left: 15px; top: 110px; width: 100px; height: 60px; border-radius: 6px 6px 20px 20px; background: repeating-linear-gradient(90deg, var(--pink-400) 0 14px, #fff 14px 28px); }
 .km-candy .stick { position: absolute; left: 63px; top: 40px; width: 5px; height: 80px; background: #fef3c7; }
-.km-candy .cloud { position: absolute; left: 65px; top: 50px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #fbcfe8 40%, #f472b6); transform: scale(0); transition: transform 0.4s cubic-bezier(.2, 1.8, .4, 1); }
+.km-candy .cloud { position: absolute; left: 65px; top: 50px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, var(--pink-200) 40%, var(--pink-400)); transform: scale(0); transition: transform 0.4s cubic-bezier(.2, 1.8, .4, 1); }
 .km-candy.s1 .cloud { transform: scale(1.6); }
 .km-candy.s2 .cloud { transform: scale(2.6); }
 .km-candy.s3 .cloud { transform: scale(3.6); }
@@ -51,7 +51,7 @@
 
 /* ── Eendjes vissen + grijpmachine (overlays) ── */
 .kermisov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 1.5px, transparent 2.5px) 0 0 / 50px 44px, linear-gradient(180deg, #4c1d95, #a855f7 60%, #f0abfc);
@@ -91,13 +91,13 @@
 .kc-claw.closed .head::after { rotate: 8deg; }
 .kc-claw .held { font-size: clamp(36px, 8cqh, 60px); line-height: 1; margin-top: 4px; }
 .kc-plush { position: absolute; bottom: 2%; font-size: clamp(40px, 12cqh, 72px); line-height: 1; transform: translateX(-50%); pointer-events: none; }
-.kc-base { display: flex; justify-content: center; padding: 10px; border-radius: 0 0 20px 20px; background: linear-gradient(180deg, #db2777, #9d174d); }
+.kc-base { display: flex; justify-content: center; padding: 10px; border-radius: 0 0 20px 20px; background: linear-gradient(180deg, var(--pink-600), #9d174d); }
 .kc-grab { min-width: 160px; height: 64px; border-radius: 999px; border: 5px solid #fff; background: #fde047; color: #9d174d; font-family: 'Fredoka One', cursive; font-size: 1.6rem; box-shadow: 0 6px 0 #ca8a04; cursor: pointer; touch-action: none; }
 .kc-grab:active { transform: translateY(4px); box-shadow: 0 2px 0 #ca8a04; }
 
 /* Het bakje onderaan de grijpmachine: haal je knuffel eruit */
 .kc-base { align-items: center; gap: 24px; }
-.kc-bakje { position: relative; width: 110px; height: 70px; border-radius: 12px; background: #1f2937; box-shadow: inset 0 8px 12px rgba(0, 0, 0, 0.6); border: 4px solid #fbcfe8; display: flex; align-items: center; justify-content: center; }
+.kc-bakje { position: relative; width: 110px; height: 70px; border-radius: 12px; background: #1f2937; box-shadow: inset 0 8px 12px rgba(0, 0, 0, 0.6); border: 4px solid var(--pink-200); display: flex; align-items: center; justify-content: center; }
 .kc-bakje::before { content: '🎁'; position: absolute; left: -2px; top: -26px; font-size: 18px; opacity: 0.8; }
 .kc-won { border: none; background: none; padding: 0; font-size: 52px; line-height: 1; cursor: pointer; touch-action: none; animation: vJump 0.8s ease infinite; }
 .kc-bakje .tap-hint { left: 34px; top: -54px; }

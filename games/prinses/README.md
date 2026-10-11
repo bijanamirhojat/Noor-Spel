@@ -47,6 +47,7 @@ js/map.js       toverlift + kaart
 js/stickers.js  stickerboek
 js/main.js      alles opbouwen en starten
 
+css/tokens.css  lagen (--z-hud, --z-overlay, --z-modal, ...) en de hoofdkleuren (--pink-400, --amber-200, ...)
 css/core.css    basis (kamers, prinses, knoppen, toast, toverstaf)
 css/overlay.css gedeelde overlay-onderdelen (titel, sluitknop, tool-/bd-knoppen)
 css/rooms/*.css stijl per kamer (kamer-klasse: .room.rm-<key>)

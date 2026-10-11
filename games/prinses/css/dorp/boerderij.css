@@ -10,7 +10,7 @@
     pointer-events: none;
     background:
         linear-gradient(180deg, transparent 18px, #fef3c7 18px 30px, transparent 30px 54px, #fef3c7 54px 66px, transparent 66px) 0 0 / 100% 100%,
-        linear-gradient(90deg, #fde68a 0 14px, transparent 14px) 0 0 / 70px 100%;
+        linear-gradient(90deg, var(--amber-200) 0 14px, transparent 14px) 0 0 / 70px 100%;
     filter: drop-shadow(0 3px 0 rgba(146, 64, 14, 0.4));
 }
 
@@ -39,7 +39,7 @@
 .eggov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;

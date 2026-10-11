@@ -16,14 +16,14 @@
 .jewel-case .glass {
     position: absolute; left: 0; top: 0; width: 150px; height: 110px;
     border-radius: 70px 70px 8px 8px;
-    border: 5px solid #fcd34d;
+    border: 5px solid var(--amber-300);
     background: linear-gradient(160deg, rgba(255,255,255,0.55), rgba(255,255,255,0.12));
     display: flex; align-items: center; justify-content: center; gap: 4px;
     font-size: 34px;
     box-shadow: inset 0 0 18px rgba(255,255,255,0.6), 0 0 20px rgba(253,230,138,0.4);
 }
 
-.jewel-case .stand { position: absolute; left: 50px; top: 110px; width: 50px; height: 60px; background: linear-gradient(90deg, #fde68a, #f59e0b); border-radius: 0 0 8px 8px; }
+.jewel-case .stand { position: absolute; left: 50px; top: 110px; width: 50px; height: 60px; background: linear-gradient(90deg, var(--amber-200), #f59e0b); border-radius: 0 0 8px 8px; }
 
 .jewel-case .glass span { animation: gleam 2s ease-in-out infinite; }
 
@@ -31,11 +31,11 @@
 
 .musicbox > div, .musicbox > span { position: absolute; }
 
-.musicbox .box { left: 0; top: 110px; width: 160px; height: 80px; border-radius: 10px; background: linear-gradient(180deg, #f9a8d4, #db2777); border: 4px solid #fcd34d; }
+.musicbox .box { left: 0; top: 110px; width: 160px; height: 80px; border-radius: 10px; background: linear-gradient(180deg, var(--pink-300), var(--pink-600)); border: 4px solid var(--amber-300); }
 
 .musicbox .lid {
     left: 0; top: 100px; width: 160px; height: 20px; border-radius: 10px 10px 4px 4px;
-    background: linear-gradient(180deg, #fbcfe8, #f472b6); border: 4px solid #fcd34d;
+    background: linear-gradient(180deg, var(--pink-200), var(--pink-400)); border: 4px solid var(--amber-300);
     transform-origin: 0 100%;
     transition: transform 0.5s cubic-bezier(.2,1.6,.4,1);
 }
@@ -53,7 +53,7 @@
 
 .bead-table { width: 240px; height: 140px; }
 
-.bead-table .top { position: absolute; left: 0; top: 50px; width: 240px; height: 22px; border-radius: 8px; background: #fde68a; border: 4px solid #f59e0b; }
+.bead-table .top { position: absolute; left: 0; top: 50px; width: 240px; height: 22px; border-radius: 8px; background: var(--amber-200); border: 4px solid #f59e0b; }
 
 .bead-table .legs { position: absolute; left: 14px; right: 14px; top: 72px; height: 68px; border-left: 12px solid #b45309; border-right: 12px solid #b45309; }
 
@@ -66,7 +66,7 @@
 .beadov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;

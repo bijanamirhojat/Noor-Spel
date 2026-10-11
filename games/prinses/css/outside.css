@@ -13,7 +13,7 @@
 .o-room .floor {
     background:
         radial-gradient(circle, #fef08a 2.5px, transparent 3.5px) 0 0 / 70px 36px,
-        radial-gradient(circle, #f9a8d4 2.5px, transparent 3.5px) 35px 18px / 70px 36px,
+        radial-gradient(circle, var(--pink-300) 2.5px, transparent 3.5px) 35px 18px / 70px 36px,
         linear-gradient(180deg, #4ade80, #16a34a);
 }
 
@@ -44,7 +44,7 @@
 }
 
 .stone {
-    background: repeating-linear-gradient(0deg, #fbcfe8 0 36px, #f9a8d4 36px 39px);
+    background: repeating-linear-gradient(0deg, var(--pink-200) 0 36px, var(--pink-300) 36px 39px);
 }
 
 .castle-wall {
@@ -61,7 +61,7 @@
     right: 0;
     top: -28px;
     height: 28px;
-    background: repeating-linear-gradient(90deg, #fbcfe8 0 34px, transparent 34px 56px);
+    background: repeating-linear-gradient(90deg, var(--pink-200) 0 34px, transparent 34px 56px);
 }
 
 .tower {
@@ -89,9 +89,9 @@
     top: -190px;
     width: 50px;
     height: 34px;
-    background: linear-gradient(90deg, #f472b6, #fb7185);
+    background: linear-gradient(90deg, var(--pink-400), #fb7185);
     clip-path: polygon(0 0, 100% 50%, 0 100%);
-    border-left: 4px solid #fcd34d;
+    border-left: 4px solid var(--amber-300);
     animation: flag 1s ease-in-out infinite alternate;
     transform-origin: 0 50%;
 }
@@ -107,9 +107,9 @@
     width: 50px;
     height: 70px;
     border-radius: 25px 25px 0 0;
-    background: linear-gradient(180deg, #fde68a, #fbbf24);
+    background: linear-gradient(180deg, var(--amber-200), #fbbf24);
     border: 5px solid #fff;
-    box-shadow: 0 0 16px #fde68a;
+    box-shadow: 0 0 16px var(--amber-200);
 }
 
 .sun {
@@ -137,7 +137,7 @@
     height: 56px;
     border-radius: 50% / 40%;
     background: linear-gradient(180deg, #f5f5f4, #d6d3d1);
-    border: 4px solid #fcd34d;
+    border: 4px solid var(--amber-300);
 }
 
 .fountain .water {
@@ -164,7 +164,7 @@
     height: 26px;
     border-radius: 0 0 50px 50px;
     background: linear-gradient(180deg, #7dd3fc, #f5f5f4 40%, #d6d3d1);
-    border-top: 4px solid #fcd34d;
+    border-top: 4px solid var(--amber-300);
 }
 
 .fountain .jet {
@@ -418,10 +418,10 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    z-index: 30;
+    z-index: var(--z-hud);
     border: 4px solid #fff;
     border-radius: 999px;
-    background: linear-gradient(135deg, #f472b6, #a855f7);
+    background: linear-gradient(135deg, var(--pink-400), #a855f7);
     color: #fff;
     font-family: 'Fredoka One', cursive;
     font-size: 1.1rem;
@@ -439,13 +439,13 @@
     position: absolute;
     left: 0; top: 0; width: 280px; height: 16px;
     border-radius: 8px;
-    background: linear-gradient(180deg, #f472b6, #db2777);
+    background: linear-gradient(180deg, var(--pink-400), var(--pink-600));
 }
 
 .swingset .leg {
     position: absolute;
     top: 6px; width: 14px; height: 262px;
-    background: linear-gradient(90deg, #f9a8d4, #ec4899);
+    background: linear-gradient(90deg, var(--pink-300), #ec4899);
     border-radius: 7px;
     transform-origin: 50% 0;
 }
@@ -472,7 +472,7 @@
     position: absolute;
     left: 0; top: 136px; width: 90px; height: 16px;
     border-radius: 8px;
-    background: linear-gradient(180deg, #fde68a, #f59e0b);
+    background: linear-gradient(180deg, var(--amber-200), #f59e0b);
 }
 
 .slide { width: 300px; height: 230px; }
@@ -494,7 +494,7 @@
     position: absolute;
     top: 12px;
     right: 12px;
-    z-index: 30;
+    z-index: var(--z-hud);
     display: none;
     gap: 8px;
 }
@@ -545,7 +545,7 @@
     pointer-events: none;
     z-index: 6;
     animation: gemBob 1.8s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px #fde68a);
+    filter: drop-shadow(0 0 10px var(--amber-200));
 }
 
 .skystar.got { animation: gemGot 0.5s ease forwards; }
@@ -573,7 +573,7 @@
 .teahouse .th-roof {
     left: -22px; top: 0; width: 344px; height: 108px;
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    background: repeating-linear-gradient(90deg, #f472b6 0 28px, #fbcfe8 28px 56px);
+    background: repeating-linear-gradient(90deg, var(--pink-400) 0 28px, var(--pink-200) 28px 56px);
 }
 
 .teahouse .th-wall {
@@ -588,8 +588,8 @@
 .teahouse .th-door {
     left: 116px; top: 150px; width: 68px; height: 112px;
     border-radius: 34px 34px 0 0;
-    background: linear-gradient(180deg, #f472b6, #db2777);
-    border: 4px solid #fcd34d;
+    background: linear-gradient(180deg, var(--pink-400), var(--pink-600));
+    border: 4px solid var(--amber-300);
     border-bottom: none;
 }
 
@@ -597,12 +597,12 @@
     content: '';
     position: absolute;
     right: 10px; top: 56px; width: 10px; height: 10px;
-    border-radius: 50%; background: #fde68a;
+    border-radius: 50%; background: var(--amber-200);
 }
 
 .teahouse .th-win {
     top: 138px; width: 62px; height: 56px;
-    background: linear-gradient(90deg, #f9a8d4 0 14px, #bae6fd 14px 48px, #f9a8d4 48px);
+    background: linear-gradient(90deg, var(--pink-300) 0 14px, #bae6fd 14px 48px, var(--pink-300) 48px);
     border: 5px solid #fff;
     border-radius: 8px;
 }
@@ -616,14 +616,14 @@
     left: 50%; top: 66px; transform: translateX(-50%);
     background: #fff; color: #be185d;
     font-family: 'Fredoka One', cursive; font-size: 18px;
-    padding: 3px 12px; border-radius: 12px; border: 3px solid #fcd34d;
+    padding: 3px 12px; border-radius: 12px; border: 3px solid var(--amber-300);
     white-space: nowrap;
 }
 
 .tea {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -634,7 +634,7 @@
     background:
         linear-gradient(90deg, rgba(255,255,255,0.35) 50%, transparent 50%) 0 0 / 60px 60px,
         linear-gradient(0deg, rgba(255,255,255,0.35) 50%, transparent 50%) 0 0 / 60px 60px,
-        linear-gradient(180deg, #fce7f3, #fbcfe8);
+        linear-gradient(180deg, #fce7f3, var(--pink-200));
 }
 
 .tea.open { display: flex; }
@@ -705,7 +705,7 @@
     border-radius: 50% 50% 12px 12px / 60% 60% 12px 12px;
     background:
         radial-gradient(circle, #fff 4px, transparent 5px) 0 0 / 28px 28px,
-        #f9a8d4;
+        var(--pink-300);
     box-shadow: 0 6px 0 #ec4899;
 }
 
@@ -804,7 +804,7 @@
 }
 
 .tea-tab {
-    border: 3px solid #fbcfe8;
+    border: 3px solid var(--pink-200);
     background: rgba(255,255,255,0.7);
     border-radius: 16px;
     padding: 6px 14px;
@@ -815,7 +815,7 @@
     touch-action: none;
 }
 
-.tea-tab.active { background: #fff; border-color: #f472b6; transform: translateY(-3px); }
+.tea-tab.active { background: #fff; border-color: var(--pink-400); transform: translateY(-3px); }
 
 .tea-opts {
     display: flex;
@@ -830,7 +830,7 @@
     width: 74px;
     height: 74px;
     border-radius: 20px;
-    border: 3px solid #fbcfe8;
+    border: 3px solid var(--pink-200);
     background: #fff;
     cursor: pointer;
     font-size: 36px;
@@ -858,7 +858,7 @@
     box-shadow: inset -5px -5px 0 rgba(0,0,0,0.15), inset 4px 4px 0 rgba(255,255,255,0.4);
 }
 
-.tea-opt.sel { border-color: #f472b6; transform: translateY(-4px) scale(1.06); }
+.tea-opt.sel { border-color: var(--pink-400); transform: translateY(-4px) scale(1.06); }
 
 .tea-opt.stir-btn, .tea-opt.new-btn { width: auto; padding: 4px 14px; font-size: 30px; }
 
@@ -912,7 +912,7 @@
 .island .sand {
     position: absolute; left: 0; bottom: 0; width: 200px; height: 46px;
     border-radius: 50%;
-    background: radial-gradient(ellipse, #fde68a, #fbbf24);
+    background: radial-gradient(ellipse, var(--amber-200), #fbbf24);
 }
 
 .island .palm { position: absolute; left: 20px; bottom: 20px; font-size: 80px; line-height: 1; }
@@ -921,12 +921,12 @@
 
 .treasure .tbox {
     position: absolute; left: 0; bottom: 0; width: 60px; height: 30px;
-    border-radius: 4px; background: #92400e; border: 3px solid #fcd34d;
+    border-radius: 4px; background: #92400e; border: 3px solid var(--amber-300);
 }
 
 .treasure .tlid {
     position: absolute; left: 0; top: 0; width: 60px; height: 18px;
-    border-radius: 18px 18px 2px 2px; background: #b45309; border: 3px solid #fcd34d;
+    border-radius: 18px 18px 2px 2px; background: #b45309; border: 3px solid var(--amber-300);
     transform-origin: 0 100%;
     transition: transform 0.4s cubic-bezier(.2,1.6,.4,1);
 }
@@ -947,7 +947,7 @@
 
 .boat-hit { position: absolute; width: 200px; height: 150px; z-index: 6; cursor: pointer; }
 
-.boat-btns { position: absolute; top: 12px; right: 12px; z-index: 30; display: none; }
+.boat-btns { position: absolute; top: 12px; right: 12px; z-index: var(--z-hud); display: none; }
 
 .boat-btns.show { display: flex; }
 

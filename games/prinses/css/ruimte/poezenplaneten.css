@@ -11,17 +11,17 @@
 .pp-ship .saucer { position: absolute; left: 0; top: 64px; width: 220px; height: 50px; border-radius: 50%; background: linear-gradient(180deg, #e9d5ff, #a78bfa); box-shadow: 0 0 20px #a78bfa; }
 .pp-ship .lights { position: absolute; left: 30px; top: 84px; width: 160px; display: flex; justify-content: space-between; }
 .pp-ship .lights i { width: 14px; height: 14px; border-radius: 50%; background: #fde047; box-shadow: 0 0 10px #fde047; animation: kmBulb 0.8s ease-in-out infinite; }
-.pp-ship .lights i:nth-child(even) { animation-delay: -0.4s; background: #f472b6; box-shadow: 0 0 10px #f472b6; }
+.pp-ship .lights i:nth-child(even) { animation-delay: -0.4s; background: var(--pink-400); box-shadow: 0 0 10px var(--pink-400); }
 
 /* ── Poesjes naar huis (overlay) ── */
 .kittenov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 6px; touch-action: none; overflow: hidden;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 2px) 0 0 / 50px 46px, radial-gradient(ellipse at 50% 50%, #4c1d95, #1e1b4b 70%, #020617);
 }
 .kittenov.open { display: flex; }
-.kittenov .nails-title { color: #f9a8d4; text-shadow: 0 0 10px #f472b6; }
+.kittenov .nails-title { color: var(--pink-300); text-shadow: 0 0 10px var(--pink-400); }
 .kit-count { position: absolute; left: 16px; top: 14px; font-family: 'Fredoka One', cursive; font-size: 1.3rem; color: #4c1d95; background: #fff; border-radius: 999px; padding: 2px 14px; }
 .kit-hint { font-family: 'Fredoka One', cursive; color: #e9d5ff; font-size: 1.05rem; pointer-events: none; }
 .kit-stage { position: relative; flex: 1; min-height: 0; width: 100%; max-width: 1000px; touch-action: none; }

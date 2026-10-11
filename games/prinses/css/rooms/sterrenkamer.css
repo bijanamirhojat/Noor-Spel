@@ -25,7 +25,7 @@
 .shooting::after {
     content: '';
     position: absolute; right: -4px; top: -3px; width: 9px; height: 9px;
-    border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff, 0 0 20px #fde68a;
+    border-radius: 50%; background: #fff; box-shadow: 0 0 10px #fff, 0 0 20px var(--amber-200);
 }
 
 @keyframes shoot {
@@ -37,22 +37,22 @@
 
 .big-moon {
     width: 120px; height: 120px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #fefce8, #fde68a 60%, #facc15);
+    background: radial-gradient(circle at 35% 35%, #fefce8, var(--amber-200) 60%, #facc15);
     box-shadow: 0 0 40px rgba(253,230,138,0.8), inset -14px -10px 0 rgba(0,0,0,0.08);
     pointer-events: none;
 }
 
-.star-mobile-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, #fcd34d, #f59e0b); pointer-events: none; }
+.star-mobile-bar { height: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--amber-300), #f59e0b); pointer-events: none; }
 
 .hang-star { width: 54px; transform-origin: 50% 0; }
 
 .hang-star::before {
     content: '';
     position: absolute; left: 26px; top: 0; width: 2px; height: var(--len);
-    background: #fde68a;
+    background: var(--amber-200);
 }
 
-.hang-star svg { position: absolute; left: 0; top: var(--len); width: 54px; height: 54px; filter: drop-shadow(0 0 8px #fde68a); }
+.hang-star svg { position: absolute; left: 0; top: var(--len); width: 54px; height: 54px; filter: drop-shadow(0 0 8px var(--amber-200)); }
 
 .hang-star.ring { animation: bellRing 0.6s ease; }
 
@@ -65,7 +65,7 @@
 .star-board .board {
     left: 10px; top: 0; width: 220px; height: 170px;
     border-radius: 14px;
-    border: 10px solid #fcd34d;
+    border: 10px solid var(--amber-300);
     background: radial-gradient(circle at 30% 30%, #312e81, #0f0c3d);
     box-shadow: 0 8px 16px rgba(0,0,0,0.35);
 }
@@ -74,14 +74,14 @@
 
 .star-rug {
     width: 300px; height: 60px; border-radius: 50%;
-    background: radial-gradient(ellipse, #fde68a 0 25%, #f59e0b 26% 45%, #7c3aed 46% 100%);
+    background: radial-gradient(ellipse, var(--amber-200) 0 25%, #f59e0b 26% 45%, #7c3aed 46% 100%);
     pointer-events: none; z-index: 1;
 }
 
 .stargame {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -91,13 +91,13 @@
     overflow: hidden;
     background:
         radial-gradient(circle, #fff 1px, transparent 1.8px) 0 0 / 34px 38px,
-        radial-gradient(circle, #fde68a 1px, transparent 1.8px) 17px 19px / 52px 46px,
+        radial-gradient(circle, var(--amber-200) 1px, transparent 1.8px) 17px 19px / 52px 46px,
         linear-gradient(180deg, #0f0c3d, #312e81 70%, #4c1d95);
 }
 
 .stargame.open { display: flex; }
 
-.stargame .nails-title { color: #fde68a; text-shadow: 0 0 10px rgba(253,230,138,0.6); }
+.stargame .nails-title { color: var(--amber-200); text-shadow: 0 0 10px rgba(253,230,138,0.6); }
 
 .sg-stage { position: relative; flex: 1; min-height: 0; width: 100%; }
 
@@ -109,7 +109,7 @@
 
 .sg-star.next .shape { animation: sgPulse 0.9s ease-in-out infinite; }
 
-.sg-star.lit .shape { fill: #fde047; filter: drop-shadow(0 0 2px #fde68a); }
+.sg-star.lit .shape { fill: #fde047; filter: drop-shadow(0 0 2px var(--amber-200)); }
 
 .sg-star.nope .shape { animation: sgNope 0.4s ease; }
 
@@ -133,7 +133,7 @@
     pointer-events: none;
 }
 
-.sg-line { stroke: #fde047; stroke-width: 1.6; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 1.5px #fde68a); stroke-dasharray: 1; stroke-dashoffset: 1; animation: sgDraw 0.35s ease-out forwards; }
+.sg-line { stroke: #fde047; stroke-width: 1.6; stroke-linecap: round; fill: none; filter: drop-shadow(0 0 1.5px var(--amber-200)); stroke-dasharray: 1; stroke-dashoffset: 1; animation: sgDraw 0.35s ease-out forwards; }
 
 @keyframes sgDraw { to { stroke-dashoffset: 0; } }
 

@@ -1,8 +1,8 @@
 .room.rm-speelkamer .wall {
     background:
-        radial-gradient(circle, #f472b6 6px, transparent 7px) 0 0 / 70px 70px,
+        radial-gradient(circle, var(--pink-400) 6px, transparent 7px) 0 0 / 70px 70px,
         radial-gradient(circle, #60a5fa 5px, transparent 6px) 35px 35px / 70px 70px,
-        linear-gradient(180deg, #fef9c3, #fde68a);
+        linear-gradient(180deg, #fef9c3, var(--amber-200));
 }
 
 .room.rm-speelkamer .floor {
@@ -17,7 +17,7 @@
     left: 0; top: 0; width: 230px; height: 60px;
     border-radius: 40px 40px 6px 6px;
     background: linear-gradient(180deg, #c084fc, #9333ea);
-    border: 5px solid #fcd34d;
+    border: 5px solid var(--amber-300);
     transform: rotate(-14deg);
     transform-origin: 6% 100%;
 }
@@ -26,7 +26,7 @@
     left: 0; top: 70px; width: 230px; height: 120px;
     border-radius: 8px;
     background: linear-gradient(180deg, #a855f7, #7e22ce);
-    border: 5px solid #fcd34d;
+    border: 5px solid var(--amber-300);
 }
 
 .chest .box::after {
@@ -86,7 +86,7 @@
 .dressup {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -137,7 +137,7 @@
 .du-tab {
     width: 58px; height: 58px;
     border-radius: 18px;
-    border: 3px solid #fde68a;
+    border: 3px solid var(--amber-200);
     background: rgba(255,255,255,0.75);
     font-size: 30px;
     line-height: 1;
@@ -145,7 +145,7 @@
     touch-action: none;
 }
 
-.du-tab.active { background: #fff; border-color: #f472b6; transform: translateY(-3px) scale(1.08); }
+.du-tab.active { background: #fff; border-color: var(--pink-400); transform: translateY(-3px) scale(1.08); }
 
 .du-opts {
     flex: 1;
@@ -162,7 +162,7 @@
 .du-opt {
     width: 74px; height: 74px;
     border-radius: 22px;
-    border: 3px solid #fbcfe8;
+    border: 3px solid var(--pink-200);
     background: #fff;
     font-size: 38px;
     line-height: 1;
@@ -172,7 +172,7 @@
     display: flex; align-items: center; justify-content: center;
 }
 
-.du-opt.sel { border-color: #f472b6; background: #fdf2f8; transform: scale(1.08); }
+.du-opt.sel { border-color: var(--pink-400); background: #fdf2f8; transform: scale(1.08); }
 
 .du-opt .sw { width: 44px; height: 44px; border-radius: 50%; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.15), inset 4px 4px 0 rgba(255,255,255,0.4); }
 

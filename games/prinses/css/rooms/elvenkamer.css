@@ -48,7 +48,7 @@
     position: absolute; left: 18px; top: 120px; width: 44px; height: 70px;
     border-radius: 22px 22px 0 0;
     background: radial-gradient(ellipse at 50% 70%, #fef9c3, #fbbf24 60%, #b45309);
-    box-shadow: 0 0 20px #fde68a;
+    box-shadow: 0 0 20px var(--amber-200);
     animation: gleam 2s ease-in-out infinite;
 }
 
@@ -63,7 +63,7 @@
 }
 .glow-shroom .stem {
     position: absolute; left: 35%; top: 50%; width: 30%; height: 50%;
-    border-radius: 8px; background: linear-gradient(90deg, #fef3c7, #fde68a);
+    border-radius: 8px; background: linear-gradient(90deg, #fef3c7, var(--amber-200));
 }
 .glow-shroom.pulse .cap { animation: shroomPulse 0.6s ease; }
 @keyframes shroomPulse {
@@ -95,7 +95,7 @@
 .elfov {
     position: absolute;
     inset: 0;
-    z-index: 50;
+    z-index: var(--z-overlay);
     display: none;
     flex-direction: column;
     align-items: center;

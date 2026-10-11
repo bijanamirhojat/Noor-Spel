@@ -25,7 +25,7 @@
 
 /* ── Ruimtereis (overlay) ── */
 .tripov {
-    position: absolute; inset: 0; z-index: 50;
+    position: absolute; inset: 0; z-index: var(--z-overlay);
     display: none; flex-direction: column; align-items: center;
     padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 1px, transparent 2px) 0 0 / 60px 52px, radial-gradient(ellipse at 50% 40%, #312e81, #0f172a 70%, #020617);
