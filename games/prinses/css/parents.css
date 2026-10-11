@@ -16,6 +16,8 @@
 .parent.walking .pbody { animation: walkBob 0.45s ease-in-out infinite; }
 .parent.singing .pbody { animation: princeSway 1.2s ease-in-out infinite; }
 .parent.hug .pbody { animation: cheer 0.6s ease; }
+.parent.working .pbody { animation: papaType 0.3s ease-in-out infinite alternate; }
+@keyframes papaType { to { transform: translateY(2px) rotate(-1.5deg); } }
 .parent.sleeping { pointer-events: none; }
 .parent .pbubble {
     position: absolute;

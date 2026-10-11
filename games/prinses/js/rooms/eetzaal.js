@@ -31,6 +31,8 @@ defineRoom({
 
 function startFamilyDinner() {
     if (state.busy) return;
+    // Papa stops working for dinner
+    parents.forEach(p => parentStopWork(p));
     if (parents.some(p => p.mode !== 'wander')) {
         showToast('Mama en Papa zijn even bezig…');
         return;

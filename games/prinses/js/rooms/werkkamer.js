@@ -45,7 +45,7 @@ defineRoom({
             for (let i = 0; i < 4; i++) setTimeout(() => playFreqSweep(700 + Math.random() * 300, 900, 0.08, 0.05), i * 90);
         });
         addObj(`<div class="wk-desk">
-            <div class="mon"><div class="scr"><span>💻</span></div></div><div class="neck"></div>
+            <div class="mon"><div class="scr"><span id="wkScreen">💻</span></div></div><div class="neck"></div>
             <div class="kb"></div><div class="mouse"></div>
             <div class="top"></div><div class="side l"></div><div class="side r"></div><div class="drawer"></div>
             <div class="tap-hint" style="left:120px;top:-44px">👇</div>
@@ -279,6 +279,12 @@ document.getElementById('pcDone').addEventListener('pointerdown', (e) => {
 });
 
 function openPc() {
+    // Papa makes room so the princess can work herself
+    const papa = papaAtComputer();
+    if (papa) {
+        parentStopWork(papa, '👍');
+        papa.goal = { wing: papa.wing, x: roomX('werkkamer') + 700 };
+    }
     pcOpen = true;
     pcEl.classList.add('open');
     document.getElementById('pcDone').classList.remove('show');

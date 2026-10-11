@@ -1,10 +1,12 @@
 /* 👑 Mama en Papa: de koningin en de koning lopen rond door het kasteel.
    Ze nemen de toverlift tussen de verdiepingen, zwaaien als de prinses in de buurt is,
-   komen zingen bij haar bed als ze gaat slapen en slapen zelf in de grote slaapkamer. */
+   komen zingen bij haar bed als ze gaat slapen en slapen zelf in de grote slaapkamer.
+   Papa gaat soms in de werkkamer aan de computer werken. */
 const PARENT_W = 138;
 const PARENT_H = 220;
 const PARENT_SPEED = 90;
 const parents = [];
+const PAPA_WORK = ['📧', '📊', '⌨️', '📝', '💻', '📈'];
 
 function queenSVG() {
     return `<svg viewBox="0 0 100 160">
@@ -98,6 +100,11 @@ function parentBubble(p, text) {
 }
 
 function pickParentGoal(p) {
+    // Papa sometimes goes to work at the computer in the study
+    if (p.id === 'papa' && Math.random() < 0.35) {
+        p.goal = { wing: sceneOf('werkkamer').key, x: roomX('werkkamer') + 460, work: true };
+        return;
+    }
     // Mostly stay on this floor, sometimes take the lift to another one
     const wing = Math.random() < 0.65 ? p.wing : randomPick(WINGS).key;
     const room = randomPick(SCENES[wing].rooms);
@@ -122,11 +129,15 @@ function updateParents(dt, now) {
                 parentPlace(p, p.goal.wing);
                 p.x = SCENES[p.goal.wing].wing.liftX + 75;
                 p.wait = now + 1200;
+            } else if (p.goal.work) {
+                p.goal = null;
+                parentStartWork(p, now);
             } else {
                 p.goal = null;
                 p.wait = now + 2500 + Math.random() * 5000;
             }
         }
+        if (p.mode === 'work') parentWork(p, now);
         // Walking to a spot for an activity (family dinner)
         if (p.mode !== 'wander' && p.goalX != null) {
             const dx = p.goalX - p.x;
@@ -146,14 +157,21 @@ function updateParents(dt, now) {
             }
         }
         const lying = p.mode === 'bed';
-        p.el.style.transform = `translate(${p.x - PARENT_W / 2}px, ${FEET_Y - PARENT_H + (lying ? p.bedDy : 0)}px) rotate(${lying ? -90 : 0}deg)`;
+        // On the desk chair in the study he sits a little lower
+        const dy = lying ? p.bedDy : p.mode === 'work' ? 30 : 0;
+        p.el.style.transform = `translate(${p.x - PARENT_W / 2}px, ${FEET_Y - PARENT_H + dy}px) rotate(${lying ? -90 : 0}deg)`;
         p.el.classList.toggle('walking', moving);
         p.el.classList.toggle('left', p.facing < 0);
     });
 }
 
 function hugParent(p) {
-    if (state.busy || overlayOpen() || p.mode !== 'wander' || scene.key !== p.wing) return;
+    if (state.busy || overlayOpen() || scene.key !== p.wing) return;
+    if (p.mode === 'work') {
+        parentStopWork(p);
+        speak('Hoi prinses! Papa was even aan het werk.');
+    }
+    if (p.mode !== 'wander') return;
     const now = performance.now();
     p.wait = now + 7000;
     const side = state.x < p.x ? -1 : 1;
@@ -172,6 +190,7 @@ function hugParent(p) {
 
 /* Singing at the princess's bed (called from sleepInBed) */
 function parentsSing() {
+    parents.forEach(p => parentStopWork(p));
     const key = sceneOf('slaapkamer').key;
     const base = roomX('slaapkamer');
     const spots = { mama: base + 160, papa: base + 660 };
@@ -214,6 +233,7 @@ function parentsWake() {
 
 /* Mama and Papa go to sleep in the big bedroom */
 function parentsToBed() {
+    parents.forEach(p => parentStopWork(p));
     if (parents.some(p => p.mode !== 'wander')) return;
     const key = sceneOf('ouderslaapkamer').key;
     const base = roomX('ouderslaapkamer');
@@ -250,4 +270,46 @@ function parentsToBed() {
         playWin();
         sparkleShower(base + 400, 120, 40);
     }, 8000);
+}
+
+/* Papa at the computer in the study: typing, the screen changes, now and then a little bubble */
+function parentStartWork(p, now) {
+    p.mode = 'work';
+    p.facing = -1;
+    p.workEnd = now + 15000 + Math.random() * 15000;
+    p.workTick = 0;
+    p.el.classList.add('working');
+    parentBubble(p, '💻');
+}
+
+function parentWork(p, now) {
+    p.facing = -1;
+    if (now > p.workEnd) {
+        parentStopWork(p, randomPick(['☕', '😊', '✅']));
+        return;
+    }
+    if (now < p.workTick) return;
+    p.workTick = now + 1200 + Math.random() * 1200;
+    const scr = document.getElementById('wkScreen');
+    if (scr) scr.textContent = randomPick(PAPA_WORK);
+    if (Math.random() < 0.25) parentBubble(p, randomPick(PAPA_WORK.concat(['🤔', '😊'])));
+    // Only hear the typing when the princess is in the study
+    if (scene.key === p.wing && inRoom('werkkamer')) {
+        for (let i = 0; i < 5; i++) setTimeout(pcClack, i * 110 + Math.random() * 40);
+    }
+}
+
+function parentStopWork(p, bubble) {
+    if (p.mode !== 'work') return;
+    p.mode = 'wander';
+    p.el.classList.remove('working');
+    p.wait = performance.now() + 2500;
+    const scr = document.getElementById('wkScreen');
+    if (scr) scr.textContent = '💻';
+    if (bubble) parentBubble(p, bubble);
+}
+
+// Is Papa working at the computer? (the princess wants to use it herself)
+function papaAtComputer() {
+    return parents.find(p => p.id === 'papa' && p.mode === 'work');
 }
