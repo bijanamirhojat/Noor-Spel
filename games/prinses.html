@@ -71,6 +71,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/cadeaukamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/badkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/ouderslaapkamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/werkkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/elvenkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/zwembad.css">
     <link rel="stylesheet" href="prinses/css/rooms/kapsalon.css">
@@ -420,6 +421,50 @@
                     <button class="tool-btn wide wc-btn" data-s="wash">🧼 Handen wassen</button>
                 </div>
                 <button class="scope-close" id="wcClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="pcov" id="pcOv">
+                <div class="nails-title">💻 Werken op de computer</div>
+                <div class="pc-todo" id="pcTodo"><span data-a="mail">✉️</span><span data-a="type">⌨️</span><span data-a="call">📞</span></div>
+                <div class="pc-monitor">
+                    <div class="pc-screen">
+                        <div class="pc-desk" id="pcDesk">
+                            <button class="pc-icon" data-app="mail"><span>✉️</span>Mail</button>
+                            <button class="pc-icon" data-app="type"><span>⌨️</span>Typen</button>
+                            <button class="pc-icon" data-app="call"><span>📞</span>Bellen</button>
+                        </div>
+                        <div class="pc-app" data-app="mail">
+                            <div class="pc-mailcount" id="pcMailCount">📤 0</div>
+                            <div class="pc-mail" id="pcMail">
+                                <div class="pc-mailfrom" id="pcMailFrom"></div>
+                                <div class="pc-mailbody"><div class="pc-mailname" id="pcMailName"></div><div class="pc-mailtext" id="pcMailText"></div></div>
+                            </div>
+                            <div class="pc-replies" id="pcMailReply"></div>
+                        </div>
+                        <div class="pc-app" data-app="type">
+                            <div class="pc-typepic" id="pcTypePic"></div>
+                            <div class="pc-typeword" id="pcTypeWord"></div>
+                        </div>
+                        <div class="pc-app" data-app="call">
+                            <div class="pc-calllist" id="pcCallList">
+                                <button class="pc-contact" data-c="mama"><span>👸</span>Mama</button>
+                                <button class="pc-contact" data-c="papa"><span>🤴</span>Papa</button>
+                                <button class="pc-contact" data-c="eenhoorn"><span>🦄</span>Eenhoorn</button>
+                                <button class="pc-contact" data-c="poes"><span>🐱</span>Poes</button>
+                            </div>
+                            <div class="pc-callon" id="pcCallOn">
+                                <div class="pc-callface" id="pcCallFace"></div>
+                                <div class="pc-callname" id="pcCallName"></div>
+                                <div class="pc-callsay" id="pcCallSay"></div>
+                                <button class="pc-hangup" id="pcHangup" aria-label="Ophangen">📞</button>
+                            </div>
+                        </div>
+                        <div class="pc-done" id="pcDone"><span>☕</span>Werk klaar!<small>Tijd voor pauze</small></div>
+                        <button class="pc-home" id="pcHome" aria-label="Terug">🏠</button>
+                    </div>
+                </div>
+                <div class="pc-kb" id="pcKb"></div>
+                <button class="scope-close" id="pcClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="gardenov" id="gardenOv">
@@ -815,6 +860,7 @@
     <script src="prinses/js/rooms/slaapkamer.js"></script>
     <script src="prinses/js/rooms/pyjama.js"></script>
     <script src="prinses/js/rooms/ouderslaapkamer.js"></script>
+    <script src="prinses/js/rooms/werkkamer.js"></script>
     <script src="prinses/js/rooms/sterrenkamer.js"></script>
     <script src="prinses/js/rooms/elvenkamer.js"></script>
     <script src="prinses/js/rooms/zwembad.js"></script>
