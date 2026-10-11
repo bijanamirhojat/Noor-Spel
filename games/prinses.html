@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/slaapkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/balzaal.css">
     <link rel="stylesheet" href="prinses/css/rooms/dierensalon.css">
+    <link rel="stylesheet" href="prinses/css/rooms/kristalgrot.css">
     <link rel="stylesheet" href="prinses/css/rooms/borduurkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/eetkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/speelkamer.css">
@@ -496,6 +497,18 @@
                 <button class="scope-close" id="rjClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="kgov" id="kgOv">
+                <div class="nails-title">⛏️ Schatten uitgraven</div>
+                <div class="kg-count" id="kgCount"></div>
+                <div class="kg-stage" id="kgStage">
+                    <div class="kg-items" id="kgItems"></div>
+                    <canvas class="kg-dirt" id="kgDirt"></canvas>
+                    <div class="kg-hint" id="kgHint">👆 Veeg de aarde weg!</div>
+                </div>
+                <div class="kg-done" id="kgDone"><span>🎉</span>Alle schatten gevonden!<button class="tool-btn wide" id="kgAgain">⛏️ Nog een keer</button></div>
+                <button class="scope-close" id="kgClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="gardenov" id="gardenOv">
                 <div class="nails-title">🥕 Moestuin</div>
                 <div class="gd-basket" id="gdBasket"></div>
@@ -876,6 +889,7 @@
     <script src="prinses/js/rooms/bakkerij.js"></script>
     <script src="prinses/js/rooms/ranjakamer.js"></script>
     <script src="prinses/js/rooms/dierensalon.js"></script>
+    <script src="prinses/js/rooms/kristalgrot.js"></script>
     <script src="prinses/js/rooms/spiegelkamer.js"></script>
     <script src="prinses/js/rooms/badkamer.js"></script>
     <script src="prinses/js/rooms/nagelsalon.js"></script>
