@@ -366,6 +366,7 @@ function closeNails() {
     nailsOpen = false;
     nailsEl.classList.remove('open');
     _playWhoosh();
+    renderPrincessGlowNails();
     if (nails.some(n => n.color)) {
         burst(state.x, 330, 40);
         sayRandom(['Wat een mooie nagels, prinses!', 'Glimmende nagels!']);
@@ -375,3 +376,68 @@ document.getElementById('nailsClose').addEventListener('pointerdown', (e) => {
     e.stopPropagation();
     closeNails();
 });
+
+/* ─────────── Glow-nagels buiten de salon ───────────
+   Glow in the dark lak blijft op de nagels van de prinses: in een donkere kamer (nacht, lamp uit) of buiten
+   in het donker lichten haar vingertjes op. js/lights.js roept nailGlowTick() aan. */
+const NAIL_GLOW_HANDS = [[28, 93], [77, 89]];   // the hands in princessSVG
+const nailGlow = { on: false, said: 0 };
+
+function renderPrincessGlowNails() {
+    const svg = princessEl().querySelector('svg .bob');
+    let g = svg.querySelector('.glow-nails');
+    if (!g) {
+        g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', 'glow-nails');
+        svg.appendChild(g);
+    }
+    // nails 0-4 are on one hand, 5-9 on the other: a little glowing fingertip for each glow nail
+    let html = '<filter id="prNailBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="2.4"/></filter>' +
+        '<filter id="prHandBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4"/></filter>';
+    NAIL_GLOW_HANDS.forEach(([hx, hy], h) => {
+        const hand = nails.slice(h * 5, h * 5 + 5);
+        const first = hand.find(n => NAIL_GLOW.has(n.color));
+        // A soft glow around the whole hand, in the colour of its first glow nail
+        if (first) html += `<circle class="halo" cx="${hx}" cy="${hy + 2}" r="9" fill="${first.color}" opacity="0.85" filter="url(#prHandBlur)"/>`;
+        hand.forEach((n, f) => {
+            if (!NAIL_GLOW.has(n.color)) return;
+            const a = (30 + f * 30) * Math.PI / 180;
+            const x = (hx + Math.cos(a) * 4.4).toFixed(1), y = (hy + Math.sin(a) * 4.4).toFixed(1);
+            html += `<circle class="halo" cx="${x}" cy="${y}" r="3.6" fill="${n.color}" filter="url(#prNailBlur)"/>` +
+                `<circle cx="${x}" cy="${y}" r="1.8" fill="${n.color}" stroke="#fff" stroke-width="0.5"/>`;
+        });
+    });
+    g.innerHTML = html;
+    nailGlowTick();
+}
+
+function nailGlowTick() {
+    const colors = nails.filter(n => NAIL_GLOW.has(n.color)).map(n => n.color);
+    const on = colors.length > 0 && darkHere();
+    const p = princessEl();
+    p.classList.toggle('nails-glow', on);
+    if (!on) { nailGlow.on = false; return; }
+    if (overlayOpen() || document.hidden) return;
+    // Now and then a little glow sparkle rises from her hands
+    const s = 1.2;
+    const side = p.classList.contains('left') ? -1 : 1;
+    NAIL_GLOW_HANDS.forEach(([hx, hy]) => {
+        if (Math.random() < 0.5) spawnSparkle(state.x + (hx - 50) * s * side, FEET_Y - (160 - hy) * s, {
+            vx: (Math.random() - 0.5) * 20, vy: -25 - Math.random() * 20, g: 0, hue: hexHue(randomPick(colors)), size: 3 + Math.random() * 3, max: 1.2
+        });
+    });
+    // The first time it gets dark (at most once a minute): say so
+    if (!nailGlow.on && performance.now() - nailGlow.said > 60000) {
+        nailGlow.said = performance.now();
+        speak('Oooh! Je nagels geven licht in het donker!');
+    }
+    nailGlow.on = true;
+}
+
+function hexHue(hex) {
+    const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min;
+    if (!d) return 0;
+    const h = max === r ? (g - b) / d % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    return (h * 60 + 360) % 360;
+}

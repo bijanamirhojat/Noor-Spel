@@ -223,3 +223,8 @@
 @keyframes nailGlow { from { opacity: 0.55; } to { opacity: 1; } }
 .nails.dark .ring-slot, .nails.dark text.stk { filter: brightness(0.45); }
 .nails.dark .bottle-btn:not(:has(.glow)) { filter: brightness(0.55); }
+
+/* Glow nails on the princess in the world: only visible in the dark (js/rooms/nagelsalon.js) */
+.princess .glow-nails { opacity: 0; transition: opacity 1.2s ease; }
+.princess.nails-glow .glow-nails { opacity: 1; }
+.princess.nails-glow .glow-nails .halo { animation: nailGlow 1.6s ease-in-out infinite alternate; }

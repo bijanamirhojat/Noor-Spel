@@ -48,6 +48,12 @@ function buildLights() {
 
 function currentRoomKey() { return ROOMS[state.room] && ROOMS[state.room].key; }
 
+// Is it dark where the princess is? (night, and inside only when the lamp is off)
+function darkHere() {
+    if (!lights.night || !scene || NO_NIGHT.includes(scene.key)) return false;
+    return !(scene.inside && lights.on.has(currentRoomKey()));
+}
+
 function toggleLamp(key) {
     const on = !lights.on.has(key);
     if (on) lights.on.add(key); else lights.on.delete(key);
@@ -56,6 +62,7 @@ function toggleLamp(key) {
     // Click!
     playTone(on ? 1400 : 900, 0.03, 0.15, 'square');
     setTimeout(() => playTone(on ? 1800 : 600, 0.03, 0.1, 'square'), 40);
+    nailGlowTick();
     const sw = document.getElementById('lampBtn');
     sw.classList.toggle('on', on);
     sw.classList.remove('call');
@@ -72,6 +79,7 @@ function setNight(night, quiet) {
     if (night) lights.hinted.clear();
     playfield.classList.toggle('is-night', night);
     updateLightBtns();
+    nailGlowTick();
     nightOutside(night);
     if (quiet) return;
     if (night) {
@@ -110,6 +118,7 @@ function lightsTick() {
     }
     unicornSleepTick();
     fireflies();
+    nailGlowTick();
     if (document.hidden || overlayOpen() || state.busy) return;
     lights.t += 0.5;
     if (lights.t >= (lights.night ? NIGHT_S : DAY_S)) setNight(!lights.night);
