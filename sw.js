@@ -301,6 +301,12 @@ self.addEventListener('fetch', (event) => {
     const isSameOrigin = url.origin === self.location.origin;
     const isNavigation = request.mode === 'navigate';
 
+    // "Updates zoeken" must see what is on the server, never a cached copy
+    if (isSameOrigin && url.searchParams.has('check')) {
+        event.respondWith(fetch(request, { cache: 'no-store' }));
+        return;
+    }
+
     // Network-first for HTML/navigation so updates appear quickly in iPad PWA.
     if (isNavigation || (isSameOrigin && request.headers.get('accept')?.includes('text/html'))) {
         event.respondWith(networkFirst(event, request, async () => caches.match('./index.html')));

@@ -829,7 +829,8 @@
             btn.textContent = '⏳ Even kijken...';
             let latest = null;
             try {
-                const res = await fetch(`index.html?check=${Date.now()}`, { cache: 'no-store' });
+                // Accept: text/html so an older service worker also asks the network first (instead of its cache)
+                const res = await fetch(`index.html?check=${Date.now()}`, { cache: 'no-store', headers: { Accept: 'text/html' } });
                 const m = (await res.text()).match(/const RELEASE_ID = '([^']+)'/);
                 latest = m && m[1];
             } catch (_) {
