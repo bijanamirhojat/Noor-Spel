@@ -21,7 +21,8 @@ const BEAR_SPOTS = {
     kasteelhal: { obj: 'frame', side: 't' }, feestzaal: { obj: 'party-table', side: 'l' },
     kristalgrot: { obj: 'kg-geode', side: 'l' }, spookhuis: { obj: 'sp-cauldron', side: 'r' },
     zooingang: { obj: 'zi-gate', side: 'l' }, regenboogmakerij: { obj: 'rb-easel', side: 'r' },
-    spiraal: { obj: 'sv-comet', side: 'l' }, balzaal: { obj: 'orchestra', side: 'r' }
+    spiraal: { obj: 'sv-comet', side: 'l' }, balzaal: { obj: 'orchestra', side: 'r' },
+    spiegelkamer: { obj: 'mirror', side: 'l' }
 };
 let bearsFound = new Set();
 const bearNodes = {};             // room key -> hidden bear in that room
@@ -135,7 +136,8 @@ function bearOptions(key, i) {
     const rx = ROOM_AT[key].idx * ROOM_W;
     const pick = BEAR_SPOTS[key];
     return [...sc.el.querySelectorAll(':scope > .obj')]
-        .filter(n => n.dataset.room === key && !n.matches('.lift, .castle-door, .koets'))
+        // Not behind an emoji: how big that is depends on the device's font
+        .filter(n => n.dataset.room === key && !n.matches('.lift, .castle-door, .koets, .emoji-obj'))
         .map(n => ({ n, x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight }))
         .filter(o => o.w >= 50 && o.h >= 50 && o.w <= 520 && o.h <= 420)
         .flatMap(o => bearPeeks(o, i).map(p => ({ ...p, n: o.n })))

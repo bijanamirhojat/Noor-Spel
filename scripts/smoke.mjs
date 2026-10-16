@@ -143,14 +143,16 @@ async function smokeScene(sceneKey) {
             if (bear && br.left >= pf.left && br.right <= pf.right) {
                 bear.style.animation = 'none';
                 let hit = 0;
+                const over = new Set();
                 for (let a = 1; a < 6; a++) for (let c = 1; c < 6; c++) {
                     // Whoever walks by (princess, Mama and Papa, the cat) doesn't count
                     const e = document.elementsFromPoint(br.left + br.width * a / 6, br.top + br.height * c / 6)
                         .find((n) => !n.closest('.princess, .parent, #pet'));
                     if (e && bear.contains(e)) hit++;
+                    else if (e) over.add((e.closest('.world > *') || e).className.split(' ')[0]);
                 }
                 bear.style.animation = '';
-                if (hit < 6) log.push(`error ${key}: troetelbeer zit te goed verstopt (zet een andere plek in BEAR_SPOTS)`);
+                if (hit < 6) log.push(`error ${key}: troetelbeer zit te goed verstopt achter ${[...over].join(', ')} (zet een andere plek in BEAR_SPOTS)`);
             }
             const objs = [...SCENES[sceneKey].el.querySelectorAll('.obj')].filter((n) =>
                 n.dataset.room === key && !n.matches('.lift, .castle-door'));
