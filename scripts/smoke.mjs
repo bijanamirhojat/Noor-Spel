@@ -137,6 +137,21 @@ async function smokeScene(sceneKey) {
                 return r.width > 0 && r.right > pf.left && r.left < pf.right;
             });
             if (paused.length) log.push(`error ${key}: animatie gepauzeerd terwijl in beeld: ${paused.map((n) => n.className).join(', ')}`);
+            // The hidden care bear must stay findable: enough of it peeks out to tap
+            const bear = bearNodes[key];
+            const br = bear && bear.getBoundingClientRect();
+            if (bear && br.left >= pf.left && br.right <= pf.right) {
+                bear.style.animation = 'none';
+                let hit = 0;
+                for (let a = 1; a < 6; a++) for (let c = 1; c < 6; c++) {
+                    // Whoever walks by (princess, Mama and Papa, the cat) doesn't count
+                    const e = document.elementsFromPoint(br.left + br.width * a / 6, br.top + br.height * c / 6)
+                        .find((n) => !n.closest('.princess, .parent, #pet'));
+                    if (e && bear.contains(e)) hit++;
+                }
+                bear.style.animation = '';
+                if (hit < 6) log.push(`error ${key}: troetelbeer zit te goed verstopt (zet een andere plek in BEAR_SPOTS)`);
+            }
             const objs = [...SCENES[sceneKey].el.querySelectorAll('.obj')].filter((n) =>
                 n.dataset.room === key && !n.matches('.lift, .castle-door'));
             for (let i = 0; i < objs.length; i++) {

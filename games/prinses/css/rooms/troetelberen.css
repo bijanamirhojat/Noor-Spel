@@ -1,0 +1,59 @@
+/* 🧸 Troetelberenkamer */
+.room.rm-troetelberen .wall {
+    background:
+        radial-gradient(ellipse 90px 34px at 12% 18%, rgba(255, 255, 255, 0.9) 98%, transparent),
+        radial-gradient(ellipse 120px 40px at 78% 10%, rgba(255, 255, 255, 0.85) 98%, transparent),
+        radial-gradient(circle, rgba(255, 255, 255, 0.7) 2px, transparent 3px) 0 0 / 40px 40px,
+        linear-gradient(180deg, #c4b5fd, #f9a8d4 60%, #fbcfe8);
+}
+.room.rm-troetelberen .floor { background: linear-gradient(180deg, #bbf7d0, #86efac); }
+
+.cb-shelf {
+    width: 652px; height: 10px;
+    border-radius: 6px;
+    background: hsl(calc(var(--r) * 50), 85%, 70%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+}
+
+.cb-svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+.cb-slot { width: 50px; height: 56px; z-index: 3; cursor: pointer; }
+.cb-slot .cb-svg { filter: grayscale(1) brightness(1.6); opacity: 0.3; }
+.cb-slot b {
+    position: absolute; left: 0; right: 0; top: 18px;
+    text-align: center; font-family: 'Fredoka One', cursive; font-size: 20px; color: rgba(255, 255, 255, 0.95);
+    pointer-events: none;
+}
+.cb-slot.has .cb-svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25)); opacity: 1; }
+.cb-slot.has b { display: none; }
+
+.cb-count {
+    width: 104px; padding: 8px 0;
+    border-radius: 40px;
+    background: #fff; border: 4px solid #f9a8d4;
+    color: #db2777; font-family: 'Fredoka One', cursive; font-size: 20px; line-height: 1.2; text-align: center;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.cb-big { width: 92px; height: 108px; }
+.cb-big .cb-svg { animation: cbSway 3s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes cbSway { 0%, 100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+
+/* The bear hidden in every other room: peeks out from behind something now and then */
+.cb-hidden { width: 50px; height: 58px; z-index: 3; cursor: pointer; animation: cbPeekL 5s ease-in-out infinite; }
+.cb-hidden.peek-r { animation-name: cbPeekR; }
+.cb-hidden.peek-t { animation-name: cbPeekT; }
+@keyframes cbPeekL { 0%, 70%, 100% { transform: none; } 78%, 88% { transform: translateX(-8px) rotate(-10deg); } }
+@keyframes cbPeekR { 0%, 70%, 100% { transform: none; } 78%, 88% { transform: translateX(8px) rotate(10deg); } }
+@keyframes cbPeekT { 0%, 70%, 100% { transform: none; } 78%, 88% { transform: translateY(-8px); } }
+.cb-hidden.found { z-index: 12; pointer-events: none; animation: cbFound 1.7s ease-in forwards; }
+@keyframes cbFound {
+    0% { transform: none; }
+    20% { transform: translateY(-40px) scale(1.6); }
+    30% { transform: translateY(-40px) scale(1.6) rotate(-15deg); }
+    40% { transform: translateY(-40px) scale(1.6) rotate(15deg); }
+    55% { transform: translateY(-40px) scale(1.6) rotate(0); opacity: 1; }
+    100% { transform: translateY(-600px) scale(0.6) rotate(360deg); opacity: 0; }
+}

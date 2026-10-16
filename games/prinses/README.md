@@ -44,6 +44,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 oppakken en eraf slepen kan ook); het bouwwerk staat in noor-prinses-lego en in het klein op de tafel
                 js/rooms/basketbal.js: basketbal (omhoog vegen of tikken, de worp wordt flink bijgestuurd; elke 5 keer raak
                 verhuist de basket); het totaal staat in noor-prinses-basket en op het scorebord in de kamer
+                js/rooms/troetelberen.js: in elke andere kamer gluurt een troetelbeer achter een ding vandaan (hideCareBears,
+                plek vanzelf gekozen, anders BEAR_SPOTS); gevonden beren staan op de planken hier en in noor-prinses-troetelberen
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
