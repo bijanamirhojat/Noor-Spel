@@ -143,6 +143,20 @@ function bearOptions(key, i) {
         .filter(p => !pick || (p.n.classList.contains(pick.obj) && p.side === pick.side));
 }
 
+// How much of a bear at p stays uncovered: by the object it hides behind and everything drawn over it
+function bearPeekPart(sc, p) {
+    const kids = [...sc.el.children];
+    const covers = kids.slice(kids.indexOf(p.n))
+        .filter(n => n === p.n || n.classList.contains('obj'))
+        .map(n => ({ x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight }));
+    let free = 0;
+    for (let a = 1; a < 6; a++) for (let c = 1; c < 6; c++) {
+        const px = p.x + BEAR_W * a / 6, py = p.y + BEAR_H * c / 6;
+        if (!covers.some(r => px >= r.x && px <= r.x + r.w && py >= r.y && py <= r.y + r.h)) free++;
+    }
+    return free / 25;
+}
+
 function hideCareBears() {
     const shown = scene;
     bearRooms().forEach((room, i) => {
@@ -150,8 +164,12 @@ function hideCareBears() {
         const sc = ROOM_AT[room.key].scene;
         sc.el.style.display = '';
         const opts = bearOptions(room.key, i);
-        const spot = opts.length ? opts[bearHash(room.key) % opts.length]
-            : { x: ROOM_AT[room.key].idx * ROOM_W + 30 + bearHash(room.key) % 600, y: 400, side: 'l', n: null };
+        // Start at a fixed place per room, but skip places where too little of the bear peeks out
+        // (object sizes differ per device, e.g. emoji, so this is measured here)
+        const h = bearHash(room.key);
+        const ordered = opts.map((_, k) => opts[(h + k) % opts.length]);
+        const spot = ordered.find(p => bearPeekPart(sc, p) >= 0.4) || ordered[0]
+            || { x: ROOM_AT[room.key].idx * ROOM_W + 30 + h % 600, y: 400, side: 'l', n: null };
         if (sc !== shown) sc.el.style.display = 'none';
         const node = el(`<div class="cb-hidden peek-${spot.side}">${careBearSVG(bearStyle(i))}</div>`);
         node.style.position = 'absolute';
