@@ -2,6 +2,7 @@
    zit een troetelbeer verstopt. Hij gluurt achter een ding in die kamer vandaan (hideCareBears, vanuit main.js,
    als alles gebouwd is). Tik erop en hij gaat naar de troetelberenkamer, waar de planken zich langzaam vullen.
    Tik op een leeg plekje en je hoort in welke kamer die beer nog verstopt zit.
+   Alle beren thuis? Met de 🙈-knop verstoppen ze zich weer (op dezelfde plekken).
    Gevonden beren staan in noor-prinses-troetelberen. */
 const BEAR_KEY = 'noor-prinses-troetelberen';
 const BEAR_COLS = 12;
@@ -22,7 +23,7 @@ const BEAR_SPOTS = {
     kristalgrot: { obj: 'kg-geode', side: 'l' }, spookhuis: { obj: 'sp-cauldron', side: 'r' },
     zooingang: { obj: 'zi-gate', side: 'l' }, regenboogmakerij: { obj: 'rb-easel', side: 'r' },
     spiraal: { obj: 'sv-comet', side: 'l' }, balzaal: { obj: 'orchestra', side: 'r' },
-    spiegelkamer: { obj: 'mirror', side: 'l' }
+    spiegelkamer: { obj: 'mirror', side: 'l' }, apenhuis: { obj: 'za-tree', side: 'l' }
 };
 let bearsFound = new Set();
 const bearNodes = {};             // room key -> hidden bear in that room
@@ -103,6 +104,8 @@ defineRoom({
             if (n === all) showToast('🧸 Alle troetelberen zijn thuis! 💖', 2600);
             else showToast(`🧸 ${n} / ${all} gevonden. Zoek in alle kamers!`, 2400);
         });
+        addObj(`<div class="cb-hide" id="cbHide">🙈 Verstoppen!<div class="tap-hint" style="left:50%;top:-40px">👇</div></div>`,
+            x + 684, 206, x + 700, hideBearsAgain);
         renderBearRoom();
     }
 });
@@ -111,6 +114,29 @@ function renderBearRoom() {
     document.querySelectorAll('.cb-slot').forEach(s => s.classList.toggle('has', bearsFound.has(s.dataset.k)));
     const c = document.getElementById('cbCount');
     if (c) c.innerHTML = `🧸<br>${bearCount()} / ${bearRooms().length}`;
+    const hide = document.getElementById('cbHide');
+    if (hide) hide.classList.toggle('show', bearCount() === bearRooms().length);
+}
+
+// All bears home: they run off the shelves and hide again
+function hideBearsAgain() {
+    if (bearCount() < bearRooms().length) return;
+    state.busy = true;
+    const slots = [...document.querySelectorAll('.cb-slot.has')];
+    slots.forEach((s, k) => {
+        s.style.setProperty('--dx', (k % 2 ? 1 : -1) * (150 + (k * 37) % 300) + 'px');
+        setTimeout(() => s.classList.add('away'), k * 18);
+    });
+    for (let k = 0; k < 8; k++) setTimeout(() => playFreqSweep(500 + k * 80, 1400 + k * 80, 0.12, 0.06), k * 170);
+    showToast('🙈 De troetelberen gaan zich weer verstoppen! Zoek ze maar!', 3000);
+    setTimeout(() => {
+        bearsFound.clear();
+        saveBears();
+        slots.forEach(s => s.classList.remove('away'));
+        renderBearRoom();
+        hideCareBears();
+        state.busy = false;
+    }, slots.length * 18 + 1200);
 }
 
 /* ─────────── Verstoppen ─────────── */
@@ -177,7 +203,7 @@ function hideCareBears() {
         node.style.position = 'absolute';
         node.style.left = Math.round(spot.x) + 'px';
         node.style.top = Math.round(spot.y) + 'px';
-        node.style.animationDelay = -(bearHash(room.key) % 50) / 10 + 's';
+        node.style.animationDelay = -(h % 50) / 10 + 's';
         if (spot.n) sc.el.insertBefore(node, spot.n);
         else sc.el.appendChild(node);
         bearNodes[room.key] = node;
