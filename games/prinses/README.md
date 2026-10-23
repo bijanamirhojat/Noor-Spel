@@ -57,6 +57,7 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
+                addCurtainWindow(key, x, y, w, h): raam met gordijnen (slaapkamer, grote slaapkamer); dicht = donker in die kamer
 js/map.js       toverlift + kaart
 js/stickers.js  stickerboek
 js/main.js      alles opbouwen en starten

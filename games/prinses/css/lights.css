@@ -17,6 +17,8 @@
 .night-shade.lit {
     background: radial-gradient(ellipse 520px 560px at var(--lx) var(--ly), rgba(255, 214, 120, 0.2), rgba(255, 214, 120, 0.06) 45%, rgba(12, 16, 58, 0.22) 85%);
 }
+/* Curtains closed (addCurtainWindow): dark in the daytime too */
+.night-shade.curtained { opacity: 1; transition-duration: 0.8s, 0.4s; }
 /* Outside: a dark sky with twinkling stars above the ground */
 .night-shade.outdoor { background: linear-gradient(180deg, rgba(10, 12, 50, 0.75) 55%, rgba(12, 16, 58, 0.5) 85%); }
 .night-shade.outdoor::before {
@@ -103,3 +105,25 @@
 .unicorn.sleeping .uwing { transform: rotate(10deg); }
 .unicorn.sleeping .tap-hint { display: none; }
 @keyframes uniBreathe { 50% { transform: translateY(24px) scale(1.03, 0.97); } }
+
+/* ── Gordijnen (addCurtainWindow in js/lights.js) ── */
+.curtain-win { border: 12px solid var(--cw-frame, #a78bfa); border-bottom-width: 18px; border-radius: 12px; box-sizing: border-box; overflow: hidden; --cw-c: #f472b6; --cw-d: #db2777; }
+.curtain-win.arch { border-radius: 110px 110px 0 0; }
+.curtain-win.royal { --cw-frame: #b45309; --cw-c: #dc2626; --cw-d: #991b1b; }
+.curtain-win .sky { position: absolute; inset: 0; background: linear-gradient(180deg, #38bdf8, #bae6fd); transition: background 1.6s; }
+.curtain-win .sky i { position: absolute; right: 18%; top: 14%; width: 40px; height: 40px; border-radius: 50%; background: #fde047; box-shadow: 0 0 20px 6px rgba(253, 224, 71, 0.6); transition: background 1.6s, box-shadow 1.6s; }
+.playfield.is-night .curtain-win .sky {
+    background:
+        radial-gradient(circle at 20% 60%, #fff 1.5px, transparent 2.5px) 0 0 / 40px 36px,
+        linear-gradient(180deg, #0c0a3e, #312e81);
+}
+.playfield.is-night .curtain-win .sky i { background: #fef9c3; box-shadow: 0 0 0 10px rgba(254, 249, 195, 0.3); }
+.curtain-win .rod { position: absolute; left: 0; right: 0; top: 0; height: 10px; background: #78350f; }
+.curtain-win .cw-curtain {
+    position: absolute; top: 0; bottom: 0; width: 52%;
+    background: repeating-linear-gradient(90deg, var(--cw-c) 0 14px, var(--cw-d) 14px 20px, var(--cw-c) 20px 28px);
+    transition: transform 0.7s ease-in-out;
+}
+.curtain-win .cw-curtain.l { left: 0; transform-origin: left center; transform: scaleX(0.22); }
+.curtain-win .cw-curtain.r { right: 0; transform-origin: right center; transform: scaleX(0.22); }
+.curtain-win.closed .cw-curtain { transform: scaleX(1); }

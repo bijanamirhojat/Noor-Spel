@@ -5,12 +5,14 @@
    's nachts lekker licht. Buiten wordt het donker met sterretjes; onder water en in de ruimte niet.
    Een kamer kan de plek van de lamp kiezen met `lampX` in defineRoom (standaard 640).
    Buiten 's nachts: lantaarnpalen gaan aan (tik = aan/uit), ramen van het kasteel en de huisjes
-   gloeien, de zon wordt een maan, er vliegen vuurvliegjes en de eenhoorn slaapt (tik = wakker maken). */
+   gloeien, de zon wordt een maan, er vliegen vuurvliegjes en de eenhoorn slaapt (tik = wakker maken).
+   Gordijnen (addCurtainWindow, in de slaapkamers): tik op het raam en de gordijnen gaan dicht; dan is die
+   kamer donker, net als 's nachts (de lamp maakt hem weer licht). Door het raam zie je dag of nacht. */
 const DAY_S = 240;
 const NIGHT_S = 120;
 const LAMP_Y = 26;
 const NO_NIGHT = ['sea', 'ruimte'];
-const lights = { night: false, t: 0, on: new Set(), shades: {}, lamps: {}, hinted: new Set(), lanterns: [], uniAwake: 0 };
+const lights = { night: false, t: 0, on: new Set(), curtains: new Set(), shades: {}, lamps: {}, hinted: new Set(), lanterns: [], uniAwake: 0 };
 // Outside: where lantern posts stand (no lanterns on the water or the beach)
 const LANTERN_SCENES = ['out', 'dorp', 'dierentuin'];
 const NO_LANTERN = ['meer', 'piratenbaai', 'strand'];
@@ -48,10 +50,12 @@ function buildLights() {
 
 function currentRoomKey() { return ROOMS[state.room] && ROOMS[state.room].key; }
 
-// Is it dark where the princess is? (night, and inside only when the lamp is off)
+// Is it dark where the princess is? (night or closed curtains, and inside only when the lamp is off)
 function darkHere() {
-    if (!lights.night || !scene || NO_NIGHT.includes(scene.key)) return false;
-    return !(scene.inside && lights.on.has(currentRoomKey()));
+    if (!scene || NO_NIGHT.includes(scene.key)) return false;
+    const key = currentRoomKey();
+    if (!lights.night && !lights.curtains.has(key)) return false;
+    return !(scene.inside && lights.on.has(key));
 }
 
 function toggleLamp(key) {
@@ -100,8 +104,8 @@ function updateLightBtns() {
     const hasLamp = !!(scene && scene.inside && lights.lamps[key]);
     sw.classList.toggle('show', hasLamp);
     sw.classList.toggle('on', hasLamp && lights.on.has(key));
-    // At night in a dark room: the light switch wiggles once to help
-    if (hasLamp && lights.night && !lights.on.has(key)) {
+    // At night (or with the curtains closed) in a dark room: the light switch wiggles once to help
+    if (hasLamp && (lights.night || lights.curtains.has(key)) && !lights.on.has(key)) {
         if (!lights.hinted.has(key)) {
             lights.hinted.add(key);
             sw.classList.remove('call'); void sw.offsetWidth; sw.classList.add('call');
@@ -135,6 +139,31 @@ document.getElementById('lampBtn').addEventListener('pointerdown', (e) => {
     const key = currentRoomKey();
     if (lights.lamps[key]) toggleLamp(key);
 });
+
+/* ─────────── Gordijnen ─────────── */
+// A window with curtains in a room (call from build): tap = curtains open / closed, closed = dark in that room
+function addCurtainWindow(key, x, y, w, h, cls = '') {
+    return addObj(`<div class="curtain-win ${cls}" style="width:${w}px;height:${h}px">
+        <div class="sky"><i></i></div><div class="cw-curtain l"></div><div class="cw-curtain r"></div><div class="rod"></div>
+    </div>`, x, y, x + w / 2, (node) => toggleCurtains(key, node));
+}
+
+function toggleCurtains(key, node) {
+    const closed = !lights.curtains.has(key);
+    if (closed) lights.curtains.add(key); else lights.curtains.delete(key);
+    node.classList.toggle('closed', closed);
+    if (lights.shades[key]) lights.shades[key].classList.toggle('curtained', closed);
+    // Swoosh of the curtains
+    playFreqSweep(closed ? 700 : 400, closed ? 400 : 700, 0.5, 0.06);
+    startNoise('shower');
+    setTimeout(stopNoise, 450);
+    nailGlowTick();
+    if (closed) lights.hinted.delete(key);
+    updateLightBtns();
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    if (closed) speak(lights.on.has(key) ? 'Gordijnen dicht. Gezellig met de lamp aan!' : 'Gordijnen dicht. Nu is het donker!');
+    else speak(lights.night ? 'Gordijnen open. Kijk, de maan!' : 'Gordijnen open. Wat lekker licht!');
+}
 
 /* ─────────── Buiten 's nachts ─────────── */
 function buildNightOutside() {

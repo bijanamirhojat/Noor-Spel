@@ -1,4 +1,4 @@
-/* 🛏️ Slaapkamer: hemelbed, kledingkast ("Klaar voor bed", js/rooms/pyjama.js), de wasmand en de knuffelmand
+/* 🛏️ Slaapkamer: hemelbed, kledingkast ("Klaar voor bed", js/rooms/pyjama.js), de wasmand, gordijnen (licht/donker) en de knuffelmand
    (met het teddybeertje en de knuffels uit de grijpmachine op de kermis, zie knuffels in js/dorp/kermis.js) */
 defineRoom({
     key: 'slaapkamer',
@@ -6,7 +6,7 @@ defineRoom({
     icon: '🛏️',
     say: 'De slaapkamer',
     build(r6) {
-        place(el('<div class="tower-window"></div>'), r6 + 565, 70);
+        addCurtainWindow('slaapkamer', r6 + 565, 70, 220, 240, 'arch');
         addObj(`<div class="sk-wardrobe"><div class="door l"><i></i></div><div class="door r"><i></i></div><span class="pj">🌙</span>
             <div class="tap-hint" style="left:36px;top:-50px">👇</div></div>`, r6 + 680, 190, r6 + 700, openBedtime);
         addObj('<div class="sk-basket"><span id="laundryPile"></span><div class="mand"></div></div>', r6 + 585, 318, r6 + 620, washLaundry);

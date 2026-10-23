@@ -4,9 +4,11 @@ defineRoom({
     name: 'Grote slaapkamer',
     icon: '👑',
     say: 'De grote slaapkamer van mama en papa',
+    lampX: 545,
     build(x) {
         place(el('<div class="royal-portrait"><span>👸</span><span>🤴</span></div>'), x + 40, 90);
         place(el('<div class="fireplace"><div class="fire"></div></div>'), x + 640, 250);
+        addCurtainWindow('ouderslaapkamer', x + 615, 60, 170, 170, 'royal');
         addObj(`<div class="big-bed">
             <div class="bb-post" style="left:0"></div><div class="bb-post" style="left:450px"></div>
             <div class="bb-canopy"></div>
