@@ -94,6 +94,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/troetelberen.css">
     <link rel="stylesheet" href="prinses/css/rooms/halloween.css">
     <link rel="stylesheet" href="prinses/css/rooms/knopjeskamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/dokterskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/feestzaal.css">
     <link rel="stylesheet" href="prinses/css/unicornstyle.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
@@ -507,6 +508,21 @@
                     <button class="tool-btn rj-tool" data-t="reset" aria-label="Weggooien">🗑️</button>
                 </div>
                 <button class="scope-close" id="rjClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="drov" id="drOv">
+                <div class="nails-title">🩺 Dokter spelen</div>
+                <div class="dr-count" id="drCount">😊 0</div>
+                <div class="dr-hint" id="drHint"></div>
+                <div class="dr-stage">
+                    <div class="dr-patient" id="drPatient">
+                        <div class="face"></div><div class="mood"></div><div class="wound"></div><div class="extra"></div>
+                    </div>
+                    <div class="dr-found" id="drFound"></div>
+                </div>
+                <div class="dr-tools" id="drTools"></div>
+                <button class="tool-btn wide dr-next" id="drNext">👋 Volgende patiënt</button>
+                <button class="scope-close" id="drClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="bwov" id="bwOv" data-m="fire">
@@ -1070,6 +1086,7 @@
     <script src="prinses/js/rooms/troetelberen.js"></script>
     <script src="prinses/js/rooms/halloween.js"></script>
     <script src="prinses/js/rooms/knopjeskamer.js"></script>
+    <script src="prinses/js/rooms/dokterskamer.js"></script>
     <script src="prinses/js/rooms/feestzaal.js"></script>
     <script src="prinses/js/unicornstyle.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>

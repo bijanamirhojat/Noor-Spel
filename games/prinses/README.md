@@ -52,6 +52,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/knopjeskamer.js: paneel vol knopjes; na een paar keer drukken (of met de rode knop) gaat het alarm
                 en is de prinses de brandweer: brand blussen met de slang of een poesje met de ladder uit de boom halen
                 (om en om); het aantal reddingen staat in noor-prinses-brandweer
+                js/rooms/dokterskamer.js: dokter spelen: een knuffeldier vertelt wat er is, eerst kijken (thermometer, stethoscoop,
+                lampje, schoonmaken), dan beter maken (drankje, druppels, thee, pleister); aantal in noor-prinses-dokter
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
