@@ -47,6 +47,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/troetelberen.js: in elke andere kamer gluurt een troetelbeer achter een ding vandaan (hideCareBears,
                 plek vanzelf gekozen, anders BEAR_SPOTS); gevonden beren staan op de planken hier en in noor-prinses-troetelberen;
                 alle beren thuis? de 🙈-knop verstopt ze weer
+                js/rooms/halloween.js: pompoenen uitsnijden (ogen, neus en mond kiezen, kaarsje aan), snoepschaal, vliegende
+                heksenbezem, spinnetje; de laatste 3 pompoenen staan op het trapje en in noor-prinses-pompoenen
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp

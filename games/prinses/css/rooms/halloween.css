@@ -1,0 +1,131 @@
+/* 🎃 Halloweenkamer */
+.room.rm-halloween .wall {
+    background:
+        radial-gradient(circle, rgba(255, 255, 255, 0.8) 1.5px, transparent 2.5px) 0 0 / 70px 60px,
+        radial-gradient(circle, rgba(253, 224, 71, 0.6) 1.5px, transparent 2.5px) 35px 30px / 70px 60px,
+        linear-gradient(180deg, #4c1d95, #7e22ce 60%, #c084fc);
+}
+.room.rm-halloween .floor { background: repeating-linear-gradient(90deg, #f97316 0 60px, #ea580c 60px 120px); }
+
+.hw-moon {
+    width: 90px; height: 90px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fefce8, #fde047);
+    box-shadow: 0 0 40px rgba(253, 224, 71, 0.6);
+    pointer-events: none;
+}
+.hw-bat { font-size: 30px; pointer-events: none; animation: hwBat 4s ease-in-out infinite; }
+@keyframes hwBat { 0%, 100% { transform: translate(0, 0) scaleX(1); } 25% { transform: translate(40px, -14px) scaleX(1); } 50% { transform: translate(80px, 0) scaleX(-1); } 75% { transform: translate(40px, 14px) scaleX(-1); } }
+.hw-web { font-size: 64px; line-height: 1; pointer-events: none; opacity: 0.85; }
+.hw-garland { font-size: 22px; letter-spacing: 6px; pointer-events: none; white-space: nowrap; }
+
+/* The carving table */
+.hw-table { width: 240px; height: 200px; }
+.hw-table > :not(.tap-hint) { position: absolute; }
+.hw-table .pk { left: 60px; top: 0; width: 120px; height: 108px; }
+.hw-table .knife { left: 190px; top: 84px; font-size: 26px; transform: rotate(-30deg); }
+.hw-table .spoon { left: 18px; top: 84px; font-size: 24px; transform: rotate(20deg); }
+.hw-table .top { left: 0; top: 110px; width: 240px; height: 16px; border-radius: 6px; background: #92400e; box-shadow: 0 4px 0 #78350f; }
+.hw-table .leg { top: 126px; width: 16px; height: 74px; background: #78350f; border-radius: 0 0 4px 4px; }
+.hw-table .leg.l { left: 20px; }
+.hw-table .leg.r { right: 20px; }
+
+.hw-pk { display: block; width: 100%; height: 100%; overflow: visible; }
+.hw-pk .cut { fill: #431407; }
+.hw-pk.lit .cut { fill: #fde047; animation: hwFlicker 1.4s ease-in-out infinite; }
+@keyframes hwFlicker { 0%, 100% { fill: #fde047; } 30% { fill: #facc15; } 60% { fill: #fef08a; } }
+.hw-pk .cut.new { transform-box: fill-box; transform-origin: center; animation: hwCarved 0.45s ease-out; }
+@keyframes hwCarved { from { transform: scale(0); } 70% { transform: scale(1.2); } }
+
+/* The steps with the carved pumpkins: tap to light them */
+.hw-steps { width: 170px; height: 170px; }
+.hw-steps .s { position: absolute; bottom: 0; height: 40px; border-radius: 6px 6px 0 0; background: #57534e; box-shadow: inset 0 6px 0 #78716c; }
+.hw-steps .s1 { left: 0; width: 170px; }
+.hw-steps .s2 { left: 0; width: 114px; bottom: 40px; }
+.hw-steps .s3 { left: 0; width: 58px; bottom: 80px; }
+.hw-steps .pks { position: absolute; inset: 0; }
+.hw-steps .p { position: absolute; width: 56px; height: 50px; }
+.hw-steps .p1 { left: 1px; bottom: 120px; }
+.hw-steps .p2 { left: 57px; bottom: 80px; }
+.hw-steps .p3 { left: 113px; bottom: 40px; }
+.hw-steps.lit .cut { fill: #fde047; animation: hwFlicker 1.4s ease-in-out infinite; }
+.hw-steps.lit .hw-pk { filter: drop-shadow(0 0 10px rgba(250, 204, 21, 0.8)); }
+
+/* Candy bowl */
+.hw-bowl { width: 120px; height: 84px; }
+.hw-bowl .bowl { position: absolute; left: 0; bottom: 0; width: 120px; height: 56px; border-radius: 10px 10px 60px 60px; background: radial-gradient(circle at 50% 30%, #fb923c, #c2410c); box-shadow: inset 0 8px 0 rgba(0, 0, 0, 0.2); }
+.hw-bowl .candy { position: absolute; left: 0; right: 0; top: 0; text-align: center; font-size: 26px; line-height: 1; }
+.hw-fly { font-size: 30px; line-height: 1; z-index: 12; pointer-events: none; animation: hwCandy 1.3s ease-out both; }
+@keyframes hwCandy {
+    0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+    45% { transform: translate(calc(var(--dx) * 0.5), -140px) scale(1.2) rotate(180deg); }
+    100% { transform: translate(var(--dx), 40px) scale(1) rotate(360deg); opacity: 0; }
+}
+
+/* Witch's broom with a black cat: flies a loop through the room */
+.hw-broom { width: 150px; height: 100px; transform-origin: 50% 80%; }
+.hw-broom .stick { position: absolute; left: 0; top: 64px; width: 110px; height: 8px; border-radius: 4px; background: #92400e; transform: rotate(-8deg); }
+.hw-broom .brush { position: absolute; left: 100px; top: 50px; width: 46px; height: 40px; border-radius: 4px 20px 20px 4px; background: repeating-linear-gradient(0deg, #facc15 0 4px, #eab308 4px 7px); transform: rotate(-8deg); }
+.hw-broom .cat { position: absolute; left: 30px; top: 6px; font-size: 52px; line-height: 1; }
+.hw-broom.fly { z-index: 12; animation: hwFly 2.6s ease-in-out; }
+@keyframes hwFly {
+    0% { transform: none; }
+    20% { transform: translate(-160px, -180px) rotate(-10deg); }
+    45% { transform: translate(-520px, -220px) rotate(-5deg) scaleX(1); }
+    55% { transform: translate(-560px, -160px) scaleX(-1); }
+    80% { transform: translate(-200px, -120px) scaleX(-1) rotate(8deg); }
+    100% { transform: none; }
+}
+
+/* Spider on a thread: drops down and climbs back up */
+.hw-spider { width: 60px; height: 160px; }
+.hw-spider .thread { position: absolute; left: 29px; top: 0; width: 2px; height: 120px; background: rgba(255, 255, 255, 0.7); transform-origin: top; }
+.hw-spider span { position: absolute; left: 6px; top: 106px; font-size: 44px; line-height: 1; }
+.hw-spider.drop .thread { animation: hwThread 1.8s ease-in-out; }
+.hw-spider.drop span { animation: hwDrop 1.8s ease-in-out; }
+@keyframes hwThread { 50% { transform: scaleY(2.4); } }
+@keyframes hwDrop { 50% { transform: translateY(168px) rotate(15deg); } }
+
+/* ── Pompoen uitsnijden (overlay) ── */
+.hwov {
+    position: absolute; inset: 0; z-index: var(--z-overlay);
+    display: none; flex-direction: column; align-items: center;
+    padding: 10px 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 2px, transparent 3px) 0 0 / 60px 60px, linear-gradient(180deg, #6d28d9, #c084fc);
+    transition: background-color 0.5s;
+}
+.hwov.open { display: flex; }
+.hwov.dark { background: radial-gradient(circle, rgba(253, 224, 71, 0.6) 1.5px, transparent 2.5px) 0 0 / 60px 60px, linear-gradient(180deg, #0f0a1f, #2e1065); }
+.hwov .nails-title { color: #fff; text-shadow: 0 2px 0 #7c2d12; }
+.hw-count { position: absolute; left: 16px; top: 12px; font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: #c2410c; background: #fff; border-radius: 999px; padding: 2px 14px; }
+.hw-hint { font-family: 'Fredoka One', cursive; color: #c2410c; background: #fff; border-radius: 999px; padding: 3px 16px; font-size: 1.05rem; }
+
+.hw-stage { position: relative; flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; }
+.hw-big { height: 100%; max-height: 300px; aspect-ratio: 200 / 180; }
+.hwov.dark .hw-big .hw-pk { filter: drop-shadow(0 0 30px rgba(250, 204, 21, 0.7)); }
+.hwov.dark .hw-big .hw-pk ellipse { filter: brightness(0.6); }
+.hw-knife { position: absolute; left: 50%; top: 40%; font-size: 48px; opacity: 0; pointer-events: none; }
+.hw-knife.cut { animation: hwKnife 0.5s ease; }
+@keyframes hwKnife {
+    0% { opacity: 1; transform: translate(60px, -40px) rotate(-30deg); }
+    50% { opacity: 1; transform: translate(-20px, 10px) rotate(-50deg); }
+    100% { opacity: 0; transform: translate(40px, -30px) rotate(-30deg); }
+}
+
+.hw-rows { display: flex; flex-direction: column; gap: 4px; }
+.hw-row { display: flex; align-items: center; gap: 8px; padding: 3px 10px; border-radius: 22px; background: rgba(255, 255, 255, 0.35); }
+.hw-row > span { font-size: 26px; }
+.hw-row.next { box-shadow: 0 0 0 4px #fde047; }
+.hw-opt svg path { fill: #431407; }
+.hw-opt[data-k="eyes"] svg, .hw-opt[data-k="mouth"] svg { width: 48px; }
+.hw-opt.sel { background: #ffedd5; border-color: #f97316; }
+.hw-tools { display: flex; gap: 10px; }
+.hw-tools .tool-btn { color: #c2410c; border-color: #fed7aa; }
+.hw-tools .tool-btn.next { animation: hintPulse 1.2s ease-in-out infinite; }
+
+@media (max-height: 560px) {
+    .hwov { padding: 6px 10px; gap: 3px; }
+    .hw-hint { display: none; }
+    .hw-opt { height: 44px; min-width: 44px; }
+    .hw-opt svg, .hw-opt[data-k] svg { width: 34px; height: 28px; }
+    .hw-tools .tool-btn { height: 42px; }
+}

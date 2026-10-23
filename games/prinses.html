@@ -92,6 +92,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/legokamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/basketbal.css">
     <link rel="stylesheet" href="prinses/css/rooms/troetelberen.css">
+    <link rel="stylesheet" href="prinses/css/rooms/halloween.css">
     <link rel="stylesheet" href="prinses/css/rooms/feestzaal.css">
     <link rel="stylesheet" href="prinses/css/unicornstyle.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
@@ -505,6 +506,26 @@
                     <button class="tool-btn rj-tool" data-t="reset" aria-label="Weggooien">🗑️</button>
                 </div>
                 <button class="scope-close" id="rjClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="hwov" id="hwOv">
+                <div class="nails-title">🎃 Pompoen uitsnijden</div>
+                <div class="hw-count" id="hwCount">🎃 0</div>
+                <div class="hw-hint" id="hwHint"></div>
+                <div class="hw-stage">
+                    <div class="hw-big" id="hwPumpkin"></div>
+                    <div class="hw-knife" id="hwKnife">🔪</div>
+                </div>
+                <div class="hw-rows">
+                    <div class="hw-row" data-k="eyes"><span>👀</span><div class="bd-tray"></div></div>
+                    <div class="hw-row" data-k="nose"><span>👃</span><div class="bd-tray"></div></div>
+                    <div class="hw-row" data-k="mouth"><span>👄</span><div class="bd-tray"></div></div>
+                </div>
+                <div class="hw-tools">
+                    <button class="tool-btn wide" id="hwLight">🕯️ Kaarsje aan</button>
+                    <button class="tool-btn wide" id="hwNew">🎃 Nieuwe pompoen</button>
+                </div>
+                <button class="scope-close" id="hwClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="kgov" id="kgOv">
@@ -1026,6 +1047,7 @@
     <script src="prinses/js/rooms/legokamer.js"></script>
     <script src="prinses/js/rooms/basketbal.js"></script>
     <script src="prinses/js/rooms/troetelberen.js"></script>
+    <script src="prinses/js/rooms/halloween.js"></script>
     <script src="prinses/js/rooms/feestzaal.js"></script>
     <script src="prinses/js/unicornstyle.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
