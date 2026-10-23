@@ -93,6 +93,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/basketbal.css">
     <link rel="stylesheet" href="prinses/css/rooms/troetelberen.css">
     <link rel="stylesheet" href="prinses/css/rooms/halloween.css">
+    <link rel="stylesheet" href="prinses/css/rooms/knopjeskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/feestzaal.css">
     <link rel="stylesheet" href="prinses/css/unicornstyle.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
@@ -506,6 +507,26 @@
                     <button class="tool-btn rj-tool" data-t="reset" aria-label="Weggooien">🗑️</button>
                 </div>
                 <button class="scope-close" id="rjClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="bwov" id="bwOv" data-m="fire">
+                <div class="nails-title" id="bwTitle">🚒 Brandweer!</div>
+                <div class="bw-count" id="bwCount"></div>
+                <div class="bw-hint" id="bwHint"></div>
+                <div class="bw-stage" id="bwStage">
+                    <div class="bw-house"><div class="roof"></div><div class="body"><i></i><i></i><i></i><i></i><b></b></div></div>
+                    <div class="bw-flames" id="bwFlames"></div>
+                    <div class="bw-tree"><div class="crown"></div><div class="branch"></div><div class="trunk"></div></div>
+                    <div class="bw-ladder" id="bwLadder"></div>
+                    <div class="bw-cat" id="bwCat">🐱</div>
+                    <div class="bw-water" id="bwWater"></div>
+                    <div class="bw-truck" id="bwTruck"><span>🚒</span><div class="bw-saved" id="bwSaved">🐱💖</div></div>
+                </div>
+                <div class="bw-tools">
+                    <button class="tool-btn wide" id="bwLadderBtn">🪜 Ladder omhoog</button>
+                    <button class="tool-btn wide" id="bwAgain">🚨 Nog een alarm</button>
+                </div>
+                <button class="scope-close" id="bwClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="hwov" id="hwOv">
@@ -1048,6 +1069,7 @@
     <script src="prinses/js/rooms/basketbal.js"></script>
     <script src="prinses/js/rooms/troetelberen.js"></script>
     <script src="prinses/js/rooms/halloween.js"></script>
+    <script src="prinses/js/rooms/knopjeskamer.js"></script>
     <script src="prinses/js/rooms/feestzaal.js"></script>
     <script src="prinses/js/unicornstyle.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>

@@ -49,6 +49,9 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 alle beren thuis? de 🙈-knop verstopt ze weer
                 js/rooms/halloween.js: pompoenen uitsnijden (ogen, neus en mond kiezen, kaarsje aan), snoepschaal, vliegende
                 heksenbezem, spinnetje; de laatste 3 pompoenen staan op het trapje en in noor-prinses-pompoenen
+                js/rooms/knopjeskamer.js: paneel vol knopjes; na een paar keer drukken (of met de rode knop) gaat het alarm
+                en is de prinses de brandweer: brand blussen met de slang of een poesje met de ladder uit de boom halen
+                (om en om); het aantal reddingen staat in noor-prinses-brandweer
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
