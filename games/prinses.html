@@ -91,6 +91,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/fotostudio.css">
     <link rel="stylesheet" href="prinses/css/rooms/plakboek.css">
     <link rel="stylesheet" href="prinses/css/rooms/legokamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/schuifkamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/basketbal.css">
     <link rel="stylesheet" href="prinses/css/rooms/troetelberen.css">
     <link rel="stylesheet" href="prinses/css/rooms/halloween.css">
@@ -768,6 +769,31 @@
                 <button class="scope-close" id="bflyClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="slov" id="slOv">
+                <div class="nails-title">🧩 Schuifpuzzel</div>
+                <div class="sl-main">
+                    <div class="sl-case">
+                        <div class="sl-board" id="slBoard"></div>
+                        <div class="sl-exit">⬇️ UIT ⬇️</div>
+                    </div>
+                    <div class="sl-panel">
+                        <div class="sl-level" id="slLevel"></div>
+                        <div class="sl-stars" id="slStars"></div>
+                        <div class="sl-count">👣 <b id="slMoves">0</b> <small>(kan in <span id="slBest"></span>)</small></div>
+                        <div class="sl-leds" id="slLeds"></div>
+                        <div class="sl-btns">
+                            <button class="tool-btn" id="slPrev" aria-label="Vorig level">◀️</button>
+                            <button class="tool-btn" id="slNext" aria-label="Volgend level">▶️</button>
+                        </div>
+                        <div class="sl-btns">
+                            <button class="tool-btn wide" id="slReset">🔄 Opnieuw</button>
+                            <button class="tool-btn wide" id="slHint">💡 Help</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="scope-close" id="slClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="bioov" id="bioOv" data-phase="pop">
                 <div class="nails-title">🎬 Bioscoop</div>
                 <div class="bio-hint" id="bioHint"></div>
@@ -1149,6 +1175,7 @@
     <script src="prinses/js/rooms/fotostudio.js"></script>
     <script src="prinses/js/rooms/plakboek.js"></script>
     <script src="prinses/js/rooms/legokamer.js"></script>
+    <script src="prinses/js/rooms/schuifkamer.js"></script>
     <script src="prinses/js/rooms/basketbal.js"></script>
     <script src="prinses/js/rooms/troetelberen.js"></script>
     <script src="prinses/js/rooms/halloween.js"></script>

@@ -47,6 +47,9 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 oppakken en eraf slepen kan ook); het bouwwerk staat in noor-prinses-lego en in het klein op de tafel
                 js/rooms/basketbal.js: basketbal (omhoog vegen of tikken, de worp wordt flink bijgestuurd; elke 5 keer raak
                 verhuist de basket); het totaal staat in noor-prinses-basket en op het scorebord in de kamer
+                js/rooms/schuifkamer.js: schuifpuzzel zoals de GiiKER Super Slide: schuif het grote prinsessenblok naar de uitgang;
+                SL_LEVELS (31 levels, van 1 zet tot de klassieke Huarong Dao), 💡 = slSolve (kortste oplossing);
+                voortgang en sterren in noor-prinses-schuif
                 js/rooms/troetelberen.js: in elke andere kamer gluurt een troetelbeer achter een ding vandaan (hideCareBears,
                 plek vanzelf gekozen, anders BEAR_SPOTS); gevonden beren staan op de planken hier en in noor-prinses-troetelberen;
                 alle beren thuis? de 🙈-knop verstopt ze weer

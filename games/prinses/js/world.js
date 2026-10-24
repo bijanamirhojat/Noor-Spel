@@ -12,7 +12,7 @@ const WINGS = [
     { key: 'mooi',  name: 'Mooi maken',        icon: '💅', color: '#a855f7', gems: 10, liftX: 30,
       rooms: ['spiegelkamer', 'kapsalon', 'badkamer', 'wc', 'nagelsalon', 'juwelierskamer', 'borduurkamer', 'parfumerie', 'glitterkamer', 'fotostudio'] },
     { key: 'speel', name: 'Speelverdieping',   icon: '🧸', color: '#f59e0b', gems: 12, liftX: 30,
-      rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad', 'lieveheersbeestjes', 'minigolf', 'plakboek', 'legokamer', 'basketbal', 'knopjeskamer', 'troetelberen'] },
+      rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad', 'lieveheersbeestjes', 'minigolf', 'plakboek', 'legokamer', 'schuifkamer', 'basketbal', 'knopjeskamer', 'troetelberen'] },
     { key: 'toren', name: 'Toren',             icon: '🌙', color: '#6366f1', gems: 12, liftX: 30,
       rooms: ['slaapkamer', 'ouderslaapkamer', 'werkkamer', 'dokterskamer', 'sterrenkamer', 'elvenkamer', 'torenkamer', 'muziekkamer', 'trofeekamer', 'halloween'] }
 ];
