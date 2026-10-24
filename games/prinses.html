@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="prinses/css/dorp/pluktuin.css">
     <link rel="stylesheet" href="prinses/css/dorp/vlinderkas.css">
     <link rel="stylesheet" href="prinses/css/dorp/kermis.css">
+    <link rel="stylesheet" href="prinses/css/dorp/bioscoop.css">
     <link rel="stylesheet" href="prinses/css/dierentuin.css">
     <link rel="stylesheet" href="prinses/css/dierentuin/ingang.css">
     <link rel="stylesheet" href="prinses/css/dierentuin/apenhuis.css">
@@ -767,6 +768,44 @@
                 <button class="scope-close" id="bflyClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="bioov" id="bioOv" data-phase="pop">
+                <div class="nails-title">🎬 Bioscoop</div>
+                <div class="bio-hint" id="bioHint"></div>
+                <div class="bio-pop">
+                    <div class="pc-machine" id="pcMachine">
+                        <div class="pc-top">POPCORN</div>
+                        <div class="pc-glass" id="pcGlass"><div class="pc-pile" id="pcPile"></div><div class="pc-kettle" id="pcKettle"></div></div>
+                        <div class="pc-base">
+                            <button class="tool-btn" id="pcCorn" data-step="corn" aria-label="Maïs">🌽</button>
+                            <button class="tool-btn" id="pcOn" data-step="heat" aria-label="Aan">🔴</button>
+                            <button class="tool-btn" id="pcScoop" data-step="scoop" aria-label="Scheppen">🥄</button>
+                        </div>
+                    </div>
+                    <div class="pc-side">
+                        <div class="pc-box-spot" id="pcBoxSpot">
+                            <div class="pc-box" id="pcBox"><div class="pc-fill"></div><div class="pc-cup"><b>🍿</b></div></div>
+                        </div>
+                        <div class="pc-tops" id="pcTops"></div>
+                        <button class="tool-btn wide pc-go" id="pcGo" data-step="go">🎬 Naar de film!</button>
+                    </div>
+                </div>
+                <div class="bio-hall">
+                    <div class="bio-screen" id="bioScreen">
+                        <div class="bio-film" id="bioFilm"></div>
+                        <div class="bio-title" id="bioTitle"></div>
+                        <div class="bio-posters" id="bioPosters"></div>
+                        <div class="bio-curtain l"></div><div class="bio-curtain r"></div>
+                    </div>
+                    <div class="bio-seats">
+                        <span class="bio-viewer">🐰</span><span class="bio-viewer">🐻</span>
+                        <div class="bio-snack" id="bioSnackSpot"></div>
+                        <span class="bio-viewer">🐱</span><span class="bio-viewer">🐶</span>
+                    </div>
+                    <button class="tool-btn wide bio-newpop" id="bioNewPop">🍿 Nieuwe popcorn</button>
+                </div>
+                <button class="scope-close" id="bioClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="kermisov" id="kermisDuckOv">
                 <div class="nails-title">🦆 Eendjes vissen</div>
                 <div class="km-tray" id="kdTray"></div>
@@ -1133,6 +1172,7 @@
     <script src="prinses/js/dorp/pluktuin.js"></script>
     <script src="prinses/js/dorp/vlinderkas.js"></script>
     <script src="prinses/js/dorp/kermis.js"></script>
+    <script src="prinses/js/dorp/bioscoop.js"></script>
     <!-- De dierentuin (scene 'dierentuin', zie ZOO in js/world.js) -->
     <script src="prinses/js/dierentuin.js"></script>
     <script src="prinses/js/dierentuin/ingang.js"></script>

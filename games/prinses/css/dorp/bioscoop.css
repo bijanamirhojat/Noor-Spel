@@ -1,0 +1,139 @@
+/* 🎬 Bioscoop (js/dorp/bioscoop.js) */
+.room.rm-bioscoop .wall { background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 1.5px, transparent 2.5px) 0 0 / 46px 40px, linear-gradient(180deg, #7dd3fc, #e0f2fe 80%); }
+
+.bio-house { width: 400px; height: 340px; }
+.bio-house > div { position: absolute; }
+.bio-house .bh-roof { left: -10px; top: 0; width: 420px; height: 40px; border-radius: 12px 12px 0 0; background: repeating-linear-gradient(90deg, #dc2626 0 30px, #fff 30px 60px); }
+.bio-house .bh-sign {
+    left: 40px; top: 34px; width: 320px; height: 70px; border-radius: 14px; background: #1e1b4b; border: 5px solid var(--amber-300); box-sizing: border-box;
+    display: flex; align-items: center; justify-content: center; z-index: 1;
+}
+.bio-house .bh-sign b { font-family: 'Fredoka One', cursive; font-size: 30px; color: #fde047; text-shadow: 0 0 10px #f59e0b; }
+.bio-house .bh-sign i { position: absolute; top: -9px; left: calc(var(--i) * 22px + 8px); width: 10px; height: 10px; border-radius: 50%; background: #fde047; animation: bhBulb 0.9s calc(var(--i) * -0.13s) steps(1) infinite; }
+@keyframes bhBulb { 50% { background: #f472b6; box-shadow: 0 0 8px #f472b6; } }
+.bio-house .bh-posters { left: 0; top: 60px; width: 400px; height: 280px; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, #9f1239, #be123c); }
+.bio-house .bh-posters span { position: absolute; top: 80px; width: 70px; height: 96px; border-radius: 8px; background: #fef3c7; border: 4px solid var(--amber-300); display: flex; align-items: center; justify-content: center; font-size: 40px; }
+.bio-house .bh-posters span:nth-child(1) { left: 20px; }
+.bio-house .bh-posters span:nth-child(2) { right: 20px; }
+.bio-house .bh-posters span:nth-child(3) { display: none; }
+.bio-house .bh-doors { left: 120px; top: 170px; width: 160px; height: 170px; display: flex; gap: 4px; }
+.bio-house .bh-doors div { flex: 1; border-radius: 10px 10px 0 0; background: linear-gradient(180deg, #fde68a, #f59e0b); border: 4px solid #92400e; box-sizing: border-box; }
+.bio-house .bh-carpet { left: 110px; top: 334px; width: 180px; height: 14px; border-radius: 4px; background: #dc2626; }
+
+.bio-cart { width: 130px; height: 190px; }
+.bio-cart > div { position: absolute; }
+.bio-cart .glass { left: 15px; top: 0; width: 100px; height: 100px; border-radius: 10px; background: rgba(224, 242, 254, 0.75); border: 5px solid #dc2626; box-sizing: border-box; display: flex; align-items: flex-end; justify-content: center; font-size: 50px; }
+.bio-cart .cart { left: 0; top: 96px; width: 130px; height: 70px; border-radius: 10px; background: repeating-linear-gradient(90deg, #dc2626 0 18px, #fff 18px 36px); border: 4px solid #991b1b; box-sizing: border-box; }
+.bio-cart .wheel { top: 156px; width: 32px; height: 32px; border-radius: 50%; background: #374151; border: 5px solid #9ca3af; box-sizing: border-box; }
+
+/* ── Overlay ── */
+.bioov {
+    position: absolute; inset: 0; z-index: var(--z-overlay);
+    display: none; flex-direction: column; align-items: center;
+    padding: 10px 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(253, 224, 71, 0.25) 4px, transparent 5px) 0 0 / 44px 44px, linear-gradient(180deg, #9f1239, #4c0519);
+    transition: background-color 1s;
+}
+.bioov.open { display: flex; }
+.bioov .nails-title { color: #fde047; }
+.bio-hint { font-family: 'Fredoka One', cursive; color: #9f1239; background: #fff; border-radius: 999px; padding: 3px 16px; font-size: 1.1rem; }
+.bioov[data-phase="pop"] .bio-hall, .bioov[data-phase="hall"] .bio-pop { display: none; }
+
+.bio-pop { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: 40px; }
+.pc-machine { height: 92%; aspect-ratio: 0.72; display: flex; flex-direction: column; border-radius: 18px; background: #dc2626; border: 6px solid #991b1b; padding: 8px; box-sizing: border-box; gap: 8px; }
+.pc-top { text-align: center; font-family: 'Fredoka One', cursive; color: #fde047; font-size: 1.5rem; letter-spacing: 2px; }
+.pc-glass { position: relative; flex: 1; border-radius: 10px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), #e0f2fe); overflow: hidden; cursor: pointer; }
+.pc-kettle { position: absolute; left: 50%; top: 12%; width: 46%; height: 22%; margin-left: -23%; border-radius: 0 0 50% 50%; background: linear-gradient(180deg, #9ca3af, #4b5563); }
+.pc-kettle::before { content: ''; position: absolute; left: 48%; top: -30%; width: 4%; height: 30%; background: #4b5563; }
+.pc-machine.on .pc-kettle { animation: pcShake 0.12s ease-in-out infinite alternate; box-shadow: 0 6px 18px #f59e0b; }
+.pc-machine.on .pc-glass { background: linear-gradient(135deg, #fff7ed, #fed7aa); }
+@keyframes pcShake { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+.pc-kernel { position: absolute; top: 45%; width: 9px; height: 11px; border-radius: 50%; background: #facc15; animation: pcKernel 0.4s ease-in both; }
+@keyframes pcKernel { from { transform: translateY(-140px); opacity: 0; } }
+.pc-pile, .pc-fill, .pc-piece {
+    background:
+        radial-gradient(circle at 30% 35%, var(--p1, #fffbeb) 0 9px, transparent 10px) 0 0 / 30px 26px,
+        radial-gradient(circle at 75% 70%, var(--p2, #fef3c7) 0 10px, transparent 11px) 0 0 / 30px 26px,
+        radial-gradient(circle at 50% 50%, var(--p1, #fffbeb) 0 8px, transparent 9px) 15px 13px / 30px 26px,
+        var(--p3, #fbbf24);
+}
+.pc-pile { position: absolute; left: 0; right: 0; bottom: 0; height: 0; border-radius: 40% 40% 0 0 / 30px 30px 0 0; transition: height 0.25s; }
+.pc-piece { position: absolute; top: 34%; width: 26px; height: 22px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05); }
+.pc-piece.fly { animation: pcFly 0.8s ease-out forwards; }
+@keyframes pcFly { 40% { transform: translate(calc(var(--dx) * 0.5), var(--dy)) rotate(180deg); } to { transform: translate(var(--dx), 300px) rotate(360deg); opacity: 0.4; } }
+.pc-base { display: flex; justify-content: center; gap: 10px; }
+.pc-base .tool-btn { min-width: 74px; height: 70px; font-size: 40px; }
+.bioov .next { animation: hintPulse 1.2s ease-in-out infinite; border-color: #fde047; }
+.bioov .nudge { animation: bioNudge 0.4s ease; }
+@keyframes bioNudge { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+.pc-side { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.pc-box-spot { display: flex; }
+.pc-box { position: relative; width: 170px; height: 210px; cursor: pointer; --f: 0; }
+.pc-box .pc-cup { position: absolute; left: 0; right: 0; bottom: 0; height: 160px; clip-path: polygon(0 0, 100% 0, 86% 100%, 14% 100%); background: repeating-linear-gradient(90deg, #dc2626 0 22px, #fff 22px 44px); display: flex; align-items: center; justify-content: center; }
+.pc-box .pc-cup b { font-size: 40px; background: #fff; border-radius: 50%; padding: 6px; line-height: 1; }
+.pc-box .pc-fill { position: absolute; left: 4px; right: 4px; bottom: 150px; height: calc(var(--f) * 64px); border-radius: 50% 50% 0 0 / 40px 40px 0 0; transition: height 0.3s; }
+.pc-box.pop { animation: duPop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
+.pc-tops { display: flex; gap: 10px; visibility: hidden; }
+.pc-tops.show { visibility: visible; }
+.pc-tops .tool-btn { min-width: 66px; height: 64px; font-size: 36px; }
+.pc-go { visibility: hidden; font-size: 1.4rem !important; height: 66px; }
+.pc-go.show { visibility: visible; }
+
+/* De zaal */
+.bioov.dark { background: radial-gradient(circle, rgba(253, 224, 71, 0.06) 4px, transparent 5px) 0 0 / 44px 44px, linear-gradient(180deg, #1c1917, #0c0a09); }
+.bio-hall { flex: 1; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; }
+.bio-screen { position: relative; flex: 1; min-height: 0; aspect-ratio: 2; max-width: 100%; border-radius: 10px; background: #fff; border: 8px solid #78350f; box-sizing: border-box; overflow: hidden; }
+.bioov.dark .bio-screen { box-shadow: 0 0 60px rgba(255, 255, 255, 0.35); }
+.bio-film { position: absolute; inset: 0; overflow: hidden; }
+.bio-film.bg-meadow { background: linear-gradient(180deg, #7dd3fc 0 66%, #86efac 66%); }
+.bio-film.bg-rain { background: repeating-linear-gradient(105deg, transparent 0 18px, rgba(255, 255, 255, 0.35) 18px 20px), linear-gradient(180deg, #94a3b8 0 66%, #4ade80 66%); }
+.bio-film.bg-sky { background: linear-gradient(180deg, #38bdf8, #bae6fd 66%, #86efac 66%); }
+.bio-film.bg-sea { background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 3px, transparent 4px) 0 0 / 60px 60px, linear-gradient(180deg, #38bdf8, #1e3a8a 85%, #fde68a 85%); }
+.bio-film.bg-night { background: radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 50px 40px, linear-gradient(180deg, #1e1b4b, #4338ca 72%, #166534 72%); }
+.bio-film.bg-space { background: radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 46px 38px, radial-gradient(circle, #fde047 1.5px, transparent 2.5px) 20px 20px / 70px 60px, #0f0a2e; }
+.bio-film.bg-moon { background: radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 46px 38px, linear-gradient(180deg, #0f0a2e 0 70%, #d1d5db 70%); }
+.bio-film.bg-end { background: #1c1917; display: flex; align-items: center; justify-content: center; }
+.bio-the-end { font-family: 'Fredoka One', cursive; font-size: 72px; color: #fde047; animation: duPop 0.6s cubic-bezier(.2, 1.6, .4, 1); }
+.bio-actor { position: absolute; line-height: 1; transform: translate(-50%, -50%); }
+.bio-actor > span { display: inline-block; }
+.bio-actor .flip { transform: scaleX(-1); }
+.bio-actor.walk > span { animation: bioWalk 0.4s ease-in-out infinite alternate; }
+.bio-actor.bob > span { animation: bioBob 1.2s ease-in-out infinite alternate; }
+.bio-actor.hop > span { animation: bioHop 0.7s ease-in-out infinite; }
+.bio-actor.spin > span { animation: bioSpin 6s linear infinite; }
+.bio-actor.wiggle > span { animation: bioWiggle 0.5s ease-in-out infinite alternate; }
+.bio-actor.blink > span { animation: bioBlink 0.8s ease-in-out infinite alternate; }
+.bio-actor.grow > span { animation: bioGrow 1.5s ease-out both; }
+.bio-actor.shake > span { animation: bioWiggle 0.1s linear infinite alternate; }
+.bio-actor .flip { animation-name: none; }
+.bio-actor.walk > .flip, .bio-actor.bob > .flip, .bio-actor.hop > .flip { animation: none; }
+@keyframes bioWalk { from { transform: translateY(0) rotate(-3deg); } to { transform: translateY(-8px) rotate(3deg); } }
+@keyframes bioBob { from { transform: translateY(-8px); } to { transform: translateY(8px); } }
+@keyframes bioHop { 50% { transform: translateY(-24px); } }
+@keyframes bioSpin { to { transform: rotate(360deg); } }
+@keyframes bioWiggle { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+@keyframes bioBlink { from { opacity: 0.3; transform: scale(0.8); } to { opacity: 1; transform: scale(1.1); } }
+@keyframes bioGrow { from { transform: scale(0); opacity: 0; } }
+.bio-title { position: absolute; left: 0; right: 0; top: 40%; text-align: center; font-family: 'Fredoka One', cursive; font-size: 40px; color: #fde047; text-shadow: 0 3px 0 #78350f; pointer-events: none; }
+.bio-screen:not(.playing) .bio-film { background: #fef3c7; }
+.bio-posters { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 24px; z-index: 2; }
+.bio-poster { width: 26%; height: 80%; border-radius: 16px; background: linear-gradient(180deg, #fde047, #f59e0b); border: 6px solid #b45309; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; touch-action: none; }
+.bio-poster span { font-size: 90px; line-height: 1; }
+.bio-poster small { font-family: 'Fredoka One', cursive; font-size: 1rem; color: #78350f; padding: 0 6px; }
+.bio-curtain { position: absolute; top: 0; bottom: 0; width: 52%; z-index: 3; background: repeating-linear-gradient(90deg, #b91c1c 0 20px, #991b1b 20px 40px); transition: transform 1.2s ease-in-out; }
+.bio-curtain.l { left: 0; transform: translateX(-92%); }
+.bio-curtain.r { right: 0; transform: translateX(92%); }
+.bio-screen.shut .bio-curtain { transform: none; }
+
+.bio-seats { display: flex; align-items: flex-end; gap: 18px; height: 150px; flex: none; }
+.bio-viewer { font-size: 64px; line-height: 1; filter: brightness(0.9); }
+.bioov.dark .bio-viewer { filter: brightness(0.55); }
+.bio-viewer.react { animation: bioHop 0.5s ease-in-out 2; }
+.bio-snack .pc-box { width: 120px; height: 150px; }
+.bio-snack .pc-box .pc-cup { height: 112px; }
+.bio-snack .pc-box .pc-cup b { font-size: 28px; }
+.bio-snack .pc-box .pc-fill { bottom: 104px; height: calc(var(--f) * 46px); }
+.bio-newpop { position: absolute; right: 8px; bottom: 8px; }
+.bio-nom { position: absolute; font-family: 'Fredoka One', cursive; font-size: 30px; color: #fde047; pointer-events: none; transform: translate(-50%, -50%); animation: bioNom 0.9s ease-out forwards; z-index: 3; }
+@keyframes bioNom { to { transform: translate(-50%, -160%) scale(1.4); opacity: 0; } }

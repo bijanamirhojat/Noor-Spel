@@ -19,7 +19,7 @@ const WINGS = [
 
 // Het dorp: met de koets bereikbaar vanaf het kasteelplein (js/village.js)
 const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', gems: 12,
-    rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'pluktuin', 'vlinderkas', 'station', 'kermis', 'spookhuis', 'strand'] };
+    rooms: ['dorpsplein', 'markt', 'ijssalon', 'bloemenwinkel', 'boerderij', 'moestuin', 'pluktuin', 'vlinderkas', 'station', 'kermis', 'bioscoop', 'spookhuis', 'strand'] };
 
 // De dierentuin: met de bus bereikbaar vanaf het strand aan het eind van het dorp (js/dierentuin.js)
 const ZOO = { key: 'dierentuin', name: 'Dierentuin', icon: '🦁', color: '#65a30d', gems: 10,
