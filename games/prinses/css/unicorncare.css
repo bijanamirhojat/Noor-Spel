@@ -1,0 +1,41 @@
+/* 🪣 Verzorgemmer op de eenhoornweide (js/unicorncare.js) */
+.uc-bucket { width: 90px; height: 90px; z-index: 3; }
+.uc-bucket > * { position: absolute; }
+.uc-bucket .pail { left: 10px; top: 36px; width: 70px; height: 54px; border-radius: 6px 6px 18px 18px; background: linear-gradient(180deg, #7dd3fc, #0ea5e9); border: 4px solid #0369a1; box-sizing: border-box; }
+.uc-bucket .handle { left: 12px; top: 10px; width: 66px; height: 52px; border: 4px solid #0369a1; border-bottom: none; border-radius: 40px 40px 0 0; box-sizing: border-box; }
+.uc-bucket .things { left: 14px; top: 14px; font-size: 26px; letter-spacing: -6px; }
+
+/* ── Eenhoorn verzorgen (overlay) ── */
+.ucov {
+    position: absolute; inset: 0; z-index: var(--z-overlay);
+    display: none; flex-direction: column; align-items: center;
+    padding: 10px 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: linear-gradient(180deg, #e0f2fe, #fce7f3 70%, #bbf7d0 70%, #86efac);
+}
+.ucov.open { display: flex; }
+.uc-needs { display: flex; gap: 10px; align-items: center; }
+.uc-need { font-size: 34px; width: 54px; height: 54px; border-radius: 50%; background: rgba(255, 255, 255, 0.6); display: flex; align-items: center; justify-content: center; filter: grayscale(1); opacity: 0.5; transition: all 0.3s; }
+.uc-need.done { filter: none; opacity: 1; background: #fff; box-shadow: 0 0 0 4px var(--pink-300); animation: duPop 0.45s cubic-bezier(.2, 1.6, .4, 1); }
+.uc-count { position: absolute; left: 16px; top: 12px; font-family: 'Fredoka One', cursive; font-size: 1.2rem; color: var(--pink-600); background: #fff; border-radius: 999px; padding: 2px 14px; }
+.ucov .uc-hint { font-family: 'Fredoka One', cursive; color: var(--pink-600); background: #fff; border-radius: 999px; padding: 3px 16px; font-size: 1.05rem; }
+.uc-stage { position: relative; flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.uc-uni { height: 100%; aspect-ratio: 160 / 150; max-width: 100%; }
+.uc-uni svg { width: 100%; height: 100%; overflow: visible; }
+.uc-uni .utail { animation: tailSwish 1.2s ease-in-out infinite alternate; transform-origin: 34px 50px; }
+.uc-uni.happy svg { animation: uniHop 0.7s cubic-bezier(.3, 1.6, .5, 1); }
+.uc-uni.munch .ubody { animation: ucMunch 0.22s ease-in-out infinite alternate; transform-origin: 80px 100px; }
+@keyframes ucMunch { to { transform: rotate(2deg); } }
+.uc-uni.drink .ubody { transform: rotate(4deg); transform-origin: 80px 100px; transition: transform 0.3s; }
+.uc-uni.party svg { animation: ucParty 1.2s ease-in-out 2; }
+@keyframes ucParty { 25% { transform: translateY(-40px) rotate(-6deg); } 50% { transform: translateY(0); } 75% { transform: translateY(-30px) rotate(6deg); } }
+.uc-knot { transition: transform 0.7s ease-in, opacity 0.7s ease-in; }
+.uc-knot.fall { transform: translateY(60px) rotate(90deg); opacity: 0; transform-box: fill-box; }
+.uc-tools { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.uc-tools .tool-btn { min-width: 70px; height: 66px; font-size: 38px; }
+.uc-food { position: absolute; font-size: 54px; pointer-events: none; z-index: 3; transform: translate(-50%, -50%); transition: left 0.5s ease-in-out, top 0.5s ease-in-out, transform 0.2s; }
+.uc-drop { position: absolute; font-size: 20px; pointer-events: none; z-index: 3; transform: translate(-50%, -50%); animation: ucDrop 0.5s ease-in forwards; }
+@keyframes ucDrop { to { transform: translate(-80%, -200%); opacity: 0; } }
+.uc-bubble { position: absolute; font-size: 28px; pointer-events: none; z-index: 2; transform: translate(-50%, -50%); animation: ucBubble 0.9s ease-out forwards; }
+@keyframes ucBubble { to { transform: translate(-50%, -160%) scale(1.4); opacity: 0; } }
+.ucov .uc-again { position: absolute; right: 16px; bottom: 16px; display: none; }
+.ucov .uc-again.show { display: block; animation: hintPulse 1.2s ease-in-out infinite; }

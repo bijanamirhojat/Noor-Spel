@@ -97,6 +97,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/dokterskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/feestzaal.css">
     <link rel="stylesheet" href="prinses/css/unicornstyle.css">
+    <link rel="stylesheet" href="prinses/css/unicorncare.css">
     <link rel="stylesheet" href="prinses/css/parents.css">
 </head>
 <body>
@@ -149,6 +150,23 @@
                 <div class="hands-wrap"><svg class="hands" id="hands" viewBox="90 60 640 390" preserveAspectRatio="xMidYMid meet"></svg></div>
                 <div class="nail-tools" id="nailTools"></div>
                 <button class="scope-close" id="nailsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="dressup beauty" id="beautyOv">
+                <div class="nails-title">💄 Beautysalon</div>
+                <div class="du-main">
+                    <div class="du-preview" id="beautyPreview"></div>
+                    <div class="du-side">
+                        <div class="du-tabs" id="beautyTabs"></div>
+                        <div class="bt-hint" id="beautyHint"></div>
+                        <div class="du-opts" id="beautyOpts"></div>
+                    </div>
+                </div>
+                <div class="du-actions">
+                    <button class="tool-btn wide" id="beautyWash">🧽 Alles eraf</button>
+                    <button class="tool-btn wide" id="beautyDone">✅ Klaar!</button>
+                </div>
+                <button class="scope-close" id="beautyClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="dressup salon" id="salonOv">
@@ -883,6 +901,16 @@
                 <button class="scope-close" id="uniClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="ucov" id="ucOv">
+                <div class="nails-title">🦄 Eenhoorn verzorgen</div>
+                <div class="uc-needs" id="ucNeeds"></div>
+                <div class="uc-hint" id="ucHint"></div>
+                <div class="uc-stage" id="ucStage"><div class="uc-uni" id="ucUni"></div></div>
+                <div class="uc-tools" id="ucTools"></div>
+                <button class="tool-btn wide uc-again" id="ucAgain">🔁 Nog een keer</button>
+                <button class="scope-close" id="ucClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="partyov" id="partyOv">
                 <div class="nails-title">🎉 Feestje!</div>
                 <div class="party-hint" id="partyHint"></div>
@@ -1089,6 +1117,7 @@
     <script src="prinses/js/rooms/dokterskamer.js"></script>
     <script src="prinses/js/rooms/feestzaal.js"></script>
     <script src="prinses/js/unicornstyle.js"></script>
+    <script src="prinses/js/unicorncare.js"></script>
     <script src="prinses/js/rooms/torenkamer.js"></script>
     <!-- Het dorp (scene 'dorp', zie VILLAGE in js/world.js) -->
     <script src="prinses/js/dorp/dorpsplein.js"></script>

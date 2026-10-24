@@ -15,6 +15,8 @@ js/wand.js      toverstaf-spreuken
 js/outside.js   buiten: plein, tuin, vijver, eenhoorn, speeltuin, theehuis, meer + bootje
 js/piraten.js   piratenbaai (achter het meer, alleen met het bootje): piratenschip + avontuur (verrekijker, varen, schatkaart, graven)
 js/unicornstyle.js  eenhoorn-verkleedkist: de look van de eenhoorn (unicornSVG in outside.js)
+js/unicorncare.js   eenhoorn verzorgen (verzorgemmer op de weide): modder eraf wassen, blaadjes uit de manen borstelen,
+                    appel/wortel, drinken en aaien; aantal keer in noor-prinses-eenhoornzorg
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets
 js/kaartjes.js  kaartjes voor koets, trein, bootje, bus en raket: kaartjesautomaat (addTicketMachine, bij elk vertrekpunt),
@@ -52,6 +54,9 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/knopjeskamer.js: paneel vol knopjes; na een paar keer drukken (of met de rode knop) gaat het alarm
                 en is de prinses de brandweer: brand blussen met de slang of een poesje met de ladder uit de boom halen
                 (om en om); het aantal reddingen staat in noor-prinses-brandweer
+                js/rooms/spiegelkamer.js: de kaptafel opent de beautysalon: crème of een groen maskertje smeren, komkommers op de ogen,
+                afvegen met het sponsje; make-up (lippenstift, oogschaduw, wimpers, blush) blijft op de prinses
+                (state.look.lips/shadow/blush/lash, MAKEUP en applyMakeup in js/core.js)
                 js/rooms/dokterskamer.js: dokter spelen: een knuffeldier vertelt wat er is, eerst kijken (thermometer, stethoscoop,
                 lampje, schoonmaken), dan beter maken (drankje, druppels, thee, pleister); aantal in noor-prinses-dokter
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed

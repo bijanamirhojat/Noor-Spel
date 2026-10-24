@@ -69,7 +69,7 @@ const state = {
     targetAlt: 0,
     flapT: 0,
     pet: { following: false, x: 200, facing: -1, key: 'hal' },
-    look: { hat: 'crown', back: 'none', face: 'none', hair: 0, neck: null, hairdo: 'long', clip: 'none', sparkle: 'none' },
+    look: { hat: 'crown', back: 'none', face: 'none', hair: 0, neck: null, hairdo: 'long', clip: 'none', sparkle: 'none', lips: 'none', shadow: 'none', blush: 'none', lash: 'none' },
     partyUntil: 0,
     lastTime: performance.now()
 };
@@ -289,13 +289,16 @@ function princessSVG(prefix) {
             <rect x="46" y="54" width="8" height="10" fill="#ffd7c2"/>
             <circle cx="50" cy="40" r="18" fill="#ffe4d6"/>
             <path class="hair" d="M32 40 Q32 20 50 20 Q68 20 68 40 Q62 28 54 30 Q48 26 42 31 Q36 30 32 40 Z" fill="url(#${prefix}hair)"/>
+            <g class="mk mk-shadow" style="display:none"><ellipse cx="43" cy="39.4" rx="4.6" ry="3.4"/><ellipse cx="57" cy="39.4" rx="4.6" ry="3.4"/></g>
             <ellipse cx="43" cy="42" rx="2.6" ry="3.4" fill="#3b0764"/>
             <ellipse cx="57" cy="42" rx="2.6" ry="3.4" fill="#3b0764"/>
             <circle cx="44" cy="40.6" r="1" fill="#fff"/>
             <circle cx="58" cy="40.6" r="1" fill="#fff"/>
-            <circle cx="39" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
-            <circle cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
+            <path class="mk mk-lash" style="display:none" d="M40.6 40.4 L38.2 38.8 M41.4 39.2 L39.6 37 M42.8 38.7 L42.2 36.4 M59.4 40.4 L61.8 38.8 M58.6 39.2 L60.4 37 M57.2 38.7 L57.8 36.4" stroke="#3b0764" stroke-width="1.1" stroke-linecap="round"/>
+            <circle class="cheek" cx="39" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
+            <circle class="cheek" cx="61" cy="48" r="3.4" fill="#fda4af" opacity=".7"/>
             <path d="M45 50 Q50 55 55 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round"/>
+            <path class="mk mk-lips" style="display:none" d="M44.4 50.2 Q47.4 48.4 50 49.9 Q52.6 48.4 55.6 50.2 Q50 56.6 44.4 50.2 Z" stroke="rgba(0,0,0,0.18)" stroke-width="0.6"/>
             ${HAIRDO_FRONT(prefix)}
             <g class="pjc">
                 <path d="M30 34 Q34 14 54 16 Q72 18 84 40 L78 44 Q66 28 54 26 Q40 26 34 38 Z" fill="#818cf8"/>
@@ -316,6 +319,34 @@ const HAIRS = [
     ['#f8fafc', '#94a3b8'], ['#fca5a5', '#dc2626'], ['#86efac', '#16a34a']
 ];
 const LOOK_KEY = 'noor-prinses-look';
+// Make-up from the spiegelkamer (js/rooms/spiegelkamer.js); 'none' = nothing on
+const MAKEUP = {
+    lips: ['#f472b6', '#e11d48', '#c026d3', '#fb923c', '#a855f7', 'rainbow'],
+    shadow: ['#c084fc', '#60a5fa', '#f472b6', '#4ade80', '#fbbf24', 'rainbow'],
+    blush: ['#fda4af', '#f472b6', '#fb923c', '#c084fc', '#f87171']
+};
+
+function makeupFill(c, pre) {
+    return c === 'rainbow' ? `url(#${pre}rb)` : c;
+}
+
+function applyMakeup(svg, look) {
+    const pre = svg.dataset.prefix;
+    const lips = svg.querySelector('.mk-lips');
+    if (!lips) return;
+    lips.style.display = look.lips === 'none' ? 'none' : '';
+    if (look.lips !== 'none') lips.setAttribute('fill', makeupFill(look.lips, pre));
+    const shadow = svg.querySelector('.mk-shadow');
+    shadow.style.display = look.shadow === 'none' ? 'none' : '';
+    if (look.shadow !== 'none') shadow.setAttribute('fill', makeupFill(look.shadow, pre));
+    svg.querySelector('.mk-lash').style.display = look.lash === 'on' ? '' : 'none';
+    svg.querySelectorAll('.cheek').forEach(c => {
+        const on = look.blush !== 'none';
+        c.setAttribute('fill', on ? look.blush : '#fda4af');
+        c.setAttribute('opacity', on ? '.9' : '.7');
+        c.setAttribute('r', on ? '4.4' : '3.4');
+    });
+}
 
 function applyLook() {
     const look = state.look;
@@ -324,6 +355,7 @@ function applyLook() {
         svg.querySelectorAll('.lk').forEach(g => {
             g.style.display = look[g.dataset.k] === g.dataset.v ? '' : 'none';
         });
+        applyMakeup(svg, look);
         const neck = svg.querySelector('.necklace');
         if (neck) neck.innerHTML = necklaceMarkup(look.neck, [35, 60], [50, 86], [65, 60], 2.8);
         const h = HAIRS[look.hair] || HAIRS[0];
@@ -350,6 +382,8 @@ function loadLook() {
         const d = JSON.parse(localStorage.getItem(LOOK_KEY));
         if (d && typeof d === 'object') {
             ['hat', 'back', 'face', 'hairdo', 'clip', 'sparkle'].forEach(k => { if (typeof d[k] === 'string') state.look[k] = d[k]; });
+            ['lips', 'shadow', 'blush'].forEach(k => { if (d[k] === 'none' || MAKEUP[k].includes(d[k])) state.look[k] = d[k]; });
+            if (d.lash === 'on' || d.lash === 'none') state.look.lash = d.lash;
             if (Number.isInteger(d.hair) && d.hair >= 0 && d.hair < HAIRS.length) state.look.hair = d.hair;
             if (d.neck && Array.isArray(d.neck.beads)) state.look.neck = { beads: d.neck.beads.slice(0, 14), pendant: d.neck.pendant || null };
             if (Number.isInteger(d.dress) && d.dress >= 0 && d.dress < DRESSES.length) state.dressIdx = d.dress;

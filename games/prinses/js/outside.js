@@ -135,6 +135,8 @@ function buildOutside() {
     place(el('<div class="haystack"></div>'), o3 + 620, 312);
     addObj(`<div class="uni-chest"><div class="lid"></div><div class="box"><span>🦄</span></div><span class="peek">🎀🌸</span>
         <div class="tap-hint" style="left:22px;top:-56px">👇</div></div>`, o3 + 690, 352, o3 + 690, openUniStyle);
+    addObj(`<div class="uc-bucket"><div class="handle"></div><span class="things">🪮🧽🥕</span><div class="pail"></div>
+        <div class="tap-hint" style="left:24px;top:-50px">👇</div></div>`, o3 + 270, 350, o3 + 300, openUniCare);
     const tree = addObj(`<div class="tree"><span class="crown">🌳</span>
         <span class="apple" style="left:50px;top:60px">🍎</span>
         <span class="apple" style="left:110px;top:40px">🍎</span>
