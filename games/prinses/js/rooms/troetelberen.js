@@ -23,7 +23,8 @@ const BEAR_SPOTS = {
     kristalgrot: { obj: 'kg-geode', side: 'l' }, spookhuis: { obj: 'sp-cauldron', side: 'r' },
     zooingang: { obj: 'zi-gate', side: 'l' }, regenboogmakerij: { obj: 'rb-easel', side: 'r' },
     spiraal: { obj: 'sv-comet', side: 'l' }, balzaal: { obj: 'orchestra', side: 'r' },
-    spiegelkamer: { obj: 'mirror', side: 'l' }, apenhuis: { obj: 'za-tree', side: 'l' }
+    spiegelkamer: { obj: 'mirror', side: 'l' }, apenhuis: { obj: 'za-tree', side: 'l' },
+    eenhoornweide: { obj: 'tree', side: 'l' }
 };
 let bearsFound = new Set();
 const bearNodes = {};             // room key -> hidden bear in that room

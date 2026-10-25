@@ -43,6 +43,9 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/smoothiebar.js: smoothies maken (fruit + melk/yoghurt in de blender, mixknop ingedrukt houden, inschenken, toppings)
                 js/rooms/broodjeskamer.js: broodje maken (boterham kiezen, met je vinger smeren, beleg uit de koelkast, hagelslag),
                 hap voor hap opeten, dan het bord in de vaatwasser (deur, aan, programma, start); aantal in noor-prinses-broodjes
+                js/rooms/babykamer.js: zorgen voor de baby (BB_ACTS: pap, melk, luier, badje, spelen, slapen met een zelfgekozen knuffel);
+                bbFigure tekent hem als SVG; wat hij echt nodig had laat hem groeien (BB_STAGES) tot hij net zo groot is als Noor;
+                groei, wensen en knuffel in noor-prinses-baby
                 js/rooms/kristalgrot.js: geheime grot onder het kasteel: kristallen die muziek maken, hartjeskristallen,
                 schatkisten uitgraven door de aarde weg te vegen (canvas); gevonden schatten in noor-prinses-grotschatten
                 js/rooms/legokamer.js: bouwen met legosteentjes (kleur kiezen, slepen of tikken; steentjes vallen op elkaar,

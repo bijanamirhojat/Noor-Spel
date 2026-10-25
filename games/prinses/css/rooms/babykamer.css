@@ -1,0 +1,149 @@
+/* 👶 Babykamer (js/rooms/babykamer.js) */
+.room.rm-babykamer .wall {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 8px, transparent 9px) 0 0 / 70px 70px,
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.5) 5px, transparent 6px) 35px 35px / 70px 70px,
+        linear-gradient(180deg, #dbeafe, #e0f2fe);
+}
+.room.rm-babykamer .floor { background: repeating-linear-gradient(90deg, #fde68a 0 80px, #fcd34d 80px 82px); }
+
+.bb-mobile { width: 160px; height: 150px; transform-origin: 50% 0; }
+.bb-mobile .bar { position: absolute; left: 78px; top: 0; width: 4px; height: 40px; background: #94a3b8; }
+.bb-mobile::before { content: ''; position: absolute; left: 10px; top: 40px; width: 140px; height: 6px; border-radius: 3px; background: #f9a8d4; }
+.bb-mobile span { position: absolute; top: 60px; font-size: 30px; animation: bbSway 3s ease-in-out infinite; transform-origin: 50% -14px; }
+.bb-mobile span::before { content: ''; position: absolute; left: 50%; top: -16px; height: 16px; border-left: 2px solid #94a3b8; }
+.bb-mobile span:nth-child(2) { left: 6px; }
+.bb-mobile span:nth-child(3) { left: 46px; top: 76px; animation-delay: -0.8s; }
+.bb-mobile span:nth-child(4) { left: 86px; animation-delay: -1.6s; }
+.bb-mobile span:nth-child(5) { left: 124px; top: 74px; animation-delay: -2.2s; }
+@keyframes bbSway { 50% { transform: rotate(10deg); } }
+.bb-mobile.spin { animation: bbSpin 2s ease; }
+@keyframes bbSpin { to { transform: rotateY(720deg); } }
+.bb-crib { width: 260px; height: 260px; }
+.bb-crib .baby { position: absolute; left: 50%; bottom: 40px; height: 60px; transform: translateX(-50%); }
+.bb-crib .baby svg { height: 100%; width: auto; display: block; }
+.bb-crib .bars { position: absolute; left: 0; bottom: 0; width: 260px; height: 120px; border-radius: 16px 16px 6px 6px; border: 10px solid #f9a8d4; border-bottom-width: 26px; box-sizing: border-box;
+    background: repeating-linear-gradient(90deg, transparent 0 22px, #fbcfe8 22px 32px); }
+.bb-ruler-wall { width: 60px; height: 260px; }
+.bb-ruler-wall i { position: absolute; left: 20px; top: 0; width: 22px; height: 260px; border-radius: 4px; background: repeating-linear-gradient(180deg, #fff 0 18px, #f472b6 18px 20px); }
+.bb-ruler-wall b { position: absolute; left: 4px; top: -14px; font-size: 34px; }
+
+/* ── Overlay ── */
+.bbov {
+    position: absolute; inset: 0; z-index: var(--z-overlay);
+    display: none; flex-direction: column; align-items: center;
+    padding: 10px 12px; gap: 6px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 6px, transparent 7px) 0 0 / 60px 60px, linear-gradient(180deg, #dbeafe, #fce7f3);
+}
+.bbov.open { display: flex; }
+.bbov .nails-title { color: #2563eb; }
+.bb-hint { font-family: 'Fredoka One', cursive; color: #2563eb; background: #fff; border-radius: 999px; padding: 3px 16px; font-size: 1.1rem; }
+.bb-main { flex: 1; min-height: 0; width: 100%; max-width: 1100px; display: flex; gap: 14px; }
+
+.bb-side { width: 150px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.bb-needs { display: flex; flex-direction: column; gap: 8px; background: #fff; border-radius: 20px; padding: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); }
+.bb-need { display: flex; align-items: center; gap: 6px; }
+.bb-need span { font-size: 28px; line-height: 1; }
+.bb-need i, .bb-grow i { flex: 1; height: 14px; border-radius: 7px; background: #e2e8f0; overflow: hidden; }
+.bb-need b, .bb-grow b { display: block; height: 100%; border-radius: 7px; transition: width 0.6s ease; }
+.bb-grow { display: flex; align-items: center; gap: 6px; background: #fff; border-radius: 20px; padding: 8px 10px; font-size: 26px; font-family: 'Fredoka One', cursive; justify-content: center; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); }
+.bb-grow b { background: linear-gradient(90deg, #86efac, #22c55e); }
+
+.bb-stage { position: relative; flex: 1; min-width: 0; container-type: size; touch-action: none; border-radius: 30px; background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2) 80%, #fde68a 80%); overflow: hidden; }
+.bb-floor { position: absolute; left: 50%; bottom: 3%; width: 60%; height: 16%; transform: translateX(-56%); border-radius: 50%; background: conic-gradient(#f9a8d4 0 25%, #93c5fd 0 50%, #fde047 0 75%, #86efac 0); opacity: 0.8; }
+
+/* De baby: --h = his height as part of the stage */
+.bb-baby { position: absolute; left: 46%; bottom: 10%; height: calc(var(--h) * 100%); transform: translateX(-50%); transition: height 1s ease; z-index: 2; }
+.bb-svg, .bb-svg svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bb-anchor { position: absolute; left: 50%; top: var(--mouth); width: 2px; height: 2px; }
+.bb-hip { top: var(--hip); }
+.bb-baby > :where(div:not(.bb-svg), span:not(.bb-anchor, .bb-knuffel)) { display: none; }
+.bb-knuffel { position: absolute; left: 92%; top: 62%; font-size: 9cqh; line-height: 1; }
+.bb-baby.v-pulse { animation: bbPat 0.3s ease; }
+@keyframes bbPat { 50% { transform: translateX(-50%) scale(1.04, 0.97); } }
+
+/* Pap: slabbetje en een blad in de kinderstoel */
+.bbov.bib .bb-bib { display: block; position: absolute; left: 24%; width: 52%; top: calc(var(--neck) - 1%); height: 15%; border-radius: 10% 10% 50% 50%; background: radial-gradient(circle, #f9a8d4 3px, transparent 4px) 0 0 / 14px 14px, #fff; border: 3px solid #f472b6; box-sizing: border-box; }
+.bbov[data-scene="chair"] .bb-tray { display: block; position: absolute; left: -30%; right: -30%; top: calc(var(--hip) - 16%); height: 7%; border-radius: 10px; background: #fbcfe8; box-shadow: 0 6px 0 #f472b6; }
+.bb-tray span { position: absolute; left: 4%; bottom: 40%; font-size: 7cqh; }
+.bbov[data-scene="chair"] .bb-baby::after { content: ''; position: absolute; left: -10%; right: -10%; top: calc(var(--hip) - 10%); bottom: 0; border-radius: 8px; background: repeating-linear-gradient(90deg, #f472b6 0 12%, transparent 12% 88%, #f472b6 88%); z-index: -1; }
+
+/* Melk */
+.bbov.bottle .bb-bottle { display: block; position: absolute; left: 52%; top: calc(var(--mouth) - 3cqh); width: 7cqh; height: 18cqh; transform: rotate(-115deg); transform-origin: 50% 0; border-radius: 30% 30% 20% 20%; background: rgba(255, 255, 255, 0.8); border: 3px solid #fff; box-sizing: border-box; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); }
+.bb-bottle::before { content: ''; position: absolute; left: 30%; top: -2px; width: 40%; height: 18%; border-radius: 50% 50% 0 0; background: #fcd34d; }
+.bb-bottle i { position: absolute; left: 0; right: 0; bottom: 0; height: var(--milk, 100%); background: #fffdf5; transition: height 0.1s linear; }
+.bb-bottle i::before { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 0 2px rgba(147, 197, 253, 0.6); }
+
+/* Luier: op de commode */
+.bbov[data-scene="table"] .bb-baby { height: calc(var(--h) * 88%); bottom: 24%; }
+.bb-table, .bb-bin, .bb-crib-back, .bb-chair { display: none; position: absolute; }
+.bbov[data-scene="table"] .bb-table { display: block; left: 20%; width: 52%; bottom: 3%; height: 22%; border-radius: 14px 14px 6px 6px; background: repeating-linear-gradient(180deg, #fbcfe8 0 30%, #f472b6 30% 33%); box-shadow: inset 0 10px 0 #93c5fd; }
+.bbov[data-scene="table"] .bb-bin { display: block; right: 18%; bottom: 4%; font-size: 9cqh; }
+.bbov[data-scene="table"] .bb-floor, .bbov[data-scene="chair"] .bb-floor { display: none; }
+
+/* Badje */
+.bbov[data-scene="tub"] .bb-tub { display: block; position: absolute; left: -45%; right: -45%; top: calc(var(--hip) - 4%); bottom: -8%; border-radius: 10% 10% 45% 45% / 20% 20% 60% 60%; background: linear-gradient(180deg, #bae6fd 0 12%, #fff 12%); border: 4px solid #e0f2fe; box-sizing: border-box; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12); }
+.bbov[data-scene="tub"] .bb-suds { display: block; position: absolute; left: -10%; right: -10%; top: calc(var(--neck) - 6%); bottom: 20%; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+    background: radial-gradient(circle, #fff 0 8px, transparent 9px) 0 0 / 30px 26px, radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 6px, transparent 7px) 14px 12px / 26px 30px; }
+.bbov[data-scene="tub"] .bb-duck { display: block; position: absolute; left: -30%; top: calc(var(--hip) - 10%); font-size: 7cqh; }
+.bb-duck.go { animation: bbDuck 1.2s ease; }
+@keyframes bbDuck { 50% { transform: translateX(200%) rotate(10deg); } }
+.bbov[data-scene="tub"] .bb-floor { display: none; }
+.bbov.rinse .bb-stage::after { content: '💧 💧 💧'; position: absolute; left: 30%; top: 0; font-size: 6cqh; letter-spacing: 2cqh; z-index: 3; animation: bbRinse 0.5s linear infinite; pointer-events: none; }
+@keyframes bbRinse { from { transform: translateY(-20%); } to { transform: translateY(400%); opacity: 0.4; } }
+
+/* Spelen */
+.bbov[data-scene="mat"] .bb-rattle { position: absolute; left: 82%; top: calc(var(--neck) + 4%); font-size: 7cqh; }
+.bb-rattle.go { display: block !important; animation: bbRattle 0.8s ease; }
+@keyframes bbRattle { 0%, 100% { transform: rotate(0); } 20%, 60% { transform: rotate(-25deg); } 40%, 80% { transform: rotate(25deg); } }
+.bbov.peek .bb-peek { display: block; position: absolute; left: 50%; top: calc(var(--mouth) - 8%); transform: translate(-50%, -50%); font-size: 14cqh; line-height: 1; }
+.bb-blocks { position: absolute; left: 14%; bottom: 10%; display: flex; flex-direction: column-reverse; align-items: center; z-index: 2; }
+.bb-blocks i { width: 9cqh; height: 9cqh; border-radius: 8px; box-shadow: inset 0 -5px rgba(0, 0, 0, 0.15); transform: rotate(var(--r)); animation: bbBlock 0.25s ease; }
+@keyframes bbBlock { from { transform: translateY(-60%) rotate(var(--r)); } }
+.bb-blocks.fall i { transition: transform 0.8s ease-in, opacity 0.8s; opacity: 0; }
+.bb-blocks.fall i:nth-child(odd) { transform: translate(-120%, 200%) rotate(-80deg); }
+.bb-blocks.fall i:nth-child(even) { transform: translate(120%, 200%) rotate(80deg); }
+
+/* Slapen: in bed, liggend */
+.bbov[data-scene="bed"] .bb-baby { left: 50%; height: calc(var(--h) * 82%); bottom: calc(34% - var(--h) * 41%); transform: translateX(-50%) rotate(-90deg); }
+.bbov[data-scene="bed"] .bb-crib-back { display: block; left: 8%; right: 8%; bottom: 6%; height: 26%; border-radius: 16px; background: linear-gradient(180deg, #fff 0 22%, #f9a8d4 22%); box-shadow: inset 0 0 0 6px #f472b6; }
+.bbov[data-scene="bed"] .bb-crib-back::before { content: ''; position: absolute; left: -2%; bottom: 0; width: 7%; height: 220%; border-radius: 20px 20px 4px 4px; background: #f472b6; }
+.bbov[data-scene="bed"] .bb-baby::before { content: ''; position: absolute; left: -14%; width: 44%; top: -10%; height: calc(var(--neck) + 14%); border-radius: 40%; background: #fff; box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12); z-index: -1; }
+.bbov[data-scene="bed"] .bb-floor { display: none; }
+.bbov[data-scene="bed"] .bb-knuffel { left: 72%; top: 34%; transform: rotate(90deg); z-index: 1; }
+.bbov.blanket .bb-blanket { display: block; position: absolute; left: -10%; right: -4%; top: calc(var(--neck) + 3%); bottom: -4%; border-radius: 12px 50% 50% 12px / 12px 20% 20% 12px; background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 4px, transparent 5px) 0 0 / 22px 22px, #93c5fd; border: 4px solid #fff; box-sizing: border-box; animation: bbBlanket 0.4s ease; }
+@keyframes bbBlanket { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+.bb-stage::before { content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity 1s;
+    background: radial-gradient(circle, #fff 1.5px, transparent 2.5px) 0 0 / 70px 60px, radial-gradient(circle at 85% 15%, #fef9c3 0 30px, transparent 31px), rgba(30, 27, 75, 0.7); }
+.bbov.night .bb-stage::before { opacity: 1; }
+.bb-zzz { position: absolute; left: 30%; top: 30%; font-size: 8cqh; z-index: 5; opacity: 0; pointer-events: none; }
+.bbov.night .bb-zzz { animation: bbZzz 2s ease-in infinite 1.2s; }
+@keyframes bbZzz { 0% { opacity: 0; transform: translate(0, 0) scale(0.6); } 30% { opacity: 1; } 100% { opacity: 0; transform: translate(40%, -150%) scale(1.3); } }
+
+/* Meetlat: de streep van Noor en hoe groot de baby is */
+.bb-ruler { position: absolute; right: 3%; bottom: 10%; height: 86%; width: 44px; border-radius: 6px; background: repeating-linear-gradient(0deg, #fff 0 calc(10% - 3px), #f472b6 calc(10% - 3px) 10%); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12); }
+.bb-noor, .bb-mark { position: absolute; right: 100%; display: flex; align-items: center; transform: translateY(50%); font-family: 'Fredoka One', cursive; white-space: nowrap; }
+.bb-noor { bottom: calc(0.82 * 100% / 0.86); color: #db2777; }
+.bb-noor::after { content: ''; position: absolute; left: 100%; width: 54px; border-top: 4px dashed #db2777; }
+.bb-noor span { font-size: 30px; }
+.bb-mark { bottom: calc(var(--h) * 100% / 0.86); font-size: 26px; transition: bottom 1s ease; }
+.bb-mark::after { content: '▶'; font-size: 16px; color: #2563eb; }
+.bbov[data-scene="bed"] .bb-ruler, .bbov[data-scene="table"] .bb-ruler { display: none; }
+
+.bb-bubble { position: absolute; left: calc(46% + 4%); bottom: calc(12% + var(--h) * 100%); z-index: 5; padding: 6px 14px; border-radius: 20px; background: #fff; font-family: 'Fredoka One', cursive; font-size: 1.4rem; color: #2563eb; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12); transform: scale(0); transform-origin: 0 100%; pointer-events: none; white-space: nowrap; }
+.bb-bubble.show { animation: bbBubble 0.3s ease forwards; }
+@keyframes bbBubble { to { transform: scale(1); } }
+.bbov[data-scene="bed"] .bb-bubble, .bbov[data-scene="table"] .bb-bubble { bottom: 70%; }
+.bb-prog { position: absolute; left: 25%; right: 25%; top: 4%; height: 16px; border-radius: 8px; background: rgba(255, 255, 255, 0.8); overflow: hidden; display: none; z-index: 5; }
+.bb-prog.show { display: block; }
+.bb-prog i { display: block; height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, #f9a8d4, #ec4899); transition: width 0.15s; }
+
+.bb-tools { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; min-height: 60px; }
+.bb-tools .tool-btn { border-color: #bfdbfe; color: #2563eb; }
+.bb-tool { min-width: 68px; height: 64px; font-size: 36px; }
+.bb-tool.next, .bb-act.next { animation: hintPulse 0.9s ease infinite; }
+.bb-new.sure { background: #fef2f2; border-color: #f87171; }
+.bb-cursor { position: absolute; z-index: 6; font-size: 56px; line-height: 1; pointer-events: none; display: none; transform: translate(-50%, -50%); }
+.bb-cursor.show { display: block; }
+.bb-puff { position: absolute; z-index: 6; font-size: 28px; pointer-events: none; transform: translate(-50%, -50%); animation: bbPuff 0.8s ease-out forwards; }
+@keyframes bbPuff { to { transform: translate(-50%, -180%) scale(1.4); opacity: 0; } }
