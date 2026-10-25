@@ -41,6 +41,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/werkkamer.js: computer om op te "werken" (mailtjes beantwoorden, woordjes typen, videobellen); Papa werkt er soms zelf (parentStartWork in js/parents.js)
                 js/rooms/ranjakamer.js: ranja maken (siroopjes kiezen = kleuren mengen, water, roeren, ijs, opdrinken)
                 js/rooms/smoothiebar.js: smoothies maken (fruit + melk/yoghurt in de blender, mixknop ingedrukt houden, inschenken, toppings)
+                js/rooms/broodjeskamer.js: broodje maken (boterham kiezen, met je vinger smeren, beleg uit de koelkast, hagelslag),
+                hap voor hap opeten, dan het bord in de vaatwasser (deur, aan, programma, start); aantal in noor-prinses-broodjes
                 js/rooms/kristalgrot.js: geheime grot onder het kasteel: kristallen die muziek maken, hartjeskristallen,
                 schatkisten uitgraven door de aarde weg te vegen (canvas); gevonden schatten in noor-prinses-grotschatten
                 js/rooms/legokamer.js: bouwen met legosteentjes (kleur kiezen, slepen of tikken; steentjes vallen op elkaar,

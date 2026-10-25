@@ -74,6 +74,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/bakkerij.css">
     <link rel="stylesheet" href="prinses/css/rooms/ranjakamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/smoothiebar.css">
+    <link rel="stylesheet" href="prinses/css/rooms/broodjeskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/juwelierskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/cadeaukamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/badkamer.css">
@@ -635,6 +636,56 @@
                 <button class="scope-close" id="blClose" aria-label="Sluiten">✖</button>
             </div>
 
+            <div class="brov" id="brOv">
+                <div class="nails-title">🥪 Broodjes maken</div>
+                <div class="br-count" id="brCount">🥪 0</div>
+                <div class="br-hint" id="brHint"></div>
+                <div class="br-stage">
+                    <div class="br-fridge" id="brFridge">
+                        <div class="br-freezer"><i></i></div>
+                        <div class="br-inside"><div class="br-shelves" id="brShelves"></div></div>
+                        <div class="br-fdoor" id="brFdoor" data-n="fridge"><i></i><span>🦄</span><span>⭐</span></div>
+                    </div>
+                    <div class="br-counter">
+                        <div class="br-breads" id="brBreads"></div>
+                        <div class="br-jars" id="brJars"></div>
+                        <div class="br-board">
+                            <div class="br-plate" id="brPlate">
+                                <div class="br-crumbs"></div>
+                                <div class="br-bread" id="brBread" data-n="eat">
+                                    <div class="br-crumb" id="brCrumb" data-n="smear">
+                                        <div class="br-spread" id="brSpread"></div>
+                                        <div class="br-hagel"></div>
+                                        <div class="br-tops" id="brTops"></div>
+                                    </div>
+                                    <div class="br-bites" id="brBites"></div>
+                                </div>
+                                <span class="br-plate-hint" data-n="plate">👆</span>
+                            </div>
+                        </div>
+                        <button class="tool-btn wide br-done" id="brDone" data-n="done">😋 Opeten</button>
+                        <div class="br-cabinet"></div>
+                    </div>
+                    <div class="br-dw" id="brDw">
+                        <div class="br-panel">
+                            <button class="br-power" id="brPower" data-n="power" aria-label="Aan">⏻</button>
+                            <div class="br-progs" id="brProgs"></div>
+                            <button class="br-start" id="brStart" data-n="start" aria-label="Start">▶️</button>
+                        </div>
+                        <div class="br-tub">
+                            <div class="br-rack" id="brRack" data-n="rack"><div class="br-rack-plate" id="brRackPlate"></div></div>
+                        </div>
+                        <div class="br-dwdoor" id="brDwDoor" data-n="dwdoor">
+                            <div class="br-window"><div class="br-water"></div><i></i><i></i><i></i><i></i><i></i></div>
+                            <div class="br-handle"></div>
+                            <div class="br-display" id="brDisplay"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="br-knife" id="brKnife">🔪</div>
+                <button class="scope-close" id="brClose" aria-label="Sluiten">✖</button>
+            </div>
+
             <div class="lgov" id="lgOv">
                 <div class="nails-title">🧱 Lego bouwen</div>
                 <div class="lg-count" id="lgCount">🧱 0</div>
@@ -1145,6 +1196,7 @@
     <script src="prinses/js/rooms/bakkerij.js"></script>
     <script src="prinses/js/rooms/ranjakamer.js"></script>
     <script src="prinses/js/rooms/smoothiebar.js"></script>
+    <script src="prinses/js/rooms/broodjeskamer.js"></script>
     <script src="prinses/js/rooms/dierensalon.js"></script>
     <script src="prinses/js/rooms/kristalgrot.js"></script>
     <script src="prinses/js/rooms/spiegelkamer.js"></script>
