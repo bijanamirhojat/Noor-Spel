@@ -1,0 +1,42 @@
+/* 🤸 Gymzaal (js/rooms/gymzaal.js) */
+.room.rm-gymzaal .wall { background: linear-gradient(180deg, #e0f2fe 0 70%, #bae6fd 70% 72%, #fef9c3 72%); }
+.room.rm-gymzaal .floor { background: repeating-linear-gradient(90deg, #d97706 0 3px, #f59e0b 3px 60px), #f59e0b; box-shadow: inset 0 22px 0 -18px #ef4444; }
+
+.gy-bars { width: 170px; height: 270px; display: flex; flex-direction: column; justify-content: space-between; padding: 6px 0; box-sizing: border-box; border-left: 12px solid #b45309; border-right: 12px solid #b45309; pointer-events: none; }
+.gy-bars i { height: 8px; border-radius: 4px; background: #d97706; }
+.gy-board { min-width: 96px; padding: 6px 12px; border-radius: 12px; background: #1e293b; color: #fde047; font: 900 32px/1 system-ui, sans-serif; display: flex; gap: 6px; align-items: center; justify-content: center; border: 4px solid #475569; pointer-events: none; }
+
+.gy-rope { width: 60px; height: 440px; }
+.gy-rope .bell { position: absolute; left: 6px; top: 6px; font-size: 44px; line-height: 1; transform-origin: 50% 0; }
+.gy-rope .bell.ring { animation: gyRing 0.8s ease; }
+@keyframes gyRing { 20% { transform: rotate(25deg); } 40% { transform: rotate(-22deg); } 60% { transform: rotate(14deg); } 80% { transform: rotate(-8deg); } }
+.gy-rope .cord { position: absolute; left: 26px; top: 46px; width: 9px; height: 380px; border-radius: 4px; background: repeating-linear-gradient(160deg, #d6a35c 0 6px, #a16207 6px 9px); }
+.gy-rope .knot { position: absolute; left: 21px; top: 416px; width: 19px; height: 18px; border-radius: 50%; background: #a16207; }
+
+.gy-tramp { width: 180px; height: 52px; }
+.gy-tramp > * { position: absolute; }
+.gy-tramp .frame { left: 0; top: 4px; width: 180px; height: 14px; border-radius: 7px; background: #3b82f6; }
+.gy-tramp .bed { left: 12px; top: 2px; width: 156px; height: 12px; border-radius: 50%; background: #111827; z-index: 1; }
+.gy-tramp .bed.squish { animation: gySquish 0.35s ease; }
+@keyframes gySquish { 40% { transform: scaleY(0.4) translateY(14px); } }
+.gy-tramp i { top: 16px; width: 10px; height: 36px; background: #1e40af; border-radius: 3px; }
+
+.gy-beam { width: 180px; height: 60px; }
+.gy-beam .top { position: absolute; left: 0; top: 0; width: 180px; height: 14px; border-radius: 6px; background: #f5deb3; box-shadow: inset 0 -4px #d6b88a; }
+.gy-beam i { position: absolute; top: 14px; width: 10px; height: 46px; background: #64748b; }
+
+.gy-mat { width: 210px; height: 22px; border-radius: 8px; background: repeating-linear-gradient(90deg, #2563eb 0 68px, #1d4ed8 68px 70px); box-shadow: 0 4px 0 #1e3a8a; }
+
+.gy-rings { width: 80px; height: 236px; transform-origin: 50% 0; }
+.gy-rings .ln { position: absolute; top: 0; width: 3px; height: 200px; background: #78716c; }
+.gy-rings .ln.l { left: 16px; }
+.gy-rings .ln.r { right: 16px; }
+.gy-rings .ring { position: absolute; top: 196px; width: 30px; height: 30px; border-radius: 50%; border: 6px solid #a16207; box-sizing: border-box; pointer-events: auto; }
+.gy-rings .ring.l { left: 3px; }
+.gy-rings .ring.r { right: 3px; }
+
+.gy-cards { display: flex; gap: 8px; pointer-events: none; z-index: var(--z-fx); }
+.gy-cards span { width: 42px; height: 52px; border-radius: 8px; background: #fff; border: 3px solid #f472b6; color: #db2777; font: 900 26px/46px system-ui, sans-serif; text-align: center; animation: gyCard 0.5s ease backwards; }
+.gy-cards span:nth-child(2) { animation-delay: 0.15s; }
+.gy-cards span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes gyCard { from { transform: translateY(30px) scale(0.3); opacity: 0; } }

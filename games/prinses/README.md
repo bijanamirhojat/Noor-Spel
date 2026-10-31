@@ -49,6 +49,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/schermkamers.js: twee kamers (dierenkamer, mensenkamer) met een groot scherm; tik een dier of mens aan
                 en hij springt uit het scherm en loopt echt door de kamer (SK_ANIMALS, SK_PEOPLE; mensen met alleen een hoofd-emoji
                 krijgen een getekend lijfje); de afstandsbediening stuurt ze terug in het scherm
+                js/rooms/gymzaal.js: de prinses gymt zelf (state.anim + tween): trampoline met salto, klimtouw met bel,
+                evenwichtsbalk, ringen en radslagen op de mat; daarna drie tienen van de jury; aantal in noor-prinses-gym
                 js/rooms/kristalgrot.js: geheime grot onder het kasteel: kristallen die muziek maken, hartjeskristallen,
                 schatkisten uitgraven door de aarde weg te vegen (canvas); gevonden schatten in noor-prinses-grotschatten
                 js/rooms/legokamer.js: bouwen met legosteentjes (kleur kiezen, slepen of tikken; steentjes vallen op elkaar,
