@@ -172,12 +172,23 @@ function bearOptions(key, i) {
         .filter(p => !pick || (p.n.classList.contains(pick.obj) && p.side === pick.side));
 }
 
+// An object's box plus everything sticking out of it (a 👇 hint, the moon on the wardrobe), in world coordinates
+function objBoxes(n) {
+    const nr = n.getBoundingClientRect();
+    const k = nr.width / n.offsetWidth || 1;
+    return [n, ...n.querySelectorAll('*')].map(c => {
+        if (c === n) return { x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight };
+        const r = c.getBoundingClientRect();
+        return { x: n.offsetLeft + (r.left - nr.left) / k, y: n.offsetTop + (r.top - nr.top) / k, w: r.width / k, h: r.height / k };
+    }).filter(b => b.w > 0 && b.h > 0);
+}
+
 // How much of a bear at p stays uncovered: by the object it hides behind and everything drawn over it
 function bearPeekPart(sc, p) {
     const kids = [...sc.el.children];
     const covers = kids.slice(kids.indexOf(p.n))
         .filter(n => n === p.n || n.classList.contains('obj'))
-        .map(n => ({ x: n.offsetLeft, y: n.offsetTop, w: n.offsetWidth, h: n.offsetHeight }));
+        .flatMap(objBoxes);
     let free = 0;
     for (let a = 1; a < 6; a++) for (let c = 1; c < 6; c++) {
         const px = p.x + BEAR_W * a / 6, py = p.y + BEAR_H * c / 6;
