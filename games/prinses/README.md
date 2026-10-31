@@ -30,7 +30,8 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
                 strand (hooghouden met de strandbal; de zeehond kopt hem terug)
                 bioscoop (popcorn maken: maïs, machine aan, scheppen, smaakje; dan een film kiezen en kijken met het licht uit)
 js/dierentuin.js   de dierentuin: bus (addBus, vanaf het strand), dierengeluiden, zooToss/zooAnim
-js/dierentuin/*.js ingang, apenhuis, savanne (voederkar: "Wie eet wat?"), pinguins, olifanten
+js/dierentuin/*.js ingang, apenhuis, savanne (voederkar: "Wie eet wat?"), stokstaartjes (uit holletjes in allerlei kleuren,
+                   ook glitter/regenboog/sterren; album aan de muur, wachter op de rots), pinguins, olifanten
 js/ruimte.js       de ruimte: raket (addRocket), poezenplaneten (catPlanetHTML), miauw/spinnen
 js/ruimte/*.js     maan, spiraal (erin = ergens anders in de ruimte uitkomen), poezenplaneten ("Poesjes naar huis"),
                    ruimtehaven (ruimtereis: sterrenkaart → zelf de raket sturen → landen op 6 planeten + paspoort)

@@ -25,7 +25,7 @@ const VILLAGE = { key: 'dorp', name: 'Dorp', icon: '🏘️', color: '#f97316', 
 
 // De dierentuin: met de bus bereikbaar vanaf het strand aan het eind van het dorp (js/dierentuin.js)
 const ZOO = { key: 'dierentuin', name: 'Dierentuin', icon: '🦁', color: '#65a30d', gems: 10,
-    rooms: ['zooingang', 'apenhuis', 'savanne', 'pinguins', 'olifanten'] };
+    rooms: ['zooingang', 'apenhuis', 'savanne', 'stokstaartjes', 'pinguins', 'olifanten'] };
 
 // Het wolkenrijk: met de vliegende eenhoorn bereikbaar (js/sky.js)
 const SKY = { key: 'wolken', name: 'Wolken', icon: '☁️', color: '#38bdf8', gems: 12,

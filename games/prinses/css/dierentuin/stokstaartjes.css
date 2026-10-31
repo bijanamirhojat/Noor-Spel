@@ -1,0 +1,49 @@
+/* 🐾 Stokstaartjes (js/dierentuin/stokstaartjes.js) */
+.room.rm-stokstaartjes .wall { background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 45%, #fde68a 75%, #fcd34d); }
+.room.rm-stokstaartjes .floor { background: radial-gradient(circle, #d97706 1.5px, transparent 2.5px) 0 0 / 22px 15px, linear-gradient(180deg, #fcd34d, #eab308); }
+.stk-defs { position: absolute; pointer-events: none; }
+.stk-dune { width: 440px; height: 160px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #fde68a, #fbbf24); pointer-events: none; }
+.stk-dune.d2 { width: 430px; height: 140px; background: linear-gradient(180deg, #fcd34d, #f59e0b); }
+.stk-cactus { font-size: 110px; pointer-events: none; }
+
+/* One meerkat (svg); colours come from --mk / --mkb on a holder */
+.stk-svg { display: block; width: 70px; height: 140px; overflow: visible; filter: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.2)); }
+.stk-svg .mb { fill: var(--mk, #c8955a); }
+.stk-svg .ml { fill: var(--mkb, #f1dcb4); }
+.stk-head { transform-origin: 30px 44px; animation: mkLook 3s ease-in-out infinite; }
+@keyframes mkLook { 0%, 20%, 100% { transform: rotate(0); } 35%, 50% { transform: rotate(-12deg) translateX(-2px); } 65%, 80% { transform: rotate(12deg) translateX(2px); } }
+.stk-glit { display: none; position: absolute; font-size: 20px; line-height: 1; left: 2px; top: 34px; pointer-events: none; animation: mkTwinkle 1.2s ease-in-out infinite; }
+.stk-glit.g2 { left: 46px; top: 80px; animation-delay: -0.6s; }
+[data-c="glitter"] .stk-glit, [data-c="regenboog"] .stk-glit, [data-c="sterren"] .stk-glit { display: block; }
+[data-c="glitter"] .stk-svg { filter: drop-shadow(0 0 8px #fde047); }
+[data-c="regenboog"] .stk-svg { filter: drop-shadow(0 0 6px #f0abfc); }
+@keyframes mkTwinkle { 0%, 100% { transform: scale(0.4); opacity: 0.3; } 50% { transform: scale(1.1) rotate(20deg); opacity: 1; } }
+.stk-hop { animation: mkHop 0.5s ease; }
+@keyframes mkHop { 40% { translate: 0 -30px; } }
+
+/* A burrow: the meerkat rises out of the clip, the sand mound sits in front */
+.stk-burrow { width: 90px; height: 150px; transform: scale(var(--s, 1)); transform-origin: 0 0; cursor: pointer; }
+.stk-clip { position: absolute; left: 0; top: 0; width: 90px; height: 128px; overflow: hidden; }
+.stk-who { position: absolute; left: 10px; top: 0; transform: translateY(132px); transition: transform 0.35s cubic-bezier(.3, 1.4, .5, 1); }
+.stk-burrow.up .stk-who { transform: translateY(6px); }
+.stk-who.stk-hop { animation: mkHop 0.45s ease; }
+.stk-mound { position: absolute; left: -8px; top: 110px; width: 106px; height: 36px; border-radius: 50% 50% 40% 40%; background: radial-gradient(ellipse at 50% 30%, #fde68a, #d97706); }
+.stk-mound i { position: absolute; left: 22px; top: 6px; width: 62px; height: 18px; border-radius: 50%; background: radial-gradient(ellipse, #451a03, #78350f); }
+
+.stk-rock { width: 180px; height: 250px; }
+.stk-rock .stone { position: absolute; left: 0; bottom: 0; width: 180px; height: 120px; border-radius: 60% 50% 12px 12px; background: linear-gradient(160deg, #d6d3d1, #78716c); box-shadow: inset -12px -10px 0 rgba(0, 0, 0, 0.12); }
+.stk-guard { position: absolute; left: 55px; top: 0; }
+
+.stk-fam { width: 70px; height: 140px; transform: scale(var(--s, 1)); transform-origin: 50% 100%; animation: mkSway 2.4s ease-in-out infinite alternate; }
+@keyframes mkSway { from { rotate: -3deg; } to { rotate: 3deg; } }
+
+.stk-album { padding: 8px 12px; border-radius: 16px; background: #fff7ed; border: 5px solid #c2410c; display: flex; align-items: center; gap: 8px; }
+.stk-album .slots { display: grid; grid-template-columns: repeat(6, 26px); gap: 2px 4px; }
+.stk-slot { position: relative; width: 26px; height: 46px; }
+.stk-slot .stk-svg { width: 23px; height: 46px; filter: none; }
+.stk-slot .stk-head { animation: none; }
+.stk-slot .stk-glit { font-size: 10px; left: 0; top: 10px; }
+.stk-slot .stk-glit.g2 { left: 14px; top: 26px; }
+.stk-slot:not(.got) .stk-svg { filter: brightness(0) opacity(0.18); }
+.stk-slot:not(.got) .stk-glit { display: none; }
+.stk-album b { font: 900 22px/1 'Fredoka One', cursive; color: #c2410c; }
