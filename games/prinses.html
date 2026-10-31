@@ -78,6 +78,7 @@
     <link rel="stylesheet" href="prinses/css/rooms/smoothiebar.css">
     <link rel="stylesheet" href="prinses/css/rooms/broodjeskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/babykamer.css">
+    <link rel="stylesheet" href="prinses/css/rooms/wasruimte.css">
     <link rel="stylesheet" href="prinses/css/rooms/schermkamers.css">
     <link rel="stylesheet" href="prinses/css/rooms/gymzaal.css">
     <link rel="stylesheet" href="prinses/css/rooms/juwelierskamer.css">
@@ -333,6 +334,26 @@
                 </div>
                 <div class="bd-tray pz-tray" id="pzTray"></div>
                 <button class="scope-close" id="pzClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="wsov" id="wsOv">
+                <div class="nails-title">🫧 Wasruimte</div>
+                <div class="pz-steps ws-steps" id="wsSteps"></div>
+                <div class="ws-main">
+                    <div class="ws-left">
+                        <div class="ws-big" id="wsMachine">
+                            <div class="ws-panel"><i></i><i></i><b></b></div>
+                            <div class="ws-window"><div class="ws-drum" id="wsDrum"></div><div class="ws-suds"></div><div class="ws-glass"></div></div>
+                        </div>
+                        <div class="ws-pile" id="wsPile"></div>
+                    </div>
+                    <div class="ws-right">
+                        <div class="ws-sky"><span class="ws-sun" id="wsSun">☀️</span><div class="ws-rope"></div><div class="ws-hung" id="wsHung"></div></div>
+                        <div class="ws-table" id="wsTable"></div>
+                    </div>
+                </div>
+                <div class="bd-tray ws-tray" id="wsTray"></div>
+                <button class="scope-close" id="wsClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="weatherov" id="weatherOv">
@@ -1269,6 +1290,7 @@
     <script src="prinses/js/rooms/smoothiebar.js"></script>
     <script src="prinses/js/rooms/broodjeskamer.js"></script>
     <script src="prinses/js/rooms/babykamer.js"></script>
+    <script src="prinses/js/rooms/wasruimte.js"></script>
     <script src="prinses/js/rooms/schermkamers.js"></script>
     <script src="prinses/js/rooms/gymzaal.js"></script>
     <script src="prinses/js/rooms/dierensalon.js"></script>

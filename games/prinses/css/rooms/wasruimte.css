@@ -1,0 +1,77 @@
+/* 🫧 Wasruimte (js/rooms/wasruimte.js) */
+.room.rm-wasruimte .wall { background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8) 0 9px, transparent 10px) 0 0 / 70px 70px, linear-gradient(180deg, #cffafe, #a5f3fc); }
+.room.rm-wasruimte .floor { background: repeating-conic-gradient(#e0f2fe 0 25%, #fff 0 50%) 0 0 / 50px 50px; }
+
+.ws-line { width: 360px; height: 120px; pointer-events: none; }
+.ws-line .rope { position: absolute; left: 0; right: 0; top: 10px; height: 3px; background: #94a3b8; border-radius: 2px; }
+.ws-line .hang { position: absolute; top: 4px; font-size: 52px; line-height: 1; transform-origin: 50% 0; animation: wsFlap 2.2s ease-in-out infinite alternate; }
+.ws-line .hang.flap { animation: wsFlap 0.25s ease-in-out 8 alternate; }
+@keyframes wsFlap { from { transform: rotate(-6deg); } to { transform: rotate(8deg); } }
+
+.ws-machine { width: 160px; height: 210px; border-radius: 14px; background: #f8fafc; box-shadow: inset 0 0 0 4px #cbd5e1, 0 6px 0 #94a3b8; }
+.ws-machine .top { position: absolute; left: 0; right: 0; top: 0; height: 36px; border-bottom: 4px solid #cbd5e1; }
+.ws-machine .top i { position: absolute; top: 10px; width: 16px; height: 16px; border-radius: 50%; background: #60a5fa; }
+.ws-machine .top i:first-child { left: 14px; }
+.ws-machine .top i:nth-child(2) { left: 38px; background: #f472b6; }
+.ws-machine .top b { position: absolute; right: 14px; top: 10px; width: 44px; height: 16px; border-radius: 4px; background: #1e293b; box-shadow: inset 0 0 6px #4ade80; }
+.ws-machine .door { position: absolute; left: 22px; top: 56px; width: 116px; height: 116px; border-radius: 50%; background: #94a3b8; padding: 10px; box-sizing: border-box; }
+.ws-machine .drum { width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle, #bae6fd, #38bdf8); display: flex; align-items: center; justify-content: center; font-size: 40px; animation: wsTurn 6s linear infinite; }
+@keyframes wsTurn { to { transform: rotate(360deg); } }
+.ws-basket { font-size: 72px; line-height: 1; }
+.ws-soap { font-size: 60px; line-height: 1; }
+.ws-wind { font-size: 56px; line-height: 1; }
+
+/* ── Overlay ── */
+.wsov { position: absolute; inset: 0; z-index: var(--z-overlay); display: none; flex-direction: column; align-items: center; padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0 8px, transparent 9px) 0 0 / 60px 60px, linear-gradient(180deg, #cffafe, #e0f2fe); }
+.wsov.open { display: flex; }
+.ws-steps span { border-color: #a5f3fc; }
+.ws-main { flex: 1; min-height: 0; width: 100%; display: flex; align-items: stretch; justify-content: center; gap: clamp(14px, 3vw, 40px); }
+.ws-left, .ws-right { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+.ws-right { flex: 1; max-width: 560px; }
+
+.ws-big { position: relative; width: clamp(180px, 22vw, 250px); aspect-ratio: 0.8; border-radius: 22px; background: #f8fafc; box-shadow: inset 0 0 0 5px #cbd5e1, 0 8px 0 #94a3b8; cursor: pointer; }
+.ws-panel { position: absolute; left: 0; right: 0; top: 0; height: 16%; border-bottom: 5px solid #cbd5e1; }
+.ws-panel i { position: absolute; top: 28%; width: 9%; aspect-ratio: 1; border-radius: 50%; background: #60a5fa; left: 8%; }
+.ws-panel i:nth-child(2) { left: 22%; background: #f472b6; }
+.ws-panel b { position: absolute; right: 8%; top: 28%; width: 30%; height: 40%; border-radius: 5px; background: #1e293b; box-shadow: inset 0 0 8px #4ade80; }
+.ws-window { position: absolute; left: 13%; top: 26%; width: 74%; aspect-ratio: 1; border-radius: 50%; background: #94a3b8; padding: 7%; box-sizing: border-box; }
+.ws-drum { position: relative; width: 100%; height: 100%; border-radius: 50%; background: radial-gradient(circle, #e0f2fe, #7dd3fc); overflow: hidden; }
+.ws-drum span { position: absolute; left: 50%; top: 50%; font-size: clamp(22px, 3vw, 34px); line-height: 1; transform: translate(-50%, -50%) rotate(var(--a)) translateY(clamp(26px, 3.6vw, 40px)); }
+.ws-drum .ws-sock svg { width: 1em; height: 1.3em; }
+.ws-suds { position: absolute; inset: 7%; border-radius: 50%; opacity: 0; pointer-events: none; transition: opacity 0.6s;
+    background: radial-gradient(circle, #fff 0 9px, transparent 10px) 0 0 / 30px 26px, radial-gradient(circle, rgba(255, 255, 255, 0.8) 0 6px, transparent 7px) 12px 14px / 26px 30px; }
+.ws-glass { position: absolute; inset: 7%; border-radius: 50%; background: linear-gradient(135deg, rgba(255, 255, 255, 0.6), transparent 45%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.ws-big.closed .ws-glass { opacity: 1; }
+.ws-big.spin .ws-drum { animation: wsTurn 1.1s linear infinite; }
+.ws-big.spin.fast .ws-drum { animation-duration: 0.3s; }
+.ws-big.spin .ws-suds { opacity: 1; }
+.ws-big.spin { animation: wsShake 0.12s linear infinite alternate; }
+@keyframes wsShake { from { transform: translateX(-2px) rotate(-0.5deg); } to { transform: translateX(2px) rotate(0.5deg); } }
+
+.ws-pile { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 300px; min-height: 64px; }
+.ws-item { position: relative; width: 62px; height: 62px; border-radius: 16px; border: 3px solid #e2e8f0; background: #fff; font-size: 38px; line-height: 1; cursor: pointer; touch-action: none; display: flex; align-items: center; justify-content: center; padding: 0; }
+.ws-item.dirty { background: #fef3c7; }
+.ws-item.dirty::after { content: ''; position: absolute; inset: 8px; pointer-events: none;
+    background: radial-gradient(circle at 30% 40%, rgba(120, 53, 15, 0.7) 0 5px, transparent 6px), radial-gradient(circle at 70% 65%, rgba(120, 53, 15, 0.6) 0 7px, transparent 8px), radial-gradient(circle at 60% 25%, rgba(120, 53, 15, 0.5) 0 3px, transparent 4px); }
+.ws-pile.clean .ws-item { border-color: #a5f3fc; box-shadow: 0 0 10px #67e8f9; }
+.ws-sock { display: inline-flex; }
+.ws-sock svg { width: 34px; height: 46px; }
+.ov-fly .ws-sock svg { width: 40px; height: 54px; }
+
+.ws-sky { position: relative; width: 100%; height: clamp(130px, 22vh, 190px); border-radius: 20px; background: linear-gradient(180deg, #7dd3fc, #e0f2fe); overflow: hidden; }
+.ws-sun { position: absolute; right: 12px; top: 6px; font-size: 44px; line-height: 1; opacity: 0.35; transition: opacity 0.5s, transform 0.5s; }
+.ws-sun.on { opacity: 1; transform: scale(1.4); animation: wsShine 1s ease-in-out infinite alternate; }
+@keyframes wsShine { to { filter: drop-shadow(0 0 16px #fde047); } }
+.ws-rope { position: absolute; left: 12px; right: 12px; top: 38%; height: 3px; background: #64748b; border-radius: 2px; }
+.ws-hung { position: absolute; left: 20px; right: 20px; top: 38%; display: flex; gap: 6px; justify-content: center; min-height: 50px; }
+.ws-peg { position: relative; font-size: clamp(34px, 4vw, 46px); line-height: 1; transform-origin: 50% 0; animation: wsFlap 1.8s ease-in-out infinite alternate; }
+.ws-peg::before { content: ''; position: absolute; left: 50%; top: -6px; width: 6px; height: 14px; margin-left: -3px; border-radius: 2px; background: #f472b6; }
+
+.ws-table { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 14px; border-radius: 18px; background: #d6a35c; box-shadow: inset 0 -8px 0 #b7793a; max-width: 420px; }
+.ws-loose { width: 76px; height: 92px; border-radius: 16px; border: 3px solid transparent; background: rgba(255, 255, 255, 0.4); padding: 4px; cursor: pointer; touch-action: none; transition: transform 0.2s, opacity 0.4s; }
+.ws-loose svg { width: 100%; height: 100%; }
+.ws-loose.sel { border-color: #f472b6; background: #fff; transform: translateY(-8px) scale(1.06); }
+.ws-loose.done { opacity: 0; transform: scale(0.3); pointer-events: none; }
+.ws-tray .bd-btn { font-size: 30px; }
+.ws-go { background: #bbf7d0; border-color: #4ade80; min-width: 80px; }
