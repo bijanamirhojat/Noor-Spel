@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="prinses/css/lights.css">
     <link rel="stylesheet" href="prinses/css/dorp/markt.css">
     <link rel="stylesheet" href="prinses/css/dorp/ijssalon.css">
+    <link rel="stylesheet" href="prinses/css/dorp/pizzeria.css">
     <link rel="stylesheet" href="prinses/css/dorp/boerderij.css">
     <link rel="stylesheet" href="prinses/css/dorp/bloemenwinkel.css">
     <link rel="stylesheet" href="prinses/css/dorp/station.css">
@@ -306,6 +307,31 @@
                 </div>
                 <div class="bd-tray ic-tray" id="icTray"></div>
                 <button class="scope-close" id="icClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="pzov" id="pzOv">
+                <div class="nails-title">🍕 Pizzeria</div>
+                <div class="pz-steps" id="pzSteps"></div>
+                <div class="pz-main">
+                    <div class="pz-customer" id="pzCustomer">
+                        <div class="pz-bubble" id="pzBubble"><div class="pz-mini" id="pzOrder"></div></div>
+                        <span class="pz-animal" id="pzAnimal">🐻</span>
+                    </div>
+                    <div class="pz-board">
+                        <div class="pz-pizza" id="pzPizza">
+                            <div class="pz-dough"><div class="pz-sauce"></div><div class="pz-cheese"></div></div>
+                            <div class="pz-tops" id="pzTops"></div>
+                            <div class="pz-cuts" id="pzCuts"></div>
+                        </div>
+                        <div class="pz-pin" id="pzPin"></div>
+                    </div>
+                    <div class="pz-side">
+                        <div class="pz-oven" id="pzOven"><div class="pz-mouth"><span>🔥</span></div></div>
+                        <div class="ic-kassa pz-kassa" id="pzKassa"><span class="ic-till">🧾</span><span class="ic-coins">🪙 <b id="pzCoins">0</b></span></div>
+                    </div>
+                </div>
+                <div class="bd-tray pz-tray" id="pzTray"></div>
+                <button class="scope-close" id="pzClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="weatherov" id="weatherOv">
@@ -1288,6 +1314,7 @@
     <script src="prinses/js/dorp/dorpsplein.js"></script>
     <script src="prinses/js/dorp/markt.js"></script>
     <script src="prinses/js/dorp/ijssalon.js"></script>
+    <script src="prinses/js/dorp/pizzeria.js"></script>
     <script src="prinses/js/dorp/boerderij.js"></script>
     <script src="prinses/js/dorp/bloemenwinkel.js"></script>
     <script src="prinses/js/dorp/station.js"></script>
