@@ -50,6 +50,9 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 groei, wensen en knuffel in noor-prinses-baby
                 js/rooms/wasruimte.js: de was doen (vieze was in de machine, zeep, wassen, ophangen tot de zon hem droogt) en dan
                 sokken bij elkaar zoeken; aantal wasjes in noor-prinses-was
+                js/rooms/vlaggentoren.js: helemaal bovenin (het Torentje): eigen vlag maken (patroon, kleuren, plaatje) en hijsen;
+                hij wappert dan ook op de torens buiten (applyFlag zet --flag-bg/--flag-sym en .my-flag op :root); in noor-prinses-vlag
+                js/rooms/duiventil.js: brief sturen met de postduif (naar wie, welk plaatje), hij komt terug met een cadeautje
                 js/rooms/schermkamers.js: twee kamers (dierenkamer, mensenkamer) met een groot scherm; tik een dier of mens aan
                 en hij springt uit het scherm en loopt echt door de kamer (SK_ANIMALS, SK_PEOPLE; mensen met alleen een hoofd-emoji
                 krijgen een getekend lijfje); de afstandsbediening stuurt ze terug in het scherm
@@ -93,9 +96,10 @@ css/rooms/*.css stijl per kamer (kamer-klasse: .room.rm-<key>)
 
 ## Verdiepingen
 
-Het kasteel heeft vijf verdiepingen (`WINGS` in `js/world.js`), elk een eigen wereld met een toverlift
+Het kasteel heeft zes verdiepingen (`WINGS` in `js/world.js`), elk een eigen wereld met een toverlift
 in de eerste kamer (laat daar x 0-200 vrij). Houd een verdieping op hooguit 12 kamers, anders worden de
 vakjes op de kaart te klein; komt er meer bij, verdeel dan opnieuw of maak een verdieping erbij.
+De bovenste verdieping (het Torentje) krijgt op de kaart een puntdak.
 De kaart tekent het kasteel als doorsnede: toren boven, beneden onder, buiten en zee eronder.
 
 ## Dorp

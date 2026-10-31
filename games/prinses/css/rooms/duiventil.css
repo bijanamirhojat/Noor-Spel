@@ -1,0 +1,54 @@
+/* 🕊️ Duiventil (js/rooms/duiventil.js) */
+.room.rm-duiventil .wall { background: repeating-linear-gradient(90deg, #d6a35c 0 4px, #e7bf7f 4px 60px), #e7bf7f; }
+.room.rm-duiventil .floor { background: repeating-linear-gradient(90deg, #92400e 0 5px, #b45309 5px 90px), #b45309; }
+
+.dv-window { width: 180px; height: 180px; border-radius: 50%; border: 12px solid #92400e; overflow: hidden; pointer-events: none; }
+.dv-window .sky { position: absolute; inset: 0; background: linear-gradient(180deg, #38bdf8, #e0f2fe); }
+.dv-window .cloud { left: 20px; top: 70px; transform: scale(0.7); }
+
+.dv-loft { width: 180px; height: 330px; }
+.dv-loft .roof { position: absolute; left: -14px; top: 0; width: 208px; height: 60px; background: #dc2626; clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+.dv-loft .box { position: absolute; left: 10px; top: 58px; width: 160px; height: 130px; background: #f8fafc; border-radius: 0 0 8px 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px; box-sizing: border-box; box-shadow: inset 0 0 0 5px #fca5a5; }
+.dv-loft .box i { border-radius: 50%; background: #451a03; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.dv-loft .box span { font-size: 30px; line-height: 1; animation: dvPeek 3s ease-in-out infinite; }
+.dv-loft .box i:nth-child(2) span { animation-delay: -1s; }
+.dv-loft .box i:nth-child(4) span { animation-delay: -2s; }
+@keyframes dvPeek { 0%, 60%, 100% { transform: translateY(0); } 75% { transform: translateY(30px); } }
+.dv-loft .post { position: absolute; left: 78px; top: 188px; width: 24px; height: 142px; background: #92400e; }
+
+.dv-beam { width: 200px; height: 14px; border-radius: 4px; background: #78350f; pointer-events: none; }
+.dv-pigeon { font-size: 50px; }
+.dv-pigeon.flutter { animation: dvFlutter 0.9s ease; }
+@keyframes dvFlutter { 30% { transform: translateY(-40px) rotate(-10deg); } 60% { transform: translateY(-20px) rotate(8deg); } }
+.dv-pigeon.peck { animation: dvPeck 0.6s ease 2; }
+@keyframes dvPeck { 50% { transform: translateY(14px) rotate(20deg); } }
+.dv-seed { font-size: 60px; }
+
+/* ── Overlay ── */
+.dvov { position: absolute; inset: 0; z-index: var(--z-overlay); display: none; flex-direction: column; align-items: center; padding: 12px; gap: 10px; touch-action: none; overflow: hidden; background: repeating-linear-gradient(90deg, #d6a35c 0 4px, #e7bf7f 4px 60px), #e7bf7f; }
+.dvov.open { display: flex; }
+.dv-stage { position: relative; flex: 1; min-height: 0; width: min(100%, 760px); border-radius: 28px; border: 14px solid #92400e; overflow: hidden; }
+.dv-sky { position: absolute; inset: 0; background: linear-gradient(180deg, #38bdf8, #bae6fd 70%, #e0f2fe); }
+.dv-sky .cloud { left: 12%; top: 18%; }
+.dv-sky .cloud.c2 { left: 62%; top: 36%; animation-delay: -4s; }
+.dv-sill { position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: linear-gradient(180deg, #b45309, #92400e); }
+.dv-bird { position: absolute; left: 8%; bottom: 20%; font-size: clamp(70px, 11vw, 110px); line-height: 1; transition: left 1.6s ease-in, bottom 1.6s ease-in, transform 1.6s; }
+.dv-bird .b { display: inline-block; transform: scaleX(-1); }
+.dv-bird .env { position: absolute; left: 30%; bottom: -10%; font-size: 0.35em; opacity: 0; }
+.dv-bird.carry .env { opacity: 1; }
+.dv-bird.away { left: 110%; bottom: 85%; transform: scale(0.4); }
+.dv-bird.back { animation: dvBack 1.4s ease-out; }
+@keyframes dvBack { from { left: 110%; bottom: 85%; transform: scale(0.4) scaleX(-1); } }
+.dv-letter { position: absolute; left: 34%; bottom: 22%; width: clamp(150px, 22vw, 220px); aspect-ratio: 3 / 2; border-radius: 10px; background: #fff; box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: space-around; font-size: clamp(40px, 6vw, 64px); transition: transform 0.6s, opacity 0.6s; }
+.dv-letter::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(160deg, transparent 49%, #fbcfe8 50%, transparent 51%), linear-gradient(20deg, transparent 49%, #fbcfe8 50%, transparent 51%); pointer-events: none; }
+.dv-letter.fold { transform: scale(0.3) translate(-80%, 20%) rotate(-20deg); opacity: 0.6; }
+.dv-gift { position: absolute; left: 30%; bottom: 20%; font-size: clamp(64px, 9vw, 96px); line-height: 1; opacity: 0; pointer-events: none; cursor: pointer; transition: opacity 0.4s; }
+.dv-gift.show { opacity: 1; pointer-events: auto; animation: hintBob 1.6s ease-in-out infinite; }
+.dv-gift.opened { animation: vPulse 0.5s ease 2; }
+.dv-reply { position: absolute; right: 8%; top: 12%; padding: 10px 18px; border-radius: 30px; background: #fff; font-size: clamp(48px, 7vw, 72px); line-height: 1; opacity: 0; transform: scale(0.4); transition: opacity 0.4s, transform 0.4s cubic-bezier(.3, 1.6, .5, 1); }
+.dv-reply span { font-size: 0.6em; }
+.dv-reply.show { opacity: 1; transform: none; }
+.dv-ask { position: absolute; right: 6%; bottom: 26%; font-size: clamp(40px, 6vw, 60px); line-height: 1; animation: hintBob 2s ease-in-out infinite; }
+.dv-tray .bd-btn { font-size: 30px; }
+.dv-who { flex-direction: column; height: 76px; min-width: 76px; display: flex; align-items: center; justify-content: center; gap: 2px; }
+.dv-who small { font: 12px/1 'Fredoka One', cursive; color: #be185d; }

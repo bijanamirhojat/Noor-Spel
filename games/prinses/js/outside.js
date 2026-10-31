@@ -69,6 +69,8 @@ function buildOutside() {
     const t1 = place(el('<div class="tower stone"><div class="win" style="top:60px"></div><div class="win" style="top:200px"></div></div>'), o0 + 10, -80);
     const t2 = place(el('<div class="tower stone"><div class="win" style="top:60px"></div><div class="win" style="top:200px"></div></div>'), o0 + 470, -80);
     place(el('<div class="door-sign">🏰 Naar binnen</div>'), o0 + 238, 78);
+    // Flies Noor's own flag from the vlaggentoren (applyFlag in js/rooms/vlaggentoren.js)
+    place(el('<div class="castle-flag"><i></i><span></span></div>'), o0 + 452, 70);
     SCENES.out.door = {
         walkX: o0 + 310,
         node: addObj('<div class="castle-door"><div class="tap-hint" style="top:90px">👇</div></div>', o0 + 220, 120, o0 + 310, (node) => goThroughDoor(node, 'hal'))

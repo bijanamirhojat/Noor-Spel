@@ -130,7 +130,7 @@ function renderMapBody() {
     if (mapTab === 'kasteel') {
         body.innerHTML = `<div class="map-castle">${WINGS.slice().reverse().map(wing => {
             const sc = SCENES[wing.key];
-            return `<div class="map-floor${scene === sc ? ' here' : ''}${wing.key === 'toren' ? ' map-tower' : ''}" style="--c:${wing.color}">
+            return `<div class="map-floor${scene === sc ? ' here' : ''}${wing === WINGS[WINGS.length - 1] ? ' map-tower' : ''}" style="--c:${wing.color}">
                 <div class="map-floor-name">${wing.icon}<small>${wing.name}</small></div>
                 <div class="map-grid">${mapTiles(sc)}</div>
             </div>`;

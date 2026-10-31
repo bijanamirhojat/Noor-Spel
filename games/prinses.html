@@ -79,6 +79,8 @@
     <link rel="stylesheet" href="prinses/css/rooms/broodjeskamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/babykamer.css">
     <link rel="stylesheet" href="prinses/css/rooms/wasruimte.css">
+    <link rel="stylesheet" href="prinses/css/rooms/vlaggentoren.css">
+    <link rel="stylesheet" href="prinses/css/rooms/duiventil.css">
     <link rel="stylesheet" href="prinses/css/rooms/schermkamers.css">
     <link rel="stylesheet" href="prinses/css/rooms/gymzaal.css">
     <link rel="stylesheet" href="prinses/css/rooms/juwelierskamer.css">
@@ -354,6 +356,31 @@
                 </div>
                 <div class="bd-tray ws-tray" id="wsTray"></div>
                 <button class="scope-close" id="wsClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="flov" id="flOv">
+                <div class="nails-title">🚩 Vlag maken</div>
+                <div class="fl-stage">
+                    <div class="fl-pole"></div>
+                    <div class="fl-preview" id="flPreview"><span></span></div>
+                </div>
+                <div class="fl-tray" id="flTray"></div>
+                <button class="scope-close" id="flClose" aria-label="Sluiten">✖</button>
+            </div>
+
+            <div class="dvov" id="dvOv">
+                <div class="nails-title">🕊️ Duivenpost</div>
+                <div class="dv-stage">
+                    <div class="dv-sky"><div class="cloud"></div><div class="cloud c2"></div></div>
+                    <div class="dv-sill"></div>
+                    <div class="dv-bird" id="dvBird"><span class="b">🕊️</span><span class="env">✉️</span></div>
+                    <div class="dv-letter" id="dvLetter"><span class="to"></span><span class="pic"></span></div>
+                    <div class="dv-gift" id="dvGift"><span class="box">🎁</span></div>
+                    <div class="dv-reply" id="dvReply"></div>
+                    <div class="dv-ask" id="dvAsk"></div>
+                </div>
+                <div class="bd-tray dv-tray" id="dvTray"></div>
+                <button class="scope-close" id="dvClose" aria-label="Sluiten">✖</button>
             </div>
 
             <div class="weatherov" id="weatherOv">
@@ -1291,6 +1318,8 @@
     <script src="prinses/js/rooms/broodjeskamer.js"></script>
     <script src="prinses/js/rooms/babykamer.js"></script>
     <script src="prinses/js/rooms/wasruimte.js"></script>
+    <script src="prinses/js/rooms/vlaggentoren.js"></script>
+    <script src="prinses/js/rooms/duiventil.js"></script>
     <script src="prinses/js/rooms/schermkamers.js"></script>
     <script src="prinses/js/rooms/gymzaal.js"></script>
     <script src="prinses/js/rooms/dierensalon.js"></script>
