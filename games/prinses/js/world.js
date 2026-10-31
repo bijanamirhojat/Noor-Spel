@@ -12,7 +12,9 @@ const WINGS = [
     { key: 'mooi',  name: 'Mooi maken',        icon: '💅', color: '#a855f7', gems: 10, liftX: 30,
       rooms: ['spiegelkamer', 'kapsalon', 'badkamer', 'wc', 'nagelsalon', 'juwelierskamer', 'borduurkamer', 'parfumerie', 'glitterkamer', 'fotostudio'] },
     { key: 'speel', name: 'Speelverdieping',   icon: '🧸', color: '#f59e0b', gems: 12, liftX: 30,
-      rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'ijskamer', 'zwembad', 'lieveheersbeestjes', 'minigolf', 'plakboek', 'legokamer', 'schuifkamer', 'basketbal', 'knopjeskamer', 'dierenkamer', 'mensenkamer', 'gymzaal', 'troetelberen'] },
+      rooms: ['regenboogzaal', 'speelkamer', 'poppenhuis', 'cadeaukamer', 'hartjeskamer', 'lieveheersbeestjes', 'plakboek', 'legokamer', 'dierenkamer', 'mensenkamer', 'troetelberen'] },
+    { key: 'sport', name: 'Sport & spel',      icon: '🏅', color: '#10b981', gems: 8, liftX: 30,
+      rooms: ['gymzaal', 'zwembad', 'ijskamer', 'basketbal', 'minigolf', 'knopjeskamer', 'schuifkamer'] },
     { key: 'toren', name: 'Toren',             icon: '🌙', color: '#6366f1', gems: 12, liftX: 30,
       rooms: ['slaapkamer', 'ouderslaapkamer', 'babykamer', 'werkkamer', 'dokterskamer', 'sterrenkamer', 'elvenkamer', 'torenkamer', 'muziekkamer', 'trofeekamer', 'halloween'] }
 ];

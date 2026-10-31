@@ -89,8 +89,10 @@ css/rooms/*.css stijl per kamer (kamer-klasse: .room.rm-<key>)
 
 ## Verdiepingen
 
-Het kasteel heeft vier verdiepingen (`WINGS` in `js/world.js`), elk een eigen wereld met een toverlift
-in de eerste kamer. De kaart tekent het kasteel als doorsnede: toren boven, beneden onder, buiten en zee eronder.
+Het kasteel heeft vijf verdiepingen (`WINGS` in `js/world.js`), elk een eigen wereld met een toverlift
+in de eerste kamer (laat daar x 0-200 vrij). Houd een verdieping op hooguit 12 kamers, anders worden de
+vakjes op de kaart te klein; komt er meer bij, verdeel dan opnieuw of maak een verdieping erbij.
+De kaart tekent het kasteel als doorsnede: toren boven, beneden onder, buiten en zee eronder.
 
 ## Dorp
 

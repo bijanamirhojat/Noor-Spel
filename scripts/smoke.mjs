@@ -198,7 +198,7 @@ async function smokeScene(sceneKey) {
 }
 
 const t0 = Date.now();
-const scenes = ['hal', 'mooi', 'speel', 'toren', 'out', 'sea', 'dorp', 'dierentuin', 'wolken', 'ruimte'];
+const scenes = ['hal', 'mooi', 'speel', 'sport', 'toren', 'out', 'sea', 'dorp', 'dierentuin', 'wolken', 'ruimte'];
 await Promise.all([only ? null : smokeGames(), ...scenes.filter((s) => !only || s === only).map(smokeScene)]);
 await browser.close();
 server.close();

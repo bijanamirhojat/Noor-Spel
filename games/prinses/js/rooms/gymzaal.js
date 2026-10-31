@@ -8,7 +8,8 @@ try { gyCount = +localStorage.getItem(GY_KEY) || 0; } catch { /* geen opslag */ 
 
 const GY_CENTER = `${PRINCESS_W / 2}px ${PRINCESS_H / 2}px`;
 const GY_ON_TRAMP = -44;     // feet on the trampoline bed
-const GY_ROPE = 70, GY_TRAMP = 230, GY_BEAM = [370, 530], GY_RINGS = 660, GY_MAT = [590, 760];
+// x 0-200 is for the lift (first room of its floor)
+const GY_ROPE = 225, GY_TRAMP = 350, GY_BEAM = [480, 600], GY_RINGS = 705, GY_MAT = [650, 760];
 
 defineRoom({
     key: 'gymzaal',
@@ -17,8 +18,8 @@ defineRoom({
     say: 'De gymzaal. Lekker bewegen!',
     lampX: 530,
     build(x) {
-        place(el('<div class="gy-bars">' + '<i></i>'.repeat(8) + '</div>'), x + 290, 120);
-        place(el(`<div class="gy-board"><span>🏅</span><b id="gyScore">${gyCount}</b></div>`), x + 160, 60);
+        place(el('<div class="gy-bars">' + '<i></i>'.repeat(8) + '</div>'), x + 270, 120);
+        place(el(`<div class="gy-board"><span>🏅</span><b id="gyScore">${gyCount}</b></div>`), x + 490, 140);
         addObj('<div class="gy-rope"><span class="bell">🔔</span><div class="cord"></div><div class="knot"></div></div>',
             x + GY_ROPE - 30, 0, x + GY_ROPE, gyRope);
         addObj(`<div class="gy-tramp"><div class="bed"></div><div class="frame"></div><i style="left:14px"></i><i style="right:14px"></i>

@@ -126,6 +126,7 @@ function renderMapBody() {
     body.className = 'map-body' + (mapTab === 'kasteel' ? ' castle' : ' places');
     body.style.setProperty('--c', w.color);
     body.style.setProperty('--n', Math.max(...WINGS.map(x => x.rooms.length)));
+    body.style.setProperty('--f', WINGS.length);
     if (mapTab === 'kasteel') {
         body.innerHTML = `<div class="map-castle">${WINGS.slice().reverse().map(wing => {
             const sc = SCENES[wing.key];
