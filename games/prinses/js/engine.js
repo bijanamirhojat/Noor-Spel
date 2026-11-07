@@ -503,6 +503,7 @@ function frame(now) {
     p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt + an.dy + boatBob}px) rotate(${an.rot}deg)`;
     updatePet(dt);
     updateParents(dt, now);
+    updateGrandparents(dt, now);
     p.classList.toggle('left', state.facing < 0);
 
     if (scene.key === 'out') updateCloudPortal();

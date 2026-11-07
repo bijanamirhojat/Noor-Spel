@@ -1,4 +1,4 @@
-/* 👑 Mama en Papa (js/parents.js) */
+/* 👑 Mama en Papa (js/parents.js), Opa en Oma (js/grandparents.js) */
 .parent {
     position: absolute;
     left: 0;
@@ -37,3 +37,6 @@
 }
 .parent .pbubble.show { transform: translateX(-50%) scale(1); }
 .parent.sleeping .pbubble { display: none; }
+
+.parent.grandparent { width: 126px; height: 200px; }
+.parent.grandparent.walking .pbody { animation-duration: 0.7s; }

@@ -81,6 +81,8 @@ js/rooms/*.js   één bestand per kamer: defineRoom({ key, name, icon, build(x) 
                 js/rooms/dokterskamer.js: dokter spelen: een knuffeldier vertelt wat er is, eerst kijken (thermometer, stethoscoop,
                 lampje, schoonmaken), dan beter maken (drankje, druppels, thee, pleister); aantal in noor-prinses-dokter
 js/parents.js   Mama en Papa (koningin en koning): lopen rond, nemen de lift, zingen bij het bed
+js/grandparents.js  Opa en Oma: sjokken rustig door het kasteel (vaak een andere verdieping, dus af en toe tegenkomen);
+                aantikken = knuffel, snoepje van Oma of muntje van Opa (gebruikt .parent-css en parentPlace/parentBubble)
 js/lights.js    dag en nacht (vanzelf, of met de ☀️/🌙-knop; slapen = nacht) en een lamp in elke kasteelkamer
                 (tik erop of de 💡-lichtknop); lampX in defineRoom kiest de plek van de lamp
                 addCurtainWindow(key, x, y, w, h): raam met gordijnen (slaapkamer, grote slaapkamer); dicht = donker in die kamer

@@ -26,6 +26,7 @@ WINGS.slice().reverse().forEach(wing => {
 });
 hideCareBears();
 buildParents();
+buildGrandparents();
 buildLights();
 world.appendChild(el(`<div class="princess" id="princess"><div class="dancer"><div class="flip">${princessSVG('pr')}</div></div></div>`));
 buildScope();
