@@ -17,6 +17,8 @@ js/piraten.js   piratenbaai (achter het meer, alleen met het bootje): piratensch
 js/unicornstyle.js  eenhoorn-verkleedkist: de look van de eenhoorn (unicornSVG in outside.js)
 js/unicorncare.js   eenhoorn verzorgen (verzorgemmer op de weide): modder eraf wassen, blaadjes uit de manen borstelen,
                     appel/wortel, drinken en aaien; aantal keer in noor-prinses-eenhoornzorg
+js/vissen.js    vissen bij de vijver (hengel naast de vijver): tik in het water = haakje erheen, een vis bijt, dobber onder =
+                snel tikken om op te halen; vangst in de emmer (aantikken = vrijlaten) en de verzamelrij; in noor-prinses-vissen
 js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets
 js/kaartjes.js  kaartjes voor koets, trein, bootje, bus en raket: kaartjesautomaat (addTicketMachine, bij elk vertrekpunt),

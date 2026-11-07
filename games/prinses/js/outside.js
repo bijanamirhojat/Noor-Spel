@@ -126,6 +126,7 @@ function buildOutside() {
         walkTo(p.x, null);
     });
     addObj('<div class="emoji-obj jumpy" style="font-size:44px">🐸</div>', o2 + 360, 345, o2 + 460, frogJump);
+    addObj('<div class="vs-spot"><span>🎣</span><span class="vs-spot-pail">🪣</span><div class="tap-hint" style="left:20px;top:-46px">👇</div></div>', o2 + 540, 300, o2 + 560, openFishing);
     addObj('<div class="emoji-obj" style="font-size:50px">🦆</div>', o2 + 650, 360, o2 + 640, () => { quack(); sayRandom(['Kwak kwak!', 'Een eendje!']); });
     addObj('<div class="flutter" style="animation-delay:-5s">🦋</div>', o2 + 300, 130, o2 + 360, butterflyTap);
     addObj('<div class="emoji-obj" style="font-size:120px">🌳</div>', o2 + 10, 250, o2 + 70, () => sayRandom(['Een grote boom!', 'Wat een mooie boom!']));
