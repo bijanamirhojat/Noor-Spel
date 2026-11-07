@@ -27,6 +27,7 @@ js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes mak
                 moestuin (zaaien, water geven, oogsten), pluktuin (bloemen plukken voor een boeket),
                 vlinderkas (rupsjes voeren, cocon, vlinders laten uitkomen),
                 kermis (eendjes vissen, grijpmachine, suikerspin, reuzenrad),
+                autowasstraat (vieze auto nat spuiten, zeep erop wrijven, borstels, afspoelen, droogblazen; in noor-prinses-autowas)
                 strand (hooghouden met de strandbal; de zeehond kopt hem terug)
                 bioscoop (popcorn maken: maïs, machine aan, scheppen, smaakje; dan een film kiezen en kijken met het licht uit)
 js/dierentuin.js   de dierentuin: bus (addBus, vanaf het strand), dierengeluiden, zooToss/zooAnim
