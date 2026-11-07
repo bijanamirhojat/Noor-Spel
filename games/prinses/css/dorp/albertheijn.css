@@ -1,0 +1,96 @@
+/* 🛒 Albert Heijn (js/dorp/albertheijn.js) */
+.ah-store { width: 520px; height: 290px; }
+.ah-band { position: absolute; left: 0; right: 0; top: 0; height: 64px; border-radius: 14px 14px 0 0; background: #00a0e2; color: #fff; font: 38px/64px 'Fredoka One', cursive; text-align: center; letter-spacing: 1px; box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); }
+.ah-glass { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; border: 6px solid #0284c7; border-top: none; background: linear-gradient(135deg, #e0f2fe, #bae6fd 55%, #e0f2fe); overflow: hidden; }
+.ah-shelf-peek { position: absolute; left: 14px; top: 24px; display: flex; flex-direction: column; gap: 14px; font-size: 34px; }
+.ah-shelf-peek span { border-bottom: 5px solid #94a3b8; padding: 0 4px; }
+.ah-doors { position: absolute; right: 40px; bottom: 0; width: 220px; height: 190px; border: 5px solid #0284c7; border-bottom: none; background: #f0f9ff; overflow: hidden; }
+.ah-doors i { position: absolute; top: 0; bottom: 0; width: 50%; background: linear-gradient(90deg, rgba(186, 230, 253, 0.85), rgba(224, 242, 254, 0.7)); border: 2px solid #7dd3fc; transition: transform 0.4s ease; }
+.ah-doors .l { left: 0; }
+.ah-doors .r { right: 0; }
+.ah-store.open .ah-doors .l { transform: translateX(-90%); }
+.ah-store.open .ah-doors .r { transform: translateX(90%); }
+.ah-cart { font-size: 84px; }
+.ah-cart.roll { animation: ahRoll 1.6s ease-in-out; }
+@keyframes ahRoll { 45% { transform: translateX(120px) rotate(-4deg); } 55% { transform: translateX(120px) scaleX(-1); } 100% { transform: none; } }
+
+/* ── Overlay ── */
+.ahov { position: absolute; inset: 0; z-index: var(--z-overlay); display: none; flex-direction: column; align-items: center; padding: 12px; gap: 8px; touch-action: none; overflow: hidden;
+    background: linear-gradient(180deg, #f0f9ff 0 78%, #e2e8f0 78%); }
+.ahov.open { display: flex; }
+.ahov .ah-title { color: #0284c7; }
+.ah-hint { position: absolute; left: 50%; top: -46px; margin-left: -18px; font-size: 36px; animation: hintBob 1.6s ease-in-out infinite; pointer-events: none; }
+
+.ah-shop { flex: 1; min-height: 0; width: 100%; display: flex; align-items: center; justify-content: center; gap: clamp(16px, 4vw, 50px); }
+.ahov.checkout .ah-shop { display: none; }
+
+/* Stack of baskets at the entrance */
+.ah-stack { position: relative; width: 120px; height: 120px; cursor: pointer; }
+.ah-stack i { position: absolute; left: 0; width: 120px; height: 56px; border-radius: 6px 6px 22px 22px; border: 5px solid #0369a1; background: repeating-linear-gradient(90deg, #0ea5e9 0 10px, #0284c7 10px 14px); }
+.ah-stack i:nth-child(1) { bottom: 0; }
+.ah-stack i:nth-child(2) { bottom: 18px; }
+.ah-stack i:nth-child(3) { bottom: 36px; }
+.ahov.has-basket .ah-stack { opacity: 0.4; }
+.ahov.has-basket .ah-stack .ah-hint { display: none; }
+
+.ah-shelves { display: flex; flex-direction: column; gap: 4px; padding: 10px 16px 0; border-radius: 16px 16px 4px 4px; background: #fff; border: 6px solid #cbd5e1; box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12); }
+.ah-row { display: flex; gap: clamp(6px, 1.2vw, 14px); padding-bottom: 6px; border-bottom: 8px solid #94a3b8; }
+.ah-good { display: flex; flex-direction: column; align-items: center; gap: 4px; width: clamp(84px, 11vw, 130px); padding: 4px 0; border: none; background: none; cursor: pointer; touch-action: none; }
+.ah-e { font-size: clamp(44px, 8vh, 72px); line-height: 1; filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.2)); }
+.ah-price { min-width: 60px; padding: 2px 6px; border-radius: 8px; background: #fef08a; border: 2px solid #eab308; font-size: 18px; line-height: 1.2; white-space: nowrap; }
+.ahov:not(.has-basket) .ah-good { opacity: 0.6; }
+
+/* Bottom bar: basket, to the till, bag */
+.ah-bottom { position: relative; width: 100%; height: clamp(110px, 17vh, 140px); display: flex; align-items: center; justify-content: center; gap: 30px; }
+.ah-basket { position: relative; width: clamp(200px, 26vw, 280px); height: 90%; display: none; }
+.ahov.has-basket .ah-basket { display: block; }
+.ah-basket::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 62%; border-radius: 8px 8px 30px 30px; border: 6px solid #0369a1; background: repeating-linear-gradient(90deg, #0ea5e9 0 14px, #0284c7 14px 20px); }
+.ah-basket::after { content: ''; position: absolute; left: 22%; right: 22%; top: 0; height: 58%; border: 6px solid #0369a1; border-bottom: none; border-radius: 60px 60px 0 0; pointer-events: none; }
+.ah-binside { position: absolute; left: 8%; right: 8%; bottom: 30%; display: flex; flex-wrap: wrap-reverse; justify-content: center; font-size: clamp(30px, 4.4vh, 40px); line-height: 1; z-index: 1; }
+.ah-binside span { cursor: pointer; margin: -3px; }
+.ahov .ah-go { display: none; height: 76px; font-size: 40px; background: #e0f2fe; border-color: #0ea5e9; }
+.ahov .ah-go.show { display: block; animation: hintBob 1.6s ease-in-out infinite; }
+.ahov.checkout .ah-go.show { display: none; }
+.ah-tas { position: relative; display: none; font-size: clamp(80px, 13vh, 110px); line-height: 1; }
+.ahov.bagging .ah-tas { display: block; }
+.ahov.bagging .ah-basket { display: none; }
+.ah-tas-items { position: absolute; left: 10%; right: 10%; bottom: 72%; display: flex; flex-wrap: wrap-reverse; justify-content: center; font-size: 30px; }
+.ah-tas-items span { margin: -4px; }
+.ah-again { position: absolute; bottom: 24px; right: 30px; margin: 0; }
+
+/* Checkout */
+.ah-checkout { display: none; flex: 1; min-height: 0; width: 100%; flex-direction: column; align-items: center; justify-content: center; gap: clamp(10px, 2.5vh, 26px); }
+.ahov.checkout .ah-checkout { display: flex; }
+.ah-till { display: flex; align-items: flex-end; gap: clamp(10px, 2vw, 24px); }
+.ah-staff { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.ah-cashier { font-size: clamp(64px, 10vh, 90px); line-height: 1; }
+.ah-screen { min-width: 150px; max-width: 220px; padding: 6px 10px; border-radius: 12px; border: 5px solid #334155; background: #052e16; color: #4ade80; display: flex; flex-direction: column; align-items: center; }
+.ah-screen b { font: 44px/1 'Fredoka One', cursive; }
+.ah-screen span { display: flex; flex-wrap: wrap; justify-content: center; font-size: 18px; }
+.ah-counter { position: relative; width: clamp(300px, 40vw, 460px); height: 110px; border-radius: 12px; background: #64748b; display: flex; align-items: center; padding: 0 12px 0 70px; box-sizing: border-box; }
+.ah-scanner { position: absolute; left: 10px; top: 20px; width: 46px; height: 70px; border-radius: 8px; background: #1f2937; box-shadow: inset 0 0 0 4px #111827; }
+.ah-scanner::after { content: ''; position: absolute; left: 6px; right: 6px; top: 50%; height: 4px; border-radius: 2px; background: #ef4444; box-shadow: 0 0 10px #ef4444; }
+.ah-belt { flex: 1; height: 70px; border-radius: 10px; background: repeating-linear-gradient(90deg, #1f2937 0 18px, #374151 18px 20px); display: flex; align-items: center; flex-wrap: wrap; gap: 2px; padding: 0 6px; font-size: 34px; line-height: 1; overflow: hidden; }
+.ah-printer { position: relative; width: 130px; height: 80px; border-radius: 12px; background: #e5e7eb; border: 4px solid #9ca3af; }
+.ah-printer::before { content: ''; position: absolute; left: 14px; right: 14px; top: 8px; height: 6px; border-radius: 3px; background: #374151; }
+.ah-bon { position: absolute; left: 20px; right: 20px; bottom: 66px; height: 0; overflow: visible; border-radius: 4px 4px 0 0; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); cursor: pointer; transition: height 0.8s ease-out; display: flex; flex-direction: column; align-items: center; gap: 6px; padding-top: 6px; box-sizing: border-box; }
+.ah-bon > * { display: none; }
+.ahov.printing .ah-bon { height: 170px; background: repeating-linear-gradient(180deg, #fff 0 14px, #f8fafc 14px 16px); clip-path: polygon(0 0, 100% 0, 100% 100%, 85% 96%, 70% 100%, 55% 96%, 40% 100%, 25% 96%, 10% 100%, 0 96%); }
+.ahov.printing .ah-bon > * { display: block; }
+.ah-bon b { font: 24px/1 'Fredoka One', cursive; color: #00a0e2; }
+.ah-bon i { width: 70%; height: 4px; border-radius: 2px; background: #cbd5e1; }
+.ah-printer .ah-hint { display: none; top: -205px; }
+.ahov.printing .ah-printer .ah-hint { display: block; }
+.ahov.paying .ah-basket, .ahov.printing .ah-basket { display: none; }
+
+.ah-payrow { display: none; align-items: center; gap: clamp(14px, 3vw, 36px); }
+.ahov.paying .ah-payrow { display: flex; }
+.ah-purse { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; padding: 10px; border-radius: 20px; background: #db2777; border: 4px solid #fff; box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18); }
+.ah-pcoin, .ah-dcoin { width: 52px; height: 52px; border: none; background: none; font-size: 40px; line-height: 1; padding: 0; cursor: pointer; touch-action: none; }
+.ah-pcoin.used { visibility: hidden; }
+.ah-dish { position: relative; width: clamp(180px, 22vw, 240px); min-height: 110px; border-radius: 50%; background: radial-gradient(ellipse, #f8fafc 0 55%, #cbd5e1 56% 64%, #e2e8f0 65%); display: flex; align-items: center; justify-content: center; }
+.ah-dish-coins { display: flex; flex-wrap: wrap; justify-content: center; max-width: 80%; }
+.ah-dish-coins .ah-dcoin { width: 34px; height: 34px; font-size: 30px; margin: -2px; }
+.ah-dish b { position: absolute; right: -14px; top: -14px; min-width: 44px; height: 44px; border-radius: 22px; background: #db2777; color: #fff; font: 28px/44px 'Fredoka One', cursive; text-align: center; }
+.ah-dish b:empty { display: none; }
+.ah-pay { width: 90px; height: 90px; border-radius: 50%; font-size: 48px; background: #bbf7d0; border-color: #22c55e; color: #15803d; }

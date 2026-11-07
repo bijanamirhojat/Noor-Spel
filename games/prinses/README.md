@@ -21,7 +21,8 @@ js/sea.js       onder water
 js/village.js   het dorp: huisjes, koets
 js/kaartjes.js  kaartjes voor koets, trein, bootje, bus en raket: kaartjesautomaat (addTicketMachine, bij elk vertrekpunt),
                 needTicket(type, node, go) knipt een kaartje of wijst naar de automaat; bewaard in noor-prinses-kaartjes
-js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), ijssalon (ijsjes maken), pizzeria (pizza bakken zoals de klant wil:
+js/dorp/*.js    dorpsplein, markt (boodschappen + betalen), albert heijn (mandje pakken, zelf kiezen uit de schappen,
+                kassa: zelf het goede aantal muntjes op het schaaltje leggen, bonnetje tikken = alles in de tas), ijssalon (ijsjes maken), pizzeria (pizza bakken zoals de klant wil:
                 deeg, saus smeren, kaas, beleg tellen, oven, snijden), bloemenwinkel (boeket voor Mama), kinderboerderij (eieren rapen),
                 station (filmische treinrit langs het hele koninkrijk), spookhuis (spookjes zoeken met de zaklamp),
                 moestuin (zaaien, water geven, oogsten), pluktuin (bloemen plukken voor een boeket),
