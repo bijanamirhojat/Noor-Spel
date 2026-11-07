@@ -1,0 +1,29 @@
+/* 🐱🐶 Voerbakjes en de hond in de kasteelhal (js/voerbakjes.js) */
+.vb-bowl { position: absolute; width: 90px; height: 38px; cursor: pointer; }
+.vb-bowl::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 30px; border-radius: 6px 6px 40px 40px / 6px 6px 30px 30px; background: var(--bowl); box-shadow: inset 0 -6px 0 rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0, 0, 0, 0.2); }
+.vb-bowl::after { content: ''; position: absolute; left: 2px; right: 2px; top: 4px; height: 12px; border-radius: 50%; background: var(--rim); }
+.vb-bowl.kat { --bowl: #f472b6; --rim: #fbcfe8; }
+.vb-bowl.hond { --bowl: #3b82f6; --rim: #bfdbfe; width: 104px; height: 42px; }
+.vb-face { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 18px; line-height: 1; z-index: 2; }
+.vb-food { position: absolute; left: 10%; right: 10%; top: -4px; height: 22px; z-index: 1; pointer-events: none; }
+.vb-food i { position: absolute; width: 11px; height: 9px; border-radius: 50%; background: #c2410c; box-shadow: inset -2px -2px 0 rgba(0, 0, 0, 0.2); animation: vbDrop 0.4s cubic-bezier(.4, 0, .6, 1.4) backwards; transition: transform 0.2s, opacity 0.2s; }
+/* Cat kibble: little orange fish-ish triangles; dog kibble: bigger dark brown bones */
+.vb-bowl.kat .vb-food i { width: 10px; height: 10px; border-radius: 2px 50% 50% 50%; background: #f59e0b; transform: rotate(45deg); }
+.vb-bowl.hond .vb-food i { width: 16px; height: 9px; border-radius: 5px; background: #78350f; box-shadow: -3px -2px 0 -1px #78350f, -3px 2px 0 -1px #78350f, 3px -2px 0 -1px #78350f, 3px 2px 0 -1px #78350f; }
+.vb-food i.gone { opacity: 0; transform: translateY(-14px) scale(0.3); }
+@keyframes vbDrop { from { transform: translateY(-90px); opacity: 0; } 60% { opacity: 1; } }
+
+.vb-mand { width: 120px; height: 46px; border-radius: 10px 10px 50px 50px / 10px 10px 40px 40px; background: repeating-linear-gradient(90deg, #b45309 0 8px, #d97706 8px 16px); box-shadow: inset 0 10px 0 #fcd34d, 0 4px 6px rgba(0, 0, 0, 0.2); }
+
+.dog { position: absolute; left: 0; top: 0; width: 90px; height: 74px; font-size: 66px; line-height: 74px; text-align: center; z-index: 9; cursor: pointer; }
+.dog .dbob, .dog .dflip { display: inline-block; }
+.dog .dflip { transition: transform 0.15s ease; }
+.dog.right .dflip { transform: scaleX(-1); }
+.dog.walking .dbob { animation: walkBob 0.25s ease-in-out infinite; }
+.dog.home .dbob { transform: translateY(14px) scaleY(0.85); }
+.dog.wag .dbob { animation: vbWag 0.25s ease-in-out infinite alternate; }
+@keyframes vbWag { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+.dog.eating .dbob, .pet.eating .pbob { animation: vbEat 0.33s ease-in-out infinite; transform-origin: 50% 100%; }
+@keyframes vbEat { 50% { transform: rotate(-12deg) translateY(4px); } }
+.pet.right.eating .pbob { animation-name: vbEatR; }
+@keyframes vbEatR { 50% { transform: rotate(12deg) translateY(4px); } }

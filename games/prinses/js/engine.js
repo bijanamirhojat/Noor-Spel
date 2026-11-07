@@ -502,6 +502,7 @@ function frame(now) {
     const boatBob = state.boating ? Math.sin(now / 450) * 3 - BOAT_LIFT : 0;
     p.style.transform = `translate(${state.x - PRINCESS_W / 2 + an.dx}px, ${FEET_Y - PRINCESS_H - (state.riding ? RIDE_LIFT : 0) - state.alt + an.dy + boatBob}px) rotate(${an.rot}deg)`;
     updatePet(dt);
+    updateDog(dt);
     updateParents(dt, now);
     updateGrandparents(dt, now);
     p.classList.toggle('left', state.facing < 0);
@@ -620,7 +621,10 @@ function updatePet(dt) {
     const pet = state.pet;
     if (pet.key !== scene.key) return;
     let moving = false;
-    if (pet.following) {
+    // Walking to her food bowl (js/voerbakjes.js)
+    if (pet.goalX != null) {
+        moving = walkAnimal(pet, dt, 280);
+    } else if (pet.following) {
         let target = state.x - state.facing * (state.riding ? 130 : 95);
         if (scene.key === 'out') target = Math.min(target, LAKE_X0 - 20);
         const d = target - pet.x;

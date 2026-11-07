@@ -1,4 +1,4 @@
-/* 🏰 Kasteelhal: deur naar buiten, lift naar boven (zie WINGS) en de poes */
+/* 🏰 Kasteelhal: deur naar buiten, lift naar boven (zie WINGS), de poes en de hond met hun voerbakjes */
 defineRoom({
     key: 'kasteelhal',
     name: 'Kasteelhal',
@@ -23,9 +23,10 @@ defineRoom({
         state.pet.x = r0 + 230;
         pet.addEventListener('pointerdown', (e) => {
             e.stopPropagation();
-            if (state.busy) return;
+            if (state.busy || state.pet.eating) return;
             togglePet();
         });
+        buildPetBowls(r0);
     }
 });
 
